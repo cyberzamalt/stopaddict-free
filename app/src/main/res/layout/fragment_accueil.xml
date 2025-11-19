@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Bandeau profil -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/accueil_txt_profil_complet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Profil: Complet"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/accueil_txt_total_aujourdhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: 0"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Total jour global -->
+        <TextView
+            android:id="@+id/accueil_txt_total_jour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total aujourd'hui: 0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white" />
+
+        <!-- Catégorie Cigarettes -->
+        <LinearLayout
+            android:id="@+id/accueil_container_cigarettes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_cigarettes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cigarettes"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_cigarettes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_cigarettes"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_cigarettes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Catégorie Joints -->
+        <LinearLayout
+            android:id="@+id/accueil_container_joints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_joints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Joints"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_joints"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_joints"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_joints"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Catégorie Alcool Global -->
+        <LinearLayout
+            android:id="@+id/accueil_container_alcool_global"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_alcool_global"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alcool global"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_alcool_global"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_alcool_global"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_alcool_global"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Catégorie Bières -->
+        <LinearLayout
+            android:id="@+id/accueil_container_bieres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_bieres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bières"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_bieres"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_bieres"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_bieres"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Catégorie Liqueurs -->
+        <LinearLayout
+            android:id="@+id/accueil_container_liqueurs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_liqueurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Liqueurs"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_liqueurs"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_liqueurs"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_liqueurs"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Catégorie Alcool Fort -->
+        <LinearLayout
+            android:id="@+id/accueil_container_alcool_fort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <CheckBox
+                android:id="@+id/accueil_check_alcool_fort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alcool fort"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/accueil_btn_moins_alcool_fort"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="-"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accueil_txt_alcool_fort"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/accueil_btn_plus_alcool_fort"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Bandeau conseils -->
+        <TextView
+            android:id="@+id/accueil_txt_conseil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conseil: Chaque pas compte dans votre parcours."
+            android:textSize="14sp"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_orange_light"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+
+    </LinearLayout>
+</ScrollView>

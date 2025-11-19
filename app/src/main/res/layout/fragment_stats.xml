@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Bandeau profil -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/stats_txt_profil_complet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Profil: Complet"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stats_txt_total_aujourdhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: 0"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Zone calculs (jour/semaine/mois/année) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/stats_txt_calculs_jour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jour: 0"
+                android:textSize="14sp"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/stats_txt_calculs_semaine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semaine: 0"
+                android:textSize="14sp"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/stats_txt_calculs_mois"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mois: 0"
+                android:textSize="14sp"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/stats_txt_calculs_annee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Année: 0"
+                android:textSize="14sp"
+                android:padding="4dp" />
+        </LinearLayout>
+
+        <!-- Boutons période -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/stats_btn_jour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jour"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/stats_btn_semaine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Semaine"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/stats_btn_mois"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mois"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/stats_btn_annee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Année"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Graphique Consommation -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Graphique Consommation"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="8dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/stats_chart_consommation"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Graphique Coûts et Économies -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Graphique Coûts et Économies"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="8dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/stats_chart_couts"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+    </LinearLayout>
+</ScrollView>

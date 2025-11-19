@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/habitudes_header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Habitudes & Volonté"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white" />
+
+        <!-- Bandeau profil -->
+        <LinearLayout
+            android:id="@+id/habitudes_bandeau_profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/habitudes_profil_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Profil: Complet"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/habitudes_total_jour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: 0"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Zone Habitudes -->
+        <LinearLayout
+            android:id="@+id/habitudes_container_habitudes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zone Habitudes"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Max Cigarettes -->
+            <EditText
+                android:id="@+id/habitudes_input_max_cigarettes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max cigarettes par jour"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Max Joints -->
+            <EditText
+                android:id="@+id/habitudes_input_max_joints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max joints par jour"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Max Alcool Global -->
+            <EditText
+                android:id="@+id/habitudes_input_max_alcool_global"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max alcool global par jour"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Max Bières -->
+            <EditText
+                android:id="@+id/habitudes_input_max_bieres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max bières par jour"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Max Liqueurs -->
+            <EditText
+                android:id="@+id/habitudes_input_max_liqueurs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max liqueurs par jour"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Max Alcool Fort -->
+            <EditText
+                android:id="@+id/habitudes_input_max_alcool_fort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max alcool fort par jour"
+                android:inputType="number"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Bouton Sauvegarder -->
+            <Button
+                android:id="@+id/habitudes_btn_sauvegarder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sauvegarder" />
+
+        </LinearLayout>
+
+        <!-- Zone Volonté (construite dynamiquement dans le code) -->
+        <LinearLayout
+            android:id="@+id/habitudes_container_volonte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>
