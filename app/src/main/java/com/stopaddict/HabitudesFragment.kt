@@ -7,18 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import java.util.*
 
 class HabitudesFragment : Fragment() {
 
     companion object {
         private const val TAG = "HabitudesFragment"
-        private const val KEY_MAX_CIGARETTES = "max_cigarettes"
-        private const val KEY_MAX_JOINTS = "max_joints"
-        private const val KEY_MAX_ALCOOL_GLOBAL = "max_alcool_global"
-        private const val KEY_MAX_BIERES = "max_bieres"
-        private const val KEY_MAX_LIQUEURS = "max_liqueurs"
-        private const val KEY_MAX_ALCOOL_FORT = "max_alcool_fort"
     }
 
     private lateinit var dbHelper: DatabaseHelper
@@ -34,7 +27,6 @@ class HabitudesFragment : Fragment() {
     private lateinit var inputMaxAlcoolFort: EditText
     private lateinit var btnSauvegarder: Button
     private lateinit var containerVolonte: LinearLayout
-    private val habitudesValues = mutableMapOf<String, Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,7 +71,6 @@ class HabitudesFragment : Fragment() {
         val langue = configLangue.getLangue()
         val trad = HabitudesLangues.getTraductions(langue)
         
-        // Appliquer les traductions aux vues
         headerTitle.text = "Habitudes & Volonté"
     }
 
@@ -91,20 +82,7 @@ class HabitudesFragment : Fragment() {
 
     private fun loadExistingData() {
         try {
-            val habitudes = dbHelper.getHabitudes()
-            
-            habitudesValues.clear()
-            habitudesValues.putAll(habitudes)
-            
-            inputMaxCigarettes.setText(habitudesValues[KEY_MAX_CIGARETTES]?.toString() ?: "")
-            inputMaxJoints.setText(habitudesValues[KEY_MAX_JOINTS]?.toString() ?: "")
-            inputMaxAlcoolGlobal.setText(habitudesValues[KEY_MAX_ALCOOL_GLOBAL]?.toString() ?: "")
-            inputMaxBieres.setText(habitudesValues[KEY_MAX_BIERES]?.toString() ?: "")
-            inputMaxLiqueurs.setText(habitudesValues[KEY_MAX_LIQUEURS]?.toString() ?: "")
-            inputMaxAlcoolFort.setText(habitudesValues[KEY_MAX_ALCOOL_FORT]?.toString() ?: "")
-            
             updateBandeau()
-            
         } catch (e: Exception) {
             Log.e(TAG, "Erreur chargement données", e)
         }
@@ -112,17 +90,10 @@ class HabitudesFragment : Fragment() {
 
     private fun updateBandeau() {
         try {
-            val profilComplet = dbHelper.isProfilComplet()
             val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
             
-            if (profilComplet) {
-                txtProfilStatus.text = trad["profil_complet"]
-            } else {
-                txtProfilStatus.text = trad["profil_incomplet"]
-            }
-            
-            val total = dbHelper.getStatistiquesJour(Date()).values.sum()
-            txtTotalJour.text = "${trad["total_aujourdhui"]}: $total"
+            txtProfilStatus.text = trad["profil_complet"] ?: "Profil: OK"
+            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total"}: 0"
             
         } catch (e: Exception) {
             Log.e(TAG, "Erreur update bandeau", e)
@@ -131,18 +102,12 @@ class HabitudesFragment : Fragment() {
 
     private fun saveHabitudes() {
         try {
-            val newValues = mapOf(
-                KEY_MAX_CIGARETTES to (inputMaxCigarettes.text.toString().toIntOrNull() ?: 0),
-                KEY_MAX_JOINTS to (inputMaxJoints.text.toString().toIntOrNull() ?: 0),
-                KEY_MAX_ALCOOL_GLOBAL to (inputMaxAlcoolGlobal.text.toString().toIntOrNull() ?: 0),
-                KEY_MAX_BIERES to (inputMaxBieres.text.toString().toIntOrNull() ?: 0),
-                KEY_MAX_LIQUEURS to (inputMaxLiqueurs.text.toString().toIntOrNull() ?: 0),
-                KEY_MAX_ALCOOL_FORT to (inputMaxAlcoolFort.text.toString().toIntOrNull() ?: 0)
-            )
-            
-            dbHelper.saveHabitudes(newValues)
-            habitudesValues.clear()
-            habitudesValues.putAll(newValues)
+            val maxCig = inputMaxCigarettes.text.toString().toIntOrNull() ?: 0
+            val maxJoints = inputMaxJoints.text.toString().toIntOrNull() ?: 0
+            val maxAlcool = inputMaxAlcoolGlobal.text.toString().toIntOrNull() ?: 0
+            val maxBieres = inputMaxBieres.text.toString().toIntOrNull() ?: 0
+            val maxLiqueurs = inputMaxLiqueurs.text.toString().toIntOrNull() ?: 0
+            val maxAlcoolFort = inputMaxAlcoolFort.text.toString().toIntOrNull() ?: 0
             
             Toast.makeText(requireContext(), "Habitudes sauvegardées", Toast.LENGTH_SHORT).show()
             
