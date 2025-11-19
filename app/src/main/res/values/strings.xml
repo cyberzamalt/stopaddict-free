@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nom de l'application -->
+    <string name="app_name">StopAddict</string>
+    
+    <!-- Onglets navigation -->
+    <string name="tab_accueil">Home</string>
+    <string name="tab_stats">Stats</string>
+    <string name="tab_calendrier">Calendar</string>
+    <string name="tab_habitudes">Habits</string>
+    <string name="tab_reglages">Settings</string>
+    
+    <!-- Avertissement majorité -->
+    <string name="warning_title">Age Verification</string>
+    <string name="warning_message">StopAddict is reserved for persons aged 18 and over, having reached or exceeded the age of majority in their country of residence or use.</string>
+    <string name="warning_checkbox_18">I am 18 years old or older</string>
+    <string name="warning_checkbox_majority">I have reached the age of majority in my country</string>
+    <string name="warning_checkbox_hide">Do not show this message again</string>
+    <string name="warning_accept">I Accept</string>
+    <string name="warning_quit">Quit</string>
+    <string name="warning_resources">Useful Resources &amp; Numbers</string>
+    
+    <!-- Catégories -->
+    <string name="category_cigarettes">Cigarettes</string>
+    <string name="category_joints">Joints</string>
+    <string name="category_alcool_global">Global Alcohol</string>
+    <string name="category_bieres">Beers</string>
+    <string name="category_liqueurs">Liqueurs</string>
+    <string name="category_alcool_fort">Hard Liquor</string>
+    
+    <!-- Boutons génériques -->
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_export">Export</string>
+    <string name="btn_import">Import</string>
+    
+    <!-- Messages génériques -->
+    <string name="msg_success">Success</string>
+    <string name="msg_error">Error</string>
+    <string name="msg_loading">Loading…</string>
+    <string name="msg_no_data">No data available</string>
+    
+    <!-- Profil -->
+    <string name="profile_complete">Complete Profile</string>
+    <string name="profile_incomplete">Incomplete Profile</string>
+    <string name="total_today">Today\'s total</string>
+    
+    <!-- Console debug -->
+    <string name="console_title">Debug Console</string>
+    <string name="console_copy">Copy</string>
+    
+    <!-- Périodes -->
+    <string name="period_day">Day</string>
+    <string name="period_week">Week</string>
+    <string name="period_month">Month</string>
+    <string name="period_year">Year</string>
+    
+    <!-- Jours de la semaine -->
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+    
+    <!-- Mois -->
+    <string name="month_january">January</string>
+    <string name="month_february">February</string>
+    <string name="month_march">March</string>
+    <string name="month_april">April</string>
+    <string name="month_may">May</string>
+    <string name="month_june">June</string>
+    <string name="month_july">July</string>
+    <string name="month_august">August</string>
+    <string name="month_september">September</string>
+    <string name="month_october">October</string>
+    <string name="month_november">November</string>
+    <string name="month_december">December</string>
+    
+    <!-- Réglages -->
+    <string name="settings_personalization">Personalization</string>
+    <string name="settings_costs">Costs</string>
+    <string name="settings_habits">Habits</string>
+    <string name="settings_dates">Dates</string>
+    <string name="settings_data">Data Management</string>
+    <string name="settings_firstname">First name</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_currency">Currency</string>
+    
+    <!-- RAZ -->
+    <string name="raz_day">Reset Day</string>
+    <string name="raz_history">Reset History</string>
+    <string name="raz_factory">Factory Reset</string>
+    <string name="raz_confirm">Are you sure?</string>
+    <string name="raz_warning">This action cannot be undone!</string>
+    
+    <!-- Export/Import -->
+    <string name="export_success">Data exported successfully</string>
+    <string name="export_error">Export error</string>
+    <string name="import_success">Data imported successfully</string>
+    <string name="import_error">Import error</string>
+    <string name="import_limit">Import limit: 1 per day (free version)</string>
+    
+    <!-- Dates -->
+    <string name="date_reduction">Reduction date</string>
+    <string name="date_quit">Quit date</string>
+    <string name="date_success">Success date</string>
+    <string name="select_date">Select date</string>
+    
+    <!-- Erreurs -->
+    <string name="error_negative_value">Values cannot be negative</string>
+    <string name="error_too_high">Values must be less than 1000</string>
+    <string name="error_invalid_input">Invalid input</string>
+    <string name="error_network">Network error</string>
+    <string name="error_database">Database error</string>
+    
+    <!-- Publicité -->
+    <string name="ad_loading">Loading ad…</string>
+    <string name="ad_failed">Ad failed to load</string>
+    
+    <!-- Version -->
+    <string name="version_free">Free Version</string>
+    <string name="version_premium">Premium Version</string>
+</resources>
