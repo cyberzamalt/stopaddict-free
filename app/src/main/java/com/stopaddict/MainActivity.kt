@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -22,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         private const val PREFS_NAME = "StopAddict"
         private const val PREF_WARNING_SHOWN = "warning_majorite_shown"
         private const val PREF_AGE_ACCEPTED = "age_18_accepted"
-        private const val URL_RESSOURCES_FR = "https://www.drogues-info-service.fr"
-        private const val URL_RESSOURCES_EN = "https://www.samhsa.gov/find-help/national-helpline"
     }
 
     private lateinit var headerTextView: TextView
@@ -31,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var adContainer: FrameLayout
     private lateinit var configLangue: ConfigLangue
-    private lateinit var pubManager: PubManager
     private lateinit var dbHelper: DatabaseHelper
     private var consoleClickCount = 0
     private var lastConsoleClickTime = 0L
@@ -42,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        Log.d(TAG, "MainActivity onCreate - Démarrage app")
+        Log.d(TAG, "MainActivity onCreate")
         
         try {
             configLangue = ConfigLangue(this)
@@ -128,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             setupTabLayoutAndViewPager()
             
             if (isVersionGratuite) {
-                initializeAdMob()
+                adContainer.visibility = View.VISIBLE
             } else {
                 adContainer.visibility = View.GONE
             }
@@ -165,17 +161,6 @@ class MainActivity : AppCompatActivity() {
             3 -> if (langue == "FR") "Habitudes" else "Habits"
             4 -> if (langue == "FR") "Réglages" else "Settings"
             else -> ""
-        }
-    }
-
-    private fun initializeAdMob() {
-        try {
-            pubManager = PubManager(this)
-            pubManager.chargerBandeau(adContainer)
-            adContainer.visibility = View.VISIBLE
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur AdMob", e)
-            adContainer.visibility = View.GONE
         }
     }
 
@@ -244,24 +229,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateDateTime()
-        if (isVersionGratuite && ::pubManager.isInitialized) {
-            pubManager.onResume()
-        }
     }
 
     override fun onPause() {
         super.onPause()
-        if (isVersionGratuite && ::pubManager.isInitialized) {
-            pubManager.onPause()
-        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         consoleDialog?.dismiss()
-        if (isVersionGratuite && ::pubManager.isInitialized) {
-            pubManager.onDestroy()
-        }
         if (::dbHelper.isInitialized) {
             dbHelper.close()
         }
