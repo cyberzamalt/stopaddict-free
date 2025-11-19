@@ -115,17 +115,10 @@ class CalendrierFragment : Fragment() {
 
     private fun updateBandeau() {
         try {
-            val profilComplet = dbHelper.isProfilComplet()
             val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
             
-            if (profilComplet) {
-                txtProfilStatus.text = trad["profil_complet"]
-            } else {
-                txtProfilStatus.text = trad["profil_incomplet"]
-            }
-            
-            val total = dbHelper.getStatistiquesJour(Date()).values.sum()
-            txtTotalJour.text = "${trad["total_aujourdhui"]}: $total"
+            txtProfilStatus.text = trad["profil_complet"] ?: "Profil: OK"
+            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total"}: 0"
             
         } catch (e: Exception) {
             Log.e(TAG, "Erreur update bandeau", e)
