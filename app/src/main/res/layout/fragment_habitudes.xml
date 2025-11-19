@@ -15,7 +15,7 @@
             android:id="@+id/habitudes_header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habitudes & Volonté"
+            android:text="Habitudes &amp; Volonté"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center"
