@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adContainer: FrameLayout
     private lateinit var configLangue: ConfigLangue
     private lateinit var dbHelper: DatabaseHelper
+    private lateinit var trad: Map<String, String>
     private var consoleClickCount = 0
     private var lastConsoleClickTime = 0L
     private var consoleVisible = false
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         try {
             configLangue = ConfigLangue(this)
             configLangue.initialiserLangue()
+            trad = MainActivityLangues.getTraductions(configLangue.getLangue())
             
             setContentView(R.layout.activity_main)
             
@@ -106,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             
             // Titre
             val titleText = TextView(this).apply {
-                text = "⚠️ Avertissement - Public majeur(e) (18+)"
+                text = trad["warning_title"] ?: ""
                 textSize = 18f
                 setTypeface(null, android.graphics.Typeface.BOLD)
                 setPadding(0, 0, 0, 20)
@@ -116,11 +118,7 @@ class MainActivity : AppCompatActivity() {
             
             // Message principal
             val messageText = TextView(this).apply {
-                text = "Stop Addict est une application d'auto-suivi et d'aide à la réduction/arrêt des consommations (tabac, alcool, cannabis).\n\n" +
-                       "Réservée aux personnes de 18 ans et plus, ayant dépassé la majorité du pays de résidence ou du pays visité.\n\n" +
-                       "Ne fait pas la promotion de ces produits.\n\n" +
-                       "Ne remplace pas un accompagnement médical, psychologique ou social. En cas de difficulté, consultez un professionnel.\n\n" +
-                       "Utilisez Stop Addict de façon responsable."
+                text = trad["warning_message"] ?: ""
                 textSize = 14f
                 setPadding(0, 0, 0, 20)
             }
@@ -128,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             
             // Lien ressources utiles
             val linkText = TextView(this).apply {
-                text = "📞 Ressources et numéros utiles"
+                text = trad["warning_resources_link"] ?: ""
                 textSize = 14f
                 setTextColor(getColor(android.R.color.holo_blue_dark))
                 setPadding(0, 0, 0, 30)
@@ -140,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             
             // CASE 1 : Je suis majeur(e) - OBLIGATOIRE
             val checkboxAge = CheckBox(this).apply {
-                text = "☑️ Je suis majeur(e), j'ai 18 ans ou plus"
+                text = trad["warning_checkbox_age"] ?: ""
                 textSize = 15f
                 setPadding(0, 10, 0, 10)
             }
@@ -148,7 +146,7 @@ class MainActivity : AppCompatActivity() {
             
             // CASE 2 : Ne plus afficher
             val checkboxNoShow = CheckBox(this).apply {
-                text = "Ne plus afficher ce message"
+                text = trad["warning_checkbox_noshow"] ?: ""
                 setPadding(0, 10, 0, 20)
             }
             container.addView(checkboxNoShow)
@@ -157,21 +155,20 @@ class MainActivity : AppCompatActivity() {
             builder.setView(container)
             
             // Bouton Quitter
-            builder.setNegativeButton("Quitter") { _, _ ->
+            builder.setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
                 finish()
             }
             
             // Bouton J'accepte et continuer - DESACTIVE par défaut
-            builder.setPositiveButton("J'accepte et continuer", null)
+            builder.setPositiveButton(trad["warning_btn_accept"] ?: "Accept", null)
             
             builder.setCancelable(false)
             val dialog = builder.create()
             
             dialog.setOnShowListener {
                 val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                positiveButton.isEnabled = false // Désactivé par défaut
+                positiveButton.isEnabled = false
                 
-                // Activer le bouton uniquement si case majorité cochée
                 checkboxAge.setOnCheckedChangeListener { _, isChecked ->
                     positiveButton.isEnabled = isChecked
                 }
@@ -202,26 +199,10 @@ class MainActivity : AppCompatActivity() {
     
     private fun showRessourcesUtiles() {
         try {
-            val ressources = """
-                📞 Ressources et numéros utiles
-                
-                🚨 Urgences : 112 (UE) / 15 (FR - SAMU)
-                
-                🇫🇷 FRANCE
-                • Tabac Info Service : 39 89
-                  → tabac-info-service.fr
-                • Alcool Info Service : 0 980 980 930
-                  → alcool-info-service.fr
-                • Drogues Info Service : 0 800 23 13 13
-                  → drogues-info-service.fr
-                
-                🌍 Consulte les ressources locales dans ton pays si tu n'es pas en France.
-            """.trimIndent()
-            
             AlertDialog.Builder(this)
-                .setTitle("📞 Besoin d'aide ?")
-                .setMessage(ressources)
-                .setPositiveButton("Fermer", null)
+                .setTitle(trad["resources_title"] ?: "Help")
+                .setMessage(trad["resources_content"] ?: "")
+                .setPositiveButton(trad["resources_btn_close"] ?: "Close", null)
                 .show()
         } catch (e: Exception) {
             Log.e(TAG, "Erreur affichage ressources", e)
@@ -262,13 +243,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTabTitle(position: Int): String {
-        val langue = configLangue.getLangue()
         return when (position) {
-            0 -> if (langue == "FR") "Accueil" else "Home"
-            1 -> if (langue == "FR") "Stats" else "Stats"
-            2 -> if (langue == "FR") "Calendrier" else "Calendar"
-            3 -> if (langue == "FR") "Habitudes & Volonté" else "Habits & Will"
-            4 -> if (langue == "FR") "Réglages" else "Settings"
+            0 -> trad["tab_accueil"] ?: "Home"
+            1 -> trad["tab_stats"] ?: "Stats"
+            2 -> trad["tab_calendrier"] ?: "Calendar"
+            3 -> trad["tab_habitudes"] ?: "Habits"
+            4 -> trad["tab_reglages"] ?: "Settings"
             else -> ""
         }
     }
@@ -299,57 +279,61 @@ class MainActivity : AppCompatActivity() {
 
     private fun showConsoleDebugDialog() {
         try {
-            // TextView style terminal noir/vert
             val textView = TextView(this).apply {
                 setBackgroundColor(Color.BLACK)
-                setTextColor(Color.rgb(0, 255, 0)) // Vert terminal
+                setTextColor(Color.rgb(0, 255, 0))
                 setPadding(20, 20, 20, 20)
                 textSize = 11f
                 typeface = android.graphics.Typeface.MONOSPACE
                 
                 val logs = StringBuilder()
                 logs.append("═══════════════════════════════════\n")
-                logs.append("      CONSOLE DEBUG STOPADDICT     \n")
+                logs.append("      ${trad["console_title"] ?: "DEBUG CONSOLE"}     \n")
                 logs.append("═══════════════════════════════════\n\n")
-                logs.append("Version: ${if (isVersionGratuite) "Gratuite" else "Payante"}\n")
-                logs.append("Langue: ${configLangue.getLangue()}\n")
-                logs.append("Date: ${SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())}\n")
-                logs.append("Build: DEBUG\n")
-                logs.append("Device: ${android.os.Build.MODEL}\n")
-                logs.append("Android: ${android.os.Build.VERSION.RELEASE}\n\n")
                 
-                // Logs base de données
+                val versionText = if (isVersionGratuite) {
+                    trad["console_version_free"] ?: "Free"
+                } else {
+                    trad["console_version_paid"] ?: "Paid"
+                }
+                logs.append("${trad["console_version"] ?: "Version"}: $versionText\n")
+                logs.append("${trad["console_langue"] ?: "Language"}: ${configLangue.getLangue()}\n")
+                logs.append("${trad["console_date"] ?: "Date"}: ${SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())}\n")
+                logs.append("${trad["console_build"] ?: "Build"}: DEBUG\n")
+                logs.append("${trad["console_device"] ?: "Device"}: ${android.os.Build.MODEL}\n")
+                logs.append("${trad["console_android"] ?: "Android"}: ${android.os.Build.VERSION.RELEASE}\n\n")
+                
                 try {
                     val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                    logs.append("--- État Application ---\n")
-                    logs.append("Age accepté: ${prefs.getBoolean(PREF_AGE_ACCEPTED, false)}\n")
-                    logs.append("Warning shown: ${prefs.getBoolean(PREF_WARNING_SHOWN, false)}\n\n")
+                    logs.append("--- ${trad["console_app_state"] ?: "App State"} ---\n")
+                    logs.append("${trad["console_age_accepted"] ?: "Age accepted"}: ${prefs.getBoolean(PREF_AGE_ACCEPTED, false)}\n")
+                    logs.append("${trad["console_warning_shown"] ?: "Warning shown"}: ${prefs.getBoolean(PREF_WARNING_SHOWN, false)}\n\n")
                 } catch (e: Exception) {
-                    logs.append("Erreur lecture prefs: ${e.message}\n\n")
+                    logs.append("${trad["console_error_prefs"] ?: "Error reading prefs"}: ${e.message}\n\n")
                 }
                 
-                logs.append("--- Logs Database ---\n")
+                logs.append("--- ${trad["console_logs_db"] ?: "Database Logs"} ---\n")
                 try {
                     val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                     val consos = dbHelper.getConsommationsJour(today)
-                    logs.append("Consommations jour:\n")
+                    logs.append("${trad["console_consos_jour"] ?: "Daily consumptions"}:\n")
                     if (consos.isEmpty()) {
-                        logs.append("  Aucune consommation\n")
+                        logs.append("  ${trad["console_no_conso"] ?: "No consumption"}\n")
                     } else {
                         consos.forEach { (type, count) ->
                             logs.append("  $type: $count\n")
                         }
                     }
                 } catch (e: Exception) {
-                    logs.append("Erreur lecture DB: ${e.message}\n")
+                    logs.append("${trad["console_error_db"] ?: "Error reading DB"}: ${e.message}\n")
                 }
                 
                 logs.append("\n═══════════════════════════════════\n")
-                logs.append("     Logs sélectionnables ✓        \n")
+                logs.append("     ${trad["console_logs_selectable"] ?: "Selectable logs ✓"}        \n")
                 logs.append("═══════════════════════════════════\n")
                 
                 text = logs.toString()
-                setTextIsSelectable(true) // Permettre sélection/copie
+                setTextIsSelectable(true)
             }
             
             val scrollView = ScrollView(this).apply {
@@ -359,13 +343,12 @@ class MainActivity : AppCompatActivity() {
             
             consoleDialog = AlertDialog.Builder(this)
                 .setView(scrollView)
-                .setPositiveButton("Fermer") { dialog, _ ->
+                .setPositiveButton(trad["console_btn_close"] ?: "Close") { dialog, _ ->
                     dialog.dismiss()
                     consoleVisible = false
                 }
                 .create()
             
-            // Style de la dialog en noir
             consoleDialog?.window?.setBackgroundDrawableResource(android.R.color.black)
             consoleDialog?.setOnShowListener {
                 consoleDialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(Color.rgb(0, 255, 0))
@@ -373,7 +356,6 @@ class MainActivity : AppCompatActivity() {
             
             consoleDialog?.show()
             
-            // Forcer en plein écran, en haut
             consoleDialog?.window?.setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
