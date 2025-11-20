@@ -1173,3 +1173,146 @@ object ReglagesLangues {
         }
     }
 }
+// À AJOUTER À LA FIN de ReglagesLangues.kt existant
+
+    // ==================== CONTENU MANUEL ====================
+    
+    fun getManuel(langue: String): String {
+        return when (langue) {
+            "FR" -> """
+Manuel d'utilisation - Stop Addict
+
+Objectif : t'aider à suivre et réduire/arrêter tes consommations (tabac, alcool, cannabis), sans incitation.
+
+1) Écran Accueil
+- Ajoute tes consommations (cigarettes, joints, verres d'alcool) avec +/-.
+- Vois ton total du jour et conseils personnalisés.
+- Active/désactive les catégories selon tes besoins.
+
+2) Statistiques
+- Graphiques semaine/mois/année pour visualiser ton évolution.
+- Compare avec tes objectifs.
+
+3) Calendrier
+- Vue mensuelle de tes consommations.
+- Légende couleur pour repérer les jours à risque.
+- Clique sur un jour pour ajouter/modifier.
+
+4) Habitudes & Volonté
+- Définis tes objectifs quotidiens max par catégorie.
+- Dates clés : réduction, arrêt, réussite.
+
+5) Réglages
+- Configure les coûts (tabac, alcool...).
+- Choisis ta langue et devise.
+- Export/Import de tes données en JSON.
+- RAZ jour/historique/usine si besoin.
+
+6) Support
+Contact : stopmauvaiseshabitudes@gmail.com (délai 72h ouvrées).
+
+7) Confidentialité
+Toutes tes données restent sur ton appareil. Aucun serveur, aucune collecte.
+
+8) Rappel santé
+App réservée aux 18+. Ne remplace pas un suivi médical/psychologique.
+            """.trimIndent()
+            
+            else -> getManuel("FR") // Fallback FR pour autres langues
+        }
+    }
+
+    // ==================== CONTENU CGV ====================
+    
+    fun getCGV(langue: String): String {
+        return when (langue) {
+            "FR" -> """
+Conditions Générales de Vente (CGV) - Stop Addict
+
+Entrée en vigueur : 15 septembre 2025
+
+1) Objet
+Stop Addict est une application mobile d'auto-suivi des consommations (tabac, alcool, cannabis). Elle ne fait pas la promotion de ces produits.
+
+2) Accès à l'application
+- Version gratuite : accès illimité avec publicités (Google AdMob).
+- Version payante : achat unique, sans pub, toutes fonctionnalités.
+
+3) Données personnelles
+- Stockage local uniquement (sur ton appareil).
+- Aucune transmission à des serveurs externes.
+- Export/suppression possibles à tout moment.
+
+4) Responsabilités
+- L'app est un outil d'aide, pas un dispositif médical.
+- Ne remplace pas un suivi par un professionnel de santé.
+- Aucune garantie de résultat.
+
+5) Modifications
+Nous pouvons modifier ces CGV. Les changements seront notifiés dans l'app ou via le Store.
+
+6) Contact
+stopmauvaiseshabitudes@gmail.com (délai cible 72h ouvrées).
+
+7) Loi applicable
+En l'absence d'entreprise constituée, ces CGV sont à titre informatif. La loi applicable dépendra de ta localisation et des règles du Store.
+            """.trimIndent()
+            
+            else -> getCGV("FR") // Fallback FR
+        }
+    }
+
+    // ==================== CONTENU MENTIONS LÉGALES ====================
+    
+    fun getMentionsLegales(langue: String): String {
+        return when (langue) {
+            "FR" -> """
+Mentions Légales - Stop Addict
+
+Éditeur : À compléter (auto-entrepreneur - ouverture prévue décembre).
+
+Contact : stopmauvaiseshabitudes@gmail.com
+
+Hébergement : Application distribuée via Google Play Store. Données utilisateurs stockées localement sur l'appareil.
+
+Protection des données : Aucune collecte côté serveur. Les données que tu saisis restent sur l'appareil. Export/RAZ disponibles.
+
+Avertissement santé : Réservé aux 18+. L'app n'incite pas à la consommation et ne remplace pas un accompagnement médical/psychologique/social.
+
+Entrée en vigueur : 15 septembre 2025
+            """.trimIndent()
+            
+            else -> getMentionsLegales("FR") // Fallback FR
+        }
+    }
+
+    // ==================== CONTENU AVERTISSEMENT ====================
+    
+    fun getAvertissement(langue: String): String {
+        return when (langue) {
+            "FR" -> """
+⚠️ Avertissement - Public majeur(e) (18+)
+
+Stop Addict est une application d'auto-suivi et d'aide à la réduction/arrêt des consommations (tabac, alcool, cannabis).
+
+✓ Réservée aux personnes de 18 ans et plus, ayant dépassé la majorité du pays de résidence ou du pays visité.
+
+✓ Ne fait pas la promotion de ces produits.
+
+✓ Ne remplace pas un accompagnement médical, psychologique ou social. En cas de difficulté, consultez un professionnel.
+
+✓ Utilisez Stop Addict de façon responsable.
+
+📞 Ressources utiles :
+• Urgences : 112 (UE) / 15 (FR - SAMU)
+• Tabac Info Service (FR) : 39 89
+• Alcool Info Service (FR) : 0 980 980 930
+• Drogues Info Service (FR) : 0 800 23 13 13
+
+Consultez les ressources locales dans votre pays si vous n'êtes pas en France.
+            """.trimIndent()
+            
+            else -> getAvertissement("FR") // Fallback FR
+        }
+    }
+}
