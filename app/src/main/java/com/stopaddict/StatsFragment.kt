@@ -43,6 +43,7 @@ class StatsFragment : Fragment() {
     // Database et config
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
+    private lateinit var trad: Map<String, String>
 
     // UI Elements - Graphiques
     private lateinit var chartConsommation: LineChart
@@ -88,6 +89,7 @@ class StatsFragment : Fragment() {
             // Initialisation database et config
             dbHelper = DatabaseHelper(requireContext())
             configLangue = ConfigLangue(requireContext())
+            trad = StatsLangues.getTraductions(configLangue.getLangue())
 
             // Initialisation des vues
             initViews(view)
@@ -123,6 +125,12 @@ class StatsFragment : Fragment() {
             btnSemaine = view.findViewById(R.id.stats_btn_semaine)
             btnMois = view.findViewById(R.id.stats_btn_mois)
             btnAnnee = view.findViewById(R.id.stats_btn_annee)
+
+            // Appliquer traductions aux boutons
+            btnJour.text = trad["periode_jour"] ?: "Jour"
+            btnSemaine.text = trad["periode_semaine"] ?: "Semaine"
+            btnMois.text = trad["periode_mois"] ?: "Mois"
+            btnAnnee.text = trad["periode_annee"] ?: "Année"
 
             // Zone calculs
             txtCalculsJour = view.findViewById(R.id.stats_txt_calculs_jour)
