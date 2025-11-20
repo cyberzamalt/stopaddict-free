@@ -79,14 +79,14 @@ class CalendrierFragment : Fragment() {
         }
         
         txtProfilStatus = TextView(requireContext()).apply {
-            text = "Profil: Incomplet"
+            text = trad["profil_incomplet"] ?: "Profil: Incomplet"
             textSize = 14f
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
         profilContainer.addView(txtProfilStatus)
         
         txtTotalJour = TextView(requireContext()).apply {
-            text = "Total jour: 0"
+            text = "${trad["total_jour"] ?: "Total jour"}: 0"
             textSize = 14f
             gravity = android.view.Gravity.END
         }
@@ -100,7 +100,7 @@ class CalendrierFragment : Fragment() {
         }
         
         btnPrecedent = Button(requireContext()).apply {
-            text = "◀ ${trad["precedent"] ?: "Préc"}"
+            text = trad["btn_mois_precedent"] ?: "◀ Préc"
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             setOnClickListener {
                 currentCalendar.add(Calendar.MONTH, -1)
@@ -110,7 +110,7 @@ class CalendrierFragment : Fragment() {
         navContainer.addView(btnPrecedent)
         
         btnAujourdhui = Button(requireContext()).apply {
-            text = trad["aujourdhui"] ?: "Aujourd'hui"
+            text = trad["btn_aujourdhui"] ?: "Aujourd'hui"
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
                 setMargins(10, 0, 10, 0)
             }
@@ -122,7 +122,7 @@ class CalendrierFragment : Fragment() {
         navContainer.addView(btnAujourdhui)
         
         btnSuivant = Button(requireContext()).apply {
-            text = "${trad["suivant"] ?: "Suiv"} ▶"
+            text = trad["btn_mois_suivant"] ?: "Suiv ▶"
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             setOnClickListener {
                 currentCalendar.add(Calendar.MONTH, 1)
@@ -161,17 +161,17 @@ class CalendrierFragment : Fragment() {
         }
         
         val legendeTitre = TextView(requireContext()).apply {
-            text = trad["legende"] ?: "Légende:"
+            text = trad["legende_titre"] ?: "Légende:"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, 0, 0, 10)
         }
         legendeContainer.addView(legendeTitre)
         
-        addLegendeItem(legendeContainer, Color.parseColor("#E8F5E9"), trad["aucune_conso"] ?: "Aucune consommation")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFF9C4"), trad["conso_moderee"] ?: "Consommation modérée (1-5)")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFCCBC"), trad["conso_elevee"] ?: "Consommation élevée (6-15)")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["conso_excessive"] ?: "Consommation excessive (16+)")
+        addLegendeItem(legendeContainer, Color.parseColor("#E8F5E9"), trad["legende_vert"] ?: "Aucune consommation")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFF9C4"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFCCBC"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["legende_rouge"] ?: "Consommation élevée (6+)")
         
         container.addView(legendeContainer)
     }
@@ -265,7 +265,7 @@ class CalendrierFragment : Fragment() {
             gridCalendrier.removeAllViews()
             
             // Entêtes jours - couleur sobre
-            val joursHeader = arrayOf("L", "M", "M", "J", "V", "S", "D")
+            val joursHeader = (0..6).map { trad["jour_$it"] ?: "?" }.toTypedArray()
             joursHeader.forEach { jour ->
                 val headerView = TextView(requireContext()).apply {
                     text = jour
