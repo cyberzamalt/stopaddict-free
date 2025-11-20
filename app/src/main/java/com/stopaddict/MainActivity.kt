@@ -1,10 +1,13 @@
 package com.stopaddict
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -96,16 +99,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAgeWarningDialog() {
         try {
-            val dialogView = layoutInflater.inflate(android.R.layout.simple_list_item_1, null)
             val container = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(40, 40, 40, 20)
             }
             
+            // Titre
+            val titleText = TextView(this).apply {
+                text = "⚠️ Avertissement - Public majeur(e) (18+)"
+                textSize = 18f
+                setTypeface(null, android.graphics.Typeface.BOLD)
+                setPadding(0, 0, 0, 20)
+                gravity = Gravity.CENTER
+            }
+            container.addView(titleText)
+            
             // Message principal
             val messageText = TextView(this).apply {
-                text = "Stop Addict est réservé aux personnes majeures (18 ans et plus).\n\nCette application est un outil d'aide et ne remplace pas un suivi médical."
-                textSize = 16f
+                text = "Stop Addict est une application d'auto-suivi et d'aide à la réduction/arrêt des consommations (tabac, alcool, cannabis).\n\n" +
+                       "Réservée aux personnes de 18 ans et plus, ayant dépassé la majorité du pays de résidence ou du pays visité.\n\n" +
+                       "Ne fait pas la promotion de ces produits.\n\n" +
+                       "Ne remplace pas un accompagnement médical, psychologique ou social. En cas de difficulté, consultez un professionnel.\n\n" +
+                       "Utilisez Stop Addict de façon responsable."
+                textSize = 14f
                 setPadding(0, 0, 0, 20)
             }
             container.addView(messageText)
@@ -115,39 +131,69 @@ class MainActivity : AppCompatActivity() {
                 text = "📞 Ressources et numéros utiles"
                 textSize = 14f
                 setTextColor(getColor(android.R.color.holo_blue_dark))
-                setPadding(0, 0, 0, 20)
+                setPadding(0, 0, 0, 30)
                 setOnClickListener {
                     showRessourcesUtiles()
                 }
             }
             container.addView(linkText)
             
-            // Checkbox ne plus afficher
+            // CASE 1 : Je suis majeur(e) - OBLIGATOIRE
+            val checkboxAge = CheckBox(this).apply {
+                text = "☑️ Je suis majeur(e), j'ai 18 ans ou plus"
+                textSize = 15f
+                setPadding(0, 10, 0, 10)
+            }
+            container.addView(checkboxAge)
+            
+            // CASE 2 : Ne plus afficher
             val checkboxNoShow = CheckBox(this).apply {
                 text = "Ne plus afficher ce message"
-                setPadding(0, 10, 0, 0)
+                setPadding(0, 10, 0, 20)
             }
             container.addView(checkboxNoShow)
             
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("⚠️ Avertissement")
             builder.setView(container)
-            builder.setPositiveButton("J'ai 18 ans ou plus") { _, _ ->
-                val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                prefs.edit().apply {
-                    putBoolean(PREF_AGE_ACCEPTED, true)
-                    if (checkboxNoShow.isChecked) {
-                        putBoolean(PREF_WARNING_SHOWN, true)
-                    }
-                    apply()
-                }
-                initializeMainContent()
-            }
+            
+            // Bouton Quitter
             builder.setNegativeButton("Quitter") { _, _ ->
                 finish()
             }
+            
+            // Bouton J'accepte et continuer - DESACTIVE par défaut
+            builder.setPositiveButton("J'accepte et continuer", null)
+            
             builder.setCancelable(false)
-            builder.show()
+            val dialog = builder.create()
+            
+            dialog.setOnShowListener {
+                val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                positiveButton.isEnabled = false // Désactivé par défaut
+                
+                // Activer le bouton uniquement si case majorité cochée
+                checkboxAge.setOnCheckedChangeListener { _, isChecked ->
+                    positiveButton.isEnabled = isChecked
+                }
+                
+                positiveButton.setOnClickListener {
+                    if (checkboxAge.isChecked) {
+                        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        prefs.edit().apply {
+                            putBoolean(PREF_AGE_ACCEPTED, true)
+                            if (checkboxNoShow.isChecked) {
+                                putBoolean(PREF_WARNING_SHOWN, true)
+                            }
+                            apply()
+                        }
+                        dialog.dismiss()
+                        initializeMainContent()
+                    }
+                }
+            }
+            
+            dialog.show()
+            
         } catch (e: Exception) {
             Log.e(TAG, "Erreur dialog", e)
             initializeMainContent()
@@ -157,30 +203,23 @@ class MainActivity : AppCompatActivity() {
     private fun showRessourcesUtiles() {
         try {
             val ressources = """
+                📞 Ressources et numéros utiles
+                
+                🚨 Urgences : 112 (UE) / 15 (FR - SAMU)
+                
                 🇫🇷 FRANCE
                 • Tabac Info Service : 39 89
+                  → tabac-info-service.fr
                 • Alcool Info Service : 0 980 980 930
+                  → alcool-info-service.fr
                 • Drogues Info Service : 0 800 23 13 13
+                  → drogues-info-service.fr
                 
-                🇧🇪 BELGIQUE
-                • Tabacstop : 0800 111 00
-                • Alcooliques Anonymes : 078 15 25 56
-                • Infor-Drogues : 02 227 52 52
-                
-                🇨🇭 SUISSE
-                • Ligne stop-tabac : 0848 000 181
-                • Alcooliques Anonymes : 0848 848 846
-                • Infodrog : 031 376 04 01
-                
-                🇨🇦 CANADA
-                • J'ARRÊTE : 1 866 527 7383
-                • Drogue : aide et référence : 1 800 265 2626
-                
-                En cas d'urgence, contactez les services d'urgence de votre pays.
+                🌍 Consulte les ressources locales dans ton pays si tu n'es pas en France.
             """.trimIndent()
             
             AlertDialog.Builder(this)
-                .setTitle("📞 Ressources utiles")
+                .setTitle("📞 Besoin d'aide ?")
                 .setMessage(ressources)
                 .setPositiveButton("Fermer", null)
                 .show()
@@ -260,24 +299,65 @@ class MainActivity : AppCompatActivity() {
 
     private fun showConsoleDebugDialog() {
         try {
+            // TextView style terminal noir/vert
             val textView = TextView(this).apply {
+                setBackgroundColor(Color.BLACK)
+                setTextColor(Color.rgb(0, 255, 0)) // Vert terminal
                 setPadding(20, 20, 20, 20)
-                textSize = 12f
+                textSize = 11f
+                typeface = android.graphics.Typeface.MONOSPACE
                 
                 val logs = StringBuilder()
-                logs.append("═══ CONSOLE DEBUG ═══\n\n")
+                logs.append("═══════════════════════════════════\n")
+                logs.append("      CONSOLE DEBUG STOPADDICT     \n")
+                logs.append("═══════════════════════════════════\n\n")
                 logs.append("Version: ${if (isVersionGratuite) "Gratuite" else "Payante"}\n")
                 logs.append("Langue: ${configLangue.getLangue()}\n")
                 logs.append("Date: ${SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())}\n")
+                logs.append("Build: DEBUG\n")
+                logs.append("Device: ${android.os.Build.MODEL}\n")
+                logs.append("Android: ${android.os.Build.VERSION.RELEASE}\n\n")
+                
+                // Logs base de données
+                try {
+                    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                    logs.append("--- État Application ---\n")
+                    logs.append("Age accepté: ${prefs.getBoolean(PREF_AGE_ACCEPTED, false)}\n")
+                    logs.append("Warning shown: ${prefs.getBoolean(PREF_WARNING_SHOWN, false)}\n\n")
+                } catch (e: Exception) {
+                    logs.append("Erreur lecture prefs: ${e.message}\n\n")
+                }
+                
+                logs.append("--- Logs Database ---\n")
+                try {
+                    val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                    val consos = dbHelper.getConsommationsJour(today)
+                    logs.append("Consommations jour:\n")
+                    if (consos.isEmpty()) {
+                        logs.append("  Aucune consommation\n")
+                    } else {
+                        consos.forEach { (type, count) ->
+                            logs.append("  $type: $count\n")
+                        }
+                    }
+                } catch (e: Exception) {
+                    logs.append("Erreur lecture DB: ${e.message}\n")
+                }
+                
+                logs.append("\n═══════════════════════════════════\n")
+                logs.append("     Logs sélectionnables ✓        \n")
+                logs.append("═══════════════════════════════════\n")
                 
                 text = logs.toString()
+                setTextIsSelectable(true) // Permettre sélection/copie
             }
             
-            val scrollView = ScrollView(this)
+            val scrollView = ScrollView(this).apply {
+                setBackgroundColor(Color.BLACK)
+            }
             scrollView.addView(textView)
             
             consoleDialog = AlertDialog.Builder(this)
-                .setTitle("Console Debug")
                 .setView(scrollView)
                 .setPositiveButton("Fermer") { dialog, _ ->
                     dialog.dismiss()
@@ -285,7 +365,20 @@ class MainActivity : AppCompatActivity() {
                 }
                 .create()
             
+            // Style de la dialog en noir
+            consoleDialog?.window?.setBackgroundDrawableResource(android.R.color.black)
+            consoleDialog?.setOnShowListener {
+                consoleDialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(Color.rgb(0, 255, 0))
+            }
+            
             consoleDialog?.show()
+            
+            // Forcer en plein écran, en haut
+            consoleDialog?.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            consoleDialog?.window?.setGravity(Gravity.TOP)
             
         } catch (e: Exception) {
             Log.e(TAG, "Erreur console", e)
