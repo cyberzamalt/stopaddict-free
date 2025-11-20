@@ -23,6 +23,7 @@ class AccueilFragment : Fragment() {
     // Database
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
+    private lateinit var trad: Map<String, String>
 
     // UI Elements - Compteurs
     private lateinit var txtTotalJour: TextView
@@ -101,6 +102,7 @@ class AccueilFragment : Fragment() {
             // Initialisation database et config
             dbHelper = DatabaseHelper(requireContext())
             configLangue = ConfigLangue(requireContext())
+            trad = AccueilLangues.getTraductions(configLangue.getLangue())
 
             // Initialisation des vues
             initViews(view)
@@ -176,6 +178,14 @@ class AccueilFragment : Fragment() {
             containerBieres = view.findViewById(R.id.accueil_container_bieres)
             containerLiqueurs = view.findViewById(R.id.accueil_container_liqueurs)
             containerAlcoolFort = view.findViewById(R.id.accueil_container_alcool_fort)
+
+            // Appliquer traductions aux CheckBox
+            checkCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
+            checkJoints.text = trad["label_joints"] ?: "Joints"
+            checkAlcoolGlobal.text = trad["label_alcool_global"] ?: "Alcool global"
+            checkBieres.text = trad["label_bieres"] ?: "Bières"
+            checkLiqueurs.text = trad["label_liqueurs"] ?: "Liqueurs"
+            checkAlcoolFort.text = trad["label_alcool_fort"] ?: "Alcool fort"
 
             Log.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
@@ -429,7 +439,7 @@ class AccueilFragment : Fragment() {
 
             // Calcul total jour
             val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
-            txtTotalJour.text = "Total aujourd'hui: $totalJour"
+            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total aujourd'hui"}: $totalJour"
             txtTotalAujourdhui.text = totalJour.toString()
 
             // Mise à jour état des cases à cocher
@@ -588,7 +598,7 @@ class AccueilFragment : Fragment() {
             Log.d(TAG, "Conseil mis à jour: P=$hasPrenom C=$hasCouts H=$hasHabitudes D=$hasDates")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour conseil: ${e.message}")
-            txtConseil.text = "Restez motivé dans votre parcours!"
+            txtConseil.text = trad["conseil_generique_6"] ?: "Restez motivé!"
         }
     }
 
@@ -605,9 +615,9 @@ class AccueilFragment : Fragment() {
         when {
             // Cas 1: Rien
             !hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
-                conseils.add("Bienvenue! Configurez vos habitudes pour un suivi personnalisé.")
-                conseils.add("Chaque pas compte dans votre parcours.")
-                conseils.add("La motivation est la clé du succès.")
+                conseils.add(trad["conseil_cas1_1"] ?: "Bienvenue!")
+                conseils.add(trad["conseil_cas1_2"] ?: "Chaque pas compte")
+                conseils.add(trad["conseil_cas1_3"] ?: "Motivation!")
             }
             // Cas 2: Prénom uniquement
             hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
@@ -620,24 +630,24 @@ class AccueilFragment : Fragment() {
                 val economies = calculerEconomiesJour()
                 if (economies > 0) {
                     conseils.add("Vous économisez ${economies}€ aujourd'hui!")
-                    conseils.add("Ces économies s'accumulent jour après jour.")
+                    conseils.add(trad["conseil_cas3_3"] ?: "Économies")
                 } else {
-                    conseils.add("Réduire votre consommation vous fera économiser.")
+                    conseils.add(trad["conseil_cas3_1"] ?: "Économisez")
                 }
-                conseils.add("L'argent économisé peut servir à vos projets.")
+                conseils.add(trad["conseil_cas3_2"] ?: "Projets")
             }
             // Cas 4: Habitudes uniquement
             !hasPrenom && !hasCouts && hasHabitudes && !hasDates -> {
                 val comparaison = comparerHabitudes()
                 conseils.add(comparaison)
-                conseils.add("Suivre vos habitudes aide à progresser.")
-                conseils.add("Fixez-vous des objectifs réalistes.")
+                conseils.add(trad["conseil_cas4_1"] ?: "Habitudes")
+                conseils.add(trad["conseil_cas4_2"] ?: "Objectifs")
             }
             // Cas 5: Dates uniquement
             !hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
                 val conseilDate = genererConseilDate()
                 conseils.add(conseilDate)
-                conseils.add("Votre objectif se rapproche!")
+                conseils.add(trad["conseil_cas5_1"] ?: "Objectif proche!")
                 conseils.add("Restez concentré sur votre date.")
             }
             // Cas 6: Prénom + Coûts
