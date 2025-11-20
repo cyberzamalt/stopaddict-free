@@ -38,14 +38,12 @@ class FragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activit
                 StatsFragment()
             }
             2 -> {
-                // TODO: Remplacer par CalendrierFragment quand créé
-                Log.w(TAG, "⚠️ CalendrierFragment pas encore créé - Placeholder temporaire")
-                PlaceholderFragment.newInstance("Calendrier", position)
+                Log.d(TAG, "→ CalendrierFragment créé")
+                CalendrierFragment()
             }
             3 -> {
-                // TODO: Remplacer par HabitudesFragment quand créé
-                Log.w(TAG, "⚠️ HabitudesFragment pas encore créé - Placeholder temporaire")
-                PlaceholderFragment.newInstance("Habitudes & Volonté", position)
+                Log.d(TAG, "→ HabitudesFragment créé")
+                HabitudesFragment()
             }
             4 -> {
                 Log.d(TAG, "→ ReglagesFragment créé")
