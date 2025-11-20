@@ -1,7 +1,6 @@
 package com.stopaddict
 
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -76,26 +75,6 @@ class ReglagesFragment : Fragment() {
     private lateinit var editPrixVerreAlcoolFort: EditText
     private lateinit var editUniteCLAlcoolFort: EditText
 
-    // UI Elements - Habitudes
-    private lateinit var editMaxCigarettes: EditText
-    private lateinit var editMaxJoints: EditText
-    private lateinit var editMaxAlcoolGlobal: EditText
-    private lateinit var editMaxBieres: EditText
-    private lateinit var editMaxLiqueurs: EditText
-    private lateinit var editMaxAlcoolFort: EditText
-
-    // UI Elements - Dates objectifs
-    private lateinit var btnDateReductionCigarettes: Button
-    private lateinit var btnDateArretCigarettes: Button
-    private lateinit var btnDateReussiteCigarettes: Button
-    private lateinit var btnDateReductionJoints: Button
-    private lateinit var btnDateArretJoints: Button
-    private lateinit var btnDateReussiteJoints: Button
-    private lateinit var btnDateReductionAlcoolGlobal: Button
-    private lateinit var btnDateArretAlcoolGlobal: Button
-    private lateinit var btnDateReussiteAlcoolGlobal: Button
-    // (même pattern pour bières, liqueurs, alcool fort)
-
     // UI Elements - RAZ et Export/Import
     private lateinit var btnRazJour: Button
     private lateinit var btnRazHistorique: Button
@@ -137,8 +116,6 @@ class ReglagesFragment : Fragment() {
             loadCategoriesActives()
             loadProfil()
             loadCouts()
-            loadHabitudes()
-            loadDates()
 
             // Configuration listeners
             setupListeners()
@@ -148,7 +125,7 @@ class ReglagesFragment : Fragment() {
 
             Log.d(TAG, "ReglagesFragment initialisé avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation ReglagesFragment: ${e.message}")
+            Log.e(TAG, "Erreur initialisation ReglagesFragment: ${e.message}", e)
             Toast.makeText(requireContext(), "Erreur chargement Réglages", Toast.LENGTH_SHORT).show()
         }
 
@@ -207,20 +184,6 @@ class ReglagesFragment : Fragment() {
             editPrixVerreAlcoolFort = view.findViewById(R.id.reglages_edit_prix_verre_alcool_fort)
             editUniteCLAlcoolFort = view.findViewById(R.id.reglages_edit_unite_cl_alcool_fort)
 
-            // Habitudes
-            editMaxCigarettes = view.findViewById(R.id.reglages_edit_max_cigarettes)
-            editMaxJoints = view.findViewById(R.id.reglages_edit_max_joints)
-            editMaxAlcoolGlobal = view.findViewById(R.id.reglages_edit_max_alcool_global)
-            editMaxBieres = view.findViewById(R.id.reglages_edit_max_bieres)
-            editMaxLiqueurs = view.findViewById(R.id.reglages_edit_max_liqueurs)
-            editMaxAlcoolFort = view.findViewById(R.id.reglages_edit_max_alcool_fort)
-
-            // Dates objectifs (cigarettes)
-            btnDateReductionCigarettes = view.findViewById(R.id.reglages_btn_date_reduction_cigarettes)
-            btnDateArretCigarettes = view.findViewById(R.id.reglages_btn_date_arret_cigarettes)
-            btnDateReussiteCigarettes = view.findViewById(R.id.reglages_btn_date_reussite_cigarettes)
-            // (initialiser les autres dates pour joints, alcools...)
-
             // RAZ et Export/Import
             btnRazJour = view.findViewById(R.id.reglages_btn_raz_jour)
             btnRazHistorique = view.findViewById(R.id.reglages_btn_raz_historique)
@@ -237,7 +200,7 @@ class ReglagesFragment : Fragment() {
 
             Log.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation vues: ${e.message}")
+            Log.e(TAG, "Erreur initialisation vues: ${e.message}", e)
             throw e
         }
     }
@@ -258,7 +221,7 @@ class ReglagesFragment : Fragment() {
 
             Log.d(TAG, "Spinners configurés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur configuration spinners: ${e.message}")
+            Log.e(TAG, "Erreur configuration spinners: ${e.message}", e)
         }
     }
 
@@ -283,114 +246,206 @@ class ReglagesFragment : Fragment() {
             checkLiqueurs.isChecked = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
             checkAlcoolFort.isChecked = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
 
-            // Visibilité conteneurs
-            updateContainersVisibility()
+            updateCoutsContainersVisibility()
 
             Log.d(TAG, "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}")
+            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}", e)
         }
     }
+
     private fun loadProfil() {
         try {
-            // Prénom
+            // Charger prénom
             val prenom = dbHelper.getPreference("prenom", "")
             editPrenom.setText(prenom)
 
-            // Langue
+            // Charger langue
             val langue = configLangue.getLangue()
-            val langueIndex = ConfigLangue.LANGUES_DISPONIBLES.keys.toList().indexOf(langue)
+            val langueIndex = ConfigLangue.LANGUES_DISPONIBLES.keys.indexOf(langue)
             if (langueIndex >= 0) {
                 spinnerLangue.setSelection(langueIndex)
             }
 
-            // Devise
-            val devise = dbHelper.getPreference("devise", "€")
-            val deviseIndex = SymbolesDevises.DEVISES_DISPONIBLES.keys.toList().indexOf(devise)
+            // Charger devise
+            val devise = dbHelper.getPreference("devise", "EUR")
+            val deviseIndex = SymbolesDevises.DEVISES_DISPONIBLES.keys.indexOf(devise)
             if (deviseIndex >= 0) {
                 spinnerDevise.setSelection(deviseIndex)
             }
 
-            Log.d(TAG, "Profil chargé: $prenom - $langue - $devise")
+            Log.d(TAG, "Profil chargé: prenom=$prenom, langue=$langue, devise=$devise")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement profil: ${e.message}")
+            Log.e(TAG, "Erreur chargement profil: ${e.message}", e)
         }
     }
+
+    // FIN PARTIE 1/3
+    // COPIER LA PARTIE 2/3 JUSTE APRÈS CETTE LIGNE
+    // DÉBUT PARTIE 2/3
+    // COLLER JUSTE APRÈS LA PARTIE 1/3
 
     private fun loadCouts() {
         try {
-            // Cigarettes
-            val coutsCigarettes = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
-            editPrixPaquet.setText(coutsCigarettes["prix_paquet"]?.toString() ?: "")
-            editNbCigarettes.setText(coutsCigarettes["nb_cigarettes"]?.toInt()?.toString() ?: "20")
-            editPrixTabac.setText(coutsCigarettes["prix_tabac"]?.toString() ?: "")
-            editPrixFeuilles.setText(coutsCigarettes["prix_feuilles"]?.toString() ?: "")
-            editNbFeuilles.setText(coutsCigarettes["nb_feuilles"]?.toInt()?.toString() ?: "")
-            editPrixFiltres.setText(coutsCigarettes["prix_filtres"]?.toString() ?: "")
-            editNbFiltres.setText(coutsCigarettes["nb_filtres"]?.toInt()?.toString() ?: "")
-            editPrixTubes.setText(coutsCigarettes["prix_tubes"]?.toString() ?: "")
-            editNbTubes.setText(coutsCigarettes["nb_tubes"]?.toInt()?.toString() ?: "")
+            // Charger coûts cigarettes
+            val coutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
+            if (coutsCig["prix_paquet"] ?: 0.0 > 0) {
+                radioCigarettesClassiques.isChecked = true
+                editPrixPaquet.setText(coutsCig["prix_paquet"].toString())
+                editNbCigarettes.setText(coutsCig["nb_cigarettes"]?.toInt().toString())
+            } else if (coutsCig["prix_tabac"] ?: 0.0 > 0) {
+                radioCigarettesRouler.isChecked = true
+                editPrixTabac.setText(coutsCig["prix_tabac"].toString())
+                editPrixFeuilles.setText(coutsCig["prix_feuilles"].toString())
+                editNbFeuilles.setText(coutsCig["nb_feuilles"]?.toInt().toString())
+            } else if (coutsCig["prix_tubes"] ?: 0.0 > 0) {
+                radioCigarettesTubeuse.isChecked = true
+                editPrixTabac.setText(coutsCig["prix_tabac"].toString())
+                editPrixTubes.setText(coutsCig["prix_tubes"].toString())
+                editNbTubes.setText(coutsCig["nb_tubes"]?.toInt().toString())
+                editPrixFiltres.setText(coutsCig["prix_filtres"].toString())
+                editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt().toString())
+            }
 
-            // Joints
+            // Charger coûts joints
             val coutsJoints = dbHelper.getCouts(DatabaseHelper.TYPE_JOINT)
-            editPrixGramme.setText(coutsJoints["prix_gramme"]?.toString() ?: "")
-            editGrammeParJoint.setText(coutsJoints["gramme_par_joint"]?.toString() ?: "")
+            editPrixGramme.setText(coutsJoints["prix_gramme"].toString())
+            editGrammeParJoint.setText(coutsJoints["gramme_par_joint"].toString())
 
-            // Alcools
+            // Charger coûts alcool global
             val coutsAlcoolGlobal = dbHelper.getCouts(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
-            editPrixVerreGlobal.setText(coutsAlcoolGlobal["prix_verre"]?.toString() ?: "")
-            editUniteCLGlobal.setText(coutsAlcoolGlobal["unite_cl"]?.toInt()?.toString() ?: "")
+            editPrixVerreGlobal.setText(coutsAlcoolGlobal["prix_verre"].toString())
+            editUniteCLGlobal.setText(coutsAlcoolGlobal["unite_cl"].toString())
 
+            // Charger coûts bières
             val coutsBieres = dbHelper.getCouts(DatabaseHelper.TYPE_BIERE)
-            editPrixVerreBiere.setText(coutsBieres["prix_verre"]?.toString() ?: "")
-            editUniteCLBiere.setText(coutsBieres["unite_cl"]?.toInt()?.toString() ?: "")
+            editPrixVerreBiere.setText(coutsBieres["prix_verre"].toString())
+            editUniteCLBiere.setText(coutsBieres["unite_cl"].toString())
 
+            // Charger coûts liqueurs
             val coutsLiqueurs = dbHelper.getCouts(DatabaseHelper.TYPE_LIQUEUR)
-            editPrixVerreLiqueur.setText(coutsLiqueurs["prix_verre"]?.toString() ?: "")
-            editUniteCLLiqueur.setText(coutsLiqueurs["unite_cl"]?.toInt()?.toString() ?: "")
+            editPrixVerreLiqueur.setText(coutsLiqueurs["prix_verre"].toString())
+            editUniteCLLiqueur.setText(coutsLiqueurs["unite_cl"].toString())
 
+            // Charger coûts alcool fort
             val coutsAlcoolFort = dbHelper.getCouts(DatabaseHelper.TYPE_ALCOOL_FORT)
-            editPrixVerreAlcoolFort.setText(coutsAlcoolFort["prix_verre"]?.toString() ?: "")
-            editUniteCLAlcoolFort.setText(coutsAlcoolFort["unite_cl"]?.toInt()?.toString() ?: "")
+            editPrixVerreAlcoolFort.setText(coutsAlcoolFort["prix_verre"].toString())
+            editUniteCLAlcoolFort.setText(coutsAlcoolFort["unite_cl"].toString())
 
             Log.d(TAG, "Coûts chargés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement coûts: ${e.message}")
+            Log.e(TAG, "Erreur chargement coûts: ${e.message}", e)
         }
     }
 
-    private fun loadHabitudes() {
+    private fun setupListeners() {
         try {
-            editMaxCigarettes.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_CIGARETTE).toString())
-            editMaxJoints.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_JOINT).toString())
-            editMaxAlcoolGlobal.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL).toString())
-            editMaxBieres.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_BIERE).toString())
-            editMaxLiqueurs.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_LIQUEUR).toString())
-            editMaxAlcoolFort.setText(dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT).toString())
+            // Profil
+            btnSauvegarderProfil.setOnClickListener {
+                saveProfil()
+            }
 
-            Log.d(TAG, "Habitudes chargées")
+            // Cases catégories
+            checkCigarettes.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_CIGARETTE] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+            }
+
+            checkJoints.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_JOINT] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+            }
+
+            checkAlcoolGlobal.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+                
+                // Si alcool global activé, désactiver sous-catégories
+                if (isChecked) {
+                    checkBieres.isChecked = false
+                    checkLiqueurs.isChecked = false
+                    checkAlcoolFort.isChecked = false
+                }
+            }
+
+            checkBieres.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_BIERE] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+                
+                // Si bière activée, désactiver alcool global
+                if (isChecked && checkAlcoolGlobal.isChecked) {
+                    checkAlcoolGlobal.isChecked = false
+                }
+            }
+
+            checkLiqueurs.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+                
+                // Si liqueur activée, désactiver alcool global
+                if (isChecked && checkAlcoolGlobal.isChecked) {
+                    checkAlcoolGlobal.isChecked = false
+                }
+            }
+
+            checkAlcoolFort.setOnCheckedChangeListener { _, isChecked ->
+                categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = isChecked
+                saveCategoriesActives()
+                updateCoutsContainersVisibility()
+                
+                // Si alcool fort activé, désactiver alcool global
+                if (isChecked && checkAlcoolGlobal.isChecked) {
+                    checkAlcoolGlobal.isChecked = false
+                }
+            }
+
+            // Radio cigarettes
+            radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) updateCigarettesFormVisibility()
+            }
+
+            radioCigarettesRouler.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) updateCigarettesFormVisibility()
+            }
+
+            radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) updateCigarettesFormVisibility()
+            }
+
+            // Boutons RAZ
+            btnRazJour.setOnClickListener {
+                showRazDialog("jour")
+            }
+
+            btnRazHistorique.setOnClickListener {
+                showRazDialog("historique")
+            }
+
+            btnRazUsine.setOnClickListener {
+                showRazDialog("usine")
+            }
+
+            // Boutons Export/Import
+            btnExporter.setOnClickListener {
+                exportData()
+            }
+
+            btnImporter.setOnClickListener {
+                Toast.makeText(requireContext(), "Import à implémenter", Toast.LENGTH_SHORT).show()
+            }
+
+            Log.d(TAG, "Listeners configurés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement habitudes: ${e.message}")
+            Log.e(TAG, "Erreur configuration listeners: ${e.message}", e)
         }
     }
 
-    private fun loadDates() {
-        try {
-            // Cigarettes
-            val datesCigarettes = dbHelper.getDatesObjectifs(DatabaseHelper.TYPE_CIGARETTE)
-            btnDateReductionCigarettes.text = datesCigarettes["reduction"] ?: "Choisir date"
-            btnDateArretCigarettes.text = datesCigarettes["arret"] ?: "Choisir date"
-            btnDateReussiteCigarettes.text = datesCigarettes["reussite"] ?: "Choisir date"
-
-            // (même pattern pour joints, alcools...)
-
-            Log.d(TAG, "Dates chargées")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement dates: ${e.message}")
-        }
-    }
-
-    private fun updateContainersVisibility() {
+    private fun updateCoutsContainersVisibility() {
         try {
             containerCoutsCigarettes.visibility = if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) View.VISIBLE else View.GONE
             containerCoutsJoints.visibility = if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) View.VISIBLE else View.GONE
@@ -398,277 +453,187 @@ class ReglagesFragment : Fragment() {
             containerCoutsBieres.visibility = if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) View.VISIBLE else View.GONE
             containerCoutsLiqueurs.visibility = if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) View.VISIBLE else View.GONE
             containerCoutsAlcoolFort.visibility = if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) View.VISIBLE else View.GONE
-
-            Log.d(TAG, "Visibilité conteneurs mise à jour")
+            
+            updateCigarettesFormVisibility()
+            
+            Log.d(TAG, "Visibilité conteneurs coûts mise à jour")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour visibilité: ${e.message}")
+            Log.e(TAG, "Erreur mise à jour visibilité: ${e.message}", e)
         }
     }
 
-    private fun setupListeners() {
+    private fun updateCigarettesFormVisibility() {
         try {
-            // Bouton sauvegarder profil
-            btnSauvegarderProfil.setOnClickListener {
-                saveProfil()
+            when {
+                radioCigarettesClassiques.isChecked -> {
+                    editPrixPaquet.visibility = View.VISIBLE
+                    editNbCigarettes.visibility = View.VISIBLE
+                    editPrixTabac.visibility = View.GONE
+                    editPrixFeuilles.visibility = View.GONE
+                    editNbFeuilles.visibility = View.GONE
+                    editPrixFiltres.visibility = View.GONE
+                    editNbFiltres.visibility = View.GONE
+                    editPrixTubes.visibility = View.GONE
+                    editNbTubes.visibility = View.GONE
+                }
+                radioCigarettesRouler.isChecked -> {
+                    editPrixPaquet.visibility = View.GONE
+                    editNbCigarettes.visibility = View.GONE
+                    editPrixTabac.visibility = View.VISIBLE
+                    editPrixFeuilles.visibility = View.VISIBLE
+                    editNbFeuilles.visibility = View.VISIBLE
+                    editPrixFiltres.visibility = View.GONE
+                    editNbFiltres.visibility = View.GONE
+                    editPrixTubes.visibility = View.GONE
+                    editNbTubes.visibility = View.GONE
+                }
+                radioCigarettesTubeuse.isChecked -> {
+                    editPrixPaquet.visibility = View.GONE
+                    editNbCigarettes.visibility = View.GONE
+                    editPrixTabac.visibility = View.VISIBLE
+                    editPrixFeuilles.visibility = View.GONE
+                    editNbFeuilles.visibility = View.GONE
+                    editPrixFiltres.visibility = View.VISIBLE
+                    editNbFiltres.visibility = View.VISIBLE
+                    editPrixTubes.visibility = View.VISIBLE
+                    editNbTubes.visibility = View.VISIBLE
+                }
             }
-
-            // Cases catégories
-            checkCigarettes.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_CIGARETTE, isChecked)
-            }
-            checkJoints.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_JOINT, isChecked)
-            }
-            checkAlcoolGlobal.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_ALCOOL_GLOBAL, isChecked)
-            }
-            checkBieres.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_BIERE, isChecked)
-            }
-            checkLiqueurs.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_LIQUEUR, isChecked)
-            }
-            checkAlcoolFort.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_ALCOOL_FORT, isChecked)
-            }
-
-            // Radio buttons cigarettes
-            radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) updateCigarettesFormVisibility("classiques")
-            }
-            radioCigarettesRouler.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) updateCigarettesFormVisibility("rouler")
-            }
-            radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) updateCigarettesFormVisibility("tubeuse")
-            }
-
-            // Boutons dates (cigarettes)
-            btnDateReductionCigarettes.setOnClickListener {
-                showDatePicker(DatabaseHelper.TYPE_CIGARETTE, "reduction")
-            }
-            btnDateArretCigarettes.setOnClickListener {
-                showDatePicker(DatabaseHelper.TYPE_CIGARETTE, "arret")
-            }
-            btnDateReussiteCigarettes.setOnClickListener {
-                showDatePicker(DatabaseHelper.TYPE_CIGARETTE, "reussite")
-            }
-
-            // Boutons RAZ
-            btnRazJour.setOnClickListener { confirmRaz("jour") }
-            btnRazHistorique.setOnClickListener { confirmRaz("historique") }
-            btnRazUsine.setOnClickListener { confirmRaz("usine") }
-
-            // Boutons Export/Import
-            btnExporter.setOnClickListener { exportData() }
-            btnImporter.setOnClickListener { importData() }
-
-            Log.d(TAG, "Listeners configurés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur configuration listeners: ${e.message}")
+            Log.e(TAG, "Erreur mise à jour formulaire cigarettes: ${e.message}", e)
         }
     }
 
     private fun saveProfil() {
         try {
-            // Prénom
-            val prenom = editPrenom.text.toString()
+            // Sauvegarder prénom
+            val prenom = editPrenom.text.toString().trim()
             dbHelper.setPreference("prenom", prenom)
 
-            // Langue
+            // Sauvegarder langue
             val langueIndex = spinnerLangue.selectedItemPosition
             val langueCode = ConfigLangue.LANGUES_DISPONIBLES.keys.toList()[langueIndex]
             configLangue.setLangue(langueCode)
 
-            // Devise
+            // Sauvegarder devise
             val deviseIndex = spinnerDevise.selectedItemPosition
             val devise = SymbolesDevises.DEVISES_DISPONIBLES.keys.toList()[deviseIndex]
             dbHelper.setPreference("devise", devise)
 
-            // Sauvegarder coûts
-            saveCouts()
-
-            // Sauvegarder habitudes
-            saveHabitudes()
-
             Toast.makeText(requireContext(), "Profil sauvegardé", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "Profil sauvegardé: $prenom - $langueCode - $devise")
+            
+            updateProfilStatus()
+
+            // Recharger l'activité pour appliquer la langue
+            activity?.recreate()
+
+            Log.d(TAG, "Profil sauvegardé: prenom=$prenom, langue=$langueCode, devise=$devise")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde profil: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur sauvegarde: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "Erreur sauvegarde profil: ${e.message}", e)
+            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveCategoriesActives() {
+        try {
+            val json = JSONObject().apply {
+                put("cigarette", categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true)
+                put("joint", categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true)
+                put("alcool_global", categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true)
+                put("biere", categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false)
+                put("liqueur", categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false)
+                put("alcool_fort", categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false)
+            }
+            dbHelper.setPreference("categories_actives", json.toString())
+            
+            Log.d(TAG, "Catégories actives sauvegardées: $categoriesActives")
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur sauvegarde catégories actives: ${e.message}", e)
         }
     }
 
     private fun saveCouts() {
         try {
-            // Cigarettes (selon type sélectionné)
-            if (radioCigarettesClassiques.isChecked) {
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_paquet", editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "nb_cigarettes", editNbCigarettes.text.toString().toDoubleOrNull() ?: 20.0)
-            } else if (radioCigarettesRouler.isChecked) {
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_tabac", editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_feuilles", editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "nb_feuilles", editNbFeuilles.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_filtres", editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "nb_filtres", editNbFiltres.text.toString().toDoubleOrNull() ?: 0.0)
-            } else if (radioCigarettesTubeuse.isChecked) {
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_tabac", editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "prix_tubes", editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0)
-                dbHelper.setCout(DatabaseHelper.TYPE_CIGARETTE, "nb_tubes", editNbTubes.text.toString().toDoubleOrNull() ?: 0.0)
+            // Sauvegarder coûts cigarettes
+            when {
+                radioCigarettesClassiques.isChecked -> {
+                    val prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
+                    val nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 20.0
+                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, prixPaquet, nbCigarettes, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                }
+                radioCigarettesRouler.isChecked -> {
+                    val prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
+                    val prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
+                    val nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 32.0
+                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, 0.0, 0.0, prixTabac, prixFeuilles, nbFeuilles, 0.0, 0.0, 0.0, 0.0, 0.0)
+                }
+                radioCigarettesTubeuse.isChecked -> {
+                    val prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
+                    val prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
+                    val nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 100.0
+                    val prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
+                    val nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 100.0
+                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, 0.0, 0.0, prixTabac, 0.0, 0.0, prixFiltres, nbFiltres, prixTubes, nbTubes, 0.0)
+                }
             }
 
-            // Joints
-            dbHelper.setCout(DatabaseHelper.TYPE_JOINT, "prix_gramme", editPrixGramme.text.toString().toDoubleOrNull() ?: 0.0)
-            dbHelper.setCout(DatabaseHelper.TYPE_JOINT, "gramme_par_joint", editGrammeParJoint.text.toString().toDoubleOrNull() ?: 0.0)
+            // Sauvegarder coûts joints
+            val prixGramme = editPrixGramme.text.toString().toDoubleOrNull() ?: 0.0
+            val grammeParJoint = editGrammeParJoint.text.toString().toDoubleOrNull() ?: 0.5
+            dbHelper.setCouts(DatabaseHelper.TYPE_JOINT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixGramme)
+            dbHelper.setPreference("gramme_par_joint", grammeParJoint.toString())
 
-            // Alcools
-            dbHelper.setCout(DatabaseHelper.TYPE_ALCOOL_GLOBAL, "prix_verre", editPrixVerreGlobal.text.toString().toDoubleOrNull() ?: 0.0)
-            dbHelper.setCout(DatabaseHelper.TYPE_ALCOOL_GLOBAL, "unite_cl", editUniteCLGlobal.text.toString().toDoubleOrNull() ?: 0.0)
+            // Sauvegarder coûts alcool global
+            val prixVerreGlobal = editPrixVerreGlobal.text.toString().toDoubleOrNull() ?: 0.0
+            val uniteCLGlobal = editUniteCLGlobal.text.toString().toDoubleOrNull() ?: 25.0
+            dbHelper.setCouts(DatabaseHelper.TYPE_ALCOOL_GLOBAL, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreGlobal)
+            dbHelper.setPreference("unite_cl_alcool_global", uniteCLGlobal.toString())
+
+            // Sauvegarder coûts bières
+            val prixVerreBiere = editPrixVerreBiere.text.toString().toDoubleOrNull() ?: 0.0
+            val uniteCLBiere = editUniteCLBiere.text.toString().toDoubleOrNull() ?: 25.0
+            dbHelper.setCouts(DatabaseHelper.TYPE_BIERE, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreBiere)
+            dbHelper.setPreference("unite_cl_biere", uniteCLBiere.toString())
+
+            // Sauvegarder coûts liqueurs
+            val prixVerreLiqueur = editPrixVerreLiqueur.text.toString().toDoubleOrNull() ?: 0.0
+            val uniteCLLiqueur = editUniteCLLiqueur.text.toString().toDoubleOrNull() ?: 4.0
+            dbHelper.setCouts(DatabaseHelper.TYPE_LIQUEUR, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreLiqueur)
+            dbHelper.setPreference("unite_cl_liqueur", uniteCLLiqueur.toString())
+
+            // Sauvegarder coûts alcool fort
+            val prixVerreAlcoolFort = editPrixVerreAlcoolFort.text.toString().toDoubleOrNull() ?: 0.0
+            val uniteCLAlcoolFort = editUniteCLAlcoolFort.text.toString().toDoubleOrNull() ?: 4.0
+            dbHelper.setCouts(DatabaseHelper.TYPE_ALCOOL_FORT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreAlcoolFort)
+            dbHelper.setPreference("unite_cl_alcool_fort", uniteCLAlcoolFort.toString())
+
+            Toast.makeText(requireContext(), "Coûts sauvegardés", Toast.LENGTH_SHORT).show()
             
-            dbHelper.setCout(DatabaseHelper.TYPE_BIERE, "prix_verre", editPrixVerreBiere.text.toString().toDoubleOrNull() ?: 0.0)
-            dbHelper.setCout(DatabaseHelper.TYPE_BIERE, "unite_cl", editUniteCLBiere.text.toString().toDoubleOrNull() ?: 0.0)
-            
-            dbHelper.setCout(DatabaseHelper.TYPE_LIQUEUR, "prix_verre", editPrixVerreLiqueur.text.toString().toDoubleOrNull() ?: 0.0)
-            dbHelper.setCout(DatabaseHelper.TYPE_LIQUEUR, "unite_cl", editUniteCLLiqueur.text.toString().toDoubleOrNull() ?: 0.0)
-            
-            dbHelper.setCout(DatabaseHelper.TYPE_ALCOOL_FORT, "prix_verre", editPrixVerreAlcoolFort.text.toString().toDoubleOrNull() ?: 0.0)
-            dbHelper.setCout(DatabaseHelper.TYPE_ALCOOL_FORT, "unite_cl", editUniteCLAlcoolFort.text.toString().toDoubleOrNull() ?: 0.0)
+            updateProfilStatus()
 
             Log.d(TAG, "Coûts sauvegardés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde coûts: ${e.message}")
+            Log.e(TAG, "Erreur sauvegarde coûts: ${e.message}", e)
+            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun saveHabitudes() {
+    // FIN PARTIE 2/3
+    // COPIER LA PARTIE 3/3 JUSTE APRÈS CETTE LIGNE
+    // DÉBUT PARTIE 3/3 FINALE
+    // COLLER JUSTE APRÈS LA PARTIE 2/3
+
+    private fun showRazDialog(type: String) {
         try {
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_CIGARETTE, editMaxCigarettes.text.toString().toIntOrNull() ?: 0)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_JOINT, editMaxJoints.text.toString().toIntOrNull() ?: 0)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL, editMaxAlcoolGlobal.text.toString().toIntOrNull() ?: 0)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_BIERE, editMaxBieres.text.toString().toIntOrNull() ?: 0)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, editMaxLiqueurs.text.toString().toIntOrNull() ?: 0)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, editMaxAlcoolFort.text.toString().toIntOrNull() ?: 0)
-
-            Log.d(TAG, "Habitudes sauvegardées")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde habitudes: ${e.message}")
-        }
-    }
-
-    private fun toggleCategorie(type: String, isActive: Boolean) {
-        try {
-            categoriesActives[type] = isActive
-
-            // Gérer exclusion alcool_global vs alcools spécifiques
-            if (type == DatabaseHelper.TYPE_ALCOOL_GLOBAL && isActive) {
-                categoriesActives[DatabaseHelper.TYPE_BIERE] = false
-                categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = false
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = false
-                checkBieres.isChecked = false
-                checkLiqueurs.isChecked = false
-                checkAlcoolFort.isChecked = false
-            } else if ((type == DatabaseHelper.TYPE_BIERE || type == DatabaseHelper.TYPE_LIQUEUR || type == DatabaseHelper.TYPE_ALCOOL_FORT) && isActive) {
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] = false
-                checkAlcoolGlobal.isChecked = false
-            }
-
-            // Sauvegarder
-            val json = JSONObject().apply {
-                put("cigarette", categoriesActives[DatabaseHelper.TYPE_CIGARETTE])
-                put("joint", categoriesActives[DatabaseHelper.TYPE_JOINT])
-                put("alcool_global", categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL])
-                put("biere", categoriesActives[DatabaseHelper.TYPE_BIERE])
-                put("liqueur", categoriesActives[DatabaseHelper.TYPE_LIQUEUR])
-                put("alcool_fort", categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT])
-            }.toString()
-            dbHelper.setPreference("categories_actives", json)
-
-            updateContainersVisibility()
-            Log.d(TAG, "Catégorie $type basculée: $isActive")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur toggle catégorie $type: ${e.message}")
-        }
-    }
-
-    private fun updateCigarettesFormVisibility(type: String) {
-        // Masquer tous les champs d'abord
-        // Puis afficher selon type (à implémenter dans le layout)
-        Log.d(TAG, "Type cigarettes changé: $type")
-    }
-    private fun showDatePicker(type: String, typeDate: String) {
-        try {
-            val calendar = Calendar.getInstance()
-            
-            // Si date déjà renseignée, partir de cette date
-            val dates = dbHelper.getDatesObjectifs(type)
-            val dateStr = dates[typeDate]
-            if (!dateStr.isNullOrEmpty()) {
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                sdf.parse(dateStr)?.let { calendar.time = it }
-            }
-
-            val datePickerDialog = DatePickerDialog(
-                requireContext(),
-                { _, year, month, dayOfMonth ->
-                    val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
-                    saveDate(type, typeDate, selectedDate)
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            
-            datePickerDialog.show()
-            Log.d(TAG, "DatePicker affiché pour $type - $typeDate")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur affichage DatePicker: ${e.message}")
-        }
-    }
-
-    private fun saveDate(type: String, typeDate: String, date: String) {
-        try {
-            val success = dbHelper.setDateObjectif(type, typeDate, date)
-            if (success) {
-                // Mettre à jour bouton
-                when (type) {
-                    DatabaseHelper.TYPE_CIGARETTE -> {
-                        when (typeDate) {
-                            "reduction" -> btnDateReductionCigarettes.text = date
-                            "arret" -> btnDateArretCigarettes.text = date
-                            "reussite" -> btnDateReussiteCigarettes.text = date
-                        }
-                    }
-                    DatabaseHelper.TYPE_JOINT -> {
-                        when (typeDate) {
-                            "reduction" -> btnDateReductionJoints.text = date
-                            "arret" -> btnDateArretJoints.text = date
-                            "reussite" -> btnDateReussiteJoints.text = date
-                        }
-                    }
-                    // (même pattern pour alcools...)
-                }
-                
-                Toast.makeText(requireContext(), "Date enregistrée", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "Date sauvegardée: $type - $typeDate = $date")
-            } else {
-                Toast.makeText(requireContext(), "Erreur sauvegarde date", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde date: ${e.message}")
-        }
-    }
-
-    private fun confirmRaz(type: String) {
-        try {
-            val (titre, message) = when (type) {
-                "jour" -> Pair("RAZ du jour", "Supprimer toutes les consommations d'aujourd'hui ?")
-                "historique" -> Pair("RAZ de l'historique", "Supprimer TOUT l'historique de consommation ? (Cette action est irréversible)")
-                "usine" -> Pair("RAZ d'usine", "TOUT réinitialiser (profil, consommations, paramètres) ? (Cette action est irréversible)")
-                else -> return
+            val message = when (type) {
+                "jour" -> "Supprimer toutes les consommations d'aujourd'hui ?"
+                "historique" -> "Supprimer tout l'historique de consommations ?\n\n⚠️ Cette action est irréversible !"
+                "usine" -> "Réinitialiser l'application aux paramètres d'usine ?\n\n⚠️ Toutes vos données seront perdues !"
+                else -> "Confirmer la suppression ?"
             }
 
             AlertDialog.Builder(requireContext())
-                .setTitle(titre)
+                .setTitle("⚠️ Confirmation")
                 .setMessage(message)
                 .setPositiveButton("Confirmer") { _, _ ->
                     executeRaz(type)
@@ -676,71 +641,145 @@ class ReglagesFragment : Fragment() {
                 .setNegativeButton("Annuler", null)
                 .show()
 
-            Log.d(TAG, "Confirmation RAZ affichée: $type")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur confirmation RAZ: ${e.message}")
+            Log.e(TAG, "Erreur affichage dialog RAZ: ${e.message}", e)
         }
     }
 
     private fun executeRaz(type: String) {
         try {
-            val success = when (type) {
-                "jour" -> dbHelper.razJour()
-                "historique" -> dbHelper.razHistorique()
-                "usine" -> dbHelper.razUsine()
-                else -> false
-            }
-
-            if (success) {
-                Toast.makeText(requireContext(), "RAZ effectuée", Toast.LENGTH_SHORT).show()
-                
-                // Recharger données
-                if (type == "usine") {
-                    loadCategoriesActives()
-                    loadProfil()
-                    loadCouts()
-                    loadHabitudes()
-                    loadDates()
+            when (type) {
+                "jour" -> {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val today = dateFormat.format(Date())
+                    
+                    categoriesActives.forEach { (typeCategorie, _) ->
+                        dbHelper.supprimerConsommationsJour(typeCategorie, today)
+                    }
+                    
+                    Toast.makeText(requireContext(), "Consommations du jour supprimées", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "RAZ jour effectué")
                 }
                 
-                updateProfilStatus()
-                Log.d(TAG, "RAZ $type effectuée avec succès")
-            } else {
-                Toast.makeText(requireContext(), "Erreur RAZ", Toast.LENGTH_SHORT).show()
+                "historique" -> {
+                    categoriesActives.forEach { (typeCategorie, _) ->
+                        dbHelper.supprimerToutesConsommations(typeCategorie)
+                    }
+                    
+                    Toast.makeText(requireContext(), "Historique supprimé", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "RAZ historique effectué")
+                }
+                
+                "usine" -> {
+                    // Supprimer toutes les données
+                    categoriesActives.forEach { (typeCategorie, _) ->
+                        dbHelper.supprimerToutesConsommations(typeCategorie)
+                        dbHelper.setCouts(typeCategorie, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                        dbHelper.setMaxJournalier(typeCategorie, 0)
+                        dbHelper.setDatesObjectifs(typeCategorie, "", "", "")
+                    }
+                    
+                    // Réinitialiser préférences
+                    dbHelper.setPreference("prenom", "")
+                    dbHelper.setPreference("devise", "EUR")
+                    configLangue.setLangue("FR")
+                    
+                    // Réinitialiser catégories actives
+                    categoriesActives = mutableMapOf(
+                        DatabaseHelper.TYPE_CIGARETTE to true,
+                        DatabaseHelper.TYPE_JOINT to true,
+                        DatabaseHelper.TYPE_ALCOOL_GLOBAL to true,
+                        DatabaseHelper.TYPE_BIERE to false,
+                        DatabaseHelper.TYPE_LIQUEUR to false,
+                        DatabaseHelper.TYPE_ALCOOL_FORT to false
+                    )
+                    saveCategoriesActives()
+                    
+                    Toast.makeText(requireContext(), "Réinitialisation complète effectuée", Toast.LENGTH_LONG).show()
+                    
+                    // Recharger l'activité
+                    activity?.recreate()
+                    
+                    Log.d(TAG, "RAZ usine effectué")
+                }
             }
+            
+            updateProfilStatus()
+            
+            // Notifier MainActivity pour refresh autres fragments
+            activity?.let {
+                if (it is MainActivity) {
+                    it.refreshData()
+                }
+            }
+            
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur exécution RAZ $type: ${e.message}")
+            Log.e(TAG, "Erreur exécution RAZ $type: ${e.message}", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun exportData() {
         try {
-            // Vérifier limite version gratuite
-            if (!exportLimiter.canExport()) {
-                val remaining = exportLimiter.getRemainingExports()
+            // Vérifier limite export (version gratuite)
+            val isVersionGratuite = true // À adapter selon version
+            if (isVersionGratuite && !exportLimiter.peutExporter()) {
                 Toast.makeText(
                     requireContext(),
-                    "Limite atteinte: $remaining export(s) restant(s) aujourd'hui (version gratuite)",
+                    "Limite d'export atteinte (1/jour en version gratuite)",
                     Toast.LENGTH_LONG
                 ).show()
-                Log.w(TAG, "Export refusé: limite atteinte")
                 return
             }
 
-            // Exporter données
-            val json = dbHelper.exportJSON()
-            if (json.isEmpty()) {
-                Toast.makeText(requireContext(), "Erreur export: données vides", Toast.LENGTH_SHORT).show()
-                return
+            // Créer JSON export
+            val exportJson = JSONObject().apply {
+                put("version", "1.0")
+                put("date_export", SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date()))
+                
+                // Profil
+                put("prenom", dbHelper.getPreference("prenom", ""))
+                put("langue", configLangue.getLangue())
+                put("devise", dbHelper.getPreference("devise", "EUR"))
+                
+                // Catégories actives
+                put("categories_actives", JSONObject(dbHelper.getPreference("categories_actives", "{}")))
+                
+                // Consommations par catégorie
+                val consommations = JSONObject()
+                categoriesActives.forEach { (type, _) ->
+                    val consommationsType = dbHelper.getToutesConsommations(type)
+                    consommations.put(type, consommationsType)
+                }
+                put("consommations", consommations)
+                
+                // Coûts par catégorie
+                val couts = JSONObject()
+                categoriesActives.forEach { (type, _) ->
+                    val coutsType = dbHelper.getCouts(type)
+                    couts.put(type, JSONObject(coutsType as Map<*, *>))
+                }
+                put("couts", couts)
+                
+                // Habitudes par catégorie
+                val habitudes = JSONObject()
+                categoriesActives.forEach { (type, _) ->
+                    habitudes.put(type, dbHelper.getMaxJournalier(type))
+                }
+                put("habitudes", habitudes)
+                
+                // Dates objectifs par catégorie
+                val dates = JSONObject()
+                categoriesActives.forEach { (type, _) ->
+                    val datesType = dbHelper.getDatesObjectifs(type)
+                    dates.put(type, JSONObject(datesType))
+                }
+                put("dates_objectifs", dates)
             }
 
-            // Écrire dans fichier
+            // Écrire fichier
             val file = File(requireContext().getExternalFilesDir(null), EXPORT_FILENAME)
-            file.writeText(json)
-
-            // Enregistrer export
-            exportLimiter.recordExport()
+            file.writeText(exportJson.toString(2))
 
             // Partager fichier
             val uri = FileProvider.getUriForFile(
@@ -755,344 +794,113 @@ class ReglagesFragment : Fragment() {
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
 
-            startActivity(Intent.createChooser(shareIntent, "Exporter sauvegarde"))
-            
+            startActivity(Intent.createChooser(shareIntent, "Exporter les données"))
+
+            // Enregistrer export
+            if (isVersionGratuite) {
+                exportLimiter.enregistrerExport()
+            }
+
             Toast.makeText(requireContext(), "Export réussi", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "Export réussi: ${file.absolutePath}")
+            Log.d(TAG, "Export effectué: ${file.absolutePath}")
+
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur export: ${e.message}")
+            Log.e(TAG, "Erreur export: ${e.message}", e)
             Toast.makeText(requireContext(), "Erreur export: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun importData() {
-        try {
-            // Vérifier limite version gratuite
-            if (!exportLimiter.canImport()) {
-                val remaining = exportLimiter.getRemainingImports()
-                Toast.makeText(
-                    requireContext(),
-                    "Limite atteinte: $remaining import(s) restant(s) aujourd'hui (version gratuite)",
-                    Toast.LENGTH_LONG
-                ).show()
-                Log.w(TAG, "Import refusé: limite atteinte")
-                return
-            }
-
-            // Sélectionner fichier (simplifié ici, devrait ouvrir file picker)
-            val file = File(requireContext().getExternalFilesDir(null), EXPORT_FILENAME)
-            if (!file.exists()) {
-                Toast.makeText(requireContext(), "Aucun fichier de sauvegarde trouvé", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            // Confirmer import
-            AlertDialog.Builder(requireContext())
-                .setTitle("Importer sauvegarde")
-                .setMessage("Toutes les données actuelles seront remplacées. Continuer ?")
-                .setPositiveButton("Confirmer") { _, _ ->
-                    executeImport(file)
-                }
-                .setNegativeButton("Annuler", null)
-                .show()
-
-            Log.d(TAG, "Confirmation import affichée")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur import: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur import: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun executeImport(file: File) {
-        try {
-            val json = file.readText()
-            val success = dbHelper.importJSON(json)
-
-            if (success) {
-                // Enregistrer import
-                exportLimiter.recordImport()
-
-                // Recharger toutes les données
-                loadCategoriesActives()
-                loadProfil()
-                loadCouts()
-                loadHabitudes()
-                loadDates()
-                updateProfilStatus()
-
-                Toast.makeText(requireContext(), "Import réussi", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "Import réussi depuis: ${file.absolutePath}")
-            } else {
-                Toast.makeText(requireContext(), "Erreur import: données invalides", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur exécution import: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun updateProfilStatus() {
         try {
-            // Vérifier si profil complet
-            var isComplete = true
-
-            // Vérifier coûts
-            var hasCouts = false
-            categoriesActives.forEach { (type, active) ->
+            // Vérifier profil complet
+            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
+            val hasCouts = categoriesActives.any { (type, active) ->
                 if (active) {
                     val couts = dbHelper.getCouts(type)
-                    if (couts.values.any { it > 0 }) {
-                        hasCouts = true
-                    }
-                }
+                    couts.values.any { it > 0.0 }
+                } else false
             }
-            if (!hasCouts) isComplete = false
-
-            // Vérifier habitudes
-            var hasHabitudes = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val max = dbHelper.getMaxJournalier(type)
-                    if (max > 0) {
-                        hasHabitudes = true
-                    }
-                }
+            val hasHabitudes = categoriesActives.any { (type, active) ->
+                active && dbHelper.getMaxJournalier(type) > 0
             }
-            if (!hasHabitudes) isComplete = false
-
-            // Vérifier dates
-            var hasDates = false
-            categoriesActives.forEach { (type, active) ->
+            val hasDates = categoriesActives.any { (type, active) ->
                 if (active) {
                     val dates = dbHelper.getDatesObjectifs(type)
-                    if (dates.values.any { !it.isNullOrEmpty() }) {
-                        hasDates = true
-                    }
-                }
+                    dates.values.any { it.isNotEmpty() }
+                } else false
             }
-            if (!hasDates) isComplete = false
 
-            // Mise à jour texte
-            txtProfilComplet.text = if (isComplete) "Profil: Complet ✓" else "Profil: Incomplet"
+            val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
+            txtProfilComplet.text = if (isComplet) {
+                "Profil: Complet ✓"
+            } else {
+                "Profil: Incomplet"
+            }
 
             // Total aujourd'hui
-            val consosJour = dbHelper.getConsommationsJour()
-            val totalJour = consosJour.values.sum()
-            txtTotalAujourdhui.text = totalJour.toString()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val today = dateFormat.format(Date())
+            var total = 0
 
-            Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"} - Total: $totalJour")
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    total += dbHelper.getConsommationParDate(type, today)
+                }
+            }
+
+            txtTotalAujourdhui.text = "Total aujourd'hui: $total"
+
+            Log.d(TAG, "Statut profil mis à jour: complet=$isComplet, total=$total")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
+            Log.e(TAG, "Erreur update profil status: ${e.message}", e)
         }
     }
-    override fun onResume() {
-        super.onResume()
+
+    fun refreshData() {
         try {
-            // Recharger données (synchro si modif depuis autre onglet)
             loadCategoriesActives()
             loadProfil()
             loadCouts()
-            loadHabitudes()
-            loadDates()
             updateProfilStatus()
-            Log.d(TAG, "Fragment resumed - données rechargées")
+            Log.d(TAG, "Données rafraîchies")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onResume: ${e.message}")
+            Log.e(TAG, "Erreur refresh data: ${e.message}", e)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            loadCategoriesActives()
+            loadProfil()
+            loadCouts()
+            updateProfilStatus()
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur onResume: ${e.message}", e)
         }
     }
 
     override fun onPause() {
         super.onPause()
         try {
-            Log.d(TAG, "Fragment paused")
+            // Sauvegarder coûts automatiquement
+            saveCouts()
+            Log.d(TAG, "Fragment mis en pause - coûts sauvegardés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onPause: ${e.message}")
+            Log.e(TAG, "Erreur onPause: ${e.message}", e)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         try {
+            if (::dbHelper.isInitialized) {
+                dbHelper.close()
+            }
             Log.d(TAG, "Fragment détruit")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroyView: ${e.message}")
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        try {
-            Log.d(TAG, "Fragment destroyed")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroy: ${e.message}")
-        }
-    }
-
-    /**
-     * Fonction appelée depuis MainActivity ou autres fragments
-     * pour rafraîchir les données (synchro live)
-     */
-    fun refreshData() {
-        try {
-            loadCategoriesActives()
-            loadProfil()
-            loadCouts()
-            loadHabitudes()
-            loadDates()
-            updateProfilStatus()
-            Log.d(TAG, "Données rafraîchies manuellement")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur refresh data: ${e.message}")
-        }
-    }
-
-    /**
-     * Valide les champs avant sauvegarde
-     */
-    private fun validateFields(): Boolean {
-        return try {
-            // Vérifier prénom (optionnel)
-            // Vérifier coûts (au moins un champ rempli si catégorie active)
-            var hasValidCout = false
-            
-            if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) {
-                if (editPrixPaquet.text.toString().isNotEmpty() || 
-                    editPrixTabac.text.toString().isNotEmpty()) {
-                    hasValidCout = true
-                }
-            }
-            
-            if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) {
-                if (editPrixGramme.text.toString().isNotEmpty()) {
-                    hasValidCout = true
-                }
-            }
-            
-            if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) {
-                if (editPrixVerreGlobal.text.toString().isNotEmpty()) {
-                    hasValidCout = true
-                }
-            }
-
-            if (!hasValidCout) {
-                Toast.makeText(
-                    requireContext(),
-                    "Veuillez renseigner au moins un coût",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            }
-
-            true
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur validation: ${e.message}")
-            false
-        }
-    }
-
-    /**
-     * Réinitialise un formulaire spécifique
-     */
-    private fun resetForm(type: String) {
-        try {
-            when (type) {
-                DatabaseHelper.TYPE_CIGARETTE -> {
-                    editPrixPaquet.setText("")
-                    editNbCigarettes.setText("20")
-                    editPrixTabac.setText("")
-                    editPrixFeuilles.setText("")
-                    editNbFeuilles.setText("")
-                    editPrixFiltres.setText("")
-                    editNbFiltres.setText("")
-                    editPrixTubes.setText("")
-                    editNbTubes.setText("")
-                }
-                DatabaseHelper.TYPE_JOINT -> {
-                    editPrixGramme.setText("")
-                    editGrammeParJoint.setText("")
-                }
-                DatabaseHelper.TYPE_ALCOOL_GLOBAL -> {
-                    editPrixVerreGlobal.setText("")
-                    editUniteCLGlobal.setText("")
-                }
-                DatabaseHelper.TYPE_BIERE -> {
-                    editPrixVerreBiere.setText("")
-                    editUniteCLBiere.setText("")
-                }
-                DatabaseHelper.TYPE_LIQUEUR -> {
-                    editPrixVerreLiqueur.setText("")
-                    editUniteCLLiqueur.setText("")
-                }
-                DatabaseHelper.TYPE_ALCOOL_FORT -> {
-                    editPrixVerreAlcoolFort.setText("")
-                    editUniteCLAlcoolFort.setText("")
-                }
-            }
-            Log.d(TAG, "Formulaire $type réinitialisé")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur reset formulaire $type: ${e.message}")
-        }
-    }
-
-    /**
-     * Affiche un résumé des économies potentielles
-     */
-    private fun showEconomiesSummary() {
-        try {
-            var economiesJour = 0.0
-            var economiesSemaine = 0.0
-            var economiesMois = 0.0
-            var economiesAnnee = 0.0
-
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    if (maxHabitude > 0) {
-                        val couts = dbHelper.getCouts(type)
-                        val prixUnitaire = when (type) {
-                            DatabaseHelper.TYPE_CIGARETTE -> {
-                                val prixPaquet = couts["prix_paquet"] ?: 0.0
-                                val nbCigarettes = couts["nb_cigarettes"] ?: 20.0
-                                if (prixPaquet > 0 && nbCigarettes > 0) {
-                                    prixPaquet / nbCigarettes
-                                } else 0.0
-                            }
-                            DatabaseHelper.TYPE_JOINT -> {
-                                val prixGramme = couts["prix_gramme"] ?: 0.0
-                                val grammeParJoint = couts["gramme_par_joint"] ?: 0.0
-                                prixGramme * grammeParJoint
-                            }
-                            else -> couts["prix_verre"] ?: 0.0
-                        }
-                        
-                        val coutJour = prixUnitaire * maxHabitude
-                        economiesJour += coutJour
-                        economiesSemaine += coutJour * 7
-                        economiesMois += coutJour * 30
-                        economiesAnnee += coutJour * 365
-                    }
-                }
-            }
-
-            val devise = dbHelper.getPreference("devise", "€")
-            val message = """
-                Si vous arrêtiez complètement:
-                
-                Jour: ${String.format("%.2f", economiesJour)}$devise
-                Semaine: ${String.format("%.2f", economiesSemaine)}$devise
-                Mois: ${String.format("%.2f", economiesMois)}$devise
-                Année: ${String.format("%.2f", economiesAnnee)}$devise
-            """.trimIndent()
-
-            AlertDialog.Builder(requireContext())
-                .setTitle("Économies potentielles")
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show()
-
-            Log.d(TAG, "Résumé économies affiché")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur affichage économies: ${e.message}")
+            Log.e(TAG, "Erreur onDestroyView: ${e.message}", e)
         }
     }
 }
+// FIN DU FICHIER - ReglagesFragment.kt est maintenant complet
