@@ -1,15 +1,13 @@
 package com.stopaddict
 
-import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,153 +19,203 @@ class CalendrierFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
-    private lateinit var headerTitle: TextView
+    private lateinit var trad: Map<String, String>
+    
     private lateinit var txtProfilStatus: TextView
     private lateinit var txtTotalJour: TextView
-    private lateinit var btnMoisPrecedent: Button
     private lateinit var txtMoisAnnee: TextView
-    private lateinit var btnMoisSuivant: Button
-    private lateinit var gridCalendrier: GridLayout
-    private lateinit var containerLegende: LinearLayout
+    private lateinit var btnPrecedent: Button
     private lateinit var btnAujourdhui: Button
-    private lateinit var btnHier: Button
-    private lateinit var btnDemain: Button
-    private var currentCalendar = Calendar.getInstance()
+    private lateinit var btnSuivant: Button
+    private lateinit var gridCalendrier: GridLayout
     
-    // Catégories actives
-    private var categoriesActives = mutableMapOf(
-        DatabaseHelper.TYPE_CIGARETTE to true,
-        DatabaseHelper.TYPE_JOINT to true,
-        DatabaseHelper.TYPE_ALCOOL_GLOBAL to true,
-        DatabaseHelper.TYPE_BIERE to false,
-        DatabaseHelper.TYPE_LIQUEUR to false,
-        DatabaseHelper.TYPE_ALCOOL_FORT to false
-    )
+    private val currentCalendar = Calendar.getInstance()
+    private val categoriesActives = mutableMapOf<String, Boolean>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_calendrier, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        
-        try {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return try {
+            val view = inflater.inflate(R.layout.fragment_placeholder, container, false)
+            
             dbHelper = DatabaseHelper(requireContext())
             configLangue = ConfigLangue(requireContext())
+            trad = CalendrierLangues.getTraductions(configLangue.getLangue())
             
             initializeViews(view)
             loadCategoriesActives()
-            applyTranslations()
-            setupListeners()
-            loadDataAndRefresh()
+            updateProfilStatus()
+            updateCalendar()
             
-            Log.d(TAG, "CalendrierFragment initialisé avec succès")
+            Log.d(TAG, "CalendrierFragment créé")
+            view
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur chargement Calendrier", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "Erreur onCreateView", e)
+            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            null
         }
     }
 
     private fun initializeViews(view: View) {
-        try {
-            headerTitle = view.findViewById(R.id.calendrier_header_title)
-            txtProfilStatus = view.findViewById(R.id.calendrier_profil_status)
-            txtTotalJour = view.findViewById(R.id.calendrier_total_jour)
-            btnMoisPrecedent = view.findViewById(R.id.calendrier_btn_mois_precedent)
-            txtMoisAnnee = view.findViewById(R.id.calendrier_txt_mois_annee)
-            btnMoisSuivant = view.findViewById(R.id.calendrier_btn_mois_suivant)
-            gridCalendrier = view.findViewById(R.id.calendrier_grid_mois)
-            containerLegende = view.findViewById(R.id.calendrier_container_legende)
-            btnAujourdhui = view.findViewById(R.id.calendrier_btn_aujourdhui)
-            btnHier = view.findViewById(R.id.calendrier_btn_hier)
-            btnDemain = view.findViewById(R.id.calendrier_btn_demain)
-            
-            Log.d(TAG, "Vues initialisées avec succès")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation vues: ${e.message}", e)
-            throw e
+        val container = view.findViewById<LinearLayout>(R.id.fragment_container)
+        container.removeAllViews()
+        container.orientation = LinearLayout.VERTICAL
+        
+        // Header
+        val header = TextView(requireContext()).apply {
+            text = trad["titre"] ?: "Calendrier"
+            textSize = 24f
+            setBackgroundColor(Color.parseColor("#00BCD4"))
+            setTextColor(Color.WHITE)
+            setPadding(20, 40, 20, 40)
+            gravity = android.view.Gravity.CENTER
+            setTypeface(null, android.graphics.Typeface.BOLD)
         }
+        container.addView(header)
+        
+        // Zone profil et total
+        val profilContainer = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(20, 10, 20, 10)
+            setBackgroundColor(Color.parseColor("#F5F5F5"))
+        }
+        
+        txtProfilStatus = TextView(requireContext()).apply {
+            text = "Profil: Incomplet"
+            textSize = 14f
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        }
+        profilContainer.addView(txtProfilStatus)
+        
+        txtTotalJour = TextView(requireContext()).apply {
+            text = "Total jour: 0"
+            textSize = 14f
+            gravity = android.view.Gravity.END
+        }
+        profilContainer.addView(txtTotalJour)
+        container.addView(profilContainer)
+        
+        // Navigation mois
+        val navContainer = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(10, 20, 10, 10)
+        }
+        
+        btnPrecedent = Button(requireContext()).apply {
+            text = "◀ ${trad["precedent"] ?: "Préc"}"
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            setOnClickListener {
+                currentCalendar.add(Calendar.MONTH, -1)
+                updateCalendar()
+            }
+        }
+        navContainer.addView(btnPrecedent)
+        
+        btnAujourdhui = Button(requireContext()).apply {
+            text = trad["aujourdhui"] ?: "Aujourd'hui"
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
+                setMargins(10, 0, 10, 0)
+            }
+            setOnClickListener {
+                currentCalendar.time = Date()
+                updateCalendar()
+            }
+        }
+        navContainer.addView(btnAujourdhui)
+        
+        btnSuivant = Button(requireContext()).apply {
+            text = "${trad["suivant"] ?: "Suiv"} ▶"
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            setOnClickListener {
+                currentCalendar.add(Calendar.MONTH, 1)
+                updateCalendar()
+            }
+        }
+        navContainer.addView(btnSuivant)
+        container.addView(navContainer)
+        
+        // Mois et année
+        txtMoisAnnee = TextView(requireContext()).apply {
+            textSize = 20f
+            gravity = android.view.Gravity.CENTER
+            setPadding(0, 10, 0, 10)
+            setTypeface(null, android.graphics.Typeface.BOLD)
+        }
+        container.addView(txtMoisAnnee)
+        
+        // Grille calendrier - AGRANDI
+        gridCalendrier = GridLayout(requireContext()).apply {
+            columnCount = 7
+            setPadding(10, 10, 10, 10)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                0,
+                1f // Prend tout l'espace disponible
+            )
+        }
+        container.addView(gridCalendrier)
+        
+        // Légende
+        val legendeContainer = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(20, 10, 20, 20)
+            setBackgroundColor(Color.parseColor("#F5F5F5"))
+        }
+        
+        val legendeTitre = TextView(requireContext()).apply {
+            text = trad["legende"] ?: "Légende:"
+            textSize = 16f
+            setTypeface(null, android.graphics.Typeface.BOLD)
+            setPadding(0, 0, 0, 10)
+        }
+        legendeContainer.addView(legendeTitre)
+        
+        addLegendeItem(legendeContainer, Color.parseColor("#E8F5E9"), trad["aucune_conso"] ?: "Aucune consommation")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFF9C4"), trad["conso_moderee"] ?: "Consommation modérée (1-5)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFCCBC"), trad["conso_elevee"] ?: "Consommation élevée (6-15)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["conso_excessive"] ?: "Consommation excessive (16+)")
+        
+        container.addView(legendeContainer)
     }
-    
+
+    private fun addLegendeItem(container: LinearLayout, color: Int, text: String) {
+        val item = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(0, 5, 0, 5)
+        }
+        
+        val colorBox = View(requireContext()).apply {
+            setBackgroundColor(color)
+            layoutParams = LinearLayout.LayoutParams(40, 40).apply {
+                setMargins(0, 0, 10, 0)
+            }
+        }
+        item.addView(colorBox)
+        
+        val label = TextView(requireContext()).apply {
+            this.text = text
+            textSize = 14f
+        }
+        item.addView(label)
+        
+        container.addView(item)
+    }
+
     private fun loadCategoriesActives() {
         try {
-            val json = dbHelper.getPreference("categories_actives", "{}")
-            if (json.isNotEmpty()) {
-                val jsonObj = JSONObject(json)
-                categoriesActives[DatabaseHelper.TYPE_CIGARETTE] = jsonObj.optBoolean("cigarette", true)
-                categoriesActives[DatabaseHelper.TYPE_JOINT] = jsonObj.optBoolean("joint", true)
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] = jsonObj.optBoolean("alcool_global", true)
-                categoriesActives[DatabaseHelper.TYPE_BIERE] = jsonObj.optBoolean("biere", false)
-                categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = jsonObj.optBoolean("liqueur", false)
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = jsonObj.optBoolean("alcool_fort", false)
-            }
-            Log.d(TAG, "Catégories actives chargées: $categoriesActives")
+            val json = dbHelper.getPreference("categories_actives", """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}""")
+            val gson = com.google.gson.Gson()
+            val map = gson.fromJson(json, Map::class.java) as Map<String, Boolean>
+            categoriesActives.clear()
+            categoriesActives.putAll(map)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}", e)
+            Log.e(TAG, "Erreur load categories", e)
         }
     }
 
-    private fun applyTranslations() {
+    private fun updateProfilStatus() {
         try {
-            val langue = configLangue.getLangue()
-            val trad = CalendrierLangues.getTraductions(langue)
+            val prenom = dbHelper.getPreference("prenom", "")
+            val hasPrenom = prenom.isNotEmpty()
             
-            headerTitle.text = trad["titre"] ?: "Calendrier"
-            btnMoisPrecedent.text = trad["btn_mois_precedent"] ?: "◀ Préc"
-            btnMoisSuivant.text = trad["btn_mois_suivant"] ?: "Suiv ▶"
-            btnAujourdhui.text = trad["btn_aujourdhui"] ?: "Aujourd'hui"
-            btnHier.text = trad["btn_hier"] ?: "Hier"
-            btnDemain.text = trad["btn_demain"] ?: "Demain"
-            
-            Log.d(TAG, "Traductions appliquées pour langue: $langue")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur application traductions: ${e.message}", e)
-        }
-    }
-
-    private fun setupListeners() {
-        btnMoisPrecedent.setOnClickListener {
-            currentCalendar.add(Calendar.MONTH, -1)
-            updateCalendar()
-        }
-        
-        btnMoisSuivant.setOnClickListener {
-            currentCalendar.add(Calendar.MONTH, 1)
-            updateCalendar()
-        }
-        
-        btnAujourdhui.setOnClickListener {
-            currentCalendar = Calendar.getInstance()
-            updateCalendar()
-        }
-        
-        btnHier.setOnClickListener {
-            currentCalendar.add(Calendar.DAY_OF_MONTH, -1)
-            updateCalendar()
-        }
-        
-        btnDemain.setOnClickListener {
-            currentCalendar.add(Calendar.DAY_OF_MONTH, 1)
-            updateCalendar()
-        }
-    }
-
-    private fun loadDataAndRefresh() {
-        updateBandeau()
-        updateCalendar()
-        updateLegende()
-    }
-
-    private fun updateBandeau() {
-        try {
-            val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
-            
-            // Vérifier profil complet
-            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
             val hasCouts = categoriesActives.any { (type, active) ->
                 if (active) {
                     val couts = dbHelper.getCouts(type)
@@ -191,21 +239,21 @@ class CalendrierFragment : Fragment() {
                 trad["profil_incomplet"] ?: "Profil: Incomplet"
             }
             
-            // Total du jour sélectionné
+            // Total aujourd'hui
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val dateStr = dateFormat.format(currentCalendar.time)
+            val today = dateFormat.format(Date())
             var total = 0
             
             categoriesActives.forEach { (type, active) ->
                 if (active) {
-                    total += dbHelper.getConsommationParDate(type, dateStr)
+                    total += dbHelper.getConsommationParDate(type, today)
                 }
             }
             
             txtTotalJour.text = "${trad["total_jour"] ?: "Total jour"}: $total"
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update bandeau: ${e.message}", e)
+            Log.e(TAG, "Erreur update profil", e)
         }
     }
 
@@ -216,15 +264,16 @@ class CalendrierFragment : Fragment() {
             
             gridCalendrier.removeAllViews()
             
-            // Ajouter entêtes jours de la semaine
+            // Entêtes jours - couleur sobre
             val joursHeader = arrayOf("L", "M", "M", "J", "V", "S", "D")
             joursHeader.forEach { jour ->
                 val headerView = TextView(requireContext()).apply {
                     text = jour
                     textSize = 14f
                     gravity = android.view.Gravity.CENTER
-                    setPadding(4, 4, 4, 4)
+                    setPadding(4, 8, 4, 8)
                     setTypeface(null, android.graphics.Typeface.BOLD)
+                    setTextColor(Color.parseColor("#455A64"))
                 }
                 gridCalendrier.addView(headerView)
             }
@@ -236,7 +285,7 @@ class CalendrierFragment : Fragment() {
             
             val daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
             
-            // Espaces vides avant le 1er jour
+            // Espaces vides
             for (i in 0 until firstDayOfWeek) {
                 gridCalendrier.addView(TextView(requireContext()).apply {
                     text = ""
@@ -252,7 +301,7 @@ class CalendrierFragment : Fragment() {
                 cal.set(Calendar.DAY_OF_MONTH, day)
                 val dateStr = dateFormatJour.format(cal.time)
                 
-                // Calculer total consommations du jour
+                // Total consommations du jour
                 var totalDay = 0
                 categoriesActives.forEach { (type, active) ->
                     if (active) {
@@ -263,155 +312,115 @@ class CalendrierFragment : Fragment() {
                 val dayView = TextView(requireContext()).apply {
                     text = day.toString()
                     textSize = 16f
-                    setPadding(8, 16, 8, 16)
+                    setPadding(8, 20, 8, 20)
                     gravity = android.view.Gravity.CENTER
                     
-                    // Couleur selon consommation
-                    when {
-                        totalDay == 0 -> {
-                            setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_green_light))
-                        }
-                        totalDay <= 5 -> {
-                            setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_orange_light))
-                        }
-                        else -> {
-                            setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_light))
-                        }
+                    // Couleurs SOBRES selon total
+                    val bgColor = when {
+                        totalDay == 0 -> Color.parseColor("#E8F5E9") // Vert très pâle
+                        totalDay in 1..5 -> Color.parseColor("#FFF9C4") // Jaune pâle
+                        totalDay in 6..15 -> Color.parseColor("#FFCCBC") // Orange pâle
+                        else -> Color.parseColor("#FFCDD2") // Rouge pâle
                     }
+                    setBackgroundColor(bgColor)
                     
-                    // Bordure si aujourd'hui
+                    // Bordure pour aujourd'hui
                     if (dateStr == today) {
+                        setBackgroundResource(android.R.drawable.editbox_background)
+                        setTextColor(Color.parseColor("#1976D2"))
                         setTypeface(null, android.graphics.Typeface.BOLD)
-                        setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
                     }
                     
-                    // Click listener
                     setOnClickListener {
-                        showDayDialog(dateStr, day)
+                        showDayDialog(dateStr, totalDay)
                     }
                 }
                 gridCalendrier.addView(dayView)
             }
             
-            updateBandeau()
-            
-            Log.d(TAG, "Calendrier mis à jour")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update calendar: ${e.message}", e)
+            Log.e(TAG, "Erreur update calendar", e)
         }
     }
-    
-    private fun showDayDialog(dateStr: String, day: Int) {
+
+    private fun showDayDialog(dateStr: String, totalActuel: Int) {
         try {
-            val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
+            val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateStr)
+            val dateFormatted = dateFormat.format(date)
             
-            // Créer layout dialog
-            val dialogView = LinearLayout(requireContext()).apply {
+            val container = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
-                setPadding(40, 40, 40, 40)
+                setPadding(20, 20, 20, 20)
             }
             
-            // Titre
-            val titre = TextView(requireContext()).apply {
-                text = "${trad["dialog_titre"] ?: "Consommations du"} $day"
+            val title = TextView(requireContext()).apply {
+                text = dateFormatted
                 textSize = 18f
                 setTypeface(null, android.graphics.Typeface.BOLD)
                 setPadding(0, 0, 0, 20)
             }
-            dialogView.addView(titre)
+            container.addView(title)
             
-            // Map pour stocker les compteurs
-            val compteurs = mutableMapOf<String, Int>()
-            val textViews = mutableMapOf<String, TextView>()
+            val editFields = mutableMapOf<String, EditText>()
             
-            // Créer compteur pour chaque catégorie active
             categoriesActives.forEach { (type, active) ->
                 if (active) {
-                    val count = dbHelper.getConsommationParDate(type, dateStr)
-                    compteurs[type] = count
+                    val currentCount = dbHelper.getConsommationParDate(type, dateStr)
                     
-                    val containerCategorie = LinearLayout(requireContext()).apply {
-                        orientation = LinearLayout.HORIZONTAL
-                        setPadding(0, 8, 0, 8)
-                        gravity = android.view.Gravity.CENTER_VERTICAL
-                    }
-                    
-                    // Label
-                    val label = TextView(requireContext()).apply {
-                        text = getNomCategorie(type)
-                        textSize = 16f
-                        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                    }
-                    containerCategorie.addView(label)
-                    
-                    // Bouton -
-                    val btnMoins = Button(requireContext()).apply {
-                        text = "-"
-                        layoutParams = LinearLayout.LayoutParams(80, LinearLayout.LayoutParams.WRAP_CONTENT)
-                        setOnClickListener {
-                            if (compteurs[type]!! > 0) {
-                                compteurs[type] = compteurs[type]!! - 1
-                                textViews[type]?.text = compteurs[type].toString()
-                            }
+                    val typeLabel = TextView(requireContext()).apply {
+                        text = when (type) {
+                            "cigarette" -> trad["cigarettes"] ?: "Cigarettes"
+                            "joint" -> trad["joints"] ?: "Joints"
+                            "alcool_global" -> trad["alcool_global"] ?: "Alcool global"
+                            "biere" -> trad["bieres"] ?: "Bières"
+                            "liqueur" -> trad["liqueurs"] ?: "Liqueurs"
+                            "alcool_fort" -> trad["alcool_fort"] ?: "Alcool fort"
+                            else -> type
                         }
+                        textSize = 14f
+                        setPadding(0, 10, 0, 5)
                     }
-                    containerCategorie.addView(btnMoins)
+                    container.addView(typeLabel)
                     
-                    // Compteur
-                    val txtCount = TextView(requireContext()).apply {
-                        text = count.toString()
-                        textSize = 20f
-                        gravity = android.view.Gravity.CENTER
-                        layoutParams = LinearLayout.LayoutParams(60, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    val editText = EditText(requireContext()).apply {
+                        setText(currentCount.toString())
+                        inputType = android.text.InputType.TYPE_CLASS_NUMBER
+                        hint = "0"
                     }
-                    textViews[type] = txtCount
-                    containerCategorie.addView(txtCount)
-                    
-                    // Bouton +
-                    val btnPlus = Button(requireContext()).apply {
-                        text = "+"
-                        layoutParams = LinearLayout.LayoutParams(80, LinearLayout.LayoutParams.WRAP_CONTENT)
-                        setOnClickListener {
-                            compteurs[type] = compteurs[type]!! + 1
-                            textViews[type]?.text = compteurs[type].toString()
-                        }
-                    }
-                    containerCategorie.addView(btnPlus)
-                    
-                    dialogView.addView(containerCategorie)
+                    container.addView(editText)
+                    editFields[type] = editText
                 }
             }
             
-            // Dialog
-            AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .setPositiveButton(trad["btn_sauvegarder"] ?: "Sauvegarder") { _, _ ->
-                    sauvegarderConsommationsJour(dateStr, compteurs)
+            val scrollView = ScrollView(requireContext())
+            scrollView.addView(container)
+            
+            android.app.AlertDialog.Builder(requireContext())
+                .setView(scrollView)
+                .setPositiveButton(trad["enregistrer"] ?: "Enregistrer") { _, _ ->
+                    saveConsommationsForDate(dateStr, editFields)
                 }
-                .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
+                .setNegativeButton(trad["annuler"] ?: "Annuler", null)
                 .show()
                 
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur affichage dialog jour: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "Erreur dialog jour", e)
         }
     }
-    
-    private fun sauvegarderConsommationsJour(dateStr: String, compteurs: Map<String, Int>) {
+
+    private fun saveConsommationsForDate(dateStr: String, editFields: Map<String, EditText>) {
         try {
-            val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
-            
-            compteurs.forEach { (type, newCount) ->
+            editFields.forEach { (type, editText) ->
+                val newCount = editText.text.toString().toIntOrNull() ?: 0
                 val currentCount = dbHelper.getConsommationParDate(type, dateStr)
                 val diff = newCount - currentCount
                 
                 if (diff > 0) {
-                    // Ajouter
                     repeat(diff) {
                         dbHelper.ajouterConsommation(type, 1, dateStr)
                     }
                 } else if (diff < 0) {
-                    // Retirer
                     repeat(-diff) {
                         dbHelper.retirerConsommation(type, dateStr)
                     }
@@ -419,129 +428,19 @@ class CalendrierFragment : Fragment() {
             }
             
             updateCalendar()
-            Toast.makeText(requireContext(), trad["msg_sauvegarde_ok"] ?: "Sauvegardé", Toast.LENGTH_SHORT).show()
+            updateProfilStatus()
+            Toast.makeText(requireContext(), trad["sauvegarde_ok"] ?: "Enregistré", Toast.LENGTH_SHORT).show()
             
-            Log.d(TAG, "Consommations sauvegardées pour $dateStr")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde consommations: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur sauvegarde: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-    
-    private fun getNomCategorie(type: String): String {
-        val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
-        return when (type) {
-            DatabaseHelper.TYPE_CIGARETTE -> trad["label_cigarettes"] ?: "Cigarettes"
-            DatabaseHelper.TYPE_JOINT -> trad["label_joints"] ?: "Joints"
-            DatabaseHelper.TYPE_ALCOOL_GLOBAL -> trad["label_alcool_global"] ?: "Alcool global"
-            DatabaseHelper.TYPE_BIERE -> trad["label_bieres"] ?: "Bières"
-            DatabaseHelper.TYPE_LIQUEUR -> trad["label_liqueurs"] ?: "Liqueurs"
-            DatabaseHelper.TYPE_ALCOOL_FORT -> trad["label_alcool_fort"] ?: "Alcool fort"
-            else -> type
-        }
-    }
-    
-    private fun updateLegende() {
-        try {
-            containerLegende.removeAllViews()
-            
-            val trad = CalendrierLangues.getTraductions(configLangue.getLangue())
-            
-            // Titre légende
-            val titreLeg = TextView(requireContext()).apply {
-                text = trad["legende_titre"] ?: "Légende:"
-                textSize = 16f
-                setTypeface(null, android.graphics.Typeface.BOLD)
-                setPadding(0, 0, 0, 12)
-            }
-            containerLegende.addView(titreLeg)
-            
-            // Vert = 0
-            val legendeVert = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.HORIZONTAL
-                setPadding(0, 4, 0, 4)
-            }
-            legendeVert.addView(View(requireContext()).apply {
-                setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_green_light))
-                layoutParams = LinearLayout.LayoutParams(40, 40).apply {
-                    setMargins(0, 0, 12, 0)
-                }
-            })
-            legendeVert.addView(TextView(requireContext()).apply {
-                text = trad["legende_vert"] ?: "Aucune consommation"
-                textSize = 14f
-            })
-            containerLegende.addView(legendeVert)
-            
-            // Orange = 1-5
-            val legendeOrange = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.HORIZONTAL
-                setPadding(0, 4, 0, 4)
-            }
-            legendeOrange.addView(View(requireContext()).apply {
-                setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_orange_light))
-                layoutParams = LinearLayout.LayoutParams(40, 40).apply {
-                    setMargins(0, 0, 12, 0)
-                }
-            })
-            legendeOrange.addView(TextView(requireContext()).apply {
-                text = trad["legende_orange"] ?: "Consommation modérée (1-5)"
-                textSize = 14f
-            })
-            containerLegende.addView(legendeOrange)
-            
-            // Rouge = 6+
-            val legendeRouge = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.HORIZONTAL
-                setPadding(0, 4, 0, 4)
-            }
-            legendeRouge.addView(View(requireContext()).apply {
-                setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_light))
-                layoutParams = LinearLayout.LayoutParams(40, 40).apply {
-                    setMargins(0, 0, 12, 0)
-                }
-            })
-            legendeRouge.addView(TextView(requireContext()).apply {
-                text = trad["legende_rouge"] ?: "Consommation élevée (6+)"
-                textSize = 14f
-            })
-            containerLegende.addView(legendeRouge)
-            
-            Log.d(TAG, "Légende mise à jour")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur update légende: ${e.message}", e)
-        }
-    }
-
-    fun refreshData() {
-        try {
-            loadCategoriesActives()
-            loadDataAndRefresh()
-            Log.d(TAG, "Données rafraîchies")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur refresh data: ${e.message}", e)
+            Log.e(TAG, "Erreur save", e)
+            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        try {
-            loadCategoriesActives()
-            loadDataAndRefresh()
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur onResume: ${e.message}", e)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        try {
-            if (::dbHelper.isInitialized) {
-                dbHelper.close()
-            }
-            Log.d(TAG, "Fragment détruit")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroyView: ${e.message}", e)
-        }
+        loadCategoriesActives()
+        updateProfilStatus()
+        updateCalendar()
     }
 }
