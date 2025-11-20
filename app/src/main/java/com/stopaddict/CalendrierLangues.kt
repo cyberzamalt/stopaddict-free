@@ -6,9 +6,6 @@ object CalendrierLangues {
 
     private const val TAG = "CalendrierLangues"
 
-    /**
-     * Retourne toutes les traductions pour une langue donnée
-     */
     fun getTraductions(codeLangue: String): Map<String, String> {
         return when (codeLangue) {
             "FR" -> TRADUCTIONS_FR
@@ -32,7 +29,6 @@ object CalendrierLangues {
     private val TRADUCTIONS_FR = mapOf(
         "titre" to "Calendrier",
         
-        // Labels catégories
         "label_cigarettes" to "Cigarettes",
         "label_joints" to "Joints",
         "label_alcool_global" to "Alcool global",
@@ -40,25 +36,27 @@ object CalendrierLangues {
         "label_liqueurs" to "Liqueurs",
         "label_alcool_fort" to "Alcool fort",
         
-        // Bandeau profil
         "profil_complet" to "Profil: Complet ✓",
         "profil_incomplet" to "Profil: Incomplet",
         "total_jour" to "Total jour",
         
-        // Boutons navigation
         "btn_mois_precedent" to "◀ Préc",
         "btn_mois_suivant" to "Suiv ▶",
         "btn_aujourdhui" to "Aujourd'hui",
-        "btn_hier" to "Hier",
-        "btn_demain" to "Demain",
         
-        // Légende
+        "jour_0" to "L",
+        "jour_1" to "M",
+        "jour_2" to "M",
+        "jour_3" to "J",
+        "jour_4" to "V",
+        "jour_5" to "S",
+        "jour_6" to "D",
+        
         "legende_titre" to "Légende:",
         "legende_vert" to "Aucune consommation",
         "legende_orange" to "Consommation modérée (1-5)",
         "legende_rouge" to "Consommation élevée (6+)",
         
-        // Dialog jour
         "dialog_titre" to "Consommations du",
         "btn_sauvegarder" to "Sauvegarder",
         "btn_annuler" to "Annuler",
@@ -83,8 +81,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Prev",
         "btn_mois_suivant" to "Next ▶",
         "btn_aujourdhui" to "Today",
-        "btn_hier" to "Yesterday",
-        "btn_demain" to "Tomorrow",
+        
+        "jour_0" to "M",
+        "jour_1" to "T",
+        "jour_2" to "W",
+        "jour_3" to "T",
+        "jour_4" to "F",
+        "jour_5" to "S",
+        "jour_6" to "S",
         
         "legende_titre" to "Legend:",
         "legende_vert" to "No consumption",
@@ -115,8 +119,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Ant",
         "btn_mois_suivant" to "Sig ▶",
         "btn_aujourdhui" to "Hoy",
-        "btn_hier" to "Ayer",
-        "btn_demain" to "Mañana",
+        
+        "jour_0" to "L",
+        "jour_1" to "M",
+        "jour_2" to "X",
+        "jour_3" to "J",
+        "jour_4" to "V",
+        "jour_5" to "S",
+        "jour_6" to "D",
         
         "legende_titre" to "Leyenda:",
         "legende_vert" to "Sin consumo",
@@ -147,8 +157,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Ant",
         "btn_mois_suivant" to "Próx ▶",
         "btn_aujourdhui" to "Hoje",
-        "btn_hier" to "Ontem",
-        "btn_demain" to "Amanhã",
+        
+        "jour_0" to "S",
+        "jour_1" to "T",
+        "jour_2" to "Q",
+        "jour_3" to "Q",
+        "jour_4" to "S",
+        "jour_5" to "S",
+        "jour_6" to "D",
         
         "legende_titre" to "Legenda:",
         "legende_vert" to "Sem consumo",
@@ -179,8 +195,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Vor",
         "btn_mois_suivant" to "Weiter ▶",
         "btn_aujourdhui" to "Heute",
-        "btn_hier" to "Gestern",
-        "btn_demain" to "Morgen",
+        
+        "jour_0" to "M",
+        "jour_1" to "D",
+        "jour_2" to "M",
+        "jour_3" to "D",
+        "jour_4" to "F",
+        "jour_5" to "S",
+        "jour_6" to "S",
         
         "legende_titre" to "Legende:",
         "legende_vert" to "Kein Konsum",
@@ -211,8 +233,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Prec",
         "btn_mois_suivant" to "Succ ▶",
         "btn_aujourdhui" to "Oggi",
-        "btn_hier" to "Ieri",
-        "btn_demain" to "Domani",
+        
+        "jour_0" to "L",
+        "jour_1" to "M",
+        "jour_2" to "M",
+        "jour_3" to "G",
+        "jour_4" to "V",
+        "jour_5" to "S",
+        "jour_6" to "D",
         
         "legende_titre" to "Legenda:",
         "legende_vert" to "Nessun consumo",
@@ -243,8 +271,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ Пред",
         "btn_mois_suivant" to "След ▶",
         "btn_aujourdhui" to "Сегодня",
-        "btn_hier" to "Вчера",
-        "btn_demain" to "Завтра",
+        
+        "jour_0" to "П",
+        "jour_1" to "В",
+        "jour_2" to "С",
+        "jour_3" to "Ч",
+        "jour_4" to "П",
+        "jour_5" to "С",
+        "jour_6" to "В",
         
         "legende_titre" to "Легенда:",
         "legende_vert" to "Нет потребления",
@@ -275,8 +309,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ السابق",
         "btn_mois_suivant" to "التالي ▶",
         "btn_aujourdhui" to "اليوم",
-        "btn_hier" to "أمس",
-        "btn_demain" to "غدا",
+        
+        "jour_0" to "إ",
+        "jour_1" to "ث",
+        "jour_2" to "أ",
+        "jour_3" to "خ",
+        "jour_4" to "ج",
+        "jour_5" to "س",
+        "jour_6" to "ح",
         
         "legende_titre" to "المفتاح:",
         "legende_vert" to "لا استهلاك",
@@ -307,8 +347,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ पिछला",
         "btn_mois_suivant" to "अगला ▶",
         "btn_aujourdhui" to "आज",
-        "btn_hier" to "कल",
-        "btn_demain" to "कल",
+        
+        "jour_0" to "सो",
+        "jour_1" to "मं",
+        "jour_2" to "बु",
+        "jour_3" to "गु",
+        "jour_4" to "शु",
+        "jour_5" to "श",
+        "jour_6" to "र",
         
         "legende_titre" to "किंवदंती:",
         "legende_vert" to "कोई खपत नहीं",
@@ -339,8 +385,14 @@ object CalendrierLangues {
         "btn_mois_precedent" to "◀ 前",
         "btn_mois_suivant" to "次 ▶",
         "btn_aujourdhui" to "今日",
-        "btn_hier" to "昨日",
-        "btn_demain" to "明日",
+        
+        "jour_0" to "月",
+        "jour_1" to "火",
+        "jour_2" to "水",
+        "jour_3" to "木",
+        "jour_4" to "金",
+        "jour_5" to "土",
+        "jour_6" to "日",
         
         "legende_titre" to "凡例:",
         "legende_vert" to "消費なし",
