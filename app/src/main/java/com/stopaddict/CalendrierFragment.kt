@@ -245,11 +245,12 @@ class CalendrierFragment : Fragment() {
             }
             
             // Jours du mois
+            val dateFormatJour = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             
             for (day in 1..daysInMonth) {
                 cal.set(Calendar.DAY_OF_MONTH, day)
-                val dateStr = dateFormat.format(cal.time)
+                val dateStr = dateFormatJour.format(cal.time)
                 
                 // Calculer total consommations du jour
                 var totalDay = 0
@@ -407,7 +408,7 @@ class CalendrierFragment : Fragment() {
                 if (diff > 0) {
                     // Ajouter
                     repeat(diff) {
-                        dbHelper.ajouterConsommation(type, dateStr)
+                        dbHelper.ajouterConsommation(type, 1, dateStr)
                     }
                 } else if (diff < 0) {
                     // Retirer
