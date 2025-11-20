@@ -96,14 +96,49 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAgeWarningDialog() {
         try {
+            val dialogView = layoutInflater.inflate(android.R.layout.simple_list_item_1, null)
+            val container = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(40, 40, 40, 20)
+            }
+            
+            // Message principal
+            val messageText = TextView(this).apply {
+                text = "Stop Addict est réservé aux personnes majeures (18 ans et plus).\n\nCette application est un outil d'aide et ne remplace pas un suivi médical."
+                textSize = 16f
+                setPadding(0, 0, 0, 20)
+            }
+            container.addView(messageText)
+            
+            // Lien ressources utiles
+            val linkText = TextView(this).apply {
+                text = "📞 Ressources et numéros utiles"
+                textSize = 14f
+                setTextColor(getColor(android.R.color.holo_blue_dark))
+                setPadding(0, 0, 0, 20)
+                setOnClickListener {
+                    showRessourcesUtiles()
+                }
+            }
+            container.addView(linkText)
+            
+            // Checkbox ne plus afficher
+            val checkboxNoShow = CheckBox(this).apply {
+                text = "Ne plus afficher ce message"
+                setPadding(0, 10, 0, 0)
+            }
+            container.addView(checkboxNoShow)
+            
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Avertissement")
-            builder.setMessage("Stop Addict est réservé aux personnes majeures (18 ans et plus).")
-            builder.setPositiveButton("J'accepte") { _, _ ->
+            builder.setTitle("⚠️ Avertissement")
+            builder.setView(container)
+            builder.setPositiveButton("J'ai 18 ans ou plus") { _, _ ->
                 val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                 prefs.edit().apply {
                     putBoolean(PREF_AGE_ACCEPTED, true)
-                    putBoolean(PREF_WARNING_SHOWN, true)
+                    if (checkboxNoShow.isChecked) {
+                        putBoolean(PREF_WARNING_SHOWN, true)
+                    }
                     apply()
                 }
                 initializeMainContent()
@@ -116,6 +151,41 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e(TAG, "Erreur dialog", e)
             initializeMainContent()
+        }
+    }
+    
+    private fun showRessourcesUtiles() {
+        try {
+            val ressources = """
+                🇫🇷 FRANCE
+                • Tabac Info Service : 39 89
+                • Alcool Info Service : 0 980 980 930
+                • Drogues Info Service : 0 800 23 13 13
+                
+                🇧🇪 BELGIQUE
+                • Tabacstop : 0800 111 00
+                • Alcooliques Anonymes : 078 15 25 56
+                • Infor-Drogues : 02 227 52 52
+                
+                🇨🇭 SUISSE
+                • Ligne stop-tabac : 0848 000 181
+                • Alcooliques Anonymes : 0848 848 846
+                • Infodrog : 031 376 04 01
+                
+                🇨🇦 CANADA
+                • J'ARRÊTE : 1 866 527 7383
+                • Drogue : aide et référence : 1 800 265 2626
+                
+                En cas d'urgence, contactez les services d'urgence de votre pays.
+            """.trimIndent()
+            
+            AlertDialog.Builder(this)
+                .setTitle("📞 Ressources utiles")
+                .setMessage(ressources)
+                .setPositiveButton("Fermer", null)
+                .show()
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur affichage ressources", e)
         }
     }
 
@@ -158,7 +228,7 @@ class MainActivity : AppCompatActivity() {
             0 -> if (langue == "FR") "Accueil" else "Home"
             1 -> if (langue == "FR") "Stats" else "Stats"
             2 -> if (langue == "FR") "Calendrier" else "Calendar"
-            3 -> if (langue == "FR") "Habitudes" else "Habits"
+            3 -> if (langue == "FR") "Habitudes & Volonté" else "Habits & Will"
             4 -> if (langue == "FR") "Réglages" else "Settings"
             else -> ""
         }
