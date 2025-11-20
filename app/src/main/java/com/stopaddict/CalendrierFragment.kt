@@ -180,7 +180,7 @@ class CalendrierFragment : Fragment() {
             val hasDates = categoriesActives.any { (type, active) ->
                 if (active) {
                     val dates = dbHelper.getDatesObjectifs(type)
-                    dates.values.any { it.isNotEmpty() }
+                    dates.values.any { it?.isNotEmpty() == true }
                 } else false
             }
             
@@ -245,7 +245,6 @@ class CalendrierFragment : Fragment() {
             }
             
             // Jours du mois
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             
             for (day in 1..daysInMonth) {
