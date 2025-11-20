@@ -146,4 +146,26 @@ class ExportLimiter(private val context: Context) {
         val count = prefs.getInt(KEY_IMPORT_COUNT, 0)
         return (MAX_IMPORT_PER_DAY - count).coerceAtLeast(0)
     }
+
+    // ==================== ALIAS FRANÇAIS ====================
+
+    /**
+     * Alias français pour canExport()
+     */
+    fun peutExporter(): Boolean = canExport()
+
+    /**
+     * Alias français pour recordExport()
+     */
+    fun enregistrerExport(): Boolean = recordExport()
+
+    /**
+     * Alias français pour canImport()
+     */
+    fun peutImporter(): Boolean = canImport()
+
+    /**
+     * Alias français pour recordImport()
+     */
+    fun enregistrerImport(): Boolean = recordImport()
 }
