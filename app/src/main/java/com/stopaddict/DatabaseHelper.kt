@@ -163,6 +163,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             Log.e(TAG, "Erreur mise à jour base de données: ${e.message}")
         }
     }
+    
     // ==================== CONSOMMATIONS ====================
 
     fun ajouterConsommation(type: String, quantite: Int = 1, dateSpecifique: String? = null): Boolean {
@@ -314,7 +315,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 put(COL_MAX_JOURNALIER, max)
             }
             val result = db.update(TABLE_HABITUDES, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Max journalier mis à jour: $type = $max")
+            Log.d(TAG, "Max journalier mis à jour pour $type: $max")
             result > 0
         } catch (e: Exception) {
             Log.e(TAG, "Erreur update max journalier: ${e.message}")
@@ -325,13 +326,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getMaxJournalier(type: String): Int {
         return try {
             val db = readableDatabase
-            val cursor = db.query(
-                TABLE_HABITUDES,
-                arrayOf(COL_MAX_JOURNALIER),
-                "$COL_TYPE = ?",
-                arrayOf(type),
-                null, null, null
-            )
+            val cursor = db.query(TABLE_HABITUDES, arrayOf(COL_MAX_JOURNALIER), "$COL_TYPE = ?", arrayOf(type), null, null, null)
             
             var max = 0
             if (cursor.moveToFirst()) {
@@ -347,24 +342,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     // ==================== DATES OBJECTIFS ====================
 
-    fun setDateObjectif(type: String, typeDate: String, date: String?): Boolean {
+    fun setDatesObjectifs(type: String, dateReduction: String, dateArret: String, dateReussite: String): Boolean {
         return try {
             val db = writableDatabase
-            val col = when (typeDate) {
-                "reduction" -> COL_DATE_REDUCTION
-                "arret" -> COL_DATE_ARRET
-                "reussite" -> COL_DATE_REUSSITE
-                else -> return false
+            val values = ContentValues().apply {
+                put(COL_DATE_REDUCTION, dateReduction.ifEmpty { null })
+                put(COL_DATE_ARRET, dateArret.ifEmpty { null })
+                put(COL_DATE_REUSSITE, dateReussite.ifEmpty { null })
             }
             
-            val values = ContentValues().apply {
-                put(col, date)
-            }
             val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Date objectif mise à jour: $type $typeDate = $date")
+            Log.d(TAG, "Dates objectifs mises à jour pour $type: $result ligne(s)")
             result > 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update date objectif: ${e.message}")
+            Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
             false
         }
     }
@@ -380,33 +371,55 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 null, null, null
             )
             
-            val dates = mutableMapOf<String, String?>()
+            val result = mutableMapOf<String, String?>()
             if (cursor.moveToFirst()) {
-                dates["reduction"] = cursor.getString(0)
-                dates["arret"] = cursor.getString(1)
-                dates["reussite"] = cursor.getString(2)
+                result["date_reduction"] = cursor.getString(0)
+                result["date_arret"] = cursor.getString(1)
+                result["date_reussite"] = cursor.getString(2)
             }
             cursor.close()
-            dates
+            result
         } catch (e: Exception) {
             Log.e(TAG, "Erreur lecture dates objectifs: ${e.message}")
             emptyMap()
         }
     }
 
-    // ==================== COUTS ====================
+    // ==================== COÛTS ====================
 
-    fun setCout(type: String, field: String, value: Double): Boolean {
+    fun setCouts(
+        type: String,
+        prixPaquet: Double,
+        nbCigarettes: Double,
+        prixTabac: Double,
+        prixFeuilles: Double,
+        nbFeuilles: Double,
+        prixFiltres: Double,
+        nbFiltres: Double,
+        prixTubes: Double,
+        nbTubes: Double,
+        prixVerre: Double
+    ): Boolean {
         return try {
             val db = writableDatabase
             val values = ContentValues().apply {
-                put(field, value)
+                put(COL_PRIX_PAQUET, prixPaquet)
+                put(COL_NB_CIGARETTES, nbCigarettes.toInt())
+                put(COL_PRIX_TABAC, prixTabac)
+                put(COL_PRIX_FEUILLES, prixFeuilles)
+                put(COL_NB_FEUILLES, nbFeuilles.toInt())
+                put(COL_PRIX_FILTRES, prixFiltres)
+                put(COL_NB_FILTRES, nbFiltres.toInt())
+                put(COL_PRIX_TUBES, prixTubes)
+                put(COL_NB_TUBES, nbTubes.toInt())
+                put(COL_PRIX_VERRE, prixVerre)
             }
+            
             val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Coût mis à jour: $type $field = $value")
+            Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
             result > 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update coût: ${e.message}")
+            Log.e(TAG, "Erreur setCouts: ${e.message}")
             false
         }
     }
@@ -416,24 +429,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val db = readableDatabase
             val cursor = db.query(TABLE_COUTS, null, "$COL_TYPE = ?", arrayOf(type), null, null, null)
             
-            val couts = mutableMapOf<String, Double>()
+            val result = mutableMapOf<String, Double>()
             if (cursor.moveToFirst()) {
                 for (i in 0 until cursor.columnCount) {
-                    val colName = cursor.getColumnName(i)
-                    if (colName != COL_ID && colName != COL_TYPE) {
-                        couts[colName] = cursor.getDouble(i)
+                    val columnName = cursor.getColumnName(i)
+                    if (columnName != COL_ID && columnName != COL_TYPE) {
+                        result[columnName] = cursor.getDouble(i)
                     }
                 }
             }
             cursor.close()
-            couts
+            result
         } catch (e: Exception) {
             Log.e(TAG, "Erreur lecture coûts: ${e.message}")
             emptyMap()
         }
     }
 
-    // ==================== PREFERENCES ====================
+    // ==================== PRÉFÉRENCES ====================
 
     fun setPreference(key: String, value: String): Boolean {
         return try {
@@ -516,6 +529,86 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         } catch (e: Exception) {
             Log.e(TAG, "Erreur RAZ usine: ${e.message}")
             false
+        }
+    }
+
+    // ==================== MÉTHODES ADDITIONNELLES ====================
+
+    fun getConsommationParDate(type: String, date: String): Int {
+        return try {
+            val db = readableDatabase
+            val cursor = db.rawQuery(
+                "SELECT SUM($COL_QUANTITE) FROM $TABLE_CONSOMMATIONS WHERE $COL_TYPE = ? AND $COL_DATE_HEURE LIKE ? AND $COL_ACTIF = 1",
+                arrayOf(type, "$date%")
+            )
+            
+            var total = 0
+            if (cursor.moveToFirst()) {
+                total = cursor.getInt(0)
+            }
+            cursor.close()
+            
+            Log.d(TAG, "Consommation $type du $date: $total")
+            total
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur getConsommationParDate: ${e.message}")
+            0
+        }
+    }
+
+    fun supprimerConsommationsJour(type: String, date: String): Boolean {
+        return try {
+            val db = writableDatabase
+            val result = db.delete(TABLE_CONSOMMATIONS, "$COL_TYPE = ? AND $COL_DATE_HEURE LIKE ?", arrayOf(type, "$date%"))
+            Log.d(TAG, "Suppression consommations du jour pour $type: $result lignes supprimées")
+            result >= 0
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur supprimerConsommationsJour: ${e.message}")
+            false
+        }
+    }
+
+    fun supprimerToutesConsommations(type: String): Boolean {
+        return try {
+            val db = writableDatabase
+            val result = db.delete(TABLE_CONSOMMATIONS, "$COL_TYPE = ?", arrayOf(type))
+            Log.d(TAG, "Suppression toutes consommations pour $type: $result lignes supprimées")
+            result >= 0
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur supprimerToutesConsommations: ${e.message}")
+            false
+        }
+    }
+
+    fun getToutesConsommations(type: String): List<Map<String, Any>> {
+        return try {
+            val db = readableDatabase
+            val cursor = db.query(
+                TABLE_CONSOMMATIONS, 
+                null, 
+                "$COL_TYPE = ? AND $COL_ACTIF = 1", 
+                arrayOf(type), 
+                null, null, 
+                "$COL_DATE_HEURE DESC"
+            )
+            
+            val liste = mutableListOf<Map<String, Any>>()
+            while (cursor.moveToNext()) {
+                val map = mutableMapOf<String, Any>()
+                for (i in 0 until cursor.columnCount) {
+                    val columnName = cursor.getColumnName(i)
+                    val value = cursor.getString(i) ?: ""
+                    map[columnName] = value
+                }
+                liste.add(map)
+            }
+            cursor.close()
+            
+            Log.d(TAG, "Récupération de ${liste.size} consommations pour $type")
+            liste
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur getToutesConsommations: ${e.message}")
+            emptyList()
         }
     }
 
@@ -616,136 +709,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 db.insert(TABLE_CONSOMMATIONS, null, values)
             }
 
-            // Importer habitudes, dates, coûts...
-            // (Logique similaire pour les autres tables)
-
             Log.d(TAG, "Import JSON réussi")
             true
         } catch (e: Exception) {
             Log.e(TAG, "Erreur import JSON: ${e.message}")
             false
-        }
-    }
-
-    // ==================== MÉTHODES ADDITIONNELLES ====================
-
-    /**
-     * Récupère le nombre de consommations d'un type pour une date donnée
-     */
-    fun getConsommationParDate(type: String, date: String): Int {
-        return try {
-            val db = readableDatabase
-            val cursor = db.rawQuery(
-                "SELECT SUM($COL_QUANTITE) FROM $TABLE_CONSOMMATIONS WHERE $COL_TYPE = ? AND $COL_DATE_HEURE LIKE ? AND $COL_ACTIF = 1",
-                arrayOf(type, "$date%")
-            )
-            
-            var total = 0
-            if (cursor.moveToFirst()) {
-                total = cursor.getInt(0)
-            }
-            cursor.close()
-            
-            Log.d(TAG, "Consommation $type du $date: $total")
-            total
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur getConsommationParDate: ${e.message}")
-            0
-        }
-    }
-
-    /**
-     * Enregistre les coûts pour un type
-     */
-    fun setCouts(type: String, couts: Map<String, Any>): Boolean {
-        return try {
-            val db = writableDatabase
-            val values = ContentValues()
-            
-            couts.forEach { (key, value) ->
-                when (value) {
-                    is Double -> values.put(key, value)
-                    is Float -> values.put(key, value)
-                    is Int -> values.put(key, value)
-                    is String -> {
-                        // Tenter de convertir en nombre
-                        val numValue = value.toDoubleOrNull()
-                        if (numValue != null) {
-                            values.put(key, numValue)
-                        }
-                    }
-                }
-            }
-            
-            val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
-            result > 0
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur setCouts: ${e.message}")
-            false
-        }
-    }
-
-    /**
-     * Enregistre les dates objectifs pour un type
-     */
-    fun setDatesObjectifs(type: String, dates: Map<String, String>): Boolean {
-        return try {
-            val db = writableDatabase
-            val values = ContentValues()
-            
-            dates.forEach { (key, value) ->
-                values.put(key, value)
-            }
-            
-            val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Dates objectifs mises à jour pour $type: $result ligne(s)")
-            result > 0
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
-            false
-        }
-    }
-
-    /**
-     * Supprime toutes les consommations du jour actuel
-     */
-    fun supprimerConsommationsJour(): Boolean {
-        return razJour()
-    }
-
-    /**
-     * Supprime toutes les consommations
-     */
-    fun supprimerToutesConsommations(): Boolean {
-        return razHistorique()
-    }
-
-    /**
-     * Récupère toutes les consommations
-     */
-    fun getToutesConsommations(): List<Map<String, Any>> {
-        return try {
-            val db = readableDatabase
-            val cursor = db.query(TABLE_CONSOMMATIONS, null, "$COL_ACTIF = 1", null, null, null, "$COL_DATE_HEURE DESC")
-            
-            val liste = mutableListOf<Map<String, Any>>()
-            while (cursor.moveToNext()) {
-                val map = mutableMapOf<String, Any>()
-                for (i in 0 until cursor.columnCount) {
-                    val columnName = cursor.getColumnName(i)
-                    val value = cursor.getString(i) ?: ""
-                    map[columnName] = value
-                }
-                liste.add(map)
-            }
-            cursor.close()
-            
-            Log.d(TAG, "Récupération de ${liste.size} consommations")
-            liste
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur getToutesConsommations: ${e.message}")
-            emptyList()
         }
     }
 
