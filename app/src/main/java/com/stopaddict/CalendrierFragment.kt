@@ -34,7 +34,7 @@ class CalendrierFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return try {
-            val view = inflater.inflate(R.layout.fragment_placeholder, container, false)
+            val view = inflater.inflate(R.layout.fragment_calendrier, container, false)
             
             dbHelper = DatabaseHelper(requireContext())
             configLangue = ConfigLangue(requireContext())
