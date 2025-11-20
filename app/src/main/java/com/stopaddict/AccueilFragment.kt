@@ -34,18 +34,18 @@ class AccueilFragment : Fragment() {
     private lateinit var txtAlcoolFort: TextView
 
     // UI Elements - Boutons +/-
-    private lateinit var btnPlusCigarettes: ImageButton
-    private lateinit var btnMoinsCigarettes: ImageButton
-    private lateinit var btnPlusJoints: ImageButton
-    private lateinit var btnMoinsJoints: ImageButton
-    private lateinit var btnPlusAlcoolGlobal: ImageButton
-    private lateinit var btnMoinsAlcoolGlobal: ImageButton
-    private lateinit var btnPlusBieres: ImageButton
-    private lateinit var btnMoinsBieres: ImageButton
-    private lateinit var btnPlusLiqueurs: ImageButton
-    private lateinit var btnMoinsLiqueurs: ImageButton
-    private lateinit var btnPlusAlcoolFort: ImageButton
-    private lateinit var btnMoinsAlcoolFort: ImageButton
+    private lateinit var btnPlusCigarettes: Button
+    private lateinit var btnMoinsCigarettes: Button
+    private lateinit var btnPlusJoints: Button
+    private lateinit var btnMoinsJoints: Button
+    private lateinit var btnPlusAlcoolGlobal: Button
+    private lateinit var btnMoinsAlcoolGlobal: Button
+    private lateinit var btnPlusBieres: Button
+    private lateinit var btnMoinsBieres: Button
+    private lateinit var btnPlusLiqueurs: Button
+    private lateinit var btnMoinsLiqueurs: Button
+    private lateinit var btnPlusAlcoolFort: Button
+    private lateinit var btnMoinsAlcoolFort: Button
 
     // UI Elements - Cases à cocher
     private lateinit var checkCigarettes: CheckBox
