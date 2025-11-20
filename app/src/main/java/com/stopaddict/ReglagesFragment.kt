@@ -87,7 +87,7 @@ class ReglagesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return try {
-            val view = inflater.inflate(R.layout.fragment_reglages, container, false)
+            val view = inflater.inflate(R.layout.fragment_placeholder, container, false)
             
             dbHelper = DatabaseHelper(requireContext())
             configLangue = ConfigLangue(requireContext())
@@ -128,6 +128,7 @@ class ReglagesFragment : Fragment() {
         addHeader(contentContainer)
         
         // Profil
+        addProfilSection(contentContainer)
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
@@ -181,26 +182,26 @@ class ReglagesFragment : Fragment() {
     }
 
     private fun addPersonnalisationSection(container: LinearLayout) {
-        addSectionTitle(container, trad["personnalisation"] ?: "Personnalisation")
+        addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
         
         // Prénom
-        addLabel(container, trad["prenom"] ?: "Prénom")
+        addLabel(container, trad["label_prenom"] ?: "Prénom")
         editPrenom = EditText(requireContext()).apply {
-            hint = trad["entrer_prenom"] ?: "Entrer votre prénom"
+            hint = trad["hint_prenom"] ?: "Entrer votre prénom"
             inputType = InputType.TYPE_CLASS_TEXT
             setPadding(20, 20, 20, 20)
         }
         container.addView(editPrenom)
         
         // Langue
-        addLabel(container, trad["langue"] ?: "Langue")
+        addLabel(container, trad["label_langue"] ?: "Langue")
         spinnerLangue = Spinner(requireContext())
         val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
         spinnerLangue.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, langues)
         container.addView(spinnerLangue)
         
         // Devise
-        addLabel(container, trad["devise"] ?: "Devise")
+        addLabel(container, trad["label_devise"] ?: "Devise")
         spinnerDevise = Spinner(requireContext())
         val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
         spinnerDevise.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, devises)
@@ -208,14 +209,14 @@ class ReglagesFragment : Fragment() {
         
         // Bouton sauvegarder personnalisation
         val btnSavePerso = Button(requireContext()).apply {
-            text = trad["sauvegarder"] ?: "Sauvegarder"
+            text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder"
             setOnClickListener { savePersonnalisation() }
         }
         container.addView(btnSavePerso)
     }
 
     private fun addCoutsSection(container: LinearLayout) {
-        addSectionTitle(container, trad["couts"] ?: "Coûts")
+        addSectionTitle(container, trad["titre_categories"] ?: "Coûts")
         
         // CIGARETTES
         addCigarettesSection(container)
@@ -237,7 +238,7 @@ class ReglagesFragment : Fragment() {
         
         // Bouton sauvegarder coûts
         val btnSaveCouts = Button(requireContext()).apply {
-            text = trad["sauvegarder_couts"] ?: "Sauvegarder les coûts"
+            text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder les coûts"
             setOnClickListener { saveCouts() }
         }
         container.addView(btnSaveCouts)
@@ -248,7 +249,7 @@ class ReglagesFragment : Fragment() {
         
         // Switch cigarette
         switchCigarette = Switch(requireContext()).apply {
-            text = trad["cigarettes"] ?: "Cigarettes"
+            text = trad["label_cigarettes"] ?: "Cigarettes"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -263,7 +264,7 @@ class ReglagesFragment : Fragment() {
         
         // Mode 1: Paquet classique
         radioCigarettesClassiques = RadioButton(requireContext()).apply {
-            text = "📦 ${trad["cigarettes_paquet"] ?: "Cigarettes paquet classique"}"
+            text = "📦 ${trad["radio_classiques"] ?: "Cigarettes paquet classique"}"
             isChecked = true
         }
         radioGroup.addView(radioCigarettesClassiques)
@@ -273,18 +274,18 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
-        addLabel(paquetContainer, trad["prix_paquet"] ?: "Prix du paquet")
+        addLabel(paquetContainer, trad["label_prix_paquet"] ?: "Prix du paquet")
         editPrixPaquet = createMoneyEditText()
         paquetContainer.addView(editPrixPaquet)
         
-        addLabel(paquetContainer, trad["nb_cigarettes"] ?: "Nombre de cigarettes par paquet")
+        addLabel(paquetContainer, trad["label_nb_cigarettes"] ?: "Nombre de cigarettes par paquet")
         editNbCigarettes = createNumberEditText()
         paquetContainer.addView(editNbCigarettes)
         radioGroup.addView(paquetContainer)
         
         // Mode 2: À rouler
         radioCigarettesRouler = RadioButton(requireContext()).apply {
-            text = "🌿 ${trad["cigarettes_rouler"] ?: "Cigarettes à rouler"}"
+            text = "🌿 ${trad["radio_rouler"] ?: "Cigarettes à rouler"}"
         }
         radioGroup.addView(radioCigarettesRouler)
         
@@ -292,30 +293,30 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
-        addLabel(roulerContainer, trad["prix_tabac"] ?: "Prix du tabac à rouler")
+        addLabel(roulerContainer, trad["label_prix_tabac"] ?: "Prix du tabac à rouler")
         editPrixTabac = createMoneyEditText()
         roulerContainer.addView(editPrixTabac)
         
-        addLabel(roulerContainer, trad["prix_feuilles"] ?: "Prix des feuilles à rouler")
+        addLabel(roulerContainer, trad["label_prix_feuilles"] ?: "Prix des feuilles à rouler")
         editPrixFeuilles = createMoneyEditText()
         roulerContainer.addView(editPrixFeuilles)
         
-        addLabel(roulerContainer, trad["nb_feuilles"] ?: "Nombre de feuilles")
+        addLabel(roulerContainer, trad["label_nb_feuilles"] ?: "Nombre de feuilles")
         editNbFeuilles = createNumberEditText()
         roulerContainer.addView(editNbFeuilles)
         
-        addLabel(roulerContainer, trad["prix_filtres"] ?: "Prix du sachet de filtres")
+        addLabel(roulerContainer, trad["label_prix_filtres"] ?: "Prix du sachet de filtres")
         editPrixFiltres = createMoneyEditText()
         roulerContainer.addView(editPrixFiltres)
         
-        addLabel(roulerContainer, trad["nb_filtres"] ?: "Nombre de filtres")
+        addLabel(roulerContainer, trad["label_nb_filtres"] ?: "Nombre de filtres")
         editNbFiltres = createNumberEditText()
         roulerContainer.addView(editNbFiltres)
         radioGroup.addView(roulerContainer)
         
         // Mode 3: À tuber
         radioCigarettesTubeuse = RadioButton(requireContext()).apply {
-            text = "🚬 ${trad["cigarettes_tuber"] ?: "Cigarettes à tuber"}"
+            text = "🚬 ${trad["radio_tubeuse"] ?: "Cigarettes à tuber"}"
         }
         radioGroup.addView(radioCigarettesTubeuse)
         
@@ -323,14 +324,14 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
-        addLabel(tuberContainer, trad["prix_tabac_tuber"] ?: "Prix du tabac à tuber")
+        addLabel(tuberContainer, trad["label_prix_tabac"] ?: "Prix du tabac à tuber")
         // Réutilise editPrixTabac - on récupère la valeur selon le mode
         
-        addLabel(tuberContainer, trad["prix_tubes"] ?: "Prix des tubes")
+        addLabel(tuberContainer, trad["label_prix_tubes"] ?: "Prix des tubes")
         editPrixTubes = createMoneyEditText()
         tuberContainer.addView(editPrixTubes)
         
-        addLabel(tuberContainer, trad["nb_tubes"] ?: "Nombre de tubes")
+        addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
         editNbTubes = createNumberEditText()
         tuberContainer.addView(editNbTubes)
         radioGroup.addView(tuberContainer)
@@ -343,7 +344,7 @@ class ReglagesFragment : Fragment() {
         val jointCard = createCard()
         
         switchJoint = Switch(requireContext()).apply {
-            text = trad["joints"] ?: "Joints (Cannabis)"
+            text = trad["label_joints"] ?: "Joints (Cannabis)"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -353,11 +354,11 @@ class ReglagesFragment : Fragment() {
         }
         jointCard.addView(switchJoint)
         
-        addLabel(jointCard, trad["prix_gramme"] ?: "Prix du gramme")
+        addLabel(jointCard, trad["label_prix_gramme"] ?: "Prix du gramme")
         editPrixGramme = createMoneyEditText()
         jointCard.addView(editPrixGramme)
         
-        addLabel(jointCard, trad["gramme_par_joint"] ?: "Grammes par joint")
+        addLabel(jointCard, trad["label_gramme_par_joint"] ?: "Grammes par joint")
         editGrammeParJoint = EditText(requireContext()).apply {
             hint = "0.5"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
@@ -365,11 +366,11 @@ class ReglagesFragment : Fragment() {
         }
         jointCard.addView(editGrammeParJoint)
         
-        addLabel(jointCard, trad["prix_feuilles_longues"] ?: "Prix des feuilles longues")
+        addLabel(jointCard, trad["label_prix_feuilles_longues"] ?: "Prix des feuilles longues")
         editPrixFeuillesJoint = createMoneyEditText()
         jointCard.addView(editPrixFeuillesJoint)
         
-        addLabel(jointCard, trad["nb_feuilles_longues"] ?: "Nombre de feuilles longues")
+        addLabel(jointCard, trad["label_nb_feuilles_longues"] ?: "Nombre de feuilles longues")
         editNbFeuillesJoint = createNumberEditText()
         jointCard.addView(editNbFeuillesJoint)
         
@@ -380,7 +381,7 @@ class ReglagesFragment : Fragment() {
         val alcoolCard = createCard()
         
         switchAlcoolGlobal = Switch(requireContext()).apply {
-            text = trad["alcool_global"] ?: "Alcool Global"
+            text = trad["label_alcool_global"] ?: "Alcool Global"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -396,7 +397,7 @@ class ReglagesFragment : Fragment() {
         }
         alcoolCard.addView(switchAlcoolGlobal)
         
-        addLabel(alcoolCard, trad["prix_verre_global"] ?: "Prix du verre (alcool global)")
+        addLabel(alcoolCard, trad["label_prix_verre"] ?: "Prix du verre (alcool global)")
         editPrixVerreGlobal = createMoneyEditText()
         alcoolCard.addView(editPrixVerreGlobal)
         
@@ -415,7 +416,7 @@ class ReglagesFragment : Fragment() {
         val biereCard = createCard()
         
         switchBiere = Switch(requireContext()).apply {
-            text = trad["bieres"] ?: "Bières"
+            text = trad["label_bieres"] ?: "Bières"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -425,7 +426,7 @@ class ReglagesFragment : Fragment() {
         }
         biereCard.addView(switchBiere)
         
-        addLabel(biereCard, trad["prix_verre_biere"] ?: "Prix du verre de bière")
+        addLabel(biereCard, trad["label_prix_verre"] ?: "Prix du verre de bière")
         editPrixVerreBiere = createMoneyEditText()
         biereCard.addView(editPrixVerreBiere)
         
@@ -444,7 +445,7 @@ class ReglagesFragment : Fragment() {
         val liqueurCard = createCard()
         
         switchLiqueur = Switch(requireContext()).apply {
-            text = trad["liqueurs"] ?: "Liqueurs"
+            text = trad["label_liqueurs"] ?: "Liqueurs"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -454,7 +455,7 @@ class ReglagesFragment : Fragment() {
         }
         liqueurCard.addView(switchLiqueur)
         
-        addLabel(liqueurCard, trad["prix_verre_liqueur"] ?: "Prix du verre de liqueur")
+        addLabel(liqueurCard, trad["label_prix_verre"] ?: "Prix du verre de liqueur")
         editPrixVerreLiqueur = createMoneyEditText()
         liqueurCard.addView(editPrixVerreLiqueur)
         
@@ -473,7 +474,7 @@ class ReglagesFragment : Fragment() {
         val alcoolFortCard = createCard()
         
         switchAlcoolFort = Switch(requireContext()).apply {
-            text = trad["alcool_fort"] ?: "Alcool Fort"
+            text = trad["label_alcool_fort"] ?: "Alcool Fort"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setOnCheckedChangeListener { _, isChecked ->
@@ -483,7 +484,7 @@ class ReglagesFragment : Fragment() {
         }
         alcoolFortCard.addView(switchAlcoolFort)
         
-        addLabel(alcoolFortCard, trad["prix_verre_alcool_fort"] ?: "Prix du verre d'alcool fort")
+        addLabel(alcoolFortCard, trad["label_prix_verre"] ?: "Prix du verre d'alcool fort")
         editPrixVerreAlcoolFort = createMoneyEditText()
         alcoolFortCard.addView(editPrixVerreAlcoolFort)
         
@@ -577,7 +578,7 @@ class ReglagesFragment : Fragment() {
             dbHelper.setCouts(DatabaseHelper.TYPE_ALCOOL_FORT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreAlcoolFort)
             dbHelper.setPreference("unite_cl_alcool_fort", uniteCLAlcoolFort.toString())
 
-            Toast.makeText(requireContext(), trad["couts_sauvegardes"] ?: "Coûts sauvegardés", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), trad["msg_profil_sauvegarde"] ?: "Coûts sauvegardés", Toast.LENGTH_SHORT).show()
             updateProfilStatus()
             
         } catch (e: Exception) {
@@ -597,7 +598,7 @@ class ReglagesFragment : Fragment() {
     }
 
     private fun addAProposSection(container: LinearLayout) {
-        addSectionTitle(container, trad["a_propos"] ?: "À propos")
+        addSectionTitle(container, trad["titre_a_propos"] ?: "À propos")
         
         val aProposCard = createCard()
         
@@ -607,22 +608,22 @@ class ReglagesFragment : Fragment() {
         }
         
         // Lien 2: Manuel d'utilisation
-        addLinkButton(aProposCard, "📖 ${trad["manuel_utilisation"] ?: "Manuel d'utilisation"}") {
+        addLinkButton(aProposCard, "📖 ${trad["btn_manuel"] ?: "Manuel d'utilisation"}") {
             showManuelDialog()
         }
         
         // Lien 3: CGV
-        addLinkButton(aProposCard, "📄 ${trad["cgv"] ?: "Conditions générales de vente (CGV)"}") {
+        addLinkButton(aProposCard, "📄 ${trad["btn_cgv"] ?: "Conditions générales de vente (CGV)"}") {
             showCGVDialog()
         }
         
         // Lien 4: Mentions légales
-        addLinkButton(aProposCard, "⚖️ ${trad["mentions_legales"] ?: "Mentions légales"}") {
+        addLinkButton(aProposCard, "⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}") {
             showMentionsLegalesDialog()
         }
         
         // Lien 5: Contact support
-        addLinkButton(aProposCard, "✉️ ${trad["contact_support"] ?: "Contact support"}") {
+        addLinkButton(aProposCard, "✉️ ${trad["btn_contact"] ?: "Contact support"}") {
             sendEmail()
         }
         
@@ -669,7 +670,7 @@ class ReglagesFragment : Fragment() {
         
         // Export
         val btnExport = Button(requireContext()).apply {
-            text = trad["exporter"] ?: "Exporter"
+            text = trad["btn_exporter"] ?: "Exporter"
             setBackgroundColor(Color.parseColor("#66BB6A"))
             setTextColor(Color.WHITE)
             setOnClickListener {
@@ -680,7 +681,7 @@ class ReglagesFragment : Fragment() {
         
         // Import
         val btnImport = Button(requireContext()).apply {
-            text = trad["importer"] ?: "Importer"
+            text = trad["btn_importer"] ?: "Importer"
             setBackgroundColor(Color.parseColor("#42A5F5"))
             setTextColor(Color.WHITE)
             setOnClickListener {
@@ -695,9 +696,9 @@ class ReglagesFragment : Fragment() {
     private fun showAvertissementDialog() {
         val message = ReglagesLangues.getAvertissement(configLangue.getLangue())
         AlertDialog.Builder(requireContext())
-            .setTitle("⚠️ ${trad["avertissement"] ?: "Avertissement"}")
+            .setTitle("⚠️ ${trad["btn_avertissement"] ?: "Avertissement"}")
             .setMessage(message)
-            .setPositiveButton(trad["fermer"] ?: "Fermer", null)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
 
@@ -713,9 +714,9 @@ class ReglagesFragment : Fragment() {
         scrollView.addView(textView)
         
         AlertDialog.Builder(requireContext())
-            .setTitle("📖 ${trad["manuel_utilisation"] ?: "Manuel d'utilisation"}")
+            .setTitle("📖 ${trad["btn_manuel"] ?: "Manuel d'utilisation"}")
             .setView(scrollView)
-            .setPositiveButton(trad["fermer"] ?: "Fermer", null)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
 
@@ -731,18 +732,18 @@ class ReglagesFragment : Fragment() {
         scrollView.addView(textView)
         
         AlertDialog.Builder(requireContext())
-            .setTitle("📄 ${trad["cgv"] ?: "CGV"}")
+            .setTitle("📄 ${trad["btn_cgv"] ?: "CGV"}")
             .setView(scrollView)
-            .setPositiveButton(trad["fermer"] ?: "Fermer", null)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
 
     private fun showMentionsLegalesDialog() {
         val mentions = ReglagesLangues.getMentionsLegales(configLangue.getLangue())
         AlertDialog.Builder(requireContext())
-            .setTitle("⚖️ ${trad["mentions_legales"] ?: "Mentions légales"}")
+            .setTitle("⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}")
             .setMessage(mentions)
-            .setPositiveButton(trad["fermer"] ?: "Fermer", null)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
 
@@ -760,19 +761,19 @@ class ReglagesFragment : Fragment() {
 
     private fun showRAZConfirmation(type: String) {
         val message = when (type) {
-            "jour" -> trad["confirmer_raz_jour"] ?: "Effacer les consommations du jour ?"
-            "historique" -> trad["confirmer_raz_historique"] ?: "Effacer TOUT l'historique ?"
-            "usine" -> trad["confirmer_raz_usine"] ?: "TOUT réinitialiser (historique + réglages) ?"
+            "jour" -> trad["confirm_raz_jour_titre"] ?: "Effacer les consommations du jour ?"
+            "historique" -> trad["confirm_raz_historique_titre"] ?: "Effacer TOUT l'historique ?"
+            "usine" -> trad["confirm_raz_usine_titre"] ?: "TOUT réinitialiser (historique + réglages) ?"
             else -> "Confirmer ?"
         }
         
         AlertDialog.Builder(requireContext())
-            .setTitle(trad["confirmation"] ?: "Confirmation")
+            .setTitle(trad["btn_confirmer"] ?: "Confirmation")
             .setMessage(message)
-            .setPositiveButton(trad["confirmer"] ?: "Confirmer") { _, _ ->
+            .setPositiveButton(trad["btn_confirmer"] ?: "Confirmer") { _, _ ->
                 executeRAZ(type)
             }
-            .setNegativeButton(trad["annuler"] ?: "Annuler", null)
+            .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
             .show()
     }
 
@@ -914,7 +915,7 @@ class ReglagesFragment : Fragment() {
                         val writer = OutputStreamWriter(outputStream)
                         writer.write(buildExportJSON())
                         writer.close()
-                        Toast.makeText(requireContext(), trad["export_ok"] ?: "Export réussi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), trad["msg_export_reussi"] ?: "Export réussi", Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
                         Log.e(TAG, "Erreur écriture export", e)
                         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -930,7 +931,7 @@ class ReglagesFragment : Fragment() {
                         reader.close()
                         
                         processImportJSON(jsonString)
-                        Toast.makeText(requireContext(), trad["import_ok"] ?: "Import réussi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), trad["msg_import_reussi"] ?: "Import réussi", Toast.LENGTH_SHORT).show()
                         loadData()
                         
                     } catch (e: Exception) {
