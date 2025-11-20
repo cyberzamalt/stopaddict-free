@@ -1172,8 +1172,6 @@ object ReglagesLangues {
             key
         }
     }
-}
-// À AJOUTER À LA FIN de ReglagesLangues.kt existant
 
     // ==================== CONTENU MANUEL ====================
     
