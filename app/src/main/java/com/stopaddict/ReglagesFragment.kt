@@ -826,7 +826,7 @@ class ReglagesFragment : Fragment() {
             val hasDates = categoriesActives.any { (type, active) ->
                 if (active) {
                     val dates = dbHelper.getDatesObjectifs(type)
-                    dates.values.any { it.isNotEmpty() }
+                    dates.values.any { it?.isNotEmpty() == true }
                 } else false
             }
 
