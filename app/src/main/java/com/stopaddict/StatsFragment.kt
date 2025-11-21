@@ -732,65 +732,80 @@ class StatsFragment : Fragment() {
         "$periode: Erreur"
     }
 }
-    private fun updateProfilStatus() {
-        try {
-            // Vérifier si profil complet (coûts + habitudes + dates remplis)
-            var isComplete = true
+private fun updateProfilStatus() {
+    try {
+        // 1. Prénom
+        val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
 
-            // Vérifier coûts (au moins une catégorie active avec coût > 0)
-            var hasCouts = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val couts = dbHelper.getCouts(type)
-                    if (couts.values.any { it > 0 }) {
-                        hasCouts = true
-                    }
+        // 2. Coûts : au moins une catégorie active avec un coût > 0
+        var hasCouts = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                if (couts.values.any { it > 0.0 }) {
+                    hasCouts = true
+                    return@forEach
                 }
             }
-            if (!hasCouts) isComplete = false
-
-            // Vérifier habitudes (au moins une catégorie active avec max > 0)
-            var hasHabitudes = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val max = dbHelper.getMaxJournalier(type)
-                    if (max > 0) {
-                        hasHabitudes = true
-                    }
-                }
-            }
-            if (!hasHabitudes) isComplete = false
-
-            // Vérifier dates (au moins une date renseignée)
-            var hasDates = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    if (dates.values.any { !it.isNullOrEmpty() }) {
-                        hasDates = true
-                    }
-                }
-            }
-            if (!hasDates) isComplete = false
-
-            // Mise à jour texte
-            txtProfilComplet.text = if (isComplete) {
-            trad["profil_complet_complet"] ?: "Profil: Complet ✓"
-            } else {
-                trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
-            }
-
-            // Total aujourd'hui
-            val consosJour = dbHelper.getConsommationsJour()
-            val totalJour = consosJour.values.sum()
-            txtTotalAujourdhui.text = totalJour.toString()
-            
-            Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"} - Total jour: $totalJour")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
         }
-    }
 
+        // 3. Habitudes (max par jour > 0)
+        var hasHabitudes = false
+        categoriesActives.forEach { (type, active) ->
+            if (active && dbHelper.getMaxJournalier(type) > 0) {
+                hasHabitudes = true
+                return@forEach
+            }
+        }
+
+        // 4. Dates objectifs (au moins une date non vide)
+        var hasDates = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+                if (dates.values.any { it?.isNotEmpty() == true }) {
+                    hasDates = true
+                    return@forEach
+                }
+            }
+        }
+
+        val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
+
+        // Texte "Profil complet / incomplet" AVEC TRAD
+        txtProfilComplet.text = if (isComplet) {
+            // On essaie d'abord les nouvelles clés, sinon on garde les anciennes si elles existent encore
+            trad["profil_complet"] ?: trad["profil_complet_complet"] ?: "Profil: Complet ✓"
+        } else {
+            trad["profil_incomplet"] ?: trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
+        }
+
+        // -------- Total aujourd'hui --------
+        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+        val today = dateFormat.format(java.util.Date())
+        var totalJour = 0.0
+
+        // On calcule le coût du jour pour chaque catégorie active
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val nbUnites = dbHelper.getConsommationParDate(type, today)
+                val couts = dbHelper.getCouts(type)
+                val prixUnitaire = calculerPrixUnitaire(type, couts)
+                totalJour += nbUnites * prixUnitaire
+            }
+        }
+
+        val devise = dbHelper.getPreference("devise", "EUR")
+        val labelTotal = trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
+
+        // ⚠️ ici : UN SEUL ":" → plus de "Total aujourd'hui::"
+        txtTotalAujourdhui.text = "$labelTotal: %.2f %s".format(totalJour, devise)
+
+        Log.d(TAG, "Profil: ${if (isComplet) "Complet" else "Incomplet"} - Total jour: $totalJour")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur updateProfilStatus stats", e)
+    }
+}       
     override fun onResume() {
         super.onResume()
         try {
