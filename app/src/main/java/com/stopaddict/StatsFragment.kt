@@ -162,14 +162,15 @@ class StatsFragment : Fragment() {
     }
 
     private fun configureChart(chart: LineChart) {
-        try {
-            // Configuration générale
-            chart.description.isEnabled = false
-            chart.setTouchEnabled(true)
-            chart.isDragEnabled = true
-            chart.setScaleEnabled(true)
-            chart.setPinchZoom(true)
-            chart.setDrawGridBackground(false)
+    try {
+        // Configuration générale
+        chart.description.isEnabled = false
+        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+        chart.setTouchEnabled(true)
+        chart.isDragEnabled = true
+        chart.setScaleEnabled(true)
+        chart.setPinchZoom(true)
+        chart.setDrawGridBackground(false)
 
             // Axe X (horizontal)
             val xAxis = chart.xAxis
@@ -713,18 +714,24 @@ class StatsFragment : Fragment() {
     }
 
     private fun formatTotaux(periode: String, totaux: Map<String, Any>): String {
-        return try {
-            val devise = dbHelper.getPreference("devise", "€")
-            val consos = totaux["consommations"] as? Int ?: 0
-            val couts = totaux["couts"] as? Double ?: 0.0
-            val economies = totaux["economies"] as? Double ?: 0.0
+    return try {
+        val devise = dbHelper.getPreference("devise", "€")
+        val consos = totaux["consommations"] as? Int ?: 0
+        val couts = totaux["couts"] as? Double ?: 0.0
+        val economies = totaux["economies"] as? Double ?: 0.0
 
-            "$periode: $consos unités | ${String.format("%.2f", couts)}$devise dépensés | ${String.format("%.2f", economies)}$devise économisés"
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur formatage totaux: ${e.message}")
-            "$periode: Erreur"
-        }
+        val labelUnites = trad["calculs_unites"] ?: "unités"
+        val labelDepenses = trad["calculs_depenses"] ?: "dépensés"
+        val labelEconomies = trad["calculs_economies"] ?: "économisés"
+
+        "$periode: $consos $labelUnites | " +
+        "${String.format("%.2f", couts)}$devise $labelDepenses | " +
+        "${String.format("%.2f", economies)}$devise $labelEconomies"
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur formatage totaux: ${e.message}")
+        "$periode: Erreur"
     }
+}
     private fun updateProfilStatus() {
         try {
             // Vérifier si profil complet (coûts + habitudes + dates remplis)
