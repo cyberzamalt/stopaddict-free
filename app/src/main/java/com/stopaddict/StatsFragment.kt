@@ -60,6 +60,8 @@ class StatsFragment : Fragment() {
     private lateinit var txtCalculsSemaine: TextView
     private lateinit var txtCalculsMois: TextView
     private lateinit var txtCalculsAnnee: TextView
+    private lateinit var txtTitreConso: TextView
+    private lateinit var txtTitreCouts: TextView
 
     // UI Elements - Bandeau profil
     private lateinit var txtProfilComplet: TextView
@@ -127,16 +129,22 @@ class StatsFragment : Fragment() {
             btnAnnee = view.findViewById(R.id.stats_btn_annee)
 
             // Appliquer traductions aux boutons
-            btnJour.text = trad["periode_jour"] ?: "Jour"
-            btnSemaine.text = trad["periode_semaine"] ?: "Semaine"
-            btnMois.text = trad["periode_mois"] ?: "Mois"
-            btnAnnee.text = trad["periode_annee"] ?: "Année"
+            btnJour.text = trad["btn_jour"] ?: "Jour"
+            btnSemaine.text = trad["btn_semaine"] ?: "Semaine"
+            btnMois.text = trad["btn_mois"] ?: "Mois"
+            btnAnnee.text = trad["btn_annee"] ?: "Année"
 
             // Zone calculs
             txtCalculsJour = view.findViewById(R.id.stats_txt_calculs_jour)
             txtCalculsSemaine = view.findViewById(R.id.stats_txt_calculs_semaine)
             txtCalculsMois = view.findViewById(R.id.stats_txt_calculs_mois)
             txtCalculsAnnee = view.findViewById(R.id.stats_txt_calculs_annee)
+            txtTitreConso = view.findViewById(R.id.stats_txt_titre_conso)
+            txtTitreCouts = view.findViewById(R.id.stats_txt_titre_couts)
+
+            // Appliquer traductions aux titres graphiques
+            txtTitreConso.text = trad["titre_graphique_consommation"] ?: "Graphique Consommation"
+            txtTitreCouts.text = trad["titre_graphique_couts"] ?: "Graphique Coûts et Économies"
 
             // Bandeau profil
             txtProfilComplet = view.findViewById(R.id.stats_txt_profil_complet)
@@ -437,12 +445,12 @@ class StatsFragment : Fragment() {
 
     private fun getLabelCategorie(type: String): String {
         return when (type) {
-            DatabaseHelper.TYPE_CIGARETTE -> "Cigarettes"
-            DatabaseHelper.TYPE_JOINT -> "Joints"
-            DatabaseHelper.TYPE_ALCOOL_GLOBAL -> "Alcool global"
-            DatabaseHelper.TYPE_BIERE -> "Bières"
-            DatabaseHelper.TYPE_LIQUEUR -> "Liqueurs"
-            DatabaseHelper.TYPE_ALCOOL_FORT -> "Alcool fort"
+            DatabaseHelper.TYPE_CIGARETTE -> trad["label_cigarettes"] ?: "Cigarettes"
+            DatabaseHelper.TYPE_JOINT -> trad["label_joints"] ?: "Joints"
+            DatabaseHelper.TYPE_ALCOOL_GLOBAL -> trad["label_alcool_global"] ?: "Alcool global"
+            DatabaseHelper.TYPE_BIERE -> trad["label_bieres"] ?: "Bières"
+            DatabaseHelper.TYPE_LIQUEUR -> trad["label_liqueurs"] ?: "Liqueurs"
+            DatabaseHelper.TYPE_ALCOOL_FORT -> trad["label_alcool_fort"] ?: "Alcool fort"
             else -> type
         }
     }
@@ -647,10 +655,10 @@ class StatsFragment : Fragment() {
             val totauxAnnee = calculerTotauxPeriode(PERIODE_ANNEE)
 
             // Afficher
-            txtCalculsJour.text = formatTotaux("Jour", totauxJour)
-            txtCalculsSemaine.text = formatTotaux("Semaine", totauxSemaine)
-            txtCalculsMois.text = formatTotaux("Mois", totauxMois)
-            txtCalculsAnnee.text = formatTotaux("Année", totauxAnnee)
+            txtCalculsJour.text = formatTotaux(trad["calculs_periode_jour"] ?: "Jour", totauxJour)
+            txtCalculsSemaine.text = formatTotaux(trad["calculs_periode_semaine"] ?: "Semaine", totauxSemaine)
+            txtCalculsMois.text = formatTotaux(trad["calculs_periode_mois"] ?: "Mois", totauxMois)
+            txtCalculsAnnee.text = formatTotaux(trad["calculs_periode_annee"] ?: "Année", totauxAnnee)
 
             Log.d(TAG, "Calculs mis à jour")
         } catch (e: Exception) {
