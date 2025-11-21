@@ -370,14 +370,15 @@ class CalendrierFragment : Fragment() {
                     
                     val typeLabel = TextView(requireContext()).apply {
                         text = when (type) {
-                            "cigarette" -> trad["cigarettes"] ?: "Cigarettes"
-                            "joint" -> trad["joints"] ?: "Joints"
-                            "alcool_global" -> trad["alcool_global"] ?: "Alcool global"
-                            "biere" -> trad["bieres"] ?: "Bières"
-                            "liqueur" -> trad["liqueurs"] ?: "Liqueurs"
-                            "alcool_fort" -> trad["alcool_fort"] ?: "Alcool fort"
+                            "cigarette" -> trad["label_cigarettes"] ?: "Cigarettes"
+                            "joint" -> trad["label_joints"] ?: "Joints"
+                            "alcool_global" -> trad["label_alcool_global"] ?: "Alcool global"
+                            "biere" -> trad["label_bieres"] ?: "Bières"
+                            "liqueur" -> trad["label_liqueurs"] ?: "Liqueurs"
+                            "alcool_fort" -> trad["label_alcool_fort"] ?: "Alcool fort"
                             else -> type
                         }
+
                         textSize = 14f
                         setPadding(0, 10, 0, 5)
                     }
