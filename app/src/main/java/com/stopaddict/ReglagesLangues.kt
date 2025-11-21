@@ -39,13 +39,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Habitudes quotidiennes",
         "titre_dates_objectifs" to "Dates objectifs",
         "titre_raz_export" to "RAZ & Export/Import",
-        
+
         // Labels profil
         "label_prenom" to "Prénom",
         "label_langue" to "Langue",
         "label_devise" to "Devise",
         "btn_sauvegarder_profil" to "Sauvegarder profil",
-        
+
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
         "label_joints" to "Joints",
@@ -53,7 +53,7 @@ object ReglagesLangues {
         "label_bieres" to "Bières",
         "label_liqueurs" to "Liqueurs",
         "label_alcool_fort" to "Alcool fort",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Cigarettes classiques",
         "radio_rouler" to "À rouler",
@@ -67,33 +67,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Nombre de filtres",
         "label_prix_tubes" to "Prix tubes (€)",
         "label_nb_tubes" to "Nombre de tubes",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Prix du gramme (€)",
         "label_gramme_par_joint" to "Grammes par joint",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Prix du verre (€)",
         "label_unite_cl" to "Unité (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Maximum journalier",
-        
+
         // Labels dates
         "label_date_reduction" to "Date réduction",
         "label_date_arret" to "Date arrêt",
         "label_date_reussite" to "Date réussite",
         "btn_choisir_date" to "Choisir date",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "RAZ du jour",
         "btn_raz_historique" to "RAZ historique",
         "btn_raz_usine" to "RAZ d'usine",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Exporter",
         "btn_importer" to "Importer",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "RAZ du jour",
         "confirm_raz_jour_message" to "Supprimer toutes les consommations d'aujourd'hui ?",
@@ -103,7 +103,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "TOUT réinitialiser (profil, consommations, paramètres) ? (Cette action est irréversible)",
         "confirm_import_titre" to "Importer sauvegarde",
         "confirm_import_message" to "Toutes les données actuelles seront remplacées. Continuer ?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Profil sauvegardé",
         "msg_date_enregistree" to "Date enregistrée",
@@ -120,12 +120,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "Aucun fichier de sauvegarde trouvé",
         "msg_donnees_invalides" to "Erreur import: données invalides",
         "msg_champs_obligatoires" to "Veuillez renseigner au moins un coût",
-        
+
         // Bandeau profil
         "profil_complet" to "Profil: Complet ✓",
         "profil_incomplet" to "Profil: Incomplet",
         "total_aujourdhui" to "Total aujourd'hui:",
-        
+
         // Économies potentielles
         "titre_economies" to "Économies potentielles",
         "economies_si_arret" to "Si vous arrêtiez complètement:",
@@ -133,12 +133,12 @@ object ReglagesLangues {
         "economies_semaine" to "Semaine",
         "economies_mois" to "Mois",
         "economies_annee" to "Année",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Confirmer",
         "btn_annuler" to "Annuler",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // À propos
         "titre_a_propos" to "À propos",
         "voir_avertissement" to "Voir l'avertissement",
@@ -147,6 +147,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Mentions légales",
         "btn_contact" to "Contact support",
         "hint_prenom" to "Entrer votre prénom",
+
         // RAZ
         "raz_sauvegarde" to "RAZ et Sauvegarde",
         "raz_jour" to "RAZ jour",
@@ -168,13 +169,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Daily habits",
         "titre_dates_objectifs" to "Goal dates",
         "titre_raz_export" to "Reset & Export/Import",
-        
+
         // Labels profil
         "label_prenom" to "First name",
         "label_langue" to "Language",
         "label_devise" to "Currency",
         "btn_sauvegarder_profil" to "Save profile",
-        
+
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
         "label_joints" to "Joints",
@@ -182,7 +183,7 @@ object ReglagesLangues {
         "label_bieres" to "Beers",
         "label_liqueurs" to "Liquors",
         "label_alcool_fort" to "Spirits",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Regular cigarettes",
         "radio_rouler" to "Rolling tobacco",
@@ -196,33 +197,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Number of filters",
         "label_prix_tubes" to "Tubes price (£)",
         "label_nb_tubes" to "Number of tubes",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Price per gram (£)",
         "label_gramme_par_joint" to "Grams per joint",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Drink price (£)",
         "label_unite_cl" to "Unit (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Daily maximum",
-        
+
         // Labels dates
         "label_date_reduction" to "Reduction date",
         "label_date_arret" to "Quit date",
         "label_date_reussite" to "Success date",
         "btn_choisir_date" to "Choose date",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Reset today",
         "btn_raz_historique" to "Reset history",
         "btn_raz_usine" to "Factory reset",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Export",
         "btn_importer" to "Import",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Reset today",
         "confirm_raz_jour_message" to "Delete all today's consumption?",
@@ -232,7 +233,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "Reset EVERYTHING (profile, consumption, settings)? (This action is irreversible)",
         "confirm_import_titre" to "Import backup",
         "confirm_import_message" to "All current data will be replaced. Continue?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Profile saved",
         "msg_date_enregistree" to "Date saved",
@@ -249,12 +250,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "No backup file found",
         "msg_donnees_invalides" to "Import error: invalid data",
         "msg_champs_obligatoires" to "Please enter at least one cost",
-        
+
         // Bandeau profil
         "profil_complet" to "Profile: Complete ✓",
         "profil_incomplet" to "Profile: Incomplete",
         "total_aujourdhui" to "Total today:",
-        
+
         // Économies potentielles
         "titre_economies" to "Potential savings",
         "economies_si_arret" to "If you quit completely:",
@@ -262,12 +263,12 @@ object ReglagesLangues {
         "economies_semaine" to "Week",
         "economies_mois" to "Month",
         "economies_annee" to "Year",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Confirm",
         "btn_annuler" to "Cancel",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // About
         "titre_a_propos" to "About",
         "voir_avertissement" to "View warning",
@@ -276,6 +277,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Legal notice",
         "btn_contact" to "Contact support",
         "hint_prenom" to "Enter your first name",
+
         // Reset
         "raz_sauvegarde" to "Reset and Backup",
         "raz_jour" to "Reset day",
@@ -297,13 +299,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Hábitos diarios",
         "titre_dates_objectifs" to "Fechas objetivos",
         "titre_raz_export" to "Restablecer y Exportar/Importar",
-        
+
         // Labels profil
         "label_prenom" to "Nombre",
         "label_langue" to "Idioma",
         "label_devise" to "Moneda",
         "btn_sauvegarder_profil" to "Guardar perfil",
-        
+
         // Labels catégories
         "label_cigarettes" to "Cigarrillos",
         "label_joints" to "Porros",
@@ -311,7 +313,7 @@ object ReglagesLangues {
         "label_bieres" to "Cervezas",
         "label_liqueurs" to "Licores",
         "label_alcool_fort" to "Aguardiente",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Cigarrillos clásicos",
         "radio_rouler" to "Para liar",
@@ -325,33 +327,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Número de filtros",
         "label_prix_tubes" to "Precio tubos (€)",
         "label_nb_tubes" to "Número de tubos",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Precio por gramo (€)",
         "label_gramme_par_joint" to "Gramos por porro",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Precio por copa (€)",
         "label_unite_cl" to "Unidad (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Máximo diario",
-        
+
         // Labels dates
         "label_date_reduction" to "Fecha reducción",
         "label_date_arret" to "Fecha abandono",
         "label_date_reussite" to "Fecha éxito",
         "btn_choisir_date" to "Elegir fecha",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Restablecer hoy",
         "btn_raz_historique" to "Restablecer historial",
         "btn_raz_usine" to "Restablecimiento de fábrica",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Exportar",
         "btn_importer" to "Importar",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Restablecer hoy",
         "confirm_raz_jour_message" to "¿Eliminar todo el consumo de hoy?",
@@ -361,7 +363,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "¿Restablecer TODO (perfil, consumo, configuración)? (Esta acción es irreversible)",
         "confirm_import_titre" to "Importar copia de seguridad",
         "confirm_import_message" to "Todos los datos actuales serán reemplazados. ¿Continuar?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Perfil guardado",
         "msg_date_enregistree" to "Fecha guardada",
@@ -378,12 +380,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "No se encontró archivo de copia de seguridad",
         "msg_donnees_invalides" to "Error de importación: datos inválidos",
         "msg_champs_obligatoires" to "Por favor ingrese al menos un costo",
-        
+
         // Bandeau profil
         "profil_complet" to "Perfil: Completo ✓",
         "profil_incomplet" to "Perfil: Incompleto",
         "total_aujourdhui" to "Total hoy:",
-        
+
         // Économies potentielles
         "titre_economies" to "Ahorros potenciales",
         "economies_si_arret" to "Si dejaras completamente:",
@@ -391,12 +393,12 @@ object ReglagesLangues {
         "economies_semaine" to "Semana",
         "economies_mois" to "Mes",
         "economies_annee" to "Año",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Confirmar",
         "btn_annuler" to "Cancelar",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // Acerca de
         "titre_a_propos" to "Acerca de",
         "voir_avertissement" to "Ver advertencia",
@@ -405,6 +407,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Aviso legal",
         "btn_contact" to "Contactar soporte",
         "hint_prenom" to "Ingrese su nombre",
+
         // Restablecer
         "raz_sauvegarde" to "Restablecer y Copia de seguridad",
         "raz_jour" to "Restablecer día",
@@ -426,13 +429,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Hábitos diários",
         "titre_dates_objectifs" to "Datas objetivos",
         "titre_raz_export" to "Redefinir e Exportar/Importar",
-        
+
         // Labels profil
         "label_prenom" to "Nome",
         "label_langue" to "Idioma",
         "label_devise" to "Moeda",
         "btn_sauvegarder_profil" to "Salvar perfil",
-        
+
         // Labels catégories
         "label_cigarettes" to "Cigarros",
         "label_joints" to "Baseados",
@@ -440,7 +443,7 @@ object ReglagesLangues {
         "label_bieres" to "Cervejas",
         "label_liqueurs" to "Licores",
         "label_alcool_fort" to "Destilados",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Cigarros clássicos",
         "radio_rouler" to "Para enrolar",
@@ -454,33 +457,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Número de filtros",
         "label_prix_tubes" to "Preço tubos (R$)",
         "label_nb_tubes" to "Número de tubos",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Preço por grama (R$)",
         "label_gramme_par_joint" to "Gramas por baseado",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Preço por dose (R$)",
         "label_unite_cl" to "Unidade (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Máximo diário",
-        
+
         // Labels dates
         "label_date_reduction" to "Data redução",
         "label_date_arret" to "Data parada",
         "label_date_reussite" to "Data sucesso",
         "btn_choisir_date" to "Escolher data",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Redefinir hoje",
         "btn_raz_historique" to "Redefinir histórico",
         "btn_raz_usine" to "Redefinição de fábrica",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Exportar",
         "btn_importer" to "Importar",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Redefinir hoje",
         "confirm_raz_jour_message" to "Excluir todo o consumo de hoje?",
@@ -490,7 +493,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "Redefinir TUDO (perfil, consumo, configurações)? (Esta ação é irreversível)",
         "confirm_import_titre" to "Importar backup",
         "confirm_import_message" to "Todos os dados atuais serão substituídos. Continuar?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Perfil salvo",
         "msg_date_enregistree" to "Data salva",
@@ -507,12 +510,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "Nenhum arquivo de backup encontrado",
         "msg_donnees_invalides" to "Erro de importação: dados inválidos",
         "msg_champs_obligatoires" to "Por favor insira pelo menos um custo",
-        
+
         // Bandeau profil
         "profil_complet" to "Perfil: Completo ✓",
         "profil_incomplet" to "Perfil: Incompleto",
         "total_aujourdhui" to "Total hoje:",
-        
+
         // Économies potentielles
         "titre_economies" to "Economias potenciais",
         "economies_si_arret" to "Se você parasse completamente:",
@@ -520,12 +523,12 @@ object ReglagesLangues {
         "economies_semaine" to "Semana",
         "economies_mois" to "Mês",
         "economies_annee" to "Ano",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Confirmar",
         "btn_annuler" to "Cancelar",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // Sobre
         "titre_a_propos" to "Sobre",
         "voir_avertissement" to "Ver aviso",
@@ -534,6 +537,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Aviso legal",
         "btn_contact" to "Contatar suporte",
         "hint_prenom" to "Digite seu nome",
+
         // Redefinir
         "raz_sauvegarde" to "Redefinir e Backup",
         "raz_jour" to "Redefinir dia",
@@ -543,6 +547,7 @@ object ReglagesLangues {
         "raz_historique_ok" to "Histórico redefinido",
         "raz_usine_ok" to "Redefinição de fábrica concluída"
     )
+
     // ==================== DEUTSCH ====================
     private val TRADUCTIONS_DE = mapOf(
         // Titres sections
@@ -554,13 +559,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Tägliche Gewohnheiten",
         "titre_dates_objectifs" to "Zieldaten",
         "titre_raz_export" to "Zurücksetzen & Export/Import",
-        
+
         // Labels profil
         "label_prenom" to "Vorname",
         "label_langue" to "Sprache",
         "label_devise" to "Währung",
         "btn_sauvegarder_profil" to "Profil speichern",
-        
+
         // Labels catégories
         "label_cigarettes" to "Zigaretten",
         "label_joints" to "Joints",
@@ -568,7 +573,7 @@ object ReglagesLangues {
         "label_bieres" to "Biere",
         "label_liqueurs" to "Liköre",
         "label_alcool_fort" to "Spirituosen",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Normale Zigaretten",
         "radio_rouler" to "Selbstgedreht",
@@ -582,33 +587,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Anzahl Filter",
         "label_prix_tubes" to "Hülsenpreis (€)",
         "label_nb_tubes" to "Anzahl Hülsen",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Preis pro Gramm (€)",
         "label_gramme_par_joint" to "Gramm pro Joint",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Getränkpreis (€)",
         "label_unite_cl" to "Einheit (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Tägliches Maximum",
-        
+
         // Labels dates
         "label_date_reduction" to "Reduzierungsdatum",
         "label_date_arret" to "Aufhördatum",
         "label_date_reussite" to "Erfolgsdatum",
         "btn_choisir_date" to "Datum wählen",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Heute zurücksetzen",
         "btn_raz_historique" to "Verlauf zurücksetzen",
         "btn_raz_usine" to "Werkseinstellungen",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Exportieren",
         "btn_importer" to "Importieren",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Heute zurücksetzen",
         "confirm_raz_jour_message" to "Alle heutigen Konsumeinträge löschen?",
@@ -618,7 +623,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "ALLES zurücksetzen (Profil, Konsum, Einstellungen)? (Diese Aktion ist irreversibel)",
         "confirm_import_titre" to "Backup importieren",
         "confirm_import_message" to "Alle aktuellen Daten werden ersetzt. Fortfahren?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Profil gespeichert",
         "msg_date_enregistree" to "Datum gespeichert",
@@ -635,12 +640,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "Keine Backup-Datei gefunden",
         "msg_donnees_invalides" to "Importfehler: ungültige Daten",
         "msg_champs_obligatoires" to "Bitte geben Sie mindestens einen Preis ein",
-        
+
         // Bandeau profil
         "profil_complet" to "Profil: Vollständig ✓",
         "profil_incomplet" to "Profil: Unvollständig",
         "total_aujourdhui" to "Heute insgesamt:",
-        
+
         // Économies potentielles
         "titre_economies" to "Mögliche Ersparnisse",
         "economies_si_arret" to "Wenn Sie komplett aufhören würden:",
@@ -648,12 +653,12 @@ object ReglagesLangues {
         "economies_semaine" to "Woche",
         "economies_mois" to "Monat",
         "economies_annee" to "Jahr",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Bestätigen",
         "btn_annuler" to "Abbrechen",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // Über
         "titre_a_propos" to "Über",
         "voir_avertissement" to "Warnung anzeigen",
@@ -662,6 +667,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Impressum",
         "btn_contact" to "Support kontaktieren",
         "hint_prenom" to "Geben Sie Ihren Vornamen ein",
+
         // Zurücksetzen
         "raz_sauvegarde" to "Zurücksetzen und Sicherung",
         "raz_jour" to "Tag zurücksetzen",
@@ -683,13 +689,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Abitudini quotidiane",
         "titre_dates_objectifs" to "Date obiettivi",
         "titre_raz_export" to "Ripristino ed Esporta/Importa",
-        
+
         // Labels profil
         "label_prenom" to "Nome",
         "label_langue" to "Lingua",
         "label_devise" to "Valuta",
         "btn_sauvegarder_profil" to "Salva profilo",
-        
+
         // Labels catégories
         "label_cigarettes" to "Sigarette",
         "label_joints" to "Spinelli",
@@ -697,7 +703,7 @@ object ReglagesLangues {
         "label_bieres" to "Birre",
         "label_liqueurs" to "Liquori",
         "label_alcool_fort" to "Superalcolici",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Sigarette classiche",
         "radio_rouler" to "Da rollare",
@@ -711,33 +717,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Numero di filtri",
         "label_prix_tubes" to "Prezzo tubi (€)",
         "label_nb_tubes" to "Numero di tubi",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Prezzo per grammo (€)",
         "label_gramme_par_joint" to "Grammi per spinello",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Prezzo bicchiere (€)",
         "label_unite_cl" to "Unità (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Massimo giornaliero",
-        
+
         // Labels dates
         "label_date_reduction" to "Data riduzione",
         "label_date_arret" to "Data smettere",
         "label_date_reussite" to "Data successo",
         "btn_choisir_date" to "Scegli data",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Ripristina oggi",
         "btn_raz_historique" to "Ripristina storico",
         "btn_raz_usine" to "Ripristino di fabbrica",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Esporta",
         "btn_importer" to "Importa",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Ripristina oggi",
         "confirm_raz_jour_message" to "Eliminare tutto il consumo di oggi?",
@@ -747,7 +753,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "Ripristinare TUTTO (profilo, consumo, impostazioni)? (Questa azione è irreversibile)",
         "confirm_import_titre" to "Importa backup",
         "confirm_import_message" to "Tutti i dati attuali saranno sostituiti. Continuare?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Profilo salvato",
         "msg_date_enregistree" to "Data salvata",
@@ -764,12 +770,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "Nessun file di backup trovato",
         "msg_donnees_invalides" to "Errore importazione: dati non validi",
         "msg_champs_obligatoires" to "Per favore inserisci almeno un costo",
-        
+
         // Bandeau profil
         "profil_complet" to "Profilo: Completo ✓",
         "profil_incomplet" to "Profilo: Incompleto",
         "total_aujourdhui" to "Totale oggi:",
-        
+
         // Économies potentielles
         "titre_economies" to "Risparmi potenziali",
         "economies_si_arret" to "Se smettessi completamente:",
@@ -777,12 +783,12 @@ object ReglagesLangues {
         "economies_semaine" to "Settimana",
         "economies_mois" to "Mese",
         "economies_annee" to "Anno",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Conferma",
         "btn_annuler" to "Annulla",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // Informazioni
         "titre_a_propos" to "Informazioni",
         "voir_avertissement" to "Visualizza avviso",
@@ -791,6 +797,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Note legali",
         "btn_contact" to "Contatta supporto",
         "hint_prenom" to "Inserisci il tuo nome",
+
         // Ripristina
         "raz_sauvegarde" to "Ripristina e Backup",
         "raz_jour" to "Ripristina giorno",
@@ -812,13 +819,13 @@ object ReglagesLangues {
         "titre_habitudes" to "Ежедневные привычки",
         "titre_dates_objectifs" to "Даты целей",
         "titre_raz_export" to "Сброс и Экспорт/Импорт",
-        
+
         // Labels profil
         "label_prenom" to "Имя",
         "label_langue" to "Язык",
         "label_devise" to "Валюта",
         "btn_sauvegarder_profil" to "Сохранить профиль",
-        
+
         // Labels catégories
         "label_cigarettes" to "Сигареты",
         "label_joints" to "Косяки",
@@ -826,7 +833,7 @@ object ReglagesLangues {
         "label_bieres" to "Пиво",
         "label_liqueurs" to "Ликёры",
         "label_alcool_fort" to "Крепкий алкоголь",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "Обычные сигареты",
         "radio_rouler" to "Самокрутки",
@@ -840,33 +847,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "Количество фильтров",
         "label_prix_tubes" to "Цена гильз (₽)",
         "label_nb_tubes" to "Количество гильз",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "Цена за грамм (₽)",
         "label_gramme_par_joint" to "Граммов на косяк",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "Цена напитка (₽)",
         "label_unite_cl" to "Единица (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "Ежедневный максимум",
-        
+
         // Labels dates
         "label_date_reduction" to "Дата сокращения",
         "label_date_arret" to "Дата отказа",
         "label_date_reussite" to "Дата успеха",
         "btn_choisir_date" to "Выбрать дату",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "Сбросить сегодня",
         "btn_raz_historique" to "Сбросить историю",
         "btn_raz_usine" to "Заводской сброс",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "Экспорт",
         "btn_importer" to "Импорт",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "Сбросить сегодня",
         "confirm_raz_jour_message" to "Удалить все сегодняшнее потребление?",
@@ -876,7 +883,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "Сбросить ВСЁ (профиль, потребление, настройки)? (Это действие необратимо)",
         "confirm_import_titre" to "Импорт резервной копии",
         "confirm_import_message" to "Все текущие данные будут заменены. Продолжить?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "Профиль сохранен",
         "msg_date_enregistree" to "Дата сохранена",
@@ -893,12 +900,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "Файл резервной копии не найден",
         "msg_donnees_invalides" to "Ошибка импорта: недопустимые данные",
         "msg_champs_obligatoires" to "Пожалуйста, введите хотя бы одну стоимость",
-        
+
         // Bandeau profil
         "profil_complet" to "Профиль: Полный ✓",
         "profil_incomplet" to "Профиль: Неполный",
         "total_aujourdhui" to "Всего сегодня:",
-        
+
         // Économies potentielles
         "titre_economies" to "Потенциальная экономия",
         "economies_si_arret" to "Если вы полностью бросите:",
@@ -906,12 +913,12 @@ object ReglagesLangues {
         "economies_semaine" to "Неделя",
         "economies_mois" to "Месяц",
         "economies_annee" to "Год",
-        
+
         // Boutons dialog
         "btn_confirmer" to "Подтвердить",
         "btn_annuler" to "Отмена",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // О программе
         "titre_a_propos" to "О программе",
         "voir_avertissement" to "Просмотр предупреждения",
@@ -920,6 +927,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "Правовая информация",
         "btn_contact" to "Связаться с поддержкой",
         "hint_prenom" to "Введите ваше имя",
+
         // Сброс
         "raz_sauvegarde" to "Сброс и резервное копирование",
         "raz_jour" to "Сброс дня",
@@ -929,6 +937,7 @@ object ReglagesLangues {
         "raz_historique_ok" to "История сброшена",
         "raz_usine_ok" to "Выполнен сброс к заводским настройкам"
     )
+
     // ==================== العربية (ARABE) ====================
     private val TRADUCTIONS_AR = mapOf(
         // Titres sections
@@ -940,13 +949,13 @@ object ReglagesLangues {
         "titre_habitudes" to "العادات اليومية",
         "titre_dates_objectifs" to "تواريخ الأهداف",
         "titre_raz_export" to "إعادة التعيين والتصدير/الاستيراد",
-        
+
         // Labels profil
         "label_prenom" to "الاسم الأول",
         "label_langue" to "اللغة",
         "label_devise" to "العملة",
         "btn_sauvegarder_profil" to "حفظ الملف الشخصي",
-        
+
         // Labels catégories
         "label_cigarettes" to "السجائر",
         "label_joints" to "المفاصل",
@@ -954,7 +963,7 @@ object ReglagesLangues {
         "label_bieres" to "البيرة",
         "label_liqueurs" to "المشروبات الكحولية",
         "label_alcool_fort" to "الكحول القوي",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "سجائر عادية",
         "radio_rouler" to "للف",
@@ -968,33 +977,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "عدد المرشحات",
         "label_prix_tubes" to "(﷼) سعر الأنابيب",
         "label_nb_tubes" to "عدد الأنابيب",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "(﷼) السعر لكل جرام",
         "label_gramme_par_joint" to "جرامات لكل مفصل",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "(﷼) سعر الكأس",
         "label_unite_cl" to "(cL) الوحدة",
-        
+
         // Labels habitudes
         "label_max_journalier" to "الحد الأقصى اليومي",
-        
+
         // Labels dates
         "label_date_reduction" to "تاريخ التخفيض",
         "label_date_arret" to "تاريخ الإقلاع",
         "label_date_reussite" to "تاريخ النجاح",
         "btn_choisir_date" to "اختر التاريخ",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "إعادة تعيين اليوم",
         "btn_raz_historique" to "إعادة تعيين السجل",
         "btn_raz_usine" to "إعادة ضبط المصنع",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "تصدير",
         "btn_importer" to "استيراد",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "إعادة تعيين اليوم",
         "confirm_raz_jour_message" to "حذف كل استهلاك اليوم؟",
@@ -1004,7 +1013,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "إعادة تعيين كل شيء (الملف، الاستهلاك، الإعدادات)؟ (هذا الإجراء لا رجعة فيه)",
         "confirm_import_titre" to "استيراد النسخة الاحتياطية",
         "confirm_import_message" to "سيتم استبدال جميع البيانات الحالية. هل تريد المتابعة؟",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "تم حفظ الملف الشخصي",
         "msg_date_enregistree" to "تم حفظ التاريخ",
@@ -1021,12 +1030,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "لم يتم العثور على ملف نسخ احتياطي",
         "msg_donnees_invalides" to "خطأ في الاستيراد: بيانات غير صالحة",
         "msg_champs_obligatoires" to "الرجاء إدخال تكلفة واحدة على الأقل",
-        
+
         // Bandeau profil
         "profil_complet" to "✓ الملف: كامل",
         "profil_incomplet" to "الملف: غير كامل",
         "total_aujourdhui" to ":المجموع اليوم",
-        
+
         // Économies potentielles
         "titre_economies" to "الوفورات المحتملة",
         "economies_si_arret" to ":إذا توقفت تماماً",
@@ -1034,12 +1043,12 @@ object ReglagesLangues {
         "economies_semaine" to "أسبوع",
         "economies_mois" to "شهر",
         "economies_annee" to "سنة",
-        
+
         // Boutons dialog
         "btn_confirmer" to "تأكيد",
         "btn_annuler" to "إلغاء",
-        "btn_ok" to "موافق"
-        ،
+        "btn_ok" to "موافق",
+
         // حول
         "titre_a_propos" to "حول",
         "voir_avertissement" to "عرض التحذير",
@@ -1048,6 +1057,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "الإشعار القانوني",
         "btn_contact" to "الاتصال بالدعم",
         "hint_prenom" to "أدخل اسمك الأول",
+
         // إعادة تعيين
         "raz_sauvegarde" to "إعادة التعيين والنسخ الاحتياطي",
         "raz_jour" to "إعادة تعيين اليوم",
@@ -1069,13 +1079,13 @@ object ReglagesLangues {
         "titre_habitudes" to "दैनिक आदतें",
         "titre_dates_objectifs" to "लक्ष्य तिथियां",
         "titre_raz_export" to "रीसेट और निर्यात/आयात",
-        
+
         // Labels profil
         "label_prenom" to "नाम",
         "label_langue" to "भाषा",
         "label_devise" to "मुद्रा",
         "btn_sauvegarder_profil" to "प्रोफ़ाइल सहेजें",
-        
+
         // Labels catégories
         "label_cigarettes" to "सिगरेट",
         "label_joints" to "जोड़",
@@ -1083,7 +1093,7 @@ object ReglagesLangues {
         "label_bieres" to "बीयर",
         "label_liqueurs" to "शराब",
         "label_alcool_fort" to "मजबूत शराब",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "नियमित सिगरेट",
         "radio_rouler" to "लपेटने के लिए",
@@ -1097,33 +1107,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "फिल्टर की संख्या",
         "label_prix_tubes" to "ट्यूब की कीमत (₹)",
         "label_nb_tubes" to "ट्यूब की संख्या",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "प्रति ग्राम कीमत (₹)",
         "label_gramme_par_joint" to "प्रति जोड़ ग्राम",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "पेय की कीमत (₹)",
         "label_unite_cl" to "इकाई (cL)",
-        
+
         // Labels habitudes
         "label_max_journalier" to "दैनिक अधिकतम",
-        
+
         // Labels dates
         "label_date_reduction" to "कमी की तिथि",
         "label_date_arret" to "छोड़ने की तिथि",
         "label_date_reussite" to "सफलता की तिथि",
         "btn_choisir_date" to "तिथि चुनें",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "आज रीसेट करें",
         "btn_raz_historique" to "इतिहास रीसेट करें",
         "btn_raz_usine" to "फ़ैक्टरी रीसेट",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "निर्यात",
         "btn_importer" to "आयात",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "आज रीसेट करें",
         "confirm_raz_jour_message" to "आज की सभी खपत हटाएं?",
@@ -1133,7 +1143,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "सब कुछ रीसेट करें (प्रोफ़ाइल, खपत, सेटिंग्स)? (यह क्रिया अपरिवर्तनीय है)",
         "confirm_import_titre" to "बैकअप आयात करें",
         "confirm_import_message" to "सभी वर्तमान डेटा बदल दिया जाएगा। जारी रखें?",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "प्रोफ़ाइल सहेजा गया",
         "msg_date_enregistree" to "तिथि सहेजी गई",
@@ -1150,12 +1160,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "कोई बैकअप फ़ाइल नहीं मिली",
         "msg_donnees_invalides" to "आयात त्रुटि: अमान्य डेटा",
         "msg_champs_obligatoires" to "कृपया कम से कम एक लागत दर्ज करें",
-        
+
         // Bandeau profil
         "profil_complet" to "प्रोफ़ाइल: पूर्ण ✓",
         "profil_incomplet" to "प्रोफ़ाइल: अपूर्ण",
         "total_aujourdhui" to "आज कुल:",
-        
+
         // Économies potentielles
         "titre_economies" to "संभावित बचत",
         "economies_si_arret" to "यदि आप पूरी तरह से छोड़ दें:",
@@ -1163,12 +1173,12 @@ object ReglagesLangues {
         "economies_semaine" to "सप्ताह",
         "economies_mois" to "महीना",
         "economies_annee" to "वर्ष",
-        
+
         // Boutons dialog
         "btn_confirmer" to "पुष्टि करें",
         "btn_annuler" to "रद्द करें",
-        "btn_ok" to "ठीक है"
-        ,
+        "btn_ok" to "ठीक है",
+
         // के बारे में
         "titre_a_propos" to "के बारे में",
         "voir_avertissement" to "चेतावनी देखें",
@@ -1177,6 +1187,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "कानूनी सूचना",
         "btn_contact" to "सहायता से संपर्क करें",
         "hint_prenom" to "अपना नाम दर्ज करें",
+
         // रीसेट
         "raz_sauvegarde" to "रीसेट और बैकअप",
         "raz_jour" to "दिन रीसेट करें",
@@ -1198,13 +1209,13 @@ object ReglagesLangues {
         "titre_habitudes" to "毎日の習慣",
         "titre_dates_objectifs" to "目標日",
         "titre_raz_export" to "リセットとエクスポート/インポート",
-        
+
         // Labels profil
         "label_prenom" to "名前",
         "label_langue" to "言語",
         "label_devise" to "通貨",
         "btn_sauvegarder_profil" to "プロフィールを保存",
-        
+
         // Labels catégories
         "label_cigarettes" to "タバコ",
         "label_joints" to "ジョイント",
@@ -1212,7 +1223,7 @@ object ReglagesLangues {
         "label_bieres" to "ビール",
         "label_liqueurs" to "リキュール",
         "label_alcool_fort" to "強いアルコール",
-        
+
         // Labels formulaires cigarettes
         "radio_classiques" to "通常のタバコ",
         "radio_rouler" to "手巻き",
@@ -1226,33 +1237,33 @@ object ReglagesLangues {
         "label_nb_filtres" to "フィルターの数",
         "label_prix_tubes" to "チューブ価格（¥）",
         "label_nb_tubes" to "チューブの数",
-        
+
         // Labels formulaires joints
         "label_prix_gramme" to "グラム当たりの価格（¥）",
         "label_gramme_par_joint" to "ジョイント当たりのグラム",
-        
+
         // Labels formulaires alcool
         "label_prix_verre" to "ドリンク価格（¥）",
         "label_unite_cl" to "単位（cL）",
-        
+
         // Labels habitudes
         "label_max_journalier" to "1日の最大",
-        
+
         // Labels dates
         "label_date_reduction" to "削減日",
         "label_date_arret" to "禁煙日",
         "label_date_reussite" to "成功日",
         "btn_choisir_date" to "日付を選択",
-        
+
         // Boutons RAZ
         "btn_raz_jour" to "今日をリセット",
         "btn_raz_historique" to "履歴をリセット",
         "btn_raz_usine" to "工場出荷時リセット",
-        
+
         // Boutons Export/Import
         "btn_exporter" to "エクスポート",
         "btn_importer" to "インポート",
-        
+
         // Messages confirmations
         "confirm_raz_jour_titre" to "今日をリセット",
         "confirm_raz_jour_message" to "今日のすべての消費を削除しますか？",
@@ -1262,7 +1273,7 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "すべてをリセットしますか（プロフィール、消費、設定）？（この操作は元に戻せません）",
         "confirm_import_titre" to "バックアップをインポート",
         "confirm_import_message" to "すべての現在のデータが置き換えられます。続行しますか？",
-        
+
         // Messages succès/erreur
         "msg_profil_sauvegarde" to "プロフィールが保存されました",
         "msg_date_enregistree" to "日付が保存されました",
@@ -1279,12 +1290,12 @@ object ReglagesLangues {
         "msg_aucune_sauvegarde" to "バックアップファイルが見つかりません",
         "msg_donnees_invalides" to "インポートエラー：無効なデータ",
         "msg_champs_obligatoires" to "少なくとも1つの費用を入力してください",
-        
+
         // Bandeau profil
         "profil_complet" to "プロフィール：完全 ✓",
         "profil_incomplet" to "プロフィール：不完全",
         "total_aujourdhui" to "今日の合計：",
-        
+
         // Économies potentielles
         "titre_economies" to "潜在的な節約",
         "economies_si_arret" to "完全にやめた場合：",
@@ -1292,12 +1303,12 @@ object ReglagesLangues {
         "economies_semaine" to "週",
         "economies_mois" to "月",
         "economies_annee" to "年",
-        
+
         // Boutons dialog
         "btn_confirmer" to "確認",
         "btn_annuler" to "キャンセル",
-        "btn_ok" to "OK"
-        ,
+        "btn_ok" to "OK",
+
         // について
         "titre_a_propos" to "について",
         "voir_avertissement" to "警告を表示",
@@ -1306,6 +1317,7 @@ object ReglagesLangues {
         "btn_mentions_legales" to "法的通知",
         "btn_contact" to "サポートに連絡",
         "hint_prenom" to "名前を入力してください",
+
         // リセット
         "raz_sauvegarde" to "リセットとバックアップ",
         "raz_jour" to "今日をリセット",
@@ -1342,11 +1354,9 @@ object ReglagesLangues {
             key
         }
     }
-}
-// À AJOUTER À LA FIN de ReglagesLangues.kt existant
 
     // ==================== CONTENU MANUEL ====================
-    
+
     fun getManuel(langue: String): String {
         return when (langue) {
             "FR" -> """
@@ -1387,13 +1397,13 @@ Toutes tes données restent sur ton appareil. Aucun serveur, aucune collecte.
 8) Rappel santé
 App réservée aux 18+. Ne remplace pas un suivi médical/psychologique.
             """.trimIndent()
-            
+
             else -> getManuel("FR") // Fallback FR pour autres langues
         }
     }
 
     // ==================== CONTENU CGV ====================
-    
+
     fun getCGV(langue: String): String {
         return when (langue) {
             "FR" -> """
@@ -1427,13 +1437,13 @@ stopmauvaiseshabitudes@gmail.com (délai cible 72h ouvrées).
 7) Loi applicable
 En l'absence d'entreprise constituée, ces CGV sont à titre informatif. La loi applicable dépendra de ta localisation et des règles du Store.
             """.trimIndent()
-            
+
             else -> getCGV("FR") // Fallback FR
         }
     }
 
     // ==================== CONTENU MENTIONS LÉGALES ====================
-    
+
     fun getMentionsLegales(langue: String): String {
         return when (langue) {
             "FR" -> """
@@ -1451,13 +1461,13 @@ Avertissement santé : Réservé aux 18+. L'app n'incite pas à la consommation 
 
 Entrée en vigueur : 15 septembre 2025
             """.trimIndent()
-            
+
             else -> getMentionsLegales("FR") // Fallback FR
         }
     }
 
     // ==================== CONTENU AVERTISSEMENT ====================
-    
+
     fun getAvertissement(langue: String): String {
         return when (langue) {
             "FR" -> """
@@ -1481,7 +1491,7 @@ Stop Addict est une application d'auto-suivi et d'aide à la réduction/arrêt d
 
 Consultez les ressources locales dans votre pays si vous n'êtes pas en France.
             """.trimIndent()
-            
+
             else -> getAvertissement("FR") // Fallback FR
         }
     }
