@@ -138,6 +138,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Confirmer",
         "btn_annuler" to "Annuler",
         "btn_ok" to "OK"
+        ,
+        // À propos
+        "titre_a_propos" to "À propos",
+        "voir_avertissement" to "Voir l'avertissement",
+        "btn_manuel" to "Manuel d'utilisation",
+        "btn_cgv" to "Conditions générales de vente (CGV)",
+        "btn_mentions_legales" to "Mentions légales",
+        "btn_contact" to "Contact support",
+        "hint_prenom" to "Entrer votre prénom",
+        // RAZ
+        "raz_sauvegarde" to "RAZ et Sauvegarde",
+        "raz_jour" to "RAZ jour",
+        "raz_historique" to "RAZ historique",
+        "raz_usine" to "RAZ réglages usine",
+        "raz_jour_ok" to "RAZ jour effectué",
+        "raz_historique_ok" to "RAZ historique effectué",
+        "raz_usine_ok" to "RAZ usine effectué"
     )
 
     // ==================== ENGLISH ====================
@@ -250,6 +267,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Confirm",
         "btn_annuler" to "Cancel",
         "btn_ok" to "OK"
+        ,
+        // About
+        "titre_a_propos" to "About",
+        "voir_avertissement" to "View warning",
+        "btn_manuel" to "User manual",
+        "btn_cgv" to "Terms and conditions",
+        "btn_mentions_legales" to "Legal notice",
+        "btn_contact" to "Contact support",
+        "hint_prenom" to "Enter your first name",
+        // Reset
+        "raz_sauvegarde" to "Reset and Backup",
+        "raz_jour" to "Reset day",
+        "raz_historique" to "Reset history",
+        "raz_usine" to "Factory reset",
+        "raz_jour_ok" to "Day reset done",
+        "raz_historique_ok" to "History reset done",
+        "raz_usine_ok" to "Factory reset done"
     )
 
     // ==================== ESPAÑOL ====================
@@ -362,6 +396,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Confirmar",
         "btn_annuler" to "Cancelar",
         "btn_ok" to "OK"
+        ,
+        // Acerca de
+        "titre_a_propos" to "Acerca de",
+        "voir_avertissement" to "Ver advertencia",
+        "btn_manuel" to "Manual de usuario",
+        "btn_cgv" to "Términos y condiciones",
+        "btn_mentions_legales" to "Aviso legal",
+        "btn_contact" to "Contactar soporte",
+        "hint_prenom" to "Ingrese su nombre",
+        // Restablecer
+        "raz_sauvegarde" to "Restablecer y Copia de seguridad",
+        "raz_jour" to "Restablecer día",
+        "raz_historique" to "Restablecer historial",
+        "raz_usine" to "Restablecimiento de fábrica",
+        "raz_jour_ok" to "Día restablecido",
+        "raz_historique_ok" to "Historial restablecido",
+        "raz_usine_ok" to "Restablecimiento de fábrica completado"
     )
 
     // ==================== PORTUGUÊS ====================
@@ -474,6 +525,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Confirmar",
         "btn_annuler" to "Cancelar",
         "btn_ok" to "OK"
+        ,
+        // Sobre
+        "titre_a_propos" to "Sobre",
+        "voir_avertissement" to "Ver aviso",
+        "btn_manuel" to "Manual do usuário",
+        "btn_cgv" to "Termos e condições",
+        "btn_mentions_legales" to "Aviso legal",
+        "btn_contact" to "Contatar suporte",
+        "hint_prenom" to "Digite seu nome",
+        // Redefinir
+        "raz_sauvegarde" to "Redefinir e Backup",
+        "raz_jour" to "Redefinir dia",
+        "raz_historique" to "Redefinir histórico",
+        "raz_usine" to "Redefinição de fábrica",
+        "raz_jour_ok" to "Dia redefinido",
+        "raz_historique_ok" to "Histórico redefinido",
+        "raz_usine_ok" to "Redefinição de fábrica concluída"
     )
     // ==================== DEUTSCH ====================
     private val TRADUCTIONS_DE = mapOf(
@@ -585,6 +653,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Bestätigen",
         "btn_annuler" to "Abbrechen",
         "btn_ok" to "OK"
+        ,
+        // Über
+        "titre_a_propos" to "Über",
+        "voir_avertissement" to "Warnung anzeigen",
+        "btn_manuel" to "Benutzerhandbuch",
+        "btn_cgv" to "Allgemeine Geschäftsbedingungen",
+        "btn_mentions_legales" to "Impressum",
+        "btn_contact" to "Support kontaktieren",
+        "hint_prenom" to "Geben Sie Ihren Vornamen ein",
+        // Zurücksetzen
+        "raz_sauvegarde" to "Zurücksetzen und Sicherung",
+        "raz_jour" to "Tag zurücksetzen",
+        "raz_historique" to "Verlauf zurücksetzen",
+        "raz_usine" to "Werkseinstellungen",
+        "raz_jour_ok" to "Tag zurückgesetzt",
+        "raz_historique_ok" to "Verlauf zurückgesetzt",
+        "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt"
     )
 
     // ==================== ITALIANO ====================
@@ -697,6 +782,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Conferma",
         "btn_annuler" to "Annulla",
         "btn_ok" to "OK"
+        ,
+        // Informazioni
+        "titre_a_propos" to "Informazioni",
+        "voir_avertissement" to "Visualizza avviso",
+        "btn_manuel" to "Manuale utente",
+        "btn_cgv" to "Termini e condizioni",
+        "btn_mentions_legales" to "Note legali",
+        "btn_contact" to "Contatta supporto",
+        "hint_prenom" to "Inserisci il tuo nome",
+        // Ripristina
+        "raz_sauvegarde" to "Ripristina e Backup",
+        "raz_jour" to "Ripristina giorno",
+        "raz_historique" to "Ripristina cronologia",
+        "raz_usine" to "Ripristino di fabbrica",
+        "raz_jour_ok" to "Giorno ripristinato",
+        "raz_historique_ok" to "Cronologia ripristinata",
+        "raz_usine_ok" to "Ripristino di fabbrica completato"
     )
 
     // ==================== РУССКИЙ ====================
@@ -809,6 +911,23 @@ object ReglagesLangues {
         "btn_confirmer" to "Подтвердить",
         "btn_annuler" to "Отмена",
         "btn_ok" to "OK"
+        ,
+        // О программе
+        "titre_a_propos" to "О программе",
+        "voir_avertissement" to "Просмотр предупреждения",
+        "btn_manuel" to "Руководство пользователя",
+        "btn_cgv" to "Условия использования",
+        "btn_mentions_legales" to "Правовая информация",
+        "btn_contact" to "Связаться с поддержкой",
+        "hint_prenom" to "Введите ваше имя",
+        // Сброс
+        "raz_sauvegarde" to "Сброс и резервное копирование",
+        "raz_jour" to "Сброс дня",
+        "raz_historique" to "Сброс истории",
+        "raz_usine" to "Сброс к заводским настройкам",
+        "raz_jour_ok" to "День сброшен",
+        "raz_historique_ok" to "История сброшена",
+        "raz_usine_ok" to "Выполнен сброс к заводским настройкам"
     )
     // ==================== العربية (ARABE) ====================
     private val TRADUCTIONS_AR = mapOf(
@@ -920,6 +1039,23 @@ object ReglagesLangues {
         "btn_confirmer" to "تأكيد",
         "btn_annuler" to "إلغاء",
         "btn_ok" to "موافق"
+        ،
+        // حول
+        "titre_a_propos" to "حول",
+        "voir_avertissement" to "عرض التحذير",
+        "btn_manuel" to "دليل المستخدم",
+        "btn_cgv" to "الشروط والأحكام",
+        "btn_mentions_legales" to "الإشعار القانوني",
+        "btn_contact" to "الاتصال بالدعم",
+        "hint_prenom" to "أدخل اسمك الأول",
+        // إعادة تعيين
+        "raz_sauvegarde" to "إعادة التعيين والنسخ الاحتياطي",
+        "raz_jour" to "إعادة تعيين اليوم",
+        "raz_historique" to "إعادة تعيين السجل",
+        "raz_usine" to "إعادة التعيين إلى إعدادات المصنع",
+        "raz_jour_ok" to "تم إعادة تعيين اليوم",
+        "raz_historique_ok" to "تم إعادة تعيين السجل",
+        "raz_usine_ok" to "تمت إعادة التعيين إلى إعدادات المصنع"
     )
 
     // ==================== हिन्दी (HINDI) ====================
@@ -1032,6 +1168,23 @@ object ReglagesLangues {
         "btn_confirmer" to "पुष्टि करें",
         "btn_annuler" to "रद्द करें",
         "btn_ok" to "ठीक है"
+        ,
+        // के बारे में
+        "titre_a_propos" to "के बारे में",
+        "voir_avertissement" to "चेतावनी देखें",
+        "btn_manuel" to "उपयोगकर्ता मैनुअल",
+        "btn_cgv" to "नियम और शर्तें",
+        "btn_mentions_legales" to "कानूनी सूचना",
+        "btn_contact" to "सहायता से संपर्क करें",
+        "hint_prenom" to "अपना नाम दर्ज करें",
+        // रीसेट
+        "raz_sauvegarde" to "रीसेट और बैकअप",
+        "raz_jour" to "दिन रीसेट करें",
+        "raz_historique" to "इतिहास रीसेट करें",
+        "raz_usine" to "फ़ैक्टरी रीसेट",
+        "raz_jour_ok" to "दिन रीसेट हो गया",
+        "raz_historique_ok" to "इतिहास रीसेट हो गया",
+        "raz_usine_ok" to "फ़ैक्टरी रीसेट पूर्ण"
     )
 
     // ==================== 日本語 (JAPONAIS) ====================
@@ -1144,6 +1297,23 @@ object ReglagesLangues {
         "btn_confirmer" to "確認",
         "btn_annuler" to "キャンセル",
         "btn_ok" to "OK"
+        ,
+        // について
+        "titre_a_propos" to "について",
+        "voir_avertissement" to "警告を表示",
+        "btn_manuel" to "ユーザーマニュアル",
+        "btn_cgv" to "利用規約",
+        "btn_mentions_legales" to "法的通知",
+        "btn_contact" to "サポートに連絡",
+        "hint_prenom" to "名前を入力してください",
+        // リセット
+        "raz_sauvegarde" to "リセットとバックアップ",
+        "raz_jour" to "今日をリセット",
+        "raz_historique" to "履歴をリセット",
+        "raz_usine" to "工場出荷時の設定にリセット",
+        "raz_jour_ok" to "今日をリセットしました",
+        "raz_historique_ok" to "履歴をリセットしました",
+        "raz_usine_ok" to "工場出荷時の設定にリセットしました"
     )
 
     /**
@@ -1172,6 +1342,8 @@ object ReglagesLangues {
             key
         }
     }
+}
+// À AJOUTER À LA FIN de ReglagesLangues.kt existant
 
     // ==================== CONTENU MANUEL ====================
     
