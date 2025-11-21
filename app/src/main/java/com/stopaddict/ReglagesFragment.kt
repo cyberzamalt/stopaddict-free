@@ -1008,7 +1008,7 @@ class ReglagesFragment : Fragment() {
         
         // Joints
         val coutsJoint = dbHelper.getCouts(DatabaseHelper.TYPE_JOINT)
-        editPrixGramme.setText(coutsJoint["prix_verre"]?.toString() ?: "0")
+        editPrixGramme.setText(coutsJoint["prix_gramme"]?.toString() ?: "0")
         editGrammeParJoint.setText(dbHelper.getPreference("gramme_par_joint", "0.5"))
         editPrixFeuillesJoint.setText(coutsJoint["prix_feuilles"]?.toString() ?: "0")
         editNbFeuillesJoint.setText(coutsJoint["nb_feuilles"]?.toInt()?.toString() ?: "32")
