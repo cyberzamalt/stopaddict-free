@@ -767,7 +767,11 @@ class StatsFragment : Fragment() {
             if (!hasDates) isComplete = false
 
             // Mise à jour texte
-            txtProfilComplet.text = if (isComplete) "Profil: Complet ✓" else "Profil: Incomplet"
+            txtProfilComplet.text = if (isComplete) {
+            trad["profil_complet_complet"] ?: "Profil: Complet ✓"
+            } else {
+                trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
+            }
 
             // Total aujourd'hui
             val consosJour = dbHelper.getConsommationsJour()
