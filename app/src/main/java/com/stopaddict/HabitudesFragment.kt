@@ -20,6 +20,7 @@ class HabitudesFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
+    private lateinit var trad: Map<String, String>
     private lateinit var headerTitle: TextView
     private lateinit var txtProfilStatus: TextView
     private lateinit var txtTotalJour: TextView
@@ -120,7 +121,7 @@ class HabitudesFragment : Fragment() {
     private fun applyTranslations() {
         try {
             val langue = configLangue.getLangue()
-            val trad = HabitudesLangues.getTraductions(langue)
+            trad = HabitudesLangues.getTraductions(langue)
             
             headerTitle.text = trad["titre"] ?: "Habitudes & Volonté"
             inputMaxCigarettes.hint = trad["hint_max_cigarettes"] ?: "Max cigarettes par jour"
@@ -331,7 +332,7 @@ class HabitudesFragment : Fragment() {
         
         // Bouton date
         val btnDate = Button(requireContext()).apply {
-            text = if (dateStr.isEmpty()) "Sélectionner une date" else dateStr
+            text = if (dateStr.isEmpty()) trad["btn_selectionner_date"] ?: "Sélectionner une date" else dateStr
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -358,7 +359,7 @@ class HabitudesFragment : Fragment() {
             
             // Si date existante, partir de là
             val currentText = button.text.toString()
-            if (currentText != "Sélectionner une date") {
+            if (currentText != trad["btn_selectionner_date"] ?: "Sélectionner une date") {
                 try {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val date = dateFormat.parse(currentText)
@@ -423,9 +424,9 @@ class HabitudesFragment : Fragment() {
             
             // Sauvegarder dates pour chaque catégorie
             btnDatesMap.forEach { (type, dates) ->
-                val dateReduction = dates["reduction"]?.text?.toString()?.takeIf { it != "Sélectionner une date" } ?: ""
-                val dateArret = dates["arret"]?.text?.toString()?.takeIf { it != "Sélectionner une date" } ?: ""
-                val dateReussite = dates["reussite"]?.text?.toString()?.takeIf { it != "Sélectionner une date" } ?: ""
+                val dateReduction = dates["reduction"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
+                val dateArret = dates["arret"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
+                val dateReussite = dates["reussite"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
                 
                 dbHelper.setDatesObjectifs(type, dateReduction, dateArret, dateReussite)
                 
