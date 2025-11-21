@@ -439,7 +439,7 @@ class AccueilFragment : Fragment() {
 
             // Calcul total jour
             val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
-            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total aujourd'hui"}: $totalJour"
+            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total aujourd'hui :"} $totalJour"
             txtTotalAujourdhui.text = totalJour.toString()
 
             // Mise à jour état des cases à cocher
