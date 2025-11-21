@@ -397,12 +397,13 @@ class CalendrierFragment : Fragment() {
             scrollView.addView(container)
             
             android.app.AlertDialog.Builder(requireContext())
-                .setView(scrollView)
-                .setPositiveButton(trad["enregistrer"] ?: "Enregistrer") { _, _ ->
-                    saveConsommationsForDate(dateStr, editFields)
-                }
-                .setNegativeButton(trad["annuler"] ?: "Annuler", null)
-                .show()
+            .setView(scrollView)
+            .setPositiveButton(trad["btn_sauvegarder"] ?: "Enregistrer") { _, _ ->
+                saveConsommationsForDate(dateStr, editFields)
+            }
+            .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
+            .show()
+
                 
         } catch (e: Exception) {
             Log.e(TAG, "Erreur dialog jour", e)
