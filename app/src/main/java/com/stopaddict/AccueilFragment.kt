@@ -439,7 +439,8 @@ class AccueilFragment : Fragment() {
 
             // Calcul total jour
             val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
-            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total aujourd'hui :"} $totalJour"
+            val labelTotal = trad["total_aujourdhui"] ?: "Total aujourd'hui"
+            txtTotalJour.text = "$labelTotal $totalJour"
             txtTotalAujourdhui.text = totalJour.toString()
 
             // Mise à jour état des cases à cocher
@@ -530,10 +531,16 @@ class AccueilFragment : Fragment() {
             }
             if (!hasDates) isComplete = false
 
-            // Mise à jour texte
-            txtProfilComplet.text = if (isComplete) "Profil: Complet ✓" else "Profil: Incomplet"
-            
-            Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
+            // Mise à jour texte avec traductions
+        val texteProfil = if (isComplete) {
+        trad["profil_complet"] ?: "Profil: Complet ✓"
+        } else {
+        trad["profil_incomplet"] ?: "Profil: Incomplet"
+        }
+        txtProfilComplet.text = texteProfil
+
+        Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
+
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
         }
