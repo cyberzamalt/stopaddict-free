@@ -142,7 +142,6 @@ class ReglagesFragment : Fragment() {
         scrollView.addView(contentContainer)
         container.addView(scrollView)
     }
-
     private fun addHeader(container: LinearLayout) {
         val header = TextView(requireContext()).apply {
             text = trad["titre"] ?: "Réglages"
@@ -163,14 +162,18 @@ class ReglagesFragment : Fragment() {
         }
         
         txtProfilComplet = TextView(requireContext()).apply {
-            text = "Profil: Incomplet"
+            text = trad["profil_incomplet"] ?: "Profil: Incomplet"
             textSize = 14f
-            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            layoutParams = LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1f
+            )
         }
         profilContainer.addView(txtProfilComplet)
-        
+
         txtTotalJour = TextView(requireContext()).apply {
-            text = "Total jour: 0"
+            text = "${trad["total_aujourdhui"] ?: "Total jour"}: 0"
             textSize = 14f
             gravity = android.view.Gravity.END
         }
@@ -990,7 +993,7 @@ class ReglagesFragment : Fragment() {
         }
     }
 
-    private fun loadCouts() {
+            private fun loadCouts() {
         // Cigarettes
         val coutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
         editPrixPaquet.setText(coutsCig["prix_paquet"]?.toString() ?: "0")
@@ -1030,18 +1033,23 @@ class ReglagesFragment : Fragment() {
 
     private fun updateProfilStatus() {
         try {
-            val prenom = dbHelper.getPreference("prenom", "")
-            val hasPrenom = prenom.isNotEmpty()
-            
+            val langue = configLangue.getLangue()
+            val trad = ReglagesLangues.getTraductions(langue)
+
+            // Vérifier profil complet
+            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
+
             val hasCouts = categoriesActives.any { (type, active) ->
                 if (active) {
                     val couts = dbHelper.getCouts(type)
                     couts.values.any { it > 0.0 }
                 } else false
             }
+
             val hasHabitudes = categoriesActives.any { (type, active) ->
                 active && dbHelper.getMaxJournalier(type) > 0
             }
+
             val hasDates = categoriesActives.any { (type, active) ->
                 if (active) {
                     val dates = dbHelper.getDatesObjectifs(type)
@@ -1050,12 +1058,13 @@ class ReglagesFragment : Fragment() {
             }
 
             val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
+
             txtProfilComplet.text = if (isComplet) {
-                "Profil: Complet ✓"
+                trad["profil_complet"] ?: "Profil: Complet ✓"
             } else {
-                "Profil: Incomplet"
+                trad["profil_incomplet"] ?: "Profil: Incomplet"
             }
-            
+
             // Total jour
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = dateFormat.format(Date())
@@ -1065,10 +1074,12 @@ class ReglagesFragment : Fragment() {
                     total += dbHelper.getConsommationParDate(type, today)
                 }
             }
-            txtTotalJour.text = "Total jour: $total"
-            
+
+            val labelTotalJour = trad["total_aujourdhui"] ?: "Total jour"
+            txtTotalJour.text = "$labelTotalJour: $total"
+
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update profil", e)
+            Log.e(TAG, "Erreur updateProfilStatus: ${e.message}", e)
         }
     }
 
