@@ -440,43 +440,30 @@ private fun getTabTitle(position: Int): String {
     updateDateTime()
     Log.d(TAG, "refreshData: finished updating date/time")
 }
-    
+        // --- Cycle de vie ---
+
     override fun onResume() {
-    super.onResume()
-    Log.d(TAG, "onResume: called -> updating date/time")
-    try {
+        super.onResume()
+        Log.d(TAG, "onResume: activité reprise -> mise à jour de la date/heure")
         updateDateTime()
-        Log.d(TAG, "onResume: updateDateTime success")
-    } catch (e: Exception) {
-        Log.e(TAG, "onResume: error while updating date/time", e)
     }
-}
 
-override fun onPause() {
-    super.onPause()
-    Log.d(TAG, "onPause: called")
-}
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: activité mise en pause")
+    }
 
-override fun onDestroy() {
-    Log.d(TAG, "onDestroy: called")
-    super.onDestroy()
-    Log.d(TAG, "onDestroy: after super.onDestroy()")
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: destruction activité, nettoyage des ressources")
 
-    try {
         consoleDialog?.dismiss()
-        Log.d(TAG, "onDestroy: console dialog dismissed")
-    } catch (e: Exception) {
-        Log.e(TAG, "onDestroy: error dismissing console dialog", e)
-    }
 
-    try {
         if (::dbHelper.isInitialized) {
+            Log.d(TAG, "onDestroy: fermeture de la base de données")
             dbHelper.close()
-            Log.d(TAG, "onDestroy: dbHelper closed")
         } else {
-            Log.d(TAG, "onDestroy: dbHelper not initialized")
+            Log.d(TAG, "onDestroy: dbHelper non initialisé, rien à fermer")
         }
-    } catch (e: Exception) {
-        Log.e(TAG, "onDestroy: error closing dbHelper", e)
     }
 }
