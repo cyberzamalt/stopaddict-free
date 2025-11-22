@@ -162,7 +162,7 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unité en cL",
         "unite_cl_biere"       to "Unité en cL",
         "unite_cl_liqueur"     to "Unité en cL",
-        "unite_cl_alcool_fort" to "Unité en cL",
+        "unite_cl_alcool_fort" to "Unité en cL"
     )
 
     // ==================== ENGLISH ====================
@@ -700,7 +700,7 @@ object ReglagesLangues {
         "raz_usine" to "Werkseinstellungen",
         "raz_jour_ok" to "Tag zurückgesetzt",
         "raz_historique_ok" to "Verlauf zurückgesetzt",
-        "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt"
+        "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt",
 
         "unite_cl_global"      to "Einheit (cl)",
         "unite_cl_biere"       to "Einheit (cl)",
