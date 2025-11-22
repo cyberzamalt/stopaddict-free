@@ -677,16 +677,16 @@ class AccueilFragment : Fragment() {
             hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
                 val conseilDate = genererConseilDate()
                 conseils.add("$prenom, $conseilDate")
-                conseils.add("$prenom, tenez bon, votre objectif approche!")
+                conseils.add("$prenom, " + (trad["date_rapproche"] ?: "votre objectif approche, tenez bon!"))
             }
             // Cas 9: Coûts + Habitudes
             !hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
                 val economies = calculerEconomiesReelles()
                 if (economies > 0) {
                     conseils.add(String.format(trad["economies_reelles"] ?: "Économies réelles: %.2f€ vs vos habitudes!", economies))
-                    conseils.add("Vous faites mieux que prévu, bravo!")
+                    conseils.add(trad["conseil_generique_5"] ?: "Vous faites mieux que prévu, bravo!")
                 } else {
-                    conseils.add("Vous consommez selon vos habitudes.")
+                    conseils.add(trad["habitudes_egal"] ?: "Vous consommez selon vos habitudes.")
                 }
             }
             // Cas 10: Coûts + Dates
@@ -696,18 +696,24 @@ class AccueilFragment : Fragment() {
                 conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
                 conseils.add(trad["economies_accumulent"] ?: "Votre porte-monnaie vous remercie!")
             }
-            // Cas 11: Habitudes + Dates
-            !hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
-                val comparaison = comparerHabitudes()
-                val conseilDate = genererConseilDate()
-                conseils.add("$comparaison - $conseilDate")
-                conseils.add(trad["conseil_generique_6"] ?: "Restez fidèle à vos objectifs!")
-            }
-            // Cas 12: Prénom + Coûts + Habitudes
-            hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
-                val economies = calculerEconomiesReelles()
-                if (economies > 0) {
-                    conseils.add("$prenom, économies: ${economies}€ vs habitudes!")
+                        // Cas 11: Habitudes + Dates
+                        !hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
+                            val comparaison = comparerHabitudes()
+                            val conseilDate = genererConseilDate()
+                            conseils.add("$comparaison - $conseilDate")
+                            conseils.add(trad["conseil_generique_6"] ?: "Restez fidèle à vos objectifs!")
+                        }
+                        // Cas 12: Prénom + Coûts + Habitudes
+                        hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
+                            val economies = calculerEconomiesReelles()
+                            if (economies > 0) {
+                                conseils.add(
+                        "$prenom, " +
+                        String.format(
+                        trad["economies_reelles"] ?: "économies réelles: %.2f€ vs habitudes!",
+                        economies
+                    )
+            )
                     conseils.add("$prenom, " + (trad["conseil_cas5_1"] ?: "vous êtes sur la bonne voie!"))
                 } else {
                     conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "maintenez vos efforts!"))
