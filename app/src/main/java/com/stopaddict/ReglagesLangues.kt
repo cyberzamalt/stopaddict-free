@@ -156,6 +156,12 @@ object ReglagesLangues {
         "raz_jour_ok" to "RAZ jour effectué",
         "raz_historique_ok" to "RAZ historique effectué",
         "raz_usine_ok" to "RAZ usine effectué"
+            
+        // Unités en cL pour les différents alcools
+        "unite_cl_global"      to "Unité en cL",
+        "unite_cl_biere"       to "Unité en cL",
+        "unite_cl_liqueur"     to "Unité en cL",
+        "unite_cl_alcool_fort" to "Unité en cL",
     )
 
     // ==================== ENGLISH ====================
@@ -285,7 +291,13 @@ object ReglagesLangues {
         "raz_usine" to "Factory reset",
         "raz_jour_ok" to "Day reset done",
         "raz_historique_ok" to "History reset done",
-        "raz_usine_ok" to "Factory reset done"
+        "raz_usine_ok" to "Factory reset done",
+
+        // Units in cl for alcohols
+        "unite_cl_global"      to "Unit (cl)",
+        "unite_cl_biere"       to "Unit (cl)",
+        "unite_cl_liqueur"     to "Unit (cl)",
+        "unite_cl_alcool_fort" to "Unit (cl)"
     )
 
     // ==================== ESPAÑOL ====================
@@ -415,7 +427,13 @@ object ReglagesLangues {
         "raz_usine" to "Restablecimiento de fábrica",
         "raz_jour_ok" to "Día restablecido",
         "raz_historique_ok" to "Historial restablecido",
-        "raz_usine_ok" to "Restablecimiento de fábrica completado"
+        "raz_usine_ok" to "Restablecimiento de fábrica completado",
+
+        "unite_cl_global"      to "Unidad (cl)",
+        "unite_cl_biere"       to "Unidad (cl)",
+        "unite_cl_liqueur"     to "Unidad (cl)",
+        "unite_cl_alcool_fort" to "Unidad (cl)"
+
     )
 
     // ==================== PORTUGUÊS ====================
@@ -545,7 +563,12 @@ object ReglagesLangues {
         "raz_usine" to "Redefinição de fábrica",
         "raz_jour_ok" to "Dia redefinido",
         "raz_historique_ok" to "Histórico redefinido",
-        "raz_usine_ok" to "Redefinição de fábrica concluída"
+        "raz_usine_ok" to "Redefinição de fábrica concluída",
+
+        "unite_cl_global"      to "Unidade (cl)",
+        "unite_cl_biere"       to "Unidade (cl)",
+        "unite_cl_liqueur"     to "Unidade (cl)",
+        "unite_cl_alcool_fort" to "Unidade (cl)"
     )
 
     // ==================== DEUTSCH ====================
@@ -676,6 +699,11 @@ object ReglagesLangues {
         "raz_jour_ok" to "Tag zurückgesetzt",
         "raz_historique_ok" to "Verlauf zurückgesetzt",
         "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt"
+
+        "unite_cl_global"      to "Einheit (cl)",
+        "unite_cl_biere"       to "Einheit (cl)",
+        "unite_cl_liqueur"     to "Einheit (cl)",
+        "unite_cl_alcool_fort" to "Einheit (cl)"
     )
 
     // ==================== ITALIANO ====================
@@ -805,7 +833,12 @@ object ReglagesLangues {
         "raz_usine" to "Ripristino di fabbrica",
         "raz_jour_ok" to "Giorno ripristinato",
         "raz_historique_ok" to "Cronologia ripristinata",
-        "raz_usine_ok" to "Ripristino di fabbrica completato"
+        "raz_usine_ok" to "Ripristino di fabbrica completato",
+
+        "unite_cl_global"      to "Unità (cl)",
+        "unite_cl_biere"       to "Unità (cl)",
+        "unite_cl_liqueur"     to "Unità (cl)",
+        "unite_cl_alcool_fort" to "Unità (cl)"
     )
 
     // ==================== РУССКИЙ ====================
@@ -935,7 +968,12 @@ object ReglagesLangues {
         "raz_usine" to "Сброс к заводским настройкам",
         "raz_jour_ok" to "День сброшен",
         "raz_historique_ok" to "История сброшена",
-        "raz_usine_ok" to "Выполнен сброс к заводским настройкам"
+        "raz_usine_ok" to "Выполнен сброс к заводским настройкам",
+
+        "unite_cl_global"      to "Единица (мл)",
+        "unite_cl_biere"       to "Единица (мл)",
+        "unite_cl_liqueur"     to "Единица (мл)",
+        "unite_cl_alcool_fort" to "Единица (мл)"
     )
 
     // ==================== العربية (ARABE) ====================
@@ -1065,7 +1103,12 @@ object ReglagesLangues {
         "raz_usine" to "إعادة التعيين إلى إعدادات المصنع",
         "raz_jour_ok" to "تم إعادة تعيين اليوم",
         "raz_historique_ok" to "تم إعادة تعيين السجل",
-        "raz_usine_ok" to "تمت إعادة التعيين إلى إعدادات المصنع"
+        "raz_usine_ok" to "تمت إعادة التعيين إلى إعدادات المصنع",
+
+        "unite_cl_global"      to "الوحدة (سنتيلتر)",
+        "unite_cl_biere"       to "الوحدة (سنتيلتر)",
+        "unite_cl_liqueur"     to "الوحدة (سنتيلتر)",
+        "unite_cl_alcool_fort" to "الوحدة (سنتيلتر)"
     )
 
     // ==================== हिन्दी (HINDI) ====================
@@ -1195,7 +1238,12 @@ object ReglagesLangues {
         "raz_usine" to "फ़ैक्टरी रीसेट",
         "raz_jour_ok" to "दिन रीसेट हो गया",
         "raz_historique_ok" to "इतिहास रीसेट हो गया",
-        "raz_usine_ok" to "फ़ैक्टरी रीसेट पूर्ण"
+        "raz_usine_ok" to "फ़ैक्टरी रीसेट पूर्ण",
+
+        "unite_cl_global"      to "इकाई (cl)",
+        "unite_cl_biere"       to "इकाई (cl)",
+        "unite_cl_liqueur"     to "इकाई (cl)",
+        "unite_cl_alcool_fort" to "इकाई (cl)"
     )
 
     // ==================== 日本語 (JAPONAIS) ====================
@@ -1325,7 +1373,12 @@ object ReglagesLangues {
         "raz_usine" to "工場出荷時の設定にリセット",
         "raz_jour_ok" to "今日をリセットしました",
         "raz_historique_ok" to "履歴をリセットしました",
-        "raz_usine_ok" to "工場出荷時の設定にリセットしました"
+        "raz_usine_ok" to "工場出荷時の設定にリセットしました",
+
+        "unite_cl_global"      to "単位（cl）",
+        "unite_cl_biere"       to "単位（cl）",
+        "unite_cl_liqueur"     to "単位（cl）",
+        "unite_cl_alcool_fort" to "単位（cl）"
     )
 
     /**
