@@ -17,7 +17,7 @@ class AccueilFragment : Fragment() {
 
     companion object {
         private const val TAG = "AccueilFragment"
-        private const val CONSEIL_UPDATE_INTERVAL = 180000L // 3 minutes en millisecondes
+        private const val CONSEIL_UPDATE_INTERVAL = 15000L // 15 secondes en millisecondes
     }
 
     // Database
@@ -121,6 +121,8 @@ class AccueilFragment : Fragment() {
 
             // Démarrer rotation conseils
             startConseilRotation()
+
+            updateConseil()
 
             Log.d(TAG, "AccueilFragment initialisé avec succès")
         } catch (e: Exception) {
