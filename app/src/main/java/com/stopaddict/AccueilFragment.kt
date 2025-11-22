@@ -338,6 +338,7 @@ class AccueilFragment : Fragment() {
                     DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount++
                 }
                 updateUI()
+                updateConseil()
                 Log.d(TAG, "Consommation ajoutée: $type")
             } else {
                 Log.e(TAG, "Échec ajout consommation: $type")
@@ -379,6 +380,7 @@ class AccueilFragment : Fragment() {
                     DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount--
                 }
                 updateUI()
+                updateConseil()
                 Log.d(TAG, "Consommation retirée: $type")
             } else {
                 Log.e(TAG, "Échec retrait consommation: $type")
@@ -421,6 +423,7 @@ class AccueilFragment : Fragment() {
             }
 
             updateUI()
+            updateConseil()
             Log.d(TAG, "Catégorie $type basculée: $isActive")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur toggle catégorie $type: ${e.message}")
