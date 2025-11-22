@@ -162,7 +162,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unité en cL",
         "unite_cl_biere"       to "Unité en cL",
         "unite_cl_liqueur"     to "Unité en cL",
-        "unite_cl_alcool_fort" to "Unité en cL"
+        "unite_cl_alcool_fort" to "Unité en cL";
+
+        "label_prix_feuilles_longues" to "Prix des feuilles longues",
+        "label_nb_feuilles_longues" to "Nombre de feuilles longues"
     )
 
     // ==================== ENGLISH ====================
@@ -299,7 +302,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unit (cl)",
         "unite_cl_biere"       to "Unit (cl)",
         "unite_cl_liqueur"     to "Unit (cl)",
-        "unite_cl_alcool_fort" to "Unit (cl)"
+        "unite_cl_alcool_fort" to "Unit (cl)",
+
+        "label_prix_feuilles_longues" to "Long papers price",
+        "label_nb_feuilles_longues"   to "Number of long papers"
     )
 
     // ==================== ESPAÑOL ====================
@@ -434,8 +440,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unidad (cl)",
         "unite_cl_biere"       to "Unidad (cl)",
         "unite_cl_liqueur"     to "Unidad (cl)",
-        "unite_cl_alcool_fort" to "Unidad (cl)"
+        "unite_cl_alcool_fort" to "Unidad (cl)",
 
+        "label_prix_feuilles_longues" to "Precio de papeles largos",
+        "label_nb_feuilles_longues"   to "Número de papeles largos"
     )
 
     // ==================== PORTUGUÊS ====================
@@ -570,7 +578,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unidade (cl)",
         "unite_cl_biere"       to "Unidade (cl)",
         "unite_cl_liqueur"     to "Unidade (cl)",
-        "unite_cl_alcool_fort" to "Unidade (cl)"
+        "unite_cl_alcool_fort" to "Unidade (cl)",
+
+    "label_prix_feuilles_longues" to "Preço das folhas longas",
+    "label_nb_feuilles_longues" to "Número de folhas longas"
     )
 
     // ==================== DEUTSCH ====================
@@ -705,7 +716,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Einheit (cl)",
         "unite_cl_biere"       to "Einheit (cl)",
         "unite_cl_liqueur"     to "Einheit (cl)",
-        "unite_cl_alcool_fort" to "Einheit (cl)"
+        "unite_cl_alcool_fort" to "Einheit (cl)",
+
+    "label_prix_feuilles_longues" to "Preis der langen Blättchen",
+    "label_nb_feuilles_longues" to "Anzahl der langen Blättchen"
     )
 
     // ==================== ITALIANO ====================
@@ -840,7 +854,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Unità (cl)",
         "unite_cl_biere"       to "Unità (cl)",
         "unite_cl_liqueur"     to "Unità (cl)",
-        "unite_cl_alcool_fort" to "Unità (cl)"
+        "unite_cl_alcool_fort" to "Unità (cl)",
+        
+    "label_prix_feuilles_longues" to "Prezzo delle cartine lunghe",
+    "label_nb_feuilles_longues" to "Numero di cartine lunghe"
     )
 
     // ==================== РУССКИЙ ====================
@@ -975,7 +992,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "Единица (мл)",
         "unite_cl_biere"       to "Единица (мл)",
         "unite_cl_liqueur"     to "Единица (мл)",
-        "unite_cl_alcool_fort" to "Единица (мл)"
+        "unite_cl_alcool_fort" to "Единица (мл)",
+
+    "label_prix_feuilles_longues" to "Цена длинных бумажек",
+    "label_nb_feuilles_longues" to "Количество длинных бумажек"
     )
 
     // ==================== العربية (ARABE) ====================
@@ -1110,7 +1130,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "الوحدة (سنتيلتر)",
         "unite_cl_biere"       to "الوحدة (سنتيلتر)",
         "unite_cl_liqueur"     to "الوحدة (سنتيلتر)",
-        "unite_cl_alcool_fort" to "الوحدة (سنتيلتر)"
+        "unite_cl_alcool_fort" to "الوحدة (سنتيلتر)",
+
+    "label_prix_feuilles_longues" to "سعر أوراق اللف الطويلة",
+    "label_nb_feuilles_longues" to "عدد أوراق اللف الطويلة"
     )
 
     // ==================== हिन्दी (HINDI) ====================
@@ -1245,7 +1268,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "इकाई (cl)",
         "unite_cl_biere"       to "इकाई (cl)",
         "unite_cl_liqueur"     to "इकाई (cl)",
-        "unite_cl_alcool_fort" to "इकाई (cl)"
+        "unite_cl_alcool_fort" to "इकाई (cl)",
+
+    "label_prix_feuilles_longues" to "लंबे रोलिंग पेपर की कीमत",
+    "label_nb_feuilles_longues" to "लंबे रोलिंग पेपर की संख्या"
     )
 
     // ==================== 日本語 (JAPONAIS) ====================
@@ -1380,7 +1406,10 @@ object ReglagesLangues {
         "unite_cl_global"      to "単位（cl）",
         "unite_cl_biere"       to "単位（cl）",
         "unite_cl_liqueur"     to "単位（cl）",
-        "unite_cl_alcool_fort" to "単位（cl）"
+        "unite_cl_alcool_fort" to "単位（cl）",
+
+    "label_prix_feuilles_longues" to "ロングペーパーの価格",
+    "label_nb_feuilles_longues" to "ロングペーパーの枚数"
     )
 
     /**
