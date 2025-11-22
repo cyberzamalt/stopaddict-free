@@ -125,7 +125,7 @@ class AccueilFragment : Fragment() {
             Log.d(TAG, "AccueilFragment initialisé avec succès")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur initialisation AccueilFragment: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur chargement Accueil", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), trad["erreur_chargement"] ?: "Erreur chargement", Toast.LENGTH_SHORT).show()
         }
 
         return view
@@ -341,11 +341,11 @@ class AccueilFragment : Fragment() {
                 Log.d(TAG, "Consommation ajoutée: $type")
             } else {
                 Log.e(TAG, "Échec ajout consommation: $type")
-                Toast.makeText(requireContext(), "Erreur ajout consommation", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), trad["erreur_ajout"] ?: "Erreur ajout", Toast.LENGTH_SHORT).show()    
             }
         } catch (e: Exception) {
             Log.e(TAG, "Erreur ajout consommation $type: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), trad["erreur_generale"] ?: "Erreur", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -363,7 +363,7 @@ class AccueilFragment : Fragment() {
             }
 
             if (currentCount <= 0) {
-                Log.w(TAG, "Impossible de retirer: $type déjà à 0")
+                Log.w(TAG, trad["erreur_retrait"] ?: "Impossible de retirer")
                 return
             }
 
@@ -385,7 +385,7 @@ class AccueilFragment : Fragment() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Erreur retrait consommation $type: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), trad["erreur_generale"] ?: "Erreur", Toast.LENGTH_SHORT).show()
         }
     }
 
