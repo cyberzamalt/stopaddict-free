@@ -548,20 +548,27 @@ class AccueilFragment : Fragment() {
             Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
         }
     }
+    
     private fun startConseilRotation() {
-        try {
-            conseilRunnable = object : Runnable {
-                override fun run() {
-                    updateConseil()
-                    conseilHandler.postDelayed(this, CONSEIL_UPDATE_INTERVAL)
-                }
+    try {
+        Log.d(TAG, "startConseilRotation: initialisation de la rotation des conseils (intervalle = $CONSEIL_UPDATE_INTERVAL ms)")
+
+        conseilRunnable = object : Runnable {
+            override fun run() {
+                Log.d(TAG, "startConseilRotation: exécution du Runnable -> appel updateConseil()")
+                updateConseil()
+                Log.d(TAG, "startConseilRotation: reprogrammation du Runnable dans $CONSEIL_UPDATE_INTERVAL ms")
+                conseilHandler.postDelayed(this, CONSEIL_UPDATE_INTERVAL)
             }
-            conseilHandler.post(conseilRunnable!!)
-            Log.d(TAG, "Rotation conseils démarrée (3 min)")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur démarrage rotation conseils: ${e.message}")
         }
+
+        conseilHandler.post(conseilRunnable!!)
+        Log.d(TAG, "startConseilRotation: Rotation conseils démarrée (3 min)")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur démarrage rotation conseils", e)
     }
+}
+
 
     private fun updateConseil() {
         try {
@@ -613,119 +620,148 @@ class AccueilFragment : Fragment() {
     }
 
     private fun genererConseil(
-        hasPrenom: Boolean,
-        hasCouts: Boolean,
-        hasHabitudes: Boolean,
-        hasDates: Boolean,
-        prenom: String
-    ): String {
-        // Banque de conseils selon combinaison (16 cas)
-        val conseils = mutableListOf<String>()
+    hasPrenom: Boolean,
+    hasCouts: Boolean,
+    hasHabitudes: Boolean,
+    hasDates: Boolean,
+    prenom: String
+): String {
+    Log.d(
+        TAG,
+        "genererConseil: start - hasPrenom=$hasPrenom, hasCouts=$hasCouts, hasHabitudes=$hasHabitudes, hasDates=$hasDates, prenom=\"$prenom\""
+    )
 
-        when {
-            // Cas 1: Rien
-            !hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
-                conseils.add(trad["conseil_cas1_1"] ?: "Bienvenue!")
-                conseils.add(trad["conseil_cas1_2"] ?: "Chaque pas compte")
-                conseils.add(trad["conseil_cas1_3"] ?: "Motivation!")
+    // Banque de conseils selon combinaison (16 cas)
+    val conseils = mutableListOf<String>()
+
+    when {
+        // Cas 1: Rien
+        !hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 1 = aucun élément renseigné")
+            conseils.add(trad["conseil_cas1_1"] ?: "Bienvenue!")
+            conseils.add(trad["conseil_cas1_2"] ?: "Chaque pas compte")
+            conseils.add(trad["conseil_cas1_3"] ?: "Motivation!")
+        }
+        // Cas 2: Prénom uniquement
+        hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 2 = prénom uniquement")
+            conseils.add("$prenom, " + (trad["conseil_cas1_1"] ?: "Bienvenue! Ajoutez vos coûts pour voir vos économies."))
+            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "restez déterminé dans votre parcours!"))
+            conseils.add("$prenom, " + (trad["conseil_generique_5"] ?: "chaque jour est une nouvelle opportunité."))
+        }
+        // Cas 3: Coûts uniquement
+        !hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 3 = coûts uniquement")
+            val economies = calculerEconomiesJour()
+            Log.d(TAG, "genererConseil: cas 3 -> économies jour = $economies")
+            if (economies > 0) {
+                conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies))
+                conseils.add(trad["conseil_cas3_3"] ?: "Économies")
+            } else {
+                conseils.add(trad["conseil_cas3_1"] ?: "Économisez")
             }
-            // Cas 2: Prénom uniquement
-            hasPrenom && !hasCouts && !hasHabitudes && !hasDates -> {
-                conseils.add("$prenom, " + (trad["conseil_cas1_1"] ?: "Bienvenue! Ajoutez vos coûts pour voir vos économies."))
-                conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "restez déterminé dans votre parcours!"))
-                conseils.add("$prenom, " + (trad["conseil_generique_5"] ?: "chaque jour est une nouvelle opportunité."))
+            conseils.add(trad["conseil_cas3_2"] ?: "Projets")
+        }
+        // Cas 4: Habitudes uniquement
+        !hasPrenom && !hasCouts && hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 4 = habitudes uniquement")
+            val comparaison = comparerHabitudes()
+            Log.d(TAG, "genererConseil: cas 4 -> comparaison=\"$comparaison\"")
+            conseils.add(comparaison)
+            conseils.add(trad["conseil_cas4_1"] ?: "Habitudes")
+            conseils.add(trad["conseil_cas4_2"] ?: "Objectifs")
+        }
+        // Cas 5: Dates uniquement
+        !hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 5 = dates uniquement")
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 5 -> conseilDate=\"$conseilDate\"")
+            conseils.add(conseilDate)
+            conseils.add(trad["conseil_cas5_1"] ?: "Objectif proche!")
+            conseils.add(trad["conseil_cas5_2"] ?: "Restez concentré sur votre date.")
+        }
+        // Cas 6: Prénom + Coûts
+        hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 6 = prénom + coûts")
+            val economies = calculerEconomiesJour()
+            Log.d(TAG, "genererConseil: cas 6 -> économies jour = $economies")
+            if (economies > 0) {
+                conseils.add("$prenom, " + String.format(trad["economies_jour"] ?: "vous économisez %.2f€ aujourd'hui!", economies))
+                conseils.add("$prenom, " + (trad["economies_accumulent"] ?: "ces économies s'accumulent rapidement!"))
+            } else {
+                conseils.add("$prenom, " + (trad["conseil_cas3_1"] ?: "réduire maintenant générera des économies."))
             }
-            // Cas 3: Coûts uniquement
-            !hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
-                val economies = calculerEconomiesJour()
-                if (economies > 0) {
-                    conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies))
-                    conseils.add(trad["conseil_cas3_3"] ?: "Économies")
-                } else {
-                    conseils.add(trad["conseil_cas3_1"] ?: "Économisez")
-                }
-                conseils.add(trad["conseil_cas3_2"] ?: "Projets")
+        }
+        // Cas 7: Prénom + Habitudes
+        hasPrenom && !hasCouts && hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 7 = prénom + habitudes")
+            val comparaison = comparerHabitudes()
+            Log.d(TAG, "genererConseil: cas 7 -> comparaison=\"$comparaison\"")
+            conseils.add("$prenom, $comparaison")
+            conseils.add("$prenom, " + (trad["conseil_generique_5"] ?: "vous progressez bien!"))
+        }
+        // Cas 8: Prénom + Dates
+        hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 8 = prénom + dates")
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 8 -> conseilDate=\"$conseilDate\"")
+            conseils.add("$prenom, $conseilDate")
+            conseils.add("$prenom, " + (trad["date_rapproche"] ?: "votre objectif approche, tenez bon!"))
+        }
+        // Cas 9: Coûts + Habitudes
+        !hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 9 = coûts + habitudes")
+            val economies = calculerEconomiesReelles()
+            Log.d(TAG, "genererConseil: cas 9 -> économies réelles = $economies")
+            if (economies > 0) {
+                conseils.add(String.format(trad["economies_reelles"] ?: "Économies réelles: %.2f€ vs vos habitudes!", economies))
+                conseils.add(trad["conseil_generique_5"] ?: "Vous faites mieux que prévu, bravo!")
+            } else {
+                conseils.add(trad["habitudes_egal"] ?: "Vous consommez selon vos habitudes.")
             }
-            // Cas 4: Habitudes uniquement
-            !hasPrenom && !hasCouts && hasHabitudes && !hasDates -> {
-                val comparaison = comparerHabitudes()
-                conseils.add(comparaison)
-                conseils.add(trad["conseil_cas4_1"] ?: "Habitudes")
-                conseils.add(trad["conseil_cas4_2"] ?: "Objectifs")
-            }
-            // Cas 5: Dates uniquement
-            !hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
-                val conseilDate = genererConseilDate()
-                conseils.add(conseilDate)
-                conseils.add(trad["conseil_cas5_1"] ?: "Objectif proche!")
-                conseils.add(trad["conseil_cas5_2"] ?: "Restez concentré sur votre date.")
-            }
-            // Cas 6: Prénom + Coûts
-            hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
-                val economies = calculerEconomiesJour()
-                if (economies > 0) {
-                    conseils.add("$prenom, " + String.format(trad["economies_jour"] ?: "vous économisez %.2f€ aujourd'hui!", economies))
-                    conseils.add("$prenom, " + (trad["economies_accumulent"] ?: "ces économies s'accumulent rapidement!"))
-                } else {
-                    conseils.add("$prenom, " + (trad["conseil_cas3_1"] ?: "réduire maintenant générera des économies."))
-                }
-            }
-            // Cas 7: Prénom + Habitudes
-            hasPrenom && !hasCouts && hasHabitudes && !hasDates -> {
-                val comparaison = comparerHabitudes()
-                conseils.add("$prenom, $comparaison")
-                conseils.add("$prenom, " + (trad["conseil_generique_5"] ?: "vous progressez bien!"))
-            }
-            // Cas 8: Prénom + Dates
-            hasPrenom && !hasCouts && !hasHabitudes && hasDates -> {
-                val conseilDate = genererConseilDate()
-                conseils.add("$prenom, $conseilDate")
-                conseils.add("$prenom, " + (trad["date_rapproche"] ?: "votre objectif approche, tenez bon!"))
-            }
-            // Cas 9: Coûts + Habitudes
-            !hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
-                val economies = calculerEconomiesReelles()
-                if (economies > 0) {
-                    conseils.add(String.format(trad["economies_reelles"] ?: "Économies réelles: %.2f€ vs vos habitudes!", economies))
-                    conseils.add(trad["conseil_generique_5"] ?: "Vous faites mieux que prévu, bravo!")
-                } else {
-                    conseils.add(trad["habitudes_egal"] ?: "Vous consommez selon vos habitudes.")
-                }
-            }
-            // Cas 10: Coûts + Dates
-            !hasPrenom && hasCouts && !hasHabitudes && hasDates -> {
-                val economies = calculerEconomiesJour()
-                val conseilDate = genererConseilDate()
-                conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
-                conseils.add(trad["economies_accumulent"] ?: "Votre porte-monnaie vous remercie!")
-            }
-                        // Cas 11: Habitudes + Dates
-                        !hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
-                            val comparaison = comparerHabitudes()
-                            val conseilDate = genererConseilDate()
-                            conseils.add("$comparaison - $conseilDate")
-                            conseils.add(trad["conseil_generique_6"] ?: "Restez fidèle à vos objectifs!")
-                        }
-                        // Cas 12: Prénom + Coûts + Habitudes
-                        hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
-                            val economies = calculerEconomiesReelles()
-                            if (economies > 0) {
-                                conseils.add(
-                        "$prenom, " +
+        }
+        // Cas 10: Coûts + Dates
+        !hasPrenom && hasCouts && !hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 10 = coûts + dates")
+            val economies = calculerEconomiesJour()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 10 -> économies=$economies, conseilDate=\"$conseilDate\"")
+            conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
+            conseils.add(trad["economies_accumulent"] ?: "Votre porte-monnaie vous remercie!")
+        }
+        // Cas 11: Habitudes + Dates
+        !hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 11 = habitudes + dates")
+            val comparaison = comparerHabitudes()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 11 -> comparaison=\"$comparaison\", conseilDate=\"$conseilDate\"")
+            conseils.add("$comparaison - $conseilDate")
+            conseils.add(trad["conseil_generique_6"] ?: "Restez fidèle à vos objectifs!")
+        }
+        // Cas 12: Prénom + Coûts + Habitudes
+        hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
+            Log.d(TAG, "genererConseil: cas 12 = prénom + coûts + habitudes")
+            val economies = calculerEconomiesReelles()
+            Log.d(TAG, "genererConseil: cas 12 -> économies réelles = $economies")
+            if (economies > 0) {
+                conseils.add(
+                    "$prenom, " +
                         String.format(
-                        trad["economies_reelles"] ?: "économies réelles: %.2f€ vs habitudes!",
-                        economies
-                    )
-            )
-                    conseils.add("$prenom, " + (trad["conseil_cas5_1"] ?: "vous êtes sur la bonne voie!"))
-                } else {
-                    conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "maintenez vos efforts!"))
-                }
+                            trad["economies_reelles"] ?: "économies réelles: %.2f€ vs habitudes!",
+                            economies
+                        )
+                )
+                conseils.add("$prenom, " + (trad["conseil_cas5_1"] ?: "vous êtes sur la bonne voie!"))
+            } else {
+                conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "maintenez vos efforts!"))
             }
-            // Cas 13: Prénom + Coûts + Dates
-            hasPrenom && hasCouts && !hasHabitudes && hasDates -> {
-                val economies = calculerEconomiesJour()
-                val conseilDate = genererConseilDate()
+        }
+        // Cas 13: Prénom + Coûts + Dates
+        hasPrenom && hasCouts && !hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 13 = prénom + coûts + dates")
+            val economies = calculerEconomiesJour()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 13 -> économies=$economies, conseilDate=\"$conseilDate\"")
             conseils.add(
                 "$prenom, " +
                     String.format(
@@ -734,48 +770,56 @@ class AccueilFragment : Fragment() {
                     ) +
                     " - " + conseilDate
             )
-                conseils.add("$prenom, " + (trad["date_rapproche"] ?: "votre objectif approche, tenez bon!"))
-            }
-            // Cas 14: Prénom + Habitudes + Dates
-            hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
-                val comparaison = comparerHabitudes()
-                val conseilDate = genererConseilDate()
-                conseils.add("$prenom, $comparaison - $conseilDate")
-                conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "continuez ainsi!"))
-            }
-            // Cas 15: Coûts + Habitudes + Dates
-            !hasPrenom && hasCouts && hasHabitudes && hasDates -> {
-                val economies = calculerEconomiesReelles()
-                val conseilDate = genererConseilDate()
-                conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
-                conseils.add(trad["conseil_generique_5"] ?: "Vous progressez sur tous les fronts!")
-            }
-            // Cas 16: COMPLET (Prénom + Coûts + Habitudes + Dates)
-            hasPrenom && hasCouts && hasHabitudes && hasDates -> {
-                val economies = calculerEconomiesReelles()
-                val conseilDate = genererConseilDate()
-                conseils.add(
-                    "$prenom, " +
+            conseils.add("$prenom, " + (trad["date_rapproche"] ?: "votre objectif approche, tenez bon!"))
+        }
+        // Cas 14: Prénom + Habitudes + Dates
+        hasPrenom && !hasCouts && hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 14 = prénom + habitudes + dates")
+            val comparaison = comparerHabitudes()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 14 -> comparaison=\"$comparaison\", conseilDate=\"$conseilDate\"")
+            conseils.add("$prenom, $comparaison - $conseilDate")
+            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "continuez ainsi!"))
+        }
+        // Cas 15: Coûts + Habitudes + Dates
+        !hasPrenom && hasCouts && hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 15 = coûts + habitudes + dates")
+            val economies = calculerEconomiesReelles()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 15 -> économies=$economies, conseilDate=\"$conseilDate\"")
+            conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
+            conseils.add(trad["conseil_generique_5"] ?: "Vous progressez sur tous les fronts!")
+        }
+        // Cas 16: COMPLET (Prénom + Coûts + Habitudes + Dates)
+        hasPrenom && hasCouts && hasHabitudes && hasDates -> {
+            Log.d(TAG, "genererConseil: cas 16 = COMPLET (prénom + coûts + habitudes + dates)")
+            val economies = calculerEconomiesReelles()
+            val conseilDate = genererConseilDate()
+            Log.d(TAG, "genererConseil: cas 16 -> économies=$economies, conseilDate=\"$conseilDate\"")
+            conseils.add(
+                "$prenom, " +
                     String.format(
                         trad["economies_jour"] ?: "vous économisez %.2f€ aujourd'hui!",
                         economies
                     ) +
                     " - " + conseilDate
             )
-                conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "profil complet, continuez ainsi!"))
-                conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "vous êtes un exemple de motivation!"))
-            }
+            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "profil complet, continuez ainsi!"))
+            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "vous êtes un exemple de motivation!"))
         }
-
-        // Ajouter conseils génériques (toujours pertinents)
-        conseils.add(trad["conseil_generique_1"] ?: "Chaque cigarette non fumée ajoute 11 minutes à votre vie.")
-        conseils.add(trad["conseil_generique_2"] ?: "L'exercice physique aide à réduire l'envie.")
-        conseils.add(trad["conseil_generique_3"] ?: "Boire de l'eau réduit les sensations de manque.")
-        conseils.add(trad["conseil_generique_4"] ?: "Entourez-vous de personnes soutenantes.")
-
-        // Retourner conseil aléatoire
-        return conseils.random()
     }
+
+    // Ajouter conseils génériques (toujours pertinents)
+    conseils.add(trad["conseil_generique_1"] ?: "Chaque cigarette non fumée ajoute 11 minutes à votre vie.")
+    conseils.add(trad["conseil_generique_2"] ?: "L'exercice physique aide à réduire l'envie.")
+    conseils.add(trad["conseil_generique_3"] ?: "Boire de l'eau réduit les sensations de manque.")
+    conseils.add(trad["conseil_generique_4"] ?: "Entourez-vous de personnes soutenantes.")
+
+    val conseilFinal = conseils.random()
+    Log.d(TAG, "genererConseil: fin - ${conseils.size} candidats, conseil choisi = \"$conseilFinal\"")
+
+    return conseilFinal
+}
 
     private fun calculerEconomiesJour(): Double {
         var economies = 0.0
