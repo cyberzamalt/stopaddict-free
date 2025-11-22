@@ -636,7 +636,7 @@ class AccueilFragment : Fragment() {
             !hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
                 val economies = calculerEconomiesJour()
                 if (economies > 0) {
-                    conseils.add("Vous économisez ${economies}€ aujourd'hui!")
+                    conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies))
                     conseils.add(trad["conseil_cas3_3"] ?: "Économies")
                 } else {
                     conseils.add(trad["conseil_cas3_1"] ?: "Économisez")
@@ -661,7 +661,7 @@ class AccueilFragment : Fragment() {
             hasPrenom && hasCouts && !hasHabitudes && !hasDates -> {
                 val economies = calculerEconomiesJour()
                 if (economies > 0) {
-                    conseils.add("$prenom, vous économisez ${economies}€ aujourd'hui!")
+                    conseils.add("$prenom, " + String.format(trad["economies_jour"] ?: "vous économisez %.2f€ aujourd'hui!", economies))
                     conseils.add("$prenom, ces économies s'accumulent rapidement!")
                 } else {
                     conseils.add("$prenom, réduire maintenant générera des économies.")
@@ -683,7 +683,7 @@ class AccueilFragment : Fragment() {
             !hasPrenom && hasCouts && hasHabitudes && !hasDates -> {
                 val economies = calculerEconomiesReelles()
                 if (economies > 0) {
-                    conseils.add("Économies réelles: ${economies}€ vs vos habitudes!")
+                    conseils.add(String.format(trad["economies_reelles"] ?: "Économies réelles: %.2f€ vs vos habitudes!", economies))
                     conseils.add("Vous faites mieux que prévu, bravo!")
                 } else {
                     conseils.add("Vous consommez selon vos habitudes.")
@@ -693,7 +693,7 @@ class AccueilFragment : Fragment() {
             !hasPrenom && hasCouts && !hasHabitudes && hasDates -> {
                 val economies = calculerEconomiesJour()
                 val conseilDate = genererConseilDate()
-                conseils.add("Économies: ${economies}€ - $conseilDate")
+                conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
                 conseils.add("Votre porte-monnaie vous remercie!")
             }
             // Cas 11: Habitudes + Dates
@@ -731,7 +731,7 @@ class AccueilFragment : Fragment() {
             !hasPrenom && hasCouts && hasHabitudes && hasDates -> {
                 val economies = calculerEconomiesReelles()
                 val conseilDate = genererConseilDate()
-                conseils.add("Économies: ${economies}€ - $conseilDate")
+                conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
                 conseils.add("Vous progressez sur tous les fronts!")
             }
             // Cas 16: COMPLET (Prénom + Coûts + Habitudes + Dates)
@@ -745,10 +745,10 @@ class AccueilFragment : Fragment() {
         }
 
         // Ajouter conseils génériques (toujours pertinents)
-        conseils.add("Chaque cigarette non fumée ajoute 11 minutes à votre vie.")
-        conseils.add("L'exercice physique aide à réduire l'envie.")
-        conseils.add("Boire de l'eau réduit les sensations de manque.")
-        conseils.add("Entourez-vous de personnes soutenantes.")
+        conseils.add(trad["conseil_generique_1"] ?: "Chaque cigarette non fumée ajoute 11 minutes à votre vie.")
+        conseils.add(trad["conseil_generique_2"] ?: "L'exercice physique aide à réduire l'envie.")
+        conseils.add(trad["conseil_generique_3"] ?: "Boire de l'eau réduit les sensations de manque.")
+        conseils.add(trad["conseil_generique_4"] ?: "Entourez-vous de personnes soutenantes.")
 
         // Retourner conseil aléatoire
         return conseils.random()
@@ -854,48 +854,64 @@ class AccueilFragment : Fragment() {
     }
 }
     private fun genererConseilDate(): String {
-        try {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val today = Date()
-            
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    
-                    // Vérifier date arrêt
-                    dates["arret"]?.let { dateStr ->
-                        if (dateStr.isNotEmpty()) {
-                            val dateArret = dateFormat.parse(dateStr)
-                            if (dateArret != null) {
-                                val diffDays = ((dateArret.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
-                                return when {
-                                    diffDays > 0 -> "Plus que $diffDays jours avant votre date d'arrêt!"
-                                    diffDays == 0 -> "C'est aujourd'hui votre date d'arrêt, courage!"
-                                    else -> "Vous avez dépassé votre date d'arrêt, continuez!"
+    return try {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val today = Date()
+
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+
+                // Vérifier date arrêt
+                dates["arret"]?.let { dateStr ->
+                    if (dateStr.isNotEmpty()) {
+                        val dateArret = dateFormat.parse(dateStr)
+                        if (dateArret != null) {
+                            val diffDays = ((dateArret.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+                            return when {
+                                diffDays > 0 -> {
+                                    val pattern = trad["date_jours_restants"]
+                                    if (pattern != null) {
+                                        String.format(pattern, diffDays)
+                                    } else {
+                                        "Plus que $diffDays jours avant votre date d'arrêt!"
+                                    }
                                 }
+                                diffDays == 0 -> trad["date_aujourdhui"]
+                                    ?: "C'est aujourd'hui votre date d'arrêt, courage!"
+                                else -> trad["date_depassee"]
+                                    ?: "Vous avez dépassé votre date d'arrêt, continuez!"
                             }
                         }
                     }
-                    
-                    // Vérifier date réduction
-                    dates["reduction"]?.let { dateStr ->
-                        if (dateStr.isNotEmpty()) {
-                            val dateReduction = dateFormat.parse(dateStr)
-                            if (dateReduction != null) {
-                                val diffDays = ((dateReduction.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
-                                if (diffDays >= 0) {
-                                    return "Date de réduction: dans $diffDays jours!"
+                }
+
+                // Vérifier date réduction
+                dates["reduction"]?.let { dateStr ->
+                    if (dateStr.isNotEmpty()) {
+                        val dateReduction = dateFormat.parse(dateStr)
+                        if (dateReduction != null) {
+                            val diffDays = ((dateReduction.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+                            if (diffDays >= 0) {
+                                val pattern = trad["date_reduction"]
+                                return if (pattern != null) {
+                                    String.format(pattern, diffDays)
+                                } else {
+                                    "Date de réduction: dans $diffDays jours!"
                                 }
                             }
                         }
                     }
                 }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur génération conseil date: ${e.message}")
         }
-        return "Votre objectif se rapproche!"
+
+        trad["date_rapproche"] ?: "Votre objectif se rapproche!"
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur génération conseil date: ${e.message}")
+        trad["date_rapproche"] ?: "Votre objectif se rapproche!"
     }
+}
     override fun onResume() {
         super.onResume()
         try {
