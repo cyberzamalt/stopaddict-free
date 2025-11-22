@@ -821,35 +821,38 @@ class AccueilFragment : Fragment() {
     }
 
     private fun comparerHabitudes(): String {
-        try {
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    if (maxHabitude > 0) {
-                        val consommation = when (type) {
-                            DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
-                            DatabaseHelper.TYPE_JOINT -> jointsCount
-                            DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
-                            DatabaseHelper.TYPE_BIERE -> bieresCount
-                            DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
-                            DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
-                            else -> 0
-                        }
-                        
-                        return when {
-                            consommation < maxHabitude -> "Vous consommez moins que d'habitude, bravo!"
-                            consommation == maxHabitude -> "Vous êtes dans vos habitudes."
-                            else -> "Vous dépassez vos habitudes, attention!"
-                        }
+    return try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val maxHabitude = dbHelper.getMaxJournalier(type)
+                if (maxHabitude > 0) {
+                    val consommation = when (type) {
+                        DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
+                        DatabaseHelper.TYPE_JOINT -> jointsCount
+                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
+                        DatabaseHelper.TYPE_BIERE -> bieresCount
+                        DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
+                        DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
+                        else -> 0
+                    }
+
+                    return when {
+                        consommation < maxHabitude ->
+                            trad["habitudes_moins"] ?: "Vous consommez moins que d'habitude, bravo!"
+                        consommation == maxHabitude ->
+                            trad["habitudes_egal"] ?: "Vous êtes dans vos habitudes."
+                        else ->
+                            trad["habitudes_plus"] ?: "Vous dépassez vos habitudes, attention!"
                     }
                 }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur comparaison habitudes: ${e.message}")
         }
-        return "Suivez vos habitudes pour progresser."
+        trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur comparaison habitudes: ${e.message}")
+        trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
     }
-
+}
     private fun genererConseilDate(): String {
         try {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
