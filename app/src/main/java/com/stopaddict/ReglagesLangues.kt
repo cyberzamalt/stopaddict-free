@@ -156,13 +156,13 @@ object ReglagesLangues {
         "raz_usine" to "RAZ réglages usine",
         "raz_jour_ok" to "RAZ jour effectué",
         "raz_historique_ok" to "RAZ historique effectué",
-        "raz_usine_ok" to "RAZ usine effectué"
+        "raz_usine_ok" to "RAZ usine effectué",
             
         // Unités en cL pour les différents alcools
         "unite_cl_global"      to "Unité en cL",
         "unite_cl_biere"       to "Unité en cL",
         "unite_cl_liqueur"     to "Unité en cL",
-        "unite_cl_alcool_fort" to "Unité en cL";
+        "unite_cl_alcool_fort" to "Unité en cL",
 
         "label_prix_feuilles_longues" to "Prix des feuilles longues",
         "label_nb_feuilles_longues" to "Nombre de feuilles longues"
