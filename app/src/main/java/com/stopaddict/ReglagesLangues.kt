@@ -31,8 +31,9 @@ object ReglagesLangues {
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
         // Titres sections
+        "titre" to "Réglages",
         "titre_profil" to "Profil",
-        "titre_categories" to "Catégories actives",
+        "titre_categories" to "Catégories",
         "titre_couts_cigarettes" to "Coûts cigarettes",
         "titre_couts_joints" to "Coûts joints",
         "titre_couts_alcool" to "Coûts alcool",
@@ -167,6 +168,7 @@ object ReglagesLangues {
     // ==================== ENGLISH ====================
     private val TRADUCTIONS_EN = mapOf(
         // Titres sections
+        "titre" to "Settings",
         "titre_profil" to "Profile",
         "titre_categories" to "Active categories",
         "titre_couts_cigarettes" to "Cigarettes costs",
@@ -303,7 +305,7 @@ object ReglagesLangues {
     // ==================== ESPAÑOL ====================
     private val TRADUCTIONS_ES = mapOf(
         // Titres sections
-        "titre_profil" to "Perfil",
+        "titre" to "Configuración",
         "titre_categories" to "Categorías activas",
         "titre_couts_cigarettes" to "Costos cigarrillos",
         "titre_couts_joints" to "Costos porros",
@@ -439,7 +441,7 @@ object ReglagesLangues {
     // ==================== PORTUGUÊS ====================
     private val TRADUCTIONS_PT = mapOf(
         // Titres sections
-        "titre_profil" to "Perfil",
+        "titre" to "Configurações",
         "titre_categories" to "Categorias ativas",
         "titre_couts_cigarettes" to "Custos cigarros",
         "titre_couts_joints" to "Custos baseados",
@@ -574,7 +576,7 @@ object ReglagesLangues {
     // ==================== DEUTSCH ====================
     private val TRADUCTIONS_DE = mapOf(
         // Titres sections
-        "titre_profil" to "Profil",
+        "titre" to "Einstellungen",
         "titre_categories" to "Aktive Kategorien",
         "titre_couts_cigarettes" to "Zigarettenkosten",
         "titre_couts_joints" to "Joint-Kosten",
@@ -709,7 +711,7 @@ object ReglagesLangues {
     // ==================== ITALIANO ====================
     private val TRADUCTIONS_IT = mapOf(
         // Titres sections
-        "titre_profil" to "Profilo",
+        "titre" to "Impostazioni",
         "titre_categories" to "Categorie attive",
         "titre_couts_cigarettes" to "Costi sigarette",
         "titre_couts_joints" to "Costi spinelli",
@@ -844,7 +846,7 @@ object ReglagesLangues {
     // ==================== РУССКИЙ ====================
     private val TRADUCTIONS_RU = mapOf(
         // Titres sections
-        "titre_profil" to "Профиль",
+        "titre" to "Настройки",
         "titre_categories" to "Активные категории",
         "titre_couts_cigarettes" to "Расходы на сигареты",
         "titre_couts_joints" to "Расходы на косяки",
@@ -979,7 +981,7 @@ object ReglagesLangues {
     // ==================== العربية (ARABE) ====================
     private val TRADUCTIONS_AR = mapOf(
         // Titres sections
-        "titre_profil" to "الملف الشخصي",
+        "titre" to "الإعدادات",
         "titre_categories" to "الفئات النشطة",
         "titre_couts_cigarettes" to "تكاليف السجائر",
         "titre_couts_joints" to "تكاليف المفاصل",
@@ -1114,7 +1116,7 @@ object ReglagesLangues {
     // ==================== हिन्दी (HINDI) ====================
     private val TRADUCTIONS_HI = mapOf(
         // Titres sections
-        "titre_profil" to "प्रोफ़ाइल",
+        "titre" to "सेटिंग्स",
         "titre_categories" to "सक्रिय श्रेणियां",
         "titre_couts_cigarettes" to "सिगरेट की लागत",
         "titre_couts_joints" to "जोड़ों की लागत",
@@ -1249,7 +1251,7 @@ object ReglagesLangues {
     // ==================== 日本語 (JAPONAIS) ====================
     private val TRADUCTIONS_JA = mapOf(
         // Titres sections
-        "titre_profil" to "プロフィール",
+        "titre" to "設定",
         "titre_categories" to "アクティブカテゴリ",
         "titre_couts_cigarettes" to "タバコの費用",
         "titre_couts_joints" to "ジョイントの費用",
