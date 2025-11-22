@@ -253,16 +253,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun getConsommationsSemaine(): Map<String, List<Int>> {
-        return getConsommationsPeriode(7)
-    }
+    Log.d(TAG, "getConsommationsSemaine() appelé - période = 7 jours")
+    val result = getConsommationsPeriode(7)
+    Log.d(
+        TAG,
+        "getConsommationsSemaine() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
+    )
+    return result
+}
 
     fun getConsommationsMois(): Map<String, List<Int>> {
-        return getConsommationsPeriode(30)
-    }
+    Log.d(TAG, "getConsommationsMois() appelé - période = 30 jours")
+    val result = getConsommationsPeriode(30)
+    Log.d(
+        TAG,
+        "getConsommationsMois() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
+    )
+    return result
+}
 
     fun getConsommationsAnnee(): Map<String, List<Int>> {
-        return getConsommationsPeriode(365)
-    }
+    Log.d(TAG, "getConsommationsAnnee() appelé - période = 365 jours")
+    val result = getConsommationsPeriode(365)
+    Log.d(
+        TAG,
+        "getConsommationsAnnee() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
+    )
+    return result
+}
 
     private fun getConsommationsPeriode(jours: Int): Map<String, List<Int>> {
         return try {
