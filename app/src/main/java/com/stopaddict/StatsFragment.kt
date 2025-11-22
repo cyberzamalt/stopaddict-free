@@ -796,9 +796,10 @@ private fun updateProfilStatus() {
         }
 
         val devise = dbHelper.getPreference("devise", "EUR")
-        val labelTotal = trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
+        val rawLabelTotal = trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
+        val labelTotal = rawLabelTotal.trimEnd(':', ' ')
 
-        // ⚠️ ici : UN SEUL ":" → plus de "Total aujourd'hui::"
+        // UN SEUL ":" ajouté ici
         txtTotalAujourdhui.text = "$labelTotal: %.2f %s".format(totalJour, devise)
 
         Log.d(TAG, "Profil: ${if (isComplet) "Complet" else "Incomplet"} - Total jour: $totalJour")
