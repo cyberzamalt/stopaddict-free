@@ -322,7 +322,7 @@ private fun getTabTitle(position: Int): String {
     }
 
     lastConsoleClickTime = currentTime
-    logger.d("handleConsoleDebugClick: lastConsoleClickTime updated to $lastConsoleTime")
+    logger.d("handleConsoleDebugClick: lastConsoleClickTime updated to $lastConsoleClickTime")
 
     if (consoleClickCount >= 5) {
         logger.d("handleConsoleDebugClick: 5 clicks detected -> toggle console (current consoleVisible=$consoleVisible)")
