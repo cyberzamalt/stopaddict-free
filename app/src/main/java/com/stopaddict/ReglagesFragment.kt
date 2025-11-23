@@ -64,6 +64,7 @@ class ReglagesFragment : Fragment() {
     private lateinit var editNbFiltres: EditText
     
     // À tuber
+    private lateinit var editPrixTabacTubes: EditText
     private lateinit var editPrixTubes: EditText
     private lateinit var editNbTubes: EditText
     
@@ -314,7 +315,7 @@ class ReglagesFragment : Fragment() {
         roulerContainer.addView(editNbFiltres)
         radioGroup.addView(roulerContainer)
         
-        // Mode 3: À tuber
+                // Mode 3: À tuber
         radioCigarettesTubeuse = RadioButton(requireContext()).apply {
             text = "🚬 ${trad["radio_tubeuse"] ?: "Cigarettes à tuber"}"
         }
@@ -324,12 +325,23 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
+
+        // Prix du tabac à tuber
         addLabel(tuberContainer, trad["label_prix_tabac"] ?: "Prix du tabac à tuber")
-        // Réutilise editPrixTabac - on récupère la valeur selon le mode
-        
+        editPrixTabacTubes = createMoneyEditText()
+        tuberContainer.addView(editPrixTabacTubes)
+
+        // Prix des tubes
         addLabel(tuberContainer, trad["label_prix_tubes"] ?: "Prix des tubes")
         editPrixTubes = createMoneyEditText()
         tuberContainer.addView(editPrixTubes)
+        
+        // Nombre de tubes
+        addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
+        editNbTubes = createNumberEditText()
+        tuberContainer.addView(editNbTubes)
+
+        radioGroup.addView(tuberContainer)
         
         addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
         editNbTubes = createNumberEditText()
@@ -538,11 +550,23 @@ class ReglagesFragment : Fragment() {
                     val nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 100.0
                     dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, 0.0, 0.0, prixTabac, prixFeuilles, nbFeuilles, prixFiltres, nbFiltres, 0.0, 0.0, 0.0)
                 }
-                radioCigarettesTubeuse.isChecked -> {
-                    val prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
+                                radioCigarettesTubeuse.isChecked -> {
+                    val prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
                     val prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
                     val nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 100.0
-                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, 0.0, 0.0, prixTabac, 0.0, 0.0, 0.0, 0.0, prixTubes, nbTubes, 0.0)
+                    dbHelper.setCouts(
+                        DatabaseHelper.TYPE_CIGARETTE,
+                        0.0,
+                        0.0,
+                        prixTabac,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        prixTubes,
+                        nbTubes,
+                        0.0
+                    )
                 }
             }
 
@@ -1053,16 +1077,22 @@ class ReglagesFragment : Fragment() {
 
             private fun loadCouts() {
         // Cigarettes
-        val coutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
+                val coutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
         editPrixPaquet.setText(coutsCig["prix_paquet"]?.toString() ?: "0")
         editNbCigarettes.setText(coutsCig["nb_cigarettes"]?.toInt()?.toString() ?: "20")
+
+        // À rouler
         editPrixTabac.setText(coutsCig["prix_tabac"]?.toString() ?: "0")
         editPrixFeuilles.setText(coutsCig["prix_feuilles"]?.toString() ?: "0")
         editNbFeuilles.setText(coutsCig["nb_feuilles"]?.toInt()?.toString() ?: "32")
         editPrixFiltres.setText(coutsCig["prix_filtres"]?.toString() ?: "0")
         editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt()?.toString() ?: "100")
+
+        // À tuber
+        editPrixTabacTubes.setText(coutsCig["prix_tabac"]?.toString() ?: "0")
         editPrixTubes.setText(coutsCig["prix_tubes"]?.toString() ?: "0")
         editNbTubes.setText(coutsCig["nb_tubes"]?.toInt()?.toString() ?: "100")
+
         
         // Joints
         val coutsJoint = dbHelper.getCouts(DatabaseHelper.TYPE_JOINT)
