@@ -453,6 +453,7 @@ override fun onPause() {
     logger.d("onPause: activité mise en pause")
 }
 
+
 override fun onDestroy() {
     super.onDestroy()
     logger.d("onDestroy: destruction activité, nettoyage des ressources")
