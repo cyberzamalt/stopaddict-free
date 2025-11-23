@@ -19,7 +19,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val TAG = "MainActivity"
         private const val PREFS_NAME = "StopAddict"
         private const val PREF_WARNING_SHOWN = "warning_majorite_shown"
         private const val PREF_AGE_ACCEPTED = "age_18_accepted"
@@ -311,37 +310,40 @@ private fun getTabTitle(position: Int): String {
 
     private fun handleConsoleDebugClick() {
     val currentTime = System.currentTimeMillis()
-    logger.d("handleConsoleDebugClick: click detected, currentTime=$currentTime, lastConsoleClickTime=$lastConsoleClickTime, consoleClickCount=$consoleClickCount")
+    logger.d(
+        "handleConsoleDebugClick: click detected, " +
+        "currentTime=$currentTime, lastConsoleClickTime=$lastConsoleClickTime, consoleClickCount=$consoleClickCount"
+    )
 
     if (currentTime - lastConsoleClickTime > 2000) {
-        logger.d("handleConsoleDebugClick: more than 2000 ms since last click -> reset consoleClickCount to 1")
+        logger.d("handleConsoleDebugClick: > 2000 ms since last click -> reset consoleClickCount to 1")
         consoleClickCount = 1
     } else {
         consoleClickCount++
-        logger.d("handleConsoleDebugClick: click within 2000 ms -> increment consoleClickCount=$consoleClickCount")
+        logger.d("handleConsoleDebugClick: click within 2000 ms -> consoleClickCount=$consoleClickCount")
     }
 
     lastConsoleClickTime = currentTime
     logger.d("handleConsoleDebugClick: lastConsoleClickTime updated to $lastConsoleClickTime")
 
     if (consoleClickCount >= 5) {
-        logger.d("handleConsoleDebugClick: 5 clicks detected -> toggle console (current consoleVisible=$consoleVisible)")
+        logger.d("handleConsoleDebugClick: 5 clicks detected -> toggle console (consoleVisible=$consoleVisible)")
         consoleClickCount = 0
 
         if (consoleVisible) {
-            logger.d("handleConsoleDebugClick: console currently visible -> dismiss dialog")
+            logger.d("handleConsoleDebugClick: console visible -> dismiss dialog")
             consoleDialog?.dismiss()
             consoleVisible = false
             logger.d("handleConsoleDebugClick: consoleVisible set to false")
         } else {
-            logger.d("handleConsoleDebugClick: console currently hidden -> show dialog")
+            logger.d("handleConsoleDebugClick: console hidden -> show dialog")
             showConsoleDebugDialog()
             consoleVisible = true
             logger.d("handleConsoleDebugClick: consoleVisible set to true")
         }
     }
 }
-
+    
     private fun showConsoleDebugDialog() {
         try {
             val textView = TextView(this).apply {
