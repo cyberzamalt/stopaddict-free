@@ -535,40 +535,60 @@ class ReglagesFragment : Fragment() {
 
     private fun saveCouts() {
         try {
-            // Cigarettes selon le mode
+                        // Cigarettes selon le mode
+            // 1) On récupère les anciens coûts pour ne pas écraser les autres modes
+            val anciensCoutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
+
+            var prixPaquet = anciensCoutsCig["prix_paquet"] ?: 0.0
+            var nbCigarettes = anciensCoutsCig["nb_cigarettes"] ?: 0.0
+            var prixTabac = anciensCoutsCig["prix_tabac"] ?: 0.0
+            var prixFeuilles = anciensCoutsCig["prix_feuilles"] ?: 0.0
+            var nbFeuilles = anciensCoutsCig["nb_feuilles"] ?: 0.0
+            var prixFiltres = anciensCoutsCig["prix_filtres"] ?: 0.0
+            var nbFiltres = anciensCoutsCig["nb_filtres"] ?: 0.0
+            var prixTubes = anciensCoutsCig["prix_tubes"] ?: 0.0
+            var nbTubes = anciensCoutsCig["nb_tubes"] ?: 0.0
+            var prixVerreCig = anciensCoutsCig["prix_verre"] ?: 0.0 // pas utilisé pour les cigarettes mais on le conserve
+
+            // 2) On met à jour UNIQUEMENT le mode sélectionné
             when {
+                // Mode 1 : cigarettes en paquet
                 radioCigarettesClassiques.isChecked -> {
-                    val prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
-                    val nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 20.0
-                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, prixPaquet, nbCigarettes, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
+                    nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 20.0
                 }
+
+                // Mode 2 : à rouler
                 radioCigarettesRouler.isChecked -> {
-                    val prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
-                    val prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
-                    val nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 32.0
-                    val prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
-                    val nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 100.0
-                    dbHelper.setCouts(DatabaseHelper.TYPE_CIGARETTE, 0.0, 0.0, prixTabac, prixFeuilles, nbFeuilles, prixFiltres, nbFiltres, 0.0, 0.0, 0.0)
+                    prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
+                    prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
+                    nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 32.0
+                    prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
+                    nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 100.0
                 }
-                                radioCigarettesTubeuse.isChecked -> {
-                    val prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
-                    val prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
-                    val nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 100.0
-                    dbHelper.setCouts(
-                        DatabaseHelper.TYPE_CIGARETTE,
-                        0.0,
-                        0.0,
-                        prixTabac,
-                        0.0,
-                        0.0,
-                        0.0,
-                        0.0,
-                        prixTubes,
-                        nbTubes,
-                        0.0
-                    )
+
+                // Mode 3 : à tuber
+                radioCigarettesTubeuse.isChecked -> {
+                    prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
+                    prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
+                    nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 100.0
                 }
             }
+
+            // 3) On sauvegarde TOUT en une seule fois sans écraser les autres modes
+            dbHelper.setCouts(
+                DatabaseHelper.TYPE_CIGARETTE,
+                prixPaquet,
+                nbCigarettes,
+                prixTabac,
+                prixFeuilles,
+                nbFeuilles,
+                prixFiltres,
+                nbFiltres,
+                prixTubes,
+                nbTubes,
+                prixVerreCig
+            )
 
             // Joints
             val prixGramme = editPrixGramme.text.toString().toDoubleOrNull() ?: 0.0
