@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         private const val PREF_AGE_ACCEPTED = "age_18_accepted"
     }
 
-    private val logger = AppLogger("MainActivity")   // 👈 AJOUTER ÇA
+    private val logger = AppLogger("MainActivity")
 
     private lateinit var headerTextView: TextView
     private lateinit var tabLayout: TabLayout
