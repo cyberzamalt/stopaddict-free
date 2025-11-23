@@ -59,22 +59,22 @@ object ReglagesLangues {
         "radio_classiques" to "Cigarettes classiques",
         "radio_rouler" to "À rouler",
         "radio_tubeuse" to "Tubeuse",
-        "label_prix_paquet" to "Prix du paquet (€)",
+        "label_prix_paquet" to "Prix du paquet",
         "label_nb_cigarettes" to "Nombre de cigarettes",
-        "label_prix_tabac" to "Prix tabac (€)",
-        "label_prix_feuilles" to "Prix feuilles (€)",
+        "label_prix_tabac" to "Prix tabac",
+        "label_prix_feuilles" to "Prix feuilles",
         "label_nb_feuilles" to "Nombre de feuilles",
-        "label_prix_filtres" to "Prix filtres (€)",
+        "label_prix_filtres" to "Prix filtres",
         "label_nb_filtres" to "Nombre de filtres",
-        "label_prix_tubes" to "Prix tubes (€)",
+        "label_prix_tubes" to "Prix tubes",
         "label_nb_tubes" to "Nombre de tubes",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Prix du gramme (€)",
+        "label_prix_gramme" to "Prix du gramme",
         "label_gramme_par_joint" to "Grammes par joint",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Prix du verre (€)",
+        "label_prix_verre" to "Prix du verre",
         "label_unite_cl" to "Unité (cL)",
 
         // Labels habitudes
@@ -340,22 +340,22 @@ object ReglagesLangues {
         "radio_classiques" to "Cigarrillos clásicos",
         "radio_rouler" to "Para liar",
         "radio_tubeuse" to "Entubadora",
-        "label_prix_paquet" to "Precio del paquete (€)",
+        "label_prix_paquet" to "Precio del paquete",
         "label_nb_cigarettes" to "Número de cigarrillos",
-        "label_prix_tabac" to "Precio tabaco (€)",
-        "label_prix_feuilles" to "Precio papeles (€)",
+        "label_prix_tabac" to "Precio tabaco",
+        "label_prix_feuilles" to "Precio papeles",
         "label_nb_feuilles" to "Número de papeles",
-        "label_prix_filtres" to "Precio filtros (€)",
+        "label_prix_filtres" to "Precio filtros",
         "label_nb_filtres" to "Número de filtros",
-        "label_prix_tubes" to "Precio tubos (€)",
+        "label_prix_tubes" to "Precio tubos)",
         "label_nb_tubes" to "Número de tubos",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Precio por gramo (€)",
+        "label_prix_gramme" to "Precio por gramo",
         "label_gramme_par_joint" to "Gramos por porro",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Precio por copa (€)",
+        "label_prix_verre" to "Precio por copa",
         "label_unite_cl" to "Unidad (cL)",
 
         // Labels habitudes
@@ -618,22 +618,22 @@ object ReglagesLangues {
         "radio_classiques" to "Normale Zigaretten",
         "radio_rouler" to "Selbstgedreht",
         "radio_tubeuse" to "Stopfmaschine",
-        "label_prix_paquet" to "Packungspreis (€)",
+        "label_prix_paquet" to "Packungspreis",
         "label_nb_cigarettes" to "Anzahl Zigaretten",
-        "label_prix_tabac" to "Tabakpreis (€)",
-        "label_prix_feuilles" to "Blättchenpreis (€)",
+        "label_prix_tabac" to "Tabakpreis",
+        "label_prix_feuilles" to "Blättchenpreis",
         "label_nb_feuilles" to "Anzahl Blättchen",
-        "label_prix_filtres" to "Filterpreis (€)",
+        "label_prix_filtres" to "Filterpreis",
         "label_nb_filtres" to "Anzahl Filter",
-        "label_prix_tubes" to "Hülsenpreis (€)",
+        "label_prix_tubes" to "Hülsenpreis",
         "label_nb_tubes" to "Anzahl Hülsen",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Preis pro Gramm (€)",
+        "label_prix_gramme" to "Preis pro Gramm",
         "label_gramme_par_joint" to "Gramm pro Joint",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Getränkpreis (€)",
+        "label_prix_verre" to "Getränkpreis",
         "label_unite_cl" to "Einheit (cL)",
 
         // Labels habitudes
@@ -757,22 +757,22 @@ object ReglagesLangues {
         "radio_classiques" to "Sigarette classiche",
         "radio_rouler" to "Da rollare",
         "radio_tubeuse" to "Con tubo",
-        "label_prix_paquet" to "Prezzo pacchetto (€)",
+        "label_prix_paquet" to "Prezzo pacchetto",
         "label_nb_cigarettes" to "Numero di sigarette",
-        "label_prix_tabac" to "Prezzo tabacco (€)",
-        "label_prix_feuilles" to "Prezzo cartine (€)",
+        "label_prix_tabac" to "Prezzo tabacco",
+        "label_prix_feuilles" to "Prezzo cartine",
         "label_nb_feuilles" to "Numero di cartine",
-        "label_prix_filtres" to "Prezzo filtri (€)",
+        "label_prix_filtres" to "Prezzo filtri",
         "label_nb_filtres" to "Numero di filtri",
-        "label_prix_tubes" to "Prezzo tubi (€)",
+        "label_prix_tubes" to "Prezzo tubi",
         "label_nb_tubes" to "Numero di tubi",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Prezzo per grammo (€)",
+        "label_prix_gramme" to "Prezzo per grammo",
         "label_gramme_par_joint" to "Grammi per spinello",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Prezzo bicchiere (€)",
+        "label_prix_verre" to "Prezzo bicchiere",
         "label_unite_cl" to "Unità (cL)",
 
         // Labels habitudes
