@@ -430,9 +430,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 put(COL_NB_FILTRES, nbFiltres.toInt())
                 put(COL_PRIX_TUBES, prixTubes)
                 put(COL_NB_TUBES, nbTubes.toInt())
-                put(COL_PRIX_VERRE, prixVerre)
+
+                // 🔧 Cas particulier : JOINT
+                // Pour le type "joint", le dernier paramètre correspond au PRIX DU GRAMME
+                // → on l'enregistre dans COL_PRIX_GRAMME
+                if (type == TYPE_JOINT) {
+                    put(COL_PRIX_GRAMME, prixVerre)
+                    // On laisse COL_PRIX_VERRE à 0 pour les joints
+                    put(COL_PRIX_VERRE, 0.0)
+                } else {
+                    // Pour les autres types (alcool, etc.), on utilise bien COL_PRIX_VERRE
+                    put(COL_PRIX_VERRE, prixVerre)
+                }
             }
-            
+
             val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
             Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
             result > 0
@@ -441,7 +452,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             false
         }
     }
-
+    
     fun getCouts(type: String): Map<String, Double> {
         return try {
             val db = readableDatabase
