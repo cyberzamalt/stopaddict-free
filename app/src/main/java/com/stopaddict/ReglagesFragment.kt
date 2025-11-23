@@ -1079,44 +1079,44 @@ class ReglagesFragment : Fragment() {
         // Cigarettes
                 val coutsCig = dbHelper.getCouts(DatabaseHelper.TYPE_CIGARETTE)
         editPrixPaquet.setText(coutsCig["prix_paquet"]?.toString() ?: "0")
-        editNbCigarettes.setText(coutsCig["nb_cigarettes"]?.toInt()?.toString() ?: "20")
+        editNbCigarettes.setText(coutsCig["nb_cigarettes"]?.toInt()?.toString() ?: "0")
 
         // À rouler
         editPrixTabac.setText(coutsCig["prix_tabac"]?.toString() ?: "0")
         editPrixFeuilles.setText(coutsCig["prix_feuilles"]?.toString() ?: "0")
-        editNbFeuilles.setText(coutsCig["nb_feuilles"]?.toInt()?.toString() ?: "32")
+        editNbFeuilles.setText(coutsCig["nb_feuilles"]?.toInt()?.toString() ?: "0")
         editPrixFiltres.setText(coutsCig["prix_filtres"]?.toString() ?: "0")
-        editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt()?.toString() ?: "100")
+        editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt()?.toString() ?: "0")
 
         // À tuber
         editPrixTabacTubes.setText(coutsCig["prix_tabac"]?.toString() ?: "0")
         editPrixTubes.setText(coutsCig["prix_tubes"]?.toString() ?: "0")
-        editNbTubes.setText(coutsCig["nb_tubes"]?.toInt()?.toString() ?: "100")
+        editNbTubes.setText(coutsCig["nb_tubes"]?.toInt()?.toString() ?: "0")
 
         
         // Joints
         val coutsJoint = dbHelper.getCouts(DatabaseHelper.TYPE_JOINT)
         editPrixGramme.setText(coutsJoint["prix_gramme"]?.toString() ?: "0")
-        editGrammeParJoint.setText(dbHelper.getPreference("gramme_par_joint", "0.5"))
+        editGrammeParJoint.setText(dbHelper.getPreference("gramme_par_joint", "0"))
         editPrixFeuillesJoint.setText(coutsJoint["prix_feuilles"]?.toString() ?: "0")
-        editNbFeuillesJoint.setText(coutsJoint["nb_feuilles"]?.toInt()?.toString() ?: "32")
+        editNbFeuillesJoint.setText(coutsJoint["nb_feuilles"]?.toInt()?.toString() ?: "")
         
         // Alcools
         val coutsGlobal = dbHelper.getCouts(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
         editPrixVerreGlobal.setText(coutsGlobal["prix_verre"]?.toString() ?: "0")
-        editUniteCLGlobal.setText(dbHelper.getPreference("unite_cl_alcool_global", "25"))
+        editUniteCLGlobal.setText(dbHelper.getPreference("unite_cl_alcool_global", ""))
         
         val coutsBiere = dbHelper.getCouts(DatabaseHelper.TYPE_BIERE)
         editPrixVerreBiere.setText(coutsBiere["prix_verre"]?.toString() ?: "0")
-        editUniteCLBiere.setText(dbHelper.getPreference("unite_cl_biere", "25"))
+        editUniteCLBiere.setText(dbHelper.getPreference("unite_cl_biere", "0"))
         
         val coutsLiqueur = dbHelper.getCouts(DatabaseHelper.TYPE_LIQUEUR)
         editPrixVerreLiqueur.setText(coutsLiqueur["prix_verre"]?.toString() ?: "0")
-        editUniteCLLiqueur.setText(dbHelper.getPreference("unite_cl_liqueur", "4"))
+        editUniteCLLiqueur.setText(dbHelper.getPreference("unite_cl_liqueur", "0"))
         
         val coutsAlcoolFort = dbHelper.getCouts(DatabaseHelper.TYPE_ALCOOL_FORT)
         editPrixVerreAlcoolFort.setText(coutsAlcoolFort["prix_verre"]?.toString() ?: "0")
-        editUniteCLAlcoolFort.setText(dbHelper.getPreference("unite_cl_alcool_fort", "4"))
+        editUniteCLAlcoolFort.setText(dbHelper.getPreference("unite_cl_alcool_fort", "0"))
     }
 
     private fun updateProfilStatus() {
