@@ -94,6 +94,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Exporter",
         "btn_importer" to "Importer",
+        "btn_export_logs" to "Exporter les logs",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "RAZ du jour",
@@ -234,6 +235,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Export",
         "btn_importer" to "Import",
+        "btn_export_logs" to "Export logs",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Reset today",
@@ -373,6 +375,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Exportar",
         "btn_importer" to "Importar",
+        "btn_export_logs" to "Exportar registros",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Restablecer hoy",
@@ -511,6 +514,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Exportar",
         "btn_importer" to "Importar",
+        "btn_export_logs" to "Exportar registros",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Redefinir hoje",
@@ -649,6 +653,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Exportieren",
         "btn_importer" to "Importieren",
+        "btn_export_logs" to "Logs exportieren",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Heute zurücksetzen",
@@ -787,6 +792,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Esporta",
         "btn_importer" to "Importa",
+        "btn_export_logs" to "Esporta log",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Ripristina oggi",
@@ -925,6 +931,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "Экспорт",
         "btn_importer" to "Импорт",
+        "btn_export_logs" to "Экспорт журналов",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "Сбросить сегодня",
@@ -1063,6 +1070,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "تصدير",
         "btn_importer" to "استيراد",
+        "btn_export_logs" to "تصدير السجلات",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "إعادة تعيين اليوم",
@@ -1201,6 +1209,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "निर्यात",
         "btn_importer" to "आयात",
+        "btn_export_logs" to "लॉग निर्यात करें",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "आज रीसेट करें",
@@ -1339,6 +1348,7 @@ object ReglagesLangues {
         // Boutons Export/Import
         "btn_exporter" to "エクスポート",
         "btn_importer" to "インポート",
+        "btn_export_logs" to "ログをエクスポート",
 
         // Messages confirmations
         "confirm_raz_jour_titre" to "今日をリセット",
