@@ -631,7 +631,8 @@ class ReglagesFragment : Fragment() {
     }
 
     private fun addRAZSection(container: LinearLayout) {
-    val card = createCard(container)
+    // ✅ On utilise la version existante de createCard() (sans paramètre)
+    val card = createCard()
 
     val title = TextView(requireContext()).apply {
         text = trad["raz_sauvegarde"] ?: "RAZ & sauvegarde"
@@ -649,24 +650,39 @@ class ReglagesFragment : Fragment() {
 
     val btnRAZJour = Button(requireContext()).apply {
         text = trad["btn_raz_jour"] ?: "RAZ du jour"
-        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        ).apply {
             setMargins(0, 0, 8, 0)
         }
-        setOnClickListener { confirmerRAZJour() }
+        // ✅ On utilise la fonction déjà présente showRAZConfirmation("jour")
+        setOnClickListener { showRAZConfirmation("jour") }
     }
 
     val btnRAZHistorique = Button(requireContext()).apply {
         text = trad["btn_raz_historique"] ?: "RAZ historique"
-        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        ).apply {
             setMargins(0, 0, 8, 0)
         }
-        setOnClickListener { confirmerRAZHistorique() }
+        // ✅ Confirmation RAZ historique
+        setOnClickListener { showRAZConfirmation("historique") }
     }
 
     val btnRAZUsine = Button(requireContext()).apply {
         text = trad["btn_raz_usine"] ?: "RAZ d'usine"
-        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-        setOnClickListener { confirmerRAZUsine() }
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        )
+        // ✅ Confirmation RAZ usine
+        setOnClickListener { showRAZConfirmation("usine") }
     }
 
     razLayout.addView(btnRAZJour)
@@ -683,25 +699,34 @@ class ReglagesFragment : Fragment() {
 
     val btnExporter = Button(requireContext()).apply {
         text = trad["btn_exporter"] ?: "Exporter"
-        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        ).apply {
             setMargins(0, 0, 8, 0)
         }
-        setOnClickListener { lancerExportJSON() }
+        // ✅ Utilise la fonction exportData() déjà définie plus bas
+        setOnClickListener { exportData() }
     }
 
     val btnImporter = Button(requireContext()).apply {
         text = trad["btn_importer"] ?: "Importer"
-        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-        setOnClickListener { lancerImportJSON() }
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        )
+        // ✅ Utilise importData() déjà définie plus bas
+        setOnClickListener { importData() }
     }
 
     exportImportLayout.addView(btnExporter)
     exportImportLayout.addView(btnImporter)
     card.addView(exportImportLayout)
 
-    // 🔥 Nouveau : bouton "Exporter les logs"
+    // Bouton "Exporter les logs"
     val btnExportLogs = Button(requireContext()).apply {
-        // Texte traduit, fallback FR si clé manquante dans certaines langues
         text = trad["btn_export_logs"] ?: "Exporter les logs"
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -711,7 +736,6 @@ class ReglagesFragment : Fragment() {
         }
 
         setOnClickListener {
-            // On délègue à l'Activity sans casser le reste
             (activity as? MainActivity)?.exportAllLogsFromSettings()
                 ?: Toast.makeText(
                     requireContext(),
@@ -723,6 +747,7 @@ class ReglagesFragment : Fragment() {
 
     card.addView(btnExportLogs)
 
+    // On ajoute la carte complète au container de la page
     container.addView(card)
 }
 
