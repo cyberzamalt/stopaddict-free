@@ -51,6 +51,19 @@
             android:background="@android:color/holo_blue_light"
             android:textColor="@android:color/white" />
 
+                <!-- Bandeau conseils -->
+        <TextView
+            android:id="@+id/accueil_txt_conseil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conseil: Chaque pas compte dans votre parcours."
+            android:textSize="14sp"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_orange_light"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+
         <!-- Catégorie Cigarettes -->
         <LinearLayout
             android:id="@+id/accueil_container_cigarettes"
@@ -332,19 +345,6 @@
                 android:text="+"
                 android:textSize="24sp" />
         </LinearLayout>
-
-        <!-- Bandeau conseils -->
-        <TextView
-            android:id="@+id/accueil_txt_conseil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Conseil: Chaque pas compte dans votre parcours."
-            android:textSize="14sp"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/holo_orange_light"
-            android:textColor="@android:color/white"
-            android:gravity="center" />
 
     </LinearLayout>
 </ScrollView>
