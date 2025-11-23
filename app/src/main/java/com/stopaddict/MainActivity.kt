@@ -345,92 +345,126 @@ private fun getTabTitle(position: Int): String {
 }
     
     private fun showConsoleDebugDialog() {
-        try {
-            val textView = TextView(this).apply {
-                setBackgroundColor(Color.BLACK)
-                setTextColor(Color.rgb(0, 255, 0))
-                setPadding(20, 20, 20, 20)
-                textSize = 11f
-                typeface = android.graphics.Typeface.MONOSPACE
-                
-                val logs = StringBuilder()
-                logs.append("═══════════════════════════════════\n")
-                logs.append("      ${trad["console_title"] ?: "DEBUG CONSOLE"}     \n")
-                logs.append("═══════════════════════════════════\n\n")
-                
-                val versionText = if (isVersionGratuite) {
-                    trad["console_version_free"] ?: "Free"
+    try {
+        val textView = TextView(this).apply {
+            setBackgroundColor(Color.BLACK)
+            setTextColor(Color.rgb(0, 255, 0))
+            setPadding(20, 20, 20, 20)
+            textSize = 11f
+            typeface = android.graphics.Typeface.MONOSPACE
+
+            val logs = StringBuilder()
+            logs.append("═══════════════════════════════════\n")
+            logs.append("      ${trad["console_title"] ?: "DEBUG CONSOLE"}     \n")
+            logs.append("═══════════════════════════════════\n\n")
+
+            // --- Infos version / device ---
+            val versionText = if (isVersionGratuite) {
+                trad["console_version_free"] ?: "Free"
+            } else {
+                trad["console_version_paid"] ?: "Paid"
+            }
+            logs.append("${trad["console_version"] ?: "Version"}: $versionText\n")
+            logs.append("${trad["console_langue"] ?: "Language"}: ${configLangue.getLangue()}\n")
+            logs.append("${trad["console_date"] ?: "Date"}: ${
+                SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(
+                    Date()
+                )
+            }\n")
+            logs.append("${trad["console_build"] ?: "Build"}: DEBUG\n")
+            logs.append("${trad["console_device"] ?: "Device"}: ${android.os.Build.MODEL}\n")
+            logs.append("${trad["console_android"] ?: "Android"}: ${android.os.Build.VERSION.RELEASE}\n\n")
+
+            // --- État des prefs (âge, avertissement, etc.) ---
+            try {
+                val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                logs.append("--- ${trad["console_app_state"] ?: "App State"} ---\n")
+                logs.append("${trad["console_age_accepted"] ?: "Age accepted"}: ${
+                    prefs.getBoolean(
+                        PREF_AGE_ACCEPTED,
+                        false
+                    )
+                }\n")
+                logs.append("${trad["console_warning_shown"] ?: "Warning shown"}: ${
+                    prefs.getBoolean(
+                        PREF_WARNING_SHOWN,
+                        false
+                    )
+                }\n\n")
+            } catch (e: Exception) {
+                logs.append("${trad["console_error_prefs"] ?: "Error reading prefs"}: ${e.message}\n\n")
+            }
+
+            // --- Logs DB du jour ---
+            logs.append("--- ${trad["console_logs_db"] ?: "Database Logs"} ---\n")
+            try {
+                val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                val consos = dbHelper.getConsommationsJour(today)
+                logs.append("${trad["console_consos_jour"] ?: "Daily consumptions"}:\n")
+                if (consos.isEmpty()) {
+                    logs.append("  ${trad["console_no_conso"] ?: "No consumption"}\n")
                 } else {
-                    trad["console_version_paid"] ?: "Paid"
-                }
-                logs.append("${trad["console_version"] ?: "Version"}: $versionText\n")
-                logs.append("${trad["console_langue"] ?: "Language"}: ${configLangue.getLangue()}\n")
-                logs.append("${trad["console_date"] ?: "Date"}: ${SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())}\n")
-                logs.append("${trad["console_build"] ?: "Build"}: DEBUG\n")
-                logs.append("${trad["console_device"] ?: "Device"}: ${android.os.Build.MODEL}\n")
-                logs.append("${trad["console_android"] ?: "Android"}: ${android.os.Build.VERSION.RELEASE}\n\n")
-                
-                try {
-                    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                    logs.append("--- ${trad["console_app_state"] ?: "App State"} ---\n")
-                    logs.append("${trad["console_age_accepted"] ?: "Age accepted"}: ${prefs.getBoolean(PREF_AGE_ACCEPTED, false)}\n")
-                    logs.append("${trad["console_warning_shown"] ?: "Warning shown"}: ${prefs.getBoolean(PREF_WARNING_SHOWN, false)}\n\n")
-                } catch (e: Exception) {
-                    logs.append("${trad["console_error_prefs"] ?: "Error reading prefs"}: ${e.message}\n\n")
-                }
-                
-                logs.append("--- ${trad["console_logs_db"] ?: "Database Logs"} ---\n")
-                try {
-                    val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-                    val consos = dbHelper.getConsommationsJour(today)
-                    logs.append("${trad["console_consos_jour"] ?: "Daily consumptions"}:\n")
-                    if (consos.isEmpty()) {
-                        logs.append("  ${trad["console_no_conso"] ?: "No consumption"}\n")
-                    } else {
-                        consos.forEach { (type, count) ->
-                            logs.append("  $type: $count\n")
-                        }
+                    consos.forEach { (type, count) ->
+                        logs.append("  $type: $count\n")
                     }
-                } catch (e: Exception) {
-                    logs.append("${trad["console_error_db"] ?: "Error reading DB"}: ${e.message}\n")
                 }
-                
-                logs.append("\n═══════════════════════════════════\n")
-                logs.append("     ${trad["console_logs_selectable"] ?: "Selectable logs ✓"}        \n")
-                logs.append("═══════════════════════════════════\n")
-                
-                text = logs.toString()
-                setTextIsSelectable(true)
+            } catch (e: Exception) {
+                logs.append("${trad["console_error_db"] ?: "Error reading DB"}: ${e.message}\n")
             }
-            
-            val scrollView = ScrollView(this).apply {
-                setBackgroundColor(Color.BLACK)
-            }
-            scrollView.addView(textView)
-            
-            consoleDialog = AlertDialog.Builder(this)
-                .setView(scrollView)
-                .setPositiveButton(trad["console_btn_close"] ?: "Close") { dialog, _ ->
-                    dialog.dismiss()
-                    consoleVisible = false
+
+            // --- 🔥 Logs internes centralisés StopAddictLogger ---
+            logs.append("\n--- ${trad["console_internal_logs"] ?: "Internal logs"} ---\n")
+            try {
+                val internalLogs = StopAddictLogger.getAllLogsAsText()
+                if (internalLogs.isBlank()) {
+                    logs.append(
+                        (trad["console_no_internal_logs"]
+                            ?: "Aucun log interne pour le moment.") + "\n"
+                    )
+                } else {
+                    logs.append(internalLogs).append("\n")
                 }
-                .create()
-            
-            consoleDialog?.window?.setBackgroundDrawableResource(android.R.color.black)
-            consoleDialog?.setOnShowListener {
-                consoleDialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(Color.rgb(0, 255, 0))
+            } catch (e: Exception) {
+                logs.append("Erreur lecture logs internes: ${e.message}\n")
             }
-            
-            consoleDialog?.show()
-            
-            consoleDialog?.window?.setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-            consoleDialog?.window?.setGravity(Gravity.TOP)
-            
-        } catch (e: Exception) {
-    logger.e("Erreur console", e)
+
+            logs.append("\n═══════════════════════════════════\n")
+            logs.append("     ${trad["console_logs_selectable"] ?: "Selectable logs ✓"}        \n")
+            logs.append("═══════════════════════════════════\n")
+
+            text = logs.toString()
+            setTextIsSelectable(true)
+        }
+
+        val scrollView = ScrollView(this).apply {
+            setBackgroundColor(Color.BLACK)
+        }
+        scrollView.addView(textView)
+
+        consoleDialog = AlertDialog.Builder(this)
+            .setView(scrollView)
+            .setPositiveButton(trad["console_btn_close"] ?: "Close") { dialog, _ ->
+                dialog.dismiss()
+                consoleVisible = false
+            }
+            .create()
+
+        consoleDialog?.window?.setBackgroundDrawableResource(android.R.color.black)
+        consoleDialog?.setOnShowListener {
+            consoleDialog?.getButton(AlertDialog.BUTTON_POSITIVE)
+                ?.setTextColor(Color.rgb(0, 255, 0))
+        }
+
+        consoleDialog?.show()
+
+        consoleDialog?.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        consoleDialog?.window?.setGravity(Gravity.TOP)
+
+    } catch (e: Exception) {
+        logger.e("Erreur console", e)
     }
 }
 
@@ -439,6 +473,32 @@ private fun getTabTitle(position: Int): String {
     updateDateTime()
     logger.d("refreshData: finished updating date/time")
 }
+
+        fun exportAllLogsFromSettings() {
+        try {
+            val allLogs = StopAddictLogger.getAllLogsAsText()
+            val safeText = if (allLogs.isBlank()) {
+                "Aucun log interne pour le moment."
+            } else {
+                allLogs
+            }
+
+            val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "StopAddict – Logs internes")
+                putExtra(Intent.EXTRA_TEXT, safeText)
+            }
+
+            val chooser = Intent.createChooser(sendIntent, "Exporter les logs")
+            startActivity(chooser)
+
+            logger.d("exportAllLogsFromSettings: partage des logs lancé")
+
+        } catch (e: Exception) {
+            logger.e("exportAllLogsFromSettings: erreur lors de l'export", e)
+            Toast.makeText(this, "Erreur export logs: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
     
         // --- Cycle de vie ---
 
