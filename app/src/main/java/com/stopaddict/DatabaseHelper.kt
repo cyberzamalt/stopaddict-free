@@ -107,7 +107,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     $COL_TYPE TEXT NOT NULL UNIQUE,
                     $COL_PRIX_PAQUET REAL DEFAULT 0,
-                    $COL_NB_CIGARETTES INTEGER DEFAULT 20,
+                    $COL_NB_CIGARETTES INTEGER DEFAULT 0,
                     $COL_PRIX_TABAC REAL DEFAULT 0,
                     $COL_PRIX_FEUILLES REAL DEFAULT 0,
                     $COL_NB_FEUILLES INTEGER DEFAULT 0,
