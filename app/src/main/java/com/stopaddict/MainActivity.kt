@@ -467,3 +467,4 @@ override fun onDestroy() {
         logger.d("onDestroy: dbHelper non initialisé, rien à fermer")
     }
 }
+}
