@@ -1,26 +1,30 @@
 package com.stopaddict
 
-import android.util.Log
-
+/**
+ * Logger "par classe" qui délègue tout au logger central StopAddictLogger.
+ *
+ * Usage existant conservé :
+ *   private val logger = AppLogger("MainActivity")
+ *   logger.d("message")
+ *   logger.e("message", e)
+ *
+ * => Rien à changer dans les fichiers qui l’utilisent.
+ */
 class AppLogger(private val tag: String) {
 
     fun d(message: String) {
-        Log.d(tag, message)
+        StopAddictLogger.d(tag, message)
     }
 
     fun e(message: String, throwable: Throwable? = null) {
-        if (throwable != null) {
-            Log.e(tag, message, throwable)
-        } else {
-            Log.e(tag, message)
-        }
+        StopAddictLogger.e(tag, message, throwable)
     }
 
     fun w(message: String) {
-        Log.w(tag, message)
+        StopAddictLogger.w(tag, message)
     }
 
     fun i(message: String) {
-        Log.i(tag, message)
+        StopAddictLogger.i(tag, message)
     }
 }
