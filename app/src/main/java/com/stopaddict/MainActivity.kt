@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -26,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         private const val PREF_AGE_ACCEPTED = "age_18_accepted"
     }
 
+    private val logger = AppLogger("MainActivity")   // 👈 AJOUTER ÇA
+
     private lateinit var headerTextView: TextView
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        Log.d(TAG, "MainActivity onCreate")
+        logger.d("MainActivity onCreate")
         
         try {
             configLangue = ConfigLangue(this)
@@ -63,74 +64,73 @@ class MainActivity : AppCompatActivity() {
             }
             
         } catch (e: Exception) {
-            Log.e(TAG, "ERREUR onCreate", e)
+            logger.e("ERREUR onCreate", e)
             Toast.makeText(this, "Erreur: ${e.message}", Toast.LENGTH_LONG).show()
             finish()
         }
     }
-
+    
     private fun initializeViews() {
         headerTextView = findViewById(R.id.main_header_title)
         tabLayout = findViewById(R.id.main_tab_layout)
         viewPager = findViewById(R.id.main_view_pager)
         adContainer = findViewById(R.id.main_ad_container)
-        Log.d(
-    TAG,
-    "initializeViews: headerTextView=$headerTextView, tabLayout=$tabLayout, viewPager=$viewPager, adContainer=$adContainer"
-)
 
+        logger.d(
+            "initializeViews: headerTextView=$headerTextView, " +
+            "tabLayout=$tabLayout, viewPager=$viewPager, adContainer=$adContainer"
+        )
     }
+
 
         private fun setupHeader() {
-        Log.d(TAG, "setupHeader: called")
+    logger.d("setupHeader: called")
 
-        updateDateTime()
+    updateDateTime()
 
-        headerTextView.setOnClickListener {
-            Log.d(TAG, "setupHeader: header clicked -> opening console debug")
-            handleConsoleDebugClick()
-        }
-
-        Log.d(TAG, "setupHeader: header click listener initialized")
+    headerTextView.setOnClickListener {
+        logger.d("setupHeader: header clicked -> opening console debug")
+        handleConsoleDebugClick()
     }
-    private fun updateDateTime() {
-        try {
-            val dateFormat = SimpleDateFormat("EEEE dd MMMM yyyy - HH:mm", Locale.getDefault())
-            val currentDateTime = dateFormat.format(Date())
-            headerTextView.text = "Stop Addict\n$currentDateTime"
 
-            Log.d(TAG, "updateDateTime: header updated with \"$currentDateTime\"")
-        } catch (e: Exception) {
-            headerTextView.text = "Stop Addict"
-            Log.e(TAG, "updateDateTime: erreur format date, fallback appliqué", e)
-        }
+    logger.d("setupHeader: header click listener initialized")
+}
+
+        
+        private fun updateDateTime() {
+    try {
+        val dateFormat = SimpleDateFormat("EEEE dd MMMM yyyy - HH:mm", Locale.getDefault())
+        val currentDateTime = dateFormat.format(Date())
+        headerTextView.text = "Stop Addict\n$currentDateTime"
+
+        logger.d("updateDateTime: header updated with \"$currentDateTime\"")
+    } catch (e: Exception) {
+        headerTextView.text = "Stop Addict"
+        logger.e("updateDateTime: erreur format date, fallback appliqué", e)
     }
+}
+    
     private fun checkAgeWarningStatus(): Boolean {
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
-        val ageAccepted = prefs.getBoolean(PREF_AGE_ACCEPTED, false)
-        val result = warningShown && ageAccepted
+    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+    val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
+    val ageAccepted = prefs.getBoolean(PREF_AGE_ACCEPTED, false)
+    val result = warningShown && ageAccepted
 
-        Log.d(
-            TAG,
-            "checkAgeWarningStatus: warningShown=$warningShown, ageAccepted=$ageAccepted, result=$result"
-        )
+    logger.d("checkAgeWarningStatus: warningShown=$warningShown, ageAccepted=$ageAccepted, result=$result")
 
-        return result
-    }
-
+    return result
+}
 
     private fun showAgeWarningDialog() {
-    Log.d(TAG, "showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
+    logger.d("showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
 
     try {
         val container = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(40, 40, 40, 20)
         }
-        Log.d(TAG, "showAgeWarningDialog: container initialisé")
+        logger.d("showAgeWarningDialog: container initialisé")
 
-        // Titre
         val titleText = TextView(this).apply {
             text = trad["warning_title"] ?: ""
             textSize = 18f
@@ -139,53 +139,49 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
         }
         container.addView(titleText)
-        Log.d(TAG, "showAgeWarningDialog: titre ajouté")
+        logger.d("showAgeWarningDialog: titre ajouté")
 
-        // Message
         val messageText = TextView(this).apply {
             text = trad["warning_message"] ?: ""
             textSize = 14f
             setPadding(0, 0, 0, 20)
         }
         container.addView(messageText)
-        Log.d(TAG, "showAgeWarningDialog: message principal ajouté")
+        logger.d("showAgeWarningDialog: message principal ajouté")
 
-        // Lien ressources utiles
         val linkText = TextView(this).apply {
             text = trad["warning_resources_link"] ?: ""
             textSize = 14f
             setTextColor(getColor(android.R.color.holo_blue_dark))
             setPadding(0, 0, 0, 30)
             setOnClickListener {
-                Log.d(TAG, "showAgeWarningDialog: clic sur 'ressources utiles'")
+                logger.d("showAgeWarningDialog: clic sur 'ressources utiles'")
                 showRessourcesUtiles()
             }
         }
         container.addView(linkText)
-        Log.d(TAG, "showAgeWarningDialog: lien ressources utiles ajouté")
+        logger.d("showAgeWarningDialog: lien ressources utiles ajouté")
 
-        // CASE 1 : majeur(e)
         val checkboxAge = CheckBox(this).apply {
             text = trad["warning_checkbox_age"] ?: ""
             textSize = 15f
             setPadding(0, 10, 0, 10)
         }
         container.addView(checkboxAge)
-        Log.d(TAG, "showAgeWarningDialog: checkbox majeur(e) ajouté")
+        logger.d("showAgeWarningDialog: checkbox majeur(e) ajouté")
 
-        // CASE 2 : ne plus afficher
         val checkboxNoShow = CheckBox(this).apply {
             text = trad["warning_checkbox_noshow"] ?: ""
             setPadding(0, 10, 0, 20)
         }
         container.addView(checkboxNoShow)
-        Log.d(TAG, "showAgeWarningDialog: checkbox ne plus afficher ajouté")
+        logger.d("showAgeWarningDialog: checkbox ne plus afficher ajouté")
 
         val builder = AlertDialog.Builder(this)
         builder.setView(container)
 
         builder.setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
-            Log.d(TAG, "showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
+            logger.d("showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
             finish()
         }
 
@@ -195,18 +191,18 @@ class MainActivity : AppCompatActivity() {
         val dialog = builder.create()
 
         dialog.setOnShowListener {
-            Log.d(TAG, "showAgeWarningDialog: dialog affiché, configuration des boutons...")
+            logger.d("showAgeWarningDialog: dialog affiché, configuration des boutons...")
 
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.isEnabled = false
 
             checkboxAge.setOnCheckedChangeListener { _, isChecked ->
-                Log.d(TAG, "showAgeWarningDialog: checkbox âge -> $isChecked")
+                logger.d("showAgeWarningDialog: checkbox âge -> $isChecked")
                 positiveButton.isEnabled = isChecked
             }
 
             positiveButton.setOnClickListener {
-                Log.d(TAG, "showAgeWarningDialog: bouton 'Accepter' cliqué")
+                logger.d("showAgeWarningDialog: bouton 'Accepter' cliqué")
 
                 if (checkboxAge.isChecked) {
                     val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -214,13 +210,13 @@ class MainActivity : AppCompatActivity() {
                     prefs.edit().apply {
                         putBoolean(PREF_AGE_ACCEPTED, true)
                         if (checkboxNoShow.isChecked) {
-                            Log.d(TAG, "showAgeWarningDialog: option 'ne plus afficher' activée")
+                            logger.d("showAgeWarningDialog: option 'ne plus afficher' activée")
                             putBoolean(PREF_WARNING_SHOWN, true)
                         }
                         apply()
                     }
 
-                    Log.d(TAG, "showAgeWarningDialog: préférences sauvegardées, fermeture dialog")
+                    logger.d("showAgeWarningDialog: préférences sauvegardées, fermeture dialog")
                     dialog.dismiss()
                     initializeMainContent()
                 }
@@ -228,75 +224,76 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show()
-        Log.d(TAG, "showAgeWarningDialog: dialog.show() exécuté")
+        logger.d("showAgeWarningDialog: dialog.show() exécuté")
 
     } catch (e: Exception) {
-        Log.e(TAG, "showAgeWarningDialog: erreur dans la création du dialog", e)
+        logger.e("showAgeWarningDialog: erreur dans la création du dialog", e)
         initializeMainContent()
     }
 }
 
+
     
 private fun showRessourcesUtiles() {
-    Log.d(TAG, "showRessourcesUtiles: ouverture de la popup ressources utiles...")
+    logger.d("showRessourcesUtiles: ouverture de la popup ressources utiles...")
     try {
         AlertDialog.Builder(this)
             .setTitle(trad["resources_title"] ?: "Help")
             .setMessage(trad["resources_content"] ?: "")
             .setPositiveButton(trad["resources_btn_close"] ?: "Close") { _, _ ->
-                Log.d(TAG, "showRessourcesUtiles: bouton Fermer cliqué")
+                logger.d("showRessourcesUtiles: bouton Fermer cliqué")
             }
             .show()
-        Log.d(TAG, "showRessourcesUtiles: dialog affiché avec succès")
+        logger.d("showRessourcesUtiles: dialog affiché avec succès")
     } catch (e: Exception) {
-            Log.e(TAG, "showRessourcesUtiles: erreur affichage ressources", e)
-     }
+        logger.e("showRessourcesUtiles: erreur affichage ressources", e)
+    }
 }
 
 private fun initializeMainContent() {
-    Log.d(TAG, "initializeMainContent: démarrage de l'initialisation du contenu principal")
+    logger.d("initializeMainContent: démarrage de l'initialisation du contenu principal")
     try {
         setupTabLayoutAndViewPager()
-        Log.d(TAG, "initializeMainContent: setupTabLayoutAndViewPager exécuté")
+        logger.d("initializeMainContent: setupTabLayoutAndViewPager exécuté")
 
         if (isVersionGratuite) {
             adContainer.visibility = View.VISIBLE
-            Log.d(TAG, "initializeMainContent: version GRATUITE -> affichage du bandeau pub")
+            logger.d("initializeMainContent: version GRATUITE -> affichage du bandeau pub")
         } else {
             adContainer.visibility = View.GONE
-            Log.d(TAG, "initializeMainContent: version PAYANTE -> masquage du bandeau pub")
+            logger.d("initializeMainContent: version PAYANTE -> masquage du bandeau pub")
         }
 
-        Log.d(TAG, "initializeMainContent: fin normale de l'initialisation")
+        logger.d("initializeMainContent: fin normale de l'initialisation")
     } catch (e: Exception) {
-        Log.e(TAG, "initializeMainContent: Erreur init content", e)
+        logger.e("initializeMainContent: Erreur init content", e)
     }
 }
 
 private fun setupTabLayoutAndViewPager() {
-    Log.d(TAG, "setupTabLayoutAndViewPager: démarrage configuration ViewPager + TabLayout")
+    logger.d("setupTabLayoutAndViewPager: démarrage configuration ViewPager + TabLayout")
 
     val fragmentAdapter = FragmentAdapter(this)
     viewPager.adapter = fragmentAdapter
     viewPager.isUserInputEnabled = true
     viewPager.offscreenPageLimit = 2
-    Log.d(TAG, "setupTabLayoutAndViewPager: adapter assigné, userInputEnabled=true, offscreenPageLimit=2")
+    logger.d("setupTabLayoutAndViewPager: adapter assigné, userInputEnabled=true, offscreenPageLimit=2")
 
     TabLayoutMediator(tabLayout, viewPager) { tab, position ->
         val title = getTabTitle(position)
         tab.text = title
-        Log.d(TAG, "setupTabLayoutAndViewPager: onglet position=$position, title=$title")
+        logger.d("setupTabLayoutAndViewPager: onglet position=$position, title=$title")
     }.attach()
-    Log.d(TAG, "setupTabLayoutAndViewPager: TabLayoutMediator attaché")
+    logger.d("setupTabLayoutAndViewPager: TabLayoutMediator attaché")
 
     viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            Log.d(TAG, "setupTabLayoutAndViewPager: onPageSelected -> position=$position, updateDateTime()")
+            logger.d("setupTabLayoutAndViewPager: onPageSelected -> position=$position, updateDateTime()")
             updateDateTime()
         }
     })
-    Log.d(TAG, "setupTabLayoutAndViewPager: callback onPageChange enregistré")
+    logger.d("setupTabLayoutAndViewPager: callback onPageChange enregistré")
 }
  
 private fun getTabTitle(position: Int): String {
@@ -308,39 +305,39 @@ private fun getTabTitle(position: Int): String {
         4 -> trad["tab_reglages"] ?: "Settings"
         else -> ""
     }
-    Log.d(TAG, "getTabTitle: position=$position -> title='$title'")
+    logger.d("getTabTitle: position=$position -> title='$title'")
     return title
 }
 
     private fun handleConsoleDebugClick() {
     val currentTime = System.currentTimeMillis()
-    Log.d(TAG, "handleConsoleDebugClick: click detected, currentTime=$currentTime, lastConsoleClickTime=$lastConsoleClickTime, consoleClickCount=$consoleClickCount")
+    logger.d("handleConsoleDebugClick: click detected, currentTime=$currentTime, lastConsoleClickTime=$lastConsoleClickTime, consoleClickCount=$consoleClickCount")
 
     if (currentTime - lastConsoleClickTime > 2000) {
-        Log.d(TAG, "handleConsoleDebugClick: more than 2000 ms since last click -> reset consoleClickCount to 1")
+        logger.d("handleConsoleDebugClick: more than 2000 ms since last click -> reset consoleClickCount to 1")
         consoleClickCount = 1
     } else {
         consoleClickCount++
-        Log.d(TAG, "handleConsoleDebugClick: click within 2000 ms -> increment consoleClickCount=$consoleClickCount")
+        logger.d("handleConsoleDebugClick: click within 2000 ms -> increment consoleClickCount=$consoleClickCount")
     }
 
     lastConsoleClickTime = currentTime
-    Log.d(TAG, "handleConsoleDebugClick: lastConsoleClickTime updated to $lastConsoleClickTime")
+    logger.d("handleConsoleDebugClick: lastConsoleClickTime updated to $lastConsoleTime")
 
     if (consoleClickCount >= 5) {
-        Log.d(TAG, "handleConsoleDebugClick: 5 clicks detected -> toggle console (current consoleVisible=$consoleVisible)")
+        logger.d("handleConsoleDebugClick: 5 clicks detected -> toggle console (current consoleVisible=$consoleVisible)")
         consoleClickCount = 0
 
         if (consoleVisible) {
-            Log.d(TAG, "handleConsoleDebugClick: console currently visible -> dismiss dialog")
+            logger.d("handleConsoleDebugClick: console currently visible -> dismiss dialog")
             consoleDialog?.dismiss()
             consoleVisible = false
-            Log.d(TAG, "handleConsoleDebugClick: consoleVisible set to false")
+            logger.d("handleConsoleDebugClick: consoleVisible set to false")
         } else {
-            Log.d(TAG, "handleConsoleDebugClick: console currently hidden -> show dialog")
+            logger.d("handleConsoleDebugClick: console currently hidden -> show dialog")
             showConsoleDebugDialog()
             consoleVisible = true
-            Log.d(TAG, "handleConsoleDebugClick: consoleVisible set to true")
+            logger.d("handleConsoleDebugClick: consoleVisible set to true")
         }
     }
 }
@@ -431,39 +428,39 @@ private fun getTabTitle(position: Int): String {
             consoleDialog?.window?.setGravity(Gravity.TOP)
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur console", e)
-        }
+    logger.e("Erreur console", e)
     }
+}
 
     fun refreshData() {
-    Log.d(TAG, "refreshData: called -> updating date/time")
+    logger.d("refreshData: called -> updating date/time")
     updateDateTime()
-    Log.d(TAG, "refreshData: finished updating date/time")
+    logger.d("refreshData: finished updating date/time")
 }
+    
         // --- Cycle de vie ---
 
     override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume: activité reprise -> mise à jour de la date/heure")
-        updateDateTime()
-    }
+    super.onResume()
+    logger.d("onResume: activité reprise -> mise à jour de la date/heure")
+    updateDateTime()
+}
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: activité mise en pause")
-    }
+override fun onPause() {
+    super.onPause()
+    logger.d("onPause: activité mise en pause")
+}
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy: destruction activité, nettoyage des ressources")
+override fun onDestroy() {
+    super.onDestroy()
+    logger.d("onDestroy: destruction activité, nettoyage des ressources")
 
-        consoleDialog?.dismiss()
+    consoleDialog?.dismiss()
 
-        if (::dbHelper.isInitialized) {
-            Log.d(TAG, "onDestroy: fermeture de la base de données")
-            dbHelper.close()
-        } else {
-            Log.d(TAG, "onDestroy: dbHelper non initialisé, rien à fermer")
-        }
+    if (::dbHelper.isInitialized) {
+        logger.d("onDestroy: fermeture de la base de données")
+        dbHelper.close()
+    } else {
+        logger.d("onDestroy: dbHelper non initialisé, rien à fermer")
     }
 }
