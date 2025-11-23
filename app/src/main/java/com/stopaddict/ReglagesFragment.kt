@@ -631,67 +631,100 @@ class ReglagesFragment : Fragment() {
     }
 
     private fun addRAZSection(container: LinearLayout) {
-        addSectionTitle(container, trad["raz_sauvegarde"] ?: "RAZ et Sauvegarde")
-        
-        val razCard = createCard()
-        
-        // RAZ jour
-        val btnRAZJour = Button(requireContext()).apply {
-            text = trad["raz_jour"] ?: "RAZ jour"
-            setBackgroundColor(Color.parseColor("#FFA726"))
-            setTextColor(Color.WHITE)
-            setOnClickListener {
-                showRAZConfirmation("jour")
-            }
-        }
-        razCard.addView(btnRAZJour)
-        
-        // RAZ historique
-        val btnRAZHistorique = Button(requireContext()).apply {
-            text = trad["raz_historique"] ?: "RAZ historique"
-            setBackgroundColor(Color.parseColor("#FF7043"))
-            setTextColor(Color.WHITE)
-            setOnClickListener {
-                showRAZConfirmation("historique")
-            }
-        }
-        razCard.addView(btnRAZHistorique)
-        
-        // RAZ usine
-        val btnRAZUsine = Button(requireContext()).apply {
-            text = trad["raz_usine"] ?: "RAZ réglages usine"
-            setBackgroundColor(Color.parseColor("#D32F2F"))
-            setTextColor(Color.WHITE)
-            setOnClickListener {
-                showRAZConfirmation("usine")
-            }
-        }
-        razCard.addView(btnRAZUsine)
-        
-        // Export
-        val btnExport = Button(requireContext()).apply {
-            text = trad["btn_exporter"] ?: "Exporter"
-            setBackgroundColor(Color.parseColor("#66BB6A"))
-            setTextColor(Color.WHITE)
-            setOnClickListener {
-                exportData()
-            }
-        }
-        razCard.addView(btnExport)
-        
-        // Import
-        val btnImport = Button(requireContext()).apply {
-            text = trad["btn_importer"] ?: "Importer"
-            setBackgroundColor(Color.parseColor("#42A5F5"))
-            setTextColor(Color.WHITE)
-            setOnClickListener {
-                importData()
-            }
-        }
-        razCard.addView(btnImport)
-        
-        container.addView(razCard)
+    val card = createCard(container)
+
+    val title = TextView(requireContext()).apply {
+        text = trad["raz_sauvegarde"] ?: "RAZ & sauvegarde"
+        textSize = 18f
+        setTextColor(Color.BLACK)
+        setPadding(0, 0, 0, 16)
     }
+    card.addView(title)
+
+    // Ligne boutons RAZ (jour / historique / usine)
+    val razLayout = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.HORIZONTAL
+        weightSum = 3f
+    }
+
+    val btnRAZJour = Button(requireContext()).apply {
+        text = trad["btn_raz_jour"] ?: "RAZ du jour"
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+            setMargins(0, 0, 8, 0)
+        }
+        setOnClickListener { confirmerRAZJour() }
+    }
+
+    val btnRAZHistorique = Button(requireContext()).apply {
+        text = trad["btn_raz_historique"] ?: "RAZ historique"
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+            setMargins(0, 0, 8, 0)
+        }
+        setOnClickListener { confirmerRAZHistorique() }
+    }
+
+    val btnRAZUsine = Button(requireContext()).apply {
+        text = trad["btn_raz_usine"] ?: "RAZ d'usine"
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        setOnClickListener { confirmerRAZUsine() }
+    }
+
+    razLayout.addView(btnRAZJour)
+    razLayout.addView(btnRAZHistorique)
+    razLayout.addView(btnRAZUsine)
+    card.addView(razLayout)
+
+    // Ligne Export / Import JSON
+    val exportImportLayout = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.HORIZONTAL
+        weightSum = 2f
+        setPadding(0, 16, 0, 0)
+    }
+
+    val btnExporter = Button(requireContext()).apply {
+        text = trad["btn_exporter"] ?: "Exporter"
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+            setMargins(0, 0, 8, 0)
+        }
+        setOnClickListener { lancerExportJSON() }
+    }
+
+    val btnImporter = Button(requireContext()).apply {
+        text = trad["btn_importer"] ?: "Importer"
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        setOnClickListener { lancerImportJSON() }
+    }
+
+    exportImportLayout.addView(btnExporter)
+    exportImportLayout.addView(btnImporter)
+    card.addView(exportImportLayout)
+
+    // 🔥 Nouveau : bouton "Exporter les logs"
+    val btnExportLogs = Button(requireContext()).apply {
+        // Texte traduit, fallback FR si clé manquante dans certaines langues
+        text = trad["btn_export_logs"] ?: "Exporter les logs"
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 16, 0, 0)
+        }
+
+        setOnClickListener {
+            // On délègue à l'Activity sans casser le reste
+            (activity as? MainActivity)?.exportAllLogsFromSettings()
+                ?: Toast.makeText(
+                    requireContext(),
+                    "Impossible d’exporter les logs",
+                    Toast.LENGTH_SHORT
+                ).show()
+        }
+    }
+
+    card.addView(btnExportLogs)
+
+    container.addView(card)
+}
 
     private fun showAvertissementDialog() {
         val message = ReglagesLangues.getAvertissement(configLangue.getLangue())
