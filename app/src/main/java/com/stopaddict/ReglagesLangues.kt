@@ -200,22 +200,22 @@ object ReglagesLangues {
         "radio_classiques" to "Regular cigarettes",
         "radio_rouler" to "Rolling tobacco",
         "radio_tubeuse" to "Tube machine",
-        "label_prix_paquet" to "Pack price (£)",
+        "label_prix_paquet" to "Pack price",
         "label_nb_cigarettes" to "Number of cigarettes",
-        "label_prix_tabac" to "Tobacco price (£)",
-        "label_prix_feuilles" to "Papers price (£)",
+        "label_prix_tabac" to "Tobacco price",
+        "label_prix_feuilles" to "Papers price",
         "label_nb_feuilles" to "Number of papers",
-        "label_prix_filtres" to "Filters price (£)",
+        "label_prix_filtres" to "Filters price",
         "label_nb_filtres" to "Number of filters",
-        "label_prix_tubes" to "Tubes price (£)",
+        "label_prix_tubes" to "Tubes price",
         "label_nb_tubes" to "Number of tubes",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Price per gram (£)",
+        "label_prix_gramme" to "Price per gram",
         "label_gramme_par_joint" to "Grams per joint",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Drink price (£)",
+        "label_prix_verre" to "Drink price",
         "label_unite_cl" to "Unit (cL)",
 
         // Labels habitudes
@@ -347,7 +347,7 @@ object ReglagesLangues {
         "label_nb_feuilles" to "Número de papeles",
         "label_prix_filtres" to "Precio filtros",
         "label_nb_filtres" to "Número de filtros",
-        "label_prix_tubes" to "Precio tubos)",
+        "label_prix_tubes" to "Precio tubos",
         "label_nb_tubes" to "Número de tubos",
 
         // Labels formulaires joints
@@ -479,22 +479,22 @@ object ReglagesLangues {
         "radio_classiques" to "Cigarros clássicos",
         "radio_rouler" to "Para enrolar",
         "radio_tubeuse" to "Entubadora",
-        "label_prix_paquet" to "Preço do maço (R$)",
+        "label_prix_paquet" to "Preço do maço",
         "label_nb_cigarettes" to "Número de cigarros",
-        "label_prix_tabac" to "Preço tabaco (R$)",
-        "label_prix_feuilles" to "Preço papéis (R$)",
+        "label_prix_tabac" to "Preço tabaco",
+        "label_prix_feuilles" to "Preço papéis",
         "label_nb_feuilles" to "Número de papéis",
-        "label_prix_filtres" to "Preço filtros (R$)",
+        "label_prix_filtres" to "Preço filtros",
         "label_nb_filtres" to "Número de filtros",
-        "label_prix_tubes" to "Preço tubos (R$)",
+        "label_prix_tubes" to "Preço tubos",
         "label_nb_tubes" to "Número de tubos",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Preço por grama (R$)",
+        "label_prix_gramme" to "Preço por grama",
         "label_gramme_par_joint" to "Gramas por baseado",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Preço por dose (R$)",
+        "label_prix_verre" to "Preço por dose",
         "label_unite_cl" to "Unidade (cL)",
 
         // Labels habitudes
@@ -896,22 +896,22 @@ object ReglagesLangues {
         "radio_classiques" to "Обычные сигареты",
         "radio_rouler" to "Самокрутки",
         "radio_tubeuse" to "Гильзовочная машина",
-        "label_prix_paquet" to "Цена пачки (₽)",
+        "label_prix_paquet" to "Цена пачки",
         "label_nb_cigarettes" to "Количество сигарет",
-        "label_prix_tabac" to "Цена табака (₽)",
-        "label_prix_feuilles" to "Цена бумаг (₽)",
+        "label_prix_tabac" to "Цена табака",
+        "label_prix_feuilles" to "Цена бумаг",
         "label_nb_feuilles" to "Количество бумаг",
-        "label_prix_filtres" to "Цена фильтров (₽)",
+        "label_prix_filtres" to "Цена фильтров",
         "label_nb_filtres" to "Количество фильтров",
-        "label_prix_tubes" to "Цена гильз (₽)",
+        "label_prix_tubes" to "Цена гильз",
         "label_nb_tubes" to "Количество гильз",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "Цена за грамм (₽)",
+        "label_prix_gramme" to "Цена за грамм",
         "label_gramme_par_joint" to "Граммов на косяк",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "Цена напитка (₽)",
+        "label_prix_verre" to "Цена напитка",
         "label_unite_cl" to "Единица (cL)",
 
         // Labels habitudes
@@ -1035,22 +1035,22 @@ object ReglagesLangues {
         "radio_classiques" to "سجائر عادية",
         "radio_rouler" to "للف",
         "radio_tubeuse" to "آلة الأنابيب",
-        "label_prix_paquet" to "(﷼) سعر الباقة",
+        "label_prix_paquet" to "سعر الباقة",
         "label_nb_cigarettes" to "عدد السجائر",
-        "label_prix_tabac" to "(﷼) سعر التبغ",
-        "label_prix_feuilles" to "(﷼) سعر الأوراق",
+        "label_prix_tabac" to "سعر التبغ",
+        "label_prix_feuilles" to "سعر الأوراق",
         "label_nb_feuilles" to "عدد الأوراق",
-        "label_prix_filtres" to "(﷼) سعر المرشحات",
+        "label_prix_filtres" to "سعر المرشحات",
         "label_nb_filtres" to "عدد المرشحات",
-        "label_prix_tubes" to "(﷼) سعر الأنابيب",
+        "label_prix_tubes" to "سعر الأنابيب",
         "label_nb_tubes" to "عدد الأنابيب",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "(﷼) السعر لكل جرام",
+        "label_prix_gramme" to "السعر لكل جرام",
         "label_gramme_par_joint" to "جرامات لكل مفصل",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "(﷼) سعر الكأس",
+        "label_prix_verre" to "سعر الكأس",
         "label_unite_cl" to "(cL) الوحدة",
 
         // Labels habitudes
@@ -1174,22 +1174,22 @@ object ReglagesLangues {
         "radio_classiques" to "नियमित सिगरेट",
         "radio_rouler" to "लपेटने के लिए",
         "radio_tubeuse" to "ट्यूब मशीन",
-        "label_prix_paquet" to "पैकेट की कीमत (₹)",
+        "label_prix_paquet" to "पैकेट की कीमत",
         "label_nb_cigarettes" to "सिगरेट की संख्या",
-        "label_prix_tabac" to "तंबाकू की कीमत (₹)",
-        "label_prix_feuilles" to "कागजों की कीमत (₹)",
+        "label_prix_tabac" to "तंबाकू की कीमत",
+        "label_prix_feuilles" to "कागजों की कीमत",
         "label_nb_feuilles" to "कागजों की संख्या",
-        "label_prix_filtres" to "फिल्टर की कीमत (₹)",
+        "label_prix_filtres" to "फिल्टर की कीमत",
         "label_nb_filtres" to "फिल्टर की संख्या",
-        "label_prix_tubes" to "ट्यूब की कीमत (₹)",
+        "label_prix_tubes" to "ट्यूब की कीमत",
         "label_nb_tubes" to "ट्यूब की संख्या",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "प्रति ग्राम कीमत (₹)",
+        "label_prix_gramme" to "प्रति ग्राम कीमत",
         "label_gramme_par_joint" to "प्रति जोड़ ग्राम",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "पेय की कीमत (₹)",
+        "label_prix_verre" to "पेय की कीमत",
         "label_unite_cl" to "इकाई (cL)",
 
         // Labels habitudes
@@ -1313,22 +1313,22 @@ object ReglagesLangues {
         "radio_classiques" to "通常のタバコ",
         "radio_rouler" to "手巻き",
         "radio_tubeuse" to "チューブマシン",
-        "label_prix_paquet" to "パック価格（¥）",
+        "label_prix_paquet" to "パック価格",
         "label_nb_cigarettes" to "タバコの本数",
-        "label_prix_tabac" to "タバコ価格（¥）",
-        "label_prix_feuilles" to "紙の価格（¥）",
+        "label_prix_tabac" to "タバコ価格",
+        "label_prix_feuilles" to "紙の価格",
         "label_nb_feuilles" to "紙の枚数",
-        "label_prix_filtres" to "フィルター価格（¥）",
+        "label_prix_filtres" to "フィルター価格",
         "label_nb_filtres" to "フィルターの数",
-        "label_prix_tubes" to "チューブ価格（¥）",
+        "label_prix_tubes" to "チューブ価格",
         "label_nb_tubes" to "チューブの数",
 
         // Labels formulaires joints
-        "label_prix_gramme" to "グラム当たりの価格（¥）",
+        "label_prix_gramme" to "グラム当たりの価格",
         "label_gramme_par_joint" to "ジョイント当たりのグラム",
 
         // Labels formulaires alcool
-        "label_prix_verre" to "ドリンク価格（¥）",
+        "label_prix_verre" to "ドリンク価格",
         "label_unite_cl" to "単位（cL）",
 
         // Labels habitudes
