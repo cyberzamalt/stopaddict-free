@@ -151,6 +151,9 @@ object ReglagesLangues {
         "btn_maj" to "Dernières mises à jour",
         "maj_titre" to "Dernières mises à jour",
         "maj_contenu" to "Déploiement V1",
+        "btn_premium" to "Version sans publicité",
+        "premium_titre" to "Version sans publicité",
+        "premium_contenu" to "La version sans publicité sera bientôt disponible.\n\nElle supprimera les bandeaux pubs et les limitations.",
         "hint_prenom" to "Entrer votre prénom",
 
         // RAZ
@@ -295,6 +298,9 @@ object ReglagesLangues {
         "btn_maj" to "Latest updates",
         "maj_titre" to "Latest updates",
         "maj_contenu" to "Deployment V1",
+        "btn_premium" to "Ad-free version",
+        "premium_titre" to "Ad-free version",
+        "premium_contenu" to "The ad-free version will be available soon.\n\nIt will remove banner ads and limits.",
         "hint_prenom" to "Enter your first name",
 
         // Reset
@@ -438,6 +444,9 @@ object ReglagesLangues {
         "btn_maj" to "Últimas actualizaciones",
         "maj_titre" to "Últimas actualizaciones",
         "maj_contenu" to "Lanzamiento V1",
+        "btn_premium" to "Versión sin publicidad",
+        "premium_titre" to "Versión sin publicidad",
+        "premium_contenu" to "La versión sin publicidad estará disponible pronto.\n\nEliminará los anuncios y las limitaciones.",
         "hint_prenom" to "Ingrese su nombre",
 
         // Restablecer
@@ -580,6 +589,9 @@ object ReglagesLangues {
         "btn_maj" to "Últimas atualizações",
         "maj_titre" to "Últimas atualizações",
         "maj_contenu" to "Lançamento V1",
+        "btn_premium" to "Versão sem publicidade",
+        "premium_titre" to "Versão sem publicidade",
+        "premium_contenu" to "A versão sem publicidade estará disponível em breve.\n\nEla removerá os anúncios e as limitações.",
         "hint_prenom" to "Digite seu nome",
 
         // Redefinir
@@ -722,6 +734,9 @@ object ReglagesLangues {
         "btn_maj" to "Letzte Aktualisierungen",
         "maj_titre" to "Letzte Aktualisierungen",
         "maj_contenu" to "Bereitstellung V1",
+        "btn_premium" to "Werbefreie Version",
+        "premium_titre" to "Werbefreie Version",
+        "premium_contenu" to "Die werbefreie Version ist bald verfügbar.\n\nSie entfernt Bannerwerbung und Einschränkungen.",
         "hint_prenom" to "Geben Sie Ihren Vornamen ein",
 
         // Zurücksetzen
@@ -864,6 +879,9 @@ object ReglagesLangues {
         "btn_maj" to "Ultimi aggiornamenti",
         "maj_titre" to "Ultimi aggiornamenti",
         "maj_contenu" to "Rilascio V1",
+        "btn_premium" to "Versione senza pubblicità",
+        "premium_titre" to "Versione senza pubblicità",
+        "premium_contenu" to "La versione senza pubblicità sarà presto disponibile.\n\nRimuoverà i banner pubblicitari e i limiti.",
         "hint_prenom" to "Inserisci il tuo nome",
 
         // Ripristina
@@ -1006,6 +1024,9 @@ object ReglagesLangues {
         "btn_maj" to "Последние обновления",
         "maj_titre" to "Последние обновления",
         "maj_contenu" to "Релиз V1",
+        "btn_premium" to "Версия без рекламы",
+        "premium_titre" to "Версия без рекламы",
+        "premium_contenu" to "Версия без рекламы скоро будет доступна.\n\nОна уберёт баннерную рекламу и ограничения.",
         "hint_prenom" to "Введите ваше имя",
 
         // Сброс
@@ -1148,6 +1169,9 @@ object ReglagesLangues {
         "btn_maj" to "آخر التحديثات",
         "maj_titre" to "آخر التحديثات",
         "maj_contenu" to "نشر الإصدار V1",
+        "btn_premium" to "الإصدار بدون إعلانات",
+        "premium_titre" to "الإصدار بدون إعلانات",
+        "premium_contenu" to "الإصدار بدون إعلانات سيكون متاحًا قريبًا.\n\nسيزيل الإعلانات والقيود.",
         "hint_prenom" to "أدخل اسمك الأول",
 
         // إعادة تعيين
@@ -1290,6 +1314,9 @@ object ReglagesLangues {
         "btn_maj" to "नवीनतम अपडेट",
         "maj_titre" to "नवीनतम अपडेट",
         "maj_contenu" to "परिनियोजन V1",
+        "btn_premium" to "विज्ञापन-मुक्त संस्करण",
+        "premium_titre" to "विज्ञापन-मुक्त संस्करण",
+        "premium_contenu" to "विज्ञापन-मुक्त संस्करण जल्दी ही उपलब्ध होगा।\n\nयह बैनर विज्ञापनों और सीमाओं को हटा देगा।",
         "hint_prenom" to "अपना नाम दर्ज करें",
 
         // रीसेट
@@ -1432,6 +1459,9 @@ object ReglagesLangues {
         "btn_maj" to "最新のアップデート",
         "maj_titre" to "最新のアップデート",
         "maj_contenu" to "リリース V1",
+        "btn_premium" to "広告なしバージョン",
+        "premium_titre" to "広告なしバージョン",
+        "premium_contenu" to "広告なしバージョンはまもなく利用可能になります。\n\nバナー広告と制限が解除されます。",
         "hint_prenom" to "名前を入力してください",
 
         // リセット
