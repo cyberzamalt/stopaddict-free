@@ -35,16 +35,23 @@
         android:background="@android:color/darker_gray" />
 
     <!-- TabLayout pour navigation (5 onglets en bas) -->
+    
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/main_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabTextColor="@android:color/darker_gray"
-        app:tabSelectedTextColor="@android:color/holo_blue_dark"
-        app:tabIndicatorColor="@android:color/holo_blue_dark"
-        app:tabIndicatorHeight="3dp" />
+    android:id="@+id/main_tab_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    app:tabPaddingStart="4dp"
+    app:tabPaddingEnd="4dp"
+
+    app:tabMode="fixed"
+    app:tabGravity="fill"
+    app:tabTextColor="@android:color/darker_gray"
+    app:tabSelectedTextColor="@android:color/holo_blue_dark"
+    app:tabIndicatorColor="@android:color/holo_blue_dark"
+    app:tabIndicatorHeight="3dp" />
 
 </LinearLayout>
