@@ -343,11 +343,6 @@ class ReglagesFragment : Fragment() {
 
         radioGroup.addView(tuberContainer)
         
-        addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
-        editNbTubes = createNumberEditText()
-        tuberContainer.addView(editNbTubes)
-        radioGroup.addView(tuberContainer)
-        
         cigaretteCard.addView(radioGroup)
         container.addView(cigaretteCard)
     }
