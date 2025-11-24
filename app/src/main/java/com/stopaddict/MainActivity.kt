@@ -278,9 +278,44 @@ private fun setupTabLayoutAndViewPager() {
     viewPager.offscreenPageLimit = 2
     logger.d("setupTabLayoutAndViewPager: adapter assigné, userInputEnabled=true, offscreenPageLimit=2")
 
-    TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
         val title = getTabTitle(position)
-        tab.text = title
+
+        // Choix de l'icône selon l'onglet
+        val iconRes = when (position) {
+            0 -> android.R.drawable.ic_menu_home             // Accueil
+            1 -> android.R.drawable.ic_menu_info_details     // Stats
+            2 -> android.R.drawable.ic_menu_my_calendar      // Calendrier
+            3 -> android.R.drawable.ic_menu_recent_history   // Habitudes & Volontés
+            4 -> android.R.drawable.ic_menu_manage           // Réglages
+            else -> 0
+        }
+
+        // Vue personnalisée onglet : icône + texte
+        val tabView = LinearLayout(this@MainActivity).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+        }
+
+        if (iconRes != 0) {
+            val iconView = ImageView(this@MainActivity).apply {
+                setImageResource(iconRes)
+            }
+            tabView.addView(iconView)
+        }
+
+        val textView = TextView(this@MainActivity).apply {
+            text = title
+            gravity = Gravity.CENTER
+            textSize = 14f
+            // 1 ligne pour tous, sauf Habitudes & Volontés (position 3) autorisé à 2 lignes
+            maxLines = if (position == 3) 2 else 1
+            setSingleLine(position != 3)
+        }
+        tabView.addView(textView)
+
+        tab.customView = tabView
+
         logger.d("setupTabLayoutAndViewPager: onglet position=$position, title=$title")
     }.attach()
     logger.d("setupTabLayoutAndViewPager: TabLayoutMediator attaché")
