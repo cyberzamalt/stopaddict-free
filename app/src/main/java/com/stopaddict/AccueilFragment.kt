@@ -69,6 +69,8 @@ class AccueilFragment : Fragment() {
     private lateinit var containerBieres: LinearLayout
     private lateinit var containerLiqueurs: LinearLayout
     private lateinit var containerAlcoolFort: LinearLayout
+        // Bouton version sans pub (accueil)
+    private lateinit var btnPremiumAccueil: Button
 
     // Variables état
     private var cigarettesCount = 0
@@ -181,6 +183,11 @@ class AccueilFragment : Fragment() {
             containerBieres = view.findViewById(R.id.accueil_container_bieres)
             containerLiqueurs = view.findViewById(R.id.accueil_container_liqueurs)
             containerAlcoolFort = view.findViewById(R.id.accueil_container_alcool_fort)
+
+                        // Bouton version sans pub
+            btnPremiumAccueil = view.findViewById(R.id.accueil_btn_premium)
+            val tradReglages = ReglagesLangues.getTraductions(configLangue.getLangue())
+            btnPremiumAccueil.text = tradReglages["btn_premium"] ?: "Version sans publicité"
 
             // Appliquer traductions aux CheckBox
             checkCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
@@ -319,6 +326,11 @@ class AccueilFragment : Fragment() {
             }
             checkAlcoolFort.setOnCheckedChangeListener { _, isChecked ->
                 toggleCategorie(DatabaseHelper.TYPE_ALCOOL_FORT, isChecked)
+            }
+            
+                        // Bouton version sans pub (accueil)
+            btnPremiumAccueil.setOnClickListener {
+                showPremiumDialog()
             }
 
             Log.d(TAG, "Listeners configurés avec succès")
@@ -1062,5 +1074,17 @@ class AccueilFragment : Fragment() {
         } catch (e: Exception) {
             Log.e(TAG, "Erreur force update conseil: ${e.message}")
         }
+    }
+        private fun showPremiumDialog() {
+        val tradReglages = ReglagesLangues.getTraductions(configLangue.getLangue())
+        val titre = tradReglages["premium_titre"] ?: "Version sans publicité"
+        val contenu = tradReglages["premium_contenu"] ?: "La version sans publicité sera bientôt disponible."
+        val btnOk = trad["btn_ok"] ?: "Fermer"
+
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(titre)
+            .setMessage(contenu)
+            .setPositiveButton(btnOk, null)
+            .show()
     }
 }
