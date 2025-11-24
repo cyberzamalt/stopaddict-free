@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="0dp"
 
         <!-- Header -->
         <TextView
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="@android:color/transparent"
             android:padding="12dp"
             android:layout_marginBottom="16dp">
 
@@ -123,13 +123,13 @@
 
         <!-- Grid calendrier (7 colonnes pour les jours de la semaine) -->
         <GridLayout
-            android:id="@+id/calendrier_grid_mois"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
             android:columnCount="7"
             android:rowCount="6"
             android:layout_marginBottom="16dp"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="@android:color/transparent"
             android:padding="8dp" />
 
         <!-- Container légende (ajouté dynamiquement) -->
@@ -138,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="@android:color/transparent"
             android:padding="12dp" />
 
     </LinearLayout>
