@@ -887,6 +887,17 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             .show()
     }
 
+                    private fun showPremiumDialog() {
+        val titre = trad["premium_titre"] ?: "Version sans publicité"
+        val contenu = trad["premium_contenu"] ?: "La version sans publicité sera bientôt disponible."
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(titre)
+            .setMessage(contenu)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
+            .show()
+    }
+
     private fun sendEmail() {
         try {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
