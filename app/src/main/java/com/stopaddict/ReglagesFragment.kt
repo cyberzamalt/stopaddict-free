@@ -662,31 +662,36 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         val aProposCard = createCard()
         
-        // Lien 1: Réafficher avertissement
+                // Lien 1: Réafficher avertissement
         addLinkButton(aProposCard, "⚠️ ${trad["voir_avertissement"] ?: "Voir l'avertissement"}") {
             showAvertissementDialog()
         }
-        
+
         // Lien 2: Manuel d'utilisation
         addLinkButton(aProposCard, "📖 ${trad["btn_manuel"] ?: "Manuel d'utilisation"}") {
             showManuelDialog()
         }
-        
+
         // Lien 3: CGV
         addLinkButton(aProposCard, "📄 ${trad["btn_cgv"] ?: "Conditions générales de vente (CGV)"}") {
             showCGVDialog()
         }
-        
+
         // Lien 4: Mentions légales
         addLinkButton(aProposCard, "⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}") {
             showMentionsLegalesDialog()
         }
-        
-        // Lien 5: Contact support
+
+        // Lien 5: Dernières mises à jour
+        addLinkButton(aProposCard, "🛠️ ${trad["btn_maj"] ?: "Dernières mises à jour"}") {
+            showMisesAJourDialog()
+        }
+
+        // Lien 6: Contact support
         addLinkButton(aProposCard, "✉️ ${trad["btn_contact"] ?: "Contact support"}") {
             sendEmail()
         }
-        
+
         container.addView(aProposCard)
     }
 
@@ -856,11 +861,13 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             .show()
     }
 
-    private fun showMentionsLegalesDialog() {
-        val mentions = ReglagesLangues.getMentionsLegales(configLangue.getLangue())
+        private fun showMisesAJourDialog() {
+        val titre = trad["maj_titre"] ?: "Dernières mises à jour"
+        val contenu = trad["maj_contenu"] ?: "Déploiement V1"
+
         AlertDialog.Builder(requireContext())
-            .setTitle("⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}")
-            .setMessage(mentions)
+            .setTitle(titre)
+            .setMessage(contenu)
             .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
