@@ -168,11 +168,11 @@ class CalendrierFragment : Fragment() {
         }
         legendeContainer.addView(legendeTitre)
         
-        addLegendeItem(legendeContainer, Color.parseColor("#E8F5E9"), trad["legende_vert"] ?: "Aucune consommation")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFF9C4"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFCCBC"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["legende_rouge"] ?: "Consommation élevée (6+)")
-        
+        addLegendeItem(legendeContainer, Color.parseColor("#FFFFFF"), trad["legende_vert"] ?: "Aucune consommation")
+        addLegendeItem(legendeContainer, Color.parseColor("#E3F2FD"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFF3E0"), trad["legende_orange"] ?: "Consommation modérée (6-15)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["legende_rouge"] ?: "Consommation élevée (16+)")
+    
         container.addView(legendeContainer)
     }
 
@@ -265,18 +265,25 @@ class CalendrierFragment : Fragment() {
             gridCalendrier.removeAllViews()
             
             // Entêtes jours - couleur sobre
-            val joursHeader = (0..6).map { trad["jour_$it"] ?: "?" }.toTypedArray()
-            joursHeader.forEach { jour ->
-                val headerView = TextView(requireContext()).apply {
-                    text = jour
-                    textSize = 14f
-                    gravity = android.view.Gravity.CENTER
-                    setPadding(4, 8, 4, 8)
-                    setTypeface(null, android.graphics.Typeface.BOLD)
-                    setTextColor(Color.parseColor("#455A64"))
-                }
-                gridCalendrier.addView(headerView)
-            }
+    val joursHeader = (0..6).map { trad["jour_$it"] ?: "?" }.toTypedArray()
+    joursHeader.forEach { jour ->
+        val headerView = TextView(requireContext()).apply {
+            text = jour
+            textSize = 14f
+            gravity = android.view.Gravity.CENTER
+            setPadding(4, 8, 4, 8)
+            setTypeface(null, android.graphics.Typeface.BOLD)
+            setTextColor(Color.parseColor("#455A64"))
+        }
+        val params = GridLayout.LayoutParams().apply {
+            width = 0
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
+            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+        }
+        headerView.layoutParams = params
+        gridCalendrier.addView(headerView)
+    }
+
             
             val cal = currentCalendar.clone() as Calendar
             cal.set(Calendar.DAY_OF_MONTH, 1)
@@ -286,13 +293,19 @@ class CalendrierFragment : Fragment() {
             val daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
             
             // Espaces vides
-            for (i in 0 until firstDayOfWeek) {
-                gridCalendrier.addView(TextView(requireContext()).apply {
-                    text = ""
-                    setPadding(4, 4, 4, 4)
-                })
-            }
-            
+    for (i in 0 until firstDayOfWeek) {
+        val emptyView = TextView(requireContext()).apply {
+            text = ""
+            setPadding(4, 4, 4, 4)
+        }
+        val params = GridLayout.LayoutParams().apply {
+            width = 0
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
+            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+        }
+        emptyView.layoutParams = params
+        gridCalendrier.addView(emptyView)
+    }           
             // Jours du mois
             val dateFormatJour = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
@@ -310,32 +323,38 @@ class CalendrierFragment : Fragment() {
                 }
                 
                 val dayView = TextView(requireContext()).apply {
-                    text = day.toString()
-                    textSize = 16f
-                    setPadding(8, 20, 8, 20)
-                    gravity = android.view.Gravity.CENTER
-                    
-                    // Couleurs SOBRES selon total
-                    val bgColor = when {
-                        totalDay == 0 -> Color.parseColor("#E8F5E9") // Vert très pâle
-                        totalDay in 1..5 -> Color.parseColor("#FFF9C4") // Jaune pâle
-                        totalDay in 6..15 -> Color.parseColor("#FFCCBC") // Orange pâle
-                        else -> Color.parseColor("#FFCDD2") // Rouge pâle
-                    }
-                    setBackgroundColor(bgColor)
-                    
-                    // Bordure pour aujourd'hui
-                    if (dateStr == today) {
-                        setBackgroundResource(android.R.drawable.editbox_background)
-                        setTextColor(Color.parseColor("#1976D2"))
-                        setTypeface(null, android.graphics.Typeface.BOLD)
-                    }
-                    
-                    setOnClickListener {
-                        showDayDialog(dateStr, totalDay)
-                    }
-                }
-                gridCalendrier.addView(dayView)
+            text = day.toString()
+            textSize = 16f
+            setPadding(8, 20, 8, 20)
+            gravity = android.view.Gravity.CENTER
+
+            // Couleurs SOBRES selon total
+            val bgColor = when {
+                totalDay == 0 -> Color.parseColor("#FFFFFF")         // aucune conso : fond neutre
+                totalDay in 1..5 -> Color.parseColor("#E3F2FD")      // bleu très pâle
+                totalDay in 6..15 -> Color.parseColor("#FFF3E0")     // orange très pâle
+                else -> Color.parseColor("#FFCDD2")                  // rouge pâle
+            }
+            setBackgroundColor(bgColor)
+
+            // Bordure pour aujourd'hui
+            if (dateStr == today) {
+                setBackgroundResource(android.R.drawable.editbox_background)
+                setTextColor(Color.parseColor("#1976D2"))
+                setTypeface(null, android.graphics.Typeface.BOLD)
+            }
+
+            setOnClickListener {
+                showDayDialog(dateStr, totalDay)
+            }
+        }
+        val params = GridLayout.LayoutParams().apply {
+            width = 0
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
+            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+        }
+    dayView.layoutParams = params
+            gridCalendrier.addView(dayView)
             }
             
         } catch (e: Exception) {
