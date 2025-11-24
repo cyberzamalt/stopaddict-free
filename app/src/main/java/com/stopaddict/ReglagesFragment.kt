@@ -658,43 +658,48 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     private fun addAProposSection(container: LinearLayout) {
-        addSectionTitle(container, trad["titre_a_propos"] ?: "À propos")
-        
-        val aProposCard = createCard()
-        
-                // Lien 1: Réafficher avertissement
-        addLinkButton(aProposCard, "⚠️ ${trad["voir_avertissement"] ?: "Voir l'avertissement"}") {
-            showAvertissementDialog()
-        }
+    addSectionTitle(container, trad["titre_a_propos"] ?: "À propos")
 
-        // Lien 2: Manuel d'utilisation
-        addLinkButton(aProposCard, "📖 ${trad["btn_manuel"] ?: "Manuel d'utilisation"}") {
-            showManuelDialog()
-        }
+    val aProposCard = createCard()
 
-        // Lien 3: CGV
-        addLinkButton(aProposCard, "📄 ${trad["btn_cgv"] ?: "Conditions générales de vente (CGV)"}") {
-            showCGVDialog()
-        }
-
-        // Lien 4: Mentions légales
-        addLinkButton(aProposCard, "⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}") {
-            showMentionsLegalesDialog()
-        }
-
-        // Lien 5: Dernières mises à jour
-        addLinkButton(aProposCard, "🛠️ ${trad["btn_maj"] ?: "Dernières mises à jour"}") {
-            showMisesAJourDialog()
-        }
-
-        // Lien 6: Contact support
-        addLinkButton(aProposCard, "✉️ ${trad["btn_contact"] ?: "Contact support"}") {
-            sendEmail()
-        }
-
-        container.addView(aProposCard)
+    // Lien 1: Réafficher avertissement
+    addLinkButton(aProposCard, "⚠️ ${trad["voir_avertissement"] ?: "Voir l'avertissement"}") {
+        showAvertissementDialog()
     }
 
+    // Lien 2: Manuel d'utilisation
+    addLinkButton(aProposCard, "📖 ${trad["btn_manuel"] ?: "Manuel d'utilisation"}") {
+        showManuelDialog()
+    }
+
+    // Lien 3: CGV
+    addLinkButton(aProposCard, "📄 ${trad["btn_cgv"] ?: "Conditions générales de vente (CGV)"}") {
+        showCGVDialog()
+    }
+
+    // Lien 4: Mentions légales
+    addLinkButton(aProposCard, "⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}") {
+        showMentionsLegalesDialog()
+    }
+
+    // Lien 5: Version sans publicité
+    addLinkButton(aProposCard, "🪙 ${trad["btn_premium"] ?: "Version sans publicité"}") {
+        showPremiumDialog()
+    }
+
+    // Lien 6: Dernières mises à jour
+    addLinkButton(aProposCard, "🛠️ ${trad["btn_maj"] ?: "Dernières mises à jour"}") {
+        showMisesAJourDialog()
+    }
+
+    // Lien 7: Contact support
+    addLinkButton(aProposCard, "✉️ ${trad["btn_contact"] ?: "Contact support"}") {
+        sendEmail()
+    }
+
+    container.addView(aProposCard)
+}
+    
     private fun addRAZSection(container: LinearLayout) {
     // ✅ On utilise la version existante de createCard() (sans paramètre)
     val card = createCard()
