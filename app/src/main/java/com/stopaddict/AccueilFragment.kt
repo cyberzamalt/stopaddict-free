@@ -1067,7 +1067,7 @@ class AccueilFragment : Fragment() {
      * Fonction pour forcer mise à jour d'un conseil
      * (utile pour tests ou actions utilisateur spécifiques)
      */
-    fun forceUpdateConseil() {
+        fun forceUpdateConseil() {
         try {
             updateConseil()
             Log.d(TAG, "Conseil mis à jour manuellement")
@@ -1075,7 +1075,8 @@ class AccueilFragment : Fragment() {
             Log.e(TAG, "Erreur force update conseil: ${e.message}")
         }
     }
-        private fun showPremiumDialog() {
+
+    private fun showPremiumDialog() {
         val tradReglages = ReglagesLangues.getTraductions(configLangue.getLangue())
         val titre = tradReglages["premium_titre"] ?: "Version sans publicité"
         val contenu = tradReglages["premium_contenu"] ?: "La version sans publicité sera bientôt disponible."
