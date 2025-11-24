@@ -342,7 +342,28 @@ class ReglagesFragment : Fragment() {
         tuberContainer.addView(editNbTubes)
 
         radioGroup.addView(tuberContainer)
-        
+        // Assurer qu'un seul mode de cigarettes est sélectionné à la fois
+radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
+    if (isChecked) {
+        radioCigarettesRouler.isChecked = false
+        radioCigarettesTubeuse.isChecked = false
+    }
+}
+
+radioCigarettesRouler.setOnCheckedChangeListener { _, isChecked ->
+    if (isChecked) {
+        radioCigarettesClassiques.isChecked = false
+        radioCigarettesTubeuse.isChecked = false
+    }
+}
+
+radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
+    if (isChecked) {
+        radioCigarettesClassiques.isChecked = false
+        radioCigarettesRouler.isChecked = false
+    }
+}
+
         cigaretteCard.addView(radioGroup)
         container.addView(cigaretteCard)
     }
