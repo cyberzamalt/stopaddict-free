@@ -275,7 +275,7 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
-        addLabel(paquetContainer, trad["label_prix_paquet"] ?: "Prix du paquet")
+        addLabel(paquetContainer, (trad["label_prix_paquet"] ?: "Prix du paquet") + " (" + getDeviseSymbol() + ")")
         editPrixPaquet = createMoneyEditText()
         paquetContainer.addView(editPrixPaquet)
         
@@ -294,11 +294,11 @@ class ReglagesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(30, 10, 0, 10)
         }
-        addLabel(roulerContainer, trad["label_prix_tabac"] ?: "Prix du tabac à rouler")
+        addLabel(roulerContainer, (trad["label_prix_tabac"] ?: "Prix du tabac à rouler") + " (" + getDeviseSymbol() + ")")
         editPrixTabac = createMoneyEditText()
         roulerContainer.addView(editPrixTabac)
         
-        addLabel(roulerContainer, trad["label_prix_feuilles"] ?: "Prix des feuilles à rouler")
+        addLabel(roulerContainer, (trad["label_prix_feuilles"] ?: "Prix des feuilles à rouler") + " (" + getDeviseSymbol() + ")")
         editPrixFeuilles = createMoneyEditText()
         roulerContainer.addView(editPrixFeuilles)
         
@@ -306,7 +306,7 @@ class ReglagesFragment : Fragment() {
         editNbFeuilles = createNumberEditText()
         roulerContainer.addView(editNbFeuilles)
         
-        addLabel(roulerContainer, trad["label_prix_filtres"] ?: "Prix du sachet de filtres")
+        addLabel(roulerContainer, (trad["label_prix_filtres"] ?: "Prix du sachet de filtres") + " (" + getDeviseSymbol() + ")")
         editPrixFiltres = createMoneyEditText()
         roulerContainer.addView(editPrixFiltres)
         
@@ -327,12 +327,12 @@ class ReglagesFragment : Fragment() {
         }
 
         // Prix du tabac à tuber
-        addLabel(tuberContainer, trad["label_prix_tabac"] ?: "Prix du tabac à tuber")
+        addLabel(tuberContainer, (trad["label_prix_tabac"] ?: "Prix du tabac pour tubeuse") + " (" + getDeviseSymbol() + ")")
         editPrixTabacTubes = createMoneyEditText()
         tuberContainer.addView(editPrixTabacTubes)
 
         // Prix des tubes
-        addLabel(tuberContainer, trad["label_prix_tubes"] ?: "Prix des tubes")
+        addLabel(tuberContainer, (trad["label_prix_tubes"] ?: "Prix des tubes") + " (" + getDeviseSymbol() + ")")
         editPrixTubes = createMoneyEditText()
         tuberContainer.addView(editPrixTubes)
         
@@ -382,7 +382,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         jointCard.addView(switchJoint)
         
-        addLabel(jointCard, trad["label_prix_gramme"] ?: "Prix du gramme")
+        addLabel(jointCard, (trad["label_prix_gramme"] ?: "Prix du gramme") + " (" + getDeviseSymbol() + ")")
         editPrixGramme = createMoneyEditText()
         jointCard.addView(editPrixGramme)
         
@@ -394,7 +394,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         jointCard.addView(editGrammeParJoint)
         
-        addLabel(jointCard, trad["label_prix_feuilles_longues"] ?: "Prix des feuilles longues")
+        addLabel(jointCard, (trad["label_prix_feuilles_longues"] ?: "Prix des feuilles longues") + " (" + getDeviseSymbol() + ")")
         editPrixFeuillesJoint = createMoneyEditText()
         jointCard.addView(editPrixFeuillesJoint)
         
@@ -425,7 +425,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         alcoolCard.addView(switchAlcoolGlobal)
         
-        addLabel(alcoolCard, trad["label_prix_verre"] ?: "Prix du verre (alcool global)")
+        addLabel(alcoolCard, (trad["label_prix_verre"] ?: "Prix du verre (alcool global)") + " (" + getDeviseSymbol() + ")")
         editPrixVerreGlobal = createMoneyEditText()
         alcoolCard.addView(editPrixVerreGlobal)
         
@@ -454,7 +454,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         biereCard.addView(switchBiere)
         
-        addLabel(biereCard, trad["label_prix_verre"] ?: "Prix du verre de bière")
+        addLabel(biereCard, (trad["label_prix_verre"] ?: "Prix du verre de bière") + " (" + getDeviseSymbol() + ")")
         editPrixVerreBiere = createMoneyEditText()
         biereCard.addView(editPrixVerreBiere)
         
@@ -483,7 +483,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         liqueurCard.addView(switchLiqueur)
         
-        addLabel(liqueurCard, trad["label_prix_verre"] ?: "Prix du verre de liqueur")
+        addLabel(liqueurCard, (trad["label_prix_verre"] ?: "Prix du verre de liqueur") + " (" + getDeviseSymbol() + ")")
         editPrixVerreLiqueur = createMoneyEditText()
         liqueurCard.addView(editPrixVerreLiqueur)
         
@@ -512,7 +512,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
         alcoolFortCard.addView(switchAlcoolFort)
         
-        addLabel(alcoolFortCard, trad["label_prix_verre"] ?: "Prix du verre d'alcool fort")
+        addLabel(alcoolFortCard, (trad["label_prix_verre"] ?: "Prix du verre d'alcool fort") + " (" + getDeviseSymbol() + ")")
         editPrixVerreAlcoolFort = createMoneyEditText()
         alcoolFortCard.addView(editPrixVerreAlcoolFort)
         
@@ -1258,6 +1258,23 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             setTypeface(null, android.graphics.Typeface.BOLD)
         }
         container.addView(labelView)
+    }
+
+        private fun getDeviseSymbol(): String {
+        val code = dbHelper.getPreference("devise", "EUR")
+        return when (code) {
+            "EUR" -> "€"
+            "USD" -> "$"
+            "GBP" -> "£"
+            "JPY" -> "¥"
+            "CHF" -> "CHF"
+            "CAD" -> "C$"
+            "AUD" -> "A$"
+            "BRL" -> "R$"
+            "INR" -> "₹"
+            "RUB" -> "₽"
+            else  -> code
+        }
     }
 
     private fun createMoneyEditText(): EditText {
