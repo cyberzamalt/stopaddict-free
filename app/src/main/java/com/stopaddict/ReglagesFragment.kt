@@ -871,6 +871,17 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             .show()
     }
 
+                private fun showMisesAJourDialog() {
+        val titre = trad["maj_titre"] ?: "Dernières mises à jour"
+        val contenu = trad["maj_contenu"] ?: "Déploiement V1"
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(titre)
+            .setMessage(contenu)
+            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
+            .show()
+    }
+
     private fun sendEmail() {
         try {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
