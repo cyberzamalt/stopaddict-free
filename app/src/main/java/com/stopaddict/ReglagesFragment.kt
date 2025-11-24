@@ -861,13 +861,12 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             .show()
     }
 
-        private fun showMisesAJourDialog() {
-        val titre = trad["maj_titre"] ?: "Dernières mises à jour"
-        val contenu = trad["maj_contenu"] ?: "Déploiement V1"
+            private fun showMentionsLegalesDialog() {
+        val mentions = ReglagesLangues.getMentionsLegales(configLangue.getLangue())
 
         AlertDialog.Builder(requireContext())
-            .setTitle(titre)
-            .setMessage(contenu)
+            .setTitle("⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}")
+            .setMessage(mentions)
             .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
