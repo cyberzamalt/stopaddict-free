@@ -730,7 +730,7 @@ class StatsFragment : Fragment() {
         }
     }
 
-        private fun formatTotaux(periode: String, totaux: Map<String, Any>): String {
+            private fun formatTotaux(periode: String, totaux: Map<String, Any>): String {
         return try {
             val deviseSymbol = getDeviseSymbol()
             val consos = totaux["consommations"] as? Int ?: 0
@@ -742,14 +742,13 @@ class StatsFragment : Fragment() {
             val labelEconomies = trad["calculs_economies"] ?: "économisés"
 
             "$periode: $consos $labelUnites | " +
-                    "${String.format(\"%.2f\", couts)} $deviseSymbol $labelDepenses | " +
-                    "${String.format(\"%.2f\", economies)} $deviseSymbol $labelEconomies"
+                    "${String.format("%.2f", couts)} $deviseSymbol $labelDepenses | " +
+                    "${String.format("%.2f", economies)} $deviseSymbol $labelEconomies"
         } catch (e: Exception) {
             Log.e(TAG, "Erreur formatage totaux: ${e.message}")
             "$periode: Erreur"
         }
     }
-
     
 private fun updateProfilStatus() {
     try {
