@@ -148,6 +148,9 @@ object ReglagesLangues {
         "btn_cgv" to "Conditions générales de vente (CGV)",
         "btn_mentions_legales" to "Mentions légales",
         "btn_contact" to "Contact support",
+        "btn_maj" to "Dernières mises à jour",
+        "maj_titre" to "Dernières mises à jour",
+        "maj_contenu" to "Déploiement V1",
         "hint_prenom" to "Entrer votre prénom",
 
         // RAZ
@@ -289,6 +292,9 @@ object ReglagesLangues {
         "btn_cgv" to "Terms and conditions",
         "btn_mentions_legales" to "Legal notice",
         "btn_contact" to "Contact support",
+        "btn_maj" to "Latest updates",
+        "maj_titre" to "Latest updates",
+        "maj_contenu" to "Deployment V1",
         "hint_prenom" to "Enter your first name",
 
         // Reset
@@ -429,6 +435,9 @@ object ReglagesLangues {
         "btn_cgv" to "Términos y condiciones",
         "btn_mentions_legales" to "Aviso legal",
         "btn_contact" to "Contactar soporte",
+        "btn_maj" to "Últimas actualizaciones",
+        "maj_titre" to "Últimas actualizaciones",
+        "maj_contenu" to "Lanzamiento V1",
         "hint_prenom" to "Ingrese su nombre",
 
         // Restablecer
@@ -568,6 +577,9 @@ object ReglagesLangues {
         "btn_cgv" to "Termos e condições",
         "btn_mentions_legales" to "Aviso legal",
         "btn_contact" to "Contatar suporte",
+        "btn_maj" to "Últimas atualizações",
+        "maj_titre" to "Últimas atualizações",
+        "maj_contenu" to "Lançamento V1",
         "hint_prenom" to "Digite seu nome",
 
         // Redefinir
@@ -707,6 +719,9 @@ object ReglagesLangues {
         "btn_cgv" to "Allgemeine Geschäftsbedingungen",
         "btn_mentions_legales" to "Impressum",
         "btn_contact" to "Support kontaktieren",
+        "btn_maj" to "Letzte Aktualisierungen",
+        "maj_titre" to "Letzte Aktualisierungen",
+        "maj_contenu" to "Bereitstellung V1",
         "hint_prenom" to "Geben Sie Ihren Vornamen ein",
 
         // Zurücksetzen
@@ -846,6 +861,9 @@ object ReglagesLangues {
         "btn_cgv" to "Termini e condizioni",
         "btn_mentions_legales" to "Note legali",
         "btn_contact" to "Contatta supporto",
+        "btn_maj" to "Ultimi aggiornamenti",
+        "maj_titre" to "Ultimi aggiornamenti",
+        "maj_contenu" to "Rilascio V1",
         "hint_prenom" to "Inserisci il tuo nome",
 
         // Ripristina
@@ -985,6 +1003,9 @@ object ReglagesLangues {
         "btn_cgv" to "Условия использования",
         "btn_mentions_legales" to "Правовая информация",
         "btn_contact" to "Связаться с поддержкой",
+        "btn_maj" to "Последние обновления",
+        "maj_titre" to "Последние обновления",
+        "maj_contenu" to "Релиз V1",
         "hint_prenom" to "Введите ваше имя",
 
         // Сброс
@@ -1124,6 +1145,9 @@ object ReglagesLangues {
         "btn_cgv" to "الشروط والأحكام",
         "btn_mentions_legales" to "الإشعار القانوني",
         "btn_contact" to "الاتصال بالدعم",
+        "btn_maj" to "آخر التحديثات",
+        "maj_titre" to "آخر التحديثات",
+        "maj_contenu" to "نشر الإصدار V1",
         "hint_prenom" to "أدخل اسمك الأول",
 
         // إعادة تعيين
@@ -1263,6 +1287,9 @@ object ReglagesLangues {
         "btn_cgv" to "नियम और शर्तें",
         "btn_mentions_legales" to "कानूनी सूचना",
         "btn_contact" to "सहायता से संपर्क करें",
+        "btn_maj" to "नवीनतम अपडेट",
+        "maj_titre" to "नवीनतम अपडेट",
+        "maj_contenu" to "परिनियोजन V1",
         "hint_prenom" to "अपना नाम दर्ज करें",
 
         // रीसेट
@@ -1402,6 +1429,9 @@ object ReglagesLangues {
         "btn_cgv" to "利用規約",
         "btn_mentions_legales" to "法的通知",
         "btn_contact" to "サポートに連絡",
+        "btn_maj" to "最新のアップデート",
+        "maj_titre" to "最新のアップデート",
+        "maj_contenu" to "リリース V1",
         "hint_prenom" to "名前を入力してください",
 
         // リセット
