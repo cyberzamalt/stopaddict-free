@@ -126,7 +126,7 @@ class ReglagesFragment : Fragment() {
         }
         
         // Header
-        //addHeader(contentContainer)
+        addHeader(contentContainer)
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
@@ -143,7 +143,18 @@ class ReglagesFragment : Fragment() {
         scrollView.addView(contentContainer)
         container.addView(scrollView)
     }
-          
+    private fun addHeader(container: LinearLayout) {
+        val header = TextView(requireContext()).apply {
+            text = trad["titre"] ?: "Réglages"
+            textSize = 24f
+            setBackgroundColor(Color.parseColor("#00BCD4"))
+            setTextColor(Color.WHITE)
+            setPadding(20, 40, 20, 40)
+            gravity = android.view.Gravity.CENTER
+            setTypeface(null, android.graphics.Typeface.BOLD)
+        }
+        container.addView(header)
+        
         // Zone profil
         val profilContainer = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -868,17 +879,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 private fun showMisesAJourDialog() {
         val titre = trad["maj_titre"] ?: "Dernières mises à jour"
         val contenu = trad["maj_contenu"] ?: "Déploiement V1"
-
-        AlertDialog.Builder(requireContext())
-            .setTitle(titre)
-            .setMessage(contenu)
-            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
-            .show()
-    }
-
-                    private fun showPremiumDialog() {
-        val titre = trad["premium_titre"] ?: "Version sans publicité"
-        val contenu = trad["premium_contenu"] ?: "La version sans publicité sera bientôt disponible."
 
         AlertDialog.Builder(requireContext())
             .setTitle(titre)
