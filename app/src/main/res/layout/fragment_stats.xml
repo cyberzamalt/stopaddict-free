@@ -37,47 +37,398 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Zone calculs (jour/semaine/mois/année) -->
-        <LinearLayout
+                <!-- Tableau récapitulatif par période et par catégorie -->
+        <TableLayout
+            android:id="@+id/stats_table_resume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="12dp"
             android:layout_marginBottom="16dp">
 
-            <TextView
-                android:id="@+id/stats_txt_calculs_jour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jour: 0"
-                android:textSize="14sp"
-                android:padding="4dp" />
+            <!-- Ligne d'en-tête -->
+            <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/stats_txt_calculs_semaine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Semaine: 0"
-                android:textSize="14sp"
-                android:padding="4dp" />
+                <TextView
+                    android:id="@+id/stats_header_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Jour"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/stats_txt_calculs_mois"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mois: 0"
-                android:textSize="14sp"
-                android:padding="4dp" />
+                <TextView
+                    android:id="@+id/stats_header_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Semaine"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/stats_txt_calculs_annee"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Année: 0"
-                android:textSize="14sp"
-                android:padding="4dp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/stats_header_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Mois"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stats_header_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Année"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <!-- Cigarettes -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_cigarettes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cigarettes" />
+
+                <TextView
+                    android:id="@+id/stats_cigarettes_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_cigarettes_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_cigarettes_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_cigarettes_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Joints -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_joints"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Joints" />
+
+                <TextView
+                    android:id="@+id/stats_joints_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_joints_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_joints_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_joints_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Alcool global -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_alcool_global"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Alcool global" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_global_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_global_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_global_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_global_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Bières -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_bieres"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bières" />
+
+                <TextView
+                    android:id="@+id/stats_bieres_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_bieres_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_bieres_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_bieres_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Liqueurs -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_liqueurs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Liqueurs" />
+
+                <TextView
+                    android:id="@+id/stats_liqueurs_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_liqueurs_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_liqueurs_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_liqueurs_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Alcool fort -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_alcool_fort"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Alcool fort" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_fort_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_fort_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_fort_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/stats_alcool_fort_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0" />
+            </TableRow>
+
+            <!-- Dépenses -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_depenses"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dépenses (€)" />
+
+                <TextView
+                    android:id="@+id/stats_depenses_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_depenses_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_depenses_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_depenses_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+            </TableRow>
+
+            <!-- Économies -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/stats_row_label_economies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Économies (€)" />
+
+                <TextView
+                    android:id="@+id/stats_economies_jour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_economies_semaine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_economies_mois"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+
+                <TextView
+                    android:id="@+id/stats_economies_annee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0,00" />
+            </TableRow>
+
+        </TableLayout>
 
         <!-- Boutons période -->
         <LinearLayout
