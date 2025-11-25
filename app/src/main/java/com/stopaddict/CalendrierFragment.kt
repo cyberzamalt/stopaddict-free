@@ -59,18 +59,6 @@ class CalendrierFragment : Fragment() {
         container.removeAllViews()
         container.orientation = LinearLayout.VERTICAL
         
-        // Header
-        val header = TextView(requireContext()).apply {
-            text = trad["titre"] ?: "Calendrier"
-            textSize = 24f
-            setBackgroundColor(Color.parseColor("#00BCD4"))
-            setTextColor(Color.WHITE)
-            setPadding(20, 40, 20, 40)
-            gravity = android.view.Gravity.CENTER
-            setTypeface(null, android.graphics.Typeface.BOLD)
-        }
-        container.addView(header)
-        
         // Zone profil et total
         val profilContainer = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.HORIZONTAL
