@@ -129,6 +129,9 @@ class StatsFragment : Fragment() {
             btnMois.text = trad["btn_mois"] ?: "Mois"
             btnAnnee.text = trad["btn_annee"] ?: "Année"
 
+            txtTitreConso = view.findViewById(R.id.stats_txt_titre_conso)
+            txtTitreCouts = view.findViewById(R.id.stats_txt_titre_couts)
+
             // Appliquer traductions aux titres graphiques
             txtTitreConso.text = trad["titre_graphique_consommation"] ?: "Graphique Consommation"
             txtTitreCouts.text = trad["titre_graphique_couts"] ?: "Graphique Coûts et Économies"
