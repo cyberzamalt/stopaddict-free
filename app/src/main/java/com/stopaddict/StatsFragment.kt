@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -21,13 +20,13 @@ class StatsFragment : Fragment() {
 
     companion object {
         private const val TAG = "StatsFragment"
-        
+
         // Périodes
         private const val PERIODE_JOUR = "jour"
         private const val PERIODE_SEMAINE = "semaine"
         private const val PERIODE_MOIS = "mois"
         private const val PERIODE_ANNEE = "annee"
-        
+
         // Couleurs graphiques (Material Design)
         private const val COLOR_CIGARETTES = Color.RED
         private const val COLOR_JOINTS = Color.GREEN
@@ -55,13 +54,70 @@ class StatsFragment : Fragment() {
     private lateinit var btnMois: Button
     private lateinit var btnAnnee: Button
 
-    // UI Elements - Zone calculs
+    // UI Elements - Zone titres graphiques
     private lateinit var txtTitreConso: TextView
     private lateinit var txtTitreCouts: TextView
 
     // UI Elements - Bandeau profil
     private lateinit var txtProfilComplet: TextView
     private lateinit var txtTotalAujourdhui: TextView
+
+    // UI Elements - Tableau résumé (labels colonnes)
+    private lateinit var headerColJour: TextView
+    private lateinit var headerColSemaine: TextView
+    private lateinit var headerColMois: TextView
+    private lateinit var headerColAnnee: TextView
+
+    // UI Elements - Tableau résumé (labels lignes)
+    private lateinit var rowLabelCigarettes: TextView
+    private lateinit var rowLabelJoints: TextView
+    private lateinit var rowLabelAlcoolGlobal: TextView
+    private lateinit var rowLabelBieres: TextView
+    private lateinit var rowLabelLiqueurs: TextView
+    private lateinit var rowLabelAlcoolFort: TextView
+    private lateinit var rowLabelEconomies: TextView
+    private lateinit var rowLabelDepenses: TextView
+
+    // UI Elements - Tableau résumé (cellules)
+    private lateinit var cellCigJour: TextView
+    private lateinit var cellCigSemaine: TextView
+    private lateinit var cellCigMois: TextView
+    private lateinit var cellCigAnnee: TextView
+
+    private lateinit var cellJointJour: TextView
+    private lateinit var cellJointSemaine: TextView
+    private lateinit var cellJointMois: TextView
+    private lateinit var cellJointAnnee: TextView
+
+    private lateinit var cellAlcoolGlobalJour: TextView
+    private lateinit var cellAlcoolGlobalSemaine: TextView
+    private lateinit var cellAlcoolGlobalMois: TextView
+    private lateinit var cellAlcoolGlobalAnnee: TextView
+
+    private lateinit var cellBiereJour: TextView
+    private lateinit var cellBiereSemaine: TextView
+    private lateinit var cellBiereMois: TextView
+    private lateinit var cellBiereAnnee: TextView
+
+    private lateinit var cellLiqueurJour: TextView
+    private lateinit var cellLiqueurSemaine: TextView
+    private lateinit var cellLiqueurMois: TextView
+    private lateinit var cellLiqueurAnnee: TextView
+
+    private lateinit var cellAlcoolFortJour: TextView
+    private lateinit var cellAlcoolFortSemaine: TextView
+    private lateinit var cellAlcoolFortMois: TextView
+    private lateinit var cellAlcoolFortAnnee: TextView
+
+    private lateinit var cellEconomiesJour: TextView
+    private lateinit var cellEconomiesSemaine: TextView
+    private lateinit var cellEconomiesMois: TextView
+    private lateinit var cellEconomiesAnnee: TextView
+
+    private lateinit var cellDepensesJour: TextView
+    private lateinit var cellDepensesSemaine: TextView
+    private lateinit var cellDepensesMois: TextView
+    private lateinit var cellDepensesAnnee: TextView
 
     // Période active
     private var periodeActive = PERIODE_JOUR
@@ -129,12 +185,86 @@ class StatsFragment : Fragment() {
             btnMois.text = trad["btn_mois"] ?: "Mois"
             btnAnnee.text = trad["btn_annee"] ?: "Année"
 
+            // Titres graphiques
             txtTitreConso = view.findViewById(R.id.stats_txt_titre_conso)
             txtTitreCouts = view.findViewById(R.id.stats_txt_titre_couts)
-
-            // Appliquer traductions aux titres graphiques
             txtTitreConso.text = trad["titre_graphique_consommation"] ?: "Graphique Consommation"
             txtTitreCouts.text = trad["titre_graphique_couts"] ?: "Graphique Coûts et Économies"
+
+            // En-têtes colonnes tableau
+            headerColJour = view.findViewById(R.id.stats_header_col_jour)
+            headerColSemaine = view.findViewById(R.id.stats_header_col_semaine)
+            headerColMois = view.findViewById(R.id.stats_header_col_mois)
+            headerColAnnee = view.findViewById(R.id.stats_header_col_annee)
+
+            headerColJour.text =
+                trad["calculs_periode_jour"] ?: trad["btn_jour"] ?: "Jour"
+            headerColSemaine.text =
+                trad["calculs_periode_semaine"] ?: trad["btn_semaine"] ?: "Semaine"
+            headerColMois.text =
+                trad["calculs_periode_mois"] ?: trad["btn_mois"] ?: "Mois"
+            headerColAnnee.text =
+                trad["calculs_periode_annee"] ?: trad["btn_annee"] ?: "Année"
+
+            // Labels lignes tableau
+            rowLabelCigarettes = view.findViewById(R.id.stats_label_row_cigarettes)
+            rowLabelJoints = view.findViewById(R.id.stats_label_row_joints)
+            rowLabelAlcoolGlobal = view.findViewById(R.id.stats_label_row_alcool_global)
+            rowLabelBieres = view.findViewById(R.id.stats_label_row_bieres)
+            rowLabelLiqueurs = view.findViewById(R.id.stats_label_row_liqueurs)
+            rowLabelAlcoolFort = view.findViewById(R.id.stats_label_row_alcool_fort)
+            rowLabelEconomies = view.findViewById(R.id.stats_label_row_economies)
+            rowLabelDepenses = view.findViewById(R.id.stats_label_row_depenses)
+
+            rowLabelCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
+            rowLabelJoints.text = trad["label_joints"] ?: "Joints"
+            rowLabelAlcoolGlobal.text = trad["label_alcool_global"] ?: "Alcool global"
+            rowLabelBieres.text = trad["label_bieres"] ?: "Bières"
+            rowLabelLiqueurs.text = trad["label_liqueurs"] ?: "Liqueurs"
+            rowLabelAlcoolFort.text = trad["label_alcool_fort"] ?: "Alcool fort"
+            rowLabelEconomies.text = trad["label_economies"] ?: "Économies"
+            rowLabelDepenses.text = trad["label_depenses"] ?: "Dépenses"
+
+            // Cellules tableau
+            cellCigJour = view.findViewById(R.id.stats_cell_cig_jour)
+            cellCigSemaine = view.findViewById(R.id.stats_cell_cig_semaine)
+            cellCigMois = view.findViewById(R.id.stats_cell_cig_mois)
+            cellCigAnnee = view.findViewById(R.id.stats_cell_cig_annee)
+
+            cellJointJour = view.findViewById(R.id.stats_cell_joint_jour)
+            cellJointSemaine = view.findViewById(R.id.stats_cell_joint_semaine)
+            cellJointMois = view.findViewById(R.id.stats_cell_joint_mois)
+            cellJointAnnee = view.findViewById(R.id.stats_cell_joint_annee)
+
+            cellAlcoolGlobalJour = view.findViewById(R.id.stats_cell_alcool_global_jour)
+            cellAlcoolGlobalSemaine = view.findViewById(R.id.stats_cell_alcool_global_semaine)
+            cellAlcoolGlobalMois = view.findViewById(R.id.stats_cell_alcool_global_mois)
+            cellAlcoolGlobalAnnee = view.findViewById(R.id.stats_cell_alcool_global_annee)
+
+            cellBiereJour = view.findViewById(R.id.stats_cell_biere_jour)
+            cellBiereSemaine = view.findViewById(R.id.stats_cell_biere_semaine)
+            cellBiereMois = view.findViewById(R.id.stats_cell_biere_mois)
+            cellBiereAnnee = view.findViewById(R.id.stats_cell_biere_annee)
+
+            cellLiqueurJour = view.findViewById(R.id.stats_cell_liqueur_jour)
+            cellLiqueurSemaine = view.findViewById(R.id.stats_cell_liqueur_semaine)
+            cellLiqueurMois = view.findViewById(R.id.stats_cell_liqueur_mois)
+            cellLiqueurAnnee = view.findViewById(R.id.stats_cell_liqueur_annee)
+
+            cellAlcoolFortJour = view.findViewById(R.id.stats_cell_alcool_fort_jour)
+            cellAlcoolFortSemaine = view.findViewById(R.id.stats_cell_alcool_fort_semaine)
+            cellAlcoolFortMois = view.findViewById(R.id.stats_cell_alcool_fort_mois)
+            cellAlcoolFortAnnee = view.findViewById(R.id.stats_cell_alcool_fort_annee)
+
+            cellEconomiesJour = view.findViewById(R.id.stats_cell_economies_jour)
+            cellEconomiesSemaine = view.findViewById(R.id.stats_cell_economies_semaine)
+            cellEconomiesMois = view.findViewById(R.id.stats_cell_economies_mois)
+            cellEconomiesAnnee = view.findViewById(R.id.stats_cell_economies_annee)
+
+            cellDepensesJour = view.findViewById(R.id.stats_cell_depenses_jour)
+            cellDepensesSemaine = view.findViewById(R.id.stats_cell_depenses_semaine)
+            cellDepensesMois = view.findViewById(R.id.stats_cell_depenses_mois)
+            cellDepensesAnnee = view.findViewById(R.id.stats_cell_depenses_annee)
 
             // Bandeau profil
             txtProfilComplet = view.findViewById(R.id.stats_txt_profil_complet)
@@ -152,34 +282,29 @@ class StatsFragment : Fragment() {
     }
 
     private fun configureChart(chart: LineChart) {
-    try {
-        // Configuration générale
-        chart.description.isEnabled = false
-        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
-        chart.setTouchEnabled(true)
-        chart.isDragEnabled = true
-        chart.setScaleEnabled(true)
-        chart.setPinchZoom(true)
-        chart.setDrawGridBackground(false)
+        try {
+            chart.description.isEnabled = false
+            chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+            chart.setTouchEnabled(true)
+            chart.isDragEnabled = true
+            chart.setScaleEnabled(true)
+            chart.setPinchZoom(true)
+            chart.setDrawGridBackground(false)
 
-            // Axe X (horizontal)
             val xAxis = chart.xAxis
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.setDrawGridLines(true)
             xAxis.granularity = 1f
             xAxis.textColor = Color.BLACK
 
-            // Axe Y gauche (vertical)
             val yAxisLeft = chart.axisLeft
             yAxisLeft.setDrawGridLines(true)
             yAxisLeft.granularity = 1f
             yAxisLeft.axisMinimum = 0f
             yAxisLeft.textColor = Color.BLACK
 
-            // Axe Y droit (désactivé)
             chart.axisRight.isEnabled = false
 
-            // Légende
             chart.legend.isEnabled = true
             chart.legend.textColor = Color.BLACK
 
@@ -194,12 +319,18 @@ class StatsFragment : Fragment() {
             val json = dbHelper.getPreference("categories_actives", "{}")
             if (json.isNotEmpty()) {
                 val jsonObj = JSONObject(json)
-                categoriesActives[DatabaseHelper.TYPE_CIGARETTE] = jsonObj.optBoolean("cigarette", true)
-                categoriesActives[DatabaseHelper.TYPE_JOINT] = jsonObj.optBoolean("joint", true)
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] = jsonObj.optBoolean("alcool_global", true)
-                categoriesActives[DatabaseHelper.TYPE_BIERE] = jsonObj.optBoolean("biere", false)
-                categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = jsonObj.optBoolean("liqueur", false)
-                categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = jsonObj.optBoolean("alcool_fort", false)
+                categoriesActives[DatabaseHelper.TYPE_CIGARETTE] =
+                    jsonObj.optBoolean("cigarette", true)
+                categoriesActives[DatabaseHelper.TYPE_JOINT] =
+                    jsonObj.optBoolean("joint", true)
+                categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] =
+                    jsonObj.optBoolean("alcool_global", true)
+                categoriesActives[DatabaseHelper.TYPE_BIERE] =
+                    jsonObj.optBoolean("biere", false)
+                categoriesActives[DatabaseHelper.TYPE_LIQUEUR] =
+                    jsonObj.optBoolean("liqueur", false)
+                categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] =
+                    jsonObj.optBoolean("alcool_fort", false)
             }
             Log.d(TAG, "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
@@ -241,13 +372,11 @@ class StatsFragment : Fragment() {
 
     private fun updateButtonsState() {
         try {
-            // Réinitialiser tous les boutons
             btnJour.isEnabled = true
             btnSemaine.isEnabled = true
             btnMois.isEnabled = true
             btnAnnee.isEnabled = true
 
-            // Désactiver bouton actif (visuel)
             when (periodeActive) {
                 PERIODE_JOUR -> btnJour.isEnabled = false
                 PERIODE_SEMAINE -> btnSemaine.isEnabled = false
@@ -260,11 +389,13 @@ class StatsFragment : Fragment() {
             Log.e(TAG, "Erreur mise à jour état boutons: ${e.message}")
         }
     }
+
     private fun updateGraphiques() {
         try {
             updateGraphiqueConsommation()
             updateGraphiqueCouts()
-            Log.d(TAG, "Graphiques mis à jour pour période: $periodeActive")
+            updateResumeTable()
+            Log.d(TAG, "Graphiques + tableau mis à jour pour période: $periodeActive")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour graphiques: ${e.message}")
         }
@@ -273,8 +404,7 @@ class StatsFragment : Fragment() {
     private fun updateGraphiqueConsommation() {
         try {
             val dataSets = mutableListOf<LineDataSet>()
-            
-            // Récupérer les données selon période
+
             val donnees = when (periodeActive) {
                 PERIODE_JOUR -> getConsommationsJourDispatch()
                 PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
@@ -283,7 +413,6 @@ class StatsFragment : Fragment() {
                 else -> emptyMap()
             }
 
-            // Créer dataset pour chaque catégorie active
             categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val values = donnees[type] ?: listOf()
@@ -291,7 +420,7 @@ class StatsFragment : Fragment() {
                         val entries = values.mapIndexed { index, value ->
                             Entry(index.toFloat(), value.toFloat())
                         }
-                        
+
                         val dataSet = LineDataSet(entries, getLabelCategorie(type))
                         dataSet.color = getColorCategorie(type)
                         dataSet.setCircleColor(getColorCategorie(type))
@@ -300,13 +429,12 @@ class StatsFragment : Fragment() {
                         dataSet.setDrawCircleHole(false)
                         dataSet.setDrawValues(true)
                         dataSet.valueTextSize = 9f
-                        
+
                         dataSets.add(dataSet)
                     }
                 }
             }
 
-            // Ajouter lignes limites habitudes
             categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val maxHabitude = dbHelper.getMaxJournalier(type)
@@ -315,29 +443,28 @@ class StatsFragment : Fragment() {
                         val limiteEntries = values.indices.map { index ->
                             Entry(index.toFloat(), maxHabitude.toFloat())
                         }
-                        
+
                         if (limiteEntries.isNotEmpty()) {
-                            val limiteDataSet = LineDataSet(limiteEntries, "Limite ${getLabelCategorie(type)}")
+                            val limiteDataSet = LineDataSet(
+                                limiteEntries,
+                                "Limite ${getLabelCategorie(type)}"
+                            )
                             limiteDataSet.color = COLOR_LIMITE
                             limiteDataSet.lineWidth = 1f
                             limiteDataSet.enableDashedLine(10f, 5f, 0f)
                             limiteDataSet.setDrawCircles(false)
                             limiteDataSet.setDrawValues(false)
-                            
+
                             dataSets.add(limiteDataSet)
                         }
                     }
                 }
             }
 
-            // Appliquer au graphique
             if (dataSets.isNotEmpty()) {
                 val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
                 chartConsommation.data = lineData
-                
-                // Configurer labels X selon période
                 chartConsommation.xAxis.valueFormatter = getXAxisFormatter()
-                
                 chartConsommation.invalidate()
                 Log.d(TAG, "Graphique consommation mis à jour: ${dataSets.size} datasets")
             } else {
@@ -350,35 +477,29 @@ class StatsFragment : Fragment() {
     }
 
     /**
-     * Dispatch horaire pour période JOUR selon logique Manuel:
-     * Diviser nombre total par heures pour répartition uniforme
-     * Exemple: 12 cigarettes sur 24h = 1 toutes les 2h
+     * Dispatch horaire pour période JOUR
      */
     private fun getConsommationsJourDispatch(): Map<String, List<Int>> {
         return try {
             val result = mutableMapOf<String, MutableList<Int>>()
             val consosJour = dbHelper.getConsommationsJour()
-            
-            // 4 tranches horaires: 00-07, 07-14, 14-21, 21-00
             val nbTranches = 4
-            
+
             categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val total = consosJour[type] ?: 0
                     val parTranche = if (total > 0) total / nbTranches else 0
                     val reste = if (total > 0) total % nbTranches else 0
-                    
-                    // Répartir uniformément
+
                     val values = MutableList(nbTranches) { parTranche }
-                    // Ajouter le reste sur la première tranche
                     if (reste > 0) {
                         values[0] += reste
                     }
-                    
+
                     result[type] = values
                 }
             }
-            
+
             Log.d(TAG, "Consommations jour dispatch calculées")
             result
         } catch (e: Exception) {
@@ -392,7 +513,6 @@ class StatsFragment : Fragment() {
             override fun getFormattedValue(value: Float): String {
                 return when (periodeActive) {
                     PERIODE_JOUR -> {
-                        // 4 tranches: 00-07, 07-14, 14-21, 21-00
                         when (value.toInt()) {
                             0 -> "00-07"
                             1 -> "07-14"
@@ -402,12 +522,10 @@ class StatsFragment : Fragment() {
                         }
                     }
                     PERIODE_SEMAINE -> {
-                        // Jours de la semaine
                         val jours = arrayOf("Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim")
                         if (value.toInt() in jours.indices) jours[value.toInt()] else ""
                     }
                     PERIODE_MOIS -> {
-                        // Tranches: 1, 6, 11, 16, 21, 26, 31
                         when (value.toInt()) {
                             0 -> "1"
                             1 -> "6"
@@ -420,8 +538,10 @@ class StatsFragment : Fragment() {
                         }
                     }
                     PERIODE_ANNEE -> {
-                        // 12 mois
-                        val mois = arrayOf("Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc")
+                        val mois = arrayOf(
+                            "Jan", "Fév", "Mar", "Avr", "Mai", "Juin",
+                            "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"
+                        )
                         if (value.toInt() in mois.indices) mois[value.toInt()] else ""
                     }
                     else -> value.toInt().toString()
@@ -453,11 +573,11 @@ class StatsFragment : Fragment() {
             else -> Color.BLACK
         }
     }
+
     private fun updateGraphiqueCouts() {
         try {
             val dataSets = mutableListOf<LineDataSet>()
-            
-            // Récupérer les données selon période
+
             val donnees = when (periodeActive) {
                 PERIODE_JOUR -> getConsommationsJourDispatch()
                 PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
@@ -466,16 +586,14 @@ class StatsFragment : Fragment() {
                 else -> emptyMap()
             }
 
-            // Calculer coûts et économies
             val couts = calculerCouts(donnees)
             val economies = calculerEconomies(donnees)
 
-            // Dataset coûts
             if (couts.isNotEmpty() && couts.any { it > 0 }) {
                 val coutsEntries = couts.mapIndexed { index, value ->
                     Entry(index.toFloat(), value.toFloat())
                 }
-                
+
                 val coutsDataSet = LineDataSet(coutsEntries, "Coûts")
                 coutsDataSet.color = COLOR_COUTS
                 coutsDataSet.setCircleColor(COLOR_COUTS)
@@ -484,16 +602,15 @@ class StatsFragment : Fragment() {
                 coutsDataSet.setDrawCircleHole(false)
                 coutsDataSet.setDrawValues(true)
                 coutsDataSet.valueTextSize = 9f
-                
+
                 dataSets.add(coutsDataSet)
             }
 
-            // Dataset économies
             if (economies.isNotEmpty() && economies.any { it > 0 }) {
                 val economiesEntries = economies.mapIndexed { index, value ->
                     Entry(index.toFloat(), value.toFloat())
                 }
-                
+
                 val economiesDataSet = LineDataSet(economiesEntries, "Économies")
                 economiesDataSet.color = COLOR_ECONOMIES
                 economiesDataSet.setCircleColor(COLOR_ECONOMIES)
@@ -502,22 +619,17 @@ class StatsFragment : Fragment() {
                 economiesDataSet.setDrawCircleHole(false)
                 economiesDataSet.setDrawValues(true)
                 economiesDataSet.valueTextSize = 9f
-                
+
                 dataSets.add(economiesDataSet)
             }
 
-            // Appliquer au graphique
             if (dataSets.isNotEmpty()) {
                 val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
                 chartCouts.data = lineData
-                
-                // Configurer labels X selon période
                 chartCouts.xAxis.valueFormatter = getXAxisFormatter()
-                
                 chartCouts.invalidate()
                 Log.d(TAG, "Graphique coûts mis à jour: ${dataSets.size} datasets")
             } else {
-                // Garder graphique vide avec axes si aucune donnée
                 chartCouts.clear()
                 Log.w(TAG, "Aucune donnée pour graphique coûts")
             }
@@ -526,30 +638,25 @@ class StatsFragment : Fragment() {
         }
     }
 
-    /**
-     * Calcule les coûts réels par période
-     */
     private fun calculerCouts(donnees: Map<String, List<Int>>): List<Double> {
         return try {
             val nbPoints = donnees.values.firstOrNull()?.size ?: 0
             if (nbPoints == 0) return emptyList()
-            
+
             val couts = MutableList(nbPoints) { 0.0 }
-            
+
             categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val values = donnees[type] ?: listOf()
                     val coutsType = dbHelper.getCouts(type)
-                    
-                    // Calcul prix unitaire
                     val prixUnitaire = calculerPrixUnitaire(type, coutsType)
-                    
+
                     values.forEachIndexed { index, quantite ->
                         couts[index] += prixUnitaire * quantite
                     }
                 }
             }
-            
+
             Log.d(TAG, "Coûts calculés: ${couts.sum()} ${getDeviseSymbol()} total")
             couts
         } catch (e: Exception) {
@@ -558,27 +665,23 @@ class StatsFragment : Fragment() {
         }
     }
 
-    /**
-     * Calcule les économies (si consommation < habitudes)
-     */
     private fun calculerEconomies(donnees: Map<String, List<Int>>): List<Double> {
         return try {
             val nbPoints = donnees.values.firstOrNull()?.size ?: 0
             if (nbPoints == 0) return emptyList()
-            
+
             val economies = MutableList(nbPoints) { 0.0 }
-            
+
             categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val values = donnees[type] ?: listOf()
                     val maxHabitude = dbHelper.getMaxJournalier(type)
                     val coutsType = dbHelper.getCouts(type)
-                    
+
                     if (maxHabitude > 0) {
                         val prixUnitaire = calculerPrixUnitaire(type, coutsType)
-                        
+
                         values.forEachIndexed { index, quantite ->
-                            // Économie = si consommation < habitude
                             if (quantite < maxHabitude) {
                                 val diff = maxHabitude - quantite
                                 economies[index] += prixUnitaire * diff
@@ -587,7 +690,7 @@ class StatsFragment : Fragment() {
                     }
                 }
             }
-            
+
             Log.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
             economies
         } catch (e: Exception) {
@@ -596,24 +699,15 @@ class StatsFragment : Fragment() {
         }
     }
 
-    /**
-     * Calcule le prix unitaire selon type de consommation
-     */
     private fun calculerPrixUnitaire(type: String, couts: Map<String, Double>): Double {
         return try {
             when (type) {
                 DatabaseHelper.TYPE_CIGARETTE -> {
-                    // Prix paquet / nb cigarettes (simplifié, prend classiques par défaut)
                     val prixPaquet = couts["prix_paquet"] ?: 0.0
                     val nbCigarettes = couts["nb_cigarettes"] ?: 20.0
-                    if (prixPaquet > 0 && nbCigarettes > 0) {
-                        prixPaquet / nbCigarettes
-                    } else {
-                        0.0
-                    }
+                    if (prixPaquet > 0 && nbCigarettes > 0) prixPaquet / nbCigarettes else 0.0
                 }
                 DatabaseHelper.TYPE_JOINT -> {
-                    // Prix gramme * gramme par joint
                     val prixGramme = couts["prix_gramme"] ?: 0.0
                     val grammeParJoint = couts["gramme_par_joint"] ?: 0.0
                     prixGramme * grammeParJoint
@@ -622,7 +716,6 @@ class StatsFragment : Fragment() {
                 DatabaseHelper.TYPE_BIERE,
                 DatabaseHelper.TYPE_LIQUEUR,
                 DatabaseHelper.TYPE_ALCOOL_FORT -> {
-                    // Prix verre
                     couts["prix_verre"] ?: 0.0
                 }
                 else -> 0.0
@@ -633,7 +726,7 @@ class StatsFragment : Fragment() {
         }
     }
 
-        private fun getDeviseSymbol(): String {
+    private fun getDeviseSymbol(): String {
         val code = dbHelper.getPreference("devise", "EUR")
         return when (code) {
             "EUR" -> "€"
@@ -646,89 +739,187 @@ class StatsFragment : Fragment() {
             "BRL" -> "R$"
             "INR" -> "₹"
             "RUB" -> "₽"
-            else  -> code   // au cas où, on affiche le code brut
+            else -> code
         }
     }
-    
-private fun updateProfilStatus() {
-    try {
-        // 1. Prénom
-        val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
 
-        // 2. Coûts : au moins une catégorie active avec un coût > 0
-        var hasCouts = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                if (couts.values.any { it > 0.0 }) {
-                    hasCouts = true
+    /**
+     * Remplit le tableau résumé en haut (Cigs/Joints/Alcool... x Jour/Semaine/Mois/Année)
+     */
+    private fun updateResumeTable() {
+        try {
+            // --- Consommations brutes par période ---
+            val consosJour = dbHelper.getConsommationsJour()
+            val consosSemaine = dbHelper.getConsommationsSemaine()
+            val consosMois = dbHelper.getConsommationsMois()
+            val consosAnnee = dbHelper.getConsommationsAnnee()
+
+            fun totalJour(type: String): Int =
+                (consosJour[type] ?: 0)
+
+            fun totalFromMap(map: Map<String, List<Int>>, type: String): Int =
+                map[type]?.sum() ?: 0
+
+            fun setIntCell(tv: TextView, active: Boolean, value: Int) {
+                tv.text = if (!active) "-" else value.toString()
+            }
+
+            // Cigarettes
+            val cigActive = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true
+            setIntCell(cellCigJour, cigActive, totalJour(DatabaseHelper.TYPE_CIGARETTE))
+            setIntCell(cellCigSemaine, cigActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_CIGARETTE))
+            setIntCell(cellCigMois, cigActive, totalFromMap(consosMois, DatabaseHelper.TYPE_CIGARETTE))
+            setIntCell(cellCigAnnee, cigActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_CIGARETTE))
+
+            // Joints
+            val jointActive = categoriesActives[DatabaseHelper.TYPE_JOINT] == true
+            setIntCell(cellJointJour, jointActive, totalJour(DatabaseHelper.TYPE_JOINT))
+            setIntCell(cellJointSemaine, jointActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_JOINT))
+            setIntCell(cellJointMois, jointActive, totalFromMap(consosMois, DatabaseHelper.TYPE_JOINT))
+            setIntCell(cellJointAnnee, jointActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_JOINT))
+
+            // Alcool global
+            val alcoolGlobalActive = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true
+            setIntCell(cellAlcoolGlobalJour, alcoolGlobalActive, totalJour(DatabaseHelper.TYPE_ALCOOL_GLOBAL))
+            setIntCell(cellAlcoolGlobalSemaine, alcoolGlobalActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_ALCOOL_GLOBAL))
+            setIntCell(cellAlcoolGlobalMois, alcoolGlobalActive, totalFromMap(consosMois, DatabaseHelper.TYPE_ALCOOL_GLOBAL))
+            setIntCell(cellAlcoolGlobalAnnee, alcoolGlobalActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_ALCOOL_GLOBAL))
+
+            // Bières
+            val biereActive = categoriesActives[DatabaseHelper.TYPE_BIERE] == true
+            setIntCell(cellBiereJour, biereActive, totalJour(DatabaseHelper.TYPE_BIERE))
+            setIntCell(cellBiereSemaine, biereActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_BIERE))
+            setIntCell(cellBiereMois, biereActive, totalFromMap(consosMois, DatabaseHelper.TYPE_BIERE))
+            setIntCell(cellBiereAnnee, biereActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_BIERE))
+
+            // Liqueurs
+            val liqueurActive = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true
+            setIntCell(cellLiqueurJour, liqueurActive, totalJour(DatabaseHelper.TYPE_LIQUEUR))
+            setIntCell(cellLiqueurSemaine, liqueurActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_LIQUEUR))
+            setIntCell(cellLiqueurMois, liqueurActive, totalFromMap(consosMois, DatabaseHelper.TYPE_LIQUEUR))
+            setIntCell(cellLiqueurAnnee, liqueurActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_LIQUEUR))
+
+            // Alcool fort
+            val alcoolFortActive = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true
+            setIntCell(cellAlcoolFortJour, alcoolFortActive, totalJour(DatabaseHelper.TYPE_ALCOOL_FORT))
+            setIntCell(cellAlcoolFortSemaine, alcoolFortActive, totalFromMap(consosSemaine, DatabaseHelper.TYPE_ALCOOL_FORT))
+            setIntCell(cellAlcoolFortMois, alcoolFortActive, totalFromMap(consosMois, DatabaseHelper.TYPE_ALCOOL_FORT))
+            setIntCell(cellAlcoolFortAnnee, alcoolFortActive, totalFromMap(consosAnnee, DatabaseHelper.TYPE_ALCOOL_FORT))
+
+            // --- Coûts & Économies par période ---
+            fun setMoneyCell(tv: TextView, value: Double) {
+                val symbol = getDeviseSymbol()
+                tv.text = if (value <= 0.0) {
+                    "0 $symbol"
+                } else {
+                    String.format("%.2f %s", value, symbol)
+                }
+            }
+
+            // Jour : on réutilise un dispatch en 4 points, puis on somme
+            val jourDispatch = getConsommationsJourDispatch()
+            val coutsJour = calculerCouts(jourDispatch).sum()
+            val ecoJour = calculerEconomies(jourDispatch).sum()
+
+            val coutsSemaine = calculerCouts(consosSemaine).sum()
+            val ecoSemaine = calculerEconomies(consosSemaine).sum()
+
+            val coutsMois = calculerCouts(consosMois).sum()
+            val ecoMois = calculerEconomies(consosMois).sum()
+
+            val coutsAnnee = calculerCouts(consosAnnee).sum()
+            val ecoAnnee = calculerEconomies(consosAnnee).sum()
+
+            setMoneyCell(cellDepensesJour, coutsJour)
+            setMoneyCell(cellDepensesSemaine, coutsSemaine)
+            setMoneyCell(cellDepensesMois, coutsMois)
+            setMoneyCell(cellDepensesAnnee, coutsAnnee)
+
+            setMoneyCell(cellEconomiesJour, ecoJour)
+            setMoneyCell(cellEconomiesSemaine, ecoSemaine)
+            setMoneyCell(cellEconomiesMois, ecoMois)
+            setMoneyCell(cellEconomiesAnnee, ecoAnnee)
+
+            Log.d(TAG, "Tableau résumé mis à jour")
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur updateResumeTable: ${e.message}")
+        }
+    }
+
+    private fun updateProfilStatus() {
+        try {
+            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
+
+            var hasCouts = false
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val couts = dbHelper.getCouts(type)
+                    if (couts.values.any { it > 0.0 }) {
+                        hasCouts = true
+                        return@forEach
+                    }
+                }
+            }
+
+            var hasHabitudes = false
+            categoriesActives.forEach { (type, active) ->
+                if (active && dbHelper.getMaxJournalier(type) > 0) {
+                    hasHabitudes = true
                     return@forEach
                 }
             }
-        }
 
-        // 3. Habitudes (max par jour > 0)
-        var hasHabitudes = false
-        categoriesActives.forEach { (type, active) ->
-            if (active && dbHelper.getMaxJournalier(type) > 0) {
-                hasHabitudes = true
-                return@forEach
-            }
-        }
-
-        // 4. Dates objectifs (au moins une date non vide)
-        var hasDates = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                if (dates.values.any { it?.isNotEmpty() == true }) {
-                    hasDates = true
-                    return@forEach
+            var hasDates = false
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val dates = dbHelper.getDatesObjectifs(type)
+                    if (dates.values.any { it?.isNotEmpty() == true }) {
+                        hasDates = true
+                        return@forEach
+                    }
                 }
             }
-        }
 
-        val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
+            val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
 
-        // Texte "Profil complet / incomplet" AVEC TRAD
-        txtProfilComplet.text = if (isComplet) {
-            // On essaie d'abord les nouvelles clés, sinon on garde les anciennes si elles existent encore
-            trad["profil_complet"] ?: trad["profil_complet_complet"] ?: "Profil: Complet ✓"
-        } else {
-            trad["profil_incomplet"] ?: trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
-        }
-
-        // -------- Total aujourd'hui --------
-        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
-        val today = dateFormat.format(java.util.Date())
-        var totalJour = 0.0
-
-        // On calcule le coût du jour pour chaque catégorie active
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val nbUnites = dbHelper.getConsommationParDate(type, today)
-                val couts = dbHelper.getCouts(type)
-                val prixUnitaire = calculerPrixUnitaire(type, couts)
-                totalJour += nbUnites * prixUnitaire
+            txtProfilComplet.text = if (isComplet) {
+                trad["profil_complet"] ?: trad["profil_complet_complet"] ?: "Profil: Complet ✓"
+            } else {
+                trad["profil_incomplet"] ?: trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
             }
+
+            val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+            val today = dateFormat.format(java.util.Date())
+            var totalJour = 0.0
+
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val nbUnites = dbHelper.getConsommationParDate(type, today)
+                    val couts = dbHelper.getCouts(type)
+                    val prixUnitaire = calculerPrixUnitaire(type, couts)
+                    totalJour += nbUnites * prixUnitaire
+                }
+            }
+
+            val deviseSymbol = getDeviseSymbol()
+            val rawLabelTotal =
+                trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
+            val labelTotal = rawLabelTotal.trimEnd(':', ' ')
+            txtTotalAujourdhui.text =
+                "$labelTotal: %.2f %s".format(totalJour, deviseSymbol)
+
+            Log.d(
+                TAG,
+                "Profil: ${if (isComplet) "Complet" else "Incomplet"} - Total jour: $totalJour"
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur updateProfilStatus stats", e)
         }
-
-        val deviseSymbol = getDeviseSymbol()
-        val rawLabelTotal = trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
-        val labelTotal = rawLabelTotal.trimEnd(':', ' ')
-
-        // UN SEUL ":" ajouté ici
-        txtTotalAujourdhui.text = "$labelTotal: %.2f %s".format(totalJour, deviseSymbol)
-
-        Log.d(TAG, "Profil: ${if (isComplet) "Complet" else "Incomplet"} - Total jour: $totalJour")
-    } catch (e: Exception) {
-        Log.e(TAG, "Erreur updateProfilStatus stats", e)
     }
-}       
+
     override fun onResume() {
         super.onResume()
         try {
-            // Recharger données (synchro si modif depuis autre onglet)
             loadCategoriesActives()
             updateGraphiques()
             updateProfilStatus()
@@ -750,7 +941,6 @@ private fun updateProfilStatus() {
     override fun onDestroyView() {
         super.onDestroyView()
         try {
-            // Cleanup graphiques
             chartConsommation.clear()
             chartCouts.clear()
             Log.d(TAG, "Fragment détruit - graphiques nettoyés")
@@ -768,10 +958,6 @@ private fun updateProfilStatus() {
         }
     }
 
-    /**
-     * Fonction appelée depuis MainActivity ou autres fragments
-     * pour rafraîchir les données (synchro live)
-     */
     fun refreshData() {
         try {
             loadCategoriesActives()
@@ -783,9 +969,6 @@ private fun updateProfilStatus() {
         }
     }
 
-    /**
-     * Change la période affichée (utile pour tests ou actions externes)
-     */
     fun setPeriode(periode: String) {
         try {
             if (periode in listOf(PERIODE_JOUR, PERIODE_SEMAINE, PERIODE_MOIS, PERIODE_ANNEE)) {
