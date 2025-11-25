@@ -143,18 +143,7 @@ class ReglagesFragment : Fragment() {
         scrollView.addView(contentContainer)
         container.addView(scrollView)
     }
-    private fun addHeader(container: LinearLayout) {
-        val header = TextView(requireContext()).apply {
-            text = trad["titre"] ?: "Réglages"
-            textSize = 24f
-            setBackgroundColor(Color.parseColor("#00BCD4"))
-            setTextColor(Color.WHITE)
-            setPadding(20, 40, 20, 40)
-            gravity = android.view.Gravity.CENTER
-            setTypeface(null, android.graphics.Typeface.BOLD)
-        }
-        container.addView(header)
-        
+          
         // Zone profil
         val profilContainer = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.HORIZONTAL
