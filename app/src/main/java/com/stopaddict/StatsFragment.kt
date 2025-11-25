@@ -56,10 +56,6 @@ class StatsFragment : Fragment() {
     private lateinit var btnAnnee: Button
 
     // UI Elements - Zone calculs
-    private lateinit var txtCalculsJour: TextView
-    private lateinit var txtCalculsSemaine: TextView
-    private lateinit var txtCalculsMois: TextView
-    private lateinit var txtCalculsAnnee: TextView
     private lateinit var txtTitreConso: TextView
     private lateinit var txtTitreCouts: TextView
 
@@ -104,7 +100,6 @@ class StatsFragment : Fragment() {
 
             // Affichage initial (période jour)
             updateGraphiques()
-            updateCalculs()
             updateProfilStatus()
 
             Log.d(TAG, "StatsFragment initialisé avec succès")
@@ -133,14 +128,6 @@ class StatsFragment : Fragment() {
             btnSemaine.text = trad["btn_semaine"] ?: "Semaine"
             btnMois.text = trad["btn_mois"] ?: "Mois"
             btnAnnee.text = trad["btn_annee"] ?: "Année"
-
-            // Zone calculs
-            txtCalculsJour = view.findViewById(R.id.stats_txt_calculs_jour)
-            txtCalculsSemaine = view.findViewById(R.id.stats_txt_calculs_semaine)
-            txtCalculsMois = view.findViewById(R.id.stats_txt_calculs_mois)
-            txtCalculsAnnee = view.findViewById(R.id.stats_txt_calculs_annee)
-            txtTitreConso = view.findViewById(R.id.stats_txt_titre_conso)
-            txtTitreCouts = view.findViewById(R.id.stats_txt_titre_couts)
 
             // Appliquer traductions aux titres graphiques
             txtTitreConso.text = trad["titre_graphique_consommation"] ?: "Graphique Consommation"
@@ -223,28 +210,24 @@ class StatsFragment : Fragment() {
                 periodeActive = PERIODE_JOUR
                 updateButtonsState()
                 updateGraphiques()
-                updateCalculs()
             }
 
             btnSemaine.setOnClickListener {
                 periodeActive = PERIODE_SEMAINE
                 updateButtonsState()
                 updateGraphiques()
-                updateCalculs()
             }
 
             btnMois.setOnClickListener {
                 periodeActive = PERIODE_MOIS
                 updateButtonsState()
                 updateGraphiques()
-                updateCalculs()
             }
 
             btnAnnee.setOnClickListener {
                 periodeActive = PERIODE_ANNEE
                 updateButtonsState()
                 updateGraphiques()
-                updateCalculs()
             }
 
             Log.d(TAG, "Listeners configurés")
@@ -647,72 +630,6 @@ class StatsFragment : Fragment() {
         }
     }
 
-    private fun updateCalculs() {
-        try {
-            // Récupérer totaux pour chaque période
-            val totauxJour = calculerTotauxPeriode(PERIODE_JOUR)
-            val totauxSemaine = calculerTotauxPeriode(PERIODE_SEMAINE)
-            val totauxMois = calculerTotauxPeriode(PERIODE_MOIS)
-            val totauxAnnee = calculerTotauxPeriode(PERIODE_ANNEE)
-
-            // Afficher
-            txtCalculsJour.text = formatTotaux(trad["calculs_periode_jour"] ?: "Jour", totauxJour)
-            txtCalculsSemaine.text = formatTotaux(trad["calculs_periode_semaine"] ?: "Semaine", totauxSemaine)
-            txtCalculsMois.text = formatTotaux(trad["calculs_periode_mois"] ?: "Mois", totauxMois)
-            txtCalculsAnnee.text = formatTotaux(trad["calculs_periode_annee"] ?: "Année", totauxAnnee)
-
-            Log.d(TAG, "Calculs mis à jour")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour calculs: ${e.message}")
-        }
-    }
-
-    private fun calculerTotauxPeriode(periode: String): Map<String, Any> {
-        return try {
-            val donnees = when (periode) {
-                PERIODE_JOUR -> mapOf<String, List<Int>>().apply {
-                    val consosJour = dbHelper.getConsommationsJour()
-                    categoriesActives.forEach { (type, active) ->
-                        if (active) {
-                            (this as MutableMap)[type] = listOf(consosJour[type] ?: 0)
-                        }
-                    }
-                }
-                PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
-                PERIODE_MOIS -> dbHelper.getConsommationsMois()
-                PERIODE_ANNEE -> dbHelper.getConsommationsAnnee()
-                else -> emptyMap()
-            }
-
-            // Total consommations
-            var totalConsos = 0
-            donnees.forEach { (_, values) ->
-                totalConsos += values.sum()
-            }
-
-            // Total coûts
-            val couts = calculerCouts(donnees)
-            val totalCouts = couts.sum()
-
-            // Total économies
-            val economies = calculerEconomies(donnees)
-            val totalEconomies = economies.sum()
-
-            mapOf(
-                "consommations" to totalConsos,
-                "couts" to totalCouts,
-                "economies" to totalEconomies
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul totaux $periode: ${e.message}")
-            mapOf(
-                "consommations" to 0,
-                "couts" to 0.0,
-                "economies" to 0.0
-            )
-        }
-    }
-
         private fun getDeviseSymbol(): String {
         val code = dbHelper.getPreference("devise", "EUR")
         return when (code) {
@@ -727,26 +644,6 @@ class StatsFragment : Fragment() {
             "INR" -> "₹"
             "RUB" -> "₽"
             else  -> code   // au cas où, on affiche le code brut
-        }
-    }
-
-            private fun formatTotaux(periode: String, totaux: Map<String, Any>): String {
-        return try {
-            val deviseSymbol = getDeviseSymbol()
-            val consos = totaux["consommations"] as? Int ?: 0
-            val couts = totaux["couts"] as? Double ?: 0.0
-            val economies = totaux["economies"] as? Double ?: 0.0
-
-            val labelUnites = trad["calculs_unites"] ?: "unités"
-            val labelDepenses = trad["calculs_depenses"] ?: "dépensés"
-            val labelEconomies = trad["calculs_economies"] ?: "économisés"
-
-            "$periode: $consos $labelUnites | " +
-                    "${String.format("%.2f", couts)} $deviseSymbol $labelDepenses | " +
-                    "${String.format("%.2f", economies)} $deviseSymbol $labelEconomies"
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur formatage totaux: ${e.message}")
-            "$periode: Erreur"
         }
     }
     
@@ -831,7 +728,6 @@ private fun updateProfilStatus() {
             // Recharger données (synchro si modif depuis autre onglet)
             loadCategoriesActives()
             updateGraphiques()
-            updateCalculs()
             updateProfilStatus()
             Log.d(TAG, "Fragment resumed - données rechargées")
         } catch (e: Exception) {
@@ -877,7 +773,6 @@ private fun updateProfilStatus() {
         try {
             loadCategoriesActives()
             updateGraphiques()
-            updateCalculs()
             updateProfilStatus()
             Log.d(TAG, "Données rafraîchies manuellement")
         } catch (e: Exception) {
@@ -894,7 +789,6 @@ private fun updateProfilStatus() {
                 periodeActive = periode
                 updateButtonsState()
                 updateGraphiques()
-                updateCalculs()
                 Log.d(TAG, "Période changée: $periode")
             } else {
                 Log.w(TAG, "Période invalide: $periode")
