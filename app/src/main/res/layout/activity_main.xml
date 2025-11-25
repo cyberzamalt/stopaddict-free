@@ -20,6 +20,87 @@
         android:clickable="true"
         android:focusable="true" />
 
+        <!-- Bandeau résumé jour (collé au header) -->
+    <HorizontalScrollView
+        android:id="@+id/header_resume_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/header_resume_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#FFEFEFEF">
+
+            <TextView
+                android:id="@+id/header_resume_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jour :"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingRight="8dp" />
+
+            <!-- Cigarettes -->
+            <TextView
+                android:id="@+id/header_resume_cigarette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚬 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+            <!-- Joints -->
+            <TextView
+                android:id="@+id/header_resume_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌿 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+            <!-- Alcool global -->
+            <TextView
+                android:id="@+id/header_resume_alcool_global"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🥃G 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+            <!-- Bières -->
+            <TextView
+                android:id="@+id/header_resume_biere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🍺 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+            <!-- Liqueur -->
+            <TextView
+                android:id="@+id/header_resume_liqueur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🍷 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+            <!-- Alcool fort -->
+            <TextView
+                android:id="@+id/header_resume_alcool_fort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🥃 0"
+                android:textSize="13sp"
+                android:paddingLeft="8dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <!-- ViewPager2 pour afficher les fragments -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_view_pager"
