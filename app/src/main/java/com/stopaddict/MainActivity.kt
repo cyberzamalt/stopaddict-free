@@ -33,6 +33,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var configLangue: ConfigLangue
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var trad: Map<String, String>
+
+        // Bandeau résumé jour sous le header principal
+    private lateinit var headerResumeScroll: HorizontalScrollView
+    private lateinit var headerResumeContainer: LinearLayout
+    private lateinit var headerResumeLabel: TextView
+    private lateinit var headerResumeCigarette: TextView
+    private lateinit var headerResumeJoint: TextView
+    private lateinit var headerResumeAlcoolGlobal: TextView
+    private lateinit var headerResumeBiere: TextView
+    private lateinit var headerResumeLiqueur: TextView
+    private lateinit var headerResumeAlcoolFort: TextView
+    
     private var consoleClickCount = 0
     private var lastConsoleClickTime = 0L
     private var consoleVisible = false
@@ -74,6 +86,19 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.main_tab_layout)
         viewPager = findViewById(R.id.main_view_pager)
         adContainer = findViewById(R.id.main_ad_container)
+
+                headerResumeScroll = findViewById(R.id.header_resume_scroll)
+        headerResumeContainer = findViewById(R.id.header_resume_container)
+        headerResumeLabel = findViewById(R.id.header_resume_label)
+        headerResumeCigarette = findViewById(R.id.header_resume_cigarette)
+        headerResumeJoint = findViewById(R.id.header_resume_joint)
+        headerResumeAlcoolGlobal = findViewById(R.id.header_resume_alcool_global)
+        headerResumeBiere = findViewById(R.id.header_resume_biere)
+        headerResumeLiqueur = findViewById(R.id.header_resume_liqueur)
+        headerResumeAlcoolFort = findViewById(R.id.header_resume_alcool_fort)
+
+        // Caché par défaut, on l’affichera seulement sur Stats & Calendrier
+        headerResumeScroll.visibility = View.GONE
 
         logger.d(
             "initializeViews: headerTextView=$headerTextView, " +
@@ -304,14 +329,69 @@ private fun setupTabLayoutAndViewPager() {
     logger.d("setupTabLayoutAndViewPager: TabLayoutMediator attaché")
 
     viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            logger.d("setupTabLayoutAndViewPager: onPageSelected -> position=$position, updateDateTime()")
-            updateDateTime()
-        }
-    })
-    logger.d("setupTabLayoutAndViewPager: callback onPageChange enregistré")
+    override fun onPageSelected(position: Int) {
+        super.onPageSelected(position)
+        logger.d("setupTabLayoutAndViewPager: onPageSelected -> position=$position, updateDateTime()")
+        updateDateTime()
+        updateHeaderResumeVisibility(position)
+    }
+})
+
+logger.d("setupTabLayoutAndViewPager: callback onPageChange enregistré")
+updateHeaderResumeVisibility(viewPager.currentItem)
 }
+
+    private fun updateHeaderResumeVisibility(position: Int) {
+        // Onglet 1 = Stats, onglet 2 = Calendrier
+        if (position == 1 || position == 2) {
+            headerResumeScroll.visibility = View.VISIBLE
+            updateHeaderResumeJour()
+        } else {
+            headerResumeScroll.visibility = View.GONE
+        }
+    }
+
+    private fun updateHeaderResumeJour() {
+        try {
+            // Traductions spécifiques Stats (pour le mot "Jour")
+            val tradStats = StatsLangues.getTraductions(configLangue.getLangue())
+            val labelJour = tradStats["calculs_periode_jour"]
+                ?: tradStats["btn_jour"]
+                ?: "Jour"
+
+            headerResumeLabel.text = "$labelJour :"
+
+            // Date du jour au format utilisé par la DB
+            val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            val consos = dbHelper.getConsommationsJour(today)
+
+            fun getCount(key: String): Int {
+                val value = consos[key]
+                return when (value) {
+                    is Number -> value.toInt()
+                    else -> 0
+                }
+            }
+
+            val cCigarette = getCount("cigarette")
+            val cJoint = getCount("joint")
+            val cAlcoolGlobal = getCount("alcool_global")
+            val cBiere = getCount("biere")
+            val cLiqueur = getCount("liqueur")
+            val cAlcoolFort = getCount("alcool_fort")
+
+            headerResumeCigarette.text = "🚬 $cCigarette"
+            headerResumeJoint.text = "🌿 $cJoint"
+            headerResumeAlcoolGlobal.text = "🥃G $cAlcoolGlobal"
+            headerResumeBiere.text = "🍺 $cBiere"
+            headerResumeLiqueur.text = "🍷 $cLiqueur"
+            headerResumeAlcoolFort.text = "🥃 $cAlcoolFort"
+
+            logger.d("updateHeaderResumeJour: jour=$today, ciga=$cCigarette, joint=$cJoint, alcoolGlobal=$cAlcoolGlobal, biere=$cBiere, liqueur=$cLiqueur, alcoolFort=$cAlcoolFort")
+        } catch (e: Exception) {
+            logger.e("updateHeaderResumeJour: erreur mise à jour bandeau jour", e)
+        }
+    }
  
 private fun getTabTitle(position: Int): String {
     val title = when (position) {
