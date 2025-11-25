@@ -11,20 +11,6 @@
         android:orientation="vertical"
         android:padding="4dp">
 
-        <!-- Header -->
-        <TextView
-            android:id="@+id/calendrier_header_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Calendrier"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:padding="12dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/holo_blue_light"
-            android:textColor="@android:color/white" />
-
         <!-- Bandeau profil -->
         <LinearLayout
             android:id="@+id/calendrier_bandeau_profil"
