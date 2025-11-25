@@ -10,20 +10,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header -->
-        <TextView
-            android:id="@+id/habitudes_header_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Habitudes &amp; Volonté"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:padding="12dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/holo_blue_light"
-            android:textColor="@android:color/white" />
-
         <!-- Bandeau profil -->
         <LinearLayout
             android:id="@+id/habitudes_bandeau_profil"
