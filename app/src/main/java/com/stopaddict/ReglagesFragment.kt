@@ -126,7 +126,7 @@ class ReglagesFragment : Fragment() {
         }
         
         // Header
-        addHeader(contentContainer)
+        //addHeader(contentContainer)
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
