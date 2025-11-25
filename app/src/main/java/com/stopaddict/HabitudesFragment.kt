@@ -21,7 +21,6 @@ class HabitudesFragment : Fragment() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
     private lateinit var trad: Map<String, String>
-    private lateinit var headerTitle: TextView
     private lateinit var txtProfilStatus: TextView
     private lateinit var txtTotalJour: TextView
     
@@ -81,7 +80,6 @@ class HabitudesFragment : Fragment() {
 
     private fun initializeViews(view: View) {
         try {
-            headerTitle = view.findViewById(R.id.habitudes_header_title)
             txtProfilStatus = view.findViewById(R.id.habitudes_profil_status)
             txtTotalJour = view.findViewById(R.id.habitudes_total_jour)
             inputMaxCigarettes = view.findViewById(R.id.habitudes_input_max_cigarettes)
@@ -123,7 +121,6 @@ class HabitudesFragment : Fragment() {
             val langue = configLangue.getLangue()
             trad = HabitudesLangues.getTraductions(langue)
             
-            headerTitle.text = trad["titre"] ?: "Habitudes & Volonté"
             inputMaxCigarettes.hint = trad["hint_max_cigarettes"] ?: "Max cigarettes par jour"
             inputMaxJoints.hint = trad["hint_max_joints"] ?: "Max joints par jour"
             inputMaxAlcoolGlobal.hint = trad["hint_max_alcool_global"] ?: "Max alcool global par jour"
@@ -488,3 +485,4 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
