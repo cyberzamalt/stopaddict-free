@@ -374,14 +374,19 @@ updateHeaderResumeVisibility(viewPager.currentItem)
 }
 
     private fun updateHeaderResumeVisibility(position: Int) {
-        // Onglet 1 = Stats, onglet 2 = Calendrier
-        if (position == 1 || position == 2) {
-            headerResumeScroll.visibility = View.VISIBLE
-            updateHeaderResumeJour()
-        } else {
-            headerResumeScroll.visibility = View.GONE
-        }
+    // 0 = Accueil
+    // 1 = Stats
+    // 2 = Calendrier
+    // 3 = Habitudes & Volontés
+    // 4 = Réglages
+
+    if (position == 0 || position == 1 || position == 2 || position == 3 || position == 4) {
+        headerResumeScroll.visibility = View.VISIBLE
+        updateHeaderResumeJour()
+    } else {
+        headerResumeScroll.visibility = View.GONE
     }
+}
 
     private fun updateHeaderResumeJour() {
         try {
