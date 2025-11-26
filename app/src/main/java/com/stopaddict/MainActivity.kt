@@ -347,7 +347,7 @@ private fun setupTabLayoutAndViewPager() {
         val textView = TextView(this@MainActivity).apply {
             text = title
             gravity = Gravity.CENTER
-            textSize = 14f
+            textSize = 12f
             // 1 ligne pour tous, sauf Habitudes & Volontés (position 3) autorisé à 2 lignes
             maxLines = if (position == 3) 2 else 1
             setSingleLine(position != 3)
