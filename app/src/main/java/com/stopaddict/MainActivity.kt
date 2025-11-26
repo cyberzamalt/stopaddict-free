@@ -15,6 +15,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.text.SimpleDateFormat
 import java.util.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var adContainer: FrameLayout
+    private lateinit var adView: AdView
     private lateinit var configLangue: ConfigLangue
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var trad: Map<String, String>
@@ -281,12 +287,38 @@ private fun initializeMainContent() {
         logger.d("initializeMainContent: setupTabLayoutAndViewPager exécuté")
 
         if (isVersionGratuite) {
-            adContainer.visibility = View.VISIBLE
-            logger.d("initializeMainContent: version GRATUITE -> affichage du bandeau pub")
-        } else {
-            adContainer.visibility = View.GONE
-            logger.d("initializeMainContent: version PAYANTE -> masquage du bandeau pub")
+    adContainer.visibility = View.VISIBLE
+    logger.d("initializeMainContent: version GRATUITE -> affichage du bandeau pub")
+
+    // --- Initialisation AdMob + chargement bannière de TEST ---
+    try {
+        // Initialise le SDK (OK si appelé plusieurs fois)
+        MobileAds.initialize(this) {}
+
+        // On crée la bannière et on l'ajoute dans main_ad_container
+        adView = AdView(this).apply {
+            // ✅ ID DE TEST fournie par Google (à laisser pour tes tests)
+            adUnitId = "ca-app-pub-3940256099942544/6300978111"
+            setAdSize(AdSize.BANNER)
         }
+
+        // On vide le container au cas où puis on ajoute la bannière
+        adContainer.removeAllViews()
+        adContainer.addView(adView)
+
+        // On charge une pub de test
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+        logger.d("initializeMainContent: bannière AdMob de test chargée")
+    } catch (e: Exception) {
+        logger.e("initializeMainContent: erreur init AdMob", e)
+    }
+
+} else {
+    adContainer.visibility = View.GONE
+    logger.d("initializeMainContent: version PAYANTE -> masquage du bandeau pub")
+}
 
         logger.d("initializeMainContent: fin normale de l'initialisation")
     } catch (e: Exception) {
@@ -617,6 +649,10 @@ override fun onDestroy() {
     logger.d("onDestroy: destruction activité, nettoyage des ressources")
 
     consoleDialog?.dismiss()
+
+    if (::adView.isInitialized) {
+        adView.destroy()
+    }
 
     if (::dbHelper.isInitialized) {
         logger.d("onDestroy: fermeture de la base de données")
