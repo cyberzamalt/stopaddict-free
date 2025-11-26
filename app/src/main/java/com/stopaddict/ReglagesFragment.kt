@@ -26,6 +26,7 @@ class ReglagesFragment : Fragment() {
         private const val TAG = "ReglagesFragment"
         private const val REQUEST_CODE_EXPORT = 1001
         private const val REQUEST_CODE_IMPORT = 1002
+        private const val PREF_MODE_CIGARETTE = "mode_cigarette"
     }
 
     private lateinit var dbHelper: DatabaseHelper
@@ -558,28 +559,35 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             var prixVerreCig = anciensCoutsCig["prix_verre"] ?: 0.0 // pas utilisé pour les cigarettes mais on le conserve
 
             // 2) On met à jour UNIQUEMENT le mode sélectionné
+            var modeCig = "classique"   // valeur par défaut
+            
             when {
+        
                 // Mode 1 : cigarettes en paquet
-                radioCigarettesClassiques.isChecked -> {
-                    prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
-                    nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 20.0
-                }
+        radioCigarettesClassiques.isChecked -> {
+            modeCig = "classique"
+            prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
+            nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 00.0
+        }
 
                 // Mode 2 : à rouler
-                radioCigarettesRouler.isChecked -> {
-                    prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
-                    prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
-                    nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 32.0
-                    prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
-                    nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 100.0
-                }
+        radioCigarettesRouler.isChecked -> {
+            modeCig = "rouler"
+            prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
+            prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
+            nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 0.0
+            prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
+            nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 00.0
+        }
 
                 // Mode 3 : à tuber
-                radioCigarettesTubeuse.isChecked -> {
-                    prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
-                    prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
-                    nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 100.0
-                }
+    radioCigarettesTubeuse.isChecked -> {
+        modeCig = "tuber"
+        prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
+        prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
+        nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 00.0
+    }
+
             }
 
             // 3) On sauvegarde TOUT en une seule fois sans écraser les autres modes
@@ -596,6 +604,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 nbTubes,
                 prixVerreCig
             )
+
+            // 🔹 On mémorise le mode choisi pour le prochain chargement de l’écran
+            dbHelper.setPreference(PREF_MODE_CIGARETTE, modeCig)
 
             // Joints
             val prixGramme = editPrixGramme.text.toString().toDoubleOrNull() ?: 0.0
@@ -1128,6 +1139,14 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             
             // Charger coûts
             loadCouts()
+
+            // ➕ AJOUT : re-sélectionner le mode de cigarettes mémorisé
+        val modeCig = dbHelper.getPreference(PREF_MODE_CIGARETTE, "classique")
+    when (modeCig) {
+            "rouler" -> radioCigarettesRouler.isChecked = true
+            "tuber" -> radioCigarettesTubeuse.isChecked = true
+        else    -> radioCigarettesClassiques.isChecked = true
+    }
             
             updateProfilStatus()
             
