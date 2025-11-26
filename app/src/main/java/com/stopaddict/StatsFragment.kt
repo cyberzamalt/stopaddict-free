@@ -192,10 +192,10 @@ class StatsFragment : Fragment() {
             txtTitreCouts.text = trad["titre_graphique_couts"] ?: "Graphique Coûts et Économies"
 
             // En-têtes colonnes tableau
-            headerColJour = view.findViewById(R.id.stats_header_col_jour)
-            headerColSemaine = view.findViewById(R.id.stats_header_col_semaine)
-            headerColMois = view.findViewById(R.id.stats_header_col_mois)
-            headerColAnnee = view.findViewById(R.id.stats_header_col_annee)
+            headerColJour = view.findViewById(R.id.stats_header_jour)
+            headerColSemaine = view.findViewById(R.id.stats_header_semaine)
+            headerColMois = view.findViewById(R.id.stats_header_mois)
+            headerColAnnee = view.findViewById(R.id.stats_header_annee)
 
             headerColJour.text =
                 trad["calculs_periode_jour"] ?: trad["btn_jour"] ?: "Jour"
@@ -207,14 +207,14 @@ class StatsFragment : Fragment() {
                 trad["calculs_periode_annee"] ?: trad["btn_annee"] ?: "Année"
 
             // Labels lignes tableau
-            rowLabelCigarettes = view.findViewById(R.id.stats_label_row_cigarettes)
-            rowLabelJoints = view.findViewById(R.id.stats_label_row_joints)
-            rowLabelAlcoolGlobal = view.findViewById(R.id.stats_label_row_alcool_global)
-            rowLabelBieres = view.findViewById(R.id.stats_label_row_bieres)
-            rowLabelLiqueurs = view.findViewById(R.id.stats_label_row_liqueurs)
-            rowLabelAlcoolFort = view.findViewById(R.id.stats_label_row_alcool_fort)
-            rowLabelEconomies = view.findViewById(R.id.stats_label_row_economies)
-            rowLabelDepenses = view.findViewById(R.id.stats_label_row_depenses)
+            rowLabelCigarettes = view.findViewById(R.id.stats_row_label_cigarettes)
+            rowLabelJoints = view.findViewById(R.id.stats_row_label_joints)
+            rowLabelAlcoolGlobal = view.findViewById(R.id.stats_row_label_alcool_global)
+            rowLabelBieres = view.findViewById(R.id.stats_row_label_bieres)
+            rowLabelLiqueurs = view.findViewById(R.id.stats_row_label_liqueurs)
+            rowLabelAlcoolFort = view.findViewById(R.id.stats_row_label_alcool_fort)
+            rowLabelEconomies = view.findViewById(R.id.stats_row_label_economies)
+            rowLabelDepenses = view.findViewById(R.id.stats_row_label_depenses)
 
             rowLabelCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
             rowLabelJoints.text = trad["label_joints"] ?: "Joints"
@@ -226,45 +226,45 @@ class StatsFragment : Fragment() {
             rowLabelDepenses.text = trad["label_depenses"] ?: "Dépenses"
 
             // Cellules tableau
-            cellCigJour = view.findViewById(R.id.stats_cell_cig_jour)
-            cellCigSemaine = view.findViewById(R.id.stats_cell_cig_semaine)
-            cellCigMois = view.findViewById(R.id.stats_cell_cig_mois)
-            cellCigAnnee = view.findViewById(R.id.stats_cell_cig_annee)
+            cellCigJour = view.findViewById(R.id.stats_cigarettes_jour)
+            cellCigSemaine = view.findViewById(R.id.stats_cigarettes_semaine)
+            cellCigMois = view.findViewById(R.id.stats_cigarettes_mois)
+            cellCigAnnee = view.findViewById(R.id.stats_cigarettes_annee)
 
-            cellJointJour = view.findViewById(R.id.stats_cell_joint_jour)
-            cellJointSemaine = view.findViewById(R.id.stats_cell_joint_semaine)
-            cellJointMois = view.findViewById(R.id.stats_cell_joint_mois)
-            cellJointAnnee = view.findViewById(R.id.stats_cell_joint_annee)
+            cellJointJour = view.findViewById(R.id.stats_joints_jour)
+            cellJointSemaine = view.findViewById(R.id.stats_joints_semaine)
+            cellJointMois = view.findViewById(R.id.stats_joints_mois)
+            cellJointAnnee = view.findViewById(R.id.stats_joints_annee)
 
-            cellAlcoolGlobalJour = view.findViewById(R.id.stats_cell_alcool_global_jour)
-            cellAlcoolGlobalSemaine = view.findViewById(R.id.stats_cell_alcool_global_semaine)
-            cellAlcoolGlobalMois = view.findViewById(R.id.stats_cell_alcool_global_mois)
-            cellAlcoolGlobalAnnee = view.findViewById(R.id.stats_cell_alcool_global_annee)
+            cellAlcoolGlobalJour = view.findViewById(R.id.stats_alcool_global_jour)
+            cellAlcoolGlobalSemaine = view.findViewById(R.id.stats_alcool_global_semaine)
+            cellAlcoolGlobalMois = view.findViewById(R.id.stats_alcool_global_mois)
+            cellAlcoolGlobalAnnee = view.findViewById(R.id.stats_alcool_global_annee)
 
-            cellBiereJour = view.findViewById(R.id.stats_cell_biere_jour)
-            cellBiereSemaine = view.findViewById(R.id.stats_cell_biere_semaine)
-            cellBiereMois = view.findViewById(R.id.stats_cell_biere_mois)
-            cellBiereAnnee = view.findViewById(R.id.stats_cell_biere_annee)
+            cellBiereJour = view.findViewById(R.id.stats_bieres_jour)
+            cellBiereSemaine = view.findViewById(R.id.stats_bieres_semaine)
+            cellBiereMois = view.findViewById(R.id.stats_bieres_mois)
+            cellBiereAnnee = view.findViewById(R.id.stats_bieres_annee)
 
-            cellLiqueurJour = view.findViewById(R.id.stats_cell_liqueur_jour)
-            cellLiqueurSemaine = view.findViewById(R.id.stats_cell_liqueur_semaine)
-            cellLiqueurMois = view.findViewById(R.id.stats_cell_liqueur_mois)
-            cellLiqueurAnnee = view.findViewById(R.id.stats_cell_liqueur_annee)
+            cellLiqueurJour = view.findViewById(R.id.stats_liqueurs_jour)
+            cellLiqueurSemaine = view.findViewById(R.id.stats_liqueurs_semaine)
+            cellLiqueurMois = view.findViewById(R.id.stats_liqueurs_mois)
+            cellLiqueurAnnee = view.findViewById(R.id.stats_liqueurs_annee)
 
-            cellAlcoolFortJour = view.findViewById(R.id.stats_cell_alcool_fort_jour)
-            cellAlcoolFortSemaine = view.findViewById(R.id.stats_cell_alcool_fort_semaine)
-            cellAlcoolFortMois = view.findViewById(R.id.stats_cell_alcool_fort_mois)
-            cellAlcoolFortAnnee = view.findViewById(R.id.stats_cell_alcool_fort_annee)
+            cellAlcoolFortJour = view.findViewById(R.id.stats_alcool_fort_jour)
+            cellAlcoolFortSemaine = view.findViewById(R.id.stats_alcool_fort_semaine)
+            cellAlcoolFortMois = view.findViewById(R.id.stats_alcool_fort_mois)
+            cellAlcoolFortAnnee = view.findViewById(R.id.stats_alcool_fort_annee)
 
-            cellEconomiesJour = view.findViewById(R.id.stats_cell_economies_jour)
-            cellEconomiesSemaine = view.findViewById(R.id.stats_cell_economies_semaine)
-            cellEconomiesMois = view.findViewById(R.id.stats_cell_economies_mois)
-            cellEconomiesAnnee = view.findViewById(R.id.stats_cell_economies_annee)
+            cellEconomiesJour = view.findViewById(R.id.stats_economies_jour)
+            cellEconomiesSemaine = view.findViewById(R.id.stats_economies_semaine)
+            cellEconomiesMois = view.findViewById(R.id.stats_economies_mois)
+            cellEconomiesAnnee = view.findViewById(R.id.stats_economies_annee)
 
-            cellDepensesJour = view.findViewById(R.id.stats_cell_depenses_jour)
-            cellDepensesSemaine = view.findViewById(R.id.stats_cell_depenses_semaine)
-            cellDepensesMois = view.findViewById(R.id.stats_cell_depenses_mois)
-            cellDepensesAnnee = view.findViewById(R.id.stats_cell_depenses_annee)
+            cellDepensesJour = view.findViewById(R.id.stats_depenses_jour)
+            cellDepensesSemaine = view.findViewById(R.id.stats_depenses_semaine)
+            cellDepensesMois = view.findViewById(R.id.stats_depenses_mois)
+            cellDepensesAnnee = view.findViewById(R.id.stats_depenses_annee)
 
             // Bandeau profil
             txtProfilComplet = view.findViewById(R.id.stats_txt_profil_complet)
