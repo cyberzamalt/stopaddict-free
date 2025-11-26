@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_NAME = "StopAddict.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
         private const val TAG = "DatabaseHelper"
 
         // Table consommations
@@ -58,6 +58,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COL_LANGUE = "langue"
         private const val COL_DEVISE = "devise"
         private const val COL_CATEGORIES_ACTIVES = "categories_actives"
+
+        // Préférences supplémentaires
+        private const val COL_MODE_CIGARETTE = "mode_cigarette"
+        private const val COL_GRAMME_PAR_JOINT_PREF = "gramme_par_joint"
+        private const val COL_UNITE_CL_ALCOOL_GLOBAL = "unite_cl_alcool_global"
+        private const val COL_UNITE_CL_BIERE = "unite_cl_biere"
+        private const val COL_UNITE_CL_LIQUEUR = "unite_cl_liqueur"
+        private const val COL_UNITE_CL_ALCOOL_FORT = "unite_cl_alcool_fort"
+
 
         // Types de consommations
         const val TYPE_CIGARETTE = "cigarette"
@@ -121,17 +130,23 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     $COL_UNITE_CL INTEGER DEFAULT 0
                 )
             """)
-
-            // Table preferences
-            db.execSQL("""
-                CREATE TABLE $TABLE_PREFERENCES (
-                    $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
-                    $COL_PRENOM TEXT DEFAULT '',
-                    $COL_LANGUE TEXT DEFAULT 'FR',
-                    $COL_DEVISE TEXT DEFAULT '€',
-                    $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}'
-                )
-            """)
+            
+        // Table preferences
+        db.execSQL("""
+            CREATE TABLE $TABLE_PREFERENCES (
+                $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
+                $COL_PRENOM TEXT DEFAULT '',
+                $COL_LANGUE TEXT DEFAULT 'FR',
+                $COL_DEVISE TEXT DEFAULT 'EUR',
+                $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+                $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
+                $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
+                $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '25',
+                $COL_UNITE_CL_BIERE TEXT DEFAULT '25',
+                $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '4',
+                $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '4'
+            )
+        """)
 
             // Insertion préférences par défaut
             db.execSQL("INSERT INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
@@ -543,8 +558,21 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             db.delete(TABLE_HABITUDES, null, null)
             db.delete(TABLE_DATES, null, null)
             db.delete(TABLE_COUTS, null, null)
-            db.execSQL("UPDATE $TABLE_PREFERENCES SET $COL_PRENOM = '', $COL_LANGUE = 'FR', $COL_DEVISE = '€', $COL_CATEGORIES_ACTIVES = '{\"cigarette\":true,\"joint\":true,\"alcool_global\":true,\"biere\":false,\"liqueur\":false,\"alcool_fort\":false}'")
-            
+
+            db.execSQL("""
+    UPDATE $TABLE_PREFERENCES SET 
+        $COL_PRENOM = '',
+        $COL_LANGUE = 'FR',
+        $COL_DEVISE = 'EUR',
+        $COL_CATEGORIES_ACTIVES = '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+        $COL_MODE_CIGARETTE = 'classique',
+        $COL_GRAMME_PAR_JOINT_PREF = '0',
+        $COL_UNITE_CL_ALCOOL_GLOBAL = '25',
+        $COL_UNITE_CL_BIERE = '25',
+        $COL_UNITE_CL_LIQUEUR = '4',
+        $COL_UNITE_CL_ALCOOL_FORT = '4'
+""")
+                        
             // Réinitialiser les lignes par défaut
             val types = listOf(TYPE_CIGARETTE, TYPE_JOINT, TYPE_ALCOOL_GLOBAL, TYPE_BIERE, TYPE_LIQUEUR, TYPE_ALCOOL_FORT)
             types.forEach { type ->
