@@ -380,7 +380,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         addLabel(jointCard, trad["label_gramme_par_joint"] ?: "Grammes par joint")
         editGrammeParJoint = EditText(requireContext()).apply {
-            hint = "0.5"
+            hint = "0.0"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(20, 20, 20, 20)
         }
@@ -423,7 +423,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         addLabel(alcoolCard, trad["unite_cl_global"] ?: "Unité en cL")
         editUniteCLGlobal = EditText(requireContext()).apply {
-            hint = "25"
+            hint = "00"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(20, 20, 20, 20)
         }
@@ -610,15 +610,15 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
             // Joints
             val prixGramme = editPrixGramme.text.toString().toDoubleOrNull() ?: 0.0
-            val grammeParJoint = editGrammeParJoint.text.toString().toDoubleOrNull() ?: 0.5
+            val grammeParJoint = editGrammeParJoint.text.toString().toDoubleOrNull() ?: 0.0
             val prixFeuillesJoint = editPrixFeuillesJoint.text.toString().toDoubleOrNull() ?: 0.0
-            val nbFeuillesJoint = editNbFeuillesJoint.text.toString().toDoubleOrNull() ?: 32.0
+            val nbFeuillesJoint = editNbFeuillesJoint.text.toString().toDoubleOrNull() ?: 0.0
             dbHelper.setCouts(DatabaseHelper.TYPE_JOINT, 0.0, 0.0, 0.0, prixFeuillesJoint, nbFeuillesJoint, 0.0, 0.0, 0.0, 0.0, prixGramme)
             dbHelper.setPreference("gramme_par_joint", grammeParJoint.toString())
 
             // Alcool global
             val prixVerreGlobal = editPrixVerreGlobal.text.toString().toDoubleOrNull() ?: 0.0
-            val uniteCLGlobal = editUniteCLGlobal.text.toString().toDoubleOrNull() ?: 25.0
+            val uniteCLGlobal = editUniteCLGlobal.text.toString().toDoubleOrNull() ?: 0.0
             dbHelper.setCouts(DatabaseHelper.TYPE_ALCOOL_GLOBAL, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreGlobal)
             dbHelper.setPreference("unite_cl_alcool_global", uniteCLGlobal.toString())
 
@@ -630,13 +630,13 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
             // Liqueurs
             val prixVerreLiqueur = editPrixVerreLiqueur.text.toString().toDoubleOrNull() ?: 0.0
-            val uniteCLLiqueur = editUniteCLLiqueur.text.toString().toDoubleOrNull() ?: 4.0
+            val uniteCLLiqueur = editUniteCLLiqueur.text.toString().toDoubleOrNull() ?: 0.0
             dbHelper.setCouts(DatabaseHelper.TYPE_LIQUEUR, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreLiqueur)
             dbHelper.setPreference("unite_cl_liqueur", uniteCLLiqueur.toString())
 
             // Alcool fort
             val prixVerreAlcoolFort = editPrixVerreAlcoolFort.text.toString().toDoubleOrNull() ?: 0.0
-            val uniteCLAlcoolFort = editUniteCLAlcoolFort.text.toString().toDoubleOrNull() ?: 4.0
+            val uniteCLAlcoolFort = editUniteCLAlcoolFort.text.toString().toDoubleOrNull() ?: 0.0
             dbHelper.setCouts(DatabaseHelper.TYPE_ALCOOL_FORT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreAlcoolFort)
             dbHelper.setPreference("unite_cl_alcool_fort", uniteCLAlcoolFort.toString())
 
