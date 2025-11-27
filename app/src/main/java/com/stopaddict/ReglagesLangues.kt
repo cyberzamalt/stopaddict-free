@@ -86,6 +86,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Date réussite",
         "btn_choisir_date" to "Choisir date",
 
+        "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "RAZ du jour",
         "btn_raz_historique" to "RAZ historique",
@@ -233,6 +235,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Success date",
         "btn_choisir_date" to "Choose date",
 
+        "msg_export_limite" to "To access export, switch to the ad-free version to enjoy it :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "Reset today",
         "btn_raz_historique" to "Reset history",
@@ -379,6 +383,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Fecha éxito",
         "btn_choisir_date" to "Elegir fecha",
 
+        "msg_export_limite" to "Para acceder a la exportación, pásate a la versión sin anuncios para disfrutarla :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "Restablecer hoy",
         "btn_raz_historique" to "Restablecer historial",
@@ -523,6 +529,8 @@ object ReglagesLangues {
         "label_date_arret" to "Data parada",
         "label_date_reussite" to "Data sucesso",
         "btn_choisir_date" to "Escolher data",
+
+        "msg_export_limite" to "Um die Exportfunktion zu nutzen, wechsle zur werbefreien Version :-)",
 
         // Boutons RAZ
         "btn_raz_jour" to "Redefinir hoje",
@@ -669,6 +677,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Erfolgsdatum",
         "btn_choisir_date" to "Datum wählen",
 
+        "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "Heute zurücksetzen",
         "btn_raz_historique" to "Verlauf zurücksetzen",
@@ -813,6 +823,8 @@ object ReglagesLangues {
         "label_date_arret" to "Data smettere",
         "label_date_reussite" to "Data successo",
         "btn_choisir_date" to "Scegli data",
+
+        "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
 
         // Boutons RAZ
         "btn_raz_jour" to "Ripristina oggi",
@@ -959,6 +971,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Дата успеха",
         "btn_choisir_date" to "Выбрать дату",
 
+        "msg_export_limite" to "Чтобы пользоваться экспортом, перейдите на версию без рекламы :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "Сбросить сегодня",
         "btn_raz_historique" to "Сбросить историю",
@@ -1103,6 +1117,8 @@ object ReglagesLangues {
         "label_date_arret" to "تاريخ الإقلاع",
         "label_date_reussite" to "تاريخ النجاح",
         "btn_choisir_date" to "اختر التاريخ",
+
+        "msg_export_limite" to "للوصول إلى التصدير، انتقل إلى النسخة بدون إعلانات للاستفادة من هذه الميزة :-)",
 
         // Boutons RAZ
         "btn_raz_jour" to "إعادة تعيين اليوم",
@@ -1249,6 +1265,8 @@ object ReglagesLangues {
         "label_date_reussite" to "सफलता की तिथि",
         "btn_choisir_date" to "तिथि चुनें",
 
+        "msg_export_limite" to "एक्सपोर्ट करने के लिए बिना विज्ञापन वाले वर्शन पर जाएँ :-)",
+
         // Boutons RAZ
         "btn_raz_jour" to "आज रीसेट करें",
         "btn_raz_historique" to "इतिहास रीसेट करें",
@@ -1393,6 +1411,8 @@ object ReglagesLangues {
         "label_date_arret" to "禁煙日",
         "label_date_reussite" to "成功日",
         "btn_choisir_date" to "日付を選択",
+
+        "msg_export_limite" to "エクスポート機能を利用するには、広告なしバージョンにアップグレードしてください :-)",
 
         // Boutons RAZ
         "btn_raz_jour" to "今日をリセット",
