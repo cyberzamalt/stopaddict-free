@@ -67,6 +67,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COL_UNITE_CL_LIQUEUR = "unite_cl_liqueur"
         private const val COL_UNITE_CL_ALCOOL_FORT = "unite_cl_alcool_fort"
 
+        
+        // 🔹 NOUVEAU : prix du tabac à tuber
+        private const val COL_PRIX_TABAC_TUBER_PREF = "prix_tabac_tuber"
 
         // Types de consommations
         const val TYPE_CIGARETTE = "cigarette"
@@ -132,21 +135,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             """)
             
         // Table preferences
-        db.execSQL("""
-            CREATE TABLE $TABLE_PREFERENCES (
-                $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
-                $COL_PRENOM TEXT DEFAULT '',
-                $COL_LANGUE TEXT DEFAULT 'FR',
-                $COL_DEVISE TEXT DEFAULT 'EUR',
-                $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
-                $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
-                $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
-                $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '0',
-                $COL_UNITE_CL_BIERE TEXT DEFAULT '0',
-                $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '0',
-                $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '0'
-            )
-        """)
+      db.execSQL("""
+    CREATE TABLE $TABLE_PREFERENCES (
+        $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
+        $COL_PRENOM TEXT DEFAULT '',
+        $COL_LANGUE TEXT DEFAULT 'FR',
+        $COL_DEVISE TEXT DEFAULT 'EUR',
+        $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+        $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
+        $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
+        $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '25',
+        $COL_UNITE_CL_BIERE TEXT DEFAULT '25',
+        $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '4',
+        $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '4',
+        $COL_PRIX_TABAC_TUBER_PREF TEXT DEFAULT '0'   -- 🔹 ajouté
+    )
+""")
 
             // Insertion préférences par défaut
             db.execSQL("INSERT INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
@@ -559,7 +563,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             db.delete(TABLE_DATES, null, null)
             db.delete(TABLE_COUTS, null, null)
 
-            db.execSQL("""
+           db.execSQL("""
     UPDATE $TABLE_PREFERENCES SET 
         $COL_PRENOM = '',
         $COL_LANGUE = 'FR',
@@ -567,12 +571,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_CATEGORIES_ACTIVES = '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
         $COL_MODE_CIGARETTE = 'classique',
         $COL_GRAMME_PAR_JOINT_PREF = '0',
-        $COL_UNITE_CL_ALCOOL_GLOBAL = '0',
-        $COL_UNITE_CL_BIERE = '0',
-        $COL_UNITE_CL_LIQUEUR = '0',
-        $COL_UNITE_CL_ALCOOL_FORT = '0'
+        $COL_UNITE_CL_ALCOOL_GLOBAL = '25',
+        $COL_UNITE_CL_BIERE = '25',
+        $COL_UNITE_CL_LIQUEUR = '4',
+        $COL_UNITE_CL_ALCOOL_FORT = '4',
+        $COL_PRIX_TABAC_TUBER_PREF = '0'
 """)
-                        
             // Réinitialiser les lignes par défaut
             val types = listOf(TYPE_CIGARETTE, TYPE_JOINT, TYPE_ALCOOL_GLOBAL, TYPE_BIERE, TYPE_LIQUEUR, TYPE_ALCOOL_FORT)
             types.forEach { type ->
