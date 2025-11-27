@@ -16,8 +16,8 @@ class ExportLimiter(private val context: Context) {
         private const val TAG = "ExportLimiter"
         
         // Limites version gratuite
-        private const val MAX_EXPORT_PER_DAY = 1
-        private const val MAX_IMPORT_PER_DAY = 1
+        private const val MAX_EXPORT_PER_DAY = 10
+        private const val MAX_IMPORT_PER_DAY = 10
     }
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
