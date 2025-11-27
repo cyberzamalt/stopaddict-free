@@ -452,7 +452,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         addLabel(biereCard, trad["unite_cl_biere"] ?: "Unité en cL")
         editUniteCLBiere = EditText(requireContext()).apply {
-            hint = "25"
+            hint = "0"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(20, 20, 20, 20)
         }
@@ -481,7 +481,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         addLabel(liqueurCard, trad["unite_cl_liqueur"] ?: "Unité en cL")
         editUniteCLLiqueur = EditText(requireContext()).apply {
-            hint = "4"
+            hint = "0"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(20, 20, 20, 20)
         }
@@ -510,7 +510,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         
         addLabel(alcoolFortCard, trad["unite_cl_alcool_fort"] ?: "Unité en cL")
         editUniteCLAlcoolFort = EditText(requireContext()).apply {
-            hint = "4"
+            hint = "0"
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(20, 20, 20, 20)
         }
@@ -624,7 +624,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
             // Bières
             val prixVerreBiere = editPrixVerreBiere.text.toString().toDoubleOrNull() ?: 0.0
-            val uniteCLBiere = editUniteCLBiere.text.toString().toDoubleOrNull() ?: 25.0
+            val uniteCLBiere = editUniteCLBiere.text.toString().toDoubleOrNull() ?: 0.0
             dbHelper.setCouts(DatabaseHelper.TYPE_BIERE, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, prixVerreBiere)
             dbHelper.setPreference("unite_cl_biere", uniteCLBiere.toString())
 
