@@ -973,13 +973,14 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
     }
 
-    private fun exportData() {
-        try {
-            if (!exportLimiter.peutExporter()) {
-                val remaining = exportLimiter.getRemainingExports()
-                Toast.makeText(requireContext(), "Limite atteinte. $remaining exports restants aujourd'hui", Toast.LENGTH_LONG).show()
-                return
-            }
+        private fun exportData() {
+            try {
+                    if (!exportLimiter.peutExporter()) {
+            val msg = trad["msg_export_limite"]
+                ?: "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)"
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+        return
+    }
             
             val jsonData = buildExportJSON()
             val fileName = "stopaddict_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())}.json"
