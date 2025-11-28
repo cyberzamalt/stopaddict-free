@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_NAME = "StopAddict.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val TAG = "DatabaseHelper"
 
         // Table consommations
@@ -41,6 +41,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COL_PRIX_PAQUET = "prix_paquet"
         private const val COL_NB_CIGARETTES = "nb_cigarettes"
         private const val COL_PRIX_TABAC = "prix_tabac"
+        private const val COL_PRIX_TABAC_TUBE = "prix_tabac_tube"
         private const val COL_PRIX_FEUILLES = "prix_feuilles"
         private const val COL_NB_FEUILLES = "nb_feuilles"
         private const val COL_PRIX_FILTRES = "prix_filtres"
@@ -122,6 +123,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     $COL_NB_CIGARETTES INTEGER DEFAULT 0,
                     $COL_PRIX_TABAC REAL DEFAULT 0,
                     $COL_PRIX_FEUILLES REAL DEFAULT 0,
+                    $COL_PRIX_TABAC_TUBE REAL DEFAULT 0,
                     $COL_NB_FEUILLES INTEGER DEFAULT 0,
                     $COL_PRIX_FILTRES REAL DEFAULT 0,
                     $COL_NB_FILTRES INTEGER DEFAULT 0,
@@ -425,43 +427,51 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     // ==================== COÛTS ====================
 
     fun setCouts(
-        type: String,
-        prixPaquet: Double,
-        nbCigarettes: Double,
-        prixTabac: Double,
-        prixFeuilles: Double,
-        nbFeuilles: Double,
-        prixFiltres: Double,
-        nbFiltres: Double,
-        prixTubes: Double,
-        nbTubes: Double,
-        prixVerre: Double
-    ): Boolean {
-        return try {
-            val db = writableDatabase
-            val values = ContentValues().apply {
-                put(COL_PRIX_PAQUET, prixPaquet)
-                put(COL_NB_CIGARETTES, nbCigarettes.toInt())
-                put(COL_PRIX_TABAC, prixTabac)
-                put(COL_PRIX_FEUILLES, prixFeuilles)
-                put(COL_NB_FEUILLES, nbFeuilles.toInt())
-                put(COL_PRIX_FILTRES, prixFiltres)
-                put(COL_NB_FILTRES, nbFiltres.toInt())
-                put(COL_PRIX_TUBES, prixTubes)
-                put(COL_NB_TUBES, nbTubes.toInt())
+    type: String,
+    prixPaquet: Double,
+    nbCigarettes: Double,
+    prixTabac: Double,
+    prixFeuilles: Double,
+    nbFeuilles: Double,
+    prixFiltres: Double,
+    nbFiltres: Double,
+    prixTubes: Double,
+    nbTubes: Double,
+    prixTabacTubes: Double,
+    prixVerre: Double
+): Boolean {
+    return try {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COL_PRIX_PAQUET, prixPaquet)
+            put(COL_NB_CIGARETTES, nbCigarettes.toInt())
+            put(COL_PRIX_TABAC, prixTabac)
+            put(COL_PRIX_TABAC_TUBE, prixTabacTubes)       // 🔹 nouveau
+            put(COL_PRIX_FEUILLES, prixFeuilles)
+            put(COL_NB_FEUILLES, nbFeuilles.toInt())
+            put(COL_PRIX_FILTRES, prixFiltres)
+            put(COL_NB_FILTRES, nbFiltres.toInt())
+            put(COL_PRIX_TUBES, prixTubes)
+            put(COL_NB_TUBES, nbTubes.toInt())
 
-                // 🔧 Cas particulier : JOINT
-                // Pour le type "joint", le dernier paramètre correspond au PRIX DU GRAMME
-                // → on l'enregistre dans COL_PRIX_GRAMME
-                if (type == TYPE_JOINT) {
-                    put(COL_PRIX_GRAMME, prixVerre)
-                    // On laisse COL_PRIX_VERRE à 0 pour les joints
-                    put(COL_PRIX_VERRE, 0.0)
-                } else {
-                    // Pour les autres types (alcool, etc.), on utilise bien COL_PRIX_VERRE
-                    put(COL_PRIX_VERRE, prixVerre)
-                }
+            if (type == TYPE_JOINT) {
+                // Pour les joints : dernier param = prix du gramme
+                put(COL_PRIX_GRAMME, prixVerre)
+                put(COL_PRIX_VERRE, 0.0)
+            } else {
+                // Pour les autres types : dernier param = prix du verre
+                put(COL_PRIX_VERRE, prixVerre)
             }
+        }
+
+        val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
+        Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
+        result > 0
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur setCouts: ${e.message}")
+        false
+    }
+}
 
             val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
             Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
