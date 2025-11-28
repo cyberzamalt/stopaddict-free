@@ -472,15 +472,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         false
     }
 }
-
-            val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
-            result > 0
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur setCouts: ${e.message}")
-            false
-        }
-    }
     
     fun getCouts(type: String): Map<String, Double> {
         return try {
