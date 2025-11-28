@@ -994,7 +994,12 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 "usine" -> {
                     categoriesActives.forEach { (typeCategorie, _) ->
                         dbHelper.supprimerToutesConsommations(typeCategorie)
-                        dbHelper.setCouts(typeCategorie, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                        dbHelper.setCouts(
+                        typeCategorie,
+                        0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 0.0
+                    )
+
                         dbHelper.setMaxJournalier(typeCategorie, 0)
                         dbHelper.setDatesObjectifs(typeCategorie, "", "", "")
                     }
