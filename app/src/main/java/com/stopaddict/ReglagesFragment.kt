@@ -1380,4 +1380,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         super.onResume()
         loadData()
     }
+        private fun parseDouble(text: String): Double {
+        if (text.isBlank()) return 0.0
+        return text.replace(',', '.').toDoubleOrNull() ?: 0.0
+    }
 }
