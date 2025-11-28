@@ -556,38 +556,34 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             var nbFiltres = anciensCoutsCig["nb_filtres"] ?: 0.0
             var prixTubes = anciensCoutsCig["prix_tubes"] ?: 0.0
             var nbTubes = anciensCoutsCig["nb_tubes"] ?: 0.0
+            var prixTabacTubes = anciensCoutsCig["prix_tabac_tube"] ?: 0.0   // 🔹 nouveau
             var prixVerreCig = anciensCoutsCig["prix_verre"] ?: 0.0 // pas utilisé pour les cigarettes mais on le conserve
 
             // 2) On met à jour UNIQUEMENT le mode sélectionné
-            var modeCig = "classique"   // valeur par défaut
-            
-            when {
-        
-                // Mode 1 : cigarettes en paquet
-        radioCigarettesClassiques.isChecked -> {
-            modeCig = "classique"
-            prixPaquet = editPrixPaquet.text.toString().toDoubleOrNull() ?: 0.0
-            nbCigarettes = editNbCigarettes.text.toString().toDoubleOrNull() ?: 00.0
-        }
+var modeCig = "classique"
 
-                // Mode 2 : à rouler
-        radioCigarettesRouler.isChecked -> {
-            modeCig = "rouler"
-            prixTabac = editPrixTabac.text.toString().toDoubleOrNull() ?: 0.0
-            prixFeuilles = editPrixFeuilles.text.toString().toDoubleOrNull() ?: 0.0
-            nbFeuilles = editNbFeuilles.text.toString().toDoubleOrNull() ?: 0.0
-            prixFiltres = editPrixFiltres.text.toString().toDoubleOrNull() ?: 0.0
-            nbFiltres = editNbFiltres.text.toString().toDoubleOrNull() ?: 00.0
-        }
+// ⚠️ Si tu n'as PAS de fonction parseDouble, remplace parseDouble(...) par :
+// editX.text.toString().toDoubleOrNull() ?: 0.0
 
-                // Mode 3 : à tuber
-    radioCigarettesTubeuse.isChecked -> {
-        modeCig = "tuber"
-        prixTabac = editPrixTabacTubes.text.toString().toDoubleOrNull() ?: 0.0
-        prixTubes = editPrixTubes.text.toString().toDoubleOrNull() ?: 0.0
-        nbTubes = editNbTubes.text.toString().toDoubleOrNull() ?: 00.0
-    }
+if (radioCigarettesClassiques.isChecked) {
+    modeCig = "classique"
+    prixPaquet = parseDouble(editPrixPaquet.text.toString())
+    nbCigarettes = parseDouble(editNbCigarettes.text.toString())
 
+} else if (radioCigarettesRouler.isChecked) {
+    modeCig = "rouler"
+    prixTabac = parseDouble(editPrixTabac.text.toString())
+    prixFeuilles = parseDouble(editPrixFeuilles.text.toString())
+    nbFeuilles = parseDouble(editNbFeuilles.text.toString())
+    prixFiltres = parseDouble(editPrixFiltres.text.toString())
+    nbFiltres = parseDouble(editNbFiltres.text.toString())
+
+} else if (radioCigarettesTubeuse.isChecked) {
+    modeCig = "tuber"
+    prixTabacTubes = parseDouble(editPrixTabacTubes.text.toString())  // tabac tube
+    prixTubes = parseDouble(editPrixTubes.text.toString())
+    nbTubes = parseDouble(editNbTubes.text.toString())
+}
             }
 
             // 3) On sauvegarde TOUT en une seule fois sans écraser les autres modes
@@ -603,6 +599,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 prixTubes,
                 nbTubes,
                 prixVerreCig
+                0.0,             // prixVerre (inutile pour les cigarettes)
+                prixTabacTubes   // 🔹 NOUVEAU : tabac à tuber
             )
 
             // 🔹 On mémorise le mode choisi pour le prochain chargement de l’écran
@@ -1170,7 +1168,13 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt()?.toString() ?: "0")
 
         // À tuber
-        editPrixTabacTubes.setText(coutsCig["prix_tabac"]?.toString() ?: "0")
+        // À tuber
+    editPrixTabacTubes.setText(coutsCig["prix_tabac_tube"]?.toString() ?: "0")
+    editPrixTubes.setText(coutsCig["prix_tubes"]?.toString() ?: "0")
+    editNbTubes.setText(
+        (coutsCig["nb_tubes"]?.toInt() ?: 0).takeIf { it > 0 }?.toString() ?: "0"
+    )
+
         editPrixTubes.setText(coutsCig["prix_tubes"]?.toString() ?: "0")
         editNbTubes.setText(coutsCig["nb_tubes"]?.toInt()?.toString() ?: "0")
 
