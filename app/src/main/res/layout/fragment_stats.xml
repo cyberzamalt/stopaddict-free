@@ -457,7 +457,7 @@
                 android:textSize="12sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_marginEnd="2dp" />
+                android:layout_marginEnd="0dp" />
 
             <Button
                 android:id="@+id/stats_btn_mois"
