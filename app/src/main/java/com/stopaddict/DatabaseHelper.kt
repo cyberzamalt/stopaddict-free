@@ -146,10 +146,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
         $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
         $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
-        $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '25',
-        $COL_UNITE_CL_BIERE TEXT DEFAULT '25',
-        $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '4',
-        $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '4',
+        $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '0',
+        $COL_UNITE_CL_BIERE TEXT DEFAULT '0',
+        $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '0',
+        $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '0',
         $COL_PRIX_TABAC_TUBER_PREF TEXT DEFAULT '0'   -- 🔹 ajouté
     )
 """)
@@ -572,10 +572,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_CATEGORIES_ACTIVES = '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
         $COL_MODE_CIGARETTE = 'classique',
         $COL_GRAMME_PAR_JOINT_PREF = '0',
-        $COL_UNITE_CL_ALCOOL_GLOBAL = '25',
-        $COL_UNITE_CL_BIERE = '25',
-        $COL_UNITE_CL_LIQUEUR = '4',
-        $COL_UNITE_CL_ALCOOL_FORT = '4',
+        $COL_UNITE_CL_ALCOOL_GLOBAL = '0',
+        $COL_UNITE_CL_BIERE = '0',
+        $COL_UNITE_CL_LIQUEUR = '0',
+        $COL_UNITE_CL_ALCOOL_FORT = '0',
         $COL_PRIX_TABAC_TUBER_PREF = '0'
 """)
             // Réinitialiser les lignes par défaut
