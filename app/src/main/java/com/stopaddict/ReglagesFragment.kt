@@ -707,8 +707,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     val aProposCard = createCard()
 
     // Lien 1: Réafficher avertissement
-    addLinkButton(aProposCard, "⚠️ ${trad["voir_avertissement"] ?: "Voir l'avertissement"}") {
-        showAvertissementDialog()
+    addLinkButton(aProposCard, "⚠️ Voir l'avertissement") {
+    (activity as? MainActivity)?.showAgeWarningDialog()
     }
 
     // Lien 2: Manuel d'utilisation
