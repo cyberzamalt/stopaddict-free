@@ -1010,6 +1010,7 @@ class AccueilFragment : Fragment() {
             loadConsommationsJour()
             loadCategoriesActives()
             updateUI()
+            updateConseil()
             Log.d(TAG, "Fragment resumed - données rechargées")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur onResume: ${e.message}")
