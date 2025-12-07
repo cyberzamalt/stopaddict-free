@@ -3,7 +3,7 @@ package com.stopaddict
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Bundle
+import android.os.Bundlef
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -242,8 +242,6 @@ class MainActivity : AppCompatActivity() {
                 logger.d("showAgeWarningDialog: bouton 'Accepter' cliqué")
 
                 if (checkboxAge.isChecked) {
-                    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-
                 prefs.edit().apply {
                     putBoolean(PREF_AGE_ACCEPTED, checkboxAge.isChecked)
                     putBoolean(PREF_WARNING_SHOWN, checkboxNoShow.isChecked)
