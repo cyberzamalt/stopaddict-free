@@ -1228,12 +1228,12 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         editPrixGramme.setText(coutsJoint["prix_gramme"]?.toString() ?: "0")
         editGrammeParJoint.setText(dbHelper.getPreference("gramme_par_joint", "0"))
         editPrixFeuillesJoint.setText(coutsJoint["prix_feuilles"]?.toString() ?: "0")
-        editNbFeuillesJoint.setText(coutsJoint["nb_feuilles"]?.toInt()?.toString() ?: "")
+        editNbFeuillesJoint.setText(coutsJoint["nb_feuilles"]?.toInt()?.toString() ?: "0")
         
         // Alcools
         val coutsGlobal = dbHelper.getCouts(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
         editPrixVerreGlobal.setText(coutsGlobal["prix_verre"]?.toString() ?: "0")
-        editUniteCLGlobal.setText(dbHelper.getPreference("unite_cl_alcool_global", ""))
+        editUniteCLGlobal.setText(dbHelper.getPreference("unite_cl_alcool_global", "0"))
         
         val coutsBiere = dbHelper.getCouts(DatabaseHelper.TYPE_BIERE)
         editPrixVerreBiere.setText(coutsBiere["prix_verre"]?.toString() ?: "0")
