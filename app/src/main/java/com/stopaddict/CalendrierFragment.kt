@@ -191,7 +191,9 @@ class CalendrierFragment : Fragment() {
         try {
             val json = dbHelper.getPreference("categories_actives", """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}""")
             val gson = com.google.gson.Gson()
-            val map = gson.fromJson(json, Map::class.java) as Map<String, Boolean>
+            val type = object : com.google.gson.reflect.TypeToken<Map<String, Boolean>>() {}.type
+            val map: Map<String, Boolean> = gson.fromJson(json, type)
+            
             categoriesActives.clear()
             categoriesActives.putAll(map)
         } catch (e: Exception) {
@@ -353,8 +355,15 @@ class CalendrierFragment : Fragment() {
     private fun showDayDialog(dateStr: String) {
         try {
             val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateStr)
-            val dateFormatted = dateFormat.format(date)
+            val parsedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateStr)
+            
+            // Si la date est invalide, on sort proprement
+            if (parsedDate == null) {
+                Log.e(TAG, "showDayDialog: date invalide pour dateStr=$dateStr")
+                return
+            }
+            
+            val dateFormatted = dateFormat.format(parsedDate)
             
             val container = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
