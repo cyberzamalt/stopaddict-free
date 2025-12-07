@@ -18,12 +18,12 @@
         android:focusable="true">
 
         <ImageView
-            android:id="@+id/main_header_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/icone_stopaddict"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="Icône StopAddict" />
+        android:id="@+id/main_header_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/TON_IMAGE_EXISTANTE"
+        android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@+id/main_header_title"
