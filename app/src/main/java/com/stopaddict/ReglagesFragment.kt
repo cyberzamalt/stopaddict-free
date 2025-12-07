@@ -1174,7 +1174,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             // Charger catégories actives
             val json = dbHelper.getPreference("categories_actives", """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}""")
             val gson = com.google.gson.Gson()
-            val map = gson.fromJson(json, Map::class.java) as Map<String, Boolean>
+            val type = object : com.google.gson.reflect.TypeToken<Map<String, Boolean>>() {}.type
+            val map: Map<String, Boolean> = gson.fromJson(json, type)
+            
             categoriesActives.clear()
             categoriesActives.putAll(map)
             
