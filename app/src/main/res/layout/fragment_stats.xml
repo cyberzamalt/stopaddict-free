@@ -443,7 +443,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Jour"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:layout_marginEnd="2dp" />
@@ -454,10 +454,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Semaine"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_marginEnd="0dp" />
+                android:layout_marginEnd="2dp" />
 
             <Button
                 android:id="@+id/stats_btn_mois"
@@ -465,7 +465,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Mois"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:layout_marginEnd="2dp" />
@@ -478,7 +478,7 @@
                 android:text="Année"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
         <!-- Graphique Consommation -->
