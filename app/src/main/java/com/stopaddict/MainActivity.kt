@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     return result
 }
 
-    private fun showAgeWarningDialog() {
+    fun showAgeWarningDialog() {
     logger.d("showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
 
     try {
