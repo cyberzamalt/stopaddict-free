@@ -171,7 +171,8 @@ class ReglagesValidator(private val context: Context) {
     /**
      * Valide un champ max journalier (entier positif, limite raisonnable)
      */
-    fun validerMaxJournalier(editText: EditText, nomChamp: String, obligatoire: Boolean = false): ValidationResult {
+     
+    fun validerMaxJournalier(editText: EditText, nomChamp: String): ValidationResult {
         val texte = editText.text.toString().trim()
 
         // Max journalier est optionnel
