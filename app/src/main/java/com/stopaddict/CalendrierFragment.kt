@@ -333,7 +333,7 @@ class CalendrierFragment : Fragment() {
             }
 
             setOnClickListener {
-                showDayDialog(dateStr, totalDay)
+                showDayDialog(dateStr)
             }
         }
         val params = GridLayout.LayoutParams().apply {
@@ -350,7 +350,7 @@ class CalendrierFragment : Fragment() {
         }
     }
 
-    private fun showDayDialog(dateStr: String, totalActuel: Int) {
+    private fun showDayDialog(dateStr: String) {
         try {
             val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
             val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateStr)
