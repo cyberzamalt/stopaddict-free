@@ -31,14 +31,15 @@ class MainActivity : AppCompatActivity() {
 
     private val logger = AppLogger("MainActivity")
 
-    private lateinit var headerTextView: TextView
-    private lateinit var tabLayout: TabLayout
-    private lateinit var viewPager: ViewPager2
-    private lateinit var adContainer: FrameLayout
-    private lateinit var adView: AdView
-    private lateinit var configLangue: ConfigLangue
-    private lateinit var dbHelper: DatabaseHelper
-    private lateinit var trad: Map<String, String>
+        private lateinit var headerRoot: LinearLayout
+        private lateinit var headerTextView: TextView
+        private lateinit var tabLayout: TabLayout
+        private lateinit var viewPager: ViewPager2
+        private lateinit var adContainer: FrameLayout
+        private lateinit var adView: AdView
+        private lateinit var configLangue: ConfigLangue
+        private lateinit var dbHelper: DatabaseHelper
+        private lateinit var trad: Map<String, String>
 
         // Bandeau résumé jour sous le header principal
     private lateinit var headerResumeScroll: HorizontalScrollView
@@ -87,13 +88,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
-    private fun initializeViews() {
+        private fun initializeViews() {
+        headerRoot = findViewById(R.id.main_header_root)
         headerTextView = findViewById(R.id.main_header_title)
         tabLayout = findViewById(R.id.main_tab_layout)
         viewPager = findViewById(R.id.main_view_pager)
         adContainer = findViewById(R.id.main_ad_container)
 
-                headerResumeScroll = findViewById(R.id.header_resume_scroll)
+        headerResumeScroll = findViewById(R.id.header_resume_scroll)
         headerResumeContainer = findViewById(R.id.header_resume_container)
         headerResumeLabel = findViewById(R.id.header_resume_label)
         headerResumeCigarette = findViewById(R.id.header_resume_cigarette)
@@ -107,25 +109,23 @@ class MainActivity : AppCompatActivity() {
         headerResumeScroll.visibility = View.GONE
 
         logger.d(
-            "initializeViews: headerTextView=$headerTextView, " +
-            "tabLayout=$tabLayout, viewPager=$viewPager, adContainer=$adContainer"
+            "initializeViews: headerRoot=$headerRoot, headerTextView=$headerTextView, " +
+                "tabLayout=$tabLayout, viewPager=$viewPager, adContainer=$adContainer"
         )
     }
 
+            private fun setupHeader() {
+        logger.d("setupHeader: called")
 
-        private fun setupHeader() {
-    logger.d("setupHeader: called")
+        updateDateTime()
 
-    updateDateTime()
+        headerRoot.setOnClickListener {
+            logger.d("setupHeader: header root clicked -> opening console debug")
+            handleConsoleDebugClick()
+        }
 
-    headerTextView.setOnClickListener {
-        logger.d("setupHeader: header clicked -> opening console debug")
-        handleConsoleDebugClick()
+        logger.d("setupHeader: header click listener initialized")
     }
-
-    logger.d("setupHeader: header click listener initialized")
-}
-
         
         private fun updateDateTime() {
     try {
