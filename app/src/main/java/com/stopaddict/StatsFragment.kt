@@ -700,31 +700,65 @@ class StatsFragment : Fragment() {
     }
 
     private fun calculerPrixUnitaire(type: String, couts: Map<String, Double>): Double {
-        return try {
-            when (type) {
-                DatabaseHelper.TYPE_CIGARETTE -> {
-                    val prixPaquet = couts["prix_paquet"] ?: 0.0
-                    val nbCigarettes = couts["nb_cigarettes"] ?: 20.0
-                    if (prixPaquet > 0 && nbCigarettes > 0) prixPaquet / nbCigarettes else 0.0
+    return try {
+        when (type) {
+            DatabaseHelper.TYPE_CIGARETTE -> {
+                // On adapte le calcul en fonction du mode choisi dans les réglages
+                val modeCig = dbHelper.getPreference("mode_cigarette", "classique")
+                when (modeCig) {
+                    "rouler" -> {
+                        val prixTabac = couts["prix_tabac"] ?: 0.0
+                        val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+                        val prixFeuilles = couts["prix_feuilles"] ?: 0.0
+                        val nbFeuilles = couts["nb_feuilles"] ?: 0.0
+                        val prixFiltres = couts["prix_filtres"] ?: 0.0
+                        val nbFiltres = couts["nb_filtres"] ?: 0.0
+
+                        val coutTabac = if (prixTabac > 0 && nbCigarettes > 0) prixTabac / nbCigarettes else 0.0
+                        val coutFeuilles = if (prixFeuilles > 0 && nbFeuilles > 0) prixFeuilles / nbFeuilles else 0.0
+                        val coutFiltres = if (prixFiltres > 0 && nbFiltres > 0) prixFiltres / nbFiltres else 0.0
+
+                        val total = coutTabac + coutFeuilles + coutFiltres
+                        if (total > 0) total else 0.0
+                    }
+                    "tuber" -> {
+                        val prixTabacTubes = couts["prix_tabac_tube"] ?: 0.0
+                        val prixTubes = couts["prix_tubes"] ?: 0.0
+                        val nbTubes = couts["nb_tubes"] ?: 0.0
+                        val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+
+                        val coutTabac = if (prixTabacTubes > 0 && nbCigarettes > 0) prixTabacTubes / nbCigarettes else 0.0
+                        val coutTubes = if (prixTubes > 0 && nbTubes > 0) prixTubes / nbTubes else 0.0
+
+                        val total = coutTabac + coutTubes
+                        if (total > 0) total else 0.0
+                    }
+                    else -> {
+                        // Mode "classique" (paquet standard)
+                        val prixPaquet = couts["prix_paquet"] ?: 0.0
+                        val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+                        if (prixPaquet > 0 && nbCigarettes > 0) prixPaquet / nbCigarettes else 0.0
+                    }
                 }
-                DatabaseHelper.TYPE_JOINT -> {
-                    val prixGramme = couts["prix_gramme"] ?: 0.0
-                    val grammeParJoint = couts["gramme_par_joint"] ?: 0.0
-                    prixGramme * grammeParJoint
-                }
-                DatabaseHelper.TYPE_ALCOOL_GLOBAL,
-                DatabaseHelper.TYPE_BIERE,
-                DatabaseHelper.TYPE_LIQUEUR,
-                DatabaseHelper.TYPE_ALCOOL_FORT -> {
-                    couts["prix_verre"] ?: 0.0
-                }
-                else -> 0.0
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul prix unitaire $type: ${e.message}")
-            0.0
+            DatabaseHelper.TYPE_JOINT -> {
+                val prixGramme = couts["prix_gramme"] ?: 0.0
+                val grammeParJoint = couts["gramme_par_joint"] ?: 0.0
+                prixGramme * grammeParJoint
+            }
+            DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+            DatabaseHelper.TYPE_BIERE,
+            DatabaseHelper.TYPE_LIQUEUR,
+            DatabaseHelper.TYPE_ALCOOL_FORT -> {
+                couts["prix_verre"] ?: 0.0
+            }
+            else -> 0.0
         }
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul prix unitaire $type: ${e.message}")
+        0.0
     }
+}
 
     private fun getDeviseSymbol(): String {
         val code = dbHelper.getPreference("devise", "EUR")
