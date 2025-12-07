@@ -556,8 +556,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         var prixTubes = anciensCoutsCig["prix_tubes"] ?: 0.0
         var nbTubes = anciensCoutsCig["nb_tubes"] ?: 0.0
         var prixTabacTubes = anciensCoutsCig["prix_tabac_tube"] ?: 0.0
-        val prixVerreCig = anciensCoutsCig["prix_verre"] ?: 0.0 // pas utilisé pour les cigarettes, mais on le garde
-
         var modeCig = "classique"
 
         fun parseDouble(text: String): Double =
@@ -1031,8 +1029,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
         return
     }
-            
-            val jsonData = buildExportJSON()
+        
             val fileName = "stopaddict_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())}.json"
             
             val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
