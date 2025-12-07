@@ -741,11 +741,29 @@ class StatsFragment : Fragment() {
                     }
                 }
             }
+            
             DatabaseHelper.TYPE_JOINT -> {
-                val prixGramme = couts["prix_gramme"] ?: 0.0
-                val grammeParJoint = couts["gramme_par_joint"] ?: 0.0
-                prixGramme * grammeParJoint
-            }
+    // Prix du gramme de produit (stocké dans la table couts)
+    val prixGramme = couts["prix_gramme"] ?: 0.0
+
+    // Grammes par joint : stocké dans les préférences (et pas dans la table couts)
+    val grammeParJointStr = dbHelper.getPreference("gramme_par_joint", "0")
+    val grammeParJoint = grammeParJointStr.replace(",", ".").toDoubleOrNull() ?: 0.0
+
+    // Optionnel : prise en compte des feuilles longues si tu les utilises pour les joints
+    val prixFeuillesJoint = couts["prix_feuilles"] ?: 0.0
+    val nbFeuillesJoint = couts["nb_feuilles"] ?: 0.0
+    val coutFeuilleParJoint =
+        if (prixFeuillesJoint > 0 && nbFeuillesJoint > 0) prixFeuillesJoint / nbFeuillesJoint else 0.0
+
+    if (prixGramme <= 0 || grammeParJoint <= 0) {
+        0.0
+    } else {
+        // Coût = produit + éventuellement une feuille par joint
+        (prixGramme * grammeParJoint) + coutFeuilleParJoint
+    }
+}
+            
             DatabaseHelper.TYPE_ALCOOL_GLOBAL,
             DatabaseHelper.TYPE_BIERE,
             DatabaseHelper.TYPE_LIQUEUR,
