@@ -5,20 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Header avec nom app + date/heure (cliquable pour console debug) -->
-    <TextView
-        android:id="@+id/main_header_title"
+        <!-- Header avec icône + nom app + date/heure (cliquable pour console debug) -->
+    <LinearLayout
+        android:id="@+id/main_header_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="StopAddict"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center"
         android:background="@android:color/holo_blue_light"
-        android:textColor="@android:color/white"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/main_header_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/icone_stopaddict"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Icône StopAddict" />
+
+        <TextView
+            android:id="@+id/main_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Addict"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+    </LinearLayout>
 
         <!-- Bandeau résumé jour (collé au header) -->
     <HorizontalScrollView
