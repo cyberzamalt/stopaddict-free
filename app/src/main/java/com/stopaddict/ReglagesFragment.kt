@@ -1020,7 +1020,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
-
+    
+        @Suppress("DEPRECATION")
         private fun exportData() {
             try {
                     if (!exportLimiter.peutExporter()) {
@@ -1082,6 +1083,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         return export.toString(2)
     }
 
+    @Suppress("DEPRECATION")
     private fun importData() {
         try {
             if (!exportLimiter.peutImporter()) {
@@ -1103,7 +1105,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
-
+    
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         
