@@ -205,6 +205,13 @@ class MainActivity : AppCompatActivity() {
             setPadding(0, 10, 0, 20)
         }
         container.addView(checkboxNoShow)
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val ageAccepted = prefs.getBoolean(PREF_AGE_ACCEPTED, false)
+        val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
+
+        checkboxAge.isChecked = ageAccepted
+        checkboxNoShow.isChecked = warningShown
+
         logger.d("showAgeWarningDialog: checkbox ne plus afficher ajouté")
 
         val builder = AlertDialog.Builder(this)
@@ -224,7 +231,7 @@ class MainActivity : AppCompatActivity() {
             logger.d("showAgeWarningDialog: dialog affiché, configuration des boutons...")
 
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            positiveButton.isEnabled = false
+            positiveButton.isEnabled = checkboxAge.isChecked
 
             checkboxAge.setOnCheckedChangeListener { _, isChecked ->
                 logger.d("showAgeWarningDialog: checkbox âge -> $isChecked")
@@ -237,15 +244,11 @@ class MainActivity : AppCompatActivity() {
                 if (checkboxAge.isChecked) {
                     val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-                    prefs.edit().apply {
-                        putBoolean(PREF_AGE_ACCEPTED, true)
-                        if (checkboxNoShow.isChecked) {
-                            logger.d("showAgeWarningDialog: option 'ne plus afficher' activée")
-                            putBoolean(PREF_WARNING_SHOWN, true)
-                        }
-                        apply()
-                    }
-
+                prefs.edit().apply {
+                    putBoolean(PREF_AGE_ACCEPTED, checkboxAge.isChecked)
+                    putBoolean(PREF_WARNING_SHOWN, checkboxNoShow.isChecked)
+                    apply()
+                }
                     logger.d("showAgeWarningDialog: préférences sauvegardées, fermeture dialog")
                     dialog.dismiss()
                     initializeMainContent()
