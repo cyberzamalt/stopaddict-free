@@ -80,6 +80,7 @@ class ConfigLangue(private val context: Context) {
     /**
      * Applique la locale au contexte
      */
+     @Suppress("DEPRECATION")
     fun appliquerLocale(codeLangue: String = getLangue()) {
         try {
             val localeCode = LOCALE_MAP[codeLangue] ?: "fr"
