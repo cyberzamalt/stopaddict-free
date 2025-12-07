@@ -114,29 +114,36 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-            private fun setupHeader() {
-        logger.d("setupHeader: called")
+           private fun setupHeader() {
+    logger.d("setupHeader: called")
 
-        updateDateTime()
+    updateDateTime()
 
-        headerRoot.setOnClickListener {
-            logger.d("setupHeader: header root clicked -> opening console debug")
-            handleConsoleDebugClick()
-        }
-
-        logger.d("setupHeader: header click listener initialized")
+    // Toute la barre (icône + textes) est cliquable
+    headerRoot.setOnClickListener {
+        logger.d("setupHeader: header root clicked -> opening console debug")
+        handleConsoleDebugClick()
     }
-        
-        private fun updateDateTime() {
-    try {
-        val dateFormat = SimpleDateFormat("EEEE dd MMMM yyyy - HH:mm", Locale.getDefault())
-        val currentDateTime = dateFormat.format(Date())
-        headerTextView.text = "Stop Addict\n$currentDateTime"
 
-        logger.d("updateDateTime: header updated with \"$currentDateTime\"")
+    logger.d("setupHeader: header click listener initialized (root)")
+}
+
+private fun updateDateTime() {
+    try {
+        val now = Date()
+        val dateFormat = SimpleDateFormat("EEEE dd MMMM yyyy", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        val datePart = dateFormat.format(now)
+        val timePart = timeFormat.format(now)
+
+        // 3 lignes : nom app / date / heure
+        headerTextView.text = "Stop Addict\n$datePart\n$timePart"
+
+        logger.d("updateDateTime: header updated with \"$datePart - $timePart\"")
     } catch (e: Exception) {
         headerTextView.text = "Stop Addict"
-        logger.e("updateDateTime: erreur format date, fallback appliqué", e)
+        logger.e("updateDateTime: erreur format date/heure, fallback appliqué", e)
     }
 }
     
