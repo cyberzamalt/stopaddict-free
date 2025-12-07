@@ -3,7 +3,7 @@ package com.stopaddict
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Bundlef
+import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
