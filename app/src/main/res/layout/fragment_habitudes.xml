@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max cigarettes par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
             <!-- Max Joints -->
@@ -64,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max joints par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
             <!-- Max Alcool Global -->
@@ -73,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max alcool global par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
             <!-- Max Bières -->
@@ -82,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max bières par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
             <!-- Max Liqueurs -->
@@ -91,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max liqueurs par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
             <!-- Max Alcool Fort -->
@@ -100,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Max alcool fort par jour"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:layout_marginBottom="12dp" />
 
             <!-- Bouton Sauvegarder -->
