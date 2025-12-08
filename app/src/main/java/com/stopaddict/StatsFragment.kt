@@ -621,47 +621,74 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 }
 
     private fun getXAxisFormatter(): ValueFormatter {
-        return object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return when (periodeActive) {
-                    PERIODE_JOUR -> {
-                        when (value.toInt()) {
-                            0 -> "00-07"
-                            1 -> "07-14"
-                            2 -> "14-21"
-                            3 -> "21-00"
-                            else -> ""
-                        }
+    return object : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return when (periodeActive) {
+                PERIODE_JOUR -> {
+                    when (value.toInt()) {
+                        0 -> "00-07"
+                        1 -> "07-14"
+                        2 -> "14-21"
+                        3 -> "21-00"
+                        else -> ""
                     }
-                    PERIODE_SEMAINE -> {
-                        val jours = arrayOf("Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim")
-                        if (value.toInt() in jours.indices) jours[value.toInt()] else ""
-                    }
-                    PERIODE_MOIS -> {
-                        when (value.toInt()) {
-                            0 -> "1"
-                            1 -> "6"
-                            2 -> "11"
-                            3 -> "16"
-                            4 -> "21"
-                            5 -> "26"
-                            6 -> "31"
-                            else -> ""
-                        }
-                    }
-                    PERIODE_ANNEE -> {
-                        val mois = arrayOf(
-                            "Jan", "Fév", "Mar", "Avr", "Mai", "Juin",
-                            "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"
-                        )
-                        if (value.toInt() in mois.indices) mois[value.toInt()] else ""
-                    }
-                    else -> value.toInt().toString()
                 }
+
+                PERIODE_SEMAINE -> {
+                    // Jours de la semaine traduits
+                    val jours = arrayOf(
+                        trad["axe_jour_lun"] ?: "Lun",
+                        trad["axe_jour_mar"] ?: "Mar",
+                        trad["axe_jour_mer"] ?: "Mer",
+                        trad["axe_jour_jeu"] ?: "Jeu",
+                        trad["axe_jour_ven"] ?: "Ven",
+                        trad["axe_jour_sam"] ?: "Sam",
+                        trad["axe_jour_dim"] ?: "Dim"
+                    )
+                    val index = value.toInt()
+                    if (index in jours.indices) jours[index] else ""
+                }
+
+                PERIODE_MOIS -> {
+                    // Labels fixes pour les jours du mois (1, 6, 11, ...)
+                    when (value.toInt()) {
+                        0 -> "1"
+                        1 -> "6"
+                        2 -> "11"
+                        3 -> "16"
+                        4 -> "21"
+                        5 -> "26"
+                        6 -> "31"
+                        else -> ""
+                    }
+                }
+
+                PERIODE_ANNEE -> {
+                    // Mois abrégés traduits
+                    val mois = arrayOf(
+                        trad["axe_mois_jan"] ?: "Jan",
+                        trad["axe_mois_fev"] ?: "Fév",
+                        trad["axe_mois_mar"] ?: "Mar",
+                        trad["axe_mois_avr"] ?: "Avr",
+                        trad["axe_mois_mai"] ?: "Mai",
+                        trad["axe_mois_juin"] ?: "Juin",
+                        trad["axe_mois_juil"] ?: "Juil",
+                        trad["axe_mois_aou"] ?: "Aoû",
+                        trad["axe_mois_sep"] ?: "Sep",
+                        trad["axe_mois_oct"] ?: "Oct",
+                        trad["axe_mois_nov"] ?: "Nov",
+                        trad["axe_mois_dec"] ?: "Déc"
+                    )
+                    val index = value.toInt()
+                    if (index in mois.indices) mois[index] else ""
+                }
+
+                else -> value.toInt().toString()
             }
         }
     }
-
+}
+    
     private fun getXAxisFormatterCouts(nbPoints: Int): ValueFormatter {
     return object : ValueFormatter() {
         override fun getFormattedValue(value: Float): String {
@@ -674,7 +701,16 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                 }
 
                 PERIODE_SEMAINE -> {
-                    val jours = arrayOf("Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim")
+                    // Jours de la semaine traduits (même ordre que pour le 1er graphique)
+                    val jours = arrayOf(
+                        trad["axe_jour_lun"] ?: "Lun",
+                        trad["axe_jour_mar"] ?: "Mar",
+                        trad["axe_jour_mer"] ?: "Mer",
+                        trad["axe_jour_jeu"] ?: "Jeu",
+                        trad["axe_jour_ven"] ?: "Ven",
+                        trad["axe_jour_sam"] ?: "Sam",
+                        trad["axe_jour_dim"] ?: "Dim"
+                    )
                     if (index in jours.indices) jours[index] else ""
                 }
 
@@ -686,9 +722,20 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                 }
 
                 PERIODE_ANNEE -> {
+                    // Mois abrégés traduits (même ordre que pour le 1er graphique)
                     val mois = arrayOf(
-                        "Jan", "Fév", "Mar", "Avr", "Mai", "Juin",
-                        "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"
+                        trad["axe_mois_jan"] ?: "Jan",
+                        trad["axe_mois_fev"] ?: "Fév",
+                        trad["axe_mois_mar"] ?: "Mar",
+                        trad["axe_mois_avr"] ?: "Avr",
+                        trad["axe_mois_mai"] ?: "Mai",
+                        trad["axe_mois_juin"] ?: "Juin",
+                        trad["axe_mois_juil"] ?: "Juil",
+                        trad["axe_mois_aou"] ?: "Aoû",
+                        trad["axe_mois_sep"] ?: "Sep",
+                        trad["axe_mois_oct"] ?: "Oct",
+                        trad["axe_mois_nov"] ?: "Nov",
+                        trad["axe_mois_dec"] ?: "Déc"
                     )
                     if (index in mois.indices) mois[index] else ""
                 }
@@ -1263,8 +1310,8 @@ private fun calculerEconomiesParCategorie(
 
             Log.d(
                 TAG,
-                "Profil: ${if (isComplet) "Complet" else "Incomplet"} - Total jour: $totalJour"
-            )
+                "Stats - Profil: ${txtProfilComplet.text} - ${txtTotalAujourdhui.text}"
+        )
         } catch (e: Exception) {
             Log.e(TAG, "Erreur updateProfilStatus stats", e)
         }
