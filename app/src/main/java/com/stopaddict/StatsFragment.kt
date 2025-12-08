@@ -1391,4 +1391,22 @@ private fun calculerEconomiesParCategorie(
             Log.e(TAG, "Erreur changement période: ${e.message}")
         }
     }
+        // Renvoie le code langue au format attendu par StatsLangues (FR, EN, ES, ...)
+    private fun getCodeLangueStats(): String {
+        val langueSysteme = java.util.Locale.getDefault().language.lowercase()
+
+        return when (langueSysteme) {
+            "fr" -> "FR"
+            "en" -> "EN"
+            "es" -> "ES"
+            "pt" -> "PT"
+            "de" -> "DE"
+            "it" -> "IT"
+            "ru" -> "RU"
+            "ar" -> "AR"
+            "hi" -> "HI"
+            "ja" -> "JA"
+            else -> "FR"   // fallback propre
+        }
+    }
 }
