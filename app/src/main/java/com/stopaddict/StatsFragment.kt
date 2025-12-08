@@ -813,10 +813,13 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             chartCouts.xAxis.granularity = 1f
 
             // Axe Y symétrique pour afficher +coûts / -économies
-            val allValues = mutableListOf<Float>()
-            dataSets.forEach { set ->
-                set.values.forEach { entry ->
-                    allValues.add(entry.y)
+                        val allValues = mutableListOf<Float>()
+
+            dataSets.forEach { dataSet ->
+                val count = dataSet.entryCount
+                for (i in 0 until count) {
+                    val e = dataSet.getEntryForIndex(i)
+                    allValues.add(e.y)
                 }
             }
 
