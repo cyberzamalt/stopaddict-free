@@ -447,8 +447,14 @@ private fun configureBarChart(chart: BarChart) {
     private fun updateGraphiqueConsommation() {
         try {
             val dataSets = mutableListOf<LineDataSet>()
-
-            val donnees = getDonneesPourCouts()
+    
+            val donnees = if (periodeActive == PERIODE_JOUR) {
+                // Jour : 4 tranches horaires (00-07, 07-14, 14-21, 21-00)
+                getConsommationsJourDispatch()
+            } else {
+                // Semaine / Mois / Année : données “classiques”
+                getDonneesPourCouts()
+            }
 
             categoriesActives.forEach { (type, active) ->
                 if (active) {
@@ -719,53 +725,92 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 
    private fun updateGraphiqueCouts() {
     try {
-        // On utilise maintenant un BarChart avec 2 datasets :
-        // - Coûts : barres au-dessus de 0
-        // - Économies : barres en dessous de 0
-        val dataSets = mutableListOf<BarDataSet>()
-
+        // Données temporelles selon la période (jour / semaine / mois / année)
         val donnees = getDonneesPourCouts()
 
-        val couts = calculerCouts(donnees)
-        val economies = calculerEconomies(donnees)
+        // Totaux de coûts / économies PAR CATEGORIE sur la période active
+        val coutsParCategorie = calculerCoutsParCategorie(donnees)
+        val economiesParCategorie = calculerEconomiesParCategorie(donnees)
 
-        // Dataset Coûts (positif, barres vers le haut)
-        if (couts.isNotEmpty() && couts.any { it > 0 }) {
-            val coutsEntries = couts.mapIndexed { index, value ->
-                BarEntry(index.toFloat(), value.toFloat())
+        val coutsEntries = mutableListOf<BarEntry>()
+        val economiesEntries = mutableListOf<BarEntry>()
+        val labels = mutableListOf<String>()
+
+        // Ordre fixe des catégories sur l’axe X
+        val typesOrder = listOf(
+            DatabaseHelper.TYPE_CIGARETTE,
+            DatabaseHelper.TYPE_JOINT,
+            DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+            DatabaseHelper.TYPE_BIERE,
+            DatabaseHelper.TYPE_LIQUEUR,
+            DatabaseHelper.TYPE_ALCOOL_FORT
+        )
+
+        var xIndex = 0f
+        typesOrder.forEach { type ->
+            if (categoriesActives[type] == true) {
+                val cout = coutsParCategorie[type] ?: 0.0
+                val eco = economiesParCategorie[type] ?: 0.0
+
+                // On n’affiche la catégorie que si elle a au moins un montant
+                if (cout > 0.0 || eco > 0.0) {
+                    // Coût au-dessus de 0
+                    if (cout > 0.0) {
+                        coutsEntries.add(BarEntry(xIndex, cout.toFloat()))
+                    } else {
+                        coutsEntries.add(BarEntry(xIndex, 0f))
+                    }
+
+                    // Économie en dessous de 0
+                    if (eco > 0.0) {
+                        economiesEntries.add(BarEntry(xIndex, (-eco).toFloat()))
+                    } else {
+                        economiesEntries.add(BarEntry(xIndex, 0f))
+                    }
+
+                    labels.add(getLabelCategorie(type))
+                    xIndex += 1f
+                }
             }
+        }
 
-            val coutsDataSet = BarDataSet(coutsEntries, "Coûts")
+        val dataSets = mutableListOf<IBarDataSet>()
+
+        if (coutsEntries.isNotEmpty()) {
+            val coutsDataSet = BarDataSet(
+                coutsEntries,
+                trad["label_depenses"] ?: "Coûts"
+            )
             coutsDataSet.color = COLOR_COUTS
             coutsDataSet.valueTextSize = 9f
             coutsDataSet.setDrawValues(true)
-
             dataSets.add(coutsDataSet)
         }
 
-        // Dataset Économies (négatif, barres vers le bas)
-        if (economies.isNotEmpty() && economies.any { it > 0 }) {
-            val economiesEntries = economies.mapIndexed { index, value ->
-                // valeurs négatives pour s'afficher sous l'axe 0
-                BarEntry(index.toFloat(), (-value).toFloat())
-            }
-
-            val economiesDataSet = BarDataSet(economiesEntries, "Économies")
-            economiesDataSet.color = COLOR_ECONOMIES
-            economiesDataSet.valueTextSize = 9f
-            economiesDataSet.setDrawValues(true)
-
-            dataSets.add(economiesDataSet)
+        if (economiesEntries.isNotEmpty()) {
+            val ecoDataSet = BarDataSet(
+                economiesEntries,
+                trad["label_economies"] ?: "Économies"
+            )
+            ecoDataSet.color = COLOR_ECONOMIES
+            ecoDataSet.valueTextSize = 9f
+            ecoDataSet.setDrawValues(true)
+            dataSets.add(ecoDataSet)
         }
 
         if (dataSets.isNotEmpty()) {
-            val barData = BarData(dataSets as List<IBarDataSet>)
+            val barData = BarData(dataSets)
             barData.barWidth = 0.45f
-
             chartCouts.data = barData
-                // nombre de points sur l’axe X (coûts / économies ont la même taille)
-                    val nbPoints = dataSets.firstOrNull()?.entryCount ?: 0
-                    chartCouts.xAxis.valueFormatter = getXAxisFormatterCouts(nbPoints)
+
+            // Libellés de l’axe X = noms des catégories
+            chartCouts.xAxis.valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    val index = value.toInt()
+                    return if (index in labels.indices) labels[index] else ""
+                }
+            }
+            chartCouts.xAxis.granularity = 1f
 
             // Axe Y symétrique pour afficher +coûts / -économies
             val allValues = mutableListOf<Float>()
@@ -784,7 +829,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             }
 
             chartCouts.invalidate()
-            Log.d(TAG, "Graphique coûts (BarChart) mis à jour: ${dataSets.size} datasets")
+            Log.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
         } else {
             chartCouts.clear()
             Log.w(TAG, "Aucune donnée pour graphique coûts")
@@ -855,6 +900,67 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             emptyList()
         }
     }
+
+        private fun calculerCoutsParCategorie(
+    donnees: Map<String, List<Int>>
+): Map<String, Double> {
+    val result = mutableMapOf<String, Double>()
+    return try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val values = donnees[type] ?: emptyList()
+                if (values.isNotEmpty()) {
+                    val coutsType = dbHelper.getCouts(type)
+                    val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                    if (prixUnitaire > 0.0) {
+                        val total = values.sumOf { quantite ->
+                            prixUnitaire * quantite
+                        }
+                        result[type] = total
+                    }
+                }
+            }
+        }
+        result
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calculerCoutsParCategorie: ${e.message}")
+        result
+    }
+}
+
+private fun calculerEconomiesParCategorie(
+    donnees: Map<String, List<Int>>
+): Map<String, Double> {
+    val result = mutableMapOf<String, Double>()
+    return try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val values = donnees[type] ?: emptyList()
+                if (values.isNotEmpty()) {
+                    val maxHabitude = dbHelper.getMaxJournalier(type)
+                    if (maxHabitude > 0) {
+                        val coutsType = dbHelper.getCouts(type)
+                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                        if (prixUnitaire > 0.0) {
+                            var totalEco = 0.0
+                            values.forEach { quantite ->
+                                if (quantite < maxHabitude) {
+                                    val diff = maxHabitude - quantite
+                                    totalEco += prixUnitaire * diff
+                                }
+                            }
+                            result[type] = totalEco
+                        }
+                    }
+                }
+            }
+        }
+        result
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calculerEconomiesParCategorie: ${e.message}")
+        result
+    }
+}
 
         private fun calculerPrixUnitaire(type: String, couts: Map<String, Double>): Double {
         return try {
