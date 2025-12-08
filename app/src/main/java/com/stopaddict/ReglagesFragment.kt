@@ -1121,11 +1121,12 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     try {
         if (!exportLimiter.peutImporter()) {
             val remaining = exportLimiter.getRemainingImports()
-            val msg = ReglagesLangues.formatMessage(
-                "msg_limite_import",
-                configLangue.getLangue(),
-                remaining
-            )
+
+            // Message traduit avec nombre restant
+            val template = trad["msg_import_limite"]
+                ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
+            val msg = String.format(template, remaining)
+
             Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
             return
         }
@@ -1135,15 +1136,14 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             type = "application/json"
         }
         startActivityForResult(intent, REQUEST_CODE_IMPORT)
-            
-            exportLimiter.enregistrerImport()
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur import", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+
+        exportLimiter.enregistrerImport()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur import", e)
+        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
-    
+}   
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
