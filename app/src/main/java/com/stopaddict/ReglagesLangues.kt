@@ -87,7 +87,9 @@ object ReglagesLangues {
         "btn_choisir_date" to "Choisir date",
 
         "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
-
+        "msg_import_limite" to "Limite atteinte. %d import(s) restant(s) aujourd'hui.",
+    
+        
         // Boutons RAZ
         "btn_raz_jour" to "RAZ du jour",
         "btn_raz_historique" to "RAZ historique",
@@ -236,6 +238,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "Choose date",
 
         "msg_export_limite" to "To access export, switch to the ad-free version to enjoy it :-)",
+                "msg_import_limite" to "Limit reached. %d import(s) remaining today.",
 
         // Boutons RAZ
         "btn_raz_jour" to "Reset today",
@@ -384,6 +387,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "Elegir fecha",
 
         "msg_export_limite" to "Para acceder a la exportación, pásate a la versión sin anuncios para disfrutarla :-)",
+                "msg_import_limite" to "Límite alcanzado. Quedan %d importaciones hoy.",
 
         // Boutons RAZ
         "btn_raz_jour" to "Restablecer hoy",
@@ -530,7 +534,8 @@ object ReglagesLangues {
         "label_date_reussite" to "Data sucesso",
         "btn_choisir_date" to "Escolher data",
 
-        "msg_export_limite" to "Um die Exportfunktion zu nutzen, wechsle zur werbefreien Version :-)",
+        "msg_export_limite" to "Para aceder à exportação, mude para a versão sem publicidade :-)",
+                "msg_import_limite" to "Limite atingido. Restam %d importações hoje.",
 
         // Boutons RAZ
         "btn_raz_jour" to "Redefinir hoje",
@@ -677,8 +682,9 @@ object ReglagesLangues {
         "label_date_reussite" to "Erfolgsdatum",
         "btn_choisir_date" to "Datum wählen",
 
-        "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
-
+        "msg_export_limite" to "Um den Export zu nutzen, wechseln Sie zur werbefreien Version :-)",
+                "msg_import_limite" to "Limit erreicht. %d Importe verbleiben heute.",
+        
         // Boutons RAZ
         "btn_raz_jour" to "Heute zurücksetzen",
         "btn_raz_historique" to "Verlauf zurücksetzen",
@@ -825,6 +831,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "Scegli data",
 
         "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
+                "msg_import_limite" to "Limite raggiunto. Rimangono %d importazioni oggi.",
 
         // Boutons RAZ
         "btn_raz_jour" to "Ripristina oggi",
@@ -972,6 +979,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "Выбрать дату",
 
         "msg_export_limite" to "Чтобы пользоваться экспортом, перейдите на версию без рекламы :-)",
+                "msg_import_limite" to "Достигнут лимит. Осталось %d импорт(ов) на сегодня.",
 
         // Boutons RAZ
         "btn_raz_jour" to "Сбросить сегодня",
@@ -1119,6 +1127,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "اختر التاريخ",
 
         "msg_export_limite" to "للوصول إلى التصدير، انتقل إلى النسخة بدون إعلانات للاستفادة من هذه الميزة :-)",
+                "msg_import_limite" to "تم بلوغ الحد. تبقّى %d عملية استيراد اليوم.",
 
         // Boutons RAZ
         "btn_raz_jour" to "إعادة تعيين اليوم",
@@ -1266,6 +1275,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "तिथि चुनें",
 
         "msg_export_limite" to "एक्सपोर्ट करने के लिए बिना विज्ञापन वाले वर्शन पर जाएँ :-)",
+                "msg_import_limite" to "सीमा पूरी हो गई। आज %d आयात शेष हैं।",
 
         // Boutons RAZ
         "btn_raz_jour" to "आज रीसेट करें",
@@ -1413,6 +1423,7 @@ object ReglagesLangues {
         "btn_choisir_date" to "日付を選択",
 
         "msg_export_limite" to "エクスポート機能を利用するには、広告なしバージョンにアップグレードしてください :-)",
+                "msg_import_limite" to "上限に達しました。本日はあと%d回インポートできます。",
 
         // Boutons RAZ
         "btn_raz_jour" to "今日をリセット",
