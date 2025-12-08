@@ -24,11 +24,15 @@ import com.google.android.gms.ads.MobileAds
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val PREFS_NAME = "StopAddict"
-        private const val PREF_WARNING_SHOWN = "warning_majorite_shown"
-        private const val PREF_AGE_ACCEPTED = "age_18_accepted"
-    }
+    private const val PREFS_NAME = "StopAddict"
+    private const val PREF_WARNING_SHOWN = "warning_majorite_shown"
+    private const val PREF_AGE_ACCEPTED = "age_18_accepted"
 
+    // Nouveau : date de dernière vérification + intervalle (30 jours)
+    private const val PREF_LAST_AGE_CHECK = "last_age_check_timestamp"
+    private const val AGE_CHECK_INTERVAL_DAYS = 30L
+}
+    
     private val logger = AppLogger("MainActivity")
 
         private lateinit var headerRoot: LinearLayout
@@ -151,14 +155,28 @@ private fun updateDateTime() {
     val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
     val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
     val ageAccepted = prefs.getBoolean(PREF_AGE_ACCEPTED, false)
-    val result = warningShown && ageAccepted
+    val lastCheck = prefs.getLong(PREF_LAST_AGE_CHECK, 0L)
 
-    logger.d("checkAgeWarningStatus: warningShown=$warningShown, ageAccepted=$ageAccepted, result=$result")
+    val now = System.currentTimeMillis()
+    val thirtyDaysMs = AGE_CHECK_INTERVAL_DAYS * 24L * 60L * 60L * 1000L
+    val intervalExceeded = (now - lastCheck) >= thirtyDaysMs
+
+    // Résultat : on considère la vérif comme "OK" seulement si :
+    // - avertissement déjà affiché une fois,
+    // - âge accepté,
+    // - ET 30 jours PAS encore dépassés
+    val result = warningShown && ageAccepted && !intervalExceeded
+
+    logger.d(
+        "checkAgeWarningStatus: warningShown=$warningShown, " +
+            "ageAccepted=$ageAccepted, lastCheck=$lastCheck, " +
+            "intervalExceeded=$intervalExceeded, result=$result"
+    )
 
     return result
 }
-
-    fun showAgeWarningDialog() {
+    
+fun showAgeWarningDialog() {
     logger.d("showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
 
     try {
@@ -199,6 +217,7 @@ private fun updateDateTime() {
         container.addView(linkText)
         logger.d("showAgeWarningDialog: lien ressources utiles ajouté")
 
+        // --- Cases à cocher ---
         val checkboxAge = CheckBox(this).apply {
             text = trad["warning_checkbox_age"] ?: ""
             textSize = 15f
@@ -212,25 +231,29 @@ private fun updateDateTime() {
             setPadding(0, 10, 0, 20)
         }
         container.addView(checkboxNoShow)
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val ageAccepted = prefs.getBoolean(PREF_AGE_ACCEPTED, false)
-        val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
 
-        checkboxAge.isChecked = ageAccepted
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+
+        // On NE pré-coche PAS "je suis majeur(e)" : il doit être vide à chaque fois
+        checkboxAge.isChecked = false
+
+        // On garde le lien avec le réglage "ne plus afficher" (Réglages)
+        val warningShown = prefs.getBoolean(PREF_WARNING_SHOWN, false)
         checkboxNoShow.isChecked = warningShown
 
-        logger.d("showAgeWarningDialog: checkbox ne plus afficher ajouté")
+        logger.d(
+            "showAgeWarningDialog: états initiaux -> " +
+                "ageChecked=${checkboxAge.isChecked}, noShowChecked=${checkboxNoShow.isChecked}"
+        )
 
         val builder = AlertDialog.Builder(this)
-        builder.setView(container)
-
-        builder.setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
-            logger.d("showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
-            finish()
-        }
-
-        builder.setPositiveButton(trad["warning_btn_accept"] ?: "Accept", null)
-        builder.setCancelable(false)
+            .setView(container)
+            .setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
+                logger.d("showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
+                finish()
+            }
+            .setPositiveButton(trad["warning_btn_accept"] ?: "Accept", null)
+            .setCancelable(false)
 
         val dialog = builder.create()
 
@@ -249,14 +272,31 @@ private fun updateDateTime() {
                 logger.d("showAgeWarningDialog: bouton 'Accepter' cliqué")
 
                 if (checkboxAge.isChecked) {
-                prefs.edit().apply {
-                    putBoolean(PREF_AGE_ACCEPTED, checkboxAge.isChecked)
-                    putBoolean(PREF_WARNING_SHOWN, checkboxNoShow.isChecked)
-                    apply()
-                }
-                    logger.d("showAgeWarningDialog: préférences sauvegardées, fermeture dialog")
+                    val now = System.currentTimeMillis()
+
+                    prefs.edit().apply {
+                        // L’utilisateur confirme qu’il est majeur
+                        putBoolean(PREF_AGE_ACCEPTED, true)
+
+                        // On mémorise son choix sur "ne plus afficher"
+                        putBoolean(PREF_WARNING_SHOWN, checkboxNoShow.isChecked)
+
+                        // On enregistre la date de cette vérification
+                        putLong(PREF_LAST_AGE_CHECK, now)
+                        apply()
+                    }
+
+                    logger.d(
+                        "showAgeWarningDialog: préférences sauvegardées (avec timestamp), " +
+                            "fermeture dialog"
+                    )
                     dialog.dismiss()
                     initializeMainContent()
+                } else {
+                    logger.d(
+                        "showAgeWarningDialog: bouton 'Accepter' cliqué " +
+                            "mais case majeur non cochée"
+                    )
                 }
             }
         }
@@ -266,11 +306,10 @@ private fun updateDateTime() {
 
     } catch (e: Exception) {
         logger.e("showAgeWarningDialog: erreur dans la création du dialog", e)
+        // En cas de bug, on n’empêche pas l’accès à l’appli
         initializeMainContent()
     }
 }
-
-
     
 private fun showRessourcesUtiles() {
     logger.d("showRessourcesUtiles: ouverture de la popup ressources utiles...")
