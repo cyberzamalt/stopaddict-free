@@ -170,9 +170,12 @@ class StatsFragment : Fragment() {
 
             Log.d(TAG, "StatsFragment initialisé avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation StatsFragment: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur chargement Stats", Toast.LENGTH_SHORT).show()
-        }
+    Log.e(TAG, "Erreur chargement Stats", e)
+
+    // Texte localisé via StatsLangues
+    val messageErreur = StatsLangues.getTexte("erreur_chargement", codeLangue)
+    Toast.makeText(requireContext(), messageErreur, Toast.LENGTH_SHORT).show()
+}
 
         return view
     }
@@ -488,10 +491,15 @@ private fun configureBarChart(chart: BarChart) {
                         }
 
                         if (limiteEntries.isNotEmpty()) {
+
+                            // Récupère le texte localisé pour "Limite"
+                            val libelleLimite = StatsLangues.getTexte("label_limite", codeLangue)
+                        
                             val limiteDataSet = LineDataSet(
                                 limiteEntries,
-                                "Limite ${getLabelCategorie(type)}"
+                                "$libelleLimite ${getLabelCategorie(type)}"
                             )
+                        
                             limiteDataSet.color = COLOR_LIMITE
                             limiteDataSet.lineWidth = 1f
                             limiteDataSet.enableDashedLine(10f, 5f, 0f)
