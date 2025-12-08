@@ -1118,18 +1118,23 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
     @Suppress("DEPRECATION")
     private fun importData() {
-        try {
-            if (!exportLimiter.peutImporter()) {
-                val remaining = exportLimiter.getRemainingImports()
-                Toast.makeText(requireContext(), "Limite atteinte. $remaining imports restants aujourd'hui", Toast.LENGTH_LONG).show()
-                return
-            }
-            
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
-                type = "application/json"
-            }
-            startActivityForResult(intent, REQUEST_CODE_IMPORT)
+    try {
+        if (!exportLimiter.peutImporter()) {
+            val remaining = exportLimiter.getRemainingImports()
+            val msg = ReglagesLangues.formatMessage(
+                "msg_limite_import",
+                configLangue.getLangue(),
+                remaining
+            )
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/json"
+        }
+        startActivityForResult(intent, REQUEST_CODE_IMPORT)
             
             exportLimiter.enregistrerImport()
             
