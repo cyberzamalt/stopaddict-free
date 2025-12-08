@@ -830,29 +830,6 @@ object StatsLangues {
         "axe_mois_oct" to "أكتوبر",
         "axe_mois_nov" to "نوفمبر",
         "axe_mois_dec" to "ديسمبر",
-
-                // Alias axes jours (nouveau formatter StatsFragment)
-        "axe_jour_lun" to "सोम",
-        "axe_jour_mar" to "मंगल",
-        "axe_jour_mer" to "बुध",
-        "axe_jour_jeu" to "गुरु",
-        "axe_jour_ven" to "शुक्र",
-        "axe_jour_sam" to "शनि",
-        "axe_jour_dim" to "रवि",
-
-        // Alias axes mois (nouveau formatter StatsFragment)
-        "axe_mois_jan" to "जन",
-        "axe_mois_fev" to "फर",
-        "axe_mois_mar" to "मार",
-        "axe_mois_avr" to "अप्र",
-        "axe_mois_mai" to "मई",
-        "axe_mois_juin" to "जून",
-        "axe_mois_juil" to "जुल",
-        "axe_mois_aou" to "अग",
-        "axe_mois_sep" to "सित",
-        "axe_mois_oct" to "अक्ट",
-        "axe_mois_nov" to "नव",
-        "axe_mois_dec" to "दिस",
         
         // Zone calculs
         "calculs_periode_jour" to "يوم",
@@ -934,28 +911,28 @@ object StatsLangues {
         "axe_x_annee_10" to "नव",
         "axe_x_annee_11" to "दिस",
 
-                // Alias axes jours (nouveau formatter StatsFragment)
-        "axe_jour_lun" to "月",
-        "axe_jour_mar" to "火",
-        "axe_jour_mer" to "水",
-        "axe_jour_jeu" to "木",
-        "axe_jour_ven" to "金",
-        "axe_jour_sam" to "土",
-        "axe_jour_dim" to "日",
+                 // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "सोम",
+        "axe_jour_mar" to "मंगल",
+        "axe_jour_mer" to "बुध",
+        "axe_jour_jeu" to "गुरु",
+        "axe_jour_ven" to "शुक्र",
+        "axe_jour_sam" to "शनि",
+        "axe_jour_dim" to "रवि",
 
         // Alias axes mois (nouveau formatter StatsFragment)
-        "axe_mois_jan" to "1月",
-        "axe_mois_fev" to "2月",
-        "axe_mois_mar" to "3月",
-        "axe_mois_avr" to "4月",
-        "axe_mois_mai" to "5月",
-        "axe_mois_juin" to "6月",
-        "axe_mois_juil" to "7月",
-        "axe_mois_aou" to "8月",
-        "axe_mois_sep" to "9月",
-        "axe_mois_oct" to "10月",
-        "axe_mois_nov" to "11月",
-        "axe_mois_dec" to "12月",
+        "axe_mois_jan" to "जन",
+        "axe_mois_fev" to "फर",
+        "axe_mois_mar" to "मार",
+        "axe_mois_avr" to "अप्र",
+        "axe_mois_mai" to "मई",
+        "axe_mois_juin" to "जून",
+        "axe_mois_juil" to "जुल",
+        "axe_mois_aou" to "अग",
+        "axe_mois_sep" to "सित",
+        "axe_mois_oct" to "अक्ट",
+        "axe_mois_nov" to "नव",
+        "axe_mois_dec" to "दिस",
         
         // Zone calculs
         "calculs_periode_jour" to "दिन",
@@ -1036,6 +1013,29 @@ object StatsLangues {
         "axe_x_annee_9" to "10月",
         "axe_x_annee_10" to "11月",
         "axe_x_annee_11" to "12月",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "月",
+        "axe_jour_mar" to "火",
+        "axe_jour_mer" to "水",
+        "axe_jour_jeu" to "木",
+        "axe_jour_ven" to "金",
+        "axe_jour_sam" to "土",
+        "axe_jour_dim" to "日",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "1月",
+        "axe_mois_fev" to "2月",
+        "axe_mois_mar" to "3月",
+        "axe_mois_avr" to "4月",
+        "axe_mois_mai" to "5月",
+        "axe_mois_juin" to "6月",
+        "axe_mois_juil" to "7月",
+        "axe_mois_aou" to "8月",
+        "axe_mois_sep" to "9月",
+        "axe_mois_oct" to "10月",
+        "axe_mois_nov" to "11月",
+        "axe_mois_dec" to "12月",
         
         // Zone calculs
         "calculs_periode_jour" to "日",
