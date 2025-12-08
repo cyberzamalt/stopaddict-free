@@ -9,10 +9,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.json.JSONObject
 
@@ -51,7 +56,7 @@ class StatsFragment : Fragment() {
 
     // UI Elements - Graphiques
     private lateinit var chartConsommation: LineChart
-    private lateinit var chartCouts: LineChart
+    private lateinit var chartCouts: BarChart
 
     // UI Elements - Boutons période
     private lateinit var btnJour: Button
@@ -276,8 +281,8 @@ class StatsFragment : Fragment() {
             txtTotalAujourdhui = view.findViewById(R.id.stats_txt_total_aujourdhui)
 
             // Configuration graphiques
-            configureChart(chartConsommation)
-            configureChart(chartCouts)
+            configureLineChart(chartConsommation)
+            configureBarChart(chartCouts)
 
             Log.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
@@ -286,38 +291,71 @@ class StatsFragment : Fragment() {
         }
     }
 
-    private fun configureChart(chart: LineChart) {
-        try {
-            chart.description.isEnabled = false
-            chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
-            chart.setTouchEnabled(true)
-            chart.isDragEnabled = true
-            chart.setScaleEnabled(true)
-            chart.setPinchZoom(true)
-            chart.setDrawGridBackground(false)
+    private fun configureLineChart(chart: LineChart) {
+    try {
+        chart.description.isEnabled = false
+        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+        chart.setTouchEnabled(true)
+        chart.isDragEnabled = true
+        chart.setScaleEnabled(true)
+        chart.setPinchZoom(true)
+        chart.setDrawGridBackground(false)
 
-            val xAxis = chart.xAxis
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.setDrawGridLines(true)
-            xAxis.granularity = 1f
-            xAxis.textColor = Color.BLACK
+        val xAxis = chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(true)
+        xAxis.granularity = 1f
+        xAxis.textColor = Color.BLACK
 
-            val yAxisLeft = chart.axisLeft
-            yAxisLeft.setDrawGridLines(true)
-            yAxisLeft.granularity = 1f
-            yAxisLeft.axisMinimum = 0f
-            yAxisLeft.textColor = Color.BLACK
+        val yAxisLeft = chart.axisLeft
+        yAxisLeft.setDrawGridLines(true)
+        yAxisLeft.granularity = 1f
+        yAxisLeft.axisMinimum = 0f   // conso uniquement en positif
+        yAxisLeft.textColor = Color.BLACK
 
-            chart.axisRight.isEnabled = false
+        chart.axisRight.isEnabled = false
 
-            chart.legend.isEnabled = true
-            chart.legend.textColor = Color.BLACK
+        chart.legend.isEnabled = true
+        chart.legend.textColor = Color.BLACK
 
-            Log.d(TAG, "Graphique configuré")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur configuration graphique: ${e.message}")
-        }
+        Log.d(TAG, "LineChart configuré")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur configuration LineChart: ${e.message}")
     }
+}
+
+private fun configureBarChart(chart: BarChart) {
+    try {
+        chart.description.isEnabled = false
+        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+        chart.setTouchEnabled(true)
+        chart.isDragEnabled = true
+        chart.setScaleEnabled(true)
+        chart.setPinchZoom(true)
+        chart.setDrawGridBackground(false)
+
+        val xAxis = chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(true)
+        xAxis.granularity = 1f
+        xAxis.textColor = Color.BLACK
+
+        val yAxisLeft = chart.axisLeft
+        yAxisLeft.setDrawGridLines(true)
+        yAxisLeft.granularity = 1f
+        // PAS de axisMinimum ici : on laisse updateGraphiqueCouts() régler min/max
+        yAxisLeft.textColor = Color.BLACK
+
+        chart.axisRight.isEnabled = false
+
+        chart.legend.isEnabled = true
+        chart.legend.textColor = Color.BLACK
+
+        Log.d(TAG, "BarChart configuré")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur configuration BarChart: ${e.message}")
+    }
+}
 
     private fun loadCategoriesActives() {
         try {
@@ -579,89 +617,88 @@ class StatsFragment : Fragment() {
         }
     }
 
-    private fun updateGraphiqueCouts() {
-        try {
-            val dataSets = mutableListOf<LineDataSet>()
+   private fun updateGraphiqueCouts() {
+    try {
+        // On utilise maintenant un BarChart avec 2 datasets :
+        // - Coûts : barres au-dessus de 0
+        // - Économies : barres en dessous de 0
+        val dataSets = mutableListOf<BarDataSet>()
 
-            val donnees = when (periodeActive) {
-                PERIODE_JOUR -> getConsommationsJourDispatch()
-                PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
-                PERIODE_MOIS -> dbHelper.getConsommationsMois()
-                PERIODE_ANNEE -> dbHelper.getConsommationsAnnee()
-                else -> emptyMap()
-            }
-
-            val couts = calculerCouts(donnees)
-            val economies = calculerEconomies(donnees)
-
-            if (couts.isNotEmpty() && couts.any { it > 0 }) {
-                val coutsEntries = couts.mapIndexed { index, value ->
-                    Entry(index.toFloat(), value.toFloat())
-                }
-
-                val coutsDataSet = LineDataSet(coutsEntries, "Coûts")
-                coutsDataSet.color = COLOR_COUTS
-                coutsDataSet.setCircleColor(COLOR_COUTS)
-                coutsDataSet.lineWidth = 2f
-                coutsDataSet.circleRadius = 3f
-                coutsDataSet.setDrawCircleHole(false)
-                coutsDataSet.setDrawValues(true)
-                coutsDataSet.valueTextSize = 9f
-
-                dataSets.add(coutsDataSet)
-            }
-
-            if (economies.isNotEmpty() && economies.any { it > 0 }) {
-                // On trace les économies en négatif pour qu’elles apparaissent sous l’axe 0
-                val economiesEntries = economies.mapIndexed { index, value ->
-                    Entry(index.toFloat(), (-value).toFloat())
-                }
-            
-                val economiesDataSet = LineDataSet(economiesEntries, "Économies")
-                economiesDataSet.color = COLOR_ECONOMIES
-                economiesDataSet.setCircleColor(COLOR_ECONOMIES)
-                economiesDataSet.lineWidth = 2f
-                economiesDataSet.circleRadius = 3f
-                economiesDataSet.setDrawCircleHole(false)
-                economiesDataSet.setDrawValues(true)
-                economiesDataSet.valueTextSize = 9f
-            
-                dataSets.add(economiesDataSet)
-            }
-            
-            if (dataSets.isNotEmpty()) {
-                val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
-                chartCouts.data = lineData
-                chartCouts.xAxis.valueFormatter = getXAxisFormatter()
-            
-                // ✅ Ajuste l’axe Y pour afficher coûts (positif) et économies (négatif)
-                val allValues = mutableListOf<Float>()
-                dataSets.forEach { set ->
-                    set.values.forEach { entry ->
-                        allValues.add(entry.y)
-                    }
-                }
-            
-                if (allValues.isNotEmpty()) {
-                    val maxAbs = allValues.maxOf { kotlin.math.abs(it) }
-                    val axisLeft = chartCouts.axisLeft
-                    axisLeft.axisMinimum = -maxAbs * 1.1f
-                    axisLeft.axisMaximum =  maxAbs * 1.1f
-                    chartCouts.axisRight.isEnabled = false
-                }
-            
-                chartCouts.invalidate()
-                Log.d(TAG, "Graphique coûts mis à jour: ${dataSets.size} datasets")
-            } else {
-                chartCouts.clear()
-                Log.w(TAG, "Aucune donnée pour graphique coûts")
-            }
-                        
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour graphique coûts: ${e.message}")
+        val donnees = when (periodeActive) {
+            PERIODE_JOUR -> getConsommationsJourDispatch()
+            PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
+            PERIODE_MOIS -> dbHelper.getConsommationsMois()
+            PERIODE_ANNEE -> dbHelper.getConsommationsAnnee()
+            else -> emptyMap()
         }
-    }
 
+        val couts = calculerCouts(donnees)
+        val economies = calculerEconomies(donnees)
+
+        // Dataset Coûts (positif, barres vers le haut)
+        if (couts.isNotEmpty() && couts.any { it > 0 }) {
+            val coutsEntries = couts.mapIndexed { index, value ->
+                BarEntry(index.toFloat(), value.toFloat())
+            }
+
+            val coutsDataSet = BarDataSet(coutsEntries, "Coûts")
+            coutsDataSet.color = COLOR_COUTS
+            coutsDataSet.valueTextSize = 9f
+            coutsDataSet.setDrawValues(true)
+
+            dataSets.add(coutsDataSet)
+        }
+
+        // Dataset Économies (négatif, barres vers le bas)
+        if (economies.isNotEmpty() && economies.any { it > 0 }) {
+            val economiesEntries = economies.mapIndexed { index, value ->
+                // valeurs négatives pour s'afficher sous l'axe 0
+                BarEntry(index.toFloat(), (-value).toFloat())
+            }
+
+            val economiesDataSet = BarDataSet(economiesEntries, "Économies")
+            economiesDataSet.color = COLOR_ECONOMIES
+            economiesDataSet.valueTextSize = 9f
+            economiesDataSet.setDrawValues(true)
+
+            dataSets.add(economiesDataSet)
+        }
+
+        if (dataSets.isNotEmpty()) {
+            val barData = BarData(dataSets as List<IBarDataSet>)
+            barData.barWidth = 0.45f
+
+            chartCouts.data = barData
+            chartCouts.xAxis.valueFormatter = getXAxisFormatter()
+
+            // Axe Y symétrique pour afficher +coûts / -économies
+            val allValues = mutableListOf<Float>()
+            dataSets.forEach { set ->
+                set.values.forEach { entry ->
+                    allValues.add(entry.y)
+                }
+            }
+
+            if (allValues.isNotEmpty()) {
+                val maxAbs = allValues.maxOf { kotlin.math.abs(it) }
+                val axisLeft = chartCouts.axisLeft
+                axisLeft.axisMinimum = -maxAbs * 1.1f
+                axisLeft.axisMaximum =  maxAbs * 1.1f
+                chartCouts.axisRight.isEnabled = false
+            }
+
+            chartCouts.invalidate()
+            Log.d(TAG, "Graphique coûts (BarChart) mis à jour: ${dataSets.size} datasets")
+        } else {
+            chartCouts.clear()
+            Log.w(TAG, "Aucune donnée pour graphique coûts")
+        }
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur mise à jour graphique coûts: ${e.message}")
+    }
+}
+   
     private fun calculerCouts(donnees: Map<String, List<Int>>): List<Double> {
         return try {
             val nbPoints = donnees.values.firstOrNull()?.size ?: 0
