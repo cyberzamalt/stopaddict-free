@@ -27,6 +27,8 @@ class ReglagesFragment : Fragment() {
         private const val REQUEST_CODE_EXPORT = 1001
         private const val REQUEST_CODE_IMPORT = 1002
         private const val PREF_MODE_CIGARETTE = "mode_cigarette"
+        private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
+        private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
     }
 
     private lateinit var dbHelper: DatabaseHelper
@@ -56,6 +58,10 @@ class ReglagesFragment : Fragment() {
     // Paquet classique
     private lateinit var editPrixPaquet: EditText
     private lateinit var editNbCigarettes: EditText
+
+    // Nombre de cigarettes fabriquées (roulées / tubées)
+    private lateinit var editNbCigarettesRoulees: EditText
+    private lateinit var editNbCigarettesTubees: EditText
     
     // À rouler
     private lateinit var editPrixTabac: EditText
@@ -305,6 +311,16 @@ class ReglagesFragment : Fragment() {
         addLabel(roulerContainer, trad["label_nb_filtres"] ?: "Nombre de filtres")
         editNbFiltres = createNumberEditText()
         roulerContainer.addView(editNbFiltres)
+
+        // Nouveau : nombre de cigarettes fabriquées avec ce paquet (rouler)
+        addLabel(
+            roulerContainer,
+            trad["label_nb_cigarettes_roulees"]
+                ?: "Nombre de cigarettes que vous fabriquez avec ce paquet (tabac + feuilles + filtres)"
+        )
+        editNbCigarettesRoulees = createNumberEditText()
+        roulerContainer.addView(editNbCigarettesRoulees)
+
         radioGroup.addView(roulerContainer)
         
                 // Mode 3: À tuber
@@ -327,15 +343,24 @@ class ReglagesFragment : Fragment() {
         addLabel(tuberContainer, (trad["label_prix_tubes"] ?: "Prix des tubes") + " (" + getDeviseSymbol() + ")")
         editPrixTubes = createMoneyEditText()
         tuberContainer.addView(editPrixTubes)
-        
-        // Nombre de tubes
+                // Nombre de tubes
         addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
         editNbTubes = createNumberEditText()
         tuberContainer.addView(editNbTubes)
 
+        // Nouveau : nombre de cigarettes fabriquées avec ce paquet (tuber)
+        addLabel(
+            tuberContainer,
+            trad["label_nb_cigarettes_tubees"]
+                ?: "Nombre de cigarettes que vous fabriquez avec ce paquet (tabac + tubes)"
+        )
+        editNbCigarettesTubees = createNumberEditText()
+        tuberContainer.addView(editNbCigarettesTubees)
+
         radioGroup.addView(tuberContainer)
         // Assurer qu'un seul mode de cigarettes est sélectionné à la fois
-radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
+
+        radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
     if (isChecked) {
         radioCigarettesRouler.isChecked = false
         radioCigarettesTubeuse.isChecked = false
@@ -582,6 +607,13 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             nbTubes = parseDouble(editNbTubes.text.toString())
         }
 
+                // Sauvegarde des nombres de cigarettes fabriquées (rouler / tuber) dans les préférences
+        val nbCigRoulees = parseDouble(editNbCigarettesRoulees.text.toString())
+        val nbCigTubees = parseDouble(editNbCigarettesTubees.text.toString())
+
+        dbHelper.setPreference(PREF_NB_CIGARETTES_ROULEES, nbCigRoulees.toString())
+        dbHelper.setPreference(PREF_NB_CIGARETTES_TUBEES, nbCigTubees.toString())
+        
         // 3) On sauvegarde TOUT en une fois, avec la nouvelle colonne
         dbHelper.setCouts(
             DatabaseHelper.TYPE_CIGARETTE,
@@ -1221,12 +1253,18 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         editPrixFiltres.setText(coutsCig["prix_filtres"]?.toString() ?: "0")
         editNbFiltres.setText(coutsCig["nb_filtres"]?.toInt()?.toString() ?: "0")
 
+                // Nombre de cigarettes fabriquées avec ce paquet (rouler)
+        val nbCigRouleesPref = dbHelper.getPreference(PREF_NB_CIGARETTES_ROULEES, "0")
+        editNbCigarettesRoulees.setText(nbCigRouleesPref)
 
     // À tuber
         editPrixTabacTubes.setText(coutsCig["prix_tabac_tube"]?.toString() ?: "0")
         editPrixTubes.setText(coutsCig["prix_tubes"]?.toString() ?: "0")
         editNbTubes.setText(coutsCig["nb_tubes"]?.toInt()?.toString() ?: "0")
 
+            // Nombre de cigarettes fabriquées avec ce paquet (tuber)
+        val nbCigTubeesPref = dbHelper.getPreference(PREF_NB_CIGARETTES_TUBEES, "0")
+        editNbCigarettesTubees.setText(nbCigTubeesPref)
         
         // Joints
         val coutsJoint = dbHelper.getCouts(DatabaseHelper.TYPE_JOINT)
