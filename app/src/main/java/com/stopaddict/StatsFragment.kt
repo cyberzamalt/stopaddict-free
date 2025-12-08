@@ -448,13 +448,7 @@ private fun configureBarChart(chart: BarChart) {
         try {
             val dataSets = mutableListOf<LineDataSet>()
 
-            val donnees = when (periodeActive) {
-                PERIODE_JOUR -> getConsommationsJourDispatch()
-                PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
-                PERIODE_MOIS -> dbHelper.getConsommationsMois()
-                PERIODE_ANNEE -> dbHelper.getConsommationsAnnee()
-                else -> emptyMap()
-            }
+            val donnees = getDonneesPourCouts()
 
             categoriesActives.forEach { (type, active) ->
                 if (active) {
@@ -551,6 +545,75 @@ private fun configureBarChart(chart: BarChart) {
         }
     }
 
+    private fun aggregateToWeeks(values: List<Int>): List<Int> {
+    if (values.isEmpty()) return emptyList()
+
+    val size = values.size
+    val nbWeeks = when {
+        size <= 7  -> 1
+        size <= 14 -> 2
+        size <= 21 -> 3
+        size <= 28 -> 4
+        else       -> 5
+    }
+
+    val result = MutableList(nbWeeks) { 0 }
+    values.forEachIndexed { index, v ->
+        val weekIndex = (index * nbWeeks) / size
+        result[weekIndex] += v
+    }
+    return result
+}
+
+/**
+ * Données “brutes” pour le graphique COUTS/ECONOMIES
+ * - JOUR   : 1 point par catégorie (total du jour)
+ * - SEMAINE: 7 points (1 par jour)
+ * - MOIS   : 4–5 points (par “semaine” du mois)
+ * - ANNEE  : 12 points (mois)
+ */
+private fun getDonneesPourCouts(): Map<String, List<Int>> {
+    return try {
+        when (periodeActive) {
+            PERIODE_JOUR -> {
+                val consosJour = dbHelper.getConsommationsJour()
+                val result = mutableMapOf<String, List<Int>>()
+                categoriesActives.forEach { (type, active) ->
+                    if (active) {
+                        val total = consosJour[type] ?: 0
+                        result[type] = listOf(total)
+                    }
+                }
+                result
+            }
+
+            PERIODE_SEMAINE -> {
+                dbHelper.getConsommationsSemaine()
+            }
+
+            PERIODE_MOIS -> {
+                val base = dbHelper.getConsommationsMois()
+                val result = mutableMapOf<String, List<Int>>()
+                base.forEach { (type, values) ->
+                    if (categoriesActives[type] == true) {
+                        result[type] = aggregateToWeeks(values)
+                    }
+                }
+                result
+            }
+
+            PERIODE_ANNEE -> {
+                dbHelper.getConsommationsAnnee()
+            }
+
+            else -> emptyMap()
+        }
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur getDonneesPourCouts: ${e.message}")
+        emptyMap()
+    }
+}
+
     private fun getXAxisFormatter(): ValueFormatter {
         return object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
@@ -593,6 +656,43 @@ private fun configureBarChart(chart: BarChart) {
         }
     }
 
+    private fun getXAxisFormatterCouts(nbPoints: Int): ValueFormatter {
+    return object : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            val index = value.toInt()
+            return when (periodeActive) {
+                PERIODE_JOUR -> {
+                    if (index == 0) {
+                        trad["calculs_periode_jour"] ?: trad["btn_jour"] ?: "Jour"
+                    } else ""
+                }
+
+                PERIODE_SEMAINE -> {
+                    val jours = arrayOf("Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim")
+                    if (index in jours.indices) jours[index] else ""
+                }
+
+                PERIODE_MOIS -> {
+                    val labels4 = arrayOf("S1", "S2", "S3", "S4")
+                    val labels5 = arrayOf("S1", "S2", "S3", "S4", "S5")
+                    val labels = if (nbPoints <= 4) labels4 else labels5
+                    if (index in labels.indices) labels[index] else ""
+                }
+
+                PERIODE_ANNEE -> {
+                    val mois = arrayOf(
+                        "Jan", "Fév", "Mar", "Avr", "Mai", "Juin",
+                        "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"
+                    )
+                    if (index in mois.indices) mois[index] else ""
+                }
+
+                else -> index.toString()
+            }
+        }
+    }
+}
+    
     private fun getLabelCategorie(type: String): String {
         return when (type) {
             DatabaseHelper.TYPE_CIGARETTE -> trad["label_cigarettes"] ?: "Cigarettes"
@@ -624,13 +724,7 @@ private fun configureBarChart(chart: BarChart) {
         // - Économies : barres en dessous de 0
         val dataSets = mutableListOf<BarDataSet>()
 
-        val donnees = when (periodeActive) {
-            PERIODE_JOUR -> getConsommationsJourDispatch()
-            PERIODE_SEMAINE -> dbHelper.getConsommationsSemaine()
-            PERIODE_MOIS -> dbHelper.getConsommationsMois()
-            PERIODE_ANNEE -> dbHelper.getConsommationsAnnee()
-            else -> emptyMap()
-        }
+        val donnees = getDonneesPourCouts()
 
         val couts = calculerCouts(donnees)
         val economies = calculerEconomies(donnees)
@@ -669,7 +763,9 @@ private fun configureBarChart(chart: BarChart) {
             barData.barWidth = 0.45f
 
             chartCouts.data = barData
-            chartCouts.xAxis.valueFormatter = getXAxisFormatter()
+                // nombre de points sur l’axe X (coûts / économies ont la même taille)
+                    val nbPoints = dataSets.firstOrNull()?.entryCount ?: 0
+                    chartCouts.xAxis.valueFormatter = getXAxisFormatterCouts(nbPoints)
 
             // Axe Y symétrique pour afficher +coûts / -économies
             val allValues = mutableListOf<Float>()
