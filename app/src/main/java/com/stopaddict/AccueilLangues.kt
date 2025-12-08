@@ -86,6 +86,8 @@ object AccueilLangues {
         "economies_jour" to "Vous économisez %.2f€ aujourd'hui!",
         "economies_reelles" to "Économies réelles: %.2f€ vs vos habitudes!",
         "economies_accumulent" to "Ces économies s'accumulent jour après jour.",
+
+        "btn_ok" to "Fermer",
         
         // Messages erreurs
         "erreur_chargement" to "Erreur chargement Accueil",
@@ -151,6 +153,8 @@ object AccueilLangues {
         "economies_jour" to "You're saving £%.2f today!",
         "economies_reelles" to "Real savings: £%.2f vs your habits!",
         "economies_accumulent" to "These savings add up quickly.",
+
+        "btn_ok" to "OK",
         
         // Messages erreurs
         "erreur_chargement" to "Error loading Home",
@@ -216,6 +220,8 @@ object AccueilLangues {
         "economies_jour" to "¡Estás ahorrando %.2f€ hoy!",
         "economies_reelles" to "Ahorros reales: %.2f€ vs tus hábitos!",
         "economies_accumulent" to "Estos ahorros se acumulan rápidamente.",
+
+        "btn_ok" to "Cerrar",
         
         // Messages erreurs
         "erreur_chargement" to "Error al cargar Inicio",
@@ -281,6 +287,8 @@ object AccueilLangues {
         "economies_jour" to "Você está economizando R$%.2f hoje!",
         "economies_reelles" to "Economias reais: R$%.2f vs seus hábitos!",
         "economies_accumulent" to "Essas economias se acumulam rapidamente.",
+
+        "btn_ok" to "Fechar",
         
         // Messages erreurs
         "erreur_chargement" to "Erro ao carregar Início",
@@ -345,6 +353,8 @@ object AccueilLangues {
         "economies_jour" to "Sie sparen heute %.2f€!",
         "economies_reelles" to "Echte Ersparnisse: %.2f€ vs Ihre Gewohnheiten!",
         "economies_accumulent" to "Diese Ersparnisse häufen sich schnell an.",
+
+        "btn_ok" to "Schließen",
         
         // Messages erreurs
         "erreur_chargement" to "Fehler beim Laden der Startseite",
@@ -410,6 +420,8 @@ object AccueilLangues {
         "economies_jour" to "Stai risparmiando %.2f€ oggi!",
         "economies_reelles" to "Risparmi reali: %.2f€ vs le tue abitudini!",
         "economies_accumulent" to "Questi risparmi si accumulano rapidamente.",
+
+        "btn_ok" to "Chiudi",
         
         // Messages erreurs
         "erreur_chargement" to "Errore nel caricamento della Home",
@@ -475,6 +487,8 @@ object AccueilLangues {
         "economies_jour" to "Вы экономите %.2f₽ сегодня!",
         "economies_reelles" to "Реальная экономия: %.2f₽ vs ваши привычки!",
         "economies_accumulent" to "Эти сбережения быстро накапливаются.",
+
+        "btn_ok" to "Закрыть",
         
         // Messages erreurs
         "erreur_chargement" to "Ошибка загрузки Главной",
@@ -539,6 +553,8 @@ object AccueilLangues {
         "economies_jour" to "!أنت توفر %.2f﷼ اليوم",
         "economies_reelles" to "!وفورات حقيقية: %.2f﷼ مقابل عاداتك",
         "economies_accumulent" to "هذه المدخرات تتراكم بسرعة.",
+
+        "btn_ok" to "إغلاق",
         
         // Messages erreurs
         "erreur_chargement" to "خطأ في تحميل الصفحة الرئيسية",
@@ -604,6 +620,8 @@ object AccueilLangues {
         "economies_jour" to "आप आज ₹%.2f बचा रहे हैं!",
         "economies_reelles" to "वास्तविक बचत: ₹%.2f बनाम आपकी आदतें!",
         "economies_accumulent" to "ये बचत तेजी से जमा होती हैं।",
+
+        "btn_ok" to "बंद करें",
         
         // Messages erreurs
         "erreur_chargement" to "होम लोड करने में त्रुटि",
@@ -669,6 +687,8 @@ object AccueilLangues {
         "economies_jour" to "今日¥%.2f節約しています！",
         "economies_reelles" to "実際の節約：¥%.2f対あなたの習慣！",
         "economies_accumulent" to "これらの節約は急速に積み重なります。",
+
+        "btn_ok" to "閉じる",
         
         // Messages erreurs
         "erreur_chargement" to "ホームの読み込みエラー",
