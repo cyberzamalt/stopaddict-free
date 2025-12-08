@@ -17,6 +17,7 @@ import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
+import android.view.inputmethod.EditorInfo
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -1397,21 +1398,28 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     private fun createMoneyEditText(): EditText {
-        return EditText(requireContext()).apply {
-            hint = "0.00"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
+    return EditText(requireContext()).apply {
+        hint = "0.00"
+        // Clavier numérique avec décimales
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        // Action principale du clavier = Suivant (Next)
+        imeOptions = EditorInfo.IME_ACTION_NEXT
+        // Une seule ligne pour éviter les retours à la ligne
+        setSingleLine(true)
+        setPadding(20, 20, 20, 20)
     }
-
+}
     private fun createNumberEditText(): EditText {
-        return EditText(requireContext()).apply {
-            hint = "0"
-            inputType = InputType.TYPE_CLASS_NUMBER
-            setPadding(20, 20, 20, 20)
-        }
+    return EditText(requireContext()).apply {
+        hint = "0"
+        // Clavier numérique entier
+        inputType = InputType.TYPE_CLASS_NUMBER
+        // Action principale du clavier = Suivant (Next)
+        imeOptions = EditorInfo.IME_ACTION_NEXT
+        setSingleLine(true)
+        setPadding(20, 20, 20, 20)
     }
-
+}
     private fun addLinkButton(container: LinearLayout, text: String, onClick: () -> Unit) {
         val button = Button(requireContext()).apply {
             this.text = text
