@@ -333,6 +333,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_ES = mapOf(
         // Titres sections
         "titre" to "Configuración",
+        "titre_profil" to "Perfil",
         "titre_categories" to "Categorías activas",
         "titre_couts_cigarettes" to "Costos cigarrillos",
         "titre_couts_joints" to "Costos porros",
@@ -481,6 +482,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_PT = mapOf(
         // Titres sections
         "titre" to "Configurações",
+        "titre_profil" to "Perfil",
         "titre_categories" to "Categorias ativas",
         "titre_couts_cigarettes" to "Custos cigarros",
         "titre_couts_joints" to "Custos baseados",
@@ -629,6 +631,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_DE = mapOf(
         // Titres sections
         "titre" to "Einstellungen",
+        "titre_profil" to "Profil",
         "titre_categories" to "Aktive Kategorien",
         "titre_couts_cigarettes" to "Zigarettenkosten",
         "titre_couts_joints" to "Joint-Kosten",
@@ -777,6 +780,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_IT = mapOf(
         // Titres sections
         "titre" to "Impostazioni",
+        "titre_profil" to "Profilo",
         "titre_categories" to "Categorie attive",
         "titre_couts_cigarettes" to "Costi sigarette",
         "titre_couts_joints" to "Costi spinelli",
@@ -925,6 +929,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_RU = mapOf(
         // Titres sections
         "titre" to "Настройки",
+        "titre_profil" to "Профиль",
         "titre_categories" to "Активные категории",
         "titre_couts_cigarettes" to "Расходы на сигареты",
         "titre_couts_joints" to "Расходы на косяки",
@@ -1073,6 +1078,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_AR = mapOf(
         // Titres sections
         "titre" to "الإعدادات",
+        "titre_profil" to "الملف الشخصي",
         "titre_categories" to "الفئات النشطة",
         "titre_couts_cigarettes" to "تكاليف السجائر",
         "titre_couts_joints" to "تكاليف المفاصل",
@@ -1221,6 +1227,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_HI = mapOf(
         // Titres sections
         "titre" to "सेटिंग्स",
+        "titre_profil" to "प्रोफ़ाइल",
         "titre_categories" to "सक्रिय श्रेणियां",
         "titre_couts_cigarettes" to "सिगरेट की लागत",
         "titre_couts_joints" to "जोड़ों की लागत",
@@ -1369,6 +1376,7 @@ object ReglagesLangues {
     private val TRADUCTIONS_JA = mapOf(
         // Titres sections
         "titre" to "設定",
+        "titre_profil" to "プロフィール",
         "titre_categories" to "アクティブカテゴリ",
         "titre_couts_cigarettes" to "タバコの費用",
         "titre_couts_joints" to "ジョイントの費用",
