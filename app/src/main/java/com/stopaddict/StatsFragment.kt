@@ -612,10 +612,11 @@ class StatsFragment : Fragment() {
             }
 
             if (economies.isNotEmpty() && economies.any { it > 0 }) {
+                // On trace les économies en négatif pour qu’elles apparaissent sous l’axe 0
                 val economiesEntries = economies.mapIndexed { index, value ->
-                    Entry(index.toFloat(), value.toFloat())
+                    Entry(index.toFloat(), (-value).toFloat())
                 }
-
+            
                 val economiesDataSet = LineDataSet(economiesEntries, "Économies")
                 economiesDataSet.color = COLOR_ECONOMIES
                 economiesDataSet.setCircleColor(COLOR_ECONOMIES)
@@ -624,20 +625,38 @@ class StatsFragment : Fragment() {
                 economiesDataSet.setDrawCircleHole(false)
                 economiesDataSet.setDrawValues(true)
                 economiesDataSet.valueTextSize = 9f
-
+            
                 dataSets.add(economiesDataSet)
             }
-
+            
             if (dataSets.isNotEmpty()) {
                 val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
                 chartCouts.data = lineData
                 chartCouts.xAxis.valueFormatter = getXAxisFormatter()
+            
+                // ✅ Ajuste l’axe Y pour afficher coûts (positif) et économies (négatif)
+                val allValues = mutableListOf<Float>()
+                dataSets.forEach { set ->
+                    set.values.forEach { entry ->
+                        allValues.add(entry.y)
+                    }
+                }
+            
+                if (allValues.isNotEmpty()) {
+                    val maxAbs = allValues.maxOf { kotlin.math.abs(it) }
+                    val axisLeft = chartCouts.axisLeft
+                    axisLeft.axisMinimum = -maxAbs * 1.1f
+                    axisLeft.axisMaximum =  maxAbs * 1.1f
+                    chartCouts.axisRight.isEnabled = false
+                }
+            
                 chartCouts.invalidate()
                 Log.d(TAG, "Graphique coûts mis à jour: ${dataSets.size} datasets")
             } else {
                 chartCouts.clear()
                 Log.w(TAG, "Aucune donnée pour graphique coûts")
             }
+                        
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour graphique coûts: ${e.message}")
         }
