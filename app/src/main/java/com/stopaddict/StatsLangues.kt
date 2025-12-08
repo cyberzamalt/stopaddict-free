@@ -88,6 +88,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Oct",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Déc",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Lun",
+        "axe_jour_mar" to "Mar",
+        "axe_jour_mer" to "Mer",
+        "axe_jour_jeu" to "Jeu",
+        "axe_jour_ven" to "Ven",
+        "axe_jour_sam" to "Sam",
+        "axe_jour_dim" to "Dim",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Jan",
+        "axe_mois_fev" to "Fév",
+        "axe_mois_mar" to "Mar",
+        "axe_mois_avr" to "Avr",
+        "axe_mois_mai" to "Mai",
+        "axe_mois_juin" to "Juin",
+        "axe_mois_juil" to "Juil",
+        "axe_mois_aou" to "Aoû",
+        "axe_mois_sep" to "Sep",
+        "axe_mois_oct" to "Oct",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Déc",
         
         // Zone calculs
         "calculs_periode_jour" to "Jour",
@@ -168,6 +191,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Oct",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Dec",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Mon",
+        "axe_jour_mar" to "Tue",
+        "axe_jour_mer" to "Wed",
+        "axe_jour_jeu" to "Thu",
+        "axe_jour_ven" to "Fri",
+        "axe_jour_sam" to "Sat",
+        "axe_jour_dim" to "Sun",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Jan",
+        "axe_mois_fev" to "Feb",
+        "axe_mois_mar" to "Mar",
+        "axe_mois_avr" to "Apr",
+        "axe_mois_mai" to "May",
+        "axe_mois_juin" to "Jun",
+        "axe_mois_juil" to "Jul",
+        "axe_mois_aou" to "Aug",
+        "axe_mois_sep" to "Sep",
+        "axe_mois_oct" to "Oct",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Dec",
         
         // Zone calculs
         "calculs_periode_jour" to "Day",
@@ -248,6 +294,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Oct",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Dic",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Lun",
+        "axe_jour_mar" to "Mar",
+        "axe_jour_mer" to "Mié",
+        "axe_jour_jeu" to "Jue",
+        "axe_jour_ven" to "Vie",
+        "axe_jour_sam" to "Sáb",
+        "axe_jour_dim" to "Dom",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Ene",
+        "axe_mois_fev" to "Feb",
+        "axe_mois_mar" to "Mar",
+        "axe_mois_avr" to "Abr",
+        "axe_mois_mai" to "May",
+        "axe_mois_juin" to "Jun",
+        "axe_mois_juil" to "Jul",
+        "axe_mois_aou" to "Ago",
+        "axe_mois_sep" to "Sep",
+        "axe_mois_oct" to "Oct",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Dic",
         
         // Zone calculs
         "calculs_periode_jour" to "Día",
@@ -328,6 +397,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Out",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Dez",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Seg",
+        "axe_jour_mar" to "Ter",
+        "axe_jour_mer" to "Qua",
+        "axe_jour_jeu" to "Qui",
+        "axe_jour_ven" to "Sex",
+        "axe_jour_sam" to "Sáb",
+        "axe_jour_dim" to "Dom",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Jan",
+        "axe_mois_fev" to "Fev",
+        "axe_mois_mar" to "Mar",
+        "axe_mois_avr" to "Abr",
+        "axe_mois_mai" to "Mai",
+        "axe_mois_juin" to "Jun",
+        "axe_mois_juil" to "Jul",
+        "axe_mois_aou" to "Ago",
+        "axe_mois_sep" to "Set",
+        "axe_mois_oct" to "Out",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Dez",
         
         // Zone calculs
         "calculs_periode_jour" to "Dia",
@@ -407,6 +499,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Okt",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Dez",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Mon",
+        "axe_jour_mar" to "Die",
+        "axe_jour_mer" to "Mit",
+        "axe_jour_jeu" to "Don",
+        "axe_jour_ven" to "Fre",
+        "axe_jour_sam" to "Sam",
+        "axe_jour_dim" to "Son",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Jan",
+        "axe_mois_fev" to "Feb",
+        "axe_mois_mar" to "Mär",
+        "axe_mois_avr" to "Apr",
+        "axe_mois_mai" to "Mai",
+        "axe_mois_juin" to "Jun",
+        "axe_mois_juil" to "Jul",
+        "axe_mois_aou" to "Aug",
+        "axe_mois_sep" to "Sep",
+        "axe_mois_oct" to "Okt",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Dez",
         
         // Zone calculs
         "calculs_periode_jour" to "Tag",
@@ -487,6 +602,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Ott",
         "axe_x_annee_10" to "Nov",
         "axe_x_annee_11" to "Dic",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Lun",
+        "axe_jour_mar" to "Mar",
+        "axe_jour_mer" to "Mer",
+        "axe_jour_jeu" to "Gio",
+        "axe_jour_ven" to "Ven",
+        "axe_jour_sam" to "Sab",
+        "axe_jour_dim" to "Dom",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Gen",
+        "axe_mois_fev" to "Feb",
+        "axe_mois_mar" to "Mar",
+        "axe_mois_avr" to "Apr",
+        "axe_mois_mai" to "Mag",
+        "axe_mois_juin" to "Giu",
+        "axe_mois_juil" to "Lug",
+        "axe_mois_aou" to "Ago",
+        "axe_mois_sep" to "Set",
+        "axe_mois_oct" to "Ott",
+        "axe_mois_nov" to "Nov",
+        "axe_mois_dec" to "Dic",
         
         // Zone calculs
         "calculs_periode_jour" to "Giorno",
@@ -567,6 +705,29 @@ object StatsLangues {
         "axe_x_annee_9" to "Окт",
         "axe_x_annee_10" to "Ноя",
         "axe_x_annee_11" to "Дек",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "Пн",
+        "axe_jour_mar" to "Вт",
+        "axe_jour_mer" to "Ср",
+        "axe_jour_jeu" to "Чт",
+        "axe_jour_ven" to "Пт",
+        "axe_jour_sam" to "Сб",
+        "axe_jour_dim" to "Вс",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "Янв",
+        "axe_mois_fev" to "Фев",
+        "axe_mois_mar" to "Мар",
+        "axe_mois_avr" to "Апр",
+        "axe_mois_mai" to "Май",
+        "axe_mois_juin" to "Июн",
+        "axe_mois_juil" to "Июл",
+        "axe_mois_aou" to "Авг",
+        "axe_mois_sep" to "Сен",
+        "axe_mois_oct" to "Окт",
+        "axe_mois_nov" to "Ноя",
+        "axe_mois_dec" to "Дек",
         
         // Zone calculs
         "calculs_periode_jour" to "День",
@@ -646,6 +807,52 @@ object StatsLangues {
         "axe_x_annee_9" to "أكتوبر",
         "axe_x_annee_10" to "نوفمبر",
         "axe_x_annee_11" to "ديسمبر",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "الاثنين",
+        "axe_jour_mar" to "الثلاثاء",
+        "axe_jour_mer" to "الأربعاء",
+        "axe_jour_jeu" to "الخميس",
+        "axe_jour_ven" to "الجمعة",
+        "axe_jour_sam" to "السبت",
+        "axe_jour_dim" to "الأحد",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "يناير",
+        "axe_mois_fev" to "فبراير",
+        "axe_mois_mar" to "مارس",
+        "axe_mois_avr" to "أبريل",
+        "axe_mois_mai" to "مايو",
+        "axe_mois_juin" to "يونيو",
+        "axe_mois_juil" to "يوليو",
+        "axe_mois_aou" to "أغسطس",
+        "axe_mois_sep" to "سبتمبر",
+        "axe_mois_oct" to "أكتوبر",
+        "axe_mois_nov" to "نوفمبر",
+        "axe_mois_dec" to "ديسمبر",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "सोम",
+        "axe_jour_mar" to "मंगल",
+        "axe_jour_mer" to "बुध",
+        "axe_jour_jeu" to "गुरु",
+        "axe_jour_ven" to "शुक्र",
+        "axe_jour_sam" to "शनि",
+        "axe_jour_dim" to "रवि",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "जन",
+        "axe_mois_fev" to "फर",
+        "axe_mois_mar" to "मार",
+        "axe_mois_avr" to "अप्र",
+        "axe_mois_mai" to "मई",
+        "axe_mois_juin" to "जून",
+        "axe_mois_juil" to "जुल",
+        "axe_mois_aou" to "अग",
+        "axe_mois_sep" to "सित",
+        "axe_mois_oct" to "अक्ट",
+        "axe_mois_nov" to "नव",
+        "axe_mois_dec" to "दिस",
         
         // Zone calculs
         "calculs_periode_jour" to "يوم",
@@ -726,6 +933,29 @@ object StatsLangues {
         "axe_x_annee_9" to "अक्ट",
         "axe_x_annee_10" to "नव",
         "axe_x_annee_11" to "दिस",
+
+                // Alias axes jours (nouveau formatter StatsFragment)
+        "axe_jour_lun" to "月",
+        "axe_jour_mar" to "火",
+        "axe_jour_mer" to "水",
+        "axe_jour_jeu" to "木",
+        "axe_jour_ven" to "金",
+        "axe_jour_sam" to "土",
+        "axe_jour_dim" to "日",
+
+        // Alias axes mois (nouveau formatter StatsFragment)
+        "axe_mois_jan" to "1月",
+        "axe_mois_fev" to "2月",
+        "axe_mois_mar" to "3月",
+        "axe_mois_avr" to "4月",
+        "axe_mois_mai" to "5月",
+        "axe_mois_juin" to "6月",
+        "axe_mois_juil" to "7月",
+        "axe_mois_aou" to "8月",
+        "axe_mois_sep" to "9月",
+        "axe_mois_oct" to "10月",
+        "axe_mois_nov" to "11月",
+        "axe_mois_dec" to "12月",
         
         // Zone calculs
         "calculs_periode_jour" to "दिन",
