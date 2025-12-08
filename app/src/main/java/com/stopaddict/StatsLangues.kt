@@ -125,6 +125,9 @@ object StatsLangues {
         "profil_complet" to "Profil: Complet ✓",
         "profil_incomplet" to "Profil: Incomplet",
         "total_aujourdhui" to "Total aujourd'hui:",
+        "profil_complet_complet" to "Profil: Complet ✓",
+        "profil_complet_incomplet" to "Profil: Incomplet",
+        "profil_total_jour" to "Total aujourd'hui:",
         
         // Messages
         "erreur_chargement" to "Erreur chargement Stats",
@@ -228,7 +231,10 @@ object StatsLangues {
         "profil_complet" to "Profile: Complete ✓",
         "profil_incomplet" to "Profile: Incomplete",
         "total_aujourdhui" to "Total today:",
-        
+        "profil_complet_complet" to "Profile: Complete ✓",
+        "profil_complet_incomplet" to "Profile: Incomplete",
+        "profil_total_jour" to "Total today:",
+
         // Messages
         "erreur_chargement" to "Error loading Stats",
         "aucune_donnee" to "No data available"
@@ -331,6 +337,9 @@ object StatsLangues {
         "profil_complet" to "Perfil: Completo ✓",
         "profil_incomplet" to "Perfil: Incompleto",
         "total_aujourdhui" to "Total hoy:",
+        "profil_complet_complet" to "Perfil: Completo ✓",
+        "profil_complet_incomplet" to "Perfil: Incompleto",
+        "profil_total_jour" to "Total hoy:",
         
         // Messages
         "erreur_chargement" to "Error al cargar Estadísticas",
@@ -431,9 +440,13 @@ object StatsLangues {
         "calculs_economies" to "economizados",
         
         // Bandeau profil
+        // Bandeau profil
         "profil_complet" to "Perfil: Completo ✓",
         "profil_incomplet" to "Perfil: Incompleto",
         "total_aujourdhui" to "Total hoje:",
+        "profil_complet_complet" to "Perfil: Completo ✓",
+        "profil_complet_incomplet" to "Perfil: Incompleto",
+        "profil_total_jour" to "Total hoje:",
         
         // Messages
         "erreur_chargement" to "Erro ao carregar Estatísticas",
@@ -536,6 +549,9 @@ object StatsLangues {
         "profil_complet" to "Profil: Vollständig ✓",
         "profil_incomplet" to "Profil: Unvollständig",
         "total_aujourdhui" to "Heute insgesamt:",
+        "profil_complet_complet" to "Profil: Vollständig ✓",
+        "profil_complet_incomplet" to "Profil: Unvollständig",
+        "profil_total_jour" to "Heute insgesamt:",
         
         // Messages
         "erreur_chargement" to "Fehler beim Laden der Statistiken",
@@ -639,6 +655,9 @@ object StatsLangues {
         "profil_complet" to "Profilo: Completo ✓",
         "profil_incomplet" to "Profilo: Incompleto",
         "total_aujourdhui" to "Totale oggi:",
+        "profil_complet_complet" to "Profilo: Completo ✓",
+        "profil_complet_incomplet" to "Profilo: Incompleto",
+        "profil_total_jour" to "Totale oggi:",
         
         // Messages
         "erreur_chargement" to "Errore nel caricamento delle Statistiche",
@@ -738,11 +757,14 @@ object StatsLangues {
         "calculs_depenses" to "потрачено",
         "calculs_economies" to "сэкономлено",
         
-        // Bandeau profil
+       // Bandeau profil
         "profil_complet" to "Профиль: Полный ✓",
         "profil_incomplet" to "Профиль: Неполный",
         "total_aujourdhui" to "Всего сегодня:",
-        
+        "profil_complet_complet" to "Профиль: Полный ✓",
+        "profil_complet_incomplet" to "Профиль: Неполный",
+        "profil_total_jour" to "Всего сегодня:",
+                
         // Messages
         "erreur_chargement" to "Ошибка загрузки Статистики",
         "aucune_donnee" to "Нет доступных данных"
@@ -844,6 +866,9 @@ object StatsLangues {
         "profil_complet" to "✓ الملف: كامل",
         "profil_incomplet" to "الملف: غير كامل",
         "total_aujourdhui" to ":المجموع اليوم",
+        "profil_complet_complet" to "✓ الملف: كامل",
+        "profil_complet_incomplet" to "الملف: غير كامل",
+        "profil_total_jour" to ":المجموع اليوم",
         
         // Messages
         "erreur_chargement" to "خطأ في تحميل الإحصائيات",
@@ -947,6 +972,9 @@ object StatsLangues {
         "profil_complet" to "प्रोफ़ाइल: पूर्ण ✓",
         "profil_incomplet" to "प्रोफ़ाइल: अपूर्ण",
         "total_aujourdhui" to "आज कुल:",
+        "profil_complet_complet" to "प्रोफ़ाइल: पूर्ण ✓",
+        "profil_complet_incomplet" to "प्रोफ़ाइल: अपूर्ण",
+        "profil_total_jour" to "आज कुल:",
         
         // Messages
         "erreur_chargement" to "आँकड़े लोड करने में त्रुटि",
@@ -1050,7 +1078,10 @@ object StatsLangues {
         "profil_complet" to "プロフィール：完全 ✓",
         "profil_incomplet" to "プロフィール：不完全",
         "total_aujourdhui" to "今日の合計：",
-        
+        "profil_complet_complet" to "プロフィール：完全 ✓",
+        "profil_complet_incomplet" to "プロフィール：不完全",
+        "profil_total_jour" to "今日の合計：",
+                
         // Messages
         "erreur_chargement" to "統計の読み込みエラー",
         "aucune_donnee" to "データがありません"
