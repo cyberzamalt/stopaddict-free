@@ -465,16 +465,16 @@ class HabitudesFragment : Fragment() {
         // -----------------------------
         // 2) Sauvegarde des dates
         // -----------------------------
-        fun safeDate(btn: Button): String? {
+        fun safeDate(btn: Button): String {
             val t = btn.text.toString().trim()
-            return if (t.isNotEmpty() && t != placeholder) t else null
+            return if (t.isNotEmpty() && t != placeholder) t else ""
         }
-
+        
         btnDatesMap.forEach { (type, datesButtons) ->
-            val dReduction = datesButtons["reduction"]?.let { safeDate(it) }
-            val dArret = datesButtons["arret"]?.let { safeDate(it) }
-            val dReussite = datesButtons["reussite"]?.let { safeDate(it) }
-
+            val dReduction = datesButtons["reduction"]?.let { safeDate(it) } ?: ""
+            val dArret = datesButtons["arret"]?.let { safeDate(it) } ?: ""
+            val dReussite = datesButtons["reussite"]?.let { safeDate(it) } ?: ""
+        
             dbHelper.setDatesObjectifs(type, dReduction, dArret, dReussite)
 
             Log.d(TAG, "Dates sauvegardées pour $type : R=$dReduction A=$dArret S=$dReussite")
@@ -531,6 +531,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
