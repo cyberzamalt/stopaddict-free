@@ -173,7 +173,7 @@ class StatsFragment : Fragment() {
     Log.e(TAG, "Erreur chargement Stats", e)
 
     // Texte localisé via StatsLangues
-    val messageErreur = StatsLangues.getTexte("erreur_chargement", codeLangue)
+    val messageErreur = StatsLangues.getTexte("erreur_chargement", getCodeLangueStats())
     Toast.makeText(requireContext(), messageErreur, Toast.LENGTH_SHORT).show()
 }
 
@@ -493,7 +493,8 @@ private fun configureBarChart(chart: BarChart) {
                         if (limiteEntries.isNotEmpty()) {
 
                             // Récupère le texte localisé pour "Limite"
-                            val libelleLimite = StatsLangues.getTexte("label_limite", codeLangue)
+                            val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats()
+                                                                     )
                         
                             val limiteDataSet = LineDataSet(
                                 limiteEntries,
@@ -1392,6 +1393,7 @@ private fun calculerEconomiesParCategorie(
         }
     }
         // Renvoie le code langue au format attendu par StatsLangues (FR, EN, ES, ...)
+        
     private fun getCodeLangueStats(): String {
         val langueSysteme = java.util.Locale.getDefault().language.lowercase()
 
