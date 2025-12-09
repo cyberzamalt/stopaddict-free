@@ -1191,7 +1191,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         val json = JSONObject(jsonString)
 
         // 1) Réinitialiser proprement la base pour éviter les mélanges
-        dbHelper.razUsine(requireContext())
+        dbHelper.razUsine()
 
         // 2) Restaurer les préférences / profil
         val prenom = json.optString("prenom", "")
@@ -1345,18 +1345,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
         Log.d(TAG, "Import JSON complet (profil + données) terminé")
 
-        // Recharger les écrans à partir des nouvelles données
-        loadData()
-        loadCouts()
-        loadHabitudes()
-        loadDates()
-
-        Toast.makeText(
-            requireContext(),
-            "Import terminé avec succès",
-            Toast.LENGTH_LONG
-        ).show()
-
     } catch (e: Exception) {
         Log.e(TAG, "Erreur lors de l'import JSON: ${e.message}", e)
         Toast.makeText(
@@ -1366,7 +1354,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         ).show()
     }
 }
-
     private fun loadData() {
         try {
             // Charger personnalisation
