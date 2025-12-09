@@ -143,35 +143,39 @@ class HabitudesFragment : Fragment() {
 
         // Nouveau : bouton Effacer
         btnEffacerHabitudes.setOnClickListener {
-            try {
-                // 1) Vider les champs "Max par jour"
-                inputMaxCigarettes.setText("")
-                inputMaxJoints.setText("")
-                inputMaxAlcoolGlobal.setText("")
-                inputMaxBieres.setText("")
-                inputMaxLiqueurs.setText("")
-                inputMaxAlcoolFort.setText("")
+    try {
+        // 1) Vider les champs "Max par jour"
+        inputMaxCigarettes.setText("")
+        inputMaxJoints.setText("")
+        inputMaxAlcoolGlobal.setText("")
+        inputMaxBieres.setText("")
+        inputMaxLiqueurs.setText("")
+        inputMaxAlcoolFort.setText("")
 
-                // 2) Remettre les boutons de dates sur le texte par défaut
-                val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
-                btnDatesMap.forEach { (_, datesButtons) ->
-                    datesButtons.values.forEach { button ->
-                        button.text = placeholder
-                    }
-                }
-
-                // 3) Sauvegarder en base (0 partout + dates vides)
-                saveHabitudesAndDates()
-            } catch (e: Exception) {
-                Log.e(TAG, "Erreur lors de la RAZ habitudes/dates: ${e.message}", e)
-                Toast.makeText(
-                    requireContext(),
-                    "Erreur lors de la réinitialisation",
-                    Toast.LENGTH_SHORT
-                ).show()
+        // 2) Remettre les boutons de dates sur le texte par défaut
+        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+        btnDatesMap.forEach { (_, datesButtons) ->
+            datesButtons.values.forEach { button ->
+                button.text = placeholder
             }
         }
+
+        // 3) NE PAS sauvegarder ici !
+        Toast.makeText(
+            requireContext(),
+            "Champs réinitialisés — Cliquez sur Sauvegarder pour appliquer",
+            Toast.LENGTH_LONG
+        ).show()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur lors de la RAZ habitudes/dates: ${e.message}", e)
+        Toast.makeText(
+            requireContext(),
+            "Erreur lors de la réinitialisation",
+            Toast.LENGTH_SHORT
+        ).show()
     }
+}
         
     private fun loadExistingData() {
         try {
@@ -429,59 +433,68 @@ class HabitudesFragment : Fragment() {
             else -> type
         }
     }
-
+    
     private fun saveHabitudesAndDates() {
-        try {
-            val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
-            
-            // Sauvegarder habitudes
-            val maxCig = inputMaxCigarettes.text.toString().toIntOrNull() ?: 0
-            val maxJoints = inputMaxJoints.text.toString().toIntOrNull() ?: 0
-            val maxAlcoolGlobal = inputMaxAlcoolGlobal.text.toString().toIntOrNull() ?: 0
-            val maxBieres = inputMaxBieres.text.toString().toIntOrNull() ?: 0
-            val maxLiqueurs = inputMaxLiqueurs.text.toString().toIntOrNull() ?: 0
-            val maxAlcoolFort = inputMaxAlcoolFort.text.toString().toIntOrNull() ?: 0
-            
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_CIGARETTE, maxCig)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_JOINT, maxJoints)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL, maxAlcoolGlobal)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_BIERE, maxBieres)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, maxLiqueurs)
-            dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, maxAlcoolFort)
-            
-            Log.d(TAG, "Habitudes sauvegardées: Cig=$maxCig, Joints=$maxJoints, Alcool=$maxAlcoolGlobal, Bières=$maxBieres, Liqueurs=$maxLiqueurs, AlcoolFort=$maxAlcoolFort")
-            
-            // Sauvegarder dates pour chaque catégorie
-            btnDatesMap.forEach { (type, dates) ->
-                val dateReduction = dates["reduction"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
-                val dateArret = dates["arret"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
-                val dateReussite = dates["reussite"]?.text?.toString()?.takeIf { it != trad["btn_selectionner_date"] ?: "Sélectionner une date" } ?: ""
-                
-                dbHelper.setDatesObjectifs(type, dateReduction, dateArret, dateReussite)
-                
-                Log.d(TAG, "Dates sauvegardées pour $type: Réduction=$dateReduction, Arrêt=$dateArret, Réussite=$dateReussite")
-            }
-            
-            Toast.makeText(
-                requireContext(),
-                trad["msg_sauvegarde_ok"] ?: "Habitudes et dates sauvegardées",
-                Toast.LENGTH_SHORT
-            ).show()
-            
-            updateBandeau()
-            
-            // Notifier MainActivity pour refresh autres fragments
-            activity?.let {
-                if (it is MainActivity) {
-                    it.refreshData()
-                }
-            }
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur sauvegarde: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+    try {
+        val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
+        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+
+        // -----------------------------
+        // 1) Sauvegarde des habitudes
+        // -----------------------------
+        fun safeInt(input: EditText): Int {
+            val v = input.text.toString().trim()
+            return v.toIntOrNull() ?: 0
         }
+
+        val maxCig = safeInt(inputMaxCigarettes)
+        val maxJoints = safeInt(inputMaxJoints)
+        val maxAlcoolGlobal = safeInt(inputMaxAlcoolGlobal)
+        val maxBieres = safeInt(inputMaxBieres)
+        val maxLiqueurs = safeInt(inputMaxLiqueurs)
+        val maxAlcoolFort = safeInt(inputMaxAlcoolFort)
+
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_CIGARETTE, maxCig)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_JOINT, maxJoints)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL, maxAlcoolGlobal)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_BIERE, maxBieres)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, maxLiqueurs)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, maxAlcoolFort)
+
+        // -----------------------------
+        // 2) Sauvegarde des dates
+        // -----------------------------
+        fun safeDate(btn: Button): String? {
+            val t = btn.text.toString().trim()
+            return if (t.isNotEmpty() && t != placeholder) t else null
+        }
+
+        btnDatesMap.forEach { (type, datesButtons) ->
+            val dReduction = datesButtons["reduction"]?.let { safeDate(it) }
+            val dArret = datesButtons["arret"]?.let { safeDate(it) }
+            val dReussite = datesButtons["reussite"]?.let { safeDate(it) }
+
+            dbHelper.setDatesObjectifs(type, dReduction, dArret, dReussite)
+
+            Log.d(TAG, "Dates sauvegardées pour $type : R=$dReduction A=$dArret S=$dReussite")
+        }
+
+        Toast.makeText(
+            requireContext(),
+            trad["msg_sauvegarde_ok"] ?: "Habitudes et dates sauvegardées",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        updateBandeau()
+
+        // Notifier MainActivity pour refresh
+        (activity as? MainActivity)?.refreshData()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur sauvegarde: ${e.message}", e)
+        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
+}
 
     fun refreshData() {
         try {
@@ -517,6 +530,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
