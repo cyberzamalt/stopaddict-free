@@ -65,7 +65,8 @@ object HabitudesLangues {
         // Boutons
         "btn_sauvegarder" to "Sauvegarder",
         "btn_selectionner_date" to "Sélectionner une date",
-        
+        "btn_effacer" to "Effacer",
+
         // Messages
         "msg_sauvegarde_ok" to "Habitudes et dates sauvegardées"
     )
@@ -101,6 +102,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Save",
         "btn_selectionner_date" to "Select a date",
+        "btn_effacer" to "Clear",
         
         "msg_sauvegarde_ok" to "Habits and dates saved"
     )
@@ -136,6 +138,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Guardar",
         "btn_selectionner_date" to "Seleccionar una fecha",
+        "btn_effacer" to "Borrar",
         
         "msg_sauvegarde_ok" to "Hábitos y fechas guardados"
     )
@@ -171,6 +174,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Salvar",
         "btn_selectionner_date" to "Selecionar uma data",
+        "btn_effacer" to "Apagar",
         
         "msg_sauvegarde_ok" to "Hábitos e datas salvos"
     )
@@ -206,6 +210,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Speichern",
         "btn_selectionner_date" to "Ein Datum auswählen",
+        "btn_effacer" to "Löschen",
         
         "msg_sauvegarde_ok" to "Gewohnheiten und Daten gespeichert"
     )
@@ -241,6 +246,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Salva",
         "btn_selectionner_date" to "Seleziona una data",
+        "btn_effacer" to "Cancella",
         
         "msg_sauvegarde_ok" to "Abitudini e date salvate"
     )
@@ -276,6 +282,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "Сохранить",
         "btn_selectionner_date" to "Выбрать дату",
+        "btn_effacer" to "Очистить",
         
         "msg_sauvegarde_ok" to "Привычки и даты сохранены"
     )
@@ -311,6 +318,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "حفظ",
         "btn_selectionner_date" to "اختر تاريخًا",
+        "btn_effacer" to "حذف",
         
         "msg_sauvegarde_ok" to "تم حفظ العادات والتواريخ"
     )
@@ -346,6 +354,7 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "सहेजें",
         "btn_selectionner_date" to "एक तिथि चुनें",
+        "btn_effacer" to "हटाएँ",
         
         "msg_sauvegarde_ok" to "आदतें और तिथियां सहेजी गईं"
     )
@@ -381,7 +390,9 @@ object HabitudesLangues {
         
         "btn_sauvegarder" to "保存",
         "btn_selectionner_date" to "日付を選択",
+        "btn_effacer" to "消去",
         
         "msg_sauvegarde_ok" to "習慣と日付が保存されました"
     )
 }
+
