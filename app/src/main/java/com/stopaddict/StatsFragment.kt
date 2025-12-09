@@ -1302,10 +1302,9 @@ private fun calculerEconomiesParCategorie(
                 }
             }
 
-            // Jour : on réutilise un dispatch en 4 points, puis on somme
-            val jourDispatch = getConsommationsJourDispatch()
-            val coutsJour = calculerCouts(jourDispatch).sum()
-            val ecoJour = calculerEconomies(jourDispatch).sum()
+            // Jour : calcul direct sur le total du jour (sans découper en 4 tranches)
+            val coutsJour = calculerCoutsJour(consosJour)
+            val ecoJour = calculerEconomiesJour(consosJour)
 
             val coutsSemaine = calculerCouts(consosSemaine).sum()
             val ecoSemaine = calculerEconomies(consosSemaine).sum()
@@ -1332,6 +1331,53 @@ private fun calculerEconomiesParCategorie(
         }
     }
 
+        // Coûts réels du JOUR (sans découpage artificiel en 4 tranches)
+    private fun calculerCoutsJour(consosJour: Map<String, Int>): Double {
+        return try {
+            var total = 0.0
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val nbUnites = consosJour[type] ?: 0
+                    if (nbUnites > 0) {
+                        val coutsType = dbHelper.getCouts(type)
+                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                        total += prixUnitaire * nbUnites
+                    }
+                }
+            }
+            total
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur calculerCoutsJour: ${e.message}")
+            0.0
+        }
+    }
+
+    // Économies réelles du JOUR = (max_journalier - conso du jour) * prix_unitaire (si tu es en dessous)
+    private fun calculerEconomiesJour(consosJour: Map<String, Int>): Double {
+        return try {
+            var totalEco = 0.0
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val nbUnites = consosJour[type] ?: 0
+                    val maxHabitude = dbHelper.getMaxJournalier(type)
+                    if (maxHabitude > 0 && nbUnites < maxHabitude) {
+                        val diff = maxHabitude - nbUnites
+                        val coutsType = dbHelper.getCouts(type)
+                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                        if (prixUnitaire > 0.0) {
+                            totalEco += prixUnitaire * diff
+                        }
+                    }
+                }
+            }
+            totalEco
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur calculerEconomiesJour: ${e.message}")
+            0.0
+        }
+    }
+
+    
     private fun updateProfilStatus() {
         try {
             val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
