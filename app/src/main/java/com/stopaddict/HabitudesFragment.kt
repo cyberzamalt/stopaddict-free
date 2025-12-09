@@ -274,39 +274,39 @@ class HabitudesFragment : Fragment() {
             containerCategorie.addView(titreCategorie)
             
             // Charger dates existantes
-            val dates = dbHelper.getDatesObjectifs(type)
+                val dates = dbHelper.getDatesObjectifs(type)
+                
+                // Initialiser map pour cette catégorie
+                btnDatesMap[type] = mutableMapOf()
+                
+                // Date Réduction
+                val btnDateReduction = createDateButton(
+                    trad["label_date_reduction"] ?: "Date de réduction",
+                    dates["date_reduction"] ?: "",
+                    type,
+                    "reduction"
+                )
+                containerCategorie.addView(btnDateReduction)
+                
+                // Date Arrêt
+                val btnDateArret = createDateButton(
+                    trad["label_date_arret"] ?: "Date d'arrêt",
+                    dates["date_arret"] ?: "",
+                    type,
+                    "arret"
+                )
+                containerCategorie.addView(btnDateArret)
+                
+                // Date Réussite
+                val btnDateReussite = createDateButton(
+                    trad["label_date_reussite"] ?: "Date de réussite",
+                    dates["date_reussite"] ?: "",
+                    type,
+                    "reussite"
+                )
+                containerCategorie.addView(btnDateReussite)
             
-            // Initialiser map pour cette catégorie
-            btnDatesMap[type] = mutableMapOf()
-            
-            // Date Réduction
-            val btnDateReduction = createDateButton(
-                trad["label_date_reduction"] ?: "Date de réduction",
-                dates["reduction"] ?: "",
-                type,
-                "reduction"
-            )
-            containerCategorie.addView(btnDateReduction)
-            
-            // Date Arrêt
-            val btnDateArret = createDateButton(
-                trad["label_date_arret"] ?: "Date d'arrêt",
-                dates["arret"] ?: "",
-                type,
-                "arret"
-            )
-            containerCategorie.addView(btnDateArret)
-            
-            // Date Réussite
-            val btnDateReussite = createDateButton(
-                trad["label_date_reussite"] ?: "Date de réussite",
-                dates["reussite"] ?: "",
-                type,
-                "reussite"
-            )
-            containerCategorie.addView(btnDateReussite)
-            
-            containerVolonte.addView(containerCategorie)
+                containerVolonte.addView(containerCategorie)
             
         } catch (e: Exception) {
             Log.e(TAG, "Erreur construction catégorie volonté $type: ${e.message}", e)
@@ -485,4 +485,5 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
