@@ -453,13 +453,7 @@ private fun configureBarChart(chart: BarChart) {
         try {
             val dataSets = mutableListOf<LineDataSet>()
     
-            val donnees = if (periodeActive == PERIODE_JOUR) {
-                // Jour : 4 tranches horaires (00-07, 07-14, 14-21, 21-00)
-                getConsommationsJourDispatch()
-            } else {
-                // Semaine / Mois / Année : données “classiques”
-                getDonneesPourCouts()
-            }
+                        val donnees = getDonneesPourConsommation()
 
             categoriesActives.forEach { (type, active) ->
                 if (active) {
@@ -582,6 +576,83 @@ private fun configureBarChart(chart: BarChart) {
     return result
 }
 
+        /**
+     * Agrège une liste de valeurs en un nombre fixe de "buckets"
+     * Exemple : 30 jours -> 7 points, 365 jours -> 12 points
+     */
+    private fun aggregateToFixedBuckets(values: List<Int>, targetSize: Int): List<Int> {
+        if (values.isEmpty() || targetSize <= 0) return emptyList()
+
+        val size = values.size
+        val result = MutableList(targetSize) { 0 }
+
+        values.forEachIndexed { index, v ->
+            val bucketIndex = (index * targetSize) / size
+            val safeIndex = bucketIndex.coerceIn(0, targetSize - 1)
+            result[safeIndex] += v
+        }
+
+        return result
+    }
+
+    /**
+     * Données spécifiques pour le graphique CONSOMMATION
+     * - JOUR   : 4 tranches horaires (inchangé)
+     * - SEMAINE: 7 points (1 par jour, inchangé)
+     * - MOIS   : 7 points (1, 6, 11, 16, 21, 26, fin du mois)
+     * - ANNEE  : 12 points (1 par mois)
+     */
+    private fun getDonneesPourConsommation(): Map<String, List<Int>> {
+        return try {
+            when (periodeActive) {
+                PERIODE_JOUR -> {
+                    // On réutilise exactement la logique actuelle
+                    getConsommationsJourDispatch()
+                }
+
+                PERIODE_SEMAINE -> {
+                    val base = dbHelper.getConsommationsSemaine()
+                    val result = mutableMapOf<String, List<Int>>()
+                    base.forEach { (type, values) ->
+                        if (categoriesActives[type] == true) {
+                            result[type] = values
+                        }
+                    }
+                    result
+                }
+
+                PERIODE_MOIS -> {
+                    val base = dbHelper.getConsommationsMois()
+                    val result = mutableMapOf<String, List<Int>>()
+                    base.forEach { (type, values) ->
+                        if (categoriesActives[type] == true) {
+                            // 7 points pour coller aux labels 1 / 6 / 11 / 16 / 21 / 26 / fin du mois
+                            result[type] = aggregateToFixedBuckets(values, 7)
+                        }
+                    }
+                    result
+                }
+
+                PERIODE_ANNEE -> {
+                    val base = dbHelper.getConsommationsAnnee()
+                    val result = mutableMapOf<String, List<Int>>()
+                    base.forEach { (type, values) ->
+                        if (categoriesActives[type] == true) {
+                            // 12 points -> 1 par mois (Jan..Déc)
+                            result[type] = aggregateToFixedBuckets(values, 12)
+                        }
+                    }
+                    result
+                }
+
+                else -> emptyMap()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur getDonneesPourConsommation: ${e.message}")
+            emptyMap()
+        }
+    }
+    
 /**
  * Données “brutes” pour le graphique COUTS/ECONOMIES
  * - JOUR   : 1 point par catégorie (total du jour)
