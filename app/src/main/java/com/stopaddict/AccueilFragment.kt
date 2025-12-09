@@ -846,70 +846,75 @@ class AccueilFragment : Fragment() {
 }
 
     private fun calculerEconomiesJour(): Double {
-        var economies = 0.0
-        try {
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
+    var economies = 0.0
+    try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                val consommation = when (type) {
+                    DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
+                    DatabaseHelper.TYPE_JOINT -> jointsCount
+                    DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
+                    DatabaseHelper.TYPE_BIERE -> bieresCount
+                    DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
+                    DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
+                    else -> 0
+                }
+
+                // Calcul coût simplifié (prix_paquet / nb_cigarettes) * consommation
+                val prixUnitaire = if (couts["prix_paquet"] ?: 0.0 > 0 && couts["nb_cigarettes"] ?: 0.0 > 0) {
+                    (couts["prix_paquet"] ?: 0.0) / (couts["nb_cigarettes"] ?: 1.0)
+                } else {
+                    couts["prix_verre"] ?: 0.0
+                }
+
+                economies += prixUnitaire * consommation
+            }
+        }
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul économies jour: ${e.message}", e)
+    }
+    // On renvoie un Double arrondi à 2 décimales, sans passer par une String
+    val arrondi = Math.round(economies * 100.0) / 100.0
+    Log.d(TAG, "calculerEconomiesJour -> economies=$economies, arrondi=$arrondi")
+    return arrondi
+}
+
+    private fun calculerEconomiesReelles(): Double {
+    var economies = 0.0
+    try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val maxHabitude = dbHelper.getMaxJournalier(type)
+                val consommation = when (type) {
+                    DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
+                    DatabaseHelper.TYPE_JOINT -> jointsCount
+                    DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
+                    DatabaseHelper.TYPE_BIERE -> bieresCount
+                    DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
+                    DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
+                    else -> 0
+                }
+
+                if (maxHabitude > consommation) {
+                    val diff = maxHabitude - consommation
                     val couts = dbHelper.getCouts(type)
-                    val consommation = when (type) {
-                        DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
-                        DatabaseHelper.TYPE_JOINT -> jointsCount
-                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
-                        DatabaseHelper.TYPE_BIERE -> bieresCount
-                        DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
-                        DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
-                        else -> 0
-                    }
-                    
-                    // Calcul coût simplifié (prix_paquet / nb_cigarettes) * consommation
                     val prixUnitaire = if (couts["prix_paquet"] ?: 0.0 > 0 && couts["nb_cigarettes"] ?: 0.0 > 0) {
                         (couts["prix_paquet"] ?: 0.0) / (couts["nb_cigarettes"] ?: 1.0)
                     } else {
                         couts["prix_verre"] ?: 0.0
                     }
-                    
-                    economies += prixUnitaire * consommation
+                    economies += prixUnitaire * diff
                 }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul économies jour: ${e.message}")
         }
-        return String.format("%.2f", economies).toDouble()
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul économies réelles: ${e.message}", e)
     }
-
-    private fun calculerEconomiesReelles(): Double {
-        var economies = 0.0
-        try {
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    val consommation = when (type) {
-                        DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
-                        DatabaseHelper.TYPE_JOINT -> jointsCount
-                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
-                        DatabaseHelper.TYPE_BIERE -> bieresCount
-                        DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
-                        DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
-                        else -> 0
-                    }
-                    
-                    if (maxHabitude > consommation) {
-                        val diff = maxHabitude - consommation
-                        val couts = dbHelper.getCouts(type)
-                        val prixUnitaire = if (couts["prix_paquet"] ?: 0.0 > 0 && couts["nb_cigarettes"] ?: 0.0 > 0) {
-                            (couts["prix_paquet"] ?: 0.0) / (couts["nb_cigarettes"] ?: 1.0)
-                        } else {
-                            couts["prix_verre"] ?: 0.0
-                        }
-                        economies += prixUnitaire * diff
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul économies réelles: ${e.message}")
-        }
-        return String.format("%.2f", economies).toDouble()
-    }
+    val arrondi = Math.round(economies * 100.0) / 100.0
+    Log.d(TAG, "calculerEconomiesReelles -> economies=$economies, arrondi=$arrondi")
+    return arrondi
+}
 
     private fun comparerHabitudes(): String {
     return try {
