@@ -944,65 +944,71 @@ class AccueilFragment : Fragment() {
         trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
     }
 }
-    private fun genererConseilDate(): String {
-    return try {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = Date()
+        private fun genererConseilDate(): String {
+        return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val today = Date()
 
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val dates = dbHelper.getDatesObjectifs(type)
 
-                // Vérifier date arrêt
-                dates["arret"]?.let { dateStr ->
-                    if (dateStr.isNotEmpty()) {
-                        val dateArret = dateFormat.parse(dateStr)
-                        if (dateArret != null) {
-                            val diffDays = ((dateArret.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
-                            return when {
-                                diffDays > 0 -> {
-                                    val pattern = trad["date_jours_restants"]
-                                    if (pattern != null) {
-                                        String.format(pattern, diffDays)
-                                    } else {
-                                        "Plus que $diffDays jours avant votre date d'arrêt!"
+                    // Vérifier date d'arrêt (clé alignée avec DatabaseHelper : date_arret)
+                    dates["date_arret"]?.let { dateStr ->
+                        if (dateStr.isNotEmpty()) {
+                            val dateArret = dateFormat.parse(dateStr)
+                            if (dateArret != null) {
+                                val diffDays = ((dateArret.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+                                return when {
+                                    diffDays > 0 -> {
+                                        val pattern = trad["date_jours_restants"]
+                                        if (pattern != null) {
+                                            String.format(pattern, diffDays)
+                                        } else {
+                                            "Plus que $diffDays jours avant votre date d'arrêt !"
+                                        }
+                                    }
+                                    diffDays == 0 -> {
+                                        trad["date_aujourdhui"]
+                                            ?: "C'est aujourd'hui votre date d'arrêt, courage !"
+                                    }
+                                    else -> {
+                                        trad["date_depassee"]
+                                            ?: "Vous avez dépassé votre date d'arrêt, continuez !"
                                     }
                                 }
-                                diffDays == 0 -> trad["date_aujourdhui"]
-                                    ?: "C'est aujourd'hui votre date d'arrêt, courage!"
-                                else -> trad["date_depassee"]
-                                    ?: "Vous avez dépassé votre date d'arrêt, continuez!"
                             }
                         }
                     }
-                }
 
-                // Vérifier date réduction
-                dates["reduction"]?.let { dateStr ->
-                    if (dateStr.isNotEmpty()) {
-                        val dateReduction = dateFormat.parse(dateStr)
-                        if (dateReduction != null) {
-                            val diffDays = ((dateReduction.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
-                            if (diffDays >= 0) {
-                                val pattern = trad["date_reduction"]
-                                return if (pattern != null) {
-                                    String.format(pattern, diffDays)
-                                } else {
-                                    "Date de réduction: dans $diffDays jours!"
+                    // Vérifier date de réduction (clé alignée avec DatabaseHelper : date_reduction)
+                    dates["date_reduction"]?.let { dateStr ->
+                        if (dateStr.isNotEmpty()) {
+                            val dateReduction = dateFormat.parse(dateStr)
+                            if (dateReduction != null) {
+                                val diffDays = ((dateReduction.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+                                if (diffDays >= 0) {
+                                    val pattern = trad["date_reduction"]
+                                    return if (pattern != null) {
+                                        String.format(pattern, diffDays)
+                                    } else {
+                                        "Date de réduction : dans $diffDays jours !"
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
 
-        trad["date_rapproche"] ?: "Votre objectif se rapproche!"
-    } catch (e: Exception) {
-        Log.e(TAG, "Erreur génération conseil date: ${e.message}")
-        trad["date_rapproche"] ?: "Votre objectif se rapproche!"
+            // Si aucune date exploitable trouvée
+            trad["date_rapproche"] ?: "Votre objectif se rapproche !"
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur génération conseil date: ${e.message}")
+            trad["date_rapproche"] ?: "Votre objectif se rapproche !"
+        }
     }
-}
+
     override fun onResume() {
         super.onResume()
         try {
