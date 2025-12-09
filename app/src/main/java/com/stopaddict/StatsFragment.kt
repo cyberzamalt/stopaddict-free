@@ -733,6 +733,10 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 
                 PERIODE_MOIS -> {
                     // Labels fixes pour les jours du mois (1, 6, 11, ...)
+                    // avec dernier label adapté au nombre réel de jours (28/29/30/31)
+                    val calendar = Calendar.getInstance()
+                    val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                
                     when (value.toInt()) {
                         0 -> "1"
                         1 -> "6"
@@ -740,7 +744,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                         3 -> "16"
                         4 -> "21"
                         5 -> "26"
-                        6 -> "31"
+                        6 -> lastDay.toString()
                         else -> ""
                     }
                 }
