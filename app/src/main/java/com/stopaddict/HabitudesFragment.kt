@@ -174,6 +174,7 @@ class HabitudesFragment : Fragment() {
             "Erreur lors de la réinitialisation",
             Toast.LENGTH_SHORT
         ).show()
+        }
     }
 }
         
@@ -530,6 +531,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
