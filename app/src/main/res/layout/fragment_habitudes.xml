@@ -108,13 +108,6 @@
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Bouton Sauvegarder -->
-            <Button
-                android:id="@+id/habitudes_btn_sauvegarder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sauvegarder" />
-
         </LinearLayout>
 
         <!-- Zone Volonté (construite dynamiquement dans le code) -->
@@ -126,5 +119,31 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp" />
 
+                <!-- Boutons en bas de page -->
+        <LinearLayout
+            android:id="@+id/habitudes_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/habitudes_btn_effacer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Effacer" />
+
+            <Button
+                android:id="@+id/habitudes_btn_sauvegarder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sauvegarder" />
+        </LinearLayout>
+        
     </LinearLayout>
 </ScrollView>
