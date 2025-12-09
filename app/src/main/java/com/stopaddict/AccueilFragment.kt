@@ -806,30 +806,38 @@ class AccueilFragment : Fragment() {
             conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "continuez ainsi!"))
         }
         // Cas 15: Coûts + Habitudes + Dates
-        !hasPrenom && hasCouts && hasHabitudes && hasDates -> {
-            logger.d("genererConseil: cas 15 = coûts + habitudes + dates")
-            val economies = calculerEconomiesReelles()
-            val conseilDate = genererConseilDate()
-            logger.d("genererConseil: cas 15 -> économies=$economies, conseilDate=\"$conseilDate\"")
-            conseils.add(String.format(trad["economies_jour"] ?: "Vous économisez %.2f€ aujourd'hui!", economies) + " - " + conseilDate)
-            conseils.add(trad["conseil_generique_5"] ?: "Vous progressez sur tous les fronts!")
-        }
+!hasPrenom && hasCouts && hasHabitudes && hasDates -> {
+    logger.d("genererConseil: cas 15 = coûts + habitudes + dates")
+    val economies = calculerEconomiesReelles()
+    val conseilDate = genererConseilDate()
+    logger.d("genererConseil: cas 15 -> économies=$economies, conseilDate=\"$conseilDate\"")
+
+    conseils.add(
+        String.format(
+            trad["economies_reelles"] ?: "Économies réelles: %.2f€ vs vos habitudes!",
+            economies
+        ) + " - " + conseilDate
+    )
+    conseils.add(trad["conseil_generique_5"] ?: "Vous progressez sur tous les fronts!")
+}
+        
         // Cas 16: COMPLET (Prénom + Coûts + Habitudes + Dates)
-        hasPrenom && hasCouts && hasHabitudes && hasDates -> {
-            logger.d("genererConseil: cas 16 = COMPLET (prénom + coûts + habitudes + dates)")
-            val economies = calculerEconomiesReelles()
-            val conseilDate = genererConseilDate()
-            logger.d("genererConseil: cas 16 -> économies=$economies, conseilDate=\"$conseilDate\"")
-            conseils.add(
-                "$prenom, " +
-                    String.format(
-                        trad["economies_jour"] ?: "vous économisez %.2f€ aujourd'hui!",
-                        economies
-                    ) +
-                    " - " + conseilDate
-            )
-            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "profil complet, continuez ainsi!"))
-            conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "vous êtes un exemple de motivation!"))
+hasPrenom && hasCouts && hasHabitudes && hasDates -> {
+    logger.d("genererConseil: cas 16 = COMPLET (prénom + coûts + habitudes + dates)")
+    val economies = calculerEconomiesReelles()
+    val conseilDate = genererConseilDate()
+    logger.d("genererConseil: cas 16 -> économies=$economies, conseilDate=\"$conseilDate\"")
+
+    conseils.add(
+        "$prenom, " +
+            String.format(
+                trad["economies_reelles"] ?: "économies réelles: %.2f€ vs vos habitudes!",
+                economies
+            ) +
+            " - " + conseilDate
+    )
+    conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "profil complet, continuez ainsi!"))
+    conseils.add("$prenom, " + (trad["conseil_generique_6"] ?: "vous êtes un exemple de motivation!"))
         }
     }
 
