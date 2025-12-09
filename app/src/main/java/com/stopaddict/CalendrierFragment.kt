@@ -300,53 +300,77 @@ class CalendrierFragment : Fragment() {
             val dateFormatJour = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             
-            for (day in 1..daysInMonth) {
-                cal.set(Calendar.DAY_OF_MONTH, day)
-                val dateStr = dateFormatJour.format(cal.time)
-                
-                // Total consommations du jour
-                var totalDay = 0
-                categoriesActives.forEach { (type, active) ->
-                    if (active) {
-                        totalDay += dbHelper.getConsommationParDate(type, dateStr)
-                    }
+            // Pré-calcul des dates d'objectifs (réduction / arrêt / réussite) pour les catégories actives
+            val datesReduction = mutableSetOf<String>()
+            val datesArret = mutableSetOf<String>()
+            val datesReussite = mutableSetOf<String>()
+            
+            categoriesActives.forEach { (type, active) ->
+                if (active) {
+                    val dates = dbHelper.getDatesObjectifs(type)
+                    dates["date_reduction"]?.takeIf { it.isNotEmpty() }?.let { datesReduction.add(it) }
+                    dates["date_arret"]?.takeIf { it.isNotEmpty() }?.let { datesArret.add(it) }
+                    dates["date_reussite"]?.takeIf { it.isNotEmpty() }?.let { datesReussite.add(it) }
                 }
-                
-                val dayView = TextView(requireContext()).apply {
-            text = day.toString()
-            textSize = 16f
-            setPadding(8, 20, 8, 20)
-            gravity = android.view.Gravity.CENTER
-
-            // Couleurs SOBRES selon total
-            val bgColor = when {
-                totalDay == 0 -> Color.parseColor("#FFFFFF")         // aucune conso : fond neutre
-                totalDay in 1..5 -> Color.parseColor("#E3F2FD")      // bleu très pâle
-                totalDay in 6..15 -> Color.parseColor("#FFF3E0")     // orange très pâle
-                else -> Color.parseColor("#FFCDD2")                  // rouge pâle
-            }
-            setBackgroundColor(bgColor)
-
-            // Bordure pour aujourd'hui
-            if (dateStr == today) {
-                setBackgroundResource(android.R.drawable.editbox_background)
-                setTextColor(Color.parseColor("#1976D2"))
-                setTypeface(null, android.graphics.Typeface.BOLD)
-            }
-
-            setOnClickListener {
-                showDayDialog(dateStr)
-            }
-        }
-        val params = GridLayout.LayoutParams().apply {
-            width = 0
-            height = ViewGroup.LayoutParams.WRAP_CONTENT
-            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-        }
-    dayView.layoutParams = params
-            gridCalendrier.addView(dayView)
             }
             
+                for (day in 1..daysInMonth) {
+                    cal.set(Calendar.DAY_OF_MONTH, day)
+                    val dateStr = dateFormatJour.format(cal.time)
+                    
+                    // Total consommations du jour
+                    var totalDay = 0
+                    categoriesActives.forEach { (type, active) ->
+                        if (active) {
+                            totalDay += dbHelper.getConsommationParDate(type, dateStr)
+                        }
+                    }
+                
+                    // Marqueurs d'objectifs pour ce jour
+                    val isReduction = datesReduction.contains(dateStr)
+                    val isArret = datesArret.contains(dateStr)
+                    val isReussite = datesReussite.contains(dateStr)
+                
+                    // Texte du jour avec petits indicateurs
+                    var label = day.toString()
+                    if (isReduction) label += " R"
+                    if (isArret) label += " A"
+                    if (isReussite) label += " ✓"
+                
+                    val dayView = TextView(requireContext()).apply {
+                        text = label
+                        textSize = 16f
+                        setPadding(8, 20, 8, 20)
+                        gravity = android.view.Gravity.CENTER
+                
+                        // Couleurs SOBRES selon total
+                        val bgColor = when {
+                            totalDay == 0 -> Color.parseColor("#FFFFFF")         // aucune conso : fond neutre
+                            totalDay in 1..5 -> Color.parseColor("#E3F2FD")      // bleu très pâle
+                            totalDay in 6..15 -> Color.parseColor("#FFF3E0")     // orange très pâle
+                            else -> Color.parseColor("#FFCDD2")                  // rouge pâle
+                        }
+                        setBackgroundColor(bgColor)
+                
+                        // Bordure pour aujourd'hui
+                        if (dateStr == today) {
+                            setBackgroundResource(android.R.drawable.editbox_background)
+                            setTextColor(Color.parseColor("#1976D2"))
+                            setTypeface(null, android.graphics.Typeface.BOLD)
+                        }
+                
+                        setOnClickListener {
+                            showDayDialog(dateStr)
+                        }
+                    }
+                    val params = GridLayout.LayoutParams().apply {
+                        width = 0
+                        height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                    }
+                    dayView.layoutParams = params
+                    gridCalendrier.addView(dayView)
+                }            
         } catch (e: Exception) {
             Log.e(TAG, "Erreur update calendar", e)
         }
