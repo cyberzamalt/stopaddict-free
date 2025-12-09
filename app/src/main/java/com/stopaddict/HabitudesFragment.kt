@@ -29,13 +29,12 @@ class HabitudesFragment : Fragment() {
     private lateinit var inputMaxJoints: EditText
     private lateinit var inputMaxAlcoolGlobal: EditText
     private lateinit var inputMaxBieres: EditText
-    private lateinit var inputMaxLiqueurs: EditText
+    private lateinit var inputMaxLiqueurs: EditText    
     private lateinit var inputMaxAlcoolFort: EditText
     private lateinit var btnSauvegarderHabitudes: Button
-    
-    // Section Volonté (construite dynamiquement)
+    private lateinit var btnEffacerHabitudes: Button
     private lateinit var containerVolonte: LinearLayout
-    
+
     // Map des boutons dates par catégorie
     private val btnDatesMap = mutableMapOf<String, MutableMap<String, Button>>()
     
@@ -89,6 +88,7 @@ class HabitudesFragment : Fragment() {
             inputMaxLiqueurs = view.findViewById(R.id.habitudes_input_max_liqueurs)
             inputMaxAlcoolFort = view.findViewById(R.id.habitudes_input_max_alcool_fort)
             btnSauvegarderHabitudes = view.findViewById(R.id.habitudes_btn_sauvegarder)
+            btnEffacerHabitudes = view.findViewById(R.id.habitudes_btn_effacer)
             containerVolonte = view.findViewById(R.id.habitudes_container_volonte)
             
             Log.d(TAG, "Vues initialisées avec succès")
@@ -135,12 +135,44 @@ class HabitudesFragment : Fragment() {
         }
     }
 
-    private fun setupListeners() {
+        private fun setupListeners() {
+        // Bouton Sauvegarder : inchangé
         btnSauvegarderHabitudes.setOnClickListener {
             saveHabitudesAndDates()
         }
-    }
 
+        // Nouveau : bouton Effacer
+        btnEffacerHabitudes.setOnClickListener {
+            try {
+                // 1) Vider les champs "Max par jour"
+                inputMaxCigarettes.setText("")
+                inputMaxJoints.setText("")
+                inputMaxAlcoolGlobal.setText("")
+                inputMaxBieres.setText("")
+                inputMaxLiqueurs.setText("")
+                inputMaxAlcoolFort.setText("")
+
+                // 2) Remettre les boutons de dates sur le texte par défaut
+                val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+                btnDatesMap.forEach { (_, datesButtons) ->
+                    datesButtons.values.forEach { button ->
+                        button.text = placeholder
+                    }
+                }
+
+                // 3) Sauvegarder en base (0 partout + dates vides)
+                saveHabitudesAndDates()
+            } catch (e: Exception) {
+                Log.e(TAG, "Erreur lors de la RAZ habitudes/dates: ${e.message}", e)
+                Toast.makeText(
+                    requireContext(),
+                    "Erreur lors de la réinitialisation",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+        
     private fun loadExistingData() {
         try {
             // Charger habitudes
@@ -485,5 +517,6 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
