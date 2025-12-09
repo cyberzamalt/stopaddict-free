@@ -1187,17 +1187,185 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     private fun processImportJSON(jsonString: String) {
+    try {
         val json = JSONObject(jsonString)
-        
-        // Restaurer préférences
-        dbHelper.setPreference("prenom", json.optString("prenom", ""))
-        configLangue.setLangue(json.optString("langue", "FR"))
-        dbHelper.setPreference("devise", json.optString("devise", "EUR"))
-        dbHelper.setPreference("categories_actives", json.optString("categories_actives", "{}"))
-        
-        // TODO: Restaurer consommations, coûts, habitudes, dates
-        Log.d(TAG, "Import terminé")
+
+        // 1) Réinitialiser proprement la base pour éviter les mélanges
+        dbHelper.razUsine(requireContext())
+
+        // 2) Restaurer les préférences / profil
+        val prenom = json.optString("prenom", "")
+        dbHelper.setPreference("prenom", prenom)
+
+        val langue = json.optString("langue", "FR")
+        configLangue.setLangue(langue)
+
+        val devise = json.optString("devise", "EUR")
+        dbHelper.setPreference("devise", devise)
+
+        val categoriesActivesStr = json.optString("categories_actives", "{}")
+        dbHelper.setPreference("categories_actives", categoriesActivesStr)
+
+        // Mettre à jour la map locale des catégories actives
+        try {
+            val jsonCat = JSONObject(categoriesActivesStr)
+            categoriesActives[DatabaseHelper.TYPE_CIGARETTE] =
+                jsonCat.optBoolean("cigarette", true)
+            categoriesActives[DatabaseHelper.TYPE_JOINT] =
+                jsonCat.optBoolean("joint", true)
+            categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] =
+                jsonCat.optBoolean("alcool_global", true)
+            categoriesActives[DatabaseHelper.TYPE_BIERE] =
+                jsonCat.optBoolean("biere", false)
+            categoriesActives[DatabaseHelper.TYPE_LIQUEUR] =
+                jsonCat.optBoolean("liqueur", false)
+            categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] =
+                jsonCat.optBoolean("alcool_fort", false)
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur parse categories_actives à l'import: ${e.message}")
+        }
+
+        // 3) Restaurer les coûts par catégorie
+        val coutsObj = json.optJSONObject("couts")
+        if (coutsObj != null) {
+            val types = listOf(
+                DatabaseHelper.TYPE_CIGARETTE,
+                DatabaseHelper.TYPE_JOINT,
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+                DatabaseHelper.TYPE_BIERE,
+                DatabaseHelper.TYPE_LIQUEUR,
+                DatabaseHelper.TYPE_ALCOOL_FORT
+            )
+
+            types.forEach { type ->
+                val objType = coutsObj.optJSONObject(type)
+                if (objType != null) {
+                    val prixPaquet = objType.optDouble("prix_paquet", 0.0)
+                    val nbCigarettes = objType.optDouble("nb_cigarettes", 0.0)
+                    val prixFeuilles = objType.optDouble("prix_feuilles", 0.0)
+                    val nbFeuilles = objType.optDouble("nb_feuilles", 0.0)
+                    val prixFiltres = objType.optDouble("prix_filtres", 0.0)
+                    val nbFiltres = objType.optDouble("nb_filtres", 0.0)
+                    val prixTabacTube = objType.optDouble("prix_tabac_tube", 0.0)
+                    val prixTubes = objType.optDouble("prix_tubes", 0.0)
+                    val nbTubes = objType.optDouble("nb_tubes", 0.0)
+                    val prixGramme = objType.optDouble("prix_gramme", 0.0)
+                    val prixVerre = objType.optDouble("prix_verre", 0.0)
+
+                    dbHelper.setCouts(
+                        type,
+                        prixPaquet,
+                        nbCigarettes,
+                        prixFeuilles,
+                        nbFeuilles,
+                        prixFiltres,
+                        nbFiltres,
+                        prixTabacTube,
+                        prixTubes,
+                        nbTubes,
+                        prixGramme,
+                        prixVerre
+                    )
+                }
+            }
+        }
+
+        // 4) Restaurer les habitudes (max par jour)
+        val habitudesObj = json.optJSONObject("habitudes")
+        if (habitudesObj != null) {
+            val types = listOf(
+                DatabaseHelper.TYPE_CIGARETTE,
+                DatabaseHelper.TYPE_JOINT,
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+                DatabaseHelper.TYPE_BIERE,
+                DatabaseHelper.TYPE_LIQUEUR,
+                DatabaseHelper.TYPE_ALCOOL_FORT
+            )
+            types.forEach { type ->
+                val max = habitudesObj.optInt(type, 0)
+                dbHelper.setMaxJournalier(type, max)
+            }
+        }
+
+        // 5) Restaurer les dates d'objectifs
+        val datesObj = json.optJSONObject("dates")
+        if (datesObj != null) {
+            val types = listOf(
+                DatabaseHelper.TYPE_CIGARETTE,
+                DatabaseHelper.TYPE_JOINT,
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+                DatabaseHelper.TYPE_BIERE,
+                DatabaseHelper.TYPE_LIQUEUR,
+                DatabaseHelper.TYPE_ALCOOL_FORT
+            )
+            types.forEach { type ->
+                val objDate = datesObj.optJSONObject(type)
+                if (objDate != null) {
+                    val dateReduction =
+                        objDate.optString("date_reduction", objDate.optString("reduction", ""))
+                    val dateArret =
+                        objDate.optString("date_arret", objDate.optString("arret", ""))
+                    val dateReussite =
+                        objDate.optString("date_reussite", objDate.optString("reussite", ""))
+
+                    dbHelper.setDatesObjectifs(
+                        type,
+                        dateReduction,
+                        dateArret,
+                        dateReussite
+                    )
+                }
+            }
+        }
+
+        // 6) Restaurer les consommations
+        val consosObj = json.optJSONObject("consommations")
+        if (consosObj != null) {
+            val keys = consosObj.keys()
+            while (keys.hasNext()) {
+                val typeKey = keys.next()
+                val arr = consosObj.optJSONArray(typeKey) ?: continue
+                for (i in 0 until arr.length()) {
+                    val cObj = arr.optJSONObject(i) ?: continue
+                    val type = cObj.optString("type", typeKey)
+                    val quantite = cObj.optInt("quantite", 0)
+                    if (quantite <= 0) continue
+
+                    val dateHeure = cObj.optString("date_heure", "")
+                    val dateSpec = if (dateHeure.length >= 10) {
+                        dateHeure.substring(0, 10)
+                    } else {
+                        null
+                    }
+
+                    dbHelper.ajouterConsommation(type, quantite, dateSpec)
+                }
+            }
+        }
+
+        Log.d(TAG, "Import JSON complet (profil + données) terminé")
+
+        // Recharger les écrans à partir des nouvelles données
+        loadData()
+        loadCouts()
+        loadHabitudes()
+        loadDates()
+
+        Toast.makeText(
+            requireContext(),
+            "Import terminé avec succès",
+            Toast.LENGTH_LONG
+        ).show()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur lors de l'import JSON: ${e.message}", e)
+        Toast.makeText(
+            requireContext(),
+            "Erreur lors de l'import: ${e.message}",
+            Toast.LENGTH_LONG
+        ).show()
     }
+}
 
     private fun loadData() {
         try {
