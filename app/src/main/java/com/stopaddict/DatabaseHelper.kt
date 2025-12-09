@@ -381,24 +381,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     // ==================== DATES OBJECTIFS ====================
-
-    fun setDatesObjectifs(type: String, dateReduction: String, dateArret: String, dateReussite: String): Boolean {
-        return try {
-            val db = writableDatabase
-            val values = ContentValues().apply {
-                put(COL_DATE_REDUCTION, dateReduction.ifEmpty { null })
-                put(COL_DATE_ARRET, dateArret.ifEmpty { null })
-                put(COL_DATE_REUSSITE, dateReussite.ifEmpty { null })
+        
+        fun setDatesObjectifs(
+            type: String,
+            dateReduction: String?,
+            dateArret: String?,
+            dateReussite: String?
+        ): Boolean {
+            return try {
+                val db = writableDatabase
+                val values = ContentValues().apply {
+                    // Si la chaîne est vide ou nulle → on enregistre NULL en base
+                    put(COL_DATE_REDUCTION, dateReduction?.takeIf { it.isNotBlank() })
+                    put(COL_DATE_ARRET, dateArret?.takeIf { it.isNotBlank() })
+                    put(COL_DATE_REUSSITE, dateReussite?.takeIf { it.isNotBlank() })
+                }
+        
+                val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
+                Log.d(
+                    TAG,
+                    "Dates objectifs mises à jour pour $type : " +
+                            "reduction=$dateReduction, arret=$dateArret, reussite=$dateReussite ($result ligne(s))"
+                )
+                result > 0
+            } catch (e: Exception) {
+                Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
+                false
             }
-            
-            val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Dates objectifs mises à jour pour $type: $result ligne(s)")
-            result > 0
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
-            false
         }
-    }
 
     fun getDatesObjectifs(type: String): Map<String, String?> {
         return try {
