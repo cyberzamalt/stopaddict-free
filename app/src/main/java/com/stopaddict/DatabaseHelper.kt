@@ -795,9 +795,16 @@ fun setDatesObjectifs(
             for (i in 0 until consoArray.length()) {
                 val obj = consoArray.getJSONObject(i)
                 val values = ContentValues()
-                obj.keys().forEach { key ->
+                val keys = obj.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
                     if (key != COL_ID) {
-                        values.put(key, obj.optString(key, null))
+                        val v = obj.optString(key, null)
+                        if (v != null) {
+                            values.put(key, v)
+                        } else {
+                            values.putNull(key)
+                        }
                     }
                 }
                 db.insert(TABLE_CONSOMMATIONS, null, values)
@@ -825,44 +832,45 @@ fun setDatesObjectifs(
         }
 
         // 4) Importer les dates objectifs
-if (json.has("dates")) {
-    val datesArray = json.getJSONArray("dates")
-    for (i in 0 until datesArray.length()) {
-        val obj = datesArray.getJSONObject(i)
-        val type = obj.optString(COL_TYPE, null) ?: continue
+        if (json.has("dates")) {
+            val datesArray = json.getJSONArray("dates")
+            for (i in 0 until datesArray.length()) {
+                val obj = datesArray.getJSONObject(i)
+                val type = obj.optString(COL_TYPE, null) ?: continue
 
-        val values = ContentValues().apply {
-            if (obj.has(COL_DATE_REDUCTION)) {
-                val v = obj.optString(COL_DATE_REDUCTION, "")
-                if (v.isNotBlank()) {
-                    put(COL_DATE_REDUCTION, v)
-                } else {
-                    putNull(COL_DATE_REDUCTION)
+                val values = ContentValues().apply {
+                    if (obj.has(COL_DATE_REDUCTION)) {
+                        val v = obj.optString(COL_DATE_REDUCTION, "")
+                        if (v.isNotBlank()) {
+                            put(COL_DATE_REDUCTION, v)
+                        } else {
+                            putNull(COL_DATE_REDUCTION)
+                        }
+                    }
+                    if (obj.has(COL_DATE_ARRET)) {
+                        val v = obj.optString(COL_DATE_ARRET, "")
+                        if (v.isNotBlank()) {
+                            put(COL_DATE_ARRET, v)
+                        } else {
+                            putNull(COL_DATE_ARRET)
+                        }
+                    }
+                    if (obj.has(COL_DATE_REUSSITE)) {
+                        val v = obj.optString(COL_DATE_REUSSITE, "")
+                        if (v.isNotBlank()) {
+                            put(COL_DATE_REUSSITE, v)
+                        } else {
+                            putNull(COL_DATE_REUSSITE)
+                        }
+                    }
                 }
-            }
-            if (obj.has(COL_DATE_ARRET)) {
-                val v = obj.optString(COL_DATE_ARRET, "")
-                if (v.isNotBlank()) {
-                    put(COL_DATE_ARRET, v)
-                } else {
-                    putNull(COL_DATE_ARRET)
-                }
-            }
-            if (obj.has(COL_DATE_REUSSITE)) {
-                val v = obj.optString(COL_DATE_REUSSITE, "")
-                if (v.isNotBlank()) {
-                    put(COL_DATE_REUSSITE, v)
-                } else {
-                    putNull(COL_DATE_REUSSITE)
+
+                if (values.size() > 0) {
+                    db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
                 }
             }
         }
 
-        if (values.size() > 0) {
-            db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-        }
-    }
-}
         // 5) Importer les coûts
         if (json.has("couts")) {
             val coutsArray = json.getJSONArray("couts")
@@ -871,7 +879,9 @@ if (json.has("dates")) {
                 val type = obj.optString(COL_TYPE, null) ?: continue
 
                 val values = ContentValues()
-                obj.keys().forEach { key ->
+                val keys = obj.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
                     if (key != COL_ID && key != COL_TYPE) {
                         val raw = obj.optString(key, "0")
                         val num = raw.replace(',', '.').toDoubleOrNull()
@@ -887,33 +897,33 @@ if (json.has("dates")) {
             }
         }
 
-// 6) Importer les préférences (langue, monnaies, réglages divers)
-if (json.has("preferences")) {
-    val prefObj = json.getJSONObject("preferences")
-    val values = ContentValues()
+        // 6) Importer les préférences (langue, monnaies, réglages divers)
+        if (json.has("preferences")) {
+            val prefObj = json.getJSONObject("preferences")
+            val values = ContentValues()
+            val keys = prefObj.keys()
+            while (keys.hasNext()) {
+                val key = keys.next()
+                if (key != COL_ID) {
+                    val raw = if (prefObj.isNull(key)) {
+                        null
+                    } else {
+                        prefObj.optString(key, null)
+                    }
 
-    prefObj.keys().forEach { key ->
-        if (key != COL_ID) {
-            // Tout est exporté en String dans exportJSON, on restaure donc en String ou NULL
-            val raw: String? = if (prefObj.isNull(key)) {
-                null
-            } else {
-                // optString ne renvoie jamais null côté Java, mais on garde une sécu
-                prefObj.optString(key, null)
+                    if (raw != null) {
+                        values.put(key, raw)
+                    } else {
+                        values.putNull(key)
+                    }
+                }
             }
 
-            if (raw != null) {
-                values.put(key, raw)
-            } else {
-                values.putNull(key)
+            if (values.size() > 0) {
+                db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
             }
         }
-    }
 
-    if (values.size() > 0) {
-        db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
-    }
-}
         Log.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
         true
     } catch (e: Exception) {
@@ -921,7 +931,7 @@ if (json.has("preferences")) {
         false
     }
 }
-
+   
     // ==================== NETTOYAGE HISTORIQUE (5 ANS) ====================
 
     fun cleanOldData() {
