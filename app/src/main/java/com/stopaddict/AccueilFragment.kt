@@ -19,6 +19,9 @@ class AccueilFragment : Fragment() {
     private const val TAG = "AccueilFragment"
     private const val CONSEIL_UPDATE_INTERVAL = 15000L // 15 secondes en millisecondes
 
+    // Délai anti-spam pour la mise à jour des conseils après interaction utilisateur (10s)
+    private const val CONSEIL_ANTISPAM_DELAY = 10_000L
+
     // Préférences liées aux cigarettes (mêmes clés que StatsFragment / ReglagesFragment)
     private const val PREF_MODE_CIGARETTE = "mode_cigarette"
     private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
@@ -98,6 +101,10 @@ class AccueilFragment : Fragment() {
     // Handler pour rotation conseils
     private val conseilHandler = Handler(Looper.getMainLooper())
     private var conseilRunnable: Runnable? = null
+
+    // Anti-spam pour la mise à jour des conseils après interaction utilisateur
+    private var lastUserInteractionTime: Long = 0L
+    private var conseilAntispamRunnable: Runnable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -357,8 +364,9 @@ class AccueilFragment : Fragment() {
                     DatabaseHelper.TYPE_LIQUEUR -> liqueursCount++
                     DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount++
                 }
-                updateUI()
-                updateConseil()
+                            updateUI()
+            planifierMiseAJourConseilAntiSpam()
+            
                 Log.d(TAG, "Consommation ajoutée: $type")
             } else {
                 Log.e(TAG, "Échec ajout consommation: $type")
@@ -400,8 +408,9 @@ class AccueilFragment : Fragment() {
                     DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount--
                 }
                 updateUI()
-                updateConseil()
+                planifierMiseAJourConseilAntiSpam()
                 Log.d(TAG, "Consommation retirée: $type")
+
             } else {
                 Log.e(TAG, "Échec retrait consommation: $type")
             }
@@ -443,8 +452,9 @@ class AccueilFragment : Fragment() {
             }
 
             updateUI()
-            updateConseil()
+            planifierMiseAJourConseilAntiSpam()
             Log.d(TAG, "Catégorie $type basculée: $isActive")
+            
         } catch (e: Exception) {
             Log.e(TAG, "Erreur toggle catégorie $type: ${e.message}")
         }
@@ -606,6 +616,46 @@ class AccueilFragment : Fragment() {
     }
 }
 
+        /**
+     * Planifie une mise à jour des conseils après une pause de CONSEIL_ANTISPAM_DELAY
+     * si l'utilisateur n'a plus interagi (ajout/retrait/catégorie) pendant ce délai.
+     */
+    private fun planifierMiseAJourConseilAntiSpam() {
+        try {
+            // Annuler un éventuel ancien runnable anti-spam
+            conseilAntispamRunnable?.let {
+                logger.d("planifierMiseAJourConseilAntiSpam: ancien runnable anti-spam trouvé -> removeCallbacks")
+                conseilHandler.removeCallbacks(it)
+            }
+
+            // Mémoriser le moment de la dernière interaction utilisateur
+            lastUserInteractionTime = System.currentTimeMillis()
+
+            // Nouveau runnable qui vérifiera si le délai est bien écoulé avant de mettre à jour le conseil
+            conseilAntispamRunnable = Runnable {
+                try {
+                    val now = System.currentTimeMillis()
+                    val elapsed = now - lastUserInteractionTime
+                    logger.d("planifierMiseAJourConseilAntiSpam: runnable déclenché (elapsed=${elapsed} ms)")
+
+                    if (elapsed >= CONSEIL_ANTISPAM_DELAY) {
+                        logger.d("planifierMiseAJourConseilAntiSpam: délai atteint -> updateConseil()")
+                        updateConseil()
+                    } else {
+                        logger.d("planifierMiseAJourConseilAntiSpam: délai non atteint, aucune mise à jour du conseil")
+                    }
+                } catch (e: Exception) {
+                    logger.e("planifierMiseAJourConseilAntiSpam: erreur dans le runnable anti-spam", e)
+                }
+            }
+
+            logger.d("planifierMiseAJourConseilAntiSpam: programmation du runnable dans ${CONSEIL_ANTISPAM_DELAY} ms")
+            conseilHandler.postDelayed(conseilAntispamRunnable!!, CONSEIL_ANTISPAM_DELAY)
+        } catch (e: Exception) {
+            logger.e("planifierMiseAJourConseilAntiSpam: erreur lors de la planification anti-spam", e)
+        }
+    }
+    
     private fun updateConseil() {
         try {
             val prenom = dbHelper.getPreference("prenom", "")
@@ -1163,16 +1213,20 @@ hasPrenom && hasCouts && hasHabitudes && hasDates -> {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        try {
-            // Arrêter rotation conseils
-            conseilRunnable?.let { conseilHandler.removeCallbacks(it) }
-            conseilRunnable = null
-            Log.d(TAG, "Fragment détruit - rotation conseils arrêtée")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroyView: ${e.message}")
-        }
-    }
+            try {
+        // Arrêter rotation conseils
+        conseilRunnable?.let { conseilHandler.removeCallbacks(it) }
+        conseilRunnable = null
 
+        // Arrêter également le runnable anti-spam si présent
+        conseilAntispamRunnable?.let { conseilHandler.removeCallbacks(it) }
+        conseilAntispamRunnable = null
+
+        Log.d(TAG, "Fragment détruit - rotation conseils et anti-spam arrêtés")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur onDestroyView: ${e.message}")
+    }
+ }
     override fun onDestroy() {
         super.onDestroy()
         try {
