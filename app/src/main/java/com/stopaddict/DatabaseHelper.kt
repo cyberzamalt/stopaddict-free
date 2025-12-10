@@ -819,7 +819,8 @@ fun setDatesObjectifs(
             val habArray = json.getJSONArray("habitudes")
             for (i in 0 until habArray.length()) {
                 val obj = habArray.getJSONObject(i)
-                val type = obj.optString(COL_TYPE, null) ?: continue
+                val type = obj.optString(COL_TYPE, "")
+                if (type.isBlank()) continue
 
                 val values = ContentValues()
                 if (obj.has(COL_MAX_JOURNALIER)) {
@@ -839,7 +840,8 @@ fun setDatesObjectifs(
             val datesArray = json.getJSONArray("dates")
             for (i in 0 until datesArray.length()) {
                 val obj = datesArray.getJSONObject(i)
-                val type = obj.optString(COL_TYPE, null) ?: continue
+                val type = obj.optString(COL_TYPE, "")
+                if (type.isBlank()) continue
 
                 val values = ContentValues().apply {
                     if (obj.has(COL_DATE_REDUCTION)) {
@@ -879,7 +881,8 @@ fun setDatesObjectifs(
             val coutsArray = json.getJSONArray("couts")
             for (i in 0 until coutsArray.length()) {
                 val obj = coutsArray.getJSONObject(i)
-                val type = obj.optString(COL_TYPE, null) ?: continue
+                val type = obj.optString(COL_TYPE, "")
+                if (type.isBlank()) continue
 
                 val values = ContentValues()
                 val keys = obj.keys()
