@@ -450,7 +450,7 @@ class AccueilFragment : Fragment() {
         }
     }
 
-    private fun updateUI() {
+        private fun updateUI() {
         try {
             // Mise à jour compteurs
             txtCigarettes.text = cigarettesCount.toString()
@@ -479,31 +479,31 @@ class AccueilFragment : Fragment() {
 
             // Mise à jour profil complet/incomplet
             updateProfilStatus()
-                        
+
             Log.d(TAG, "UI mise à jour - Total: $totalJour")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour UI: ${e.message}")
         }
     }
 
-    private fun updateButtonsVisibility() {
+        private fun updateButtonsVisibility() {
         try {
             // Les catégories restent visibles mais les boutons sont actifs/inactifs selon état
             btnPlusCigarettes.isEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
             btnMoinsCigarettes.isEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
-            
+
             btnPlusJoints.isEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
             btnMoinsJoints.isEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
-            
+
             btnPlusAlcoolGlobal.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
             btnMoinsAlcoolGlobal.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
-            
+
             btnPlusBieres.isEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
             btnMoinsBieres.isEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
-            
+
             btnPlusLiqueurs.isEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
             btnMoinsLiqueurs.isEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
-            
+
             btnPlusAlcoolFort.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
             btnMoinsAlcoolFort.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
 
@@ -512,12 +512,13 @@ class AccueilFragment : Fragment() {
             Log.e(TAG, "Erreur mise à jour visibilité boutons: ${e.message}")
         }
     }
-
-    private fun updateProfilStatus() {
+        
+        private fun updateProfilStatus() {
         try {
-            // Vérifier si profil complet (coûts + habitudes + dates remplis)
+            // Vérifier si profil complet (prenom + coûts + habitudes + dates remplis)
             var isComplete = true
 
+            // Prénom obligatoire pour considérer le profil comme vraiment complet
             val prenom = dbHelper.getPreference("prenom", "")
             val hasPrenom = prenom.isNotEmpty()
             if (!hasPrenom) isComplete = false
@@ -559,15 +560,14 @@ class AccueilFragment : Fragment() {
             if (!hasDates) isComplete = false
 
             // Mise à jour texte avec traductions
-        val texteProfil = if (isComplete) {
-        trad["profil_complet"] ?: "Profil: Complet ✓"
-        } else {
-        trad["profil_incomplet"] ?: "Profil: Incomplet"
-        }
-        txtProfilComplet.text = texteProfil
+            val texteProfil = if (isComplete) {
+                trad["profil_complet"] ?: "Profil: Complet ✓"
+            } else {
+                trad["profil_incomplet"] ?: "Profil: Incomplet"
+            }
+            txtProfilComplet.text = texteProfil
 
-        Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
-
+            Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
         }
