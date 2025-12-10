@@ -16,9 +16,14 @@ import java.util.*
 class AccueilFragment : Fragment() {
 
     companion object {
-        private const val TAG = "AccueilFragment"
-        private const val CONSEIL_UPDATE_INTERVAL = 15000L // 15 secondes en millisecondes
-    }
+    private const val TAG = "AccueilFragment"
+    private const val CONSEIL_UPDATE_INTERVAL = 15000L // 15 secondes en millisecondes
+
+    // Préférences liées aux cigarettes (mêmes clés que StatsFragment / ReglagesFragment)
+    private const val PREF_MODE_CIGARETTE = "mode_cigarette"
+    private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
+    private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
+}
 
     // Database
     private lateinit var dbHelper: DatabaseHelper
@@ -474,7 +479,7 @@ class AccueilFragment : Fragment() {
 
             // Mise à jour profil complet/incomplet
             updateProfilStatus()
-
+                        
             Log.d(TAG, "UI mise à jour - Total: $totalJour")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur mise à jour UI: ${e.message}")
@@ -512,6 +517,10 @@ class AccueilFragment : Fragment() {
         try {
             // Vérifier si profil complet (coûts + habitudes + dates remplis)
             var isComplete = true
+
+            val prenom = dbHelper.getPreference("prenom", "")
+            val hasPrenom = prenom.isNotEmpty()
+            if (!hasPrenom) isComplete = false
 
             // Vérifier coûts (au moins une catégorie active avec coût > 0)
             var hasCouts = false
@@ -853,6 +862,117 @@ hasPrenom && hasCouts && hasHabitudes && hasDates -> {
     return conseilFinal
 }
 
+            /**
+     * Calcul du prix unitaire par type de consommation.
+     * Identique à StatsFragment pour garder la cohérence profonde.
+     */
+    private fun calculerPrixUnitaire(type: String, couts: Map<String, Double>): Double {
+        return try {
+            when (type) {
+                DatabaseHelper.TYPE_CIGARETTE -> {
+                    // On adapte le calcul en fonction du mode choisi dans les réglages
+                    val modeCig = dbHelper.getPreference(PREF_MODE_CIGARETTE, "classique")
+
+                    when (modeCig) {
+                        "rouler" -> {
+                            val prixTabac = couts["prix_tabac"] ?: 0.0
+                            val prixFeuilles = couts["prix_feuilles"] ?: 0.0
+                            val nbFeuilles = couts["nb_feuilles"] ?: 0.0
+                            val prixFiltres = couts["prix_filtres"] ?: 0.0
+                            val nbFiltres = couts["nb_filtres"] ?: 0.0
+
+                            // Nombre de cigarettes réellement fabriquées
+                            val nbCigRouleesStr =
+                                dbHelper.getPreference(PREF_NB_CIGARETTES_ROULEES, "0")
+                            val nbCigRoulees =
+                                nbCigRouleesStr.replace(",", ".").toDoubleOrNull() ?: 0.0
+
+                            val coutTotal = prixTabac + prixFeuilles + prixFiltres
+                            if (coutTotal > 0 && nbCigRoulees > 0) {
+                                coutTotal / nbCigRoulees
+                            } else {
+                                // Fallback : ancien calcul
+                                val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+                                val coutTabac =
+                                    if (prixTabac > 0 && nbCigarettes > 0) prixTabac / nbCigarettes else 0.0
+                                val coutFeuilles =
+                                    if (prixFeuilles > 0 && nbFeuilles > 0) prixFeuilles / nbFeuilles else 0.0
+                                val coutFiltres =
+                                    if (prixFiltres > 0 && nbFiltres > 0) prixFiltres / nbFiltres else 0.0
+
+                                val total = coutTabac + coutFeuilles + coutFiltres
+                                if (total > 0) total else 0.0
+                            }
+                        }
+
+                        "tuber" -> {
+                            val prixTabacTubes = couts["prix_tabac_tube"] ?: 0.0
+                            val prixTubes = couts["prix_tubes"] ?: 0.0
+                            val nbTubes = couts["nb_tubes"] ?: 0.0
+
+                            val nbCigTubeesStr =
+                                dbHelper.getPreference(PREF_NB_CIGARETTES_TUBEES, "0")
+                            val nbCigTubees =
+                                nbCigTubeesStr.replace(",", ".").toDoubleOrNull() ?: 0.0
+
+                            val coutTotal = prixTabacTubes + prixTubes
+                            if (coutTotal > 0 && nbCigTubees > 0) {
+                                coutTotal / nbCigTubees
+                            } else {
+                                // Fallback : ancien calcul
+                                val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+                                val coutTabac =
+                                    if (prixTabacTubes > 0 && nbCigarettes > 0) prixTabacTubes / nbCigarettes else 0.0
+                                val coutTubes =
+                                    if (prixTubes > 0 && nbTubes > 0) prixTubes / nbTubes else 0.0
+
+                                val total = coutTabac + coutTubes
+                                if (total > 0) total else 0.0
+                            }
+                        }
+
+                        else -> {
+                            // Mode "classique" (paquet standard)
+                            val prixPaquet = couts["prix_paquet"] ?: 0.0
+                            val nbCigarettes = couts["nb_cigarettes"] ?: 0.0
+                            if (prixPaquet > 0 && nbCigarettes > 0) prixPaquet / nbCigarettes else 0.0
+                        }
+                    }
+                }
+
+                DatabaseHelper.TYPE_JOINT -> {
+                    val prixGramme = couts["prix_gramme"] ?: 0.0
+                    val grammeParJointStr = dbHelper.getPreference("gramme_par_joint", "0")
+                    val grammeParJoint =
+                        grammeParJointStr.replace(",", ".").toDoubleOrNull() ?: 0.0
+
+                    val prixFeuillesJoint = couts["prix_feuilles"] ?: 0.0
+                    val nbFeuillesJoint = couts["nb_feuilles"] ?: 0.0
+                    val coutFeuilleParJoint =
+                        if (prixFeuillesJoint > 0 && nbFeuillesJoint > 0) prixFeuillesJoint / nbFeuillesJoint else 0.0
+
+                    if (prixGramme <= 0 || grammeParJoint <= 0) {
+                        0.0
+                    } else {
+                        (prixGramme * grammeParJoint) + coutFeuilleParJoint
+                    }
+                }
+
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+                DatabaseHelper.TYPE_BIERE,
+                DatabaseHelper.TYPE_LIQUEUR,
+                DatabaseHelper.TYPE_ALCOOL_FORT -> {
+                    couts["prix_verre"] ?: 0.0
+                }
+
+                else -> 0.0
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur calcul prix unitaire $type: ${e.message}")
+            0.0
+        }
+    }
+ 
     private fun calculerEconomiesJour(): Double {
     var economies = 0.0
     try {
@@ -869,14 +989,11 @@ hasPrenom && hasCouts && hasHabitudes && hasDates -> {
                     else -> 0
                 }
 
-                // Calcul coût simplifié (prix_paquet / nb_cigarettes) * consommation
-                val prixUnitaire = if (couts["prix_paquet"] ?: 0.0 > 0 && couts["nb_cigarettes"] ?: 0.0 > 0) {
-                    (couts["prix_paquet"] ?: 0.0) / (couts["nb_cigarettes"] ?: 1.0)
-                } else {
-                    couts["prix_verre"] ?: 0.0
+                                // Utilise la même logique que StatsFragment pour le prix unitaire
+                val prixUnitaire = calculerPrixUnitaire(type, couts)
+                if (prixUnitaire > 0.0 && consommation > 0) {
+                    economies += prixUnitaire * consommation
                 }
-
-                economies += prixUnitaire * consommation
             }
         }
     } catch (e: Exception) {
@@ -906,13 +1023,12 @@ hasPrenom && hasCouts && hasHabitudes && hasDates -> {
 
                 if (maxHabitude > consommation) {
                     val diff = maxHabitude - consommation
-                    val couts = dbHelper.getCouts(type)
-                    val prixUnitaire = if (couts["prix_paquet"] ?: 0.0 > 0 && couts["nb_cigarettes"] ?: 0.0 > 0) {
-                        (couts["prix_paquet"] ?: 0.0) / (couts["nb_cigarettes"] ?: 1.0)
-                    } else {
-                        couts["prix_verre"] ?: 0.0
+                                        val couts = dbHelper.getCouts(type)
+                    val prixUnitaire = calculerPrixUnitaire(type, couts)
+                    if (prixUnitaire > 0.0 && diff > 0) {
+                        economies += prixUnitaire * diff
                     }
-                    economies += prixUnitaire * diff
+
                 }
             }
         }
