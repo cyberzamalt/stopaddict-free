@@ -50,6 +50,7 @@ object StatsLangues {
         "label_limite" to "Limite",
         "label_couts" to "Coûts",
         "label_economies" to "Économies",
+        "label_depenses" to "Dépenses",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -156,6 +157,7 @@ object StatsLangues {
         "label_limite" to "Limit",
         "label_couts" to "Costs",
         "label_economies" to "Savings",
+        "label_depenses" to "Spending",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -262,6 +264,7 @@ object StatsLangues {
         "label_limite" to "Límite",
         "label_couts" to "Costos",
         "label_economies" to "Ahorros",
+        "label_depenses" to "Gastos",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -368,7 +371,8 @@ object StatsLangues {
         "label_limite" to "Limite",
         "label_couts" to "Custos",
         "label_economies" to "Economias",
-        
+        "label_depenses" to "Gastos",
+
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
         "axe_x_jour_1" to "07-14",
@@ -474,6 +478,7 @@ object StatsLangues {
         "label_limite" to "Grenze",
         "label_couts" to "Kosten",
         "label_economies" to "Ersparnisse",
+        "label_depenses" to "Ausgaben",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -580,6 +585,7 @@ object StatsLangues {
         "label_limite" to "Limite",
         "label_couts" to "Costi",
         "label_economies" to "Risparmi",
+        "label_depenses" to "Spese",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -686,6 +692,7 @@ object StatsLangues {
         "label_limite" to "Лимит",
         "label_couts" to "Расходы",
         "label_economies" to "Сбережения",
+        "label_depenses" to "Расходы",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -791,6 +798,7 @@ object StatsLangues {
         "label_limite" to "الحد",
         "label_couts" to "التكاليف",
         "label_economies" to "المدخرات",
+        "label_depenses" to "المصروفات",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -897,6 +905,7 @@ object StatsLangues {
         "label_limite" to "सीमा",
         "label_couts" to "लागत",
         "label_economies" to "बचत",
+        "label_depenses" to "खर्च",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
@@ -1003,6 +1012,7 @@ object StatsLangues {
         "label_limite" to "制限",
         "label_couts" to "費用",
         "label_economies" to "節約",
+        "label_depenses" to "支出",
         
         // Labels axes X (jour)
         "axe_x_jour_0" to "00-07",
