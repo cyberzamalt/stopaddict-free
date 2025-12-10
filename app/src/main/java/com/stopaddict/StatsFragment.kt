@@ -703,6 +703,15 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 }
 
     private fun getXAxisFormatter(): ValueFormatter {
+    // Pré-calcul du dernier jour du mois une seule fois
+    val lastDayOfMonth = try {
+        val calendar = Calendar.getInstance()
+        calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul lastDayOfMonth: ${e.message}")
+        31 // fallback raisonnable
+    }
+
     return object : ValueFormatter() {
         override fun getFormattedValue(value: Float): String {
             return when (periodeActive) {
@@ -732,11 +741,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                 }
 
                 PERIODE_MOIS -> {
-                    // Labels fixes pour les jours du mois (1, 6, 11, ...)
-                    // avec dernier label adapté au nombre réel de jours (28/29/30/31)
-                    val calendar = Calendar.getInstance()
-                    val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-                
+                    // On réutilise les mêmes labels, mais en utilisant lastDayOfMonth pré-calculé
                     when (value.toInt()) {
                         0 -> "1"
                         1 -> "6"
@@ -744,7 +749,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                         3 -> "16"
                         4 -> "21"
                         5 -> "26"
-                        6 -> lastDay.toString()
+                        6 -> lastDayOfMonth.toString()
                         else -> ""
                     }
                 }
