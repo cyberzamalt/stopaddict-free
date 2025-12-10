@@ -765,32 +765,119 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
     }
 
-    fun importJSON(jsonString: String): Boolean {
-        return try {
-            val json = JSONObject(jsonString)
-            val db = writableDatabase
+   fun importJSON(jsonString: String): Boolean {
+    return try {
+        val json = JSONObject(jsonString)
+        val db = writableDatabase
 
-            // Effacer données existantes
-            razUsine()
+        // 1) Réinitialiser les données (structure conservée)
+        razUsine()
 
-            // Importer consommations
+        // 2) Importer les consommations
+        if (json.has("consommations")) {
             val consoArray = json.getJSONArray("consommations")
             for (i in 0 until consoArray.length()) {
                 val obj = consoArray.getJSONObject(i)
                 val values = ContentValues()
                 obj.keys().forEach { key ->
-                    if (key != COL_ID) values.put(key, obj.getString(key))
+                    if (key != COL_ID) {
+                        values.put(key, obj.optString(key, null))
+                    }
                 }
                 db.insert(TABLE_CONSOMMATIONS, null, values)
             }
-
-            Log.d(TAG, "Import JSON réussi")
-            true
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur import JSON: ${e.message}")
-            false
         }
+
+        // 3) Importer les habitudes (max journaliers)
+        if (json.has("habitudes")) {
+            val habArray = json.getJSONArray("habitudes")
+            for (i in 0 until habArray.length()) {
+                val obj = habArray.getJSONObject(i)
+                val type = obj.optString(COL_TYPE, null) ?: continue
+
+                val values = ContentValues()
+                if (obj.has(COL_MAX_JOURNALIER)) {
+                    val maxStr = obj.optString(COL_MAX_JOURNALIER, "0")
+                    val max = maxStr.toIntOrNull() ?: 0
+                    values.put(COL_MAX_JOURNALIER, max)
+                }
+
+                if (values.size() > 0) {
+                    db.update(TABLE_HABITUDES, values, "$COL_TYPE = ?", arrayOf(type))
+                }
+            }
+        }
+
+        // 4) Importer les dates objectifs
+        if (json.has("dates")) {
+            val datesArray = json.getJSONArray("dates")
+            for (i in 0 until datesArray.length()) {
+                val obj = datesArray.getJSONObject(i)
+                val type = obj.optString(COL_TYPE, null) ?: continue
+
+                val values = ContentValues().apply {
+                    if (obj.has(COL_DATE_REDUCTION)) {
+                        put(COL_DATE_REDUCTION, obj.optString(COL_DATE_REDUCTION, null))
+                    }
+                    if (obj.has(COL_DATE_ARRET)) {
+                        put(COL_DATE_ARRET, obj.optString(COL_DATE_ARRET, null))
+                    }
+                    if (obj.has(COL_DATE_REUSSITE)) {
+                        put(COL_DATE_REUSSITE, obj.optString(COL_DATE_REUSSITE, null))
+                    }
+                }
+
+                if (values.size() > 0) {
+                    db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
+                }
+            }
+        }
+
+        // 5) Importer les coûts
+        if (json.has("couts")) {
+            val coutsArray = json.getJSONArray("couts")
+            for (i in 0 until coutsArray.length()) {
+                val obj = coutsArray.getJSONObject(i)
+                val type = obj.optString(COL_TYPE, null) ?: continue
+
+                val values = ContentValues()
+                obj.keys().forEach { key ->
+                    if (key != COL_ID && key != COL_TYPE) {
+                        val raw = obj.optString(key, "0")
+                        val num = raw.replace(',', '.').toDoubleOrNull()
+                        if (num != null) {
+                            values.put(key, num)
+                        }
+                    }
+                }
+
+                if (values.size() > 0) {
+                    db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
+                }
+            }
+        }
+
+        // 6) Importer les préférences (langue, monnaies, réglages divers)
+        if (json.has("preferences")) {
+            val prefObj = json.getJSONObject("preferences")
+            val values = ContentValues()
+            prefObj.keys().forEach { key ->
+                if (key != COL_ID) {
+                    values.put(key, prefObj.optString(key, null))
+                }
+            }
+            if (values.size() > 0) {
+                db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
+            }
+        }
+
+        Log.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
+        true
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur import JSON: ${e.message}")
+        false
     }
+}
 
     // ==================== NETTOYAGE HISTORIQUE (5 ANS) ====================
 
