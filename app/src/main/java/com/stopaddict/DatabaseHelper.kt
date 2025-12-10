@@ -796,17 +796,20 @@ fun setDatesObjectifs(
                 val obj = consoArray.getJSONObject(i)
                 val values = ContentValues()
                 val keys = obj.keys()
+
                 while (keys.hasNext()) {
                     val key = keys.next()
                     if (key != COL_ID) {
-                        val v = obj.optString(key, null)
-                        if (v != null) {
-                            values.put(key, v)
-                        } else {
+                        if (obj.isNull(key)) {
                             values.putNull(key)
+                        } else {
+                            // Pas de defaultValue = null → pas de problème de "Nothing?"
+                            val v = obj.optString(key)
+                            values.put(key, v)
                         }
                     }
                 }
+
                 db.insert(TABLE_CONSOMMATIONS, null, values)
             }
         }
@@ -902,19 +905,16 @@ fun setDatesObjectifs(
             val prefObj = json.getJSONObject("preferences")
             val values = ContentValues()
             val keys = prefObj.keys()
+
             while (keys.hasNext()) {
                 val key = keys.next()
                 if (key != COL_ID) {
-                    val raw = if (prefObj.isNull(key)) {
-                        null
-                    } else {
-                        prefObj.optString(key, null)
-                    }
-
-                    if (raw != null) {
-                        values.put(key, raw)
-                    } else {
+                    if (prefObj.isNull(key)) {
                         values.putNull(key)
+                    } else {
+                        // Ici aussi : pas de defaultValue = null
+                        val raw = prefObj.optString(key)
+                        values.put(key, raw)
                     }
                 }
             }
