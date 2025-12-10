@@ -381,34 +381,50 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     // ==================== DATES OBJECTIFS ====================
-        
-        fun setDatesObjectifs(
-            type: String,
-            dateReduction: String?,
-            dateArret: String?,
-            dateReussite: String?
-        ): Boolean {
-            return try {
-                val db = writableDatabase
-                val values = ContentValues().apply {
-                    // Si la chaîne est vide ou nulle → on enregistre NULL en base
-                    put(COL_DATE_REDUCTION, dateReduction?.takeIf { it.isNotBlank() })
-                    put(COL_DATE_ARRET, dateArret?.takeIf { it.isNotBlank() })
-                    put(COL_DATE_REUSSITE, dateReussite?.takeIf { it.isNotBlank() })
-                }
-        
-                val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-                Log.d(
-                    TAG,
-                    "Dates objectifs mises à jour pour $type : " +
-                            "reduction=$dateReduction, arret=$dateArret, reussite=$dateReussite ($result ligne(s))"
-                )
-                result > 0
-            } catch (e: Exception) {
-                Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
-                false
+
+fun setDatesObjectifs(
+    type: String,
+    dateReduction: String?,
+    dateArret: String?,
+    dateReussite: String?
+): Boolean {
+    return try {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            // Réduction
+            if (!dateReduction.isNullOrBlank()) {
+                put(COL_DATE_REDUCTION, dateReduction)
+            } else {
+                putNull(COL_DATE_REDUCTION)
+            }
+
+            // Arrêt
+            if (!dateArret.isNullOrBlank()) {
+                put(COL_DATE_ARRET, dateArret)
+            } else {
+                putNull(COL_DATE_ARRET)
+            }
+
+            // Réussite
+            if (!dateReussite.isNullOrBlank()) {
+                put(COL_DATE_REUSSITE, dateReussite)
+            } else {
+                putNull(COL_DATE_REUSSITE)
             }
         }
+
+        val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
+        Log.d(
+            TAG,
+            "Dates objectifs mises à jour pour $type : " +
+                    "reduction=$dateReduction, arret=$dateArret, reussite=$dateReussite ($result ligne(s))"
+        )
+        result > 0
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
+        false
+    }
+}
 
     fun getDatesObjectifs(type: String): Map<String, String?> {
         return try {
@@ -809,30 +825,44 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
 
         // 4) Importer les dates objectifs
-        if (json.has("dates")) {
-            val datesArray = json.getJSONArray("dates")
-            for (i in 0 until datesArray.length()) {
-                val obj = datesArray.getJSONObject(i)
-                val type = obj.optString(COL_TYPE, null) ?: continue
+if (json.has("dates")) {
+    val datesArray = json.getJSONArray("dates")
+    for (i in 0 until datesArray.length()) {
+        val obj = datesArray.getJSONObject(i)
+        val type = obj.optString(COL_TYPE, null) ?: continue
 
-                val values = ContentValues().apply {
-                    if (obj.has(COL_DATE_REDUCTION)) {
-                        put(COL_DATE_REDUCTION, obj.optString(COL_DATE_REDUCTION, null))
-                    }
-                    if (obj.has(COL_DATE_ARRET)) {
-                        put(COL_DATE_ARRET, obj.optString(COL_DATE_ARRET, null))
-                    }
-                    if (obj.has(COL_DATE_REUSSITE)) {
-                        put(COL_DATE_REUSSITE, obj.optString(COL_DATE_REUSSITE, null))
-                    }
+        val values = ContentValues().apply {
+            if (obj.has(COL_DATE_REDUCTION)) {
+                val v = obj.optString(COL_DATE_REDUCTION, "")
+                if (v.isNotBlank()) {
+                    put(COL_DATE_REDUCTION, v)
+                } else {
+                    putNull(COL_DATE_REDUCTION)
                 }
-
-                if (values.size() > 0) {
-                    db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
+            }
+            if (obj.has(COL_DATE_ARRET)) {
+                val v = obj.optString(COL_DATE_ARRET, "")
+                if (v.isNotBlank()) {
+                    put(COL_DATE_ARRET, v)
+                } else {
+                    putNull(COL_DATE_ARRET)
+                }
+            }
+            if (obj.has(COL_DATE_REUSSITE)) {
+                val v = obj.optString(COL_DATE_REUSSITE, "")
+                if (v.isNotBlank()) {
+                    put(COL_DATE_REUSSITE, v)
+                } else {
+                    putNull(COL_DATE_REUSSITE)
                 }
             }
         }
 
+        if (values.size() > 0) {
+            db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
+        }
+    }
+}
         // 5) Importer les coûts
         if (json.has("couts")) {
             val coutsArray = json.getJSONArray("couts")
@@ -857,20 +887,33 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             }
         }
 
-        // 6) Importer les préférences (langue, monnaies, réglages divers)
-        if (json.has("preferences")) {
-            val prefObj = json.getJSONObject("preferences")
-            val values = ContentValues()
-            prefObj.keys().forEach { key ->
-                if (key != COL_ID) {
-                    values.put(key, prefObj.optString(key, null))
-                }
+// 6) Importer les préférences (langue, monnaies, réglages divers)
+if (json.has("preferences")) {
+    val prefObj = json.getJSONObject("preferences")
+    val values = ContentValues()
+
+    prefObj.keys().forEach { key ->
+        if (key != COL_ID) {
+            // Tout est exporté en String dans exportJSON, on restaure donc en String ou NULL
+            val raw: String? = if (prefObj.isNull(key)) {
+                null
+            } else {
+                // optString ne renvoie jamais null côté Java, mais on garde une sécu
+                prefObj.optString(key, null)
             }
-            if (values.size() > 0) {
-                db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
+
+            if (raw != null) {
+                values.put(key, raw)
+            } else {
+                values.putNull(key)
             }
         }
+    }
 
+    if (values.size() > 0) {
+        db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
+    }
+}
         Log.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
         true
     } catch (e: Exception) {
