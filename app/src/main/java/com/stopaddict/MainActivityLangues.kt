@@ -441,27 +441,175 @@ object MainActivityLangues {
         "tab_habitudes" to "Hábitos y Voluntad",
         "tab_reglages" to "Ajustes",
         
-        "warning_title" to "⚠️ Advertencia - Solo adultos (18+)",
-        "warning_message" to "Stop Addict es una aplicación de automonitoreo y ayuda para reducir/detener el consumo (tabaco, alcohol, cannabis).\n\n" +
-                              "Reservada para personas de 18 años o más, que hayan alcanzado la mayoría de edad en su país de residencia o país visitado.\n\n" +
-                              "No promueve estos productos.\n\n" +
-                              "No reemplaza el apoyo médico, psicológico o social. En caso de dificultad, consulte a un profesional.\n\n" +
-                              "Use Stop Addict de manera responsable.",
-        "warning_resources_link" to "📞 Recursos y líneas de ayuda",
-        "warning_checkbox_age" to "☑️ Soy adulto, tengo 18 años o más",
-        "warning_checkbox_noshow" to "No mostrar este mensaje de nuevo",
-        "warning_btn_quit" to "Salir",
-        "warning_btn_accept" to "Acepto y continúo",
-        
-        "resources_title" to "📞 ¿Necesitas ayuda?",
-        "resources_content" to "📞 Recursos y líneas de ayuda\n\n" +
-                               "🚨 Emergencias: 112 (UE) / 911 (América)\n\n" +
-                               "🇪🇸 ESPAÑA\n" +
-                               "• Tabaquismo: 900 111 000\n" +
-                               "• Alcohol: 900 161 515\n" +
-                               "• Drogas: 900 16 15 15\n\n" +
-                               "🌍 Consulta los recursos locales en tu país.",
-        "resources_btn_close" to "Cerrar",
+            // Dialog avertissement majorité
+            "warning_title" to "⚠️ Advertencia – Solo para adultos",
+            "warning_message" to """
+                        ⚠️ AVISO LEGAL
+                        
+                        El uso de esta aplicación implica la lectura atenta del siguiente aviso.
+                        El usuario debe leer toda la información antes de utilizar la aplicación.
+                        
+                        1. VERIFICACIÓN DE MAYORÍA DE EDAD Y CUMPLIMIENTO DE LAS LEYES LOCALES
+                        El usuario debe confirmar que es mayor de edad según las leyes de su país de residencia y de cualquier país donde utilice la aplicación.
+                        Las edades legales para tabaco, cannabis y alcohol varían entre países.
+                        Ejemplo: una persona mayor de edad en España (18 años) puede considerarse menor según las leyes de alcohol en Estados Unidos.
+                        
+                        Es responsabilidad exclusiva del usuario verificar las leyes, restricciones y obligaciones del país o región respecto a:
+                        - el uso de la aplicación,
+                        - la posesión o consumo de cigarrillos,
+                        - el uso de cannabis según la normativa local,
+                        - el consumo de alcohol,
+                        - cualquier otra actividad regulada.
+                        
+                        La aplicación no debe interpretarse como una invitación, facilitación o recomendación al consumo de sustancias reguladas.
+                        
+                        2. AUSENCIA DE INCITACIÓN AL CONSUMO
+                        El uso de la aplicación no implica que el usuario sea fumador o consumidor de alcohol o cannabis.
+                        La aplicación no incentiva, no recomienda, no glorifica ni normaliza el consumo de tabaco, cannabis o alcohol.
+                        
+                        El único propósito de la aplicación es:
+                        - ayudar a contar, visualizar y analizar,
+                        - sensibilizar sobre hábitos, consumos y gastos,
+                        - apoyar la reducción o el abandono.
+                        
+                        El verdadero éxito es rechazar un cigarrillo, un porro o una bebida, o no empezar nunca.
+                        Si no fumas ni bebes, continúa protegiendo tu salud: tabaco, cannabis y alcohol son nocivos.
+                        
+                        3. RESPONSABILIDAD DEL USUARIO
+                        El uso de la aplicación es totalmente responsabilidad del usuario, o de sus tutores legales si es menor de edad.
+                        El desarrollador no es responsable de:
+                        - uso inadecuado,
+                        - desvíos del uso previsto,
+                        - interpretaciones erróneas,
+                        - incumplimiento de leyes locales,
+                        - decisiones basadas en los datos mostrados.
+                        
+                        La aplicación no puede utilizarse como prueba legal ni para atribuir responsabilidad civil o penal.
+                        
+                        4. PROTECCIÓN DE MENORES Y SUPERVISIÓN PARENTAL
+                        Aunque la aplicación no recoge datos personales, es esencial vigilar el uso digital de los menores.
+                        Padres y tutores deben supervisar:
+                        - salud y bienestar,
+                        - estado emocional,
+                        - comportamiento social,
+                        - uso de herramientas digitales.
+                        
+                        5. DATOS PERSONALES Y PRIVACIDAD
+                        No se requiere registro.
+                        No se recopilan, almacenan ni transmiten datos personales.
+                        Si se introduce un nombre, solo se utiliza dentro de la aplicación o en archivos exportados/importados en el propio dispositivo.
+                        
+                        El usuario debe:
+                        - proteger su teléfono,
+                        - mantener medidas de seguridad,
+                        - adoptar buenas prácticas de privacidad.
+                        
+                        6. PUBLICIDAD Y FINANCIACIÓN
+                        La versión gratuita contiene un banner publicitario que financia el desarrollo.
+                        La versión premium elimina los anuncios.
+                        
+                        Esta aplicación es el trabajo personal de un creador independiente.
+                        Los anuncios sirven exclusivamente para mantener y mejorar la aplicación.
+                        
+                        7. NEUTRALIDAD, INDEPENDENCIA Y AUSENCIA DE VÍNCULOS EXTERNOS
+                        El desarrollador es independiente.
+                        La aplicación no tiene vínculos con:
+                        - gobiernos o administraciones,
+                        - industrias del tabaco,
+                        - productores de alcohol,
+                        - industria del cannabis,
+                        - organizaciones criminales o cárteles.
+                        
+                        La aplicación no sustituye ni compite con otras aplicaciones con nombres similares.
+                        
+                        8. PROPIEDAD INTELECTUAL
+                        El nombre, diseño, textos, contenidos y funciones están protegidos por derechos de autor.
+                        Toda reproducción o distribución no autorizada está prohibida.
+                        
+                        9. LIMITACIONES TÉCNICAS Y RIESGOS
+                        La aplicación puede presentar errores o pérdida de datos según:
+                        - modelo del dispositivo,
+                        - versión de Android,
+                        - estado del sistema,
+                        - almacenamiento disponible,
+                        - entorno del software.
+                        
+                        El desarrollador no es responsable de:
+                        - pérdida de datos,
+                        - fallos técnicos,
+                        - archivos dañados,
+                        - incompatibilidades parciales o totales.
+                        
+                        La versión gratuita permite probar la aplicación antes de comprarla.
+                        No se realizan reembolsos.
+                        
+                        Un cambio de dispositivo o cuenta de Google puede requerir una nueva compra según las reglas del Play Store.
+                        
+                        10. DESARROLLO Y USO DE IA
+                        La aplicación fue creada mediante trabajo personal con apoyo ocasional de herramientas de inteligencia artificial.
+                        El creador sigue siendo el autor único del proyecto.
+                    """.trimIndent(),
+            "warning_resources_link" to "📞 Recursos y líneas de ayuda",
+            "warning_checkbox_age" to "☑️ Confirmo que soy mayor de edad",
+            "warning_checkbox_noshow" to "No mostrar este mensaje de nuevo",
+            "warning_btn_quit" to "Salir",
+            "warning_btn_accept" to "Acepto y continúo",
+            
+            // Dialog ressources
+            "resources_title" to "📞 Recursos y líneas de ayuda",
+            "resources_content" to """
+                        📞 RECURSOS ÚTILES – AYUDA, APOYO E INFORMACIÓN
+                        
+                        Este módulo reúne recursos oficiales o reconocidos para personas que enfrentan dificultades relacionadas con tabaco, alcohol, cannabis o malestar emocional.  
+                        La disponibilidad depende del país o región.  
+                        Verifica siempre los números locales de tu zona.
+                        
+                        1. TABACO – LÍNEAS DE APOYO, DEJAR DE FUMAR
+                        • España – Línea de ayuda para dejar de fumar: 900 111 000  
+                          Apoyo anónimo y gratuito para dejar el tabaco.
+                        • México – Línea de la Vida: 800 911 2000  
+                        • Argentina – Programa Nacional de Prevención: 0800 222 1002  
+                        • Chile – Fono Drogas y Alcohol: 1412  
+                        • Internacional – Consulta los servicios de salud locales.
+                        
+                        2. ALCOHOL – AYUDA Y PREVENCIÓN
+                        • España – Servicio de Información sobre Alcohol: 900 161 515  
+                        • México – Centros de Integración Juvenil: 800 911 2000  
+                        • Argentina – Alcohólicos Anónimos: (011) 4325-1813  
+                        • Colombia – Línea Psicoactiva: 018000 112 439  
+                        
+                        3. CANNABIS – INFORMACIÓN Y ACOMPAÑAMIENTO
+                        • España – Plan Nacional sobre Drogas: 900 16 15 15  
+                        • México – Línea de la Vida: 800 911 2000  
+                        • Argentina – SEDRONAR: 141  
+                        • Chile – SENDA Fono Drogas: 1412  
+                        
+                        4. MALTRATO EMOCIONAL, CRISIS Y SALUD MENTAL
+                        • España – Teléfono de la Esperanza: 717 003 717  
+                        • México – Línea de Atención Psicológica: 55 5259 8121  
+                        • Argentina – Atención al Suicida: 135 (CABA y GBA)  
+                        • Chile – Salud Responde: 600 360 7777  
+                        • Colombia – Línea 106 – Atención emocional  
+                        
+                        5. EMERGENCIAS
+                        • Unión Europea – 112  
+                        • España – 112  
+                        • México – 911  
+                        • Argentina – 911  
+                        • Chile – 131 (ambulancias), 133 (policía), 132 (bomberos)  
+                        • Colombia – 123  
+                        
+                        6. USO RESPONSABLE Y INFORMACIÓN ADICIONAL
+                        Estos recursos no están afiliados a StopAddict.  
+                        Se ofrecen únicamente con fines informativos.  
+                        Ante cualquier dificultad física, emocional o social, consulta a un profesional de la salud.
+                        
+                        7. RECORDATORIO IMPORTANTE
+                        Esta aplicación no diagnostica, trata ni previene enfermedades.  
+                        No sustituye la atención médica.  
+                        En caso de emergencia o peligro inmediato, contacta los servicios oficiales de tu país.
+                    """.trimIndent(),
+            "resources_btn_close" to "Cerrar",
         
         "console_title" to "CONSOLA DEBUG STOPADDICT",
         "console_version" to "Versión",
@@ -492,26 +640,169 @@ object MainActivityLangues {
         "tab_habitudes" to "Hábitos e Vontade",
         "tab_reglages" to "Configurações",
         
-        "warning_title" to "⚠️ Aviso - Apenas adultos (18+)",
-        "warning_message" to "Stop Addict é um aplicativo de automonitoramento e ajuda para reduzir/parar o consumo (tabaco, álcool, cannabis).\n\n" +
-                              "Reservado para pessoas com 18 anos ou mais, tendo atingido a maioridade em seu país de residência ou país visitado.\n\n" +
-                              "Não promove esses produtos.\n\n" +
-                              "Não substitui acompanhamento médico, psicológico ou social. Em caso de dificuldade, consulte um profissional.\n\n" +
-                              "Use Stop Addict de forma responsável.",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ Aviso – Apenas para adultos",
+        "warning_message" to """
+                    ⚠️ AVISO LEGAL
+                    
+                    O uso deste aplicativo implica a leitura atenta do aviso a seguir.
+                    O usuário deve ler todas as informações antes de utilizar o aplicativo.
+                    
+                    1. VERIFICAÇÃO DE MAIORIDADE E CUMPRIMENTO DAS LEIS LOCAIS
+                    O usuário deve confirmar que é maior de idade de acordo com as leis do seu país de residência e de qualquer país onde utilize o aplicativo.
+                    As idades legais para tabaco, cannabis e álcool variam entre países.
+                    Exemplo: uma pessoa maior de idade no Brasil ou Portugal pode ser considerada menor segundo as leis de álcool nos Estados Unidos.
+                    
+                    É responsabilidade exclusiva do usuário verificar as leis, restrições e obrigações do país ou região relacionadas:
+                    - ao uso do aplicativo,
+                    - à posse ou consumo de cigarros,
+                    - ao uso de cannabis segundo a legislação local,
+                    - ao consumo de álcool,
+                    - a qualquer outra prática regulamentada.
+                    
+                    O aplicativo não incentiva, não facilita, não recomenda nem promove o consumo de substâncias regulamentadas.
+                    
+                    2. AUSÊNCIA DE INCENTIVO AO CONSUMO
+                    O uso do aplicativo não pressupõe que o usuário seja fumante ou consumidor de álcool ou cannabis.
+                    O aplicativo não incentiva, não recomenda, não glamouriza nem normaliza o consumo de tabaco, cannabis ou álcool.
+                    
+                    O objetivo do aplicativo é exclusivamente:
+                    - ajudar a contar, visualizar e analisar,
+                    - conscientizar sobre hábitos, consumo e gastos,
+                    - apoiar a redução ou o abandono.
+                    
+                    O verdadeiro sucesso é recusar um cigarro, um baseado ou uma bebida — ou nunca começar.
+                    Se você não fuma nem bebe, continue protegendo sua saúde: tabaco, cannabis e álcool são nocivos.
+                    
+                    3. RESPONSABILIDADE DO USUÁRIO
+                    O uso do aplicativo é totalmente responsabilidade do usuário, ou de seus responsáveis legais caso seja menor.
+                    O desenvolvedor não pode ser responsabilizado em caso de:
+                    - uso inadequado,
+                    - desvio da finalidade original,
+                    - interpretação incorreta,
+                    - descumprimento de leis locais,
+                    - decisões tomadas com base nos dados exibidos.
+                    
+                    O aplicativo não pode ser utilizado como prova legal nem para atribuir responsabilidade civil ou penal.
+                    
+                    4. PROTEÇÃO DE MENORES E SUPERVISÃO PARENTAL
+                    Embora o aplicativo não colete dados pessoais, é essencial supervisionar o uso digital por menores.
+                    Pais e responsáveis devem observar:
+                    - saúde e bem-estar,
+                    - estado emocional,
+                    - comportamento social,
+                    - uso geral de ferramentas digitais.
+                    
+                    5. DADOS PESSOAIS E PRIVACIDADE
+                    Não é necessário cadastro.
+                    Nenhum dado pessoal é coletado, armazenado ou transmitido.
+                    Se um nome é inserido, ele é usado apenas dentro do aplicativo ou em arquivos exportados/importados no próprio dispositivo.
+                    
+                    O usuário deve:
+                    - proteger seu smartphone,
+                    - manter medidas de segurança,
+                    - adotar boas práticas de proteção de dados.
+                    
+                    6. PUBLICIDADE E FINANCIAMENTO
+                    A versão gratuita contém um banner publicitário para financiar o desenvolvimento.
+                    A versão premium remove todos os anúncios.
+                    
+                    Este aplicativo é fruto do trabalho pessoal de um criador independente.
+                    A publicidade serve exclusivamente para manter e melhorar o aplicativo.
+                    
+                    7. NEUTRALIDADE, INDEPENDÊNCIA E AUSÊNCIA DE LIGAÇÕES EXTERNAS
+                    O desenvolvedor é independente.
+                    O aplicativo não possui vínculo com:
+                    - governos ou administrações,
+                    - indústrias do tabaco,
+                    - produtores de álcool,
+                    - indústrias de cannabis,
+                    - organizações criminosas ou cartéis.
+                    
+                    O aplicativo não substitui nem concorre com outros aplicativos de nome semelhante.
+                    
+                    8. PROPRIEDADE INTELECTUAL
+                    O nome, design, textos, conteúdos e funcionalidades são protegidos por direitos autorais.
+                    A reprodução ou distribuição não autorizada é proibida.
+                    
+                    9. LIMITAÇÕES TÉCNICAS, COMPATIBILIDADE E RISCOS
+                    O aplicativo pode apresentar erros, falhas ou perda de dados dependendo de:
+                    - modelo do dispositivo,
+                    - versão do Android,
+                    - estado do sistema,
+                    - armazenamento disponível,
+                    - ambiente de software.
+                    
+                    O desenvolvedor não pode ser responsabilizado por:
+                    - perda de dados,
+                    - falhas técnicas,
+                    - arquivos corrompidos,
+                    - incompatibilidades parciais ou totais.
+                    
+                    A versão gratuita permite testar o aplicativo antes da compra.
+                    Não há possibilidade de reembolso.
+                    
+                    Alterações de smartphone ou conta Google podem exigir nova compra, de acordo com as regras do Play Store.
+                    
+                    10. DESENVOLVIMENTO E USO DE IA
+                    O aplicativo foi criado por meio de trabalho pessoal com apoio pontual de ferramentas de inteligência artificial.
+                    O criador continua sendo o autor integral do projeto.
+                """.trimIndent(),
         "warning_resources_link" to "📞 Recursos e linhas de ajuda",
-        "warning_checkbox_age" to "☑️ Sou adulto, tenho 18 anos ou mais",
+        "warning_checkbox_age" to "☑️ Confirmo que sou maior de idade",
         "warning_checkbox_noshow" to "Não mostrar esta mensagem novamente",
         "warning_btn_quit" to "Sair",
         "warning_btn_accept" to "Aceito e continuo",
         
-        "resources_title" to "📞 Precisa de ajuda?",
-        "resources_content" to "📞 Recursos e linhas de ajuda\n\n" +
-                               "🚨 Emergências: 112 (UE) / 192 (BR - SAMU)\n\n" +
-                               "🇧🇷 BRASIL\n" +
-                               "• Tabagismo: 0800 722 6001\n" +
-                               "• CVV: 188 (apoio emocional)\n" +
-                               "• CAPS-AD (álcool/drogas)\n\n" +
-                               "🌍 Consulte os recursos locais no seu país.",
+        // Dialog ressources
+        "resources_title" to "📞 Recursos e linhas de ajuda",
+        "resources_content" to """
+                    📞 RECURSOS ÚTEIS – AJUDA, APOIO E INFORMAÇÕES
+                    
+                    Este módulo reúne recursos oficiais ou amplamente reconhecidos para pessoas com dificuldades relacionadas a tabaco, álcool, cannabis ou sofrimento emocional.  
+                    A disponibilidade varia conforme o país ou região.  
+                    Verifique sempre os números locais da sua área.
+                    
+                    1. TABACO – APOIO PARA PARAR DE FUMAR
+                    • Brasil – Disque Saúde Tabagismo: 0800 722 6001  
+                      Informações e apoio oficial para parar de fumar.
+                    • Portugal – SNS / Linha Saúde 24: 808 24 24 24  
+                    • Moçambique / Angola – consulte serviços locais de saúde.
+                    
+                    2. ÁLCOOL – AJUDA E PREVENÇÃO
+                    • Brasil – CAPS AD (Álcool e Drogas): atendimento em unidades locais  
+                    • Brasil – Alcoólicos Anônimos: 11 3105-9007 (exemplo SP)  
+                    • Portugal – Linha Vida / SICAD: 1414  
+                    • Angola – Linha SOS: consulte recursos locais
+                    
+                    3. CANNABIS – INFORMAÇÃO E ACOMPANHAMENTO
+                    • Brasil – Disque Saúde / Drogas: 132  
+                    • Portugal – SICAD – Informação sobre substâncias: 808 259 259  
+                    • Comunidade lusófona – consulte serviços oficiais de saúde pública
+                    
+                    4. APOIO EMOCIONAL, CRISE E SAÚDE MENTAL
+                    • Brasil – CVV (Centro de Valorização da Vida): 188  
+                    • Portugal – SOS Voz Amiga: 213 544 545 / 912 802 669 / 963 524 660  
+                    • Angola – Linha de apoio psicológico (varia por província)  
+                    • Moçambique – Serviços de apoio psicológico locais  
+                    
+                    5. EMERGÊNCIAS
+                    • União Europeia – 112  
+                    • Brasil – 192 (SAMU), 190 (Polícia), 193 (Bombeiros)  
+                    • Portugal – 112  
+                    • Angola – 113 (Polícia), 115 (Bombeiros)  
+                    • Moçambique – 117 (Emergências)  
+                    
+                    6. USO RESPONSÁVEL E INFORMAÇÕES COMPLEMENTARES
+                    Estes recursos não possuem vínculo com o StopAddict.  
+                    São fornecidos apenas para fins informativos.  
+                    Consulte profissionais de saúde em caso de dificuldade física, emocional ou social.
+                    
+                    7. LEMBRETE IMPORTANTE
+                    Este aplicativo não diagnostica, trata ou previne doenças.  
+                    Não substitui orientação médica.  
+                    Em caso de emergência, contate os serviços oficiais de seu país.
+                """.trimIndent(),
         "resources_btn_close" to "Fechar",
         
         "console_title" to "CONSOLE DEBUG STOPADDICT",
@@ -543,26 +834,166 @@ object MainActivityLangues {
         "tab_habitudes" to "Gewohnheiten & Wille",
         "tab_reglages" to "Einstellungen",
         
-        "warning_title" to "⚠️ Warnung - Nur für Erwachsene (18+)",
-        "warning_message" to "Stop Addict ist eine Selbstüberwachungs- und Hilfs-App zur Reduzierung/Beendigung des Konsums (Tabak, Alkohol, Cannabis).\n\n" +
-                              "Reserviert für Personen ab 18 Jahren, die in ihrem Wohnsitzland oder besuchten Land volljährig sind.\n\n" +
-                              "Bewirbt diese Produkte nicht.\n\n" +
-                              "Ersetzt keine medizinische, psychologische oder soziale Unterstützung. Bei Schwierigkeiten konsultieren Sie einen Fachmann.\n\n" +
-                              "Verwenden Sie Stop Addict verantwortungsvoll.",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ Warnung – Nur für Erwachsene",
+        "warning_message" to """
+                    ⚠️ RECHTLICHER HINWEIS
+                    
+                    Die Nutzung dieser App setzt das sorgfältige Lesen des folgenden Hinweises voraus.
+                    Der Nutzer muss alle Informationen aufmerksam prüfen, bevor er die Anwendung verwendet.
+                    
+                    1. ALTERSNACHWEIS UND EINHALTUNG DER LOKALEN GESETZE
+                    Der Nutzer muss bestätigen, dass er gemäß den Gesetzen seines Wohnsitzlandes sowie jedes Landes, in dem er die App verwendet, volljährig ist.
+                    Die gesetzlichen Altersgrenzen für Tabak, Cannabis und Alkohol unterscheiden sich je nach Land erheblich.
+                    Beispiel: Eine volljährige Person in Deutschland (18 Jahre) kann nach US-Gesetzen bezüglich Alkoholkonsum als minderjährig gelten.
+                    
+                    Es liegt ausschließlich in der Verantwortung des Nutzers, die lokalen Gesetze, Einschränkungen und Verpflichtungen zu prüfen, die sich beziehen auf:
+                    - die Nutzung der Anwendung,
+                    - den Besitz oder Konsum von Zigaretten,
+                    - den Gebrauch von Cannabis gemäß lokaler Vorschriften,
+                    - den Alkoholkonsum,
+                    - jede weitere regulierte Tätigkeit.
+                    
+                    Die App darf nicht als Unterstützung oder Förderung des Konsums regulierter Substanzen ausgelegt werden.
+                    
+                    2. KEINE ANREGUNG ZUM KONSUM
+                    Die Nutzung der App bedeutet nicht, dass der Nutzer Raucher oder Konsument von Alkohol oder Cannabis ist.
+                    Die App fördert, normalisiert oder verherrlicht nicht den Konsum von Tabak, Cannabis oder Alkohol.
+                    
+                    Die App dient ausschließlich dazu:
+                    - den Konsum zu erfassen, zu visualisieren und zu analysieren,
+                    - Bewusstsein für Gewohnheiten, Konsum und Ausgaben zu schaffen,
+                    - die Reduktion oder den Ausstieg zu unterstützen.
+                    
+                    Der wahre Erfolg besteht darin, eine Zigarette, einen Joint oder ein alkoholisches Getränk abzulehnen – oder gar nicht erst damit anzufangen.
+                    Wenn Sie nicht rauchen oder trinken, schützen Sie weiterhin Ihre Gesundheit: Tabak, Cannabis und Alkohol sind gesundheitsschädlich.
+                    
+                    3. VERANTWORTUNG DES NUTZERS
+                    Die Nutzung der App liegt vollständig in der Verantwortung des Nutzers oder seiner gesetzlichen Vertreter, falls er minderjährig ist.
+                    Der Entwickler kann nicht haftbar gemacht werden für:
+                    - Missbrauch der Anwendung,
+                    - zweckentfremdete Nutzung,
+                    - falsche Interpretation,
+                    - Nichteinhaltung lokaler Gesetze,
+                    - Entscheidungen, die auf Basis der angezeigten Daten getroffen werden.
+                    
+                    Die App kann nicht zur rechtlichen Beweisführung oder zur Feststellung zivil- oder strafrechtlicher Verantwortung verwendet werden.
+                    
+                    4. SCHUTZ VON MINDERJÄHRIGEN UND ELTERLICHE AUFSICHT
+                    Auch wenn die Anwendung keine personenbezogenen Daten sammelt, ist es wichtig, den digitalen Umgang von Minderjährigen zu überwachen.
+                    Eltern und Erziehungsberechtigte sollten achten auf:
+                    - Gesundheit und Wohlbefinden,
+                    - emotionale Stabilität,
+                    - soziales Verhalten,
+                    - den Umgang mit digitalen Geräten.
+                    
+                    5. DATENSCHUTZ UND PRIVATSPHÄRE
+                    Kein Benutzerkonto erforderlich.
+                    Es werden keine personenbezogenen Daten gesammelt, gespeichert oder übermittelt.
+                    Wenn ein Vorname eingegeben wird, wird er nur in der App oder in exportierten/importierten Dateien auf dem eigenen Gerät verwendet.
+                    
+                    Der Nutzer ist dafür verantwortlich:
+                    - sein Smartphone zu schützen,
+                    - Sicherheitssoftware aktuell zu halten,
+                    - gute Datenschutzpraktiken anzuwenden.
+                    
+                    6. WERBUNG UND FINANZIERUNG
+                    Die kostenlose Version enthält Werbebanner zur Finanzierung der Entwicklung.
+                    Die Premium-Version entfernt alle Werbeanzeigen.
+                    
+                    Die App ist das persönliche Projekt eines unabhängigen Entwicklers.
+                    Werbung dient ausschließlich der Weiterentwicklung, Wartung und Verbesserung der App.
+                    
+                    7. NEUTRALITÄT, UNABHÄNGIGKEIT UND KEINE EXTERNEN VERBINDUNGEN
+                    Der Entwickler handelt vollständig unabhängig.
+                    Die App steht in keinerlei Verbindung zu:
+                    - staatlichen Einrichtungen,
+                    - Tabakindustrie,
+                    - Alkoholherstellern,
+                    - Cannabisindustrie,
+                    - kriminellen Organisationen oder Kartellen.
+                    
+                    Die App ersetzt oder konkurriert keine andere App mit ähnlichem Namen.
+                    
+                    8. URHEBERRECHT
+                    Name, Design, Inhalte, Texte und Funktionen sind urheberrechtlich geschützt.
+                    Jede unerlaubte Reproduktion oder Verbreitung ist untersagt.
+                    
+                    9. TECHNISCHE GRENZEN, KOMPATIBILITÄT UND RISIKEN
+                    Die App kann Fehler oder Datenverlust verursachen, abhängig von:
+                    - Gerätemodell,
+                    - Android-Version,
+                    - Systemzustand,
+                    - verfügbarem Speicher,
+                    - Softwareumgebung.
+                    
+                    Der Entwickler haftet nicht für:
+                    - Datenverlust,
+                    - Geräte- oder Softwarefehler,
+                    - beschädigte Dateien,
+                    - teilweise oder vollständige Inkompatibilität.
+                    
+                    Die kostenlose Version ermöglicht das Testen vor dem Kauf.
+                    Rückerstattungen sind nicht möglich.
+                    
+                    Ein Wechsel des Smartphones oder Google-Kontos kann gemäß Play-Store-Regeln einen erneuten Kauf erfordern.
+                    
+                    10. ENTWICKLUNG UND EINSATZ VON KI
+                    Die Anwendung wurde mit persönlicher Arbeit und gelegentlicher Unterstützung von KI-Tools entwickelt.
+                    Der Entwickler bleibt der alleinige Autor des gesamten Projekts.
+                """.trimIndent(),
         "warning_resources_link" to "📞 Ressourcen und Hilfslinien",
-        "warning_checkbox_age" to "☑️ Ich bin erwachsen, ich bin 18 Jahre oder älter",
+        "warning_checkbox_age" to "☑️ Ich bestätige, dass ich volljährig bin",
         "warning_checkbox_noshow" to "Diese Nachricht nicht mehr anzeigen",
         "warning_btn_quit" to "Beenden",
         "warning_btn_accept" to "Ich akzeptiere und fahre fort",
         
-        "resources_title" to "📞 Brauchen Sie Hilfe?",
-        "resources_content" to "📞 Ressourcen und Hilfslinien\n\n" +
-                               "🚨 Notfall: 112 (EU) / 110 (DE)\n\n" +
-                               "🇩🇪 DEUTSCHLAND\n" +
-                               "• Rauchfrei: 0800 8 31 31 31\n" +
-                               "• Sucht & Drogen: 01806 31 30 31\n" +
-                               "• Telefonseelsorge: 0800 111 0 111\n\n" +
-                               "🌍 Prüfen Sie lokale Ressourcen in Ihrem Land.",
+        // Dialog ressources
+        "resources_title" to "📞 Ressourcen und Hilfslinien",
+        "resources_content" to """
+                    📞 NÜTZLICHE RESSOURCEN – HILFE, BERATUNG UND INFORMATIONEN
+                    
+                    Dieses Modul enthält offizielle oder weithin anerkannte Ressourcen für Menschen, die Unterstützung im Zusammenhang mit Tabak, Alkohol, Cannabis oder emotionalem Stress benötigen.  
+                    Die Verfügbarkeit hängt vom jeweiligen Land oder der Region ab.  
+                    Bitte prüfen Sie immer die lokalen Telefonnummern.
+                    
+                    1. TABAK – AUFHÖRHILFEN UND BERATUNG
+                    • Deutschland – Rauchfrei Telefon: 0800 8 31 31 31  
+                      Offizielle Unterstützung zum Rauchstopp.
+                    • Österreich – Rauchfrei Telefon: 0800 810 013  
+                    • Schweiz – Stop Smoking Helpline: 0848 000 181  
+                    
+                    2. ALKOHOL – HILFE UND PRÄVENTION
+                    • Deutschland – Sucht & Drogen Hotline: 01806 313031  
+                    • Österreich – Suchtinfo / Beratung: 1455  
+                    • Schweiz – Alkoholhilfe / Suchtberatung: regionale Nummern
+                    
+                    3. CANNABIS – INFORMATION UND BERATUNG
+                    • Deutschland – Drugscouts / Suchtberatung: regionale Angebote  
+                    • Österreich – Check-it! Drogeninfo: lokale Zentren  
+                    • Schweiz – Sucht Schweiz: 021 321 29 11  
+                    
+                    4. EMOTIONALE BELASTUNG, KRISEN UND PSYCHISCHE GESUNDHEIT
+                    • Deutschland – TelefonSeelsorge: 0800 111 0 111 / 0800 111 0 222  
+                    • Österreich – TelefonSeelsorge: 142  
+                    • Schweiz – Die Dargebotene Hand: 143  
+                    
+                    5. NOTFALLNUMMERN
+                    • Europäische Union – 112  
+                    • Deutschland – 110 (Polizei), 112 (Feuerwehr/Rettung)  
+                    • Österreich – 112 (EU), 133 (Polizei), 144 (Rettung)  
+                    • Schweiz – 112 (EU), 117 (Polizei), 118 (Feuerwehr), 144 (Sanität)  
+                    
+                    6. VERANTWORTUNGSVOLLE NUTZUNG & WEITERE INFORMATIONEN
+                    Diese Ressourcen sind nicht mit StopAddict verbunden.  
+                    Sie dienen ausschließlich zu Informationszwecken.  
+                    Bei körperlichen, emotionalen oder sozialen Problemen wenden Sie sich an Fachpersonal.
+                    
+                    7. WICHTIGER HINWEIS
+                    Diese App diagnostiziert, behandelt oder verhindert keine Krankheiten.  
+                    Sie ersetzt keine medizinische Beratung.  
+                    Wenden Sie sich im Notfall an die offiziellen Rettungsdienste Ihres Landes.
+                """.trimIndent(),
         "resources_btn_close" to "Schließen",
         
         "console_title" to "DEBUG-KONSOLE STOPADDICT",
@@ -594,28 +1025,166 @@ object MainActivityLangues {
         "tab_habitudes" to "Abitudini e Volontà",
         "tab_reglages" to "Impostazioni",
         
-        "warning_title" to "⚠️ Avviso - Solo adulti (18+)",
-        "warning_message" to "Stop Addict è un'app di auto-monitoraggio e aiuto per ridurre/interrompere il consumo (tabacco, alcol, cannabis).\n\n" +
-                              "Riservata a persone di 18 anni o più, che hanno raggiunto la maggiore età nel loro paese di residenza o paese visitato.\n\n" +
-                              "Non promuove questi prodotti.\n\n" +
-                              "Non sostituisce il supporto medico, psicologico o sociale. In caso di difficoltà, consultare un professionista.\n\n" +
-                              "Usa Stop Addict in modo responsabile.",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ Avviso – Solo per adulti",
+        "warning_message" to """
+                    ⚠️ AVVISO LEGALE
+                    
+                    L’utilizzo di questa applicazione implica la lettura attenta del seguente avviso.
+                    L’utente deve leggere tutte le informazioni prima di utilizzare l’app.
+                    
+                    1. VERIFICA DELLA MAGGIORE ETÀ E RISPETTO DELLE LEGGI LOCALI
+                    L’utente deve confermare di essere maggiorenne secondo le leggi del proprio paese di residenza e di qualsiasi paese in cui utilizzi l’app.
+                    Le età legali per tabacco, cannabis e alcol differiscono ampiamente tra i vari paesi.
+                    Esempio: una persona maggiorenne in Italia (18 anni) può risultare minorenne per quanto riguarda le leggi sul consumo di alcol negli Stati Uniti.
+                    
+                    È esclusiva responsabilità dell’utente verificare le normative, i divieti e gli obblighi vigenti nel paese o nella regione relativi a:
+                    - uso dell’app,
+                    - possesso o consumo di sigarette,
+                    - utilizzo di cannabis secondo le norme locali,
+                    - consumo di alcol,
+                    - qualsiasi altra pratica regolamentata.
+                    
+                    L’app non deve essere interpretata come un invito, un incoraggiamento o una facilitazione del consumo di sostanze regolamentate.
+                    
+                    2. ASSENZA DI INCITAMENTO AL CONSUMO
+                    L’utilizzo dell’app non implica che l’utente sia fumatore o consumatore di alcol o cannabis.
+                    L’app non incentiva, non normalizza e non glorifica il consumo di tabacco, cannabis o alcol.
+                    
+                    L’unico scopo dell’app è:
+                    - aiutare a contare, visualizzare e analizzare,
+                    - sensibilizzare sui propri comportamenti, consumi e spese,
+                    - sostenere la riduzione o l’interruzione del consumo.
+                    
+                    Il vero successo è rifiutare una sigaretta, uno spinello o un bicchiere — o non iniziare mai.
+                    Se non fumi e non bevi, continua a proteggere la tua salute: tabacco, cannabis e alcol sono dannosi.
+                    
+                    3. RESPONSABILITÀ DELL’UTENTE
+                    L’uso dell’app è interamente sotto la responsabilità dell’utente, o dei suoi tutori legali se minorenne.
+                    Lo sviluppatore non può essere ritenuto responsabile in caso di:
+                    - uso improprio,
+                    - utilizzo non conforme allo scopo previsto,
+                    - interpretazioni errate,
+                    - mancato rispetto delle leggi locali,
+                    - decisioni prese sulla base dei dati visualizzati.
+                    
+                    L’app non può essere utilizzata per attribuire responsabilità civili o penali, né come prova in procedimenti legali.
+                    
+                    4. PROTEZIONE DEI MINORI E SUPERVISIONE PARENTALE
+                    Sebbene l’app non raccolga dati personali, è essenziale monitorare l’utilizzo digitale dei minori.
+                    Genitori e tutori dovrebbero prestare attenzione a:
+                    - salute e benessere,
+                    - stato emotivo,
+                    - comportamento sociale,
+                    - uso degli strumenti digitali.
+                    
+                    5. DATI PERSONALI E PRIVACY
+                    Non è necessaria alcuna registrazione.
+                    Nessun dato personale viene raccolto, memorizzato o trasmesso.
+                    Se viene inserito un nome, esso è utilizzato solo all’interno dell’app o nei file esportati/importati sul dispositivo dell’utente.
+                    
+                    L’utente è responsabile di:
+                    - proteggere il proprio smartphone,
+                    - mantenere adeguate misure di sicurezza,
+                    - adottare buone pratiche di tutela dei dati.
+                    
+                    6. PUBBLICITÀ E FINANZIAMENTO
+                    La versione gratuita contiene un banner pubblicitario per finanziare lo sviluppo.
+                    La versione premium permette l’utilizzo senza pubblicità.
+                    
+                    Questa applicazione è il risultato del lavoro personale di uno sviluppatore indipendente.
+                    La pubblicità serve esclusivamente a supportare miglioramenti, manutenzione e sviluppo continuo.
+                    
+                    7. NEUTRALITÀ, INDIPENDENZA E ASSENZA DI COLLEGAMENTI ESTERNI
+                    Lo sviluppatore è indipendente.
+                    L’app non ha alcun legame con:
+                    - enti pubblici,
+                    - industria del tabacco,
+                    - produttori di alcol,
+                    - industria della cannabis,
+                    - organizzazioni criminali o cartelli.
+                    
+                    L’app non sostituisce né compete con altre applicazioni dal nome simile.
+                    
+                    8. PROPRIETÀ INTELLETTUALE
+                    Nome, design, testi, contenuti e funzioni sono protetti dal diritto d’autore.
+                    È vietata ogni riproduzione o distribuzione non autorizzata.
+                    
+                    9. LIMITAZIONI TECNICHE, COMPATIBILITÀ E RISCHI
+                    L’app può presentare bug, errori o perdite di dati in base a:
+                    - modello del dispositivo,
+                    - versione Android,
+                    - stato del sistema,
+                    - memoria disponibile,
+                    - ambiente software.
+                    
+                    Lo sviluppatore non è responsabile per:
+                    - perdita di dati,
+                    - malfunzionamenti hardware/software,
+                    - file danneggiati,
+                    - incompatibilità totali o parziali.
+                    
+                    La versione gratuita consente di provare l’app prima dell’acquisto.
+                    Non sono previsti rimborsi.
+                    
+                    Un cambio di smartphone o account Google può richiedere un nuovo acquisto secondo le regole del Play Store.
+                    
+                    10. SVILUPPO E UTILIZZO DI IA
+                    L’app è stata sviluppata attraverso lavoro personale con supporto occasionale di strumenti di intelligenza artificiale.
+                    Lo sviluppatore rimane l’unico autore dell’intero progetto.
+                """.trimIndent(),
         "warning_resources_link" to "📞 Risorse e linee di aiuto",
-        "warning_checkbox_age" to "☑️ Sono adulto, ho 18 anni o più",
+        "warning_checkbox_age" to "☑️ Confermo di essere maggiorenne",
         "warning_checkbox_noshow" to "Non mostrare più questo messaggio",
         "warning_btn_quit" to "Esci",
         "warning_btn_accept" to "Accetto e continuo",
         
-        "resources_title" to "📞 Hai bisogno di aiuto?",
-        "resources_content" to "📞 Risorse e linee di aiuto\n\n" +
-                               "🚨 Emergenza: 112 (UE) / 118 (IT - urgenza)\n\n" +
-                               "🇮🇹 ITALIA\n" +
-                               "• Istituto Superiore Sanità: 800 554 088\n" +
-                               "• Telefono Verde Alcol: 800 632 000\n" +
-                               "• SerD (Servizi Dipendenze)\n\n" +
-                               "🌍 Consulta le risorse locali nel tuo paese.",
+        // Dialog ressources
+        "resources_title" to "📞 Risorse e linee di aiuto",
+        "resources_content" to """
+                    📞 RISORSE UTILI – AIUTO, SOSTEGNO E INFORMAZIONI
+                    
+                    Questo modulo raccoglie risorse ufficiali o ampiamente riconosciute per persone che affrontano difficoltà legate a tabacco, alcol, cannabis o sofferenza emotiva.  
+                    La disponibilità varia a seconda del paese o della regione.  
+                    Verificare sempre i numeri locali della propria zona.
+                    
+                    1. TABACCO – SUPPORTO PER SMETTERE DI FUMARE
+                    • Italia – Istituto Superiore di Sanità / Telefono Verde Fumo: 800 554 088  
+                    • Italia – SerD (Servizi per le Dipendenze): numeri locali  
+                    • Svizzera italiana – Linea Stop Tabacco: 0848 000 181  
+                    
+                    2. ALCOL – AIUTO E PREVENZIONE
+                    • Italia – Telefono Verde Alcol: 800 632 000  
+                    • Italia – SerD / Alcologia: contatti territoriali  
+                    • Svizzera – Servizi cantonali di consulenza sulle dipendenze
+                    
+                    3. CANNABIS – INFORMAZIONE E ASSISTENZA
+                    • Italia – Dipendenze / SerD: centri territoriali  
+                    • Svizzera – Informazioni su sostanze: 0848 133 133  
+                    • San Marino – Servizi sanitari locali
+                    
+                    4. SOSTEGNO EMOTIVO, CRISI E SALUTE MENTALE
+                    • Italia – Telefono Amico: 02 2327 2327  
+                    • Italia – Samaritans Italia: numeri regionali  
+                    • Svizzera – La Mano Tesa (Linea 143)  
+                    
+                    5. EMERGENZE
+                    • Unione Europea – 112  
+                    • Italia – 112 (Numero Unico), 118 (emergenza sanitaria), 115 (vigili del fuoco), 113 (polizia)  
+                    • Svizzera – 112 (UE), 117 (polizia), 118 (vigili del fuoco), 144 (ambulanza)  
+                    
+                    6. USO RESPONSABILE E INFORMAZIONI AGGIUNTIVE
+                    Queste risorse non sono affiliate a StopAddict.  
+                    Sono fornite esclusivamente a scopo informativo.  
+                    Per difficoltà fisiche, emotive o sociali è consigliato rivolgersi a un professionista.
+                    
+                    7. PROMEMORIA IMPORTANTE
+                    Questa applicazione non diagnostica, tratta o previene malattie.  
+                    Non sostituisce il parere medico.  
+                    In caso di emergenza, contattare i servizi ufficiali del proprio paese.
+                """.trimIndent(),
         "resources_btn_close" to "Chiudi",
-        
+                
         "console_title" to "CONSOLE DEBUG STOPADDICT",
         "console_version" to "Versione",
         "console_version_free" to "Gratuita",
@@ -645,28 +1214,167 @@ object MainActivityLangues {
         "tab_habitudes" to "Привычки и Воля",
         "tab_reglages" to "Настройки",
         
-        "warning_title" to "⚠️ Предупреждение - Только для взрослых (18+)",
-        "warning_message" to "Stop Addict - это приложение для самоконтроля и помощи в сокращении/прекращении потребления (табак, алкоголь, каннабис).\n\n" +
-                              "Предназначено для лиц старше 18 лет, достигших совершеннолетия в стране проживания или посещаемой стране.\n\n" +
-                              "Не пропагандирует эти продукты.\n\n" +
-                              "Не заменяет медицинскую, психологическую или социальную поддержку. В случае трудностей обратитесь к специалисту.\n\n" +
-                              "Используйте Stop Addict ответственно.",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ Предупреждение – Только для взрослых",
+        "warning_message" to """
+                    ⚠️ ЮРИДИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ
+                    
+                    Использование данного приложения подразумевает внимательное прочтение следующей информации.
+                    Пользователь должен ознакомиться со всеми пунктами перед началом использования.
+                    
+                    1. ПРОВЕРКА СОВЕРШЕННОЛЕТИЯ И СОБЛЮДЕНИЕ МЕСТНЫХ ЗАКОНОВ
+                    Пользователь должен подтвердить, что он является совершеннолетним согласно законам своей страны проживания, а также любой страны, где используется приложение.
+                    Законы, регулирующие возрастной доступ к табаку, каннабису и алкоголю, существенно отличаются в разных странах.
+                    Пример: человек, достигший совершеннолетия в России или Казахстане, может считаться несовершеннолетним по законодательству США в отношении алкоголя.
+                    
+                    Пользователь обязан самостоятельно проверить действующие законы, ограничения и правила, относящиеся к:
+                    - использованию приложения,
+                    - владению или потреблению табака,
+                    - употреблению каннабиса в соответствии с местным законодательством,
+                    - потреблению алкоголя,
+                    - любой другой регулируемой деятельности.
+                    
+                    Приложение не является призывом, не поощряет и не пропагандирует употребление каких-либо веществ.
+                    
+                    2. ОТСУТСТВИЕ ПРИЗЫВА К ПОТРЕБЛЕНИЮ
+                    Использование приложения не означает, что пользователь является курильщиком или потребителем алкоголя/каннабиса.
+                    Приложение не поощряет, не нормализует и не представляет в привлекательном виде потребление табака, алкоголя или каннабиса.
+                    
+                    Единственная цель приложения:
+                    - помощь в подсчёте, визуализации и анализе потребления,
+                    - повышение осознанности относительно привычек, расходов и последствий,
+                    - поддержка в снижении или полном отказе.
+                    
+                    Настоящий успех — отказаться от сигареты, косяка или алкогольного напитка либо никогда не начинать.
+                    Если вы не употребляете — сохраняйте своё здоровье: табак, алкоголь и каннабис вредны.
+                    
+                    3. ОТВЕТСТВЕННОСТЬ ПОЛЬЗОВАТЕЛЯ
+                    Пользователь несёт полную ответственность за использование приложения, а несовершеннолетние — их законные представители.
+                    Разработчик не несёт ответственности за:
+                    - неправильное использование,
+                    - интерпретацию данных,
+                    - нарушение местных законов,
+                    - решения, принятые на основе информации приложения.
+                    
+                    Приложение не может быть использовано в качестве юридического доказательства или основания для гражданской/уголовной ответственности.
+                    
+                    4. ЗАЩИТА НЕСОВЕРШЕННОЛЕТНИХ И РОДИТЕЛЬСКИЙ КОНТРОЛЬ
+                    Несмотря на отсутствие сбора персональных данных, важно контролировать цифровую активность несовершеннолетних.
+                    Родителям и опекунам рекомендуется следить за:
+                    - здоровьем и самочувствием,
+                    - эмоциональным состоянием,
+                    - социальным поведением,
+                    - использованием цифровых устройств.
+                    
+                    5. ПЕРСОНАЛЬНЫЕ ДАННЫЕ И КОНФИДЕНЦИАЛЬНОСТЬ
+                    Регистрация не требуется.
+                    Персональные данные не собираются, не хранятся и не передаются.
+                    Введённое имя используется только внутри приложения и в экспортируемых/импортируемых файлах на устройстве пользователя.
+                    
+                    Пользователь обязан:
+                    - защищать своё устройство,
+                    - использовать актуальные средства безопасности,
+                    - соблюдать рекомендации по защите личных данных.
+                    
+                    6. РЕКЛАМА И ФИНАНСИРОВАНИЕ
+                    Бесплатная версия приложения содержит рекламный баннер.
+                    Премиум-версия предоставляет использование без рекламы.
+                    
+                    Приложение является результатом работы независимого разработчика.
+                    Реклама используется исключительно для поддержки разработки и улучшений.
+                    
+                    7. НЕЙТРАЛЬНОСТЬ, НЕЗАВИСИМОСТЬ И ОТСУТСТВИЕ СВЯЗЕЙ
+                    Разработчик является независимым частным лицом.
+                    Приложение не связано с:
+                    - государственными структурами,
+                    - табачными компаниями,
+                    - производителями алкоголя,
+                    - индустрией каннабиса,
+                    - криминальными организациями.
+                    
+                    Приложение не предназначено для замены или конкуренции с любыми другими приложениями похожего названия.
+                    
+                    8. АВТОРСКИЕ ПРАВА
+                    Название, дизайн, текст и функциональность защищены авторским правом.
+                    Любое несанкционированное копирование или распространение запрещено.
+                    
+                    9. ТЕХНИЧЕСКИЕ ОГРАНИЧЕНИЯ И РИСКИ
+                    Возможны ошибки, сбои или потеря данных в зависимости от:
+                    - модели устройства,
+                    - версии Android,
+                    - состояния системы,
+                    - доступной памяти,
+                    - установленного ПО.
+                    
+                    Разработчик не несёт ответственности за:
+                    - потерю данных,
+                    - поломки устройства или ПО,
+                    - поврежденные файлы,
+                    - несовместимость частичную или полную.
+                    
+                    Бесплатная версия позволяет протестировать приложение перед покупкой.
+                    Возврат средств невозможен.
+                    
+                    Смена устройства или аккаунта Google может потребовать повторной покупки согласно правилам Play Store.
+                    
+                    10. РАЗРАБОТКА И ИСПОЛЬЗОВАНИЕ ИИ
+                    Приложение было создано вручную с отдельными элементами, оптимизированными средствами искусственного интеллекта.
+                    Разработчик является единственным автором проекта.
+                """.trimIndent(),
         "warning_resources_link" to "📞 Ресурсы и телефоны помощи",
-        "warning_checkbox_age" to "☑️ Я взрослый, мне 18 лет или больше",
+        "warning_checkbox_age" to "☑️ Я подтверждаю, что являюсь совершеннолетним",
         "warning_checkbox_noshow" to "Больше не показывать это сообщение",
         "warning_btn_quit" to "Выход",
         "warning_btn_accept" to "Принимаю и продолжаю",
         
-        "resources_title" to "📞 Нужна помощь?",
-        "resources_content" to "📞 Ресурсы и телефоны помощи\n\n" +
-                               "🚨 Скорая помощь: 112 (EU) / 103 (RU)\n\n" +
-                               "🇷🇺 РОССИЯ\n" +
-                               "• Телефон доверия: 8-800-2000-122\n" +
-                               "• Нарко-стоп: 8-800-333-44-44\n" +
-                               "• Анонимная помощь\n\n" +
-                               "🌍 Проверьте местные ресурсы в вашей стране.",
+        // Dialog ressources
+        "resources_title" to "📞 Ресурсы и телефоны помощи",
+        "resources_content" to """
+                    📞 ПОЛЕЗНЫЕ РЕСУРСЫ – ПОМОЩЬ, ПОДДЕРЖКА И ИНФОРМАЦИЯ
+                    
+                    Ниже приведены официальные и признанные службы поддержки для людей, сталкивающихся с трудностями, связанными с табаком, алкоголем, каннабисом или эмоциональным состоянием.  
+                    Номера могут различаться в зависимости от региона.  
+                    Всегда проверяйте актуальность местных телефонов.
+                    
+                    1. ТАБАК – ПОМОЩЬ В ОТКАЗЕ ОТ КУРЕНИЯ
+                    • Россия – Линия помощи: 8-800-200-02-00 (антитабачные консультации)  
+                    • Беларусь – Линия здоровья: 801 100 201 01  
+                    • Казахстан – Национальная линия здоровья: 1406  
+                    
+                    2. АЛКОГОЛЬ – ПОДДЕРЖКА И ПРОФИЛАКТИКА
+                    • Россия – Телефон доверия по зависимостям: 8-800-333-44-44  
+                    • Беларусь – Центры профилактики зависимостей: региональные номера  
+                    • Казахстан – Единая служба психологической поддержки: 111  
+                    
+                    3. КАННАБИС – ИНФОРМАЦИОННАЯ ПОДДЕРЖКА
+                    • Россия – Центры наркологической помощи: местные телефоны  
+                    • Беларусь – Службы помощи при зависимостях: региональные контакты  
+                    • Казахстан – Служба консультирования 1406  
+                    
+                    4. ЭМОЦИОНАЛЬНАЯ ПОДДЕРЖКА И КРИЗИСНЫЕ СИТУАЦИИ
+                    • Россия – Детский телефон доверия: 8-800-2000-122  
+                    • Россия – Психологическая помощь: 8-800-100-49-94  
+                    • Беларусь – Линия доверия: 801 100 123 45  
+                    • Казахстан – Национальная линия доверия: 111  
+                    
+                    5. СЛУЖБЫ ЭКСТРЕННОЙ ПОМОЩИ
+                    • Европейский Союз – 112  
+                    • Россия – 112 (единый номер), 103 (скорая), 102 (полиция), 101 (пожарные)  
+                    • Беларусь – 112, 103, 102, 101  
+                    • Казахстан – 112, 103, 102, 101  
+                    
+                    6. ОТВЕТСТВЕННОЕ ИСПОЛЬЗОВАНИЕ И ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ
+                    Эти ресурсы не связаны с приложением StopAddict.  
+                    Они предоставлены исключительно для справочных целей.  
+                    При физических, эмоциональных или социальных трудностях рекомендуется обращаться к специалистам.
+                    
+                    7. ВАЖНОЕ НАПОМИНАНИЕ
+                    Приложение не диагностирует, не лечит и не предотвращает заболевания.  
+                    Оно не заменяет консультацию врача.  
+                    В случае угрозы жизни или опасности необходимо обращаться в экстренные службы.
+                """.trimIndent(),
         "resources_btn_close" to "Закрыть",
-        
+                
         "console_title" to "КОНСОЛЬ ОТЛАДКИ STOPADDICT",
         "console_version" to "Версия",
         "console_version_free" to "Бесплатная",
@@ -696,25 +1404,168 @@ object MainActivityLangues {
         "tab_habitudes" to "العادات والإرادة",
         "tab_reglages" to "الإعدادات",
         
-        "warning_title" to "⚠️ تحذير - للبالغين فقط (18+)",
-        "warning_message" to "Stop Addict هو تطبيق للمراقبة الذاتية والمساعدة في تقليل/إيقاف الاستهلاك (التبغ، الكحول، القنب).\n\n" +
-                              "مخصص للأشخاص الذين يبلغون 18 عامًا أو أكثر، وبلغوا سن الرشد في بلد إقامتهم أو البلد الذي يزورونه.\n\n" +
-                              "لا يروج لهذه المنتجات.\n\n" +
-                              "لا يحل محل الدعم الطبي أو النفسي أو الاجتماعي. في حالة الصعوبة، استشر أخصائيًا.\n\n" +
-                              "استخدم Stop Addict بمسؤولية.",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ تحذير – للبالغين فقط",
+        "warning_message" to """
+                    ⚠️ إشعار قانوني
+                    
+                    يتطلب استخدام هذا التطبيق قراءة هذا التحذير بعناية.
+                    يجب على المستخدم الإطلاع على جميع المعلومات التالية قبل الاستخدام.
+                    
+                    1. التحقق من السن القانونية والامتثال للقوانين المحلية
+                    يجب على المستخدم التأكد من أنه بلغ سن الرشد القانوني وفق قوانين بلد إقامته، وكذلك أي بلد يستخدم فيه التطبيق.
+                    تختلف الأعمار القانونية المتعلقة بالتبغ والقنب والكحول بشكل كبير بين الدول.
+                    مثال: قد يُعتبر الشخص البالغ 18 عامًا راشدًا في مصر أو تونس، ولكنه يعتبر قاصرًا وفق قوانين استهلاك الكحول في الولايات المتحدة.
+                    
+                    تقع على عاتق المستخدم كامل المسؤولية في التحقق من القوانين السارية والمتعلقة بـ:
+                    - استخدام التطبيق،
+                    - حيازة أو استهلاك السجائر،
+                    - استخدام القنب وفق التشريعات المحلية،
+                    - استهلاك الكحول،
+                    - أي ممارسات أخرى خاضعة للتنظيم.
+                    
+                    هذا التطبيق لا يشجع، ولا يروج، ولا يسهل استهلاك أي مواد خاضعة للرقابة.
+                    
+                    2. عدم التحفيز على الاستهلاك
+                    استخدام التطبيق لا يعني أن المستخدم مدخن أو مستهلك للكحول أو القنب.
+                    التطبيق لا يشجع ولا يطبع ولا يعرض بشكل إيجابي استهلاك السجائر أو الكحول أو القنب.
+                    
+                    الهدف الوحيد للتطبيق هو:
+                    - المساعدة على العدّ، والعرض، والتحليل،
+                    - زيادة الوعي بالعادات والاستهلاك والمصاريف،
+                    - دعم التقليل أو الإيقاف التام عن الاستهلاك.
+                    
+                    النجاح الحقيقي هو رفض سيجارة أو سيجارة ملفوفة أو مشروب كحولي — أو عدم البدء بها أصلًا.
+                    إذا كنت لا تدخن أو لا تشرب، فحافظ على صحتك: التبغ والكحول والقنب مواد ضارة.
+                    
+                    3. مسؤولية المستخدم
+                    استخدام التطبيق يقع بالكامل تحت مسؤولية المستخدم أو أوليائه الشرعيين إن كان قاصرًا.
+                    لا يتحمل المطوّر أي مسؤولية عن:
+                    - سوء الاستخدام،
+                    - الاستخدام غير المقصود،
+                    - التفسير الخاطئ،
+                    - عدم الامتثال للقوانين المحلية،
+                    - أي قرارات مبنية على البيانات المعروضة.
+                    
+                    لا يمكن استخدام التطبيق كدليل قانوني أو لإثبات المسؤولية المدنية أو الجنائية.
+                    
+                    4. حماية القاصرين والرقابة الأبوية
+                    بالرغم من أن التطبيق لا يجمع أي بيانات شخصية، من الضروري مراقبة استخدام القاصرين للأدوات الرقمية.
+                    يجب على الآباء والأوصياء مراقبة:
+                    - الصحة الجسدية،
+                    - الحالة العاطفية،
+                    - السلوك الاجتماعي،
+                    - استخدام الأجهزة الرقمية.
+                    
+                    5. البيانات الشخصية والخصوصية
+                    لا يتطلب التطبيق أي تسجيل.
+                    لا يتم جمع أو تخزين أو إرسال أي بيانات شخصية.
+                    إذا أدخل المستخدم اسمًا، فإنه يُستخدم فقط داخل التطبيق أو في الملفات المخزّنة على جهازه.
+                    
+                    يتحمل المستخدم مسؤولية:
+                    - حماية هاتفه،
+                    - استخدام أدوات الحماية والتحديث،
+                    - اتباع ممارسات سليمة للخصوصية.
+                    
+                    6. الإعلانات والتمويل
+                    النسخة المجانية تحتوي على إعلانات للمساعدة في تمويل التطوير.
+                    النسخة المدفوعة تتيح الاستخدام دون إعلانات.
+                    
+                    هذا التطبيق هو عمل فردي لمطوّر مستقل.
+                    الإعلانات موجودة فقط لدعم التطوير والصيانة والتحسينات.
+                    
+                    7. الحياد والاستقلالية وعدم وجود روابط خارجية
+                    المطوّر مستقل تمامًا.
+                    التطبيق غير مرتبط بـ:
+                    - أي جهات حكومية،
+                    - شركات التبغ،
+                    - منتجي الكحول،
+                    - صناعة القنب،
+                    - أي منظمات إجرامية.
+                    
+                    التطبيق لا يستهدف منافسة أو استبدال أي تطبيق آخر مشابه في الاسم.
+                    
+                    8. الملكية الفكرية
+                    الاسم، التصميم، النصوص، المحتوى، والوظائف محمية بحقوق النشر.
+                    يمنع أي نسخ أو إعادة توزيع دون إذن.
+                    
+                    9. القيود التقنية والمخاطر المحتملة
+                    قد يواجه التطبيق أخطاءً أو فقدانًا للبيانات تبعًا لـ:
+                    - نوع الجهاز،
+                    - إصدار نظام Android،
+                    - حالة النظام،
+                    - السعة التخزينية،
+                    - بيئة البرامج.
+                    
+                    المطوّر غير مسؤول عن:
+                    - فقدان البيانات،
+                    - الأعطال التقنية،
+                    - تلف الملفات،
+                    - عدم التوافق الجزئي أو الكامل.
+                    
+                    النسخة المجانية تمكّن المستخدم من تجربة التطبيق قبل الشراء.
+                    لا توجد إمكانية لاسترجاع الأموال.
+                    
+                    قد يتطلب تغيير الهاتف أو حساب Google شراءً جديدًا حسب سياسة متجر Play.
+                    
+                    10. التطوير ودور الذكاء الاصطناعي
+                    تم تطوير التطبيق بجهد شخصي مع الاستعانة ببعض أدوات الذكاء الاصطناعي لتحسين النصوص أو أجزاء من الكود.
+                    يبقى المطوّر هو المؤلف الوحيد للمشروع.
+                """.trimIndent(),
         "warning_resources_link" to "📞 الموارد وخطوط المساعدة",
-        "warning_checkbox_age" to "☑️ أنا بالغ، عمري 18 عامًا أو أكثر",
+        "warning_checkbox_age" to "☑️ أؤكد أنني بلغت السن القانونية",
         "warning_checkbox_noshow" to "لا تظهر هذه الرسالة مرة أخرى",
         "warning_btn_quit" to "خروج",
         "warning_btn_accept" to "أوافق وأواصل",
         
-        "resources_title" to "📞 هل تحتاج مساعدة؟",
-        "resources_content" to "📞 الموارد وخطوط المساعدة\n\n" +
-                               "🚨 الطوارئ: 112 (EU)\n\n" +
-                               "🌍 تحقق من الموارد المحلية في بلدك\n" +
-                               "• خطوط المساعدة النفسية\n" +
-                               "• مراكز الإدمان\n" +
-                               "• الدعم الاجتماعي",
+        // Dialog ressources
+        "resources_title" to "📞 الموارد وخطوط المساعدة",
+        "resources_content" to """
+                    📞 موارد مفيدة – خطوط المساعدة، الدعم، والمعلومات
+                    
+                    يحتوي هذا القسم على موارد رسمية أو موثوقة لمساعدة الأشخاص الذين يواجهون صعوبة في التعامل مع التبغ أو الكحول أو القنب أو الضغوط العاطفية.  
+                    تختلف الأرقام حسب البلد، ويجب دائمًا التحقق من الأرقام المحلية.
+                    
+                    1. الإقلاع عن التدخين – دعم واستشارات
+                    • المغرب – خط الإقلاع عن التدخين: 080 100 47 47  
+                    • مصر – الدعم الصحي: 15335  
+                    • تونس – المساعدة الهاتفية: 8010 1111  
+                    • الجزائر – مراكز الإقلاع عن التدخين: أرقام محلية  
+                    
+                    2. الكحول – دعم ومساعدة
+                    • المغرب – الخط الوطني للدعم النفسي والاجتماعي: 080 200 47 47  
+                    • مصر – الخط الساخن للصحة النفسية: 080 888 07 00  
+                    • تونس – خدمات الدعم النفسي: 8010 1111  
+                    
+                    3. القنب / الإدمان – معلومات ومراكز علاج
+                    • مصر – الخط الساخن للإدمان: 16023  
+                    • المغرب – مراكز علاج الإدمان: أرقام محلية  
+                    • تونس – مراكز معالجة الإدمان (SerT): أرقام محلية  
+                    
+                    4. الدعم العاطفي، الأزمات، والصحة النفسية
+                    • لبنان – خط الحياة: 1564  
+                    • الإمارات – دعم الصحة النفسية: 8004673  
+                    • السعودية – مركز الاستشارات النفسية: 920033360  
+                    • المغرب – الخط الوطني للدعم النفسي: 080 200 47 47  
+                    
+                    5. الطوارئ
+                    • الاتحاد الأوروبي – 112  
+                    • المغرب – 190 (شرطة)، 150 (درك)، 150/155 (إسعاف)  
+                    • مصر – 122 (شرطة)، 123 (إسعاف)  
+                    • السعودية – 911  
+                    • الإمارات – 999  
+                    • تونس – 197 (شرطة)، 190 (طوارئ)، 198 (حماية مدنية)  
+                    
+                    6. استخدام مسؤول ومعلومات إضافية
+                    هذه الموارد غير مرتبطة بتطبيق StopAddict.  
+                    تُقدّم فقط لأغراض معلوماتية.  
+                    عند مواجهة مشاكل صحية أو نفسية أو اجتماعية، يجب استشارة متخصص.
+                    
+                    7. تذكير مهم
+                    هذا التطبيق لا يشخّص ولا يعالج ولا يمنع الأمراض.  
+                    ولا يغني عن استشارة طبيب مختص.  
+                    في حالة الطوارئ أو الخطر، يجب الاتصال بخدمات الطوارئ الرسمية.
+                """.trimIndent(),
         "resources_btn_close" to "إغلاق",
         
         "console_title" to "وحدة التحكم STOPADDICT",
@@ -746,26 +1597,165 @@ object MainActivityLangues {
         "tab_habitudes" to "आदतें और इच्छाशक्ति",
         "tab_reglages" to "सेटिंग्स",
         
-        "warning_title" to "⚠️ चेतावनी - केवल वयस्कों के लिए (18+)",
-        "warning_message" to "Stop Addict एक स्व-निगरानी और सहायता ऐप है जो उपभोग (तंबाकू, शराब, भांग) को कम करने/बंद करने में मदद करता है।\n\n" +
-                              "18 वर्ष या उससे अधिक उम्र के लोगों के लिए आरक्षित है, जो अपने निवास देश या दौरा किए गए देश में वयस्कता की आयु तक पहुंच चुके हैं।\n\n" +
-                              "इन उत्पादों को बढ़ावा नहीं देता है।\n\n" +
-                              "चिकित्सा, मनोवैज्ञानिक या सामाजिक सहायता का विकल्प नहीं है। कठिनाई की स्थिति में, एक पेशेवर से परामर्श लें।\n\n" +
-                              "Stop Addict का जिम्मेदारी से उपयोग करें।",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ चेतावनी – केवल वयस्कों के लिए",
+        "warning_message" to """
+                    ⚠️ कानूनी चेतावनी
+                    
+                    इस ऐप का उपयोग करने से पहले नीचे दिए गए सभी बिंदुओं को ध्यान से पढ़ना आवश्यक है।
+                    उपयोगकर्ता को ऐप का उपयोग करने से पहले सभी जानकारी समझनी चाहिए।
+                    
+                    1. वयस्कता की पुष्टि और स्थानीय कानूनों का पालन
+                    उपयोगकर्ता को यह पुष्टि करनी चाहिए कि वह अपने निवास देश के कानूनों के अनुसार वयस्क है, और किसी भी देश में जहाँ वह ऐप का उपयोग करता है।
+                    तंबाकू, शराब और भांग के लिए कानूनी उम्र विभिन्न देशों में अलग-अलग होती है।
+                    उदाहरण: भारत में 18 वर्ष का व्यक्ति कुछ देशों (जैसे अमेरिका) में शराब के नियमों के अनुसार नाबालिग माना जा सकता है।
+                    
+                    उपयोगकर्ता की पूरी जिम्मेदारी है कि वह निम्न से संबंधित सभी स्थानीय कानूनों की पुष्टि करे:
+                    - ऐप का उपयोग,
+                    - सिगरेट का सेवन या स्वामित्व,
+                    - स्थानीय कानूनों के अनुसार भांग का उपयोग,
+                    - शराब का सेवन,
+                    - कोई भी अन्य नियामित गतिविधि।
+                    
+                    ऐप किसी भी प्रकार के मादक पदार्थों के सेवन को प्रोत्साहित, समर्थन या बढ़ावा नहीं देता।
+                    
+                    2. सेवन के लिए कोई प्रोत्साहन नहीं
+                    ऐप का उपयोग यह नहीं दर्शाता कि उपयोगकर्ता धूम्रपान करता है या शराब/भांग का सेवन करता है।
+                    ऐप धूम्रपान, शराब या भांग के सेवन को सामान्य, आकर्षक या प्रोत्साहित नहीं करता।
+                    
+                    ऐप का मुख्य उद्देश्य है:
+                    - सेवन को गिनना, दिखाना और विश्लेषण करना,
+                    - आदतों, खर्चों और जोखिमों के प्रति जागरूकता बढ़ाना,
+                    - सेवन कम करने या पूरी तरह छोड़ने में सहायता करना।
+                    
+                    वास्तविक सफलता है—सिगरेट, शराब या किसी भी नशीले पदार्थ को मना करना, या फिर कभी शुरू ही न करना।
+                    यदि आप नहीं पीते या नहीं धूम्रपान करते, तो यह आपकी सेहत के लिए बेहतर है—तंबाकू, शराब और भांग हानिकारक होते हैं।
+                    
+                    3. उपयोगकर्ता की जिम्मेदारी
+                    ऐप का उपयोग पूरी तरह से उपयोगकर्ता की जिम्मेदारी है।  
+                    यदि उपयोगकर्ता नाबालिग है, तो उसके अभिभावकों की जिम्मेदारी है।
+                    डेवलपर किसी भी स्थिति में जिम्मेदार नहीं है:
+                    - गलत उपयोग,
+                    - दुरुपयोग या गलत व्याख्या,
+                    - कानूनों का उल्लंघन,
+                    - ऐप के डेटा के आधार पर लिए गए निर्णय।
+                    
+                    ऐप किसी भी कानूनी प्रमाण या नागरिक/आपराधिक उत्तरदायित्व के लिए उपयोग नहीं किया जा सकता।
+                    
+                    4. नाबालिगों की सुरक्षा और अभिभावकीय निगरानी
+                    ऐप कोई व्यक्तिगत डेटा एकत्र नहीं करता, फिर भी नाबालिगों की डिजिटल गतिविधि की निगरानी आवश्यक है।
+                    अभिभावकों को ध्यान देना चाहिए:
+                    - स्वास्थ्य और कल्याण,
+                    - भावनात्मक स्थिति,
+                    - सामाजिक व्यवहार,
+                    - डिजिटल उपकरणों के उपयोग पर।
+                    
+                    5. व्यक्तिगत डेटा और गोपनीयता
+                    ऐप में पंजीकरण की आवश्यकता नहीं है।
+                    कोई भी निजी डेटा एकत्र, संग्रहीत या साझा नहीं किया जाता।
+                    यदि कोई नाम दर्ज किया जाता है, तो वह केवल ऐप और उपयोगकर्ता के अपने डिवाइस में संग्रहीत फ़ाइलों में उपयोग होता है।
+                    
+                    उपयोगकर्ता स्वयं जिम्मेदार है:
+                    - अपने फ़ोन की सुरक्षा के लिए,
+                    - सुरक्षा सॉफ़्टवेयर और अपडेट के लिए,
+                    - अच्छी डेटा-गोपनीयता आदतों का पालन करने के लिए।
+                    
+                    6. विज्ञापन और वित्तपोषण
+                    मुफ्त संस्करण में विज्ञापन शामिल हैं, जो विकास को समर्थन देते हैं।
+                    प्रीमियम संस्करण बिना विज्ञापन के उपयोग की अनुमति देता है।
+                    
+                    यह ऐप एक स्वतंत्र डेवलपर का व्यक्तिगत प्रोजेक्ट है।
+                    विज्ञापन केवल रखरखाव और सुधार के लिए उपयोग किए जाते हैं।
+                    
+                    7. निष्पक्षता, स्वतंत्रता और बाहरी संबद्धताओं का अभाव
+                    डेवलपर पूरी तरह स्वतंत्र है।
+                    ऐप का कोई संबंध नहीं है:
+                    - सरकारी एजेंसियों,
+                    - तंबाकू उद्योग,
+                    - शराब निर्माताओं,
+                    - भांग उद्योग,
+                    - किसी भी आपराधिक संगठन से।
+                    
+                    यह ऐप किसी भी समान नाम वाले ऐप से प्रतिस्पर्धा या उसका विकल्प नहीं है।
+                    
+                    8. बौद्धिक संपदा
+                    ऐप का नाम, डिज़ाइन, सामग्री और सुविधाएँ कॉपीराइट द्वारा संरक्षित हैं।
+                    किसी भी प्रकार की अनधिकृत नकल या वितरण निषिद्ध है।
+                    
+                    9. तकनीकी सीमाएँ और जोखिम
+                    ऐप में त्रुटियाँ, डेटा हानि या समस्याएँ हो सकती हैं, यह निर्भर करता है:
+                    - डिवाइस मॉडल,
+                    - Android संस्करण,
+                    - सिस्टम स्थिति,
+                    - उपलब्ध संग्रहण,
+                    - सॉफ़्टवेयर वातावरण।
+                    
+                    डेवलपर किसी भी स्थिति में जिम्मेदार नहीं है:
+                    - डेटा हानि,
+                    - डिवाइस/सॉफ़्टवेयर त्रुटियाँ,
+                    - फ़ाइल भ्रष्टाचार,
+                    - आंशिक या पूर्ण असंगतता।
+                    
+                    मुफ्त संस्करण खरीदने से पहले परीक्षण की अनुमति देता है।
+                    रिफंड उपलब्ध नहीं हैं।
+                    
+                    फ़ोन या Google खाते को बदलने पर Play Store की नीति के अनुसार पुनः खरीदारी आवश्यक हो सकती है।
+                    
+                    10. विकास और कृत्रिम बुद्धिमत्ता की भूमिका
+                    ऐप व्यक्तिगत मेहनत और कुछ AI टूल्स की सहायता से विकसित किया गया है।
+                    डेवलपर इस परियोजना का एकमात्र लेखक है।
+                """.trimIndent(),
         "warning_resources_link" to "📞 संसाधन और हेल्पलाइन",
-        "warning_checkbox_age" to "☑️ मैं वयस्क हूं, मैं 18 वर्ष या उससे अधिक का हूं",
+        "warning_checkbox_age" to "☑️ मैं पुष्टि करता हूं कि मैं वयस्क हूं",
         "warning_checkbox_noshow" to "यह संदेश फिर से न दिखाएं",
         "warning_btn_quit" to "बाहर निकलें",
         "warning_btn_accept" to "मैं स्वीकार करता हूं और जारी रखता हूं",
         
-        "resources_title" to "📞 मदद चाहिए?",
-        "resources_content" to "📞 संसाधन और हेल्पलाइन\n\n" +
-                               "🚨 आपातकाल: 112\n\n" +
-                               "🇮🇳 भारत\n" +
-                               "• राष्ट्रीय हेल्पलाइन: 1800-11-0031\n" +
-                               "• मानसिक स्वास्थ्य: 08046110007\n" +
-                               "• नशा मुक्ति केंद्र\n\n" +
-                               "🌍 अपने देश में स्थानीय संसाधनों की जांच करें।",
+        // Dialog ressources
+        "resources_title" to "📞 संसाधन और हेल्पलाइन",
+        "resources_content" to """
+                    📞 उपयोगी संसाधन – सहायता, समर्थन और जानकारी
+                    
+                    यह अनुभाग तंबाकू, शराब, भांग या भावनात्मक कठिनाइयों से जूझ रहे लोगों के लिए विश्वसनीय और मान्यता प्राप्त संसाधन प्रदान करता है।  
+                    हेल्पलाइन नंबर क्षेत्र के अनुसार बदल सकते हैं।  
+                    हमेशा अपने स्थानीय क्षेत्र के आधिकारिक नंबरों की पुष्टि करें।
+                    
+                    1. तंबाकू – धूम्रपान छोड़ने में सहायता
+                    • भारत – राष्ट्रीय तंबाकू परामर्श हेल्पलाइन: 1800-11-2356  
+                    • भारत – Quitline सहायता: 011-22901701  
+                    • नेपाल – Tobacco Quitline: 1660-01-21212
+                    
+                    2. शराब – सहायता और परामर्श
+                    • भारत – मानसिक स्वास्थ्य/शराब सहायता हेल्पलाइन: 08046110007  
+                    • भारत – Alcohol De-Addiction Centres: स्थानीय नंबर  
+                    • नेपाल/बांग्लादेश – स्थानीय मानसिक स्वास्थ्य सेवाएँ
+                    
+                    3. भांग/नशा – जानकारी और सहायता
+                    • भारत – राष्ट्रीय नशा मुक्ति हेल्पलाइन: 1800-11-0031  
+                    • बांग्लादेश – Addiction Counselling: स्थानीय केंद्र  
+                    • नेपाल – Substance Support Lines: क्षेत्रीय नंबर
+                    
+                    4. भावनात्मक संकट, मानसिक स्वास्थ्य और समर्थन
+                    • भारत – KIRAN मानसिक स्वास्थ्य हेल्पलाइन: 1800-599-0019  
+                    • भारत – Snehi Emotional Support: 9582208181  
+                    • नेपाल – Suicide Prevention: 1166  
+                    • बांग्लादेश – Mental Health Hotline: 09666-787801  
+                    
+                    5. आपातकालीन नंबर
+                    • भारत – 112 (एकीकृत आपातकाल), 100 (पुलिस), 101 (फायर), 102/108 (एम्बुलेंस)  
+                    • नेपाल – 100 (पुलिस), 101 (फायर), 102 (एम्बुलेंस)  
+                    • बांग्लादेश – 999  
+                    
+                    6. जिम्मेदार उपयोग और अतिरिक्त जानकारी
+                    ये संसाधन StopAddict से संबद्ध नहीं हैं।  
+                    इन्हें केवल जानकारी के उद्देश्य से प्रदान किया गया है।  
+                    शारीरिक, भावनात्मक या सामाजिक कठिनाइयों में विशेषज्ञ से परामर्श लेना आवश्यक है।
+                    
+                    7. महत्वपूर्ण अनुस्मारक
+                    यह ऐप किसी भी बीमारी का निदान, उपचार या रोकथाम नहीं करता।  
+                    यह पेशेवर चिकित्सकीय सलाह का विकल्प नहीं है।  
+                    आपात स्थिति में, अपने देश की आधिकारिक आपातकालीन सेवाओं से संपर्क करें।
+                """.trimIndent(),
         "resources_btn_close" to "बंद करें",
         
         "console_title" to "डीबग कंसोल STOPADDICT",
@@ -797,28 +1787,162 @@ object MainActivityLangues {
         "tab_habitudes" to "習慣と意志",
         "tab_reglages" to "設定",
         
-        "warning_title" to "⚠️ 警告 - 成人向け (18+)",
-        "warning_message" to "Stop Addictは、消費（タバコ、アルコール、大麻）の削減/停止を支援する自己監視アプリです。\n\n" +
-                              "居住国または訪問国で成年に達した18歳以上の方を対象としています。\n\n" +
-                              "これらの製品を宣伝するものではありません。\n\n" +
-                              "医療、心理、社会的サポートの代替品ではありません。困難な場合は、専門家にご相談ください。\n\n" +
-                              "Stop Addictを責任を持って使用してください。",
+        // Dialog avertissement majorité
+        "warning_title" to "⚠️ 警告 – 成人向け",
+        "warning_message" to """
+                    ⚠️ 法的注意事項
+                    
+                    このアプリを使用する前に、以下の内容を必ずお読みください。
+                    利用者は、使用開始前にすべての情報を理解する必要があります。
+                    
+                    1. 成年確認および各国の法律遵守
+                    利用者は、自身が居住国または利用国の法律において成年に達していることを確認しなければなりません。
+                    タバコ、アルコール、大麻に関する成年年齢は国によって大きく異なります。
+                    例：日本で成人でも、国によってはアルコールに関する法的基準が異なる場合があります。
+                    
+                    利用者は以下に関する現地法を自行で確認する責任があります：
+                    - アプリの使用
+                    - タバコの所持および使用
+                    - 現地法に基づく大麻の扱い
+                    - アルコールの購入・消費
+                    - 規制対象となるその他の行為
+                    
+                    本アプリは、これらの物質の使用を促したり、推奨したりするものではありません。
+                    
+                    2. 消費を促すものではありません
+                    このアプリの利用は、喫煙・飲酒・大麻使用者であることを意味するものではありません。
+                    本アプリは、喫煙、飲酒、大麻使用を美化・正当化・推奨するものではありません。
+                    
+                    アプリの目的は以下の通りです：
+                    - 消費量の記録・可視化・分析
+                    - 習慣・消費・費用に対する意識向上
+                    - 消費量の削減または停止を支援すること
+                    
+                    本当の成功は、タバコ・酒・大麻を断ること、あるいは最初から始めないことです。
+                    吸わない・飲まない人はそのまま健康を守ってください。  
+                    これらの物質は身体に有害です。
+                    
+                    3. 利用者の責任
+                    アプリの使用は利用者の自己責任です。
+                    未成年者が使用する場合は、保護者が責任を負います。
+                    
+                    開発者は以下について一切責任を負いません：
+                    - 誤使用・不適切な使用
+                    - 情報の誤解釈
+                    - 現地法違反
+                    - 表示されたデータをもとにした判断
+                    
+                    アプリは法律的証拠として利用することはできません。
+                    
+                    4. 未成年保護と保護者の監督
+                    個人情報は収集していませんが、未成年のデジタル利用には監督が必要です。
+                    
+                    保護者は以下を確認することが推奨されます：
+                    - 健康状態
+                    - 心の状態
+                    - 社会的行動
+                    - デジタル機器の利用状況
+                    
+                    5. 個人情報とプライバシー
+                    アカウント登録は不要です。
+                    個人データの収集・保存・送信は一切行われません。
+                    入力された名前は、アプリ内またはユーザーの端末に保存されるファイルでのみ使用されます。
+                    
+                    利用者は以下の責任を負います：
+                    - 端末の保護
+                    - セキュリティ設定と更新
+                    - 適切なデータ保護対策
+                    
+                    6. 広告と資金提供
+                    無料版には広告が表示され、アプリの開発を支援しています。
+                    プレミアム版では広告は完全に削除されます。
+                    
+                    本アプリは独立開発者による個人プロジェクトです。
+                    広告収益は開発と改善のためにのみ使用されます。
+                    
+                    7. 中立性・独立性および外部との無関係
+                    開発者は独立した個人です。
+                    本アプリは以下と一切関係ありません：
+                    - 政府機関
+                    - タバコ産業
+                    - アルコールメーカー
+                    - 大麻産業
+                    - 犯罪組織
+                    
+                    類似名の他アプリとは無関係であり、競合も代替も意図していません。
+                    
+                    8. 著作権について
+                    アプリ名、デザイン、文章、機能は著作権により保護されています。
+                    無断転載・配布は禁止されています。
+                    
+                    9. 技術的制限とリスク
+                    デバイス、Androidバージョン、システム状態、ストレージ容量、環境によっては、
+                    バグ・データ損失・動作不良などが発生する場合があります。
+                    
+                    開発者は以下に対し責任を負いません：
+                    - データ損失
+                    - 端末やソフトウェアの不具合
+                    - ファイル破損
+                    - 部分的または完全な非互換性
+                    
+                    無料版で購入前に動作を確認できます。
+                    返金には対応していません。
+                    
+                    端末変更やGoogleアカウント変更によっては、Playストアの規定により再購入が必要となる場合があります。
+                    
+                    10. AI（人工知能）の利用について
+                    このアプリは独自開発であり、一部文章や最適化にAIツールを利用していますが、
+                    開発者は本プロジェクトの唯一の著作者です。
+                """.trimIndent(),
         "warning_resources_link" to "📞 リソースとヘルプライン",
-        "warning_checkbox_age" to "☑️ 私は成人です、18歳以上です",
-        "warning_checkbox_noshow" to "このメッセージを再度表示しない",
+        "warning_checkbox_age" to "☑️ 成人であることを確認しました",
+        "warning_checkbox_noshow" to "このメッセージを再表示しない",
         "warning_btn_quit" to "終了",
         "warning_btn_accept" to "同意して続行",
         
-        "resources_title" to "📞 助けが必要ですか？",
-        "resources_content" to "📞 リソースとヘルプライン\n\n" +
-                               "🚨 緊急: 110 / 119\n\n" +
-                               "🇯🇵 日本\n" +
-                               "• こころの健康相談: 0570-064-556\n" +
-                               "• いのちの電話: 0570-783-556\n" +
-                               "• 各自治体の相談窓口\n\n" +
-                               "🌍 お住まいの国の地域リソースを確認してください。",
+        // Dialog ressources
+        "resources_title" to "📞 リソースとヘルプライン",
+        "resources_content" to """
+                    📞 役立つリソース – 支援、相談窓口、情報
+                    
+                    以下は、タバコ・アルコール・大麻・精神的ストレスに困っている方のための公式または信頼できる支援サービスです。  
+                    地域によって番号が異なるため、お住まいの地域の情報を必ずご確認ください。
+                    
+                    1. 禁煙サポート
+                    • 日本 – 禁煙支援窓口（自治体）：地域番号  
+                    • 日本 – こころの健康相談統一ダイヤル：0570-064-556  
+                    • 日本 – がん相談支援センター：地域窓口  
+                    
+                    2. アルコール依存・相談
+                    • 日本 – 精神保健福祉センター（アルコール相談）：地域番号  
+                    • 日本 – アルコール依存症相談窓口（病院・自治体）
+                    
+                    3. 大麻・薬物依存サポート
+                    • 日本 – ダルク（DARC）支援施設：地域窓口  
+                    • 日本 – 薬物依存相談（保健所）：地域番号  
+                    
+                    4. 心の健康・自殺予防・感情サポート
+                    • 日本 – いのちの電話：0570-783-556  
+                    • 日本 – よりそいホットライン：0120-279-338  
+                    • 日本 – 子ども110番 / 若者支援窓口：地域番号  
+                    
+                    5. 緊急番号
+                    • 日本 – 110（警察）、119（消防・救急）  
+                    • 韓国 – 112（警察）、119（消防・救急）  
+                    • シンガポール – 999（警察）、995（救急）、1777（非緊急医療）  
+                    
+                    6. 責任ある利用と追加情報
+                    これらのリソースは StopAddict と提携していません。  
+                    あくまでも参考情報として提供されています。  
+                    身体的・精神的・社会的な問題がある場合は、必ず専門家に相談してください。
+                    
+                    7. 重要な注意事項
+                    このアプリは病気の診断・治療・予防を行うものではありません。  
+                    専門的な医療アドバイスの代替にはなりません。  
+                    緊急時は必ず公式の緊急サービスに連絡してください。
+                """.trimIndent(),
         "resources_btn_close" to "閉じる",
-        
+                
         "console_title" to "デバッグコンソール STOPADDICT",
         "console_version" to "バージョン",
         "console_version_free" to "無料",
