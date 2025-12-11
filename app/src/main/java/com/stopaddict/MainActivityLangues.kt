@@ -237,28 +237,181 @@ object MainActivityLangues {
         "tab_habitudes" to "Habits & Will",
         "tab_reglages" to "Settings",
         
-        "warning_title" to "⚠️ Warning - Adults Only (18+)",
-        "warning_message" to "Stop Addict is a self-monitoring and assistance app for reducing/stopping consumption (tobacco, alcohol, cannabis).\n\n" +
-                              "Reserved for people aged 18 and over, having reached the age of majority in their country of residence or country visited.\n\n" +
-                              "Does not promote these products.\n\n" +
-                              "Does not replace medical, psychological or social support. In case of difficulty, consult a professional.\n\n" +
-                              "Use Stop Addict responsibly.",
-        "warning_resources_link" to "📞 Resources and helplines",
-        "warning_checkbox_age" to "☑️ I am an adult, I am 18 years old or older",
+       // Dialog avertissement majorité
+        "warning_title" to "⚠️ Warning – Adults Only",
+        "warning_message" to """
+                    ⚠️ LEGAL NOTICE
+                    
+                    Using this application implies that you have carefully read the following information.
+                    The user must review all of the following elements before any use.
+                    
+                    1. AGE VERIFICATION AND COMPLIANCE WITH LOCAL LAWS
+                    The user must confirm that they are of legal age according to the laws of their country of residence and in any country where they use the application.
+                    Legal ages regarding tobacco, cannabis and alcohol vary significantly from one country to another.
+                    Example: a person considered an adult at 18 in the United Kingdom or Canada may still be considered underage under U.S. alcohol regulations.
+                    
+                    It is the user’s sole responsibility to verify the laws, restrictions and obligations applicable in any country or region regarding:
+                    - the use of the application,
+                    - the possession or consumption of cigarettes,
+                    - the use of cannabis according to local regulations,
+                    - the consumption of alcohol,
+                    - any other regulated practice.
+                    
+                    The application must not be considered as encouraging, facilitating, recommending or promoting the use of regulated substances in any country.
+                    
+                    2. NO ENCOURAGEMENT TO CONSUME
+                    Using this application does not imply that the user is a smoker or a consumer of alcohol or cannabis.
+                    The application does not encourage, recommend, glamorise or normalise the consumption of cigarettes, joints, or alcohol.
+                    
+                    The application’s purpose is solely to:
+                    - help track, visualise and analyse usage,
+                    - raise awareness about consumption, habits and spending,
+                    - support reduction or cessation.
+                    
+                    Real success is refusing a cigarette, a joint, or a drink — or never starting at all.
+                    If you do not smoke or drink, continue protecting your health: tobacco, cannabis and alcohol are harmful and can negatively affect behaviour and social interactions.
+                    
+                    3. USER RESPONSIBILITY
+                    The use of the application is entirely under the user's responsibility, or that of their legal guardians if underage.
+                    The developer cannot be held responsible for:
+                    - misuse,
+                    - diversion from intended use,
+                    - incorrect interpretation,
+                    - failure to comply with local laws,
+                    - decisions made based on displayed data.
+                    
+                    The application cannot be used to establish civil or criminal liability, nor as evidence in any legal context, for or against the user or the developer.
+                    
+                    4. PROTECTION OF MINORS AND PARENTAL SUPERVISION
+                    Even though the application collects no personal data, it is essential to remain vigilant regarding minors’ digital usage.
+                    Parents, guardians and legal representatives should monitor:
+                    - health and wellbeing,
+                    - mental and emotional state,
+                    - social behaviour,
+                    - general use of digital tools.
+                    
+                    5. PERSONAL DATA AND PRIVACY
+                    No registration is required.
+                    No personal data is collected, stored or transmitted.
+                    If a first name is entered, it is used only within the application or in exported/imported files stored on the user’s own device.
+                    
+                    It is the user's responsibility to:
+                    - protect their smartphone,
+                    - maintain security software,
+                    - adopt good data protection practices.
+                    
+                    6. ADVERTISING AND FUNDING
+                    The free version includes a banner advertisement to support development.
+                    The premium version allows usage without ads.
+                    
+                    This application is the personal work of an independent creator.
+                    Advertisements exist solely to support development, maintenance and improvements.
+                    
+                    7. NEUTRALITY, INDEPENDENCE AND NO EXTERNAL AFFILIATION
+                    The developer is an independent individual.
+                    The application has no ties with:
+                    - governments or public institutions,
+                    - tobacco companies,
+                    - alcohol manufacturers,
+                    - cannabis industries,
+                    - any criminal organisation or cartel.
+                    
+                    The application is not intended to replace or compete with any other similarly named application.
+                    
+                    8. INTELLECTUAL PROPERTY
+                    The name, design, text, content and features of the application are protected by copyright law.
+                    Any reproduction, copying or redistribution without authorisation is prohibited.
+                    
+                    Copyright applies automatically, even without paid registration.
+                    
+                    9. TECHNICAL LIMITATIONS, COMPATIBILITY AND RISKS
+                    The application may encounter bugs, errors or data loss depending on:
+                    - device model,
+                    - Android version,
+                    - system condition,
+                    - available storage,
+                    - software environment.
+                    
+                    The developer cannot be held responsible for:
+                    - data loss,
+                    - hardware/software malfunction,
+                    - corrupted files,
+                    - partial or total incompatibility.
+                    
+                    The free version allows users to test the application before purchasing.
+                    No refunds are possible.
+                    
+                    A change of smartphone or Google account may require repurchasing the application depending on Play Store policies.
+                    
+                    10. DEVELOPMENT AND ROLE OF AI
+                    The application was built through personal work and the use of AI tools to optimize text and code.
+                    The creator remains the sole author of the entire project.
+                """.trimIndent(),
+        "warning_resources_link" to "📞 Useful Help & Support Numbers",
+        "warning_checkbox_age" to "☑️ I confirm I am of legal age",
         "warning_checkbox_noshow" to "Do not show this message again",
         "warning_btn_quit" to "Quit",
         "warning_btn_accept" to "I accept and continue",
         
-        "resources_title" to "📞 Need help?",
-        "resources_content" to "📞 Resources and helplines\n\n" +
-                               "🚨 Emergency: 112 (EU) / 911 (US/CA)\n\n" +
-                               "🇬🇧 UK\n" +
-                               "• NHS Smoking: 0300 123 1044\n" +
-                               "• Alcohol helpline: 0300 123 1110\n" +
-                               "• FRANK drugs: 0300 123 6600\n\n" +
-                               "🌍 Check local resources in your country.",
+        // Dialog ressources
+        "resources_title" to "📞 Help & Useful Support Numbers",
+        "resources_content" to """
+                    📞 USEFUL RESOURCES – HELP, SUPPORT & INFORMATION
+                    
+                    This module provides official or widely recognised resources for people facing difficulties related to tobacco, alcohol, cannabis or emotional distress. Availability depends on your country or region.  
+                    Always check the local availability of hotlines in your area.
+                    
+                    1. TOBACCO – QUITLINES, SUPPORT & COUNSELLING
+                    • United States – 1-800-QUIT-NOW (1-800-784-8669)  
+                      National quitline offering personalised support and cessation programs.
+                    • United Kingdom – NHS Smokefree Helpline: 0300 123 1044  
+                    • Canada – QuitNow: 1 877 455 2233  
+                    • Australia – Quitline: 13 78 48  
+                    • International – Check your local health authorities for national quitlines.
+                    
+                    2. ALCOHOL – HELP, PREVENTION & SUPPORT
+                    • United States – SAMHSA National Helpline: 1-800-662-HELP (4357)  
+                      Free, confidential, 24/7 support for alcohol and mental health issues.
+                    • United Kingdom – Drinkline: 0300 123 1110  
+                    • Canada – Alcoholics Anonymous: 1 877 404 2242  
+                    • Australia – Alcohol Drug Information Service (ADIS): state numbers vary (example NSW: 1800 250 015)
+                    
+                    3. CANNABIS – INFORMATION & ASSISTANCE
+                    • United States – SAMHSA Drug Information: 1-800-662-HELP  
+                    • Canada – Canada Health Drug Info: 1-866-366-3667  
+                    • United Kingdom – FRANK Drugs Helpline: 0300 123 6600  
+                    • Australia – National Alcohol and Other Drugs Hotline: 1800 250 015
+                    
+                    4. EMOTIONAL DISTRESS, CRISIS & MENTAL HEALTH SUPPORT
+                    Excessive consumption can hide psychological or emotional suffering.  
+                    If you or someone you know is struggling, the following hotlines may help:
+                    
+                    • United States – Suicide & Crisis Lifeline: 988  
+                    • United Kingdom – Samaritans: 116 123  
+                    • Canada – Suicide Prevention Service: 1 833 456 4566  
+                    • Australia – Lifeline: 13 11 14  
+                    
+                    5. EMERGENCY NUMBERS
+                    Emergency numbers vary by country. Examples:
+                    • United States – 911  
+                    • Canada – 911  
+                    • United Kingdom – 999 or 112  
+                    • Australia – 000  
+                    • European Union – 112  
+                    Always verify the official emergency numbers of the country you are in.
+                    
+                    6. RESPONSIBLE USE & ADDITIONAL INFORMATION
+                    These resources are not affiliated with StopAddict.  
+                    They are provided solely for informational purposes.  
+                    Consulting health professionals is recommended for any physical, emotional or social difficulties.
+                    
+                    7. IMPORTANT REMINDER
+                    This application does not diagnose, treat or prevent any illness.  
+                    It does not replace medical advice.  
+                    In case of immediate danger or emergency, contact the official emergency services of your area.
+                """.trimIndent(),
         "resources_btn_close" to "Close",
-        
+    
         "console_title" to "DEBUG CONSOLE STOPADDICT",
         "console_version" to "Version",
         "console_version_free" to "Free",
