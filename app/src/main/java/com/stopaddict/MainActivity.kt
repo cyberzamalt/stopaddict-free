@@ -176,7 +176,7 @@ private fun updateDateTime() {
     return result
 }
     
-fun showAgeWarningDialog() {
+    fun showAgeWarningDialog(fromSettings: Boolean = false) {
     logger.d("showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
 
     try {
@@ -250,14 +250,14 @@ fun showAgeWarningDialog() {
                 "ageChecked=${checkboxAge.isChecked}, noShowChecked=${checkboxNoShow.isChecked}"
         )
 
-        // --- NOUVEAU : ScrollView autour du container ---
+        // --- ScrollView autour du container pour éviter que ça déborde ---
         val scrollView = ScrollView(this).apply {
-            isFillViewport = true   // pour que le contenu puisse prendre toute la hauteur dispo
+            isFillViewport = true
             addView(container)
         }
 
         val builder = AlertDialog.Builder(this)
-            .setView(scrollView)  // <- on met le scrollView, plus directement le container
+            .setView(scrollView)
             .setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
                 logger.d("showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
                 finish()
@@ -296,12 +296,14 @@ fun showAgeWarningDialog() {
                         apply()
                     }
 
-                    logger.d(
-                        "showAgeWarningDialog: préférences sauvegardées (avec timestamp), " +
-                            "fermeture dialog"
-                    )
+                    logger.d("showAgeWarningDialog: préférences sauvegardées, fermeture dialog")
+
                     dialog.dismiss()
-                    initializeMainContent()
+
+                    // Si affiché depuis Réglages → NE PAS renvoyer à l'accueil
+                    if (!fromSettings) {
+                        initializeMainContent()
+                    }
                 } else {
                     logger.d(
                         "showAgeWarningDialog: bouton 'Accepter' cliqué " +
