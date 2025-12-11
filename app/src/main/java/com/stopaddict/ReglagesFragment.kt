@@ -899,15 +899,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     container.addView(card)
 }
 
-    private fun showAvertissementDialog() {
-        val message = ReglagesLangues.getAvertissement(configLangue.getLangue())
-        AlertDialog.Builder(requireContext())
-            .setTitle("⚠️ ${trad["btn_avertissement"] ?: "Avertissement"}")
-            .setMessage(message)
-            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
-            .show()
-    }
-
     private fun showManuelDialog() {
         val manuel = ReglagesLangues.getManuel(configLangue.getLangue())
         val scrollView = ScrollView(requireContext())
