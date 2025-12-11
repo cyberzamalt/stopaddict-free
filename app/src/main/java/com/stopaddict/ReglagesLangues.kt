@@ -1991,34 +1991,4 @@ object ReglagesLangues {
             else -> getMentionsLegales("FR") // Fallback FR
         }
     }
-
-    // ==================== CONTENU AVERTISSEMENT ====================
-
-    fun getAvertissement(langue: String): String {
-        return when (langue) {
-            "FR" -> """
-⚠️ Avertissement - Public majeur(e) (18+)
-
-Stop Addict est une application d'auto-suivi et d'aide à la réduction/arrêt des consommations (tabac, alcool, cannabis).
-
-✓ Réservée aux personnes de 18 ans et plus, ayant dépassé la majorité du pays de résidence ou du pays visité.
-
-✓ Ne fait pas la promotion de ces produits.
-
-✓ Ne remplace pas un accompagnement médical, psychologique ou social. En cas de difficulté, consultez un professionnel.
-
-✓ Utilisez Stop Addict de façon responsable.
-
-📞 Ressources utiles :
-• Urgences : 112 (UE) / 15 (FR - SAMU)
-• Tabac Info Service (FR) : 39 89
-• Alcool Info Service (FR) : 0 980 980 930
-• Drogues Info Service (FR) : 0 800 23 13 13
-
-Consultez les ressources locales dans votre pays si vous n'êtes pas en France.
-            """.trimIndent()
-
-            else -> getAvertissement("FR") // Fallback FR
-        }
-    }
 }
