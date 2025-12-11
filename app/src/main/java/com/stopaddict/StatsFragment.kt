@@ -1008,55 +1008,41 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         }
     }
 
-    private fun calculerEconomies(
-    donnees: Map<String, List<Int>>,
-    coutsParCategorie: Map<String, Double>
-): List<Double> {
+    private fun calculerEconomies(donnees: Map<String, List<Int>>): List<Double> {
     return try {
-        val nbPoints = donnees.values.maxOfOrNull { it.size } ?: 0
-        if (nbPoints == 0) {
-            Log.d(TAG, "Aucune donnée pour calculer les économies")
-            return emptyList()
-        }
+        val nbPoints = donnees.values.firstOrNull()?.size ?: 0
+        if (nbPoints == 0) return emptyList()
 
-        // Économies par jour (même taille que les courbes)
         val economies = MutableList(nbPoints) { 0.0 }
-        // Total d’unités consommées par jour (toutes catégories confondues)
-        val totalUnitesParJour = IntArray(nbPoints) { 0 }
 
+        // 1) On repère le premier index où il existe au moins UNE consommation > 0
+        val firstIndexWithConso = (0 until nbPoints).firstOrNull { index ->
+            categoriesActives.any { (type, active) ->
+                if (!active) return@any false
+                val values = donnees[type] ?: emptyList()
+                index < values.size && values[index] > 0
+            }
+        } ?: nbPoints  // Si vraiment aucune conso sur la période, on neutralise tout
+
+        // 2) Calcul des économies uniquement à partir de ce premier jour "réel"
         categoriesActives.forEach { (type, active) ->
             if (active) {
                 val values = donnees[type] ?: emptyList()
-                if (values.isNotEmpty()) {
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    val coutType = coutsParCategorie[type] ?: 0.0
+                if (values.isEmpty()) return@forEach
 
-                    if (maxHabitude > 0 && coutType > 0.0) {
-                        val prixUnitaire = calculerPrixUnitaire(type, coutType)
+                val maxHabitude = dbHelper.getMaxJournalier(type)
+                if (maxHabitude <= 0) return@forEach
 
-                        values.forEachIndexed { index, consoJour ->
-                            if (index < nbPoints) {
-                                // Marque ce jour comme "renseigné" s’il y a au moins une consommation
-                                if (consoJour > 0) {
-                                    totalUnitesParJour[index] += consoJour
-                                }
+                val coutsType = dbHelper.getCouts(type)
+                val prixUnitaire = calculerPrixUnitaire(type, coutsType)
 
-                                val diff = maxHabitude - consoJour
-                                if (diff > 0) {
-                                    economies[index] += prixUnitaire * diff
-                                }
-                            }
-                        }
+                values.forEachIndexed { index, quantite ->
+                    // On ignore les jours AVANT la première vraie conso
+                    if (index >= firstIndexWithConso && quantite < maxHabitude) {
+                        val diff = maxHabitude - quantite
+                        economies[index] += prixUnitaire * diff
                     }
                 }
-            }
-        }
-
-        // IMPORTANT : on neutralise les jours sans aucune conso enregistrée
-        // (sinon on crée de fausses "économies" sur des jours où tu n’as rien saisi)
-        for (i in 0 until nbPoints) {
-            if (totalUnitesParJour[i] == 0) {
-                economies[i] = 0.0
             }
         }
 
