@@ -1843,6 +1843,146 @@ object ReglagesLangues {
             Using StopAddict implies full acceptance of this manual.
         """.trimIndent()
 
+            "ES" -> """
+            MANUAL DE USO – STOPADDICT
+            
+            Bienvenido/a a StopAddict. Esta aplicación está diseñada para ayudarte a seguir tu consumo de cigarrillos, porros y alcohol de manera simple, visual e informativa. No sustituye un consejo médico ni incentiva en ningún caso el consumo. Su función es únicamente servir como contador avanzado, herramienta de estimación y apoyo a la concienciación.
+            
+            1. PRESENTACIÓN GENERAL
+            StopAddict funciona completamente sin conexión, sin registro y sin recopilación de datos. Toda la información introducida se almacena en tu dispositivo. Puedes usar la aplicación a diario para visualizar tus consumos, tu presupuesto, tus hábitos, tus progresos y tus objetivos.
+            
+            La aplicación se compone de varias pestañas:
+            • Inicio: contadores del día y consejos adaptativos.
+            • Costes: configuración detallada del precio de cada consumo.
+            • Hábitos: registro de tus niveles diarios habituales.
+            • Fechas: definición de tus objetivos (reducción o abandono).
+            • Agenda: resumen diario de todos tus consumos.
+            • Estadísticas: gráficos y estimaciones.
+            • Ajustes: idioma, tema, información y versión premium.
+            
+            2. FUNCIONAMIENTO DE LA PESTAÑA INICIO
+            La pantalla de inicio muestra las categorías de consumo activadas. Para cada categoría, los botones + y – permiten añadir o restar una unidad. Los valores se guardan automáticamente para el día en curso.
+            
+            Puedes activar o desactivar:
+            • cigarrillos,
+            • porros,
+            • alcohol global,
+            • cervezas,
+            • licores,
+            • alcoholes fuertes.
+            
+            El total del día se actualiza en tiempo real.
+            
+            3. CONSEJOS PERSONALIZADOS
+            La sección “Consejo” ofrece mensajes automáticos adaptados a tu situación. La aplicación analiza únicamente:
+            • la presencia o no de un nombre,
+            • tus costes,
+            • tus hábitos,
+            • tus fechas objetivo,
+            • tu consumo del día.
+            
+            Una protección anti-spam evita cambios demasiado frecuentes.
+            
+            4. MÓDULO “COSTES”
+            Permite indicar el coste real:
+            • Cigarrillos clásicos: precio del paquete y número de cigarrillos.
+            • Tabaco de liar: precio del tabaco, papel, filtros, unidades por paquete y cigarrillos producidos.
+            • Tubos: precio del tabaco y tubos, unidades y cigarrillos producidos.
+            • Porros: precio por gramo, gramos por porro y papel.
+            • Alcohol: precio por unidad de cada tipo.
+            
+            Los precios unitarios se calculan automáticamente y se usan en Estadísticas.
+            
+            5. MÓDULO “HÁBITOS”
+            Permite indicar cuántas unidades consumes habitualmente por día. Esto sirve para evaluar:
+            • si estás por debajo de tus hábitos,
+            • si estás dentro de tu media,
+            • si los superas.
+            
+            También sirve para calcular ahorros “reales”.
+            
+            6. MÓDULO “FECHAS”
+            Puedes definir:
+            • fecha de abandono,
+            • fecha de reducción.
+            
+            La aplicación calcula automáticamente días restantes o retrasos.
+            
+            7. PESTAÑA AGENDA
+            Muestra el historial diario de consumos:
+            • cantidades,
+            • fechas,
+            • evolución.
+            
+            Los datos permanecen en el dispositivo.
+            
+            8. PESTAÑA ESTADÍSTICAS
+            Incluye:
+            • curva diaria,
+            • semanal,
+            • mensual,
+            • anual.
+            
+            Los gráficos muestran:
+            • unidades consumidas,
+            • coste estimado,
+            • ahorros potenciales,
+            • ahorros reales según tus hábitos.
+            
+            9. EXPORTACIONES E IMPORTACIONES
+            En la versión gratuita:
+            • exportar no está disponible,
+            • importar no está disponible.
+            
+            Si intentas usarlos:
+            «Esta función está disponible solo en la versión premium.»
+            
+            10. VERSIÓN GRATIS VS PREMIUM
+            Versión gratuita:
+            • publicidad,
+            • sin importación/exportación,
+            • todas las demás funciones activas.
+            
+            Versión premium:
+            • sin publicidad,
+            • importación/exportación,
+            • uso ilimitado,
+            • apoyo al desarrollador.
+            
+            Un cambio de teléfono puede requerir una nueva compra según Google Play.
+            
+            11. IDIOMAS Y TRADUCCIONES
+            La aplicación se adapta al idioma elegido. El manual, las CGV y los avisos legales pueden estar disponibles solo en francés.
+            
+            12. CONFIDENCIALIDAD
+            StopAddict no recopila datos. Todo se almacena localmente. Tú eres responsable de tus archivos exportados.
+            
+            13. LIMITACIONES TÉCNICAS
+            Dependiendo del dispositivo:
+            • rendimiento,
+            • almacenamiento,
+            • compatibilidad,
+            pueden variar.
+            
+            No se garantiza un funcionamiento perfecto.
+            
+            14. BUENAS PRÁCTICAS
+            Se recomienda:
+            • consultar un profesional de salud,
+            • practicar deporte,
+            • dormir bien,
+            • alimentarse de forma equilibrada.
+            
+            15. INDEPENDENCIA Y PROPIEDAD
+            Aplicación creada por un desarrollador independiente. Contenidos protegidos por derechos de autor.
+            
+            16. ACTUALIZACIONES
+            Las actualizaciones pueden modificar funciones sin garantía de continuidad.
+            
+            17. ACEPTACIÓN
+            El uso de StopAddict implica aceptar este manual.
+            """.trimIndent(),
+
             else -> getManuel("FR") // Fallback FR pour autres langues
         }
     }
@@ -2114,6 +2254,97 @@ object ReglagesLangues {
             12. ACCEPTANCE OF THE TERMS
             By installing, using or purchasing the premium version of StopAddict, the user acknowledges having read, understood and accepted all these Terms of Sale.
         """.trimIndent()
+
+            "ES" -> """
+            CONDICIONES GENERALES DE VENTA (CGV) – STOPADDICT
+            
+            Las presentes condiciones regulan el uso de la versión gratuita y premium de StopAddict. Instalar o usar la aplicación implica aceptar íntegramente lo siguiente.
+            
+            1. OBJETO
+            StopAddict es una aplicación informativa que permite seguir el consumo diario de cigarrillos, porros y alcohol. No es:
+            • una herramienta médica,
+            • un servicio terapéutico,
+            • un diagnóstico,
+            • un sustituto de acompañamiento profesional.
+            
+            2. VERSIÓN GRATUITA
+            Incluye:
+            • seguimiento diario,
+            • consejos personalizados,
+            • configuración de costes,
+            • hábitos y fechas,
+            • agenda,
+            • estadísticas.
+            
+            La versión gratuita contiene un banner publicitario.  
+            Las funciones de importación y exportación no están disponibles.
+            
+            Cualquier intento muestra:
+            «Esta función está disponible solo en la versión premium.»
+            
+            3. VERSIÓN PREMIUM
+            Incluye:
+            • eliminación total de publicidad,
+            • importación/exportación,
+            • apoyo al desarrollador independiente.
+            
+            Un pago único a través de Google Play Store.
+            
+            4. CONDICIONES DE COMPRA
+            La compra depende de las reglas de Google Play.  
+            El desarrollador no recibe ni almacena datos personales.
+            
+            El usuario debe:
+            • utilizar una cuenta Google válida,
+            • ser mayor según la legislación local,
+            • respetar reglas locales.
+            
+            5. AUSENCIA DE REEMBOLSO
+            No se efectúan reembolsos debido a:
+            • existencia de versión gratuita,
+            • diferencias entre dispositivos,
+            • variaciones Android,
+            • naturaleza digital del producto.
+            
+            No se reembolsa en caso de:
+            • incompatibilidad,
+            • bug,
+            • pérdida de datos,
+            • cambio de teléfono o cuenta Google.
+            
+            6. RESPONSABILIDAD DEL USUARIO
+            El usuario es responsable:
+            • del uso de la aplicación,
+            • de sus datos,
+            • del respeto de las leyes locales,
+            • de la protección de su dispositivo.
+            
+            Los datos no constituyen prueba ni pueden usarse judicialmente.
+            
+            7. LIMITACIONES TÉCNICAS
+            No se garantiza:
+            • compatibilidad total,
+            • ausencia de bug,
+            • continuidad del servicio.
+            
+            8. DATOS PERSONALES
+            StopAddict no recopila datos ni crea cuentas.  
+            Todo queda almacenado localmente.
+            
+            Los archivos exportados son responsabilidad del usuario.
+            
+            9. INDEPENDENCIA
+            El desarrollador es independiente. No existe relación con industrias de tabaco, alcohol, cannabis ni organismos oficiales.
+            
+            10. PROPIEDAD INTELECTUAL
+            Todo el contenido está protegido por derechos de autor.
+            
+            11. ACTUALIZACIONES
+            Pueden modificar funciones sin obligación de mantenimiento.
+            
+            12. ACEPTACIÓN
+            El uso implica aceptación de las CGV.
+            """.trimIndent(),
 
             else -> getCGV("FR") // Fallback FR
         }
@@ -2408,6 +2639,84 @@ object ReglagesLangues {
             14. ACCEPTANCE OF THE LEGAL NOTICE
             Use of the app implies full and unconditional acceptance of this legal notice and data policy.
         """.trimIndent()
+
+            "ES" -> """
+            AVISO LEGAL Y POLÍTICA DE DATOS – STOPADDICT
+            
+            1. EDITOR
+            StopAddict es una aplicación desarrollada por un creador independiente.  
+            No existe relación comercial con industrias del tabaco, alcohol, cannabis, organismos públicos o entidades médicas.
+            
+            2. OBJETO
+            StopAddict es una herramienta personal e informativa para seguir consumos diarios.  
+            No es:
+            • un dispositivo médico,
+            • un diagnóstico,
+            • una terapia,
+            • una incitación al consumo.
+            
+            3. MAYORÍA Y LEGISLACIÓN
+            La app es solo para mayores según:
+            • la ley del país de residencia,
+            • la ley del país donde se usa.
+            
+            El usuario debe respetar las normas locales sobre tabaco, alcohol, cannabis y dispositivos de seguimiento.
+            
+            4. NEUTRALIDAD
+            StopAddict:
+            • no promueve consumo,
+            • no incentiva la compra,
+            • no fomenta conductas de riesgo.
+            
+            5. RESPONSABILIDAD DEL USUARIO
+            El usuario es responsable:
+            • del uso,
+            • de sus datos,
+            • del cumplimiento legal.
+            
+            La app no puede usarse como prueba judicial.
+            
+            6. DATOS Y PRIVACIDAD
+            No se recoge ningún dato.  
+            No hay cuentas ni envíos a servidores.  
+            Todo se almacena en el dispositivo.
+            
+            Los archivos exportados son responsabilidad del usuario.
+            
+            7. SEGURIDAD
+            La app recuerda la importancia de:
+            • salud,
+            • sueño,
+            • deporte,
+            • alimentación,
+            • apoyo social.
+            
+            8. PUBLICIDAD & PREMIUM
+            La versión gratuita incluye publicidad.  
+            La versión premium la elimina e incluye importación/exportación.
+            
+            Un cambio de smartphone puede requerir una nueva compra según Google.
+            
+            No hay reembolsos en caso de:
+            • incompatibilidad,
+            • bugs,
+            • pérdida de datos.
+            
+            9. GARANTÍAS
+            La app se proporciona “tal cual”, sin garantía de funcionamiento perfecto.
+            
+            10. PROPIEDAD INTELECTUAL
+            Todo el contenido está protegido por derechos de autor.
+            
+            11. ACTUALIZACIONES
+            Pueden mejorar o modificar funciones sin garantía de continuidad.
+            
+            12. CONTACTO
+            Los comentarios pueden enviarse vía Google Play.
+            
+            13. ACEPTACIÓN
+            El uso implica la aceptación del presente aviso legal.
+            """.trimIndent(),
 
             else -> getMentionsLegales("FR") // Fallback FR
         }
