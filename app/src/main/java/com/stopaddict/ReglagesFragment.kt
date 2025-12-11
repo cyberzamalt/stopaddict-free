@@ -742,7 +742,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         aProposCard,
         "⚠️ ${trad["voir_avertissement"] ?: "Voir l'avertissement"}"
     ) {
-        (activity as? MainActivity)?.showAgeWarningDialog()
+    (activity as? MainActivity)?.showAgeWarningDialog(fromSettings = true)
     }
 
     // Lien 2: Manuel d'utilisation
