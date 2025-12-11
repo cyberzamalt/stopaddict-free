@@ -180,12 +180,14 @@ fun showAgeWarningDialog() {
     logger.d("showAgeWarningDialog: ouverture du pop-up d’avertissement majeurité...")
 
     try {
+        // Conteneur principal vertical
         val container = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(40, 40, 40, 20)
         }
         logger.d("showAgeWarningDialog: container initialisé")
 
+        // Titre
         val titleText = TextView(this).apply {
             text = trad["warning_title"] ?: ""
             textSize = 18f
@@ -196,6 +198,7 @@ fun showAgeWarningDialog() {
         container.addView(titleText)
         logger.d("showAgeWarningDialog: titre ajouté")
 
+        // Message principal (long)
         val messageText = TextView(this).apply {
             text = trad["warning_message"] ?: ""
             textSize = 14f
@@ -204,6 +207,7 @@ fun showAgeWarningDialog() {
         container.addView(messageText)
         logger.d("showAgeWarningDialog: message principal ajouté")
 
+        // Lien "Ressources et numéros utiles"
         val linkText = TextView(this).apply {
             text = trad["warning_resources_link"] ?: ""
             textSize = 14f
@@ -246,8 +250,14 @@ fun showAgeWarningDialog() {
                 "ageChecked=${checkboxAge.isChecked}, noShowChecked=${checkboxNoShow.isChecked}"
         )
 
+        // --- NOUVEAU : ScrollView autour du container ---
+        val scrollView = ScrollView(this).apply {
+            isFillViewport = true   // pour que le contenu puisse prendre toute la hauteur dispo
+            addView(container)
+        }
+
         val builder = AlertDialog.Builder(this)
-            .setView(container)
+            .setView(scrollView)  // <- on met le scrollView, plus directement le container
             .setNegativeButton(trad["warning_btn_quit"] ?: "Quit") { _, _ ->
                 logger.d("showAgeWarningDialog: utilisateur a cliqué 'Quitter'")
                 finish()
@@ -304,10 +314,14 @@ fun showAgeWarningDialog() {
         dialog.show()
         logger.d("showAgeWarningDialog: dialog.show() exécuté")
 
+        // Optionnel : garantit que le pop-up ne dépasse pas l'écran en hauteur
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
     } catch (e: Exception) {
-        logger.e("showAgeWarningDialog: erreur dans la création du dialog", e)
-        // En cas de bug, on n’empêche pas l’accès à l’appli
-        initializeMainContent()
+        logger.e("showAgeWarningDialog: erreur affichage avertissement", e)
     }
 }
     
