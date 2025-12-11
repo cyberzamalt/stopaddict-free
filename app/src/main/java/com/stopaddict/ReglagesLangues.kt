@@ -1981,7 +1981,7 @@ object ReglagesLangues {
             
             17. ACEPTACIÓN
             El uso de StopAddict implica aceptar este manual.
-            """.trimIndent(),
+            """.trimIndent()
 
             else -> getManuel("FR") // Fallback FR pour autres langues
         }
@@ -2344,7 +2344,7 @@ object ReglagesLangues {
             
             12. ACEPTACIÓN
             El uso implica aceptación de las CGV.
-            """.trimIndent(),
+            """.trimIndent()
 
             else -> getCGV("FR") // Fallback FR
         }
@@ -2716,7 +2716,7 @@ object ReglagesLangues {
             
             13. ACEPTACIÓN
             El uso implica la aceptación del presente aviso legal.
-            """.trimIndent(),
+            """.trimIndent()
 
             else -> getMentionsLegales("FR") // Fallback FR
         }
