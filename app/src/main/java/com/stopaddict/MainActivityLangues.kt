@@ -148,7 +148,7 @@ object MainActivityLangues {
                     "warning_checkbox_age" to "☑️ Je suis majeur(e)",
                     "warning_checkbox_noshow" to "Ne plus afficher ce message",
                     "warning_btn_quit" to "Quitter",
-                    "warning_btn_accept" to "J'accepte et continuer",
+                    "warning_btn_accept" to "J'accepte et je continue",
             
                     // Dialog ressources
                     "resources_title" to "📞 Ressources et numéros utiles",
