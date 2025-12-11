@@ -1008,40 +1008,65 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         }
     }
 
-    private fun calculerEconomies(donnees: Map<String, List<Int>>): List<Double> {
-        return try {
-            val nbPoints = donnees.values.firstOrNull()?.size ?: 0
-            if (nbPoints == 0) return emptyList()
+    private fun calculerEconomies(
+    donnees: Map<String, List<Int>>,
+    coutsParCategorie: Map<String, Double>
+): List<Double> {
+    return try {
+        val nbPoints = donnees.values.maxOfOrNull { it.size } ?: 0
+        if (nbPoints == 0) {
+            Log.d(TAG, "Aucune donnée pour calculer les économies")
+            return emptyList()
+        }
 
-            val economies = MutableList(nbPoints) { 0.0 }
+        // Économies par jour (même taille que les courbes)
+        val economies = MutableList(nbPoints) { 0.0 }
+        // Total d’unités consommées par jour (toutes catégories confondues)
+        val totalUnitesParJour = IntArray(nbPoints) { 0 }
 
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val values = donnees[type] ?: listOf()
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val values = donnees[type] ?: emptyList()
+                if (values.isNotEmpty()) {
                     val maxHabitude = dbHelper.getMaxJournalier(type)
-                    val coutsType = dbHelper.getCouts(type)
+                    val coutType = coutsParCategorie[type] ?: 0.0
 
-                    if (maxHabitude > 0) {
-                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                    if (maxHabitude > 0 && coutType > 0.0) {
+                        val prixUnitaire = calculerPrixUnitaire(type, coutType)
 
-                        values.forEachIndexed { index, quantite ->
-                            if (quantite < maxHabitude) {
-                                val diff = maxHabitude - quantite
-                                economies[index] += prixUnitaire * diff
+                        values.forEachIndexed { index, consoJour ->
+                            if (index < nbPoints) {
+                                // Marque ce jour comme "renseigné" s’il y a au moins une consommation
+                                if (consoJour > 0) {
+                                    totalUnitesParJour[index] += consoJour
+                                }
+
+                                val diff = maxHabitude - consoJour
+                                if (diff > 0) {
+                                    economies[index] += prixUnitaire * diff
+                                }
                             }
                         }
                     }
                 }
             }
-
-            Log.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
-            economies
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul économies: ${e.message}")
-            emptyList()
         }
-    }
 
+        // IMPORTANT : on neutralise les jours sans aucune conso enregistrée
+        // (sinon on crée de fausses "économies" sur des jours où tu n’as rien saisi)
+        for (i in 0 until nbPoints) {
+            if (totalUnitesParJour[i] == 0) {
+                economies[i] = 0.0
+            }
+        }
+
+        Log.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
+        economies
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul économies: ${e.message}")
+        emptyList()
+    }
+}
         private fun calculerCoutsParCategorie(
     donnees: Map<String, List<Int>>
 ): Map<String, Double> {
