@@ -35,7 +35,7 @@ object MainActivityLangues {
         "tab_reglages" to "Réglages",
         
                 // Dialog avertissement majorité
-        "warning_title" to "⚠️ Avertissement - Public majeur(e) (18+)",
+        "warning_title" to "⚠️ Avertissement - Public majeur(e)",
         "warning_message" to """
             ⚠️ AVERTISSEMENT LÉGAL
             
