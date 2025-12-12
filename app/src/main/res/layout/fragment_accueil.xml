@@ -156,7 +156,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/btn_moins_green" />
@@ -216,7 +215,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/btn_moins_green" />
@@ -276,7 +274,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/btn_moins_green" />
@@ -336,7 +333,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/btn_moins_green" />
@@ -396,7 +392,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/btn_moins_green" />
