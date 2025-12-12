@@ -61,8 +61,8 @@
             android:padding="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@android:color/holo_orange_light"
-            android:textColor="@android:color/white"
+            android:background="@color/conseil_background"
+            android:textColor="@color/conseil_text"
             android:gravity="center" />
 
         <!-- Catégorie Cigarettes -->
