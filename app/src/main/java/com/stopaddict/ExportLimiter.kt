@@ -22,6 +22,8 @@ class ExportLimiter(private val context: Context) {
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    
+    fun importDesactive(): Boolean = MAX_IMPORT_PER_DAY <= 0
 
     /**
      * Vérifie si l'utilisateur peut exporter aujourd'hui
