@@ -455,7 +455,7 @@ private fun configureBarChart(chart: BarChart) {
     
                         val donnees = getDonneesPourConsommation()
 
-            categoriesActives.forEach { (type, active) ->
+                        categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val values = donnees[type] ?: listOf()
                     if (values.isNotEmpty()) {
@@ -464,20 +464,21 @@ private fun configureBarChart(chart: BarChart) {
                         }
 
                         val dataSet = LineDataSet(entries, getLabelCategorie(type))
-                        dataSet.color = getColorCategorie(type)
-                        dataSet.setCircleColor(getColorCategorie(type))
-                        dataSet.lineWidth = 2f
-                        dataSet.circleRadius = 3f
+                        val color = getColorCategorie(type)
+
+                        // Courbes de consommation : épaisses, lisses, sans points ni valeurs
+                        dataSet.color = color
+                        dataSet.lineWidth = 4f
+                        dataSet.setDrawCircles(false)
                         dataSet.setDrawCircleHole(false)
-                        dataSet.setDrawValues(true)
-                        dataSet.valueTextSize = 9f
+                        dataSet.setDrawValues(false)
 
                         dataSets.add(dataSet)
                     }
                 }
             }
 
-            categoriesActives.forEach { (type, active) ->
+                        categoriesActives.forEach { (type, active) ->
                 if (active) {
                     val maxHabitude = dbHelper.getMaxJournalier(type)
                     if (maxHabitude > 0) {
@@ -487,20 +488,33 @@ private fun configureBarChart(chart: BarChart) {
                         }
 
                         if (limiteEntries.isNotEmpty()) {
+                            // Texte localisé pour "Limite"
+                            val libelleLimite = StatsLangues.getTexte(
+                                "label_limite",
+                                getCodeLangueStats()
+                            )
 
-                            // Récupère le texte localisé pour "Limite"
-                            val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats()
-                                                                     )
-                        
                             val limiteDataSet = LineDataSet(
                                 limiteEntries,
                                 "$libelleLimite ${getLabelCategorie(type)}"
                             )
-                        
-                            limiteDataSet.color = COLOR_LIMITE
-                            limiteDataSet.lineWidth = 1f
+
+                            // Couleur de base = couleur de la catégorie
+                            val baseColor = getColorCategorie(type)
+                            val r = Color.red(baseColor)
+                            val g = Color.green(baseColor)
+                            val b = Color.blue(baseColor)
+                            val limiteColor = Color.argb(150, r, g, b) // ~60% d’opacité
+
+                            // Lignes de limites : fines, pointillées, transparentes, avec points
+                            limiteDataSet.color = limiteColor
+                            limiteDataSet.lineWidth = 1.5f
                             limiteDataSet.enableDashedLine(10f, 5f, 0f)
-                            limiteDataSet.setDrawCircles(false)
+
+                            limiteDataSet.setDrawCircles(true)
+                            limiteDataSet.circleRadius = 5f
+                            limiteDataSet.setDrawCircleHole(true)
+                            limiteDataSet.circleHoleRadius = 2.5f
                             limiteDataSet.setDrawValues(false)
 
                             dataSets.add(limiteDataSet)
@@ -508,7 +522,7 @@ private fun configureBarChart(chart: BarChart) {
                     }
                 }
             }
-
+                        
             if (dataSets.isNotEmpty()) {
                 val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
                 chartConsommation.data = lineData
