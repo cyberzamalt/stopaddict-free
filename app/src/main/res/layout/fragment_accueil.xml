@@ -92,14 +92,14 @@
                 android:id="@+id/accueil_btn_moins_cigarettes"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="-"
-                android:textSize="24sp"
+                android:text="−"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:background="@drawable/bg_btn_moins"
+                android:clickable="true"
+                android:focusable="true" />
                         
             <TextView
                 android:id="@+id/accueil_txt_cigarettes"
@@ -115,13 +115,13 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
 
         </LinearLayout>
 
@@ -172,16 +172,16 @@
 
             <Button
                 android:id="@+id/accueil_btn_plus_joints"
-                 android:layout_width="50dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
             
         </LinearLayout>
 
@@ -231,16 +231,18 @@
                 android:layout_gravity="center_vertical" />
 
             <Button
-                android:id="@+id/accueil_btn_plus_alcool_global" android:layout_width="50dp"
+                android:id="@+id/accueil_btn_plus_alcool_global"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
+            
         </LinearLayout>
 
         <!-- Catégorie Bières -->
@@ -293,13 +295,13 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
             
         </LinearLayout>
 
@@ -353,13 +355,13 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
             
         </LinearLayout>
 
@@ -413,13 +415,13 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textColor="@color/text_white"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_plus_red" />
+                android:background="@drawable/bg_btn_plus"
+                android:clickable="true"
+                android:focusable="true" />
                 
         </LinearLayout>
  <Button
