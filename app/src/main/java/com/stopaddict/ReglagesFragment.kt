@@ -1153,7 +1153,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         Log.e(TAG, "Erreur import", e)
         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
-}   
+
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
