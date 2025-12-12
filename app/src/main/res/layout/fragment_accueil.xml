@@ -88,18 +88,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_cigarettes"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="−"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_moins"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
                         
             <TextView
                 android:id="@+id/accueil_txt_cigarettes"
@@ -110,18 +107,15 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_cigarettes"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
 
         </LinearLayout>
 
@@ -148,17 +142,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_joints"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="－"
-                android:textSize="24sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
 
             <TextView
                 android:id="@+id/accueil_txt_joints"
@@ -169,18 +161,15 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_joints"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
             
         </LinearLayout>
 
@@ -207,17 +196,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_alcool_global"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="－"
-                android:textSize="24sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
             
             <TextView
                 android:id="@+id/accueil_txt_alcool_global"
@@ -228,18 +215,15 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_alcool_global"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
             
         </LinearLayout>
 
@@ -266,17 +250,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_bieres"                
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="－"
-                android:textSize="24sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
             
             <TextView
                 android:id="@+id/accueil_txt_bieres"
@@ -287,18 +269,15 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_bieres"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
             
         </LinearLayout>
 
@@ -325,17 +304,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+           <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_liqueurs"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="－"
-                android:textSize="24sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
 
             <TextView
                 android:id="@+id/accueil_txt_liqueurs"
@@ -346,18 +323,16 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_liqueurs"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
+
             
         </LinearLayout>
 
@@ -384,17 +359,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_moins_alcool_fort"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="－"
-                android:textSize="24sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:backgroundTint="@color/btn_moins_green" />
+                android:backgroundTint="@color/btn_moins_green"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Moins"
+                android:src="@drawable/ic_minus" />
 
             <TextView
                 android:id="@+id/accueil_txt_alcool_fort"
@@ -405,18 +378,15 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/accueil_btn_plus_alcool_fort"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="＋"
-                android:textSize="26sp"
-                android:textColor="@color/text_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_plus"
-                android:clickable="true"
-                android:focusable="true" />
+                android:backgroundTint="@color/btn_plus_red"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Plus"
+                android:src="@drawable/ic_plus" />
                 
         </LinearLayout>
  <Button
