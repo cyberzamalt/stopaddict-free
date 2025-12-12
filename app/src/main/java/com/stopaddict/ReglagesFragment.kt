@@ -1111,16 +1111,25 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun importData() {
     try {
         if (!exportLimiter.peutImporter()) {
-            val remaining = exportLimiter.getRemainingImports()
 
-            // Message traduit avec nombre restant
-            val template = trad["msg_import_limite"]
-                ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
-            val msg = String.format(template, remaining)
+    // Si import désactivé (version free), on réutilise le message premium déjà traduit de l'export
+    if (exportLimiter.importDesactive()) {
+        val msg = trad["msg_export_limite"]
+            ?: "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter"
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+        return
+    }
 
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-            return
-        }
+    val remaining = exportLimiter.getRemainingImports()
+
+    // Sinon (limite > 0), on garde le message avec compteur
+    val template = trad["msg_import_limite"]
+        ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
+    val msg = String.format(template, remaining)
+
+    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    return
+}
 
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
