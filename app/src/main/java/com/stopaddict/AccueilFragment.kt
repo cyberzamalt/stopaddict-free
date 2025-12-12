@@ -518,45 +518,34 @@ class AccueilFragment : Fragment() {
 
         private fun updateButtonsVisibility() {
     try {
-        fun applyStyle(btn: Button, enabled: Boolean, isPlus: Boolean) {
-            // Remet + / - (si tu vois un “point”, ça force le texte correct ici)
-            btn.text = if (isPlus) "+" else "-"
-
-            // Couleurs + texte
-            val tintRes = if (isPlus) R.color.btn_plus_red else R.color.btn_moins_green
-            btn.backgroundTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(requireContext(), tintRes)
-            )
-            btn.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-
-            // Etat activé/désactivé (la “couleur se désactive aussi” via l’alpha)
-            btn.isEnabled = enabled
-            btn.alpha = if (enabled) 1.0f else 0.25f
-        }
+        fun applyStyle(btn: View, enabled: Boolean) {
+    btn.isEnabled = enabled
+    btn.alpha = if (enabled) 1.0f else 0.25f
+}
 
         val cigEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
-        applyStyle(btnPlusCigarettes,  cigEnabled, true)
-        applyStyle(btnMoinsCigarettes, cigEnabled, false)
+        applyStyle(btnPlusCigarettes,  cigEnabled)
+        applyStyle(btnMoinsCigarettes, cigEnabled)
 
         val jointEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
-        applyStyle(btnPlusJoints,  jointEnabled, true)
-        applyStyle(btnMoinsJoints, jointEnabled, false)
+        applyStyle(btnPlusJoints,  jointEnabled)
+        applyStyle(btnMoinsJoints, jointEnabled)
 
         val alcoolEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
-        applyStyle(btnPlusAlcoolGlobal,  alcoolEnabled, true)
-        applyStyle(btnMoinsAlcoolGlobal, alcoolEnabled, false)
+        applyStyle(btnPlusAlcoolGlobal,  alcoolEnabled)
+        applyStyle(btnMoinsAlcoolGlobal, alcoolEnabled)
 
         val biereEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
-        applyStyle(btnPlusBieres,  biereEnabled, true)
-        applyStyle(btnMoinsBieres, biereEnabled, false)
+        applyStyle(btnPlusBieres,  biereEnabled)
+        applyStyle(btnMoinsBieres, biereEnabled)
 
         val liqueurEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
-        applyStyle(btnPlusLiqueurs,  liqueurEnabled, true)
-        applyStyle(btnMoinsLiqueurs, liqueurEnabled, false)
+        applyStyle(btnPlusLiqueurs,  liqueurEnabled)
+        applyStyle(btnMoinsLiqueurs, liqueurEnabled)
 
         val fortEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
-        applyStyle(btnPlusAlcoolFort,  fortEnabled, true)
-        applyStyle(btnMoinsAlcoolFort, fortEnabled, false)
+        applyStyle(btnPlusAlcoolFort,  fortEnabled)
+        applyStyle(btnMoinsAlcoolFort, fortEnabled)
 
         Log.d(TAG, "Visibilité boutons mise à jour")
     } catch (e: Exception) {
