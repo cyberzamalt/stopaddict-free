@@ -958,8 +958,8 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
                     private fun showPremiumDialog() {
         // Titre et contenu récupérés depuis les traductions si dispo
-        val titre = trad["premium_title"] ?: "Version sans publicité"
-        val contenu = trad["premium_message"] ?: "Une version sans publicité sera proposée pour soutenir le développement de StopAddict."
+        val titre = trad["premium_titre"] ?: "Version sans publicité"
+        val contenu = trad["premium_contenu"] ?: "Une version sans publicité sera proposée pour soutenir le développement de StopAddict."
 
         AlertDialog.Builder(requireContext())
             .setTitle(titre)
