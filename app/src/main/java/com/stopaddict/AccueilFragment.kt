@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.content.ActivityNotFoundException
+import android.content.res.ColorStateList
+import androidx.core.content.ContextCompat
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -515,31 +517,52 @@ class AccueilFragment : Fragment() {
     }
 
         private fun updateButtonsVisibility() {
-        try {
-            // Les catégories restent visibles mais les boutons sont actifs/inactifs selon état
-            btnPlusCigarettes.isEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
-            btnMoinsCigarettes.isEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
+    try {
+        fun applyStyle(btn: Button, enabled: Boolean, isPlus: Boolean) {
+            // Remet + / - (si tu vois un “point”, ça force le texte correct ici)
+            btn.text = if (isPlus) "+" else "-"
 
-            btnPlusJoints.isEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
-            btnMoinsJoints.isEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
+            // Couleurs + texte
+            val tintRes = if (isPlus) R.color.btn_plus_red else R.color.btn_moins_green
+            btn.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), tintRes)
+            )
+            btn.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
 
-            btnPlusAlcoolGlobal.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
-            btnMoinsAlcoolGlobal.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
-
-            btnPlusBieres.isEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
-            btnMoinsBieres.isEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
-
-            btnPlusLiqueurs.isEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
-            btnMoinsLiqueurs.isEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
-
-            btnPlusAlcoolFort.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
-            btnMoinsAlcoolFort.isEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
-
-            Log.d(TAG, "Visibilité boutons mise à jour")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour visibilité boutons: ${e.message}")
+            // Etat activé/désactivé (la “couleur se désactive aussi” via l’alpha)
+            btn.isEnabled = enabled
+            btn.alpha = if (enabled) 1.0f else 0.25f
         }
+
+        val cigEnabled = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
+        applyStyle(btnPlusCigarettes,  cigEnabled, true)
+        applyStyle(btnMoinsCigarettes, cigEnabled, false)
+
+        val jointEnabled = categoriesActives[DatabaseHelper.TYPE_JOINT] ?: true
+        applyStyle(btnPlusJoints,  jointEnabled, true)
+        applyStyle(btnMoinsJoints, jointEnabled, false)
+
+        val alcoolEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] ?: true
+        applyStyle(btnPlusAlcoolGlobal,  alcoolEnabled, true)
+        applyStyle(btnMoinsAlcoolGlobal, alcoolEnabled, false)
+
+        val biereEnabled = categoriesActives[DatabaseHelper.TYPE_BIERE] ?: false
+        applyStyle(btnPlusBieres,  biereEnabled, true)
+        applyStyle(btnMoinsBieres, biereEnabled, false)
+
+        val liqueurEnabled = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] ?: false
+        applyStyle(btnPlusLiqueurs,  liqueurEnabled, true)
+        applyStyle(btnMoinsLiqueurs, liqueurEnabled, false)
+
+        val fortEnabled = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] ?: false
+        applyStyle(btnPlusAlcoolFort,  fortEnabled, true)
+        applyStyle(btnMoinsAlcoolFort, fortEnabled, false)
+
+        Log.d(TAG, "Visibilité boutons mise à jour")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur mise à jour visibilité boutons: ${e.message}")
     }
+}
         
         private fun updateProfilStatus() {
         try {
