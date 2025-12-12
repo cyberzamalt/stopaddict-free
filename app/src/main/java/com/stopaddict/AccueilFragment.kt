@@ -3,6 +3,9 @@ package com.stopaddict
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -341,15 +344,34 @@ class AccueilFragment : Fragment() {
             }
             
                         // Bouton version sans pub (accueil)
-            btnPremiumAccueil.setOnClickListener {
-                showPremiumDialog()
-            }
+            btnPremiumAccueil.setOnClickListener { ouvrirVersionPremium() }
 
             Log.d(TAG, "Listeners configurés avec succès")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur configuration listeners: ${e.message}")
         }
     }
+
+    private fun ouvrirVersionPremium() {
+    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package de la version payante
+
+    try {
+        startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage"))
+        )
+    } catch (e: ActivityNotFoundException) {
+        try {
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage"))
+            )
+        } catch (e2: Exception) {
+            // Secours : si tout échoue, on affiche le message existant
+            showPremiumDialog()
+        }
+    } catch (e: Exception) {
+        showPremiumDialog()
+    }
+}
 
     private fun ajouterConsommation(type: String) {
         try {
