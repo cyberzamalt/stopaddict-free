@@ -1112,7 +1112,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     try {
         if (!exportLimiter.peutImporter()) {
 
-    // Si import désactivé (version free), on réutilise le message premium déjà traduit de l'export
+    // Si import désactivé (MAX_IMPORT_PER_DAY <= 0), on réutilise le message premium déjà traduit de l'export
     if (exportLimiter.importDesactive()) {
         val msg = trad["msg_export_limite"]
             ?: "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter"
@@ -1120,6 +1120,16 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         return
     }
 
+    val remaining = exportLimiter.getRemainingImports()
+
+    // Sinon (limite > 0), on garde le message avec compteur
+    val template = trad["msg_import_limite"]
+        ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
+    val msg = String.format(template, remaining)
+
+    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    return
+}
     val remaining = exportLimiter.getRemainingImports()
 
     // Sinon (limite > 0), on garde le message avec compteur
