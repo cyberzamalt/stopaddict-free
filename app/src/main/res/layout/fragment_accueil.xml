@@ -93,8 +93,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
-
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
+                        
             <TextView
                 android:id="@+id/accueil_txt_cigarettes"
                 android:layout_width="60dp"
@@ -109,7 +111,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
+
         </LinearLayout>
 
         <!-- Catégorie Joints -->
