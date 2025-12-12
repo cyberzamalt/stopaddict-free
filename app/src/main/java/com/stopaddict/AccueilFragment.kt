@@ -353,23 +353,19 @@ class AccueilFragment : Fragment() {
     }
 
     private fun ouvrirVersionPremium() {
-    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package de la version payante
+    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package
 
     try {
-        startActivity(
-            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage"))
-        )
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage")))
     } catch (e: ActivityNotFoundException) {
         try {
-            startActivity(
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage"))
-            )
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage")))
         } catch (e2: Exception) {
-            // Secours : si tout échoue, on affiche le message existant
-            showPremiumDialog()
+            // Plus de popup : juste un log (ou toast si tu préfères)
+            Log.e(TAG, "Impossible d'ouvrir le store", e2)
         }
     } catch (e: Exception) {
-        showPremiumDialog()
+        Log.e(TAG, "Impossible d'ouvrir le store", e)
     }
 }
 
@@ -1286,18 +1282,5 @@ hasPrenom && hasCouts && hasHabitudes && hasDates -> {
         } catch (e: Exception) {
             Log.e(TAG, "Erreur force update conseil: ${e.message}")
         }
-    }
-
-    private fun showPremiumDialog() {
-        val tradReglages = ReglagesLangues.getTraductions(configLangue.getLangue())
-        val titre = tradReglages["premium_titre"] ?: "Version sans publicité"
-        val contenu = tradReglages["premium_contenu"] ?: "La version sans publicité sera bientôt disponible."
-        val btnOk = trad["btn_ok"] ?: "Fermer"
-
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle(titre)
-            .setMessage(contenu)
-            .setPositiveButton(btnOk, null)
-            .show()
     }
 }
