@@ -24,7 +24,7 @@
     <color name="text_disabled">#BDBDBD</color>
     <color name="text_white">#FFFFFF</color>
 
-    <!-- Couleurs de texte -->
+    <!-- Couleurs de bouton -->
     <color name="btn_plus_red">#ED1C24</color>   <!-- 237,28,36 -->
     <color name="btn_moins_green">#22B14C</color> <!-- 34,177,76 -->
     
