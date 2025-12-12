@@ -1107,70 +1107,49 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         return export.toString(2)
     }
 
-    @Suppress("DEPRECATION")
+        @Suppress("DEPRECATION")
     private fun importData() {
-    try {
-        if (!exportLimiter.peutImporter()) {
+        try {
+            if (!exportLimiter.peutImporter()) {
 
-    // Si import désactivé (version free), on réutilise le message premium déjà traduit de l'export
-    if (exportLimiter.importDesactive()) {
-        val msg = trad["msg_export_limite"]
-            ?: "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter"
-        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-        return
-    }
+                // Si import désactivé (version free), on réutilise le message premium déjà traduit de l'export
+                if (exportLimiter.importDesactive()) {
+                    val msg = trad["msg_export_limite"]
+                        ?: "Pour accéder à l'importation, passez à la version sans publicité pour en profiter"
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                    return
+                }
 
-    val remaining = exportLimiter.getRemainingImports()
+                // Sinon (limite > 0), on garde le message avec compteur
+                val remaining = exportLimiter.getRemainingImports()
+                val template = trad["msg_import_limite"]
+                    ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
+                val msg = String.format(template, remaining)
 
-    // Sinon (limite > 0), on garde le message avec compteur
-    val template = trad["msg_import_limite"]
-        ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
-    val msg = String.format(template, remaining)
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                return
+            }
 
-    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-    return
-}
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/json"
+            }
+            startActivityForResult(intent, REQUEST_CODE_IMPORT)
 
-    val remaining = exportLimiter.getRemainingImports()
+            exportLimiter.enregistrerImport()
 
-    // Sinon (limite > 0), on garde le message avec compteur
-    val template = trad["msg_import_limite"]
-        ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
-    val msg = String.format(template, remaining)
-
-    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-    return
-}
-    val remaining = exportLimiter.getRemainingImports()
-
-    // Sinon (limite > 0), on garde le message avec compteur
-    val template = trad["msg_import_limite"]
-        ?: "Limite atteinte. %d import(s) restant(s) aujourd'hui."
-    val msg = String.format(template, remaining)
-
-    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-    return
-}
-
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/json"
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur import", e)
+            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-        startActivityForResult(intent, REQUEST_CODE_IMPORT)
-
-        exportLimiter.enregistrerImport()
-
-    } catch (e: Exception) {
-        Log.e(TAG, "Erreur import", e)
-        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
 
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        
+
         if (resultCode != Activity.RESULT_OK || data == null) return
-        
+
         when (requestCode) {
             REQUEST_CODE_EXPORT -> {
                 data.data?.let { uri ->
@@ -1179,13 +1158,18 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                         val writer = OutputStreamWriter(outputStream)
                         writer.write(buildExportJSON())
                         writer.close()
-                        Toast.makeText(requireContext(), trad["msg_export_reussi"] ?: "Export réussi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            trad["msg_export_reussi"] ?: "Export réussi",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } catch (e: Exception) {
                         Log.e(TAG, "Erreur écriture export", e)
                         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+
             REQUEST_CODE_IMPORT -> {
                 data.data?.let { uri ->
                     try {
@@ -1193,11 +1177,15 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                         val reader = BufferedReader(InputStreamReader(inputStream))
                         val jsonString = reader.readText()
                         reader.close()
-                        
+
                         processImportJSON(jsonString)
-                        Toast.makeText(requireContext(), trad["msg_import_reussi"] ?: "Import réussi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            trad["msg_import_reussi"] ?: "Import réussi",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         loadData()
-                        
+
                     } catch (e: Exception) {
                         Log.e(TAG, "Erreur lecture import", e)
                         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
