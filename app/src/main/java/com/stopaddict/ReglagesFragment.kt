@@ -1,6 +1,7 @@
 package com.stopaddict
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -762,7 +763,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
     // Lien 5: Version sans publicité
     addLinkButton(aProposCard, "🪙 ${trad["btn_premium"] ?: "Version sans publicité"}") {
-        showPremiumDialog()
+        ouvrirVersionPremium()
     }
 
     // Lien 6: Dernières mises à jour
@@ -777,7 +778,25 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
     container.addView(aProposCard)
 }
-    
+    private fun ouvrirVersionPremium() {
+    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package de la version payante
+
+    try {
+        startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage"))
+        )
+    } catch (e: ActivityNotFoundException) {
+        try {
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage"))
+            )
+        } catch (e2: Exception) {
+            showPremiumDialog()
+        }
+    } catch (e: Exception) {
+        showPremiumDialog()
+    }
+}
     private fun addRAZSection(container: LinearLayout) {
     // ✅ On utilise la version existante de createCard() (sans paramètre)
     val card = createCard()
