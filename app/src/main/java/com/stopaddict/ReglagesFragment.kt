@@ -779,24 +779,21 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     container.addView(aProposCard)
 }
     private fun ouvrirVersionPremium() {
-    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package de la version payante
+    val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package
 
     try {
-        startActivity(
-            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage"))
-        )
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$premiumPackage")))
     } catch (e: ActivityNotFoundException) {
         try {
-            startActivity(
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage"))
-            )
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage")))
         } catch (e2: Exception) {
-            showPremiumDialog()
+            Log.e(TAG, "Impossible d'ouvrir le store", e2)
         }
     } catch (e: Exception) {
-        showPremiumDialog()
+        Log.e(TAG, "Impossible d'ouvrir le store", e)
     }
 }
+    
     private fun addRAZSection(container: LinearLayout) {
     // ✅ On utilise la version existante de createCard() (sans paramètre)
     val card = createCard()
@@ -967,18 +964,6 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 private fun showMisesAJourDialog() {
         val titre = trad["maj_titre"] ?: "Dernières mises à jour"
         val contenu = trad["maj_contenu"] ?: "Déploiement V1"
-
-        AlertDialog.Builder(requireContext())
-            .setTitle(titre)
-            .setMessage(contenu)
-            .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
-            .show()
-    }
-
-                    private fun showPremiumDialog() {
-        // Titre et contenu récupérés depuis les traductions si dispo
-        val titre = trad["premium_titre"] ?: "Version sans publicité"
-        val contenu = trad["premium_contenu"] ?: "Une version sans publicité sera proposée pour soutenir le développement de StopAddict."
 
         AlertDialog.Builder(requireContext())
             .setTitle(titre)
