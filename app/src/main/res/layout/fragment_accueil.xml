@@ -145,7 +145,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
 
             <TextView
                 android:id="@+id/accueil_txt_joints"
@@ -158,10 +160,13 @@
 
             <Button
                 android:id="@+id/accueil_btn_plus_joints"
-                android:layout_width="50dp"
+                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
+            
         </LinearLayout>
 
         <!-- Catégorie Alcool Global -->
@@ -192,8 +197,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
-
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
+            
             <TextView
                 android:id="@+id/accueil_txt_alcool_global"
                 android:layout_width="60dp"
@@ -204,11 +211,12 @@
                 android:layout_gravity="center_vertical" />
 
             <Button
-                android:id="@+id/accueil_btn_plus_alcool_global"
-                android:layout_width="50dp"
+                android:id="@+id/accueil_btn_plus_alcool_global" android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
         </LinearLayout>
 
         <!-- Catégorie Bières -->
@@ -235,12 +243,14 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/accueil_btn_moins_bieres"
+                android:id="@+id/accueil_btn_moins_bieres"                
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
-
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
+            
             <TextView
                 android:id="@+id/accueil_txt_bieres"
                 android:layout_width="60dp"
@@ -255,7 +265,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
+            
         </LinearLayout>
 
         <!-- Catégorie Liqueurs -->
@@ -286,7 +299,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
 
             <TextView
                 android:id="@+id/accueil_txt_liqueurs"
@@ -302,7 +317,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
+            
         </LinearLayout>
 
         <!-- Catégorie Alcool Fort -->
@@ -333,7 +351,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="-"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_moins_green" />
 
             <TextView
                 android:id="@+id/accueil_txt_alcool_fort"
@@ -349,7 +369,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="+"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:backgroundTint="@color/btn_plus_red" />
+                
         </LinearLayout>
  <Button
         android:id="@+id/accueil_btn_premium"
