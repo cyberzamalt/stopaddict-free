@@ -49,18 +49,18 @@ class AccueilFragment : Fragment() {
     private lateinit var txtAlcoolFort: TextView
 
     // UI Elements - Boutons +/-
-    private lateinit var btnPlusCigarettes: Button
-    private lateinit var btnMoinsCigarettes: Button
-    private lateinit var btnPlusJoints: Button
-    private lateinit var btnMoinsJoints: Button
-    private lateinit var btnPlusAlcoolGlobal: Button
-    private lateinit var btnMoinsAlcoolGlobal: Button
-    private lateinit var btnPlusBieres: Button
-    private lateinit var btnMoinsBieres: Button
-    private lateinit var btnPlusLiqueurs: Button
-    private lateinit var btnMoinsLiqueurs: Button
-    private lateinit var btnPlusAlcoolFort: Button
-    private lateinit var btnMoinsAlcoolFort: Button
+    private lateinit var btnPlusCigarettes: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsCigarettes: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnPlusJoints: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsJoints: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnPlusAlcoolGlobal: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsAlcoolGlobal: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnPlusBieres: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsBieres: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnPlusLiqueurs: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsLiqueurs: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnPlusAlcoolFort: androidx.appcompat.widget.AppCompatImageButton
+    private lateinit var btnMoinsAlcoolFort: androidx.appcompat.widget.AppCompatImageButton
 
     // UI Elements - Cases à cocher
     private lateinit var checkCigarettes: CheckBox
