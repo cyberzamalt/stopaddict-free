@@ -174,14 +174,6 @@ object ReglagesLangues {
         "unite_cl_liqueur"     to "Unité en cL",
         "unite_cl_alcool_fort" to "Unité en cL",
 
-        legal_disclaimer_international = "AVERTISSEMENT IMPORTANT : Cette application ne constitue pas un avis médical, psychologique ou professionnel. Les informations fournies sont générales, non personnalisées et uniquement destinées à un usage personnel et informatif. StopAddict n’est pas un dispositif médical, ne remplace pas un diagnostic professionnel, un traitement, une thérapie, ni les services d’un professionnel de santé.
-
-En utilisant l’application, vous acceptez que votre utilisation se fait sous votre seule responsabilité. Les lois applicables sont exclusivement les lois françaises. Tout différend devra être porté devant les tribunaux français. Si vous résidez hors de France, il vous appartient de vérifier la conformité de l’utilisation de cette application avec les lois locales de votre pays.
-
-StopAddict, son créateur et ses partenaires ne pourront être tenus responsables de tout dommage direct ou indirect lié à l’utilisation de cette application, y compris mais sans s’y limiter : la santé, les choix personnels, l'interprétation des données, l'arrêt ou la réduction de consommation, ou toute conséquence liée à vos décisions personnelles.
-
-En continuant l’utilisation, vous reconnaissez avoir lu, compris et accepté cet avertissement international.",
-
         "label_prix_feuilles_longues" to "Prix des feuilles longues",
         "label_nb_feuilles_longues" to "Nombre de feuilles longues"
     )
@@ -331,15 +323,6 @@ En continuant l’utilisation, vous reconnaissez avoir lu, compris et accepté c
         "unite_cl_biere"       to "Unit (cl)",
         "unite_cl_liqueur"     to "Unit (cl)",
         "unite_cl_alcool_fort" to "Unit (cl)",
-
-        legal_disclaimer_international = "IMPORTANT DISCLAIMER: This application does not constitute medical, psychological, or professional advice. All information provided is general, non-personalized, and intended solely for personal and informational use. StopAddict is not a medical device and does not replace professional diagnosis, treatment, therapy, or any healthcare service.
-
-By using the application, you agree that your use is entirely at your own risk. The applicable law is exclusively French law. Any dispute must be brought before French courts. If you reside outside France, it is your responsibility to ensure that the use of this application complies with your local laws.
-
-StopAddict, its creator, and its partners cannot be held liable for any direct or indirect damage resulting from the use of this application, including but not limited to: health consequences, personal choices, data interpretation, reduction or cessation of consumption, or any consequence linked to your personal decisions.
-
-By continuing to use the app, you acknowledge that you have read, understood, and accepted this international disclaimer.",
-
         
         "label_prix_feuilles_longues" to "Long papers price",
         "label_nb_feuilles_longues"   to "Number of long papers"
@@ -490,14 +473,6 @@ By continuing to use the app, you acknowledge that you have read, understood, an
         "unite_cl_liqueur"     to "Unidad (cl)",
         "unite_cl_alcool_fort" to "Unidad (cl)",
 
-        legal_disclaimer_international = "ADVERTENCIA IMPORTANTE: Esta aplicación no constituye asesoramiento médico, psicológico ni profesional. La información proporcionada es general, no personalizada y se ofrece únicamente con fines personales e informativos. StopAddict no es un dispositivo médico y no sustituye un diagnóstico profesional, un tratamiento, una terapia ni los servicios de un profesional de la salud.
-
-Al utilizar la aplicación, usted acepta que su uso se realiza bajo su exclusiva responsabilidad. La ley aplicable es exclusivamente la ley francesa. Cualquier disputa deberá presentarse ante los tribunales franceses. Si reside fuera de Francia, es su responsabilidad verificar que el uso de esta aplicación cumple con las leyes locales de su país.
-
-StopAddict, su creador y sus socios no serán responsables de ningún daño directo o indirecto derivado del uso de esta aplicación, incluidos, entre otros: consecuencias para la salud, decisiones personales, interpretación de datos, reducción o interrupción del consumo o cualquier consecuencia relacionada con sus decisiones personales.
-
-Al continuar utilizando la aplicación, usted reconoce haber leído, comprendido y aceptado esta advertencia internacional.",
-
         "label_prix_feuilles_longues" to "Precio de papeles largos",
         "label_nb_feuilles_longues"   to "Número de papeles largos"
     )
@@ -646,14 +621,6 @@ Al continuar utilizando la aplicación, usted reconoce haber leído, comprendido
         "unite_cl_biere"       to "Unidade (cl)",
         "unite_cl_liqueur"     to "Unidade (cl)",
         "unite_cl_alcool_fort" to "Unidade (cl)",
-
-        legal_disclaimer_international = "AVISO IMPORTANTE: Este aplicativo não constitui aconselhamento médico, psicológico ou profissional. As informações fornecidas são gerais, não personalizadas e destinadas apenas para uso pessoal e informativo. StopAddict não é um dispositivo médico e não substitui diagnóstico profissional, tratamento, terapia ou serviços de saúde.
-
-Ao utilizar o aplicativo, você concorda que o uso é de sua inteira responsabilidade. A lei aplicável é exclusivamente a lei francesa. Qualquer disputa deverá ser submetida aos tribunais franceses. Se você reside fora da França, é sua responsabilidade verificar a conformidade do uso deste aplicativo com as leis locais de seu país.
-
-StopAddict, seu criador e parceiros não poderão ser responsabilizados por danos diretos ou indiretos decorrentes do uso deste aplicativo, incluindo, entre outros: consequências para a saúde, escolhas pessoais, interpretação de dados, redução ou interrupção do consumo ou qualquer consequência relacionada às suas decisões pessoais.
-
-Ao continuar utilizando o aplicativo, você reconhece ter lido, compreendido e aceitado este aviso internacional.",
         
     "label_prix_feuilles_longues" to "Preço das folhas longas",
     "label_nb_feuilles_longues" to "Número de folhas longas"
@@ -804,14 +771,6 @@ Ao continuar utilizando o aplicativo, você reconhece ter lido, compreendido e a
         "unite_cl_liqueur"     to "Einheit (cl)",
         "unite_cl_alcool_fort" to "Einheit (cl)",
 
-        legal_disclaimer_international = "WICHTIGER HINWEIS: Diese Anwendung stellt keinen medizinischen, psychologischen oder professionellen Rat dar. Die bereitgestellten Informationen sind allgemein, nicht personalisiert und ausschließlich für den persönlichen und informativen Gebrauch bestimmt. StopAddict ist kein medizinisches Gerät und ersetzt keine professionelle Diagnose, Behandlung, Therapie oder Gesundheitsdienstleistung.
-
-Durch die Nutzung der Anwendung erklären Sie sich damit einverstanden, dass die Nutzung ausschließlich auf eigene Verantwortung erfolgt. Es gilt ausschließlich französisches Recht. Streitigkeiten sind vor französischen Gerichten auszutragen. Wenn Sie außerhalb Frankreichs leben, liegt es in Ihrer Verantwortung zu prüfen, ob die Nutzung dieser Anwendung mit den lokalen Gesetzen Ihres Landes übereinstimmt.
-
-StopAddict, der Entwickler und seine Partner übernehmen keinerlei Haftung für direkte oder indirekte Schäden, die durch die Nutzung dieser Anwendung entstehen, einschließlich, aber nicht beschränkt auf: gesundheitliche Folgen, persönliche Entscheidungen, Dateninterpretation, Reduzierung oder Beendigung des Konsums oder sonstige Entscheidungen.
-
-Durch die weitere Nutzung bestätigen Sie, dass Sie diesen internationalen Hinweis gelesen, verstanden und akzeptiert haben.",
-
     "label_prix_feuilles_longues" to "Preis der langen Blättchen",
     "label_nb_feuilles_longues" to "Anzahl der langen Blättchen"
     )
@@ -960,14 +919,6 @@ Durch die weitere Nutzung bestätigen Sie, dass Sie diesen internationalen Hinwe
         "unite_cl_biere"       to "Unità (cl)",
         "unite_cl_liqueur"     to "Unità (cl)",
         "unite_cl_alcool_fort" to "Unità (cl)",
-
-        legal_disclaimer_international = "AVVISO IMPORTANTE: Questa applicazione non costituisce consulenza medica, psicologica o professionale. Le informazioni fornite sono generali, non personalizzate e destinate esclusivamente a uso personale e informativo. StopAddict non è un dispositivo medico e non sostituisce diagnosi, trattamenti, terapie o servizi sanitari professionali.
-
-Utilizzando l'applicazione, accetti che il suo utilizzo avviene sotto la tua esclusiva responsabilità. La legge applicabile è esclusivamente quella francese. Qualsiasi controversia deve essere sottoposta ai tribunali francesi. Se risiedi fuori dalla Francia, è tua responsabilità verificare la conformità dell'utilizzo dell'app con le leggi locali del tuo paese.
-
-StopAddict, il suo creatore e i partner non potranno essere ritenuti responsabili per danni diretti o indiretti derivanti dall'uso dell'app, inclusi ma non limitati a: conseguenze sulla salute, scelte personali, interpretazione dei dati, riduzione o cessazione del consumo o qualsiasi conseguenza derivante dalle tue decisioni personali.
-
-Continuando a utilizzare l'app, dichiari di aver letto, compreso e accettato questo avviso internazionale.",
         
     "label_prix_feuilles_longues" to "Prezzo delle cartine lunghe",
     "label_nb_feuilles_longues" to "Numero di cartine lunghe"
@@ -1118,14 +1069,6 @@ Continuando a utilizzare l'app, dichiari di aver letto, compreso e accettato que
         "unite_cl_liqueur"     to "Единица (мл)",
         "unite_cl_alcool_fort" to "Единица (мл)",
 
-        legal_disclaimer_international = "ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ: Это приложение не является медицинской, психологической или профессиональной консультацией. Предоставляемая информация носит общий характер, не является персонализированной и предназначена исключительно для личного и информационного использования. StopAddict не является медицинским устройством и не заменяет профессиональную диагностику, лечение, терапию или медицинские услуги.
-
-Используя приложение, вы соглашаетесь, что делаете это исключительно на свой страх и риск. Применяется исключительно французское законодательство. Любые споры подлежат рассмотрению только во французских судах. Если вы живете за пределами Франции, вы несёте ответственность за соблюдение местных законов вашей страны.
-
-StopAddict, его создатель и партнёры не несут ответственности за прямой или косвенный ущерб, возникший в результате использования приложения, включая, но не ограничиваясь: последствиями для здоровья, личными решениями, интерпретацией данных, сокращением или прекращением потребления и любыми другими последствиями ваших личных действий.
-
-Продолжая использование приложения, вы подтверждаете, что прочитали, поняли и приняли это международное предупреждение.",
-
     "label_prix_feuilles_longues" to "Цена длинных бумажек",
     "label_nb_feuilles_longues" to "Количество длинных бумажек"
     )
@@ -1274,14 +1217,6 @@ StopAddict, его создатель и партнёры не несут отв
         "unite_cl_biere"       to "الوحدة (سنتيلتر)",
         "unite_cl_liqueur"     to "الوحدة (سنتيلتر)",
         "unite_cl_alcool_fort" to "الوحدة (سنتيلتر)",
-
-        legal_disclaimer_international = "تحذير مهم: هذا التطبيق لا يشكل أي استشارة طبية أو نفسية أو مهنية. جميع المعلومات المقدمة عامة وغير مخصصة، وموجهة للاستخدام الشخصي والمعلوماتي فقط. StopAddict ليس جهازًا طبيًا ولا يبدل التشخيص أو العلاج أو المتابعة من قبل المتخصصين في الرعاية الصحية.
-
-باستخدامك للتطبيق، فإنك توافق على أن الاستخدام يتم تحت مسؤوليتك الشخصية بالكامل. القانون المعمول به هو القانون الفرنسي فقط، وأي نزاع يجب رفعه أمام المحاكم الفرنسية. إذا كنت تقيم خارج فرنسا، فإن مسؤولية التحقق من توافق استخدام التطبيق مع قوانين بلدك تقع عليك وحدك.
-
-لا يتحمل StopAddict أو منشئه أو شركاؤه أي مسؤولية عن أي ضرر مباشر أو غير مباشر ناتج عن استخدام التطبيق، بما في ذلك — على سبيل المثال لا الحصر — الآثار الصحية، القرارات الشخصية، تفسير البيانات، التقليل أو التوقف عن الاستهلاك، أو أي نتيجة ناتجة عن قراراتك الشخصية.
-
-باستمرارك في استخدام التطبيق، فإنك تقر بأنك قرأت هذا التحذير الدولي وفهمته ووافقت عليه.",
 
     "label_prix_feuilles_longues" to "سعر أوراق اللف الطويلة",
     "label_nb_feuilles_longues" to "عدد أوراق اللف الطويلة"
@@ -1432,14 +1367,6 @@ StopAddict, его создатель и партнёры не несут отв
         "unite_cl_liqueur"     to "इकाई (cl)",
         "unite_cl_alcool_fort" to "इकाई (cl)",
 
-        legal_disclaimer_international = "महत्वपूर्ण चेतावनी: यह ऐप किसी भी प्रकार की चिकित्सीय, मनोवैज्ञानिक या पेशेवर सलाह प्रदान नहीं करता। दी गई जानकारी सामान्य है, व्यक्तिगत नहीं है, और केवल व्यक्तिगत और सूचनात्मक उपयोग के लिए है। StopAddict कोई चिकित्सा उपकरण नहीं है और यह पेशेवर निदान, उपचार, थेरेपी या स्वास्थ्य सेवा का विकल्प नहीं है।
-
-इस ऐप का उपयोग करके, आप सहमत होते हैं कि उपयोग पूरी तरह से आपकी अपनी जिम्मेदारी पर है। लागू कानून केवल फ्रांसीसी कानून है। किसी भी विवाद का निपटारा केवल फ्रांसीसी अदालतों में किया जाएगा। यदि आप फ्रांस के बाहर रहते हैं, तो अपने देश के स्थानीय कानूनों का पालन सुनिश्चित करना आपकी जिम्मेदारी है।
-
-StopAddict, इसके निर्माता और इसके साझेदार ऐप के उपयोग से होने वाले किसी भी प्रत्यक्ष या अप्रत्यक्ष नुकसान के लिए जिम्मेदार नहीं होंगे, जिसमें शामिल है — लेकिन सीमित नहीं — स्वास्थ्य संबंधी प्रभाव, व्यक्तिगत निर्णय, डेटा की व्याख्या, उपभोग में कमी या बंद करना, या आपकी व्यक्तिगत पसंद से संबंधित कोई भी परिणाम।
-
-ऐप का उपयोग जारी रखते हुए, आप पुष्टि करते हैं कि आपने इस अंतरराष्ट्रीय चेतावनी को पढ़ा, समझा और स्वीकार किया है।",
-
     "label_prix_feuilles_longues" to "लंबे रोलिंग पेपर की कीमत",
     "label_nb_feuilles_longues" to "लंबे रोलिंग पेपर की संख्या"
     )
@@ -1588,14 +1515,6 @@ StopAddict, इसके निर्माता और इसके साझ�
         "unite_cl_biere"       to "単位（cl）",
         "unite_cl_liqueur"     to "単位（cl）",
         "unite_cl_alcool_fort" to "単位（cl）",
-
-        legal_disclaimer_international = "重要な注意事項：本アプリは医療的・心理的・専門的アドバイスを提供するものではありません。提供される情報は一般的なものであり、個別の状況に合わせたものではなく、個人利用および情報提供のみを目的としています。StopAddict は医療機器ではなく、専門的な診断、治療、療法、または医療サービスの代替にはなりません。
-
-本アプリを使用することで、利用者はすべて自己責任で利用することに同意するものとします。適用される法律はフランス法のみとし、すべての紛争はフランスの裁判所で解決されます。フランス国外に居住している場合、本アプリの利用が居住国の法律に適合しているかどうかを確認する責任は利用者にあります。
-
-StopAddict、その開発者、およびパートナーは、本アプリの利用による直接的または間接的な損害について一切の責任を負いません。これには、健康への影響、個人的判断、データ解釈、消費の減少または中止、その他あなたの個人的決定に関連する結果が含まれますが、これらに限定されません。
-
-アプリの利用を継続することで、あなたはこの国際的注意事項を読み、理解し、同意したものとみなされます。",
 
     "label_prix_feuilles_longues" to "ロングペーパーの価格",
     "label_nb_feuilles_longues" to "ロングペーパーの枚数"
