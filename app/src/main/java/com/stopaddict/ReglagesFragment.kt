@@ -316,8 +316,8 @@ class ReglagesFragment : Fragment() {
         // Nouveau : nombre de cigarettes fabriquées avec ce paquet (rouler)
         addLabel(
             roulerContainer,
-            trad["label_nb_cigarettes_roulees"]
-                ?: "Nombre de cigarettes que vous fabriquez avec ce paquet (tabac + feuilles + filtres)"
+            trad["label_nb_cigarettes"]
+                ?: "Nombre de cigarettes"
         )
         editNbCigarettesRoulees = createNumberEditText()
         roulerContainer.addView(editNbCigarettesRoulees)
@@ -351,10 +351,10 @@ class ReglagesFragment : Fragment() {
 
         // Nouveau : nombre de cigarettes fabriquées avec ce paquet (tuber)
         addLabel(
-            tuberContainer,
-            trad["label_nb_cigarettes_tubees"]
-                ?: "Nombre de cigarettes que vous fabriquez avec ce paquet (tabac + tubes)"
-        )
+        tuberContainer,
+        trad["label_nb_cigarettes"]
+            ?: "Nombre de cigarettes"
+            )
         editNbCigarettesTubees = createNumberEditText()
         tuberContainer.addView(editNbCigarettesTubees)
 
