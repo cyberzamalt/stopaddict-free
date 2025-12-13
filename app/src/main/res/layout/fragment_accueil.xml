@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#D54000"
+            android:background="#bf8024"
             android:padding="12dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
