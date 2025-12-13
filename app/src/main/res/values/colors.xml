@@ -73,8 +73,8 @@
     <color name="background_dialog">#FFFFFF</color>
     
     <!-- Couleurs boutons -->
-    <color name="button_primary">#0e3544</color>
-    <color name="button_primary_pressed">#2b7b99</color>
+    <color name="button_primary">#042c66</color>
+    <color name="button_primary_pressed">#1087b2</color>
     <color name="button_secondary">#FF9800</color>
     <color name="button_secondary_pressed">#F57C00</color>
     <color name="button_danger">#F44336</color>
