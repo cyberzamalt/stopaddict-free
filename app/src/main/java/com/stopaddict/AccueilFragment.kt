@@ -48,6 +48,8 @@ class AccueilFragment : Fragment() {
     private lateinit var txtLiqueurs: TextView
     private lateinit var txtAlcoolFort: TextView
 
+    private lateinit var bandeauProfil: View
+
     // UI Elements - Boutons +/-
     private lateinit var btnPlusCigarettes: androidx.appcompat.widget.AppCompatImageButton
     private lateinit var btnMoinsCigarettes: androidx.appcompat.widget.AppCompatImageButton
@@ -190,6 +192,7 @@ class AccueilFragment : Fragment() {
 
             // Bandeau profil/conseils
             txtProfilComplet = view.findViewById(R.id.accueil_txt_profil_complet)
+            bandeauProfil = view.findViewById(R.id.accueil_bandeau_profil)
             txtConseil = view.findViewById(R.id.accueil_txt_conseil)
 
             // Conteneurs catégories
@@ -604,6 +607,8 @@ class AccueilFragment : Fragment() {
                 trad["profil_incomplet"] ?: "Profil: Incomplet"
             }
             txtProfilComplet.text = texteProfil
+            bandeauProfil.setBackgroundColor(ContextCompat.getColor(requireContext(), if (isComplete) R.color.profile_complete else R.color.profile_incomplete))
+txtProfilComplet.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
             txtProfilComplet.setBackgroundColor(ContextCompat.getColor(requireContext(),
     if (isComplete) R.color.profile_complete else R.color.profile_incomplete
 ))
