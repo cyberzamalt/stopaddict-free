@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- ÉTAT COCHÉ -->
+    <!-- COCHÉ : fond blanc + contour noir + icône check noire -->
     <item android:state_checked="true">
         <layer-list>
 
-            <!-- fond blanc + contour noir -->
+            <!-- carré blanc + bordure noire -->
             <item>
                 <shape android:shape="rectangle">
                     <solid android:color="@android:color/white"/>
                     <stroke android:width="2dp" android:color="@android:color/black"/>
+                    <corners android:radius="2dp"/>
                 </shape>
             </item>
 
-            <!-- coche -->
-            <item android:gravity="center">
-                <shape android:shape="path">
-                    <pathData android:pathData="M4,8 L7,11 L12,4"
-                        android:fillColor="@android:color/black"/>
-                </shape>
-            </item>
-
+            <!-- coche noire (vector) -->
+            <item
+                android:drawable="@drawable/ic_check_black"
+                android:gravity="center"/>
         </layer-list>
     </item>
 
-    <!-- ÉTAT DÉCOCHÉ -->
+    <!-- DÉCOCHÉ : fond blanc + contour noir -->
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@android:color/white"/>
             <stroke android:width="2dp" android:color="@android:color/black"/>
+            <corners android:radius="2dp"/>
         </shape>
     </item>
 
