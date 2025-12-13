@@ -76,8 +76,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_cigarettes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Cigarettes"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
@@ -134,8 +132,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_joints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Joints"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
@@ -192,8 +188,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_alcool_global"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Alcool global"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
@@ -250,8 +244,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_bieres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Bières"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
@@ -308,8 +300,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_liqueurs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Liqueurs"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
@@ -367,8 +357,6 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_alcool_fort"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Alcool fort"
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
