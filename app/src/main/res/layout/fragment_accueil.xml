@@ -82,6 +82,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
@@ -138,6 +140,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
@@ -194,6 +198,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
@@ -250,6 +256,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
@@ -306,6 +314,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
@@ -363,6 +373,8 @@
                 android:textSize="16sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:checked="true" />
 
             <Space
