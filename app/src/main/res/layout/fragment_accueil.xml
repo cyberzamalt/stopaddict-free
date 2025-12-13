@@ -13,8 +13,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="#D54000"
             android:padding="12dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_marginBottom="16dp">
 
             <TextView
@@ -23,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Profil: Complet"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Conseil: Chaque pas compte dans votre parcours."
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:padding="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
@@ -77,11 +79,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_cigarettes"
                 android:text="Cigarettes"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
@@ -133,11 +136,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_joints"
                 android:text="Joints"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
@@ -189,11 +193,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_alcool_global"
                 android:text="Alcool global"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
@@ -245,11 +250,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_bieres"
                 android:text="Bières"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
@@ -301,11 +307,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_liqueurs"
                 android:text="Liqueurs"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
@@ -358,11 +365,12 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/accueil_check_alcool_fort"
                 android:text="Alcool fort"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:checked="true" />
 
             <Space
