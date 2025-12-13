@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ÉTAT COCHÉ -->
+    <item android:state_checked="true">
+        <layer-list>
+
+            <!-- fond blanc + contour noir -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/white"/>
+                    <stroke android:width="2dp" android:color="@android:color/black"/>
+                </shape>
+            </item>
+
+            <!-- coche -->
+            <item android:gravity="center">
+                <shape android:shape="path">
+                    <pathData android:pathData="M4,8 L7,11 L12,4"
+                        android:fillColor="@android:color/black"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <!-- ÉTAT DÉCOCHÉ -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white"/>
+            <stroke android:width="2dp" android:color="@android:color/black"/>
+        </shape>
+    </item>
+
+</selector>
