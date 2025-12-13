@@ -81,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cigarettes"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
@@ -137,8 +136,7 @@
                 android:layout_height="wrap_content"
                 android:text="Joints"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
@@ -193,8 +191,7 @@
                 android:layout_height="wrap_content"
                 android:text="Alcool global"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
@@ -249,8 +246,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bières"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
@@ -305,8 +301,7 @@
                 android:layout_height="wrap_content"
                 android:text="Liqueurs"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
@@ -362,8 +357,7 @@
                 android:layout_height="wrap_content"
                 android:text="Alcool fort"
                 android:textSize="16sp"
-                android:button="@android:drawable/btn_check"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/black"
                 android:checked="true" />
 
             <Space
