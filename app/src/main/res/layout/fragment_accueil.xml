@@ -10,14 +10,12 @@
 
         <!-- Bandeau profil -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@android:color/transparent"
-            android:padding="12dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="16dp">
+                android:id="@+id/accueil_bandeau_profil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/accueil_txt_profil_complet"
