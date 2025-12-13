@@ -8,6 +8,7 @@
             <!-- carré blanc + bordure noire -->
             <item>
                 <shape android:shape="rectangle">
+                    <size android:width="20dp" android:height="20dp"/>
                     <solid android:color="@android:color/white"/>
                     <stroke android:width="2dp" android:color="@android:color/black"/>
                     <corners android:radius="2dp"/>
@@ -24,6 +25,7 @@
     <!-- DÉCOCHÉ : fond blanc + contour noir -->
     <item>
         <shape android:shape="rectangle">
+            <size android:width="20dp" android:height="20dp"/>
             <solid android:color="@android:color/white"/>
             <stroke android:width="2dp" android:color="@android:color/black"/>
             <corners android:radius="2dp"/>
