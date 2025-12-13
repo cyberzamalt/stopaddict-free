@@ -84,7 +84,7 @@
                 app:buttonTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
@@ -141,7 +141,7 @@
                 app:buttonTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
@@ -198,7 +198,7 @@
                 app:buttonTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
@@ -255,7 +255,7 @@
                 app:buttonTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
@@ -310,9 +310,9 @@
                 android:textSize="14sp"
                 app:buttonCompat="@drawable/checkbox_classic"
                 app:buttonTint="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:drawablePadding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
@@ -370,7 +370,7 @@
                 app:buttonTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
+                android:drawablePadding="12dp"
                 android:checked="true" />
 
             <Space
