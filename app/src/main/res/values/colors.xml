@@ -25,8 +25,8 @@
     <color name="text_white">#FFFFFF</color>
 
     <!-- Couleurs de bouton -->
-    <color name="btn_plus_red">#ED1C24</color>   <!-- 237,28,36 -->
-    <color name="btn_moins_green">#22B14C</color> <!-- 34,177,76 -->
+    <color name="btn_plus_red">#d10000</color>   <!-- 237,28,36 -->
+    <color name="btn_moins_green">#036a00</color> <!-- 34,177,76 -->
     
     <!-- Couleurs de statut -->
     <color name="success">#4CAF50</color>
