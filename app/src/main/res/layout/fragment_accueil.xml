@@ -82,6 +82,7 @@
                 android:text="Cigarettes"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
@@ -137,6 +138,7 @@
                 android:text="Joints"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
@@ -192,6 +194,7 @@
                 android:text="Alcool global"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
@@ -247,6 +250,7 @@
                 android:text="Bières"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
@@ -302,6 +306,7 @@
                 android:text="Liqueurs"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
@@ -358,6 +363,7 @@
                 android:text="Alcool fort"
                 android:textSize="16sp"
                 android:button="@drawable/checkbox_classic"
+                android:buttonTint="@null"
                 android:checked="true" />
 
             <Space
