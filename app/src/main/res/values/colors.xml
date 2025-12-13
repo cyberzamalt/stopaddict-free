@@ -86,7 +86,7 @@
     <color name="profile_incomplete">#FF9800</color>
     
     <!-- Couleurs conseils (Accueil) -->
-    <color name="conseil_background">#FF9800</color>
+    <color name="conseil_background">#036a00</color>
     <color name="conseil_text">#FFFFFF</color>
     
     <!-- Couleurs header -->
