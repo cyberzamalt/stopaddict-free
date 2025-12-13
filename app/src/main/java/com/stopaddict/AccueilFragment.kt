@@ -191,6 +191,7 @@ class AccueilFragment : Fragment() {
             // Bandeau profil/conseils
             txtProfilComplet = view.findViewById(R.id.accueil_txt_profil_complet)
             txtTotalAujourdhui = view.findViewById(R.id.accueil_txt_total_aujourdhui)
+            txtTotalAujourdhui.visibility = View.GONE
             txtConseil = view.findViewById(R.id.accueil_txt_conseil)
 
             // Conteneurs catégories
