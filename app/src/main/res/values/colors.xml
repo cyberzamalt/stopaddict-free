@@ -82,7 +82,7 @@
     <color name="button_disabled">#E0E0E0</color>
 
     <!-- Couleurs bandeau Total aujourd'hui -->
-    <color name="blue_primary">#2196F3</color>
+    <color name="blue_primary">#FF00FF</color>
     
     <!-- Couleurs bandeau profil -->
     <color name="profile_complete">#4CAF50</color>
