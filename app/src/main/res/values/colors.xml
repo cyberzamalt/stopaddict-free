@@ -55,7 +55,7 @@
     <color name="chart_alcool">#FFC107</color>
     <color name="chart_line">#2196F3</color>
     <color name="chart_grid">#E0E0E0</color>
-    <color name="chart_background">#FAFAFA</color>
+    <color name="chart_background">#FFFFFF</color>
     
     <!-- Couleurs habitudes limites -->
     <color name="limit_line">#F44336</color>
@@ -68,7 +68,7 @@
     <color name="date_reussite">#4CAF50</color>
     
     <!-- Couleurs backgrounds -->
-    <color name="background">#FAFAFA</color>
+    <color name="background">#FFFFFF</color>
     <color name="background_card">#FFFFFF</color>
     <color name="background_dialog">#FFFFFF</color>
     
