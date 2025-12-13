@@ -97,9 +97,9 @@
     <color name="ad_background">#616161</color>
     
     <!-- Couleurs onglets -->
-    <color name="tab_selected">#2196F3</color>
-    <color name="tab_unselected">#757575</color>
-    <color name="tab_indicator">#2196F3</color>
+    <color name="tab_selected">#042c66</color>
+    <color name="tab_unselected">#1087b2</color>
+    <color name="tab_indicator">#d10000</color>
     
     <!-- Couleurs dividers -->
     <color name="divider">#E0E0E0</color>
