@@ -604,6 +604,10 @@ class AccueilFragment : Fragment() {
                 trad["profil_incomplet"] ?: "Profil: Incomplet"
             }
             txtProfilComplet.text = texteProfil
+            txtProfilComplet.setBackgroundColor(ContextCompat.getColor(requireContext(),
+    if (isComplete) R.color.profile_complete else R.color.profile_incomplete
+))
+txtProfilComplet.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
 
             Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
         } catch (e: Exception) {
