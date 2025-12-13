@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- COCHÉ : fond blanc + contour noir + icône check noire -->
-    <item android:state_checked="true">
-        <layer-list>
-
-            <!-- carré blanc + bordure noire -->
-            <item>
-                <shape android:shape="rectangle">
-                    <size android:width="20dp" android:height="20dp"/>
-                    <solid android:color="@android:color/white"/>
-                    <stroke android:width="2dp" android:color="@android:color/black"/>
-                    <corners android:radius="2dp"/>
-                </shape>
-            </item>
-
-            <!-- coche noire (vector) -->
-            <item
-                android:drawable="@drawable/ic_check_black"
-                android:gravity="center"/>
-        </layer-list>
-    </item>
-
-    <!-- DÉCOCHÉ : fond blanc + contour noir -->
-    <item>
-        <shape android:shape="rectangle">
-            <size android:width="20dp" android:height="20dp"/>
-            <solid android:color="@android:color/white"/>
-            <stroke android:width="2dp" android:color="@android:color/black"/>
-            <corners android:radius="2dp"/>
-        </shape>
-    </item>
+    <item android:state_checked="true" android:drawable="@drawable/cb_on"/>
+    <item android:drawable="@drawable/cb_off"/>
 
 </selector>
