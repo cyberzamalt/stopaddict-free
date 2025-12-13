@@ -190,8 +190,6 @@ class AccueilFragment : Fragment() {
 
             // Bandeau profil/conseils
             txtProfilComplet = view.findViewById(R.id.accueil_txt_profil_complet)
-            txtTotalAujourdhui = view.findViewById(R.id.accueil_txt_total_aujourdhui)
-            txtTotalAujourdhui.visibility = View.GONE
             txtConseil = view.findViewById(R.id.accueil_txt_conseil)
 
             // Conteneurs catégories
@@ -495,7 +493,6 @@ class AccueilFragment : Fragment() {
             val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
             val labelTotal = trad["total_aujourdhui"] ?: "Total aujourd'hui"
             txtTotalJour.text = "$labelTotal $totalJour"
-            txtTotalAujourdhui.text = totalJour.toString()
 
             // Mise à jour état des cases à cocher
             checkCigarettes.isChecked = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
