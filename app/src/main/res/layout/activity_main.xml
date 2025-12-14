@@ -46,10 +46,13 @@
 
         <LinearLayout
             android:id="@+id/header_resume_container"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp"
+            android:showDividers="middle"
+            android:divider="@android:color/transparent"
+            android:dividerPadding="10dp"
             android:background="#FFEFEFEF">
 
             <TextView
@@ -68,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="🚬 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="10dp" />
 
             <!-- Joints -->
             <TextView
@@ -77,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="🌿 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="10dp" />
 
             <!-- Alcool global -->
             <TextView
@@ -86,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="🥃G 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="10dp" />
 
             <!-- Bières -->
             <TextView
@@ -95,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="🍺 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="10dp" />
 
             <!-- Liqueur -->
             <TextView
@@ -104,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="🍷 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+               android:layout_marginStart="10dp" />
 
             <!-- Alcool fort -->
             <TextView
@@ -113,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="🥃 0"
                 android:textSize="13sp"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
     </HorizontalScrollView>
