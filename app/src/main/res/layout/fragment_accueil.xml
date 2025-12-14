@@ -50,7 +50,7 @@
             android:text="Conseil: Chaque pas compte dans votre parcours."
             android:textSize="18sp"
             android:padding="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="16dp"
             android:background="@color/conseil_background"
             android:textColor="@color/conseil_text"
