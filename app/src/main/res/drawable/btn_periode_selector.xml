@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Bouton actif: isEnabled = false -->
+    <!-- Bouton actif -->
     <item
-        android:state_enabled="false"
+        android:state_selected="true"
         android:drawable="@drawable/btn_periode_disabled" />
+
     <!-- Bouton normal -->
     <item android:drawable="@drawable/btn_periode_enabled" />
 </selector>
