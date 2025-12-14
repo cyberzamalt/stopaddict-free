@@ -330,6 +330,11 @@ private fun updateDateTime() {
 private fun showRessourcesUtiles() {
     logger.d("showRessourcesUtiles: ouverture de la popup ressources utiles...")
     try {
+                val tv = TextView(this).apply {
+            text = trad["resources_content"] ?: ""
+            textSize = 14f
+            setPadding(50, 30, 50, 30)
+        }
         AlertDialog.Builder(this)
             .setTitle(trad["resources_title"] ?: "Help")
             .setMessage(trad["resources_content"] ?: "")
