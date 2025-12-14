@@ -419,24 +419,32 @@ private fun configureBarChart(chart: BarChart) {
     }
 
     private fun updateButtonsState() {
-        try {
-            btnJour.isEnabled = true
-            btnSemaine.isEnabled = true
-            btnMois.isEnabled = true
-            btnAnnee.isEnabled = true
+    try {
+        // Tous les boutons restent cliquables
+        btnJour.isEnabled = true
+        btnSemaine.isEnabled = true
+        btnMois.isEnabled = true
+        btnAnnee.isEnabled = true
 
-            when (periodeActive) {
-                PERIODE_JOUR -> btnJour.isEnabled = false
-                PERIODE_SEMAINE -> btnSemaine.isEnabled = false
-                PERIODE_MOIS -> btnMois.isEnabled = false
-                PERIODE_ANNEE -> btnAnnee.isEnabled = false
-            }
+        // Reset état "sélectionné"
+        btnJour.isSelected = false
+        btnSemaine.isSelected = false
+        btnMois.isSelected = false
+        btnAnnee.isSelected = false
 
-            Log.d(TAG, "État boutons mis à jour: $periodeActive")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour état boutons: ${e.message}")
+        // Marquer le bouton actif
+        when (periodeActive) {
+            PERIODE_JOUR -> btnJour.isSelected = true
+            PERIODE_SEMAINE -> btnSemaine.isSelected = true
+            PERIODE_MOIS -> btnMois.isSelected = true
+            PERIODE_ANNEE -> btnAnnee.isSelected = true
         }
+
+        Log.d(TAG, "État boutons (selected) mis à jour: $periodeActive")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur mise à jour état boutons: ${e.message}", e)
     }
+}
 
     private fun updateGraphiques() {
         try {
