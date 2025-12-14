@@ -952,11 +952,15 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
             private fun showMentionsLegalesDialog() {
-        val mentions = ReglagesLangues.getMentionsLegales(configLangue.getLangue())
-
+                    val mentions = ReglagesLangues.getMentionsLegales(configLangue.getLangue())
+                    val tv = TextView(requireContext()).apply {
+                text = mentions
+                textSize = 14f
+                setPadding(50, 30, 50, 30)
+            }
         AlertDialog.Builder(requireContext())
             .setTitle("⚖️ ${trad["btn_mentions_legales"] ?: "Mentions légales"}")
-            .setMessage(mentions)
+            .setView(tv)
             .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
