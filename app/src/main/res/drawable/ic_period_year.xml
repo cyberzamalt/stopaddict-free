@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="18dp"
+    android:height="18dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Calendar body -->
+    <path android:fillColor="#7B1FA2" android:pathData="M5,5h14a2,2 0 0,1 2,2v12a2,2 0 0,1 -2,2H5a2,2 0 0,1 -2,-2V7a2,2 0 0,1 2,-2z"/>
+    <!-- Top bar -->
+    <path android:fillColor="#4A148C" android:pathData="M3,9h18v2H3z"/>
+    <!-- Star -->
+    <path android:fillColor="#FDD835" android:pathData="M12,12.2l0.9,1.8l2,0.3l-1.4,1.4l0.3,2l-1.8,-0.9l-1.8,0.9l0.3,-2l-1.4,-1.4l2,-0.3z"/>
+</vector>
