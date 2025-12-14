@@ -201,7 +201,7 @@ private fun updateDateTime() {
         // Message principal (long)
         val messageText = TextView(this).apply {
             text = trad["warning_message"] ?: ""
-            textSize = 14f
+            textSize = 12f
             setPadding(0, 0, 0, 20)
         }
         container.addView(messageText)
@@ -210,7 +210,7 @@ private fun updateDateTime() {
         // Lien "Ressources et numéros utiles"
         val linkText = TextView(this).apply {
             text = trad["warning_resources_link"] ?: ""
-            textSize = 14f
+            textSize = 12f
             setTextColor(getColor(android.R.color.holo_blue_dark))
             setPadding(0, 0, 0, 30)
             setOnClickListener {
