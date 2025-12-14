@@ -968,10 +968,16 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 private fun showMisesAJourDialog() {
         val titre = trad["maj_titre"] ?: "Dernières mises à jour"
         val contenu = trad["maj_contenu"] ?: "Déploiement V1"
+        val tv = TextView(requireContext()).apply {
+                text = contenu
+                textSize = 14f
+                setPadding(50, 30, 50, 30)
+                setTextIsSelectable(true)
+            }
 
         AlertDialog.Builder(requireContext())
             .setTitle(titre)
-            .setMessage(contenu)
+            .setView(tv)
             .setPositiveButton(trad["btn_ok"] ?: "Fermer", null)
             .show()
     }
