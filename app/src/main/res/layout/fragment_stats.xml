@@ -44,8 +44,7 @@
     android:layout_marginTop="8dp"
     android:background="#FFFFFF"
     android:elevation="2dp"
-    android:padding="12dp"
-    android:stretchColumns="1,2,3,4">
+    android:padding="12dp">
 
     <!-- Ligne d'en-tête (fond léger) -->
     <TableRow
