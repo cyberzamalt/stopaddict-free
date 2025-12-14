@@ -139,6 +139,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Cigarettes"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -195,6 +196,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Joints"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -251,6 +253,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Alcool global"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -307,6 +310,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Bières"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -363,6 +367,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Liqueurs"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -419,6 +424,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Alcool fort"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
