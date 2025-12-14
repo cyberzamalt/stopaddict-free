@@ -595,49 +595,69 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="16dp">
-
+        
             <Button
                 android:id="@+id/stats_btn_jour"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="Jour"
                 android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_marginEnd="2dp" />
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/btn_periode_selector"
+                android:textColor="@color/btn_periode_text_selector"
+                android:textAllCaps="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
 
            <Button
                 android:id="@+id/stats_btn_semaine"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="Semaine"
                 android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_marginEnd="2dp" />
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/btn_periode_selector"
+                android:textColor="@color/btn_periode_text_selector"
+                android:textAllCaps="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
 
             <Button
                 android:id="@+id/stats_btn_mois"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="Mois"
                 android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_marginEnd="2dp" />
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/btn_periode_selector"
+                android:textColor="@color/btn_periode_text_selector"
+                android:textAllCaps="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
 
             <Button
                 android:id="@+id/stats_btn_annee"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="Année"
+                android:textSize="10sp"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:textSize="10sp" />
+                android:background="@drawable/btn_periode_selector"
+                android:textColor="@color/btn_periode_text_selector"
+                android:textAllCaps="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
         </LinearLayout>
 
         <!-- Graphique Consommation -->
