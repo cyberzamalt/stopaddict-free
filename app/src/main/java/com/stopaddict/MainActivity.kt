@@ -337,7 +337,7 @@ private fun showRessourcesUtiles() {
         }
         AlertDialog.Builder(this)
             .setTitle(trad["resources_title"] ?: "Help")
-            .setMessage(trad["resources_content"] ?: "")
+            .setView(tv)
             .setPositiveButton(trad["resources_btn_close"] ?: "Close") { _, _ ->
                 logger.d("showRessourcesUtiles: bouton Fermer cliqué")
             }
