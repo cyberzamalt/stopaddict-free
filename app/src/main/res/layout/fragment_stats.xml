@@ -70,6 +70,11 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Jour"
+            android:drawableLeft="@drawable/ic_period_day"
+            android:drawablePadding="6dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -81,6 +86,11 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Semaine"
+            android:drawableLeft="@drawable/ic_period_week"
+            android:drawablePadding="6dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -92,6 +102,11 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Mois"
+            android:drawableLeft="@drawable/ic_period_month"
+            android:drawablePadding="6dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -103,6 +118,11 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Année"
+            android:drawableLeft="@drawable/ic_period_year"
+            android:drawablePadding="6dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="12sp"
             android:textStyle="bold" />
     </TableRow>
 
@@ -112,7 +132,7 @@
             android:id="@+id/stats_row_label_cigarettes"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -168,7 +188,7 @@
             android:id="@+id/stats_row_label_joints"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -224,7 +244,7 @@
             android:id="@+id/stats_row_label_alcool_global"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -280,7 +300,7 @@
             android:id="@+id/stats_row_label_bieres"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -336,7 +356,7 @@
             android:id="@+id/stats_row_label_liqueurs"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -392,7 +412,7 @@
             android:id="@+id/stats_row_label_alcool_fort"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -448,7 +468,7 @@
             android:id="@+id/stats_row_label_depenses"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
@@ -504,7 +524,7 @@
             android:id="@+id/stats_row_label_economies"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
