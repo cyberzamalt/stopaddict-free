@@ -114,10 +114,10 @@ object StatsLangues {
         "axe_mois_dec" to "Déc",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Jour",
-        "calculs_periode_semaine" to "▦ Semaine",
-        "calculs_periode_mois" to "▣ Mois",
-        "calculs_periode_annee" to "▢ Année",
+        "calculs_periode_jour" to "Jour",
+        "calculs_periode_semaine" to "Semaine",
+        "calculs_periode_mois" to "Mois",
+        "calculs_periode_annee" to "Année",
         "calculs_unites" to "unités",
         "calculs_depenses" to "dépensés",
         "calculs_economies" to "économisés",
@@ -221,10 +221,10 @@ object StatsLangues {
         "axe_mois_dec" to "Dec",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Day",
-        "calculs_periode_semaine" to "▦ Week",
-        "calculs_periode_mois" to "▣ Month",
-        "calculs_periode_annee" to "▢ Year",
+        "calculs_periode_jour" to "Day",
+        "calculs_periode_semaine" to "Week",
+        "calculs_periode_mois" to "Month",
+        "calculs_periode_annee" to "Year",
         "calculs_unites" to "units",
         "calculs_depenses" to "spent",
         "calculs_economies" to "saved",
@@ -328,10 +328,10 @@ object StatsLangues {
         "axe_mois_dec" to "Dic",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Día",
-        "calculs_periode_semaine" to "▦ Semana",
-        "calculs_periode_mois" to "▣ Mes",
-        "calculs_periode_annee" to "▢ Año",
+        "calculs_periode_jour" to "Día",
+        "calculs_periode_semaine" to "Semana",
+        "calculs_periode_mois" to "Mes",
+        "calculs_periode_annee" to "Año",
         "calculs_unites" to "unidades",
         "calculs_depenses" to "gastados",
         "calculs_economies" to "ahorrados",
@@ -435,10 +435,10 @@ object StatsLangues {
         "axe_mois_dec" to "Dez",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Dia",
-        "calculs_periode_semaine" to "▦ Semana",
-        "calculs_periode_mois" to "▣ Mês",
-        "calculs_periode_annee" to "▢ Ano",
+        "calculs_periode_jour" to "Dia",
+        "calculs_periode_semaine" to "Semana",
+        "calculs_periode_mois" to "Mês",
+        "calculs_periode_annee" to "Ano",
         "calculs_unites" to "unidades",
         "calculs_depenses" to "gastos",
         "calculs_economies" to "economizados",
@@ -542,10 +542,10 @@ object StatsLangues {
         "axe_mois_dec" to "Dez",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Tag",
-        "calculs_periode_semaine" to "▦ Woche",
-        "calculs_periode_mois" to "▣ Monat",
-        "calculs_periode_annee" to "▢ Jahr",
+        "calculs_periode_jour" to "Tag",
+        "calculs_periode_semaine" to "Woche",
+        "calculs_periode_mois" to "Monat",
+        "calculs_periode_annee" to "Jahr",
         "calculs_unites" to "Einheiten",
         "calculs_depenses" to "ausgegeben",
         "calculs_economies" to "gespart",
@@ -649,10 +649,10 @@ object StatsLangues {
         "axe_mois_dec" to "Dic",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ Giorno",
-        "calculs_periode_semaine" to "▦ Settimana",
-        "calculs_periode_mois" to "▣ Mese",
-        "calculs_periode_annee" to "▢ Anno",
+        "calculs_periode_jour" to "Giorno",
+        "calculs_periode_semaine" to "Settimana",
+        "calculs_periode_mois" to "Mese",
+        "calculs_periode_annee" to "Anno",
         "calculs_unites" to "unità",
         "calculs_depenses" to "spesi",
         "calculs_economies" to "risparmiati",
@@ -756,10 +756,10 @@ object StatsLangues {
         "axe_mois_dec" to "Дек",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ День",
-        "calculs_periode_semaine" to "▦ Неделя",
-        "calculs_periode_mois" to "▣ Месяц",
-        "calculs_periode_annee" to "▢ Год",
+        "calculs_periode_jour" to "День",
+        "calculs_periode_semaine" to "Неделя",
+        "calculs_periode_mois" to "Месяц",
+        "calculs_periode_annee" to "Год",
         "calculs_unites" to "единиц",
         "calculs_depenses" to "потрачено",
         "calculs_economies" to "сэкономлено",
@@ -862,10 +862,10 @@ object StatsLangues {
         "axe_mois_dec" to "ديسمبر",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ يوم",
-        "calculs_periode_semaine" to "▦ أسبوع",
-        "calculs_periode_mois" to "▣ شهر",
-        "calculs_periode_annee" to "▢ سنة",
+        "calculs_periode_jour" to "يوم",
+        "calculs_periode_semaine" to "أسبوع",
+        "calculs_periode_mois" to "شهر",
+        "calculs_periode_annee" to "سنة",
         "calculs_unites" to "وحدات",
         "calculs_depenses" to "منفق",
         "calculs_economies" to "محفوظ",
@@ -969,10 +969,10 @@ object StatsLangues {
         "axe_mois_dec" to "दिस",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ दिन",
-        "calculs_periode_semaine" to "▦ सप्ताह",
-        "calculs_periode_mois" to "▣ महीना",
-        "calculs_periode_annee" to "▢ वर्ष",
+        "calculs_periode_jour" to "दिन",
+        "calculs_periode_semaine" to "सप्ताह",
+        "calculs_periode_mois" to "महीना",
+        "calculs_periode_annee" to "वर्ष",
         "calculs_unites" to "इकाइयां",
         "calculs_depenses" to "खर्च",
         "calculs_economies" to "बचाया",
@@ -1076,10 +1076,10 @@ object StatsLangues {
         "axe_mois_dec" to "12月",
         
         // Zone calculs
-        "calculs_periode_jour" to "◷ 日",
-        "calculs_periode_semaine" to "▦ 週",
-        "calculs_periode_mois" to "▣ 月",
-        "calculs_periode_annee" to "▢ 年",
+        "calculs_periode_jour" to "日",
+        "calculs_periode_semaine" to "週",
+        "calculs_periode_mois" to "月",
+        "calculs_periode_annee" to "年",
         "calculs_unites" to "単位",
         "calculs_depenses" to "支出",
         "calculs_economies" to "節約",
