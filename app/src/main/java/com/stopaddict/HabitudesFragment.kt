@@ -239,7 +239,6 @@ class HabitudesFragment : Fragment() {
 
         // POURCENTAGE
         val percent = (blocsRemplis * 100) / totalBlocs
-        val restants = totalBlocs - blocsRemplis
 
         // AFFICHAGE
                 txtProfilStatus.text =
@@ -537,6 +536,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
