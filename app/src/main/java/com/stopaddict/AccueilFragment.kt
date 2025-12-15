@@ -72,9 +72,10 @@ class AccueilFragment : Fragment() {
     private lateinit var checkLiqueurs: CheckBox
     private lateinit var checkAlcoolFort: CheckBox
 
-    // UI Elements - Bandeau profil et conseils
+    // UI Elements - Bandeau profil (progression) et conseils
     private lateinit var txtProfilComplet: TextView
-    private lateinit var txtTotalAujourdhui: TextView
+    private lateinit var profilProgress: ProgressBar
+    private lateinit var txtProfilRestant: TextView
     private lateinit var txtConseil: TextView
 
     // Conteneurs catégories
@@ -194,6 +195,8 @@ class AccueilFragment : Fragment() {
             txtProfilComplet = view.findViewById(R.id.accueil_txt_profil_complet)
             bandeauProfil = view.findViewById(R.id.accueil_bandeau_profil)
             txtConseil = view.findViewById(R.id.accueil_txt_conseil)
+            profilProgress = view.findViewById(R.id.accueil_profil_progress)
+            txtProfilRestant = view.findViewById(R.id.accueil_txt_profil_restant)
 
             // Conteneurs catégories
             containerCigarettes = view.findViewById(R.id.accueil_container_cigarettes)
@@ -554,71 +557,60 @@ class AccueilFragment : Fragment() {
     }
 }
         
-        private fun updateProfilStatus() {
-        try {
-            // Vérifier si profil complet (prenom + coûts + habitudes + dates remplis)
-            var isComplete = true
+    private fun updateProfilStatus() {
+    try {
+        // On a 3 blocs à compléter : coûts, habitudes, dates
+        val totalBlocs = 3
+        var blocsRemplis = 0
 
-            // Prénom obligatoire pour considérer le profil comme vraiment complet
-            val prenom = dbHelper.getPreference("prenom", "")
-            val hasPrenom = prenom.isNotEmpty()
-            if (!hasPrenom) isComplete = false
-
-            // Vérifier coûts (au moins une catégorie active avec coût > 0)
-            var hasCouts = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val couts = dbHelper.getCouts(type)
-                    if (couts.values.any { it > 0 }) {
-                        hasCouts = true
-                    }
+        // --- COÛTS ---
+        var hasCouts = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                if (couts.values.any { it > 0 }) {
+                    hasCouts = true
                 }
             }
-            if (!hasCouts) isComplete = false
-
-            // Vérifier habitudes (au moins une catégorie active avec max > 0)
-            var hasHabitudes = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val max = dbHelper.getMaxJournalier(type)
-                    if (max > 0) {
-                        hasHabitudes = true
-                    }
-                }
-            }
-            if (!hasHabitudes) isComplete = false
-
-            // Vérifier dates (au moins une date renseignée)
-            var hasDates = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    if (dates.values.any { !it.isNullOrEmpty() }) {
-                        hasDates = true
-                    }
-                }
-            }
-            if (!hasDates) isComplete = false
-
-            // Mise à jour texte avec traductions
-            val texteProfil = if (isComplete) {
-                trad["profil_complet"] ?: "Profil: Complet ✓"
-            } else {
-                trad["profil_incomplet"] ?: "Profil: Incomplet"
-            }
-            txtProfilComplet.text = texteProfil
-            bandeauProfil.setBackgroundColor(ContextCompat.getColor(requireContext(), if (isComplete) R.color.profile_complete else R.color.profile_incomplete))
-txtProfilComplet.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            txtProfilComplet.setBackgroundColor(ContextCompat.getColor(requireContext(),
-    if (isComplete) R.color.profile_complete else R.color.profile_incomplete
-))
-txtProfilComplet.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-
-            Log.d(TAG, "Profil: ${if (isComplete) "Complet" else "Incomplet"}")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour profil: ${e.message}")
         }
+        if (hasCouts) blocsRemplis++
+
+        // --- HABITUDES ---
+        var hasHabitudes = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                if (dbHelper.getMaxJournalier(type) > 0) {
+                    hasHabitudes = true
+                }
+            }
+        }
+        if (hasHabitudes) blocsRemplis++
+
+        // --- DATES ---
+        var hasDates = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+                if (dates.values.any { !it.isNullOrEmpty() }) {
+                    hasDates = true
+                }
+            }
+        }
+        if (hasDates) blocsRemplis++
+
+        // --- POURCENTAGE ---
+        val percent = (blocsRemplis * 100) / totalBlocs
+        val restants = totalBlocs - blocsRemplis
+
+        // --- AFFICHAGE ---
+        txtProfilComplet.text = "Profil complété à $percent%"
+        profilProgress.progress = percent
+        txtProfilRestant.text = "$restants champs restants"
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur mise à jour profil (progression): ${e.message}")
     }
+}
     
     private fun startConseilRotation() {
     logger.d("startConseilRotation: initialisation de la rotation de conseils (intervalle = $CONSEIL_UPDATE_INTERVAL ms)")
