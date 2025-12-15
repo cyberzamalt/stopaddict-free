@@ -1456,8 +1456,7 @@ private fun calculerEconomiesParCategorie(
         if (hasDates) blocsRemplis++
 
         val percent = (blocsRemplis * 100) / totalBlocs
-        val restants = totalBlocs - blocsRemplis
-
+        
         // --- AFFICHAGE ---
         txtProfilComplet.text =
             if (percent == 100)
