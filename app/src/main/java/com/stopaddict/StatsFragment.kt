@@ -1458,14 +1458,22 @@ private fun calculerEconomiesParCategorie(
         val percent = (blocsRemplis * 100) / totalBlocs
         
         // --- AFFICHAGE ---
-        txtProfilComplet.text =
-            if (percent == 100)
-                (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
-            else
-                (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
-        
-        profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+            statsTxtProfilComplet.text =
+                if (percent == 100)
+                    (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
+                else
+                    (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
+            
+            val iconRes =
+                if (percent == 100) R.drawable.ic_check_black
+                else R.drawable.ic_minus_black
+            
+            val d = ContextCompat.getDrawable(requireContext(), iconRes)
+            d?.setBounds(0, 0, 48, 48)
+            statsTxtProfilComplet.setCompoundDrawables(d, null, null, null)
+            
+            statsProfilProgress.progress = percent
+            statsTxtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
