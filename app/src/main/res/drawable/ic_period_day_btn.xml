@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Actif = bouton disabled (isEnabled=false) -->
-    <item android:state_enabled="false" android:drawable="@drawable/ic_period_day"/>
-    <!-- Inactif -->
-    <item android:drawable="@drawable/ic_period_day_dim"/>
+    <item android:state_selected="true" android:drawable="@drawable/ic_period_day" />
+    <item android:drawable="@drawable/ic_period_day_dim" />
 </selector>
