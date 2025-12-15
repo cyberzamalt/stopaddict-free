@@ -242,9 +242,14 @@ class HabitudesFragment : Fragment() {
         val restants = totalBlocs - blocsRemplis
 
         // AFFICHAGE
-        txtProfilStatus.text = "Profil complété à $percent%"
+                txtProfilStatus.text =
+            if (percent == 100)
+                (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
+            else
+                (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
+        
         profilProgress.progress = percent
-        txtProfilRestant.text = "$restants champs restants"
+        txtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur update bandeau (progression)", e)
@@ -532,6 +537,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
