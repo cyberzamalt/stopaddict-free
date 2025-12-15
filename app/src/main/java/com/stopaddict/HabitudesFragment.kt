@@ -21,8 +21,10 @@ class HabitudesFragment : Fragment() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
     private lateinit var trad: Map<String, String>
+    
     private lateinit var txtProfilStatus: TextView
-    private lateinit var txtTotalJour: TextView
+    private lateinit var profilProgress: ProgressBar
+    private lateinit var txtProfilRestant: TextView
     
     // Section Habitudes
     private lateinit var inputMaxCigarettes: EditText
@@ -80,7 +82,9 @@ class HabitudesFragment : Fragment() {
     private fun initializeViews(view: View) {
         try {
             txtProfilStatus = view.findViewById(R.id.habitudes_profil_status)
-            txtTotalJour = view.findViewById(R.id.habitudes_total_jour)
+            profilProgress = view.findViewById(R.id.habitudes_profil_progress)
+            txtProfilRestant = view.findViewById(R.id.habitudes_txt_profil_restant)
+            
             inputMaxCigarettes = view.findViewById(R.id.habitudes_input_max_cigarettes)
             inputMaxJoints = view.findViewById(R.id.habitudes_input_max_joints)
             inputMaxAlcoolGlobal = view.findViewById(R.id.habitudes_input_max_alcool_global)
@@ -204,51 +208,48 @@ class HabitudesFragment : Fragment() {
     }
 
     private fun updateBandeau() {
-        try {
-            val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
-            
-            // Vérifier profil complet
-            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
-            val hasCouts = categoriesActives.any { (type, active) ->
-                if (active) {
-                    val couts = dbHelper.getCouts(type)
-                    couts.values.any { it > 0.0 }
-                } else false
-            }
-            val hasHabitudes = categoriesActives.any { (type, active) ->
-                active && dbHelper.getMaxJournalier(type) > 0
-            }
-            val hasDates = categoriesActives.any { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    dates.values.any { it?.isNotEmpty() == true }
-                } else false
-            }
-            
-            val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
-            txtProfilStatus.text = if (isComplet) {
-                trad["profil_complet"] ?: "Profil: Complet ✓"
-            } else {
-                trad["profil_incomplet"] ?: "Profil: Incomplet"
-            }
-            
-            // Total aujourd'hui
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val today = dateFormat.format(Date())
-            var total = 0
-            
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    total += dbHelper.getConsommationParDate(type, today)
-                }
-            }
-            
-            txtTotalJour.text = "${trad["total_aujourdhui"] ?: "Total aujourd'hui"}: $total"
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur update bandeau: ${e.message}", e)
+    try {
+        // 3 blocs : coûts, habitudes, dates
+        val totalBlocs = 3
+        var blocsRemplis = 0
+
+        // COÛTS
+        val hasCouts = categoriesActives.any { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                couts.values.any { it > 0.0 }
+            } else false
         }
+        if (hasCouts) blocsRemplis++
+
+        // HABITUDES
+        val hasHabitudes = categoriesActives.any { (type, active) ->
+            active && dbHelper.getMaxJournalier(type) > 0
+        }
+        if (hasHabitudes) blocsRemplis++
+
+        // DATES
+        val hasDates = categoriesActives.any { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+                dates.values.any { it?.isNotEmpty() == true }
+            } else false
+        }
+        if (hasDates) blocsRemplis++
+
+        // POURCENTAGE
+        val percent = (blocsRemplis * 100) / totalBlocs
+        val restants = totalBlocs - blocsRemplis
+
+        // AFFICHAGE
+        txtProfilStatus.text = "Profil complété à $percent%"
+        profilProgress.progress = percent
+        txtProfilRestant.text = "$restants champs restants"
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur update bandeau (progression)", e)
     }
+}
     
     private fun buildVolonteSection() {
         try {
@@ -531,6 +532,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
