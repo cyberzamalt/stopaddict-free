@@ -625,7 +625,6 @@ class AccueilFragment : Fragment() {
             d?.setBounds(0, 0, 48, 48)
             txtProfilComplet.setCompoundDrawables(d, null, null, null)
 
-
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
 
