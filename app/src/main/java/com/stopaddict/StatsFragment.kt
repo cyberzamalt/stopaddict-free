@@ -1458,9 +1458,15 @@ private fun calculerEconomiesParCategorie(
         val percent = (blocsRemplis * 100) / totalBlocs
         val restants = totalBlocs - blocsRemplis
 
-        txtProfilComplet.text = "Profil complété à $percent%"
+        // --- AFFICHAGE ---
+        txtProfilComplet.text =
+            if (percent == 100)
+                (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
+            else
+                (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
+        
         profilProgress.progress = percent
-        txtProfilRestant.text = "$restants champs restants"
+        txtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
