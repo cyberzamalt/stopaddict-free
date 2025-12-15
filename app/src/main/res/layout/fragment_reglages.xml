@@ -11,33 +11,44 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Bandeau profil -->
+                <!-- Bandeau profil (progression) -->
         <LinearLayout
+            android:id="@+id/reglages_bandeau_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:orientation="vertical"
             android:padding="12dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
 
             <TextView
                 android:id="@+id/reglages_txt_profil_complet"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Profil: Complet"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:text="Profil complété à 0%"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
+            <ProgressBar
+                android:id="@+id/reglages_profil_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="0" />
 
             <TextView
-                android:id="@+id/reglages_txt_total_aujourdhui"
-                android:layout_width="wrap_content"
+                android:id="@+id/reglages_txt_profil_restant"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total: 0"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:gravity="end"
+                android:text="0 champs restants"
+                android:textSize="12sp"
+                android:paddingTop="6dp" />
 
+        </LinearLayout>
+        
         <!-- Zone Personnalisation -->
         <LinearLayout
             android:layout_width="match_parent"
