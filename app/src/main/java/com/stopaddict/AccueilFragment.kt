@@ -41,6 +41,7 @@ class AccueilFragment : Fragment() {
     
     // UI Elements - Compteurs
     private lateinit var txtTotalJour: TextView
+    private lateinit var txtTotalJourLabel: TextView
     private lateinit var txtCigarettes: TextView
     private lateinit var txtJoints: TextView
     private lateinit var txtAlcoolGlobal: TextView
@@ -160,6 +161,7 @@ class AccueilFragment : Fragment() {
         try {
             // Compteurs
             txtTotalJour = view.findViewById(R.id.accueil_txt_total_jour)
+            txtTotalJourLabel = view.findViewById(R.id.accueil_txt_total_jour_label)
             txtCigarettes = view.findViewById(R.id.accueil_txt_cigarettes)
             txtJoints = view.findViewById(R.id.accueil_txt_joints)
             txtAlcoolGlobal = view.findViewById(R.id.accueil_txt_alcool_global)
@@ -497,8 +499,8 @@ class AccueilFragment : Fragment() {
 
             // Calcul total jour
             val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
-            val labelTotal = trad["total_aujourdhui"] ?: "Total aujourd'hui"
-            txtTotalJour.text = "$labelTotal $totalJour"
+            txtTotalJourLabel.text = trad["total_aujourdhui"] ?: "Total aujourd'hui:"
+            txtTotalJour.text = totalJour.toString()
 
             // Mise à jour état des cases à cocher
             checkCigarettes.isChecked = categoriesActives[DatabaseHelper.TYPE_CIGARETTE] ?: true
