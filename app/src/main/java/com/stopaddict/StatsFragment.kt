@@ -167,6 +167,9 @@ class StatsFragment : Fragment() {
             setupListeners()
 
             // Affichage initial (période jour)
+
+            // Etat visuel initial des boutons (Jour actif)
+            updateButtonsState()
             updateGraphiques()
             updateProfilStatus()
 
