@@ -54,19 +54,38 @@
 
         </LinearLayout>
 
-        <!-- Total jour global -->
-        <TextView
-            android:id="@+id/accueil_txt_total_jour"
+        <!-- Total jour global (carte) -->
+        <LinearLayout
+            android:id="@+id/accueil_card_total_jour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total aujourd'hui: 0"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center"
+            android:orientation="vertical"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/blue_primary"
-            android:textColor="@android:color/white" />
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <!-- Ligne 1 : libellé -->
+            <TextView
+                android:id="@+id/accueil_txt_total_jour_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total aujourd'hui:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingBottom="6dp" />
+
+            <!-- Ligne 2 : valeur (on garde l'ID EXISTANT pour ne rien casser côté Kotlin) -->
+            <TextView
+                android:id="@+id/accueil_txt_total_jour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+        </LinearLayout>
 
                 <!-- Bandeau conseils -->
         <TextView
