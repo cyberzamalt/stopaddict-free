@@ -70,9 +70,10 @@ class StatsFragment : Fragment() {
     private lateinit var txtTitreConso: TextView
     private lateinit var txtTitreCouts: TextView
 
-    // UI Elements - Bandeau profil
+    // UI Elements - Bandeau profil (progression)
     private lateinit var txtProfilComplet: TextView
-    private lateinit var txtTotalAujourdhui: TextView
+    private lateinit var profilProgress: ProgressBar
+    private lateinit var txtProfilRestant: TextView
 
     // UI Elements - Tableau résumé (labels colonnes)
     private lateinit var headerColJour: TextView
@@ -284,9 +285,10 @@ class StatsFragment : Fragment() {
             cellDepensesMois = view.findViewById(R.id.stats_depenses_mois)
             cellDepensesAnnee = view.findViewById(R.id.stats_depenses_annee)
 
-            // Bandeau profil
+            // Bandeau profil (progression)
             txtProfilComplet = view.findViewById(R.id.stats_txt_profil_complet)
-            txtTotalAujourdhui = view.findViewById(R.id.stats_txt_total_aujourdhui)
+            profilProgress = view.findViewById(R.id.stats_profil_progress)
+            txtProfilRestant = view.findViewById(R.id.stats_txt_profil_restant)
 
             // Configuration graphiques
             configureLineChart(chartConsommation)
@@ -1420,75 +1422,50 @@ private fun calculerEconomiesParCategorie(
 
     
     private fun updateProfilStatus() {
-        try {
-            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
+    try {
+        val totalBlocs = 3
+        var blocsRemplis = 0
 
-            var hasCouts = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val couts = dbHelper.getCouts(type)
-                    if (couts.values.any { it > 0.0 }) {
-                        hasCouts = true
-                        return@forEach
-                    }
-                }
+        // COÛTS
+        var hasCouts = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                if (couts.values.any { it > 0 }) hasCouts = true
             }
-
-            var hasHabitudes = false
-            categoriesActives.forEach { (type, active) ->
-                if (active && dbHelper.getMaxJournalier(type) > 0) {
-                    hasHabitudes = true
-                    return@forEach
-                }
-            }
-
-            var hasDates = false
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    if (dates.values.any { it?.isNotEmpty() == true }) {
-                        hasDates = true
-                        return@forEach
-                    }
-                }
-            }
-
-            val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
-
-            txtProfilComplet.text = if (isComplet) {
-                trad["profil_complet"] ?: trad["profil_complet_complet"] ?: "Profil: Complet ✓"
-            } else {
-                trad["profil_incomplet"] ?: trad["profil_complet_incomplet"] ?: "Profil: Incomplet"
-            }
-
-            val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
-            val today = dateFormat.format(java.util.Date())
-            var totalJour = 0.0
-
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val nbUnites = dbHelper.getConsommationParDate(type, today)
-                    val couts = dbHelper.getCouts(type)
-                    val prixUnitaire = calculerPrixUnitaire(type, couts)
-                    totalJour += nbUnites * prixUnitaire
-                }
-            }
-
-            val deviseSymbol = getDeviseSymbol()
-            val rawLabelTotal =
-                trad["profil_total_jour"] ?: trad["total_aujourdhui"] ?: "Total aujourd'hui"
-            val labelTotal = rawLabelTotal.trimEnd(':', ' ')
-            txtTotalAujourdhui.text =
-                "$labelTotal: %.2f %s".format(totalJour, deviseSymbol)
-
-            Log.d(
-                TAG,
-                "Stats - Profil: ${txtProfilComplet.text} - ${txtTotalAujourdhui.text}"
-        )
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur updateProfilStatus stats", e)
         }
+        if (hasCouts) blocsRemplis++
+
+        // HABITUDES
+        var hasHabitudes = false
+        categoriesActives.forEach { (type, active) ->
+            if (active && dbHelper.getMaxJournalier(type) > 0) {
+                hasHabitudes = true
+            }
+        }
+        if (hasHabitudes) blocsRemplis++
+
+        // DATES
+        var hasDates = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+                if (dates.values.any { !it.isNullOrEmpty() }) hasDates = true
+            }
+        }
+        if (hasDates) blocsRemplis++
+
+        val percent = (blocsRemplis * 100) / totalBlocs
+        val restants = totalBlocs - blocsRemplis
+
+        txtProfilComplet.text = "Profil complété à $percent%"
+        profilProgress.progress = percent
+        txtProfilRestant.text = "$restants champs restants"
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
     }
+}
 
     override fun onResume() {
         super.onResume()
