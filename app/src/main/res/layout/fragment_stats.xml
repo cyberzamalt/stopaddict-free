@@ -615,10 +615,10 @@
             app:backgroundTint="@null"
             android:textAllCaps="false"
             android:drawableStart="@drawable/ic_period_day_btn"
-            android:drawablePadding="6dp"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
-            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical|start"
             android:includeFontPadding="false"/>
             
         <androidx.appcompat.widget.AppCompatButton
@@ -638,10 +638,10 @@
             app:backgroundTint="@null"
             android:textAllCaps="false"
             android:drawableStart="@drawable/ic_period_week_btn"
-            android:drawablePadding="6dp"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
-            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical|start"
             android:includeFontPadding="false"/>
 
 
@@ -662,10 +662,10 @@
             app:backgroundTint="@null"
             android:textAllCaps="false"
             android:drawableStart="@drawable/ic_period_month_btn"
-            android:drawablePadding="6dp"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
-            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical|start"
             android:includeFontPadding="false"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -684,10 +684,10 @@
             app:backgroundTint="@null"
             android:textAllCaps="false"
             android:drawableStart="@drawable/ic_period_year_btn"
-            android:drawablePadding="6dp"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
-            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical|start"
             android:includeFontPadding="false"/>
             
         </LinearLayout>
