@@ -603,9 +603,14 @@ class AccueilFragment : Fragment() {
         val restants = totalBlocs - blocsRemplis
 
         // --- AFFICHAGE ---
-        txtProfilComplet.text = "Profil complété à $percent%"
+        txtProfilComplet.text =
+            if (percent == 100)
+                (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
+            else
+                (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
+        
         profilProgress.progress = percent
-        txtProfilRestant.text = "$restants champs restants"
+        txtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur mise à jour profil (progression): ${e.message}")
@@ -615,7 +620,7 @@ class AccueilFragment : Fragment() {
     private fun startConseilRotation() {
     logger.d("startConseilRotation: initialisation de la rotation de conseils (intervalle = $CONSEIL_UPDATE_INTERVAL ms)")
 
-    try {
+    try {    
         // Annuler un éventuel ancien runnable
         conseilRunnable?.let {
             logger.d("startConseilRotation: ancien runnable trouvé -> removeCallbacks")
