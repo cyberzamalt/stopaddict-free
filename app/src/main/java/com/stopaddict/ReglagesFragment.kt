@@ -39,7 +39,9 @@ class ReglagesFragment : Fragment() {
     private lateinit var trad: Map<String, String>
     
     private lateinit var txtProfilComplet: TextView
-    private lateinit var txtTotalJour: TextView
+    private lateinit var profilProgress: ProgressBar
+    private lateinit var txtProfilRestant: TextView
+    
     private lateinit var editPrenom: EditText
     private lateinit var spinnerLangue: Spinner
     private lateinit var spinnerDevise: Spinner
@@ -154,34 +156,43 @@ class ReglagesFragment : Fragment() {
     }
     
     private fun addHeader(container: LinearLayout) {
-               
-        // Zone profil
-        val profilContainer = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(20, 10, 20, 10)
-            setBackgroundColor(Color.parseColor("#F5F5F5"))
-        }
-        
-        txtProfilComplet = TextView(requireContext()).apply {
-            text = trad["profil_incomplet"] ?: "Profil: Incomplet"
-            textSize = 14f
-            layoutParams = LinearLayout.LayoutParams(
-                0,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                1f
-            )
-        }
-        profilContainer.addView(txtProfilComplet)
 
-        txtTotalJour = TextView(requireContext()).apply {
-            text = "${trad["total_aujourdhui"] ?: "Total jour"}: 0"
-            textSize = 14f
-            gravity = android.view.Gravity.END
-        }
-        profilContainer.addView(txtTotalJour)
-        container.addView(profilContainer)
+    // Zone profil (progression)
+    val profilContainer = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(20, 10, 20, 10)
+        setBackgroundColor(Color.parseColor("#F5F5F5"))
     }
 
+    txtProfilComplet = TextView(requireContext()).apply {
+        text = "Profil complété à 0%"
+        textSize = 14f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setPadding(0, 0, 0, 12)
+    }
+    profilContainer.addView(txtProfilComplet)
+
+    profilProgress = ProgressBar(requireContext(), null, android.R.attr.progressBarStyleHorizontal).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            24
+        )
+        max = 100
+        progress = 0
+    }
+    profilContainer.addView(profilProgress)
+
+    txtProfilRestant = TextView(requireContext()).apply {
+        text = "0 champs restants"
+        textSize = 12f
+        gravity = android.view.Gravity.END
+        setPadding(0, 10, 0, 0)
+    }
+    profilContainer.addView(txtProfilRestant)
+
+    container.addView(profilContainer)
+}
+    
     private fun addPersonnalisationSection(container: LinearLayout) {
         addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
         
@@ -1483,56 +1494,45 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     private fun updateProfilStatus() {
-        try {
-            val langue = configLangue.getLangue()
-            val trad = ReglagesLangues.getTraductions(langue)
+    try {
+        val totalBlocs = 3
+        var blocsRemplis = 0
 
-            // Vérifier profil complet
-            val hasPrenom = dbHelper.getPreference("prenom", "").isNotEmpty()
-
-            val hasCouts = categoriesActives.any { (type, active) ->
-                if (active) {
-                    val couts = dbHelper.getCouts(type)
-                    couts.values.any { it > 0.0 }
-                } else false
-            }
-
-            val hasHabitudes = categoriesActives.any { (type, active) ->
-                active && dbHelper.getMaxJournalier(type) > 0
-            }
-
-            val hasDates = categoriesActives.any { (type, active) ->
-                if (active) {
-                    val dates = dbHelper.getDatesObjectifs(type)
-                    dates.values.any { it?.isNotEmpty() == true }
-                } else false
-            }
-
-            val isComplet = hasPrenom && hasCouts && hasHabitudes && hasDates
-
-            txtProfilComplet.text = if (isComplet) {
-                trad["profil_complet"] ?: "Profil: Complet ✓"
-            } else {
-                trad["profil_incomplet"] ?: "Profil: Incomplet"
-            }
-
-            // Total jour
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val today = dateFormat.format(Date())
-            var total = 0
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    total += dbHelper.getConsommationParDate(type, today)
-                }
-            }
-
-            val labelTotalJour = trad["total_aujourdhui"] ?: "Total jour"
-            txtTotalJour.text = "$labelTotalJour: $total"
-
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur updateProfilStatus: ${e.message}", e)
+        // COÛTS (uniquement catégories actives)
+        val hasCouts = categoriesActives.any { (type, active) ->
+            if (active) {
+                val couts = dbHelper.getCouts(type)
+                couts.values.any { it > 0.0 }
+            } else false
         }
+        if (hasCouts) blocsRemplis++
+
+        // HABITUDES (uniquement catégories actives)
+        val hasHabitudes = categoriesActives.any { (type, active) ->
+            active && dbHelper.getMaxJournalier(type) > 0
+        }
+        if (hasHabitudes) blocsRemplis++
+
+        // DATES (uniquement catégories actives)
+        val hasDates = categoriesActives.any { (type, active) ->
+            if (active) {
+                val dates = dbHelper.getDatesObjectifs(type)
+                dates.values.any { it?.isNotEmpty() == true }
+            } else false
+        }
+        if (hasDates) blocsRemplis++
+
+        val percent = (blocsRemplis * 100) / totalBlocs
+        val restants = totalBlocs - blocsRemplis
+
+        txtProfilComplet.text = "Profil complété à $percent%"
+        profilProgress.progress = percent
+        txtProfilRestant.text = "$restants champs restants"
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
     }
+}
 
     // Fonctions utilitaires
     private fun createCard(): LinearLayout {
