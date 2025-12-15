@@ -28,6 +28,8 @@
                 android:text="Profil complété à 0%"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:drawableStart="@drawable/ic_check_black"
+                android:drawablePadding="8dp"
                 android:paddingBottom="8dp" />
 
             <ProgressBar
