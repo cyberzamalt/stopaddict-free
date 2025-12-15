@@ -8,23 +8,45 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Bandeau profil -->
+               <!-- Bandeau profil (progression) -->
         <LinearLayout
-                android:id="@+id/accueil_bandeau_profil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp">
+            android:id="@+id/accueil_bandeau_profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
 
+            <!-- Texte principal (on réutilise l'ID existant) -->
             <TextView
                 android:id="@+id/accueil_txt_profil_complet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Profil: Complet"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:text="Profil complété à 0%"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
+            <!-- Barre de progression -->
+            <ProgressBar
+                android:id="@+id/accueil_profil_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="0" />
+
+            <!-- Champs restants -->
+            <TextView
+                android:id="@+id/accueil_txt_profil_restant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="0 champs restants"
+                android:textSize="12sp"
+                android:paddingTop="6dp" />
 
         </LinearLayout>
 
