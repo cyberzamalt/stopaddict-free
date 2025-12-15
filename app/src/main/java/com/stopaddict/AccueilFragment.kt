@@ -612,7 +612,6 @@ class AccueilFragment : Fragment() {
 
         // --- POURCENTAGE ---
         val percent = (blocsRemplis * 100) / totalBlocs
-        val restants = totalBlocs - blocsRemplis
 
         // --- AFFICHAGE ---
         txtProfilComplet.text =
