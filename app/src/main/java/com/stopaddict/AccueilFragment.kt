@@ -752,7 +752,6 @@ class AccueilFragment : Fragment() {
                 ConseilCategorie.ECONOMIE -> R.drawable.ic_conseil_economie
                 ConseilCategorie.HABITUDE -> R.drawable.ic_conseil_habitude
                 ConseilCategorie.OBJECTIF -> R.drawable.ic_conseil_objectif
-                ConseilCategorie.SANTE -> R.drawable.ic_conseil_sante
                 else -> R.drawable.ic_conseil_generique
             }
             
