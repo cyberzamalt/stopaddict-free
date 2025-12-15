@@ -240,12 +240,20 @@ class HabitudesFragment : Fragment() {
         // POURCENTAGE
         val percent = (blocsRemplis * 100) / totalBlocs
 
-        // AFFICHAGE
-                txtProfilStatus.text =
+        // --- AFFICHAGE ---
+        txtProfilStatus.text =
             if (percent == 100)
                 (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
+        
+        val iconRes =
+            if (percent == 100) R.drawable.ic_check_black
+            else R.drawable.ic_minus_black
+        
+        val d = ContextCompat.getDrawable(requireContext(), iconRes)
+        d?.setBounds(0, 0, 48, 48)
+        txtProfilStatus.setCompoundDrawables(d, null, null, null)
         
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
@@ -536,6 +544,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
