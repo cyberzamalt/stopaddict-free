@@ -219,7 +219,6 @@ class CalendrierFragment : Fragment() {
         if (hasDates) blocsRemplis++
 
         val percent = (blocsRemplis * 100) / totalBlocs
-        val restants = totalBlocs - blocsRemplis
 
         txtProfilStatus.text =
             if (percent == 100)
