@@ -1531,7 +1531,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
         
-        val iconRes = if (percent == 100) R.drawable.ic_check_black else R.drawable.ic_minus
+        val iconRes = if (percent == 100) R.drawable.ic_check_black else R.drawable.ic_minus_black
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
 
         profilProgress.progress = percent
