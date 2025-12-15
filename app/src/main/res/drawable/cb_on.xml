@@ -8,7 +8,7 @@
     </item>
 
     <item
-        android:drawable="@drawable/ic_check_black"
+        android:drawable="@drawable/ic_check_white"
         android:gravity="center" />
 
 </layer-list>
