@@ -497,6 +497,13 @@ updateHeaderResumeVisibility(viewPager.currentItem)
             logger.e("updateHeaderResumeJour: erreur mise à jour bandeau jour", e)
         }
     }
+
+    // Appelable depuis les Fragments (Accueil / Calendrier)
+    fun refreshHeaderResumeJour() {
+        runOnUiThread {
+            updateHeaderResumeJour()
+        }
+    }
  
 private fun getTabTitle(position: Int): String {
     val title = when (position) {
