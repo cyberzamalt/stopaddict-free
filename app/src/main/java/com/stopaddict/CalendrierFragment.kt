@@ -465,6 +465,14 @@ class CalendrierFragment : Fragment() {
             
             updateCalendar()
             updateProfilStatus()
+
+            val todayStr = java.time.LocalDate.now()
+                .format(java.time.format.DateTimeFormatter.ISO_DATE)
+            
+            if (dateStr == todayStr) {
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+            
             Toast.makeText(requireContext(), trad["sauvegarde_ok"] ?: "Enregistré", Toast.LENGTH_SHORT).show()
             
         } catch (e: Exception) {
