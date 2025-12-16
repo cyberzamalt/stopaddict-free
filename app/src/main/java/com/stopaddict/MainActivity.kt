@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
     private var consoleDialog: AlertDialog? = null
     private val isVersionGratuite = true
 
+    // Cache bandeau "Jour" (évite de recharger les traductions à chaque update)
+    private var headerTradStatsCache: Map<String, String>? = null
+    private var headerLabelJourCache: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
@@ -459,15 +463,22 @@ updateHeaderResumeVisibility(viewPager.currentItem)
     }
 }
 
+    private fun ensureHeaderResumeCache() {
+    if (headerLabelJourCache != null && headerTradStatsCache != null) return
+
+    val tradStats = StatsLangues.getTraductions(configLangue.getLangue())
+    headerTradStatsCache = tradStats
+
+    headerLabelJourCache =
+        tradStats["calculs_periode_jour"]
+            ?: tradStats["btn_jour"]
+            ?: "Jour"
+}
+
     private fun updateHeaderResumeJour() {
         try {
-            // Traductions spécifiques Stats (pour le mot "Jour")
-            val tradStats = StatsLangues.getTraductions(configLangue.getLangue())
-            val labelJour = tradStats["calculs_periode_jour"]
-                ?: tradStats["btn_jour"]
-                ?: "Jour"
-
-            headerResumeLabel.text = "$labelJour :"
+            ensureHeaderResumeCache()
+            headerResumeLabel.text = "${headerLabelJourCache ?: "Jour"} :"
 
             // Date du jour au format utilisé par la DB
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
