@@ -138,7 +138,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_cigarette"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
@@ -198,7 +197,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_joint"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
@@ -258,7 +256,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_alcool"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
@@ -318,7 +315,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_biere"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
@@ -378,7 +374,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_liqueur"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
@@ -439,7 +434,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"
-                android:drawableStart="@drawable/ic_alcool_fort"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:checked="true" />
