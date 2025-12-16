@@ -235,14 +235,14 @@ class StatsFragment : Fragment() {
             rowLabelEconomies = view.findViewById(R.id.stats_row_label_economies)
             rowLabelDepenses = view.findViewById(R.id.stats_row_label_depenses)
 
-            rowLabelCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
-            rowLabelJoints.text = trad["label_joints"] ?: "Joints"
-            rowLabelAlcoolGlobal.text = trad["label_alcool_global"] ?: "Alcool global"
-            rowLabelBieres.text = trad["label_bieres"] ?: "Bières"
-            rowLabelLiqueurs.text = trad["label_liqueurs"] ?: "Liqueurs"
-            rowLabelAlcoolFort.text = trad["label_alcool_fort"] ?: "Alcool fort"
-            rowLabelEconomies.text = trad["label_economies"] ?: "Économies"
-            rowLabelDepenses.text = trad["label_depenses"] ?: "Dépenses"
+            rowLabelCigarettes.text = "🚬 " + (trad["label_cigarettes"] ?: "Cigarettes")
+            rowLabelJoints.text = "🌿 " + (trad["label_joints"] ?: "Joints")
+            rowLabelAlcoolGlobal.text = "🥃G " + (trad["label_alcool_global"] ?: "Alcool global")
+            rowLabelBieres.text = "🍺 " + (trad["label_bieres"] ?: "Bières")
+            rowLabelLiqueurs.text = "🍷 " + (trad["label_liqueurs"] ?: "Liqueurs")
+            rowLabelAlcoolFort.text = "🥃 " + (trad["label_alcool_fort"] ?: "Alcool fort")
+            rowLabelEconomies.text = "💰 " + (trad["label_economies"] ?: "Économies")
+            rowLabelDepenses.text = "💸 " + (trad["label_depenses"] ?: "Dépenses")
 
             // Cellules tableau
             cellCigJour = view.findViewById(R.id.stats_cigarettes_jour)
