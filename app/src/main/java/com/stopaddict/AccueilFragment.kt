@@ -231,6 +231,14 @@ class AccueilFragment : Fragment() {
             checkLiqueurs.text = trad["label_liqueurs"] ?: "Liqueurs"
             checkAlcoolFort.text = trad["label_alcool_fort"] ?: "Alcool fort"
 
+            // Ajout des icônes (emoji) comme dans le header et Stats – sans impacter la traduction
+            checkCigarettes.text   = "🚬 " + (trad["label_cigarettes"] ?: "Cigarettes")
+            checkJoints.text       = "🌿 " + (trad["label_joints"] ?: "Joints")
+            checkAlcoolGlobal.text = "🥃G " + (trad["label_alcool_global"] ?: "Alcool global")
+            checkBieres.text       = "🍺 " + (trad["label_bieres"] ?: "Bières")
+            checkLiqueurs.text     = "🍷 " + (trad["label_liqueurs"] ?: "Liqueurs")
+            checkAlcoolFort.text   = "🥃 " + (trad["label_alcool_fort"] ?: "Alcool fort")
+
             Log.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur initialisation vues: ${e.message}")
