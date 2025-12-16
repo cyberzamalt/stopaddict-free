@@ -278,107 +278,120 @@ class AccueilFragment : Fragment() {
             Log.e(TAG, "Erreur chargement consommations: ${e.message}")
         }
     }
+
     private fun setupListeners() {
-        try {
-            // Cigarettes
-            btnPlusCigarettes.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_CIGARETTE)
-                }
+    try {
+        // Cigarettes
+        btnPlusCigarettes.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_CIGARETTE)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
             }
-            btnMoinsCigarettes.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_CIGARETTE)
-                }
-            }
-            checkCigarettes.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_CIGARETTE, isChecked)
-            }
-
-            // Joints
-            btnPlusJoints.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_JOINT)
-                }
-            }
-            btnMoinsJoints.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_JOINT)
-                }
-            }
-            checkJoints.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_JOINT, isChecked)
-            }
-
-            // Alcool Global
-            btnPlusAlcoolGlobal.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
-                }
-            }
-            btnMoinsAlcoolGlobal.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
-                }
-            }
-            checkAlcoolGlobal.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_ALCOOL_GLOBAL, isChecked)
-            }
-
-            // Bières
-            btnPlusBieres.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_BIERE)
-                }
-            }
-            btnMoinsBieres.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_BIERE)
-                }
-            }
-            checkBieres.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_BIERE, isChecked)
-            }
-
-            // Liqueurs
-            btnPlusLiqueurs.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_LIQUEUR)
-                }
-            }
-            btnMoinsLiqueurs.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_LIQUEUR)
-                }
-            }
-            checkLiqueurs.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_LIQUEUR, isChecked)
-            }
-
-            // Alcool Fort
-            btnPlusAlcoolFort.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) {
-                    ajouterConsommation(DatabaseHelper.TYPE_ALCOOL_FORT)
-                }
-            }
-            btnMoinsAlcoolFort.setOnClickListener {
-                if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) {
-                    retirerConsommation(DatabaseHelper.TYPE_ALCOOL_FORT)
-                }
-            }
-            checkAlcoolFort.setOnCheckedChangeListener { _, isChecked ->
-                toggleCategorie(DatabaseHelper.TYPE_ALCOOL_FORT, isChecked)
-            }
-            
-                        // Bouton version sans pub (accueil)
-            btnPremiumAccueil.setOnClickListener { ouvrirVersionPremium() }
-
-            Log.d(TAG, "Listeners configurés avec succès")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur configuration listeners: ${e.message}")
         }
-    }
+        btnMoinsCigarettes.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_CIGARETTE)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkCigarettes.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_CIGARETTE, isChecked)
+        }
 
+        // Joints
+        btnPlusJoints.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_JOINT)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        btnMoinsJoints.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_JOINT)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkJoints.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_JOINT, isChecked)
+        }
+
+        // Alcool Global
+        btnPlusAlcoolGlobal.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        btnMoinsAlcoolGlobal.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkAlcoolGlobal.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_ALCOOL_GLOBAL, isChecked)
+        }
+
+        // Bières
+        btnPlusBieres.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_BIERE)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        btnMoinsBieres.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_BIERE)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkBieres.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_BIERE, isChecked)
+        }
+
+        // Liqueurs
+        btnPlusLiqueurs.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_LIQUEUR)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        btnMoinsLiqueurs.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_LIQUEUR)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkLiqueurs.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_LIQUEUR, isChecked)
+        }
+
+        // Alcool Fort
+        btnPlusAlcoolFort.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) {
+                ajouterConsommation(DatabaseHelper.TYPE_ALCOOL_FORT)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        btnMoinsAlcoolFort.setOnClickListener {
+            if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) {
+                retirerConsommation(DatabaseHelper.TYPE_ALCOOL_FORT)
+                (activity as? MainActivity)?.refreshHeaderResumeJour()
+            }
+        }
+        checkAlcoolFort.setOnCheckedChangeListener { _, isChecked ->
+            toggleCategorie(DatabaseHelper.TYPE_ALCOOL_FORT, isChecked)
+        }
+
+        // Bouton version sans pub (accueil)
+        btnPremiumAccueil.setOnClickListener { ouvrirVersionPremium() }
+
+        Log.d(TAG, "Listeners configurés avec succès")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur configuration listeners: ${e.message}")
+    }
+}
+    
     private fun ouvrirVersionPremium() {
     val premiumPackage = "com.stopaddict.premium" // TODO: remplacer par le vrai package
 
