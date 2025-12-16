@@ -355,38 +355,41 @@ private fun initializeMainContent() {
         logger.d("initializeMainContent: setupTabLayoutAndViewPager exécuté")
 
         if (isVersionGratuite) {
-    adContainer.visibility = View.VISIBLE
-    logger.d("initializeMainContent: version GRATUITE -> affichage du bandeau pub")
+            adContainer.visibility = View.VISIBLE
+            logger.d("initializeMainContent: version GRATUITE -> affichage du bandeau pub")
 
-    // --- Initialisation AdMob + chargement bannière de TEST ---
-    try {
-        // Initialise le SDK (OK si appelé plusieurs fois)
-        MobileAds.initialize(this) {}
+            // --- Initialisation AdMob + chargement bannière de TEST (DIFFÉRÉ) ---
+            // Objectif : ne pas bloquer l'affichage UI au démarrage
+            adContainer.postDelayed({
+                try {
+                    // Initialise le SDK (OK si appelé plusieurs fois)
+                    MobileAds.initialize(this) {}
 
-        // On crée la bannière et on l'ajoute dans main_ad_container
-        adView = AdView(this).apply {
-            // ✅ ID DE TEST fournie par Google (à laisser pour tes tests)
-            adUnitId = "ca-app-pub-3940256099942544/6300978111"
-            setAdSize(AdSize.BANNER)
+                    // On crée la bannière et on l'ajoute dans main_ad_container
+                    adView = AdView(this).apply {
+                        // ✅ ID DE TEST fournie par Google (à laisser pour tes tests)
+                        adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                        setAdSize(AdSize.BANNER)
+                    }
+
+                    // On vide le container au cas où puis on ajoute la bannière
+                    adContainer.removeAllViews()
+                    adContainer.addView(adView)
+
+                    // On charge une pub de test
+                    val adRequest = AdRequest.Builder().build()
+                    adView.loadAd(adRequest)
+
+                    logger.d("initializeMainContent: bannière AdMob de test chargée (différée)")
+                } catch (e: Exception) {
+                    logger.e("initializeMainContent: erreur init AdMob (différée)", e)
+                }
+            }, 300) // 300ms : affichage plus rapide de la pub sans bloquer l’UI
+
+        } else {
+            adContainer.visibility = View.GONE
+            logger.d("initializeMainContent: version PAYANTE -> masquage du bandeau pub")
         }
-
-        // On vide le container au cas où puis on ajoute la bannière
-        adContainer.removeAllViews()
-        adContainer.addView(adView)
-
-        // On charge une pub de test
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
-
-        logger.d("initializeMainContent: bannière AdMob de test chargée")
-    } catch (e: Exception) {
-        logger.e("initializeMainContent: erreur init AdMob", e)
-    }
-
-} else {
-    adContainer.visibility = View.GONE
-    logger.d("initializeMainContent: version PAYANTE -> masquage du bandeau pub")
-}
 
         logger.d("initializeMainContent: fin normale de l'initialisation")
     } catch (e: Exception) {
