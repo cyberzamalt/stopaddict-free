@@ -247,7 +247,10 @@ class HabitudesFragment : Fragment() {
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
         
-        val iconRes = if (percent == 100) R.drawable.ic_check_black else R.drawable.ic_minus_black
+        val iconRes = if (percent == 100)
+                R.drawable.ic_status_complete
+            else
+                R.drawable.ic_status_incomplete
         txtProfilStatus.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
         
         profilProgress.progress = percent
@@ -539,6 +542,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
