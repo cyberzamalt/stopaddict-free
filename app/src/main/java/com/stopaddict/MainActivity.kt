@@ -400,7 +400,7 @@ private fun setupTabLayoutAndViewPager() {
     val fragmentAdapter = FragmentAdapter(this)
     viewPager.adapter = fragmentAdapter
     viewPager.isUserInputEnabled = true
-    viewPager.offscreenPageLimit = 2
+    viewPager.offscreenPageLimit = 1
     logger.d("setupTabLayoutAndViewPager: adapter assigné, userInputEnabled=true, offscreenPageLimit=2")
 
     TabLayoutMediator(tabLayout, viewPager) { tab, position ->
