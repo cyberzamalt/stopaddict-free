@@ -1530,13 +1530,6 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
         
         val iconRes = if (percent == 100)
-                    R.drawable.ic_status_complete
-                else
-                    R.drawable.ic_status_incomplete
-        txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-    
-            // Force l’espace entre l’icône et le texte (plus fiable que l’XML selon les devices)
-            txtProfilComplet.compoundDrawablePadding = 8.dp
 
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
