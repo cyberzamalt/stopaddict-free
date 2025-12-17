@@ -592,60 +592,22 @@ class AccueilFragment : Fragment() {
         
     private fun updateProfilStatus() {
     try {
-        // On a 3 blocs à compléter : coûts, habitudes, dates
-        val totalBlocs = 3
-        var blocsRemplis = 0
+        // --- POURCENTAGE (centralisé) ---
+        val percent = dbHelper.getProfilCompletionPercent(categoriesActives)
 
-        // --- COÛTS ---
-        var hasCouts = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                if (couts.values.any { it > 0 }) {
-                    hasCouts = true
-                }
-            }
-        }
-        if (hasCouts) blocsRemplis++
-
-        // --- HABITUDES ---
-        var hasHabitudes = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                if (dbHelper.getMaxJournalier(type) > 0) {
-                    hasHabitudes = true
-                }
-            }
-        }
-        if (hasHabitudes) blocsRemplis++
-
-        // --- DATES ---
-        var hasDates = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                if (dates.values.any { !it.isNullOrEmpty() }) {
-                    hasDates = true
-                }
-            }
-        }
-        if (hasDates) blocsRemplis++
-
-        // --- POURCENTAGE ---
-        val percent = (blocsRemplis * 100) / totalBlocs
-
-        // --- AFFICHAGE ---
+        // --- AFFICHAGE (inchangé) ---
         txtProfilComplet.text =
             if (percent == 100)
                 (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
-        
-            val iconRes = if (percent == 100)
-                    R.drawable.ic_status_complete
-                else
-                    R.drawable.ic_status_incomplete
-            txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
+
+        val iconRes = if (percent == 100)
+            R.drawable.ic_status_complete
+        else
+            R.drawable.ic_status_incomplete
+
+        txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
 
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
