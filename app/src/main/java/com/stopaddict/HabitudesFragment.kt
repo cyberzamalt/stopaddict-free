@@ -209,36 +209,7 @@ class HabitudesFragment : Fragment() {
 
     private fun updateBandeau() {
     try {
-        // 3 blocs : coûts, habitudes, dates
-        val totalBlocs = 3
-        var blocsRemplis = 0
-
-        // COÛTS
-        val hasCouts = categoriesActives.any { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                couts.values.any { it > 0.0 }
-            } else false
-        }
-        if (hasCouts) blocsRemplis++
-
-        // HABITUDES
-        val hasHabitudes = categoriesActives.any { (type, active) ->
-            active && dbHelper.getMaxJournalier(type) > 0
-        }
-        if (hasHabitudes) blocsRemplis++
-
-        // DATES
-        val hasDates = categoriesActives.any { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                dates.values.any { it?.isNotEmpty() == true }
-            } else false
-        }
-        if (hasDates) blocsRemplis++
-
-        // POURCENTAGE
-        val percent = (blocsRemplis * 100) / totalBlocs
+        val percent = dbHelper.getProfilCompletionPercent(categoriesActives)
 
         // --- AFFICHAGE ---
         txtProfilStatus.text =
@@ -542,6 +513,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
