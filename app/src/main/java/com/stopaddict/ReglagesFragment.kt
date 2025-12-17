@@ -157,7 +157,7 @@ class ReglagesFragment : Fragment() {
         container.addView(scrollView)
     }
     
- private fun addHeader(container: LinearLayout) {
+    private fun addHeader() {
 
     val root = view ?: return
 
