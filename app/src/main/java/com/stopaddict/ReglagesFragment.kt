@@ -157,54 +157,15 @@ class ReglagesFragment : Fragment() {
         container.addView(scrollView)
     }
     
-    private fun addHeader(container: LinearLayout) {
+ private fun addHeader(container: LinearLayout) {
 
-    // Zone profil (progression)
-    val profilContainer = LinearLayout(requireContext()).apply {
-    orientation = LinearLayout.VERTICAL
-    setPadding(12.dp, 12.dp, 12.dp, 12.dp)
-    setBackgroundResource(android.R.drawable.dialog_holo_light_frame)
+    val root = view ?: return
 
-    // Comme les autres onglets : marge sous le bandeau
-    layoutParams = LinearLayout.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    ).apply {
-        bottomMargin = 16.dp
-    }
-}
+    txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
+    profilProgress = root.findViewById(R.id.reglages_profil_progress)
+    txtProfilRestant = root.findViewById(R.id.reglages_txt_profil_restant)
 
-    txtProfilComplet = TextView(requireContext()).apply {
-        text = "Profil complété à 0%"
-        textSize = 14f
-        setTypeface(null, android.graphics.Typeface.BOLD)
-        setPadding(0, 0, 0, 12)
-    }
-    profilContainer.addView(txtProfilComplet)
-
-    profilProgress = ProgressBar(requireContext(), null, android.R.attr.progressBarStyleHorizontal).apply {
-    layoutParams = LinearLayout.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        10.dp
-    )
-    max = 100
-    progress = 0
-
-    // Même rendu vert que les autres onglets
-    progressDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.profil_progress_drawable)
-}
-
-    profilContainer.addView(profilProgress)
-
-    txtProfilRestant = TextView(requireContext()).apply {
-        text = "0 champs restants"
-        textSize = 12f
-        gravity = android.view.Gravity.END
-        setPadding(0, 10, 0, 0)
-    }
-    profilContainer.addView(txtProfilRestant)
-
-    container.addView(profilContainer)
+    updateProfilStatus()
 }
     
     private fun addPersonnalisationSection(container: LinearLayout) {
@@ -1575,7 +1536,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
     
             // Force l’espace entre l’icône et le texte (plus fiable que l’XML selon les devices)
-            txtProfilComplet.compoundDrawablePadding = (12 * resources.displayMetrics.density).toInt()
+            txtProfilComplet.compoundDrawablePadding = 8.dp
 
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
