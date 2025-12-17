@@ -1438,7 +1438,7 @@ private fun calculerEconomiesParCategorie(
             else R.drawable.ic_status_incomplete
 
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-        txtProfilComplet.compoundDrawablePadding = 8.dp
+        txtProfilComplet.compoundDrawablePadding = (8 * resources.displayMetrics.density).toInt()
 
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
