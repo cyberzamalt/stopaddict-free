@@ -28,7 +28,7 @@
                 android:text="Profil complété à 0%"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:drawablePadding="10dp"
+                android:drawablePadding="8dp"
                 android:paddingBottom="8dp" />
 
             <ProgressBar
