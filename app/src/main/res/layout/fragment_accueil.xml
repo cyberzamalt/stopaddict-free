@@ -95,6 +95,7 @@
             android:padding="14dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
             android:background="@drawable/conseil_card_bg">
         
             <!-- (Étape 2) Icône : pour l’instant cachée -->
@@ -103,6 +104,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="10dp"
+                android:layout_gravity="center_vertical"
                 android:visibility="gone" />
         
             <!-- On garde le même ID pour ne rien casser côté Kotlin -->
