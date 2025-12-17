@@ -1423,53 +1423,23 @@ private fun calculerEconomiesParCategorie(
     
     private fun updateProfilStatus() {
     try {
-        val totalBlocs = 3
-        var blocsRemplis = 0
+        // --- CALCUL CENTRALISÉ ---
+        val percent = dbHelper.getProfilCompletionPercent(categoriesActives)
 
-        // COÛTS
-        var hasCouts = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                if (couts.values.any { it > 0 }) hasCouts = true
-            }
-        }
-        if (hasCouts) blocsRemplis++
-
-        // HABITUDES
-        var hasHabitudes = false
-        categoriesActives.forEach { (type, active) ->
-            if (active && dbHelper.getMaxJournalier(type) > 0) {
-                hasHabitudes = true
-            }
-        }
-        if (hasHabitudes) blocsRemplis++
-
-        // DATES
-        var hasDates = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                if (dates.values.any { !it.isNullOrEmpty() }) hasDates = true
-            }
-        }
-        if (hasDates) blocsRemplis++
-
-        val percent = (blocsRemplis * 100) / totalBlocs
-        
         // --- AFFICHAGE ---
         txtProfilComplet.text =
             if (percent == 100)
                 (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
-        
-        val iconRes = if (percent == 100)
-                R.drawable.ic_status_complete
-            else
-                R.drawable.ic_status_incomplete
+
+        val iconRes =
+            if (percent == 100) R.drawable.ic_status_complete
+            else R.drawable.ic_status_incomplete
+
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-        
+        txtProfilComplet.compoundDrawablePadding = 8.dp
+
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
 
