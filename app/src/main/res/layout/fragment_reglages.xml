@@ -5,11 +5,10 @@
     android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
                 <!-- Bandeau profil (progression) -->
         <LinearLayout
@@ -29,6 +28,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:drawablePadding="8dp"
+                android:gravity="center_vertical"
                 android:paddingBottom="8dp" />
 
             <ProgressBar
@@ -51,6 +51,13 @@
                 android:paddingTop="6dp" />
 
         </LinearLayout>
+        <!-- Container dynamique (celui que Kotlin vide/reconstruit) -->
+        
+<LinearLayout
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" />
         
         <!-- Zone Personnalisation -->
         <LinearLayout
