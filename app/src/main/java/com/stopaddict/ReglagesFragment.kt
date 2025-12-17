@@ -139,7 +139,7 @@ class ReglagesFragment : Fragment() {
         }
         
         // Header
-        addHeader()
+        addHeader(view)
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
@@ -157,9 +157,7 @@ class ReglagesFragment : Fragment() {
         container.addView(scrollView)
     }
     
-    private fun addHeader() {
-
-    val root = view ?: return
+    private fun addHeader(root: View) {
 
     txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
     profilProgress = root.findViewById(R.id.reglages_profil_progress)
