@@ -49,12 +49,12 @@ class ReglagesFragment : Fragment() {
     private lateinit var spinnerDevise: Spinner
     
     // Catégories
-    private lateinit var switchCigarette: Switch
-    private lateinit var switchJoint: Switch
-    private lateinit var switchAlcoolGlobal: Switch
-    private lateinit var switchBiere: Switch
-    private lateinit var switchLiqueur: Switch
-    private lateinit var switchAlcoolFort: Switch
+    private lateinit var switchCigarette: CheckBox
+    private lateinit var switchJoint: CheckBox
+    private lateinit var switchAlcoolGlobal: CheckBox
+    private lateinit var switchBiere: CheckBox
+    private lateinit var switchLiqueur: CheckBox
+    private lateinit var switchAlcoolFort: CheckBox
     
     // Cigarettes - 3 modes
     private lateinit var radioCigarettesClassiques: RadioButton
@@ -108,7 +108,7 @@ class ReglagesFragment : Fragment() {
             exportLimiter = ExportLimiter(requireContext())
             trad = ReglagesLangues.getTraductions(configLangue.getLangue())
             
-            initializeUI(view)
+            bindUIFromXml(view)
             loadData()
             
             Log.d(TAG, "ReglagesFragment créé")
@@ -119,6 +119,92 @@ class ReglagesFragment : Fragment() {
             null
         }
     }
+
+    private fun bindUIFromXml(view: View) {
+
+    // Bandeau profil (en haut)
+    txtProfilComplet = view.findViewById(R.id.reglages_txt_profil_complet)
+    profilProgress = view.findViewById(R.id.reglages_profil_progress)
+    txtProfilRestant = view.findViewById(R.id.reglages_txt_profil_restant)
+
+    // Personnalisation
+    editPrenom = view.findViewById(R.id.reglages_edit_prenom)
+    spinnerLangue = view.findViewById(R.id.reglages_spinner_langue)
+    spinnerDevise = view.findViewById(R.id.reglages_spinner_devise)
+
+    view.findViewById<Button>(R.id.reglages_btn_sauvegarder_profil)
+        .setOnClickListener { savePersonnalisation() }
+
+    // Catégories (dans ton XML ce sont des CheckBox, pas des Switch)
+    // Donc on les déclare en CheckBox dans le Kotlin
+    val checkCig = view.findViewById<CheckBox>(R.id.reglages_check_cigarettes)
+    val checkJoint = view.findViewById<CheckBox>(R.id.reglages_check_joints)
+    val checkAlcoolGlobal = view.findViewById<CheckBox>(R.id.reglages_check_alcool_global)
+    val checkBiere = view.findViewById<CheckBox>(R.id.reglages_check_bieres)
+    val checkLiqueur = view.findViewById<CheckBox>(R.id.reglages_check_liqueurs)
+    val checkAlcoolFort = view.findViewById<CheckBox>(R.id.reglages_check_alcool_fort)
+
+    // On met à jour la map + sauvegarde quand l’utilisateur change
+    fun bindCheck(key: String, cb: CheckBox) {
+        cb.setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives[key] = isChecked
+            saveCategoriesActives()
+            updateProfilStatus()
+        }
+    }
+
+    bindCheck("cigarette", checkCig)
+    bindCheck("joint", checkJoint)
+    bindCheck("alcool_global", checkAlcoolGlobal)
+    bindCheck("biere", checkBiere)
+    bindCheck("liqueur", checkLiqueur)
+    bindCheck("alcool_fort", checkAlcoolFort)
+
+    // Cigarettes - radios
+    radioCigarettesClassiques = view.findViewById(R.id.reglages_radio_classiques)
+    radioCigarettesRouler = view.findViewById(R.id.reglages_radio_rouler)
+    radioCigarettesTubeuse = view.findViewById(R.id.reglages_radio_tubeuse)
+
+    // Cigarettes - champs
+    editPrixPaquet = view.findViewById(R.id.reglages_edit_prix_paquet)
+    editNbCigarettes = view.findViewById(R.id.reglages_edit_nb_cigarettes)
+
+    editPrixTabac = view.findViewById(R.id.reglages_edit_prix_tabac)
+    editPrixFeuilles = view.findViewById(R.id.reglages_edit_prix_feuilles)
+    editNbFeuilles = view.findViewById(R.id.reglages_edit_nb_feuilles)
+    editPrixFiltres = view.findViewById(R.id.reglages_edit_prix_filtres)
+    editNbFiltres = view.findViewById(R.id.reglages_edit_nb_filtres)
+
+    editPrixTubes = view.findViewById(R.id.reglages_edit_prix_tubes)
+    editNbTubes = view.findViewById(R.id.reglages_edit_nb_tubes)
+
+    // Joints
+    editPrixGramme = view.findViewById(R.id.reglages_edit_prix_gramme)
+    editGrammeParJoint = view.findViewById(R.id.reglages_edit_gramme_par_joint)
+
+    // Alcools
+    editPrixVerreGlobal = view.findViewById(R.id.reglages_edit_prix_verre_global)
+    editUniteCLGlobal = view.findViewById(R.id.reglages_edit_unite_cl_global)
+
+    editPrixVerreBiere = view.findViewById(R.id.reglages_edit_prix_verre_biere)
+    editUniteCLBiere = view.findViewById(R.id.reglages_edit_unite_cl_biere)
+
+    editPrixVerreLiqueur = view.findViewById(R.id.reglages_edit_prix_verre_liqueur)
+    editUniteCLLiqueur = view.findViewById(R.id.reglages_edit_unite_cl_liqueur)
+
+    editPrixVerreAlcoolFort = view.findViewById(R.id.reglages_edit_prix_verre_alcool_fort)
+    editUniteCLAlcoolFort = view.findViewById(R.id.reglages_edit_unite_cl_alcool_fort)
+
+    // Boutons export/import/RAZ (du XML)
+    view.findViewById<Button>(R.id.reglages_btn_exporter).setOnClickListener { exportData() }
+    view.findViewById<Button>(R.id.reglages_btn_importer).setOnClickListener { importData() }
+    view.findViewById<Button>(R.id.reglages_btn_raz_jour).setOnClickListener { showRAZConfirmation("jour") }
+    view.findViewById<Button>(R.id.reglages_btn_raz_historique).setOnClickListener { showRAZConfirmation("historique") }
+    view.findViewById<Button>(R.id.reglages_btn_raz_usine).setOnClickListener { showRAZConfirmation("usine") }
+
+    // Bandeau
+    updateProfilStatus()
+}
 
     private fun initializeUI(view: View) {
         val container = view.findViewById<LinearLayout>(R.id.fragment_container)
