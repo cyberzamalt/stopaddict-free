@@ -319,7 +319,7 @@ class ReglagesFragment : Fragment() {
         val cigaretteCard = createCard()
         
         // Switch cigarette
-        switchCigarette = Switch(requireContext()).apply {
+        switchCigarette = CheckBox(requireContext()).apply {
             text = trad["label_cigarettes"] ?: "Cigarettes"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
@@ -460,7 +460,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun addJointsSection(container: LinearLayout) {
         val jointCard = createCard()
         
-        switchJoint = Switch(requireContext()).apply {
+        switchJoint = CheckBox(requireContext()).apply {
             text = trad["label_joints"] ?: "Joints (Cannabis)"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
@@ -497,7 +497,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun addAlcoolGlobalSection(container: LinearLayout) {
         val alcoolCard = createCard()
         
-        switchAlcoolGlobal = Switch(requireContext()).apply {
+        switchAlcoolGlobal = CheckBox(requireContext()).apply {
             text = trad["label_alcool_global"] ?: "Alcool Global"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
@@ -532,7 +532,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun addBieresSection(container: LinearLayout) {
         val biereCard = createCard()
         
-        switchBiere = Switch(requireContext()).apply {
+        switchBiere = CheckBox(requireContext()).apply {
             text = trad["label_bieres"] ?: "Bières"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
@@ -561,7 +561,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun addLiqueursSection(container: LinearLayout) {
         val liqueurCard = createCard()
         
-        switchLiqueur = Switch(requireContext()).apply {
+        switchLiqueur = CheckBox(requireContext()).apply {
             text = trad["label_liqueurs"] ?: "Liqueurs"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
@@ -590,7 +590,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     private fun addAlcoolFortSection(container: LinearLayout) {
         val alcoolFortCard = createCard()
         
-        switchAlcoolFort = Switch(requireContext()).apply {
+        switchAlcoolFort = CheckBox(requireContext()).apply {
             text = trad["label_alcool_fort"] ?: "Alcool Fort"
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
