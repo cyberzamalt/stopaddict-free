@@ -213,6 +213,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
     }
 
+    fun getProfilCompletionPercent(categoriesActives: Map<String, Boolean>): Int {
+    val actives = categoriesActives.filterValues { it }.keys
+    if (actives.isEmpty()) return 0
+
+    val totalBlocs = actives.size * 3
+    var blocsRemplis = 0
+
+    for (type in actives) {
+        // 1) COÛTS
+        val couts = getCouts(type)
+        if (couts.values.any { (it ?: 0.0) > 0.0 }) blocsRemplis++
+
+        // 2) HABITUDES
+        if (getMaxJournalier(type) > 0) blocsRemplis++
+
+        // 3) DATES
+        val dates = getDatesObjectifs(type)
+        if (dates.values.any { !it.isNullOrEmpty() }) blocsRemplis++
+    }
+
+    return ((blocsRemplis * 100) / totalBlocs).coerceIn(0, 100)
+}
+
     fun retirerConsommation(type: String, dateSpecifique: String? = null): Boolean {
         return try {
             val db = writableDatabase
