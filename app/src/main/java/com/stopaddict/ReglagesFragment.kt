@@ -137,12 +137,12 @@ class ReglagesFragment : Fragment() {
 
     // Catégories (dans ton XML ce sont des CheckBox, pas des Switch)
     // Donc on les déclare en CheckBox dans le Kotlin
-    val checkCig = view.findViewById<CheckBox>(R.id.reglages_check_cigarettes)
-    val checkJoint = view.findViewById<CheckBox>(R.id.reglages_check_joints)
-    val checkAlcoolGlobal = view.findViewById<CheckBox>(R.id.reglages_check_alcool_global)
-    val checkBiere = view.findViewById<CheckBox>(R.id.reglages_check_bieres)
-    val checkLiqueur = view.findViewById<CheckBox>(R.id.reglages_check_liqueurs)
-    val checkAlcoolFort = view.findViewById<CheckBox>(R.id.reglages_check_alcool_fort)
+    switchCigarette = view.findViewById(R.id.reglages_check_cigarettes)
+    switchJoint = view.findViewById(R.id.reglages_check_joints)
+    switchAlcoolGlobal = view.findViewById(R.id.reglages_check_alcool_global)
+    switchBiere = view.findViewById(R.id.reglages_check_bieres)
+    switchLiqueur = view.findViewById(R.id.reglages_check_liqueurs)
+    switchAlcoolFort = view.findViewById(R.id.reglages_check_alcool_fort)
 
     // On met à jour la map + sauvegarde quand l’utilisateur change
     fun bindCheck(key: String, cb: CheckBox) {
@@ -153,12 +153,12 @@ class ReglagesFragment : Fragment() {
         }
     }
 
-    bindCheck("cigarette", checkCig)
-    bindCheck("joint", checkJoint)
-    bindCheck("alcool_global", checkAlcoolGlobal)
-    bindCheck("biere", checkBiere)
-    bindCheck("liqueur", checkLiqueur)
-    bindCheck("alcool_fort", checkAlcoolFort)
+    bindCheck("cigarette", switchCigarette)
+    bindCheck("joint", switchJoint)
+    bindCheck("alcool_global", switchAlcoolGlobal)
+    bindCheck("biere", switchBiere)
+    bindCheck("liqueur", switchLiqueur)
+    bindCheck("alcool_fort", switchAlcoolFort)
 
     // Cigarettes - radios
     radioCigarettesClassiques = view.findViewById(R.id.reglages_radio_classiques)
