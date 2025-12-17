@@ -221,9 +221,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     var blocsRemplis = 0
 
     for (type in actives) {
+
         // 1) COÛTS
         val couts = getCouts(type)
-        if (couts.values.any { (it ?: 0.0) > 0.0 }) blocsRemplis++
+        if (couts.values.any { it > 0.0 }) blocsRemplis++
 
         // 2) HABITUDES
         if (getMaxJournalier(type) > 0) blocsRemplis++
