@@ -139,7 +139,7 @@ class ReglagesFragment : Fragment() {
         }
         
         // Header
-        addHeader(contentContainer)
+        addHeader()
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
