@@ -1536,6 +1536,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 else
                     R.drawable.ic_status_incomplete
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
+    
+            // Force l’espace entre l’icône et le texte (plus fiable que l’XML selon les devices)
+            txtProfilComplet.compoundDrawablePadding = (12 * resources.displayMetrics.density).toInt()
 
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
