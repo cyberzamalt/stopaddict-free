@@ -192,7 +192,6 @@ class ReglagesFragment : Fragment() {
 
     // Même rendu vert que les autres onglets
     progressDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.profil_progress_drawable)
-    splitTrack = false
 }
 
     profilContainer.addView(profilProgress)
