@@ -1493,53 +1493,25 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
 
     private fun updateProfilStatus() {
     try {
-        val totalBlocs = 3
-        var blocsRemplis = 0
+        // --- CALCUL CENTRALISÉ ---
+        val percent = dbHelper.getProfilCompletionPercent(categoriesActives)
 
-        // COÛTS (uniquement catégories actives)
-        val hasCouts = categoriesActives.any { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                couts.values.any { it > 0.0 }
-            } else false
-        }
-        if (hasCouts) blocsRemplis++
-
-        // HABITUDES (uniquement catégories actives)
-        val hasHabitudes = categoriesActives.any { (type, active) ->
-            active && dbHelper.getMaxJournalier(type) > 0
-        }
-        if (hasHabitudes) blocsRemplis++
-
-        // DATES (uniquement catégories actives)
-        val hasDates = categoriesActives.any { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                dates.values.any { it?.isNotEmpty() == true }
-            } else false
-        }
-        if (hasDates) blocsRemplis++
-
-        val percent = (blocsRemplis * 100) / totalBlocs
-
-        // --- AFFICHAGE ---
+        // --- AFFICHAGE (INCHANGÉ) ---
         txtProfilComplet.text =
             if (percent == 100)
                 (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
-        
-        val iconRes = if (percent == 100) {
-                R.drawable.ic_status_complete
-            } else {
-                R.drawable.ic_status_incomplete
-            }
-            
-            txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-            txtProfilComplet.compoundDrawablePadding = 8.dp
-            
-            profilProgress.progress = percent
-            txtProfilRestant.visibility = View.GONE
+
+        val iconRes =
+            if (percent == 100) R.drawable.ic_status_complete
+            else R.drawable.ic_status_incomplete
+
+        txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
+        txtProfilComplet.compoundDrawablePadding = 8.dp
+
+        profilProgress.progress = percent
+        txtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
