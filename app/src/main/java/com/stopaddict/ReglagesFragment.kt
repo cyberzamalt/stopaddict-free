@@ -20,6 +20,8 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import android.view.inputmethod.EditorInfo
 import java.text.SimpleDateFormat
+import androidx.core.content.ContextCompat
+import kotlin.math.roundToInt
 import java.util.*
 
 class ReglagesFragment : Fragment() {
@@ -133,7 +135,7 @@ class ReglagesFragment : Fragment() {
         
         val contentContainer = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(20, 10, 20, 20)
+            setPadding(0, 0, 0, 0)
         }
         
         // Header
@@ -159,10 +161,18 @@ class ReglagesFragment : Fragment() {
 
     // Zone profil (progression)
     val profilContainer = LinearLayout(requireContext()).apply {
-        orientation = LinearLayout.VERTICAL
-        setPadding(20, 10, 20, 10)
-        setBackgroundColor(Color.parseColor("#F5F5F5"))
+    orientation = LinearLayout.VERTICAL
+    setPadding(12.dp, 12.dp, 12.dp, 12.dp)
+    setBackgroundResource(android.R.drawable.dialog_holo_light_frame)
+
+    // Comme les autres onglets : marge sous le bandeau
+    layoutParams = LinearLayout.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    ).apply {
+        bottomMargin = 16.dp
     }
+}
 
     txtProfilComplet = TextView(requireContext()).apply {
         text = "Profil complété à 0%"
@@ -173,13 +183,18 @@ class ReglagesFragment : Fragment() {
     profilContainer.addView(txtProfilComplet)
 
     profilProgress = ProgressBar(requireContext(), null, android.R.attr.progressBarStyleHorizontal).apply {
-        layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            24
-        )
-        max = 100
-        progress = 0
-    }
+    layoutParams = LinearLayout.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        10.dp
+    )
+    max = 100
+    progress = 0
+
+    // Même rendu vert que les autres onglets
+    progressDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.profil_progress_drawable)
+    splitTrack = false
+}
+
     profilContainer.addView(profilProgress)
 
     txtProfilRestant = TextView(requireContext()).apply {
@@ -1105,6 +1120,14 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         export.put("langue", configLangue.getLangue())
         export.put("devise", dbHelper.getPreference("devise", "EUR"))
         export.put("categories_actives", dbHelper.getPreference("categories_actives", "{}"))
+        export.put(PREF_MODE_CIGARETTE, dbHelper.getPreference(PREF_MODE_CIGARETTE, "classique"))
+        export.put(PREF_NB_CIGARETTES_ROULEES, dbHelper.getPreference(PREF_NB_CIGARETTES_ROULEES, "0"))
+        export.put(PREF_NB_CIGARETTES_TUBEES, dbHelper.getPreference(PREF_NB_CIGARETTES_TUBEES, "0"))
+        export.put("gramme_par_joint", dbHelper.getPreference("gramme_par_joint", "0"))
+        export.put("unite_cl_alcool_global", dbHelper.getPreference("unite_cl_alcool_global", "0"))
+        export.put("unite_cl_biere", dbHelper.getPreference("unite_cl_biere", "0"))
+        export.put("unite_cl_liqueur", dbHelper.getPreference("unite_cl_liqueur", "0"))
+        export.put("unite_cl_alcool_fort", dbHelper.getPreference("unite_cl_alcool_fort", "0"))
         
         // Consommations par catégorie
         val consommations = JSONObject()
@@ -1240,28 +1263,34 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         val categoriesActivesStr = json.optString("categories_actives", "{}")
         dbHelper.setPreference("categories_actives", categoriesActivesStr)
 
+        // ✅ Restaurer préférences liées aux coûts / modes
+        dbHelper.setPreference(PREF_MODE_CIGARETTE, json.optString(PREF_MODE_CIGARETTE, "classique"))
+        dbHelper.setPreference(PREF_NB_CIGARETTES_ROULEES, json.optString(PREF_NB_CIGARETTES_ROULEES, "0"))
+        dbHelper.setPreference(PREF_NB_CIGARETTES_TUBEES, json.optString(PREF_NB_CIGARETTES_TUBEES, "0"))
+        
+        dbHelper.setPreference("gramme_par_joint", json.optString("gramme_par_joint", "0"))
+        dbHelper.setPreference("unite_cl_alcool_global", json.optString("unite_cl_alcool_global", "0"))
+        dbHelper.setPreference("unite_cl_biere", json.optString("unite_cl_biere", "0"))
+        dbHelper.setPreference("unite_cl_liqueur", json.optString("unite_cl_liqueur", "0"))
+        dbHelper.setPreference("unite_cl_alcool_fort", json.optString("unite_cl_alcool_fort", "0"))
+
         // Mettre à jour la map locale des catégories actives
         try {
             val jsonCat = JSONObject(categoriesActivesStr)
-            categoriesActives[DatabaseHelper.TYPE_CIGARETTE] =
-                jsonCat.optBoolean("cigarette", true)
-            categoriesActives[DatabaseHelper.TYPE_JOINT] =
-                jsonCat.optBoolean("joint", true)
-            categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] =
-                jsonCat.optBoolean("alcool_global", true)
-            categoriesActives[DatabaseHelper.TYPE_BIERE] =
-                jsonCat.optBoolean("biere", false)
-            categoriesActives[DatabaseHelper.TYPE_LIQUEUR] =
-                jsonCat.optBoolean("liqueur", false)
-            categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] =
-                jsonCat.optBoolean("alcool_fort", false)
+          categoriesActives["cigarette"] = jsonCat.optBoolean("cigarette", true)
+categoriesActives["joint"] = jsonCat.optBoolean("joint", true)
+categoriesActives["alcool_global"] = jsonCat.optBoolean("alcool_global", true)
+categoriesActives["biere"] = jsonCat.optBoolean("biere", false)
+categoriesActives["liqueur"] = jsonCat.optBoolean("liqueur", false)
+categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         } catch (e: Exception) {
             Log.e(TAG, "Erreur parse categories_actives à l'import: ${e.message}")
         }
 
-        // 3) Restaurer les coûts par catégorie
+        // 3) Restaurer les coûts par catégorie (ordre cohérent avec saveCouts()/loadCouts())
         val coutsObj = json.optJSONObject("couts")
         if (coutsObj != null) {
+        
             val types = listOf(
                 DatabaseHelper.TYPE_CIGARETTE,
                 DatabaseHelper.TYPE_JOINT,
@@ -1271,38 +1300,46 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
                 DatabaseHelper.TYPE_ALCOOL_FORT
             )
 
-            types.forEach { type ->
-                val objType = coutsObj.optJSONObject(type)
-                if (objType != null) {
-                    val prixPaquet = objType.optDouble("prix_paquet", 0.0)
-                    val nbCigarettes = objType.optDouble("nb_cigarettes", 0.0)
-                    val prixFeuilles = objType.optDouble("prix_feuilles", 0.0)
-                    val nbFeuilles = objType.optDouble("nb_feuilles", 0.0)
-                    val prixFiltres = objType.optDouble("prix_filtres", 0.0)
-                    val nbFiltres = objType.optDouble("nb_filtres", 0.0)
-                    val prixTabacTube = objType.optDouble("prix_tabac_tube", 0.0)
-                    val prixTubes = objType.optDouble("prix_tubes", 0.0)
-                    val nbTubes = objType.optDouble("nb_tubes", 0.0)
-                    val prixGramme = objType.optDouble("prix_gramme", 0.0)
-                    val prixVerre = objType.optDouble("prix_verre", 0.0)
-
-                    dbHelper.setCouts(
-                        type,
-                        prixPaquet,
-                        nbCigarettes,
-                        prixFeuilles,
-                        nbFeuilles,
-                        prixFiltres,
-                        nbFiltres,
-                        prixTabacTube,
-                        prixTubes,
-                        nbTubes,
-                        prixGramme,
-                        prixVerre
-                    )
-                }
-            }
+        types.forEach { type ->
+            val objType = coutsObj.optJSONObject(type) ?: return@forEach
+    
+            val prixPaquet = objType.optDouble("prix_paquet", 0.0)
+            val nbCigarettes = objType.optDouble("nb_cigarettes", 0.0)
+    
+            val prixTabac = objType.optDouble("prix_tabac", 0.0)
+            val prixFeuilles = objType.optDouble("prix_feuilles", 0.0)
+            val nbFeuilles = objType.optDouble("nb_feuilles", 0.0)
+    
+            val prixFiltres = objType.optDouble("prix_filtres", 0.0)
+            val nbFiltres = objType.optDouble("nb_filtres", 0.0)
+    
+            val prixTubes = objType.optDouble("prix_tubes", 0.0)
+            val nbTubes = objType.optDouble("nb_tubes", 0.0)
+    
+            val prixTabacTube = objType.optDouble("prix_tabac_tube", 0.0)
+    
+            val prixVerre = objType.optDouble("prix_verre", 0.0)
+            val prixGramme = objType.optDouble("prix_gramme", 0.0)
+    
+            // ✅ On conserve ton principe actuel : pour JOINT, le dernier param sert de "prix_gramme"
+            val dernierParam = if (type == DatabaseHelper.TYPE_JOINT) prixGramme else prixVerre
+    
+            dbHelper.setCouts(
+                type,
+                prixPaquet,
+                nbCigarettes,
+                prixTabac,
+                prixFeuilles,
+                nbFeuilles,
+                prixFiltres,
+                nbFiltres,
+                prixTubes,
+                nbTubes,
+                prixTabacTube,
+                dernierParam
+               )
         }
+}
 
         // 4) Restaurer les habitudes (max par jour)
         val habitudesObj = json.optJSONObject("habitudes")
@@ -1405,8 +1442,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             spinnerLangue.setSelection(langues.indexOf(langue).coerceAtLeast(0))
             
             val devise = dbHelper.getPreference("devise", "EUR")
-            val devises = arrayOf("EUR", "USD", "GBP", "JPY", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
-            spinnerDevise.setSelection(devises.indexOf(devise).coerceAtLeast(0))
+            val devisesAffichees = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
+            val idx = devisesAffichees.indexOfFirst { it.startsWith(devise) }
+            spinnerDevise.setSelection(if (idx >= 0) idx else 0)
             
             // Charger catégories actives
             val json = dbHelper.getPreference("categories_actives", """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}""")
@@ -1644,4 +1682,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         if (text.isBlank()) return 0.0
         return text.replace(',', '.').toDoubleOrNull() ?: 0.0
     }
+
+private val Int.dp: Int
+    get() = (this * resources.displayMetrics.density).roundToInt()
+
 }
+
