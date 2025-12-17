@@ -1529,10 +1529,17 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
         
-        val iconRes = if (percent == 100)
-
-        profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+        val iconRes = if (percent == 100) {
+                R.drawable.ic_status_complete
+            } else {
+                R.drawable.ic_status_incomplete
+            }
+            
+            txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
+            txtProfilComplet.compoundDrawablePadding = 8.dp
+            
+            profilProgress.progress = percent
+            txtProfilRestant.visibility = View.GONE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
