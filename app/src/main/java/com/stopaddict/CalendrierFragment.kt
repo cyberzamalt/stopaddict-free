@@ -186,53 +186,23 @@ class CalendrierFragment : Fragment() {
 
     private fun updateProfilStatus() {
     try {
-        val totalBlocs = 3
-        var blocsRemplis = 0
+        // --- POURCENTAGE (centralisé) ---
+        val percent = dbHelper.getProfilCompletionPercent(categoriesActives)
 
-        // COÛTS
-        var hasCouts = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val couts = dbHelper.getCouts(type)
-                if (couts.values.any { it > 0.0 }) hasCouts = true
-            }
-        }
-        if (hasCouts) blocsRemplis++
-
-        // HABITUDES
-        var hasHabitudes = false
-        categoriesActives.forEach { (type, active) ->
-            if (active && dbHelper.getMaxJournalier(type) > 0) {
-                hasHabitudes = true
-            }
-        }
-        if (hasHabitudes) blocsRemplis++
-
-        // DATES (les 3 dates attendues, mais ici on valide "au moins une présente" comme avant)
-        var hasDates = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val dates = dbHelper.getDatesObjectifs(type)
-                if (dates.values.any { it?.isNotEmpty() == true }) hasDates = true
-            }
-        }
-        if (hasDates) blocsRemplis++
-
-        val percent = (blocsRemplis * 100) / totalBlocs
-
-        // --- AFFICHAGE ---
+        // --- AFFICHAGE (inchangé) ---
         txtProfilStatus.text =
             if (percent == 100)
                 (trad["profil_complet"] ?: "Profil: Complet ✓") + " 100%"
             else
                 (trad["profil_incomplet"] ?: "Profil: Incomplet") + " $percent%"
-        
+
         val iconRes = if (percent == 100)
-                R.drawable.ic_status_complete
-            else
-                R.drawable.ic_status_incomplete
+            R.drawable.ic_status_complete
+        else
+            R.drawable.ic_status_incomplete
+
         txtProfilStatus.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-        
+
         profilProgress.progress = percent
         txtProfilRestant.visibility = View.GONE
 
