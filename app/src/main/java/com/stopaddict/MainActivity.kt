@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
     private var consoleDialog: AlertDialog? = null
     private val isVersionGratuite = true
 
+    // Cache : dernier jour pour lequel le bandeau a été calculé
+    private var headerResumeLastDay: String? = null
+
     // Cache bandeau "Jour" (évite de recharger les traductions à chaque update)
     private var headerTradStatsCache: Map<String, String>? = null
     private var headerLabelJourCache: String? = null
@@ -457,7 +460,12 @@ updateHeaderResumeVisibility(viewPager.currentItem)
 
     if (position == 0 || position == 1 || position == 2 || position == 3 || position == 4) {
         headerResumeScroll.visibility = View.VISIBLE
-        updateHeaderResumeJour()
+
+        // Micro-optimisation : on ne recalcule que si le JOUR a changé
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        if (headerResumeLastDay != today) {
+            updateHeaderResumeJour()
+        }
     } else {
         headerResumeScroll.visibility = View.GONE
     }
@@ -482,6 +490,7 @@ updateHeaderResumeVisibility(viewPager.currentItem)
 
             // Date du jour au format utilisé par la DB
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            headerResumeLastDay = today
             val consos = dbHelper.getConsommationsJour(today)
 
             fun getCount(key: String): Int {
@@ -730,6 +739,9 @@ private fun getTabTitle(position: Int): String {
     super.onResume()
     logger.d("onResume: activité reprise -> mise à jour de la date/heure")
     updateDateTime()
+
+    // Bandeau jour : si on revient après un moment (ou changement de jour), on refresh
+    updateHeaderResumeVisibility(viewPager.currentItem)
 }
 
 override fun onPause() {
