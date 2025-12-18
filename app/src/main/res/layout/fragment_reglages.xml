@@ -53,12 +53,12 @@
         </LinearLayout>
         <!-- Container dynamique (celui que Kotlin vide/reconstruit) -->
         
-<LinearLayout 
-    android:id="@+id/fragment_container" 
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
+<LinearLayout
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" />
-
+        
         <!-- Zone Personnalisation -->
         <LinearLayout
             android:layout_width="match_parent"
