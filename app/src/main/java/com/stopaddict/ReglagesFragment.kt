@@ -109,6 +109,7 @@ class ReglagesFragment : Fragment() {
             trad = ReglagesLangues.getTraductions(configLangue.getLangue())
             
             bindUIFromXml(view)
+            initializeUI(view) 
             loadData()
             
             Log.d(TAG, "ReglagesFragment créé")
