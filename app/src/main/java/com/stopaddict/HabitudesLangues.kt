@@ -31,6 +31,8 @@ object HabitudesLangues {
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
         "titre" to "Habitudes & Volonté",
+        "titre_habitudes" to "Habitudes",
+        "titre_volonte" to "Volonté",
         
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
@@ -54,7 +56,6 @@ object HabitudesLangues {
         "hint_max_alcool_fort" to "Max alcool fort par jour",
         
         // Section Volonté
-        "titre_volonte" to "Zone Volonté - Dates Objectifs",
         "desc_volonte" to "Définissez 3 dates par catégorie : Réduction, Arrêt, Réussite",
         
         // Labels dates
@@ -68,12 +69,21 @@ object HabitudesLangues {
         "btn_effacer" to "Effacer",
 
         // Messages
-        "msg_sauvegarde_ok" to "Habitudes et dates sauvegardées"
+        "msg_err_chargement_habitudes" to "Erreur chargement Habitudes",
+        "msg_reset_habitudes" to "Habitudes réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+        "msg_reset_dates" to "Dates réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+        "msg_err_reset" to "Erreur lors de la réinitialisation",
+        "msg_sauvegarde_habitudes_ok" to "Habitudes sauvegardées",
+        "msg_sauvegarde_dates_ok" to "Dates sauvegardées",
+
+        "msg_err_generic" to "Une erreur est survenue"
     )
 
     // ==================== ENGLISH ====================
     private val TRADUCTIONS_EN = mapOf(
         "titre" to "Habits & Willpower",
+        "titre_habitudes" to "Habits",
+        "titre_volonte" to "Willpower",
         
         "label_cigarettes" to "Cigarettes",
         "label_joints" to "Joints",
@@ -93,7 +103,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Max liquors per day",
         "hint_max_alcool_fort" to "Max spirits per day",
         
-        "titre_volonte" to "Willpower Zone - Goal Dates",
         "desc_volonte" to "Set 3 dates per category: Reduction, Quit, Success",
         
         "label_date_reduction" to "Reduction date",
@@ -103,13 +112,23 @@ object HabitudesLangues {
         "btn_sauvegarder" to "Save",
         "btn_selectionner_date" to "Select a date",
         "btn_effacer" to "Clear",
-        
-        "msg_sauvegarde_ok" to "Habits and dates saved"
+                
+                // Messages
+        "msg_err_chargement_habitudes" to "Error loading Habits",
+        "msg_reset_habitudes" to "Habits reset — Tap Save to apply",
+        "msg_reset_dates" to "Dates reset — Tap Save to apply",
+        "msg_err_reset" to "Error during reset",
+        "msg_sauvegarde_habitudes_ok" to "Habits saved",
+        "msg_sauvegarde_dates_ok" to "Dates saved",
+
+        "msg_err_generic" to "An error occurred"
     )
 
     // ==================== ESPAÑOL ====================
     private val TRADUCTIONS_ES = mapOf(
         "titre" to "Hábitos y Voluntad",
+        "titre_habitudes" to "Hábitos",
+        "titre_volonte" to "Voluntad",
         
         "label_cigarettes" to "Cigarrillos",
         "label_joints" to "Porros",
@@ -129,7 +148,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Máx licores por día",
         "hint_max_alcool_fort" to "Máx licores fuertes por día",
         
-        "titre_volonte" to "Zona Voluntad - Fechas Objetivo",
         "desc_volonte" to "Define 3 fechas por categoría: Reducción, Parada, Éxito",
         
         "label_date_reduction" to "Fecha de reducción",
@@ -139,13 +157,23 @@ object HabitudesLangues {
         "btn_sauvegarder" to "Guardar",
         "btn_selectionner_date" to "Seleccionar una fecha",
         "btn_effacer" to "Borrar",
-        
-        "msg_sauvegarde_ok" to "Hábitos y fechas guardados"
+                
+        "msg_err_chargement_habitudes" to "Error al cargar Hábitos",
+        "msg_reset_habitudes" to "Hábitos reiniciados — Pulsa Guardar para aplicar",
+        "msg_reset_dates" to "Fechas reiniciadas — Pulsa Guardar para aplicar",
+        "msg_err_reset" to "Error durante el reinicio",
+        "msg_sauvegarde_habitudes_ok" to "Hábitos guardados",
+        "msg_sauvegarde_dates_ok" to "Fechas guardadas",
+
+        "msg_err_generic" to "Se produjo un error"
     )
 
     // ==================== PORTUGUÊS ====================
     private val TRADUCTIONS_PT = mapOf(
         "titre" to "Hábitos e Vontade",
+        "titre_habitudes" to "Hábitos",
+        "titre_volonte" to "Vontade",
+
         
         "label_cigarettes" to "Cigarros",
         "label_joints" to "Baseados",
@@ -165,7 +193,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Máx licores por dia",
         "hint_max_alcool_fort" to "Máx bebidas fortes por dia",
         
-        "titre_volonte" to "Zona Vontade - Datas Objetivo",
         "desc_volonte" to "Defina 3 datas por categoria: Redução, Parada, Sucesso",
         
         "label_date_reduction" to "Data de redução",
@@ -175,13 +202,22 @@ object HabitudesLangues {
         "btn_sauvegarder" to "Salvar",
         "btn_selectionner_date" to "Selecionar uma data",
         "btn_effacer" to "Apagar",
-        
-        "msg_sauvegarde_ok" to "Hábitos e datas salvos"
+                
+        "msg_err_chargement_habitudes" to "Erro ao carregar Hábitos",
+        "msg_reset_habitudes" to "Hábitos redefinidos — Toque em Salvar para aplicar",
+        "msg_reset_dates" to "Datas redefinidas — Toque em Salvar para aplicar",
+        "msg_err_reset" to "Erro durante a redefinição",
+        "msg_sauvegarde_habitudes_ok" to "Hábitos salvos",
+        "msg_sauvegarde_dates_ok" to "Datas salvas",
+
+        "msg_err_generic" to "Ocorreu um erro"
     )
 
     // ==================== DEUTSCH ====================
     private val TRADUCTIONS_DE = mapOf(
         "titre" to "Gewohnheiten & Willenskraft",
+        "titre_habitudes" to "Gewohnheiten",
+        "titre_volonte" to "Willenskraft",
         
         "label_cigarettes" to "Zigaretten",
         "label_joints" to "Joints",
@@ -201,7 +237,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Max Liköre pro Tag",
         "hint_max_alcool_fort" to "Max Spirituosen pro Tag",
         
-        "titre_volonte" to "Willenskraft-Zone - Zieldaten",
         "desc_volonte" to "Legen Sie 3 Daten pro Kategorie fest: Reduktion, Stopp, Erfolg",
         
         "label_date_reduction" to "Reduktionsdatum",
@@ -212,12 +247,21 @@ object HabitudesLangues {
         "btn_selectionner_date" to "Ein Datum auswählen",
         "btn_effacer" to "Löschen",
         
-        "msg_sauvegarde_ok" to "Gewohnheiten und Daten gespeichert"
+        "msg_err_chargement_habitudes" to "Fehler beim Laden der Gewohnheiten",
+        "msg_reset_habitudes" to "Gewohnheiten zurückgesetzt — Zum Anwenden Speichern tippen",
+        "msg_reset_dates" to "Daten zurückgesetzt — Zum Anwenden Speichern tippen",
+        "msg_err_reset" to "Fehler beim Zurücksetzen",
+        "msg_sauvegarde_habitudes_ok" to "Gewohnheiten gespeichert",
+        "msg_sauvegarde_dates_ok" to "Daten gespeichert",
+
+        "msg_err_generic" to "Ein Fehler ist aufgetreten"
     )
 
     // ==================== ITALIANO ====================
     private val TRADUCTIONS_IT = mapOf(
         "titre" to "Abitudini e Volontà",
+        "titre_habitudes" to "Abitudini",
+        "titre_volonte" to "Volontà",
         
         "label_cigarettes" to "Sigarette",
         "label_joints" to "Canne",
@@ -237,7 +281,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Max liquori al giorno",
         "hint_max_alcool_fort" to "Max superalcolici al giorno",
         
-        "titre_volonte" to "Zona Volontà - Date Obiettivo",
         "desc_volonte" to "Imposta 3 date per categoria: Riduzione, Stop, Successo",
         
         "label_date_reduction" to "Data di riduzione",
@@ -248,12 +291,21 @@ object HabitudesLangues {
         "btn_selectionner_date" to "Seleziona una data",
         "btn_effacer" to "Cancella",
         
-        "msg_sauvegarde_ok" to "Abitudini e date salvate"
+        "msg_err_chargement_habitudes" to "Errore nel caricamento delle Abitudini",
+        "msg_reset_habitudes" to "Abitudini reimpostate — Tocca Salva per applicare",
+        "msg_reset_dates" to "Date reimpostate — Tocca Salva per applicare",
+        "msg_err_reset" to "Errore durante il ripristino",
+        "msg_sauvegarde_habitudes_ok" to "Abitudini salvate",
+        "msg_sauvegarde_dates_ok" to "Date salvate",
+
+        "msg_err_generic" to "Si è verificato un errore"
     )
 
     // ==================== РУССКИЙ ====================
     private val TRADUCTIONS_RU = mapOf(
         "titre" to "Привычки и Воля",
+        "titre_habitudes" to "Привычки",
+        "titre_volonte" to "Воля",
         
         "label_cigarettes" to "Сигареты",
         "label_joints" to "Косяки",
@@ -273,7 +325,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "Макс ликёров в день",
         "hint_max_alcool_fort" to "Макс крепкого алкоголя в день",
         
-        "titre_volonte" to "Зона Воли - Целевые Даты",
         "desc_volonte" to "Установите 3 даты на категорию: Сокращение, Прекращение, Успех",
         
         "label_date_reduction" to "Дата сокращения",
@@ -284,12 +335,21 @@ object HabitudesLangues {
         "btn_selectionner_date" to "Выбрать дату",
         "btn_effacer" to "Очистить",
         
-        "msg_sauvegarde_ok" to "Привычки и даты сохранены"
+        "msg_err_chargement_habitudes" to "Ошибка загрузки привычек",
+        "msg_reset_habitudes" to "Привычки сброшены — Нажмите «Сохранить», чтобы применить",
+        "msg_reset_dates" to "Даты сброшены — Нажмите «Сохранить», чтобы применить",
+        "msg_err_reset" to "Ошибка при сбросе",
+        "msg_sauvegarde_habitudes_ok" to "Привычки сохранены",
+        "msg_sauvegarde_dates_ok" to "Даты сохранены",
+
+        "msg_err_generic" to "Произошла ошибка"
     )
 
     // ==================== العربية ====================
     private val TRADUCTIONS_AR = mapOf(
         "titre" to "العادات والإرادة",
+        "titre_habitudes" to "العادات",
+        "titre_volonte" to "الإرادة",
         
         "label_cigarettes" to "السجائر",
         "label_joints" to "الحشيش",
@@ -309,7 +369,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "الحد الأقصى للمشروبات في اليوم",
         "hint_max_alcool_fort" to "الحد الأقصى للكحول القوي في اليوم",
         
-        "titre_volonte" to "منطقة الإرادة - تواريخ الأهداف",
         "desc_volonte" to "حدد 3 تواريخ لكل فئة: التخفيض، التوقف، النجاح",
         
         "label_date_reduction" to "تاريخ التخفيض",
@@ -320,12 +379,21 @@ object HabitudesLangues {
         "btn_selectionner_date" to "اختر تاريخًا",
         "btn_effacer" to "حذف",
         
-        "msg_sauvegarde_ok" to "تم حفظ العادات والتواريخ"
+        "msg_err_chargement_habitudes" to "خطأ في تحميل العادات",
+        "msg_reset_habitudes" to "تمت إعادة ضبط العادات — اضغط حفظ للتطبيق",
+        "msg_reset_dates" to "تمت إعادة ضبط التواريخ — اضغط حفظ للتطبيق",
+        "msg_err_reset" to "خطأ أثناء إعادة الضبط",
+        "msg_sauvegarde_habitudes_ok" to "تم حفظ العادات",
+        "msg_sauvegarde_dates_ok" to "تم حفظ التواريخ",
+
+        "msg_err_generic" to "حدث خطأ"
     )
 
     // ==================== हिन्दी ====================
     private val TRADUCTIONS_HI = mapOf(
         "titre" to "आदतें और इच्छाशक्ति",
+        "titre_habitudes" to "आदतें",
+        "titre_volonte" to "इच्छाशक्ति",
         
         "label_cigarettes" to "सिगरेट",
         "label_joints" to "जॉइंट",
@@ -345,7 +413,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "प्रति दिन अधिकतम शराब",
         "hint_max_alcool_fort" to "प्रति दिन अधिकतम मजबूत शराब",
         
-        "titre_volonte" to "इच्छाशक्ति क्षेत्र - लक्ष्य तिथियां",
         "desc_volonte" to "प्रति श्रेणी 3 तिथियां निर्धारित करें: कमी, रुकावट, सफलता",
         
         "label_date_reduction" to "कमी की तिथि",
@@ -356,13 +423,22 @@ object HabitudesLangues {
         "btn_selectionner_date" to "एक तिथि चुनें",
         "btn_effacer" to "हटाएँ",
         
-        "msg_sauvegarde_ok" to "आदतें और तिथियां सहेजी गईं"
-    )
+        "msg_err_chargement_habitudes" to "आदतें लोड करने में त्रुटि",
+        "msg_reset_habitudes" to "आदतें रीसेट — लागू करने के लिए सहेजें दबाएँ",
+        "msg_reset_dates" to "तिथियाँ रीसेट — लागू करने के लिए सहेजें दबाएँ",
+        "msg_err_reset" to "रीसेट के दौरान त्रुटि",
+        "msg_sauvegarde_habitudes_ok" to "आदतें सहेजी गईं",
+        "msg_sauvegarde_dates_ok" to "तिथियाँ सहेजी गईं",
+
+        "msg_err_generic" to "एक त्रुटि हुई"
+        )
 
     // ==================== 日本語 ====================
     private val TRADUCTIONS_JA = mapOf(
         "titre" to "習慣と意志力",
-        
+        "titre_habitudes" to "習慣",
+        "titre_volonte" to "意志",
+
         "label_cigarettes" to "タバコ",
         "label_joints" to "ジョイント",
         "label_alcool_global" to "アルコール（全体）",
@@ -381,7 +457,6 @@ object HabitudesLangues {
         "hint_max_liqueurs" to "1日の最大リキュール数",
         "hint_max_alcool_fort" to "1日の最大強いアルコール数",
         
-        "titre_volonte" to "意志力ゾーン - 目標日",
         "desc_volonte" to "カテゴリごとに3つの日付を設定：削減、停止、成功",
         
         "label_date_reduction" to "削減日",
@@ -392,7 +467,16 @@ object HabitudesLangues {
         "btn_selectionner_date" to "日付を選択",
         "btn_effacer" to "消去",
         
-        "msg_sauvegarde_ok" to "習慣と日付が保存されました"
+        "msg_err_chargement_habitudes" to "習慣の読み込みエラー",
+        
+        "msg_reset_habitudes" to "習慣をリセット — 適用するには保存をタップ",
+        "msg_reset_dates" to "日付をリセット — 適用するには保存をタップ",
+        "msg_err_reset" to "リセット中にエラー",
+        "msg_sauvegarde_habitudes_ok" to "習慣を保存しました",
+        "msg_sauvegarde_dates_ok" to "日付を保存しました",
+
+        "msg_err_generic" to "エラーが発生しました"
     )
 }
+
 
