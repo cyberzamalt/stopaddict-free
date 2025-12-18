@@ -67,7 +67,7 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
             android:layout_marginBottom="16dp"
-            android:visibility="gone">
+            android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,7 +75,8 @@
                 android:text="Personnalisation"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prenom"
@@ -83,25 +84,29 @@
                 android:layout_height="wrap_content"
                 android:hint="Prénom"
                 android:inputType="textPersonName"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp" 
+                    android:visibility="gone"/>
 
             <Spinner
                 android:id="@+id/reglages_spinner_langue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
 
             <Spinner
                 android:id="@+id/reglages_spinner_devise"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_sauvegarder_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sauvegarder profil"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Activer/Désactiver catégories -->
@@ -111,7 +116,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,49 +125,56 @@
                 android:text="Catégories actives"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_cigarettes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cigarettes"
-                android:checked="true" />
+                android:checked="true" 
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_joints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Joints"
-                android:checked="true" />
+                android:checked="true"
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_alcool_global"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Alcool global"
-                android:checked="true" />
+                android:checked="true" 
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_bieres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bières"
-                android:checked="true" />
+                android:checked="true"
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_liqueurs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Liqueurs"
-                android:checked="true" />
+                android:checked="true" 
+                    android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/reglages_check_alcool_fort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Alcool fort"
-                android:checked="true" />
+                android:checked="true"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Cigarettes -->
@@ -172,7 +185,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -180,13 +194,15 @@
                 android:text="Coûts Cigarettes"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
 
                 <RadioButton
                     android:id="@+id/reglages_radio_classiques"
@@ -194,21 +210,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Classiques"
-                    android:checked="true" />
+                    android:checked="true"
+                        android:visibility="gone"/>
 
                 <RadioButton
                     android:id="@+id/reglages_radio_rouler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="À rouler" />
+                    android:text="À rouler"
+                        android:visibility="gone"/>
 
                 <RadioButton
                     android:id="@+id/reglages_radio_tubeuse"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tubeuse" />
+                    android:text="Tubeuse"
+                        android:visibility="gone"/>
             </RadioGroup>
 
             <EditText
@@ -217,7 +236,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix paquet (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_nb_cigarettes"
@@ -225,7 +245,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre cigarettes/paquet"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_tabac"
@@ -233,7 +254,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix tabac (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp" 
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_feuilles"
@@ -241,7 +263,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix feuilles (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_nb_feuilles"
@@ -249,7 +272,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre feuilles/paquet"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_filtres"
@@ -257,7 +281,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix filtres (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_nb_filtres"
@@ -265,7 +290,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre filtres/paquet"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_tubes"
@@ -273,14 +299,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix tubes (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_nb_tubes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre tubes/boîte"
-                android:inputType="number" />
+                android:inputType="number"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Joints -->
@@ -291,7 +319,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -299,7 +328,8 @@
                 android:text="Coûts Joints"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_gramme"
@@ -307,14 +337,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix gramme (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_gramme_par_joint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Grammes par joint"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Alcool Global -->
@@ -325,7 +357,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -333,7 +366,8 @@
                 android:text="Coûts Alcool Global"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_verre_global"
@@ -341,14 +375,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix verre (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_unite_cl_global"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Unité (cl)"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Bières -->
@@ -359,7 +395,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -367,7 +404,8 @@
                 android:text="Coûts Bières"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_verre_biere"
@@ -375,14 +413,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix bière (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_unite_cl_biere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Unité (cl)"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Liqueurs -->
@@ -393,7 +433,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -401,7 +442,8 @@
                 android:text="Coûts Liqueurs"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_verre_liqueur"
@@ -409,14 +451,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix liqueur (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_unite_cl_liqueur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Unité (cl)"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Coûts Alcool Fort -->
@@ -427,7 +471,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -435,7 +480,8 @@
                 android:text="Coûts Alcool Fort"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_prix_verre_alcool_fort"
@@ -443,14 +489,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Prix verre (€)"
                 android:inputType="numberDecimal"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_unite_cl_alcool_fort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Unité (cl)"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Habitudes Max -->
@@ -460,7 +508,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -468,7 +517,8 @@
                 android:text="Habitudes (max par jour)"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_cigarettes"
@@ -476,7 +526,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Max cigarettes"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp" 
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_joints"
@@ -484,7 +535,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Max joints"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_alcool_global"
@@ -492,7 +544,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Max alcool global"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_bieres"
@@ -500,7 +553,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Max bières"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp" 
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_liqueurs"
@@ -508,14 +562,16 @@
                 android:layout_height="wrap_content"
                 android:hint="Max liqueurs"
                 android:inputType="number"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/reglages_edit_max_alcool_fort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Max alcool fort"
-                android:inputType="number" />
+                android:inputType="number"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Dates Arrêt Cigarettes -->
@@ -525,7 +581,8 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -533,27 +590,31 @@
                 android:text="Dates Cigarettes"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_date_reduction_cigarettes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date réduction"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp" 
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_date_arret_cigarettes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date arrêt"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_date_reussite_cigarettes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date réussite" />
+                android:text="Date réussite"
+                    android:visibility="gone"/>
         </LinearLayout>
 
         <!-- Zone Export/Import/RAZ -->
@@ -562,7 +623,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
-            android:padding="16dp">
+            android:padding="16dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -570,42 +632,48 @@
                 android:text="Gestion données"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_exporter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Exporter JSON"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_importer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Importer JSON"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_raz_jour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RAZ jour"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_raz_historique"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RAZ historique"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                    android:visibility="gone"/>
 
             <Button
                 android:id="@+id/reglages_btn_raz_usine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RAZ usine"
-                android:textColor="@android:color/holo_red_dark" />
+                android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"/>
         </LinearLayout>
 
     </LinearLayout>
