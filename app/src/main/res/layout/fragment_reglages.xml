@@ -677,4 +677,7 @@
         </LinearLayout>
 
     </LinearLayout>
+        </LinearLayout>  ← AJOUTE cette ligne (ferme le wrapper gone)
+
+    </LinearLayout>  ← Fin du parent principal
 </ScrollView>
