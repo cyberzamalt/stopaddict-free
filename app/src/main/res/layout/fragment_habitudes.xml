@@ -24,7 +24,6 @@
                 android:id="@+id/habitudes_profil_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profil complété à 0%"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:drawablePadding="8dp"
@@ -45,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="0 champs restants"
                 android:textSize="12sp"
                 android:paddingTop="6dp" />
 
@@ -57,7 +55,6 @@
             android:id="@+id/habitudes_txt_titre_habitudes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habitudes"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
@@ -76,7 +73,6 @@
                 android:id="@+id/habitudes_input_max_cigarettes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max cigarettes par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
@@ -86,7 +82,6 @@
                 android:id="@+id/habitudes_input_max_joints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max joints par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
@@ -96,7 +91,6 @@
                 android:id="@+id/habitudes_input_max_alcool_global"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max alcool global par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
@@ -106,7 +100,6 @@
                 android:id="@+id/habitudes_input_max_bieres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max bières par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
@@ -116,7 +109,6 @@
                 android:id="@+id/habitudes_input_max_liqueurs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max liqueurs par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
@@ -126,7 +118,6 @@
                 android:id="@+id/habitudes_input_max_alcool_fort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Max alcool fort par jour"
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="12dp" />
@@ -148,15 +139,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginEnd="8dp"
-        android:text="Effacer" />
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/habitudes_btn_sauvegarder_habitudes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Sauvegarder" />
+        android:layout_weight="1"/>
 </LinearLayout>
 
         <!-- Zone Volonté (construite dynamiquement dans le code) -->
@@ -164,7 +153,6 @@
             android:id="@+id/habitudes_txt_titre_volonte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volonté"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
@@ -192,15 +180,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginEnd="8dp"
-        android:text="Effacer" />
+        android:layout_marginEnd="8dp"/>
 
     <Button
         android:id="@+id/habitudes_btn_sauvegarder_dates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Sauvegarder" />
+        android:layout_weight="1"/>
 </LinearLayout>
         
     </LinearLayout>
