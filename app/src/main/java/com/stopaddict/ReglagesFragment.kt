@@ -109,7 +109,7 @@ class ReglagesFragment : Fragment() {
             trad = ReglagesLangues.getTraductions(configLangue.getLangue())
             
             bindUIFromXml(view)
-            //initializeUI(view) 
+            initializeUI(view) 
             loadData()
             
             Log.d(TAG, "ReglagesFragment créé")
@@ -129,51 +129,51 @@ class ReglagesFragment : Fragment() {
     txtProfilRestant = view.findViewById(R.id.reglages_txt_profil_restant)
 }
 
-   // private fun initializeUI(view: View) {
-     //   val container = view.findViewById<LinearLayout>(R.id.fragment_container)
-       // container.removeAllViews()
-        //container.orientation = LinearLayout.VERTICAL
+    private fun initializeUI(view: View) {
+        val container = view.findViewById<LinearLayout>(R.id.fragment_container)
+        container.removeAllViews()
+        container.orientation = LinearLayout.VERTICAL
         
         // ScrollView pour tout
-       // val scrollView = ScrollView(requireContext()).apply {
-          //  layoutParams = LinearLayout.LayoutParams(
-         //       ViewGroup.LayoutParams.MATCH_PARENT,
-              //  ViewGroup.LayoutParams.MATCH_PARENT
-            //)
-        //}
+        val scrollView = ScrollView(requireContext()).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        }
         
-        //val contentContainer = LinearLayout(requireContext()).apply {
-          //  orientation = LinearLayout.VERTICAL
-            //setPadding(0, 0, 0, 0)
-        //}
+        val contentContainer = LinearLayout(requireContext()).apply {
+             orientation = LinearLayout.VERTICAL
+            setPadding(0, 0, 0, 0)
+        }
         
-        // Header
-        //addHeader(view)
+        Header
+        addHeader(view)
         
         // Personnalisation
-        //addPersonnalisationSection(contentContainer)
+        addPersonnalisationSection(contentContainer)
         
         // Coûts
-        //addCoutsSection(contentContainer)
+        addCoutsSection(contentContainer)
         
         // À propos
-        //addAProposSection(contentContainer)
+        addAProposSection(contentContainer)
         
         // RAZ et Sauvegarde
-        //addRAZSection(contentContainer)
+        addRAZSection(contentContainer)
         
-       // scrollView.addView(contentContainer)
-        //container.addView(scrollView)
-    //}
+       scrollView.addView(contentContainer)
+        container.addView(scrollView)
+    }
     
-//    private fun addHeader(root: View) {
+    private fun addHeader(root: View) {
 
-    //txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
-    //profilProgress = root.findViewById(R.id.reglages_profil_progress)
-  //  txtProfilRestant = root.findViewById(R.id.reglages_txt_profil_restant)
-//
-  //  updateProfilStatus()
-//}
+    txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
+    profilProgress = root.findViewById(R.id.reglages_profil_progress)
+    txtProfilRestant = root.findViewById(R.id.reglages_txt_profil_restant)
+
+    updateProfilStatus()
+}
     
     private fun addPersonnalisationSection(container: LinearLayout) {
         addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
