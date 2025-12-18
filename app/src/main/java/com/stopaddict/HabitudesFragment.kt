@@ -20,7 +20,7 @@ class HabitudesFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
-    private lateinit var trad: Map<String, String>
+    private var trad: Map<String, String> = emptyMap()
     
     private lateinit var txtProfilStatus: TextView
     private lateinit var profilProgress: ProgressBar
@@ -82,7 +82,11 @@ class HabitudesFragment : Fragment() {
             Log.d(TAG, "HabitudesFragment initialisé avec succès")
         } catch (e: Exception) {
             Log.e(TAG, "Erreur initialisation: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur chargement Habitudes", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                trad["msg_err_chargement_habitudes"] ?: "Erreur chargement Habitudes",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -181,13 +185,17 @@ private fun setupListeners() {
 
             Toast.makeText(
                 requireContext(),
-                "Habitudes réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+                trad["msg_reset_habitudes"] ?: "Habitudes réinitialisées — Cliquez sur Sauvegarder pour appliquer",
                 Toast.LENGTH_LONG
             ).show()
 
         } catch (e: Exception) {
             Log.e(TAG, "Erreur RAZ habitudes: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur lors de la réinitialisation", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                trad["msg_err_reset"] ?: "Erreur lors de la réinitialisation",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -208,13 +216,17 @@ private fun setupListeners() {
 
             Toast.makeText(
                 requireContext(),
-                "Dates réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+                trad["msg_reset_dates"] ?: "Dates réinitialisées — Cliquez sur Sauvegarder pour appliquer",
                 Toast.LENGTH_LONG
             ).show()
 
         } catch (e: Exception) {
             Log.e(TAG, "Erreur RAZ dates: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur lors de la réinitialisation", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                trad["msg_err_reset"] ?: "Erreur lors de la réinitialisation",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
@@ -262,7 +274,7 @@ private fun setupListeners() {
         txtProfilStatus.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
         
         profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+        txtProfilRestant.visibility = View.VISIBLE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur update bandeau (progression)", e)
@@ -430,7 +442,11 @@ private fun setupListeners() {
             
         } catch (e: Exception) {
             Log.e(TAG, "Erreur affichage DatePicker: ${e.message}", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                trad["msg_err_generic"] ?: "Une erreur est survenue",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
     
@@ -469,7 +485,7 @@ private fun saveHabitudesOnly() {
 
         Toast.makeText(
             requireContext(),
-            trad["msg_sauvegarde_ok"] ?: "Habitudes sauvegardées",
+            trad["msg_sauvegarde_habitudes_ok"] ?: "Habitudes sauvegardées",
             Toast.LENGTH_SHORT
         ).show()
 
@@ -478,7 +494,11 @@ private fun saveHabitudesOnly() {
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur sauvegarde habitudes: ${e.message}", e)
-        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+                requireContext(),
+                trad["msg_err_generic"] ?: "Une erreur est survenue",
+                Toast.LENGTH_SHORT
+            ).show()
     }
 }
 
@@ -502,7 +522,7 @@ private fun saveDatesOnly() {
 
         Toast.makeText(
             requireContext(),
-            trad["msg_sauvegarde_ok"] ?: "Dates sauvegardées",
+            trad["msg_sauvegarde_dates_ok"] ?: "Dates sauvegardées",
             Toast.LENGTH_SHORT
         ).show()
 
@@ -511,7 +531,11 @@ private fun saveDatesOnly() {
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur sauvegarde dates: ${e.message}", e)
-        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            trad["msg_err_generic"] ?: "Une erreur est survenue",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
 
@@ -549,6 +573,7 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
 
