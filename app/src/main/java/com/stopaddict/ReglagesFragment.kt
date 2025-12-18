@@ -147,7 +147,7 @@ class ReglagesFragment : Fragment() {
             setPadding(0, 0, 0, 0)
         }
         
-        Header
+        //Header
         addHeader(view)
         
         // Personnalisation
