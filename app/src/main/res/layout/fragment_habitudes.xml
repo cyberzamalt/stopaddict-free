@@ -52,6 +52,16 @@
         </LinearLayout>
 
         <!-- Zone Habitudes -->
+
+        <TextView
+            android:id="@+id/habitudes_txt_titre_habitudes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Habitudes"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+        
         <LinearLayout
             android:id="@+id/habitudes_container_habitudes"
             android:layout_width="match_parent"
@@ -123,7 +133,42 @@
 
         </LinearLayout>
 
+        <!-- Boutons Habitudes (uniquement) -->
+<LinearLayout
+    android:id="@+id/habitudes_buttons_habitudes_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="end"
+    android:paddingTop="0dp"
+    android:paddingBottom="16dp">
+
+    <Button
+        android:id="@+id/habitudes_btn_effacer_habitudes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp"
+        android:text="Effacer" />
+
+    <Button
+        android:id="@+id/habitudes_btn_sauvegarder_habitudes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Sauvegarder" />
+</LinearLayout>
+
         <!-- Zone Volonté (construite dynamiquement dans le code) -->
+        <TextView
+            android:id="@+id/habitudes_txt_titre_volonte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volonté"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+        
         <LinearLayout
             android:id="@+id/habitudes_container_volonte"
             android:layout_width="match_parent"
@@ -132,31 +177,31 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp" />
 
-                <!-- Boutons en bas de page -->
-        <LinearLayout
-            android:id="@+id/habitudes_buttons_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp">
+        <!-- Boutons Dates (uniquement) -->
+<LinearLayout
+    android:id="@+id/habitudes_buttons_dates_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="end"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
 
-            <Button
-                android:id="@+id/habitudes_btn_effacer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="Effacer" />
+    <Button
+        android:id="@+id/habitudes_btn_effacer_dates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp"
+        android:text="Effacer" />
 
-            <Button
-                android:id="@+id/habitudes_btn_sauvegarder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sauvegarder" />
-        </LinearLayout>
+    <Button
+        android:id="@+id/habitudes_btn_sauvegarder_dates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Sauvegarder" />
+</LinearLayout>
         
     </LinearLayout>
 </ScrollView>
