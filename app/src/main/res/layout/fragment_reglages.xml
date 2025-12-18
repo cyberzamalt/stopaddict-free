@@ -66,8 +66,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -111,8 +110,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -173,8 +171,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -293,8 +290,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -328,8 +324,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -363,8 +358,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -465,8 +459,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -531,8 +524,7 @@
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
             android:padding="16dp"
-            android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+            android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -569,8 +561,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@android:drawable/dialog_holo_light_frame"
-            android:padding="16dp"
-                android:visibility="gone"/>
+            android:padding="16dp"/>
 
             <TextView
                 android:layout_width="match_parent"
