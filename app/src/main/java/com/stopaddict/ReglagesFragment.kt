@@ -148,7 +148,7 @@ class ReglagesFragment : Fragment() {
         }
         
         // Header
-        addHeader(view)
+        //addHeader(view)
         
         // Personnalisation
         addPersonnalisationSection(contentContainer)
@@ -166,14 +166,14 @@ class ReglagesFragment : Fragment() {
         container.addView(scrollView)
     }
     
-    private fun addHeader(root: View) {
+//    private fun addHeader(root: View) {
 
-    txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
-    profilProgress = root.findViewById(R.id.reglages_profil_progress)
-    txtProfilRestant = root.findViewById(R.id.reglages_txt_profil_restant)
-
-    updateProfilStatus()
-}
+    //txtProfilComplet = root.findViewById(R.id.reglages_txt_profil_complet)
+    //profilProgress = root.findViewById(R.id.reglages_profil_progress)
+  //  txtProfilRestant = root.findViewById(R.id.reglages_txt_profil_restant)
+//
+  //  updateProfilStatus()
+//}
     
     private fun addPersonnalisationSection(container: LinearLayout) {
         addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
