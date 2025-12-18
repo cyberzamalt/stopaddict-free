@@ -33,8 +33,15 @@ class HabitudesFragment : Fragment() {
     private lateinit var inputMaxBieres: EditText
     private lateinit var inputMaxLiqueurs: EditText    
     private lateinit var inputMaxAlcoolFort: EditText
+    private lateinit var txtTitreHabitudes: TextView
+    
+    private lateinit var txtTitreVolonte: TextView
+    
     private lateinit var btnSauvegarderHabitudes: Button
     private lateinit var btnEffacerHabitudes: Button
+    private lateinit var btnSauvegarderDates: Button
+    private lateinit var btnEffacerDates: Button
+    
     private lateinit var containerVolonte: LinearLayout
 
     // Map des boutons dates par catégorie
@@ -91,8 +98,16 @@ class HabitudesFragment : Fragment() {
             inputMaxBieres = view.findViewById(R.id.habitudes_input_max_bieres)
             inputMaxLiqueurs = view.findViewById(R.id.habitudes_input_max_liqueurs)
             inputMaxAlcoolFort = view.findViewById(R.id.habitudes_input_max_alcool_fort)
-            btnSauvegarderHabitudes = view.findViewById(R.id.habitudes_btn_sauvegarder)
-            btnEffacerHabitudes = view.findViewById(R.id.habitudes_btn_effacer)
+
+            txtTitreHabitudes = view.findViewById(R.id.habitudes_txt_titre_habitudes)
+            txtTitreVolonte = view.findViewById(R.id.habitudes_txt_titre_volonte)
+            
+            btnSauvegarderHabitudes = view.findViewById(R.id.habitudes_btn_sauvegarder_habitudes)
+            btnEffacerHabitudes = view.findViewById(R.id.habitudes_btn_effacer_habitudes)
+            
+            btnSauvegarderDates = view.findViewById(R.id.habitudes_btn_sauvegarder_dates)
+            btnEffacerDates = view.findViewById(R.id.habitudes_btn_effacer_dates)
+            
             containerVolonte = view.findViewById(R.id.habitudes_container_volonte)
             
             Log.d(TAG, "Vues initialisées avec succès")
@@ -122,6 +137,7 @@ class HabitudesFragment : Fragment() {
 
     private fun applyTranslations() {
         try {
+            trad = emptyMap()
             val langue = configLangue.getLangue()
             trad = HabitudesLangues.getTraductions(langue)
             
@@ -131,7 +147,14 @@ class HabitudesFragment : Fragment() {
             inputMaxBieres.hint = trad["hint_max_bieres"] ?: "Max bières par jour"
             inputMaxLiqueurs.hint = trad["hint_max_liqueurs"] ?: "Max liqueurs par jour"
             inputMaxAlcoolFort.hint = trad["hint_max_alcool_fort"] ?: "Max alcool fort par jour"
+            txtTitreHabitudes.text = trad["titre_habitudes"] ?: "Habitudes"
+            txtTitreVolonte.text = trad["titre_volonte"] ?: "Volonté"
+            
+            btnEffacerHabitudes.text = trad["btn_effacer"] ?: "Effacer"
             btnSauvegarderHabitudes.text = trad["btn_sauvegarder"] ?: "Sauvegarder"
+            
+            btnEffacerDates.text = trad["btn_effacer"] ?: "Effacer"
+            btnSauvegarderDates.text = trad["btn_sauvegarder"] ?: "Sauvegarder"
             
             Log.d(TAG, "Traductions appliquées pour langue: $langue")
         } catch (e: Exception) {
@@ -139,45 +162,59 @@ class HabitudesFragment : Fragment() {
         }
     }
 
-        private fun setupListeners() {
-        // Bouton Sauvegarder : inchangé
-        btnSauvegarderHabitudes.setOnClickListener {
-            saveHabitudesAndDates()
+private fun setupListeners() {
+
+    // Sauvegarder Habitudes uniquement
+    btnSauvegarderHabitudes.setOnClickListener {
+        saveHabitudesOnly()
+    }
+
+    // Effacer Habitudes (UI seulement)
+    btnEffacerHabitudes.setOnClickListener {
+        try {
+            inputMaxCigarettes.setText("")
+            inputMaxJoints.setText("")
+            inputMaxAlcoolGlobal.setText("")
+            inputMaxBieres.setText("")
+            inputMaxLiqueurs.setText("")
+            inputMaxAlcoolFort.setText("")
+
+            Toast.makeText(
+                requireContext(),
+                "Habitudes réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+                Toast.LENGTH_LONG
+            ).show()
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur RAZ habitudes: ${e.message}", e)
+            Toast.makeText(requireContext(), "Erreur lors de la réinitialisation", Toast.LENGTH_SHORT).show()
         }
+    }
 
-        // Nouveau : bouton Effacer
-        btnEffacerHabitudes.setOnClickListener {
-    try {
-        // 1) Vider les champs "Max par jour"
-        inputMaxCigarettes.setText("")
-        inputMaxJoints.setText("")
-        inputMaxAlcoolGlobal.setText("")
-        inputMaxBieres.setText("")
-        inputMaxLiqueurs.setText("")
-        inputMaxAlcoolFort.setText("")
+    // Sauvegarder Dates uniquement
+    btnSauvegarderDates.setOnClickListener {
+        saveDatesOnly()
+    }
 
-        // 2) Remettre les boutons de dates sur le texte par défaut
-        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
-        btnDatesMap.forEach { (_, datesButtons) ->
-            datesButtons.values.forEach { button ->
-                button.text = placeholder
+    // Effacer Dates (UI seulement)
+    btnEffacerDates.setOnClickListener {
+        try {
+            val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+            btnDatesMap.forEach { (_, datesButtons) ->
+                datesButtons.values.forEach { button ->
+                    button.text = placeholder
+                }
             }
-        }
 
-        // 3) NE PAS sauvegarder ici !
-        Toast.makeText(
-            requireContext(),
-            "Champs réinitialisés — Cliquez sur Sauvegarder pour appliquer",
-            Toast.LENGTH_LONG
-        ).show()
+            Toast.makeText(
+                requireContext(),
+                "Dates réinitialisées — Cliquez sur Sauvegarder pour appliquer",
+                Toast.LENGTH_LONG
+            ).show()
 
-    } catch (e: Exception) {
-        Log.e(TAG, "Erreur lors de la RAZ habitudes/dates: ${e.message}", e)
-        Toast.makeText(
-            requireContext(),
-            "Erreur lors de la réinitialisation",
-            Toast.LENGTH_SHORT
-        ).show()
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur RAZ dates: ${e.message}", e)
+            Toast.makeText(requireContext(), "Erreur lors de la réinitialisation", Toast.LENGTH_SHORT).show()
         }
     }
 }
@@ -237,15 +274,6 @@ class HabitudesFragment : Fragment() {
             containerVolonte.removeAllViews()
             
             val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
-            
-            // Titre section
-            val titreVolonte = TextView(requireContext()).apply {
-                text = trad["titre_volonte"] ?: "Zone Volonté - Dates Objectifs"
-                textSize = 18f
-                setTypeface(null, android.graphics.Typeface.BOLD)
-                setPadding(0, 0, 0, 16)
-            }
-            containerVolonte.addView(titreVolonte)
             
             // Description
             val description = TextView(requireContext()).apply {
@@ -375,7 +403,8 @@ class HabitudesFragment : Fragment() {
             
             // Si date existante, partir de là
             val currentText = button.text.toString()
-            if (currentText != trad["btn_selectionner_date"] ?: "Sélectionner une date") {
+            val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+                if (currentText != placeholder) {
                 try {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val date = dateFormat.parse(currentText)
@@ -417,14 +446,8 @@ class HabitudesFragment : Fragment() {
         }
     }
     
-    private fun saveHabitudesAndDates() {
+private fun saveHabitudesOnly() {
     try {
-        val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
-        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
-
-        // -----------------------------
-        // 1) Sauvegarde des habitudes
-        // -----------------------------
         fun safeInt(input: EditText): Int {
             val v = input.text.toString().trim()
             return v.toIntOrNull() ?: 0
@@ -444,37 +467,50 @@ class HabitudesFragment : Fragment() {
         dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, maxLiqueurs)
         dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, maxAlcoolFort)
 
-        // -----------------------------
-        // 2) Sauvegarde des dates
-        // -----------------------------
+        Toast.makeText(
+            requireContext(),
+            trad["msg_sauvegarde_ok"] ?: "Habitudes sauvegardées",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        updateBandeau()
+        (activity as? MainActivity)?.refreshData()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur sauvegarde habitudes: ${e.message}", e)
+        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+    }
+}
+
+private fun saveDatesOnly() {
+    try {
+        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+
         fun safeDate(btn: Button): String {
             val t = btn.text.toString().trim()
             return if (t.isNotEmpty() && t != placeholder) t else ""
         }
-        
+
         btnDatesMap.forEach { (type, datesButtons) ->
             val dReduction = datesButtons["reduction"]?.let { safeDate(it) } ?: ""
             val dArret = datesButtons["arret"]?.let { safeDate(it) } ?: ""
             val dReussite = datesButtons["reussite"]?.let { safeDate(it) } ?: ""
-        
-            dbHelper.setDatesObjectifs(type, dReduction, dArret, dReussite)
 
+            dbHelper.setDatesObjectifs(type, dReduction, dArret, dReussite)
             Log.d(TAG, "Dates sauvegardées pour $type : R=$dReduction A=$dArret S=$dReussite")
         }
 
         Toast.makeText(
             requireContext(),
-            trad["msg_sauvegarde_ok"] ?: "Habitudes et dates sauvegardées",
+            trad["msg_sauvegarde_ok"] ?: "Dates sauvegardées",
             Toast.LENGTH_SHORT
         ).show()
 
         updateBandeau()
-
-        // Notifier MainActivity pour refresh
         (activity as? MainActivity)?.refreshData()
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur sauvegarde: ${e.message}", e)
+        Log.e(TAG, "Erreur sauvegarde dates: ${e.message}", e)
         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
 }
@@ -513,6 +549,7 @@ class HabitudesFragment : Fragment() {
         }
     }
 }
+
 
 
 
