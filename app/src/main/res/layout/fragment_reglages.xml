@@ -65,7 +65,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:visibility="gone">
-        
+        <!--
+
         <!-- Zone Personnalisation -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -616,6 +617,7 @@
 
     </LinearLayout>
         </LinearLayout>  ← AJOUTE cette ligne (ferme le wrapper gone)
+-->
 
     </LinearLayout>  ← Fin du parent principal
 </ScrollView>
