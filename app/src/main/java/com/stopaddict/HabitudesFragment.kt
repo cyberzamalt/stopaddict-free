@@ -34,6 +34,14 @@ class HabitudesFragment : Fragment() {
     private lateinit var inputMaxLiqueurs: EditText    
     private lateinit var inputMaxAlcoolFort: EditText
     private lateinit var txtTitreHabitudes: TextView
+
+    // Périodes (Jour / Semaine / Mois) - 1 par catégorie
+    private lateinit var periodCigarettes: RadioGroup
+    private lateinit var periodJoints: RadioGroup
+    private lateinit var periodAlcoolGlobal: RadioGroup
+    private lateinit var periodBieres: RadioGroup
+    private lateinit var periodLiqueurs: RadioGroup
+    private lateinit var periodAlcoolFort: RadioGroup    
     
     private lateinit var txtTitreVolonte: TextView
     
@@ -102,6 +110,13 @@ class HabitudesFragment : Fragment() {
             inputMaxBieres = view.findViewById(R.id.habitudes_input_max_bieres)
             inputMaxLiqueurs = view.findViewById(R.id.habitudes_input_max_liqueurs)
             inputMaxAlcoolFort = view.findViewById(R.id.habitudes_input_max_alcool_fort)
+
+            periodCigarettes = view.findViewById(R.id.habitudes_period_cigarettes)
+            periodJoints = view.findViewById(R.id.habitudes_period_joints)
+            periodAlcoolGlobal = view.findViewById(R.id.habitudes_period_alcool_global)
+            periodBieres = view.findViewById(R.id.habitudes_period_bieres)
+            periodLiqueurs = view.findViewById(R.id.habitudes_period_liqueurs)
+            periodAlcoolFort = view.findViewById(R.id.habitudes_period_alcool_fort)
 
             txtTitreHabitudes = view.findViewById(R.id.habitudes_txt_titre_habitudes)
             txtTitreVolonte = view.findViewById(R.id.habitudes_txt_titre_volonte)
@@ -183,6 +198,13 @@ private fun setupListeners() {
             inputMaxLiqueurs.setText("")
             inputMaxAlcoolFort.setText("")
 
+            periodCigarettes.clearCheck()
+            periodJoints.clearCheck()
+            periodAlcoolGlobal.clearCheck()
+            periodBieres.clearCheck()
+            periodLiqueurs.clearCheck()
+            periodAlcoolFort.clearCheck()
+
             Toast.makeText(
                 requireContext(),
                 trad["msg_reset_habitudes"] ?: "Habitudes réinitialisées — Cliquez sur Sauvegarder pour appliquer",
@@ -232,29 +254,34 @@ private fun setupListeners() {
 }
         
     private fun loadExistingData() {
-        try {
-            // Charger habitudes
-            val maxCig = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_CIGARETTE)
-            val maxJoints = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_JOINT)
-            val maxAlcoolGlobal = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
-            val maxBieres = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_BIERE)
-            val maxLiqueurs = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_LIQUEUR)
-            val maxAlcoolFort = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT)
-            
-            if (maxCig > 0) inputMaxCigarettes.setText(maxCig.toString())
-            if (maxJoints > 0) inputMaxJoints.setText(maxJoints.toString())
-            if (maxAlcoolGlobal > 0) inputMaxAlcoolGlobal.setText(maxAlcoolGlobal.toString())
-            if (maxBieres > 0) inputMaxBieres.setText(maxBieres.toString())
-            if (maxLiqueurs > 0) inputMaxLiqueurs.setText(maxLiqueurs.toString())
-            if (maxAlcoolFort > 0) inputMaxAlcoolFort.setText(maxAlcoolFort.toString())
-            
-            updateBandeau()
-            
-            Log.d(TAG, "Données existantes chargées")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement données: ${e.message}", e)
-        }
+    try {
+        val maxCig = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_CIGARETTE)
+        val maxJoints = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_JOINT)
+        val maxAlcoolGlobal = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL)
+        val maxBieres = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_BIERE)
+        val maxLiqueurs = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_LIQUEUR)
+        val maxAlcoolFort = dbHelper.getMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT)
+
+        val cigTxt = formatDaily(maxCig)
+        val jointsTxt = formatDaily(maxJoints)
+        val alcoolGlobalTxt = formatDaily(maxAlcoolGlobal)
+        val bieresTxt = formatDaily(maxBieres)
+        val liqueursTxt = formatDaily(maxLiqueurs)
+        val alcoolFortTxt = formatDaily(maxAlcoolFort)
+
+        if (cigTxt.isNotEmpty()) inputMaxCigarettes.setText(cigTxt)
+        if (jointsTxt.isNotEmpty()) inputMaxJoints.setText(jointsTxt)
+        if (alcoolGlobalTxt.isNotEmpty()) inputMaxAlcoolGlobal.setText(alcoolGlobalTxt)
+        if (bieresTxt.isNotEmpty()) inputMaxBieres.setText(bieresTxt)
+        if (liqueursTxt.isNotEmpty()) inputMaxLiqueurs.setText(liqueursTxt)
+        if (alcoolFortTxt.isNotEmpty()) inputMaxAlcoolFort.setText(alcoolFortTxt)
+
+        updateBandeau()
+        Log.d(TAG, "Données existantes chargées")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur chargement données: ${e.message}", e)
     }
+}
 
     private fun updateBandeau() {
     try {
@@ -461,27 +488,96 @@ private fun setupListeners() {
             else -> type
         }
     }
+
+private fun safeDouble(input: EditText): Double {
+    val v = input.text.toString().trim()
+    return v.replace(',', '.').toDoubleOrNull() ?: 0.0
+}
+
+private fun periodDivisor(checkedId: Int, jourId: Int, semaineId: Int, moisId: Int): Double {
+    return when (checkedId) {
+        jourId -> 1.0
+        semaineId -> 7.0
+        moisId -> 30.0
+        else -> 1.0 // aucun choix = comportement historique = "jour"
+    }
+}
+
+private fun normalizeToDaily(value: Double, checkedId: Int, jourId: Int, semaineId: Int, moisId: Int): Double {
+    if (value <= 0.0) return 0.0
+    val d = periodDivisor(checkedId, jourId, semaineId, moisId)
+    return value / d
+}
+
+private fun formatDaily(v: Double): String {
+    if (v <= 0.0) return ""
+    val asInt = v.toInt()
+    return if (kotlin.math.abs(v - asInt.toDouble()) < 0.000001) asInt.toString() else String.format(Locale.US, "%.3f", v).trimEnd('0').trimEnd('.')
+}
     
 private fun saveHabitudesOnly() {
     try {
-        fun safeInt(input: EditText): Int {
-            val v = input.text.toString().trim()
-            return v.toIntOrNull() ?: 0
-        }
+        val cigRaw = safeDouble(inputMaxCigarettes)
+        val jointsRaw = safeDouble(inputMaxJoints)
+        val alcoolGlobalRaw = safeDouble(inputMaxAlcoolGlobal)
+        val bieresRaw = safeDouble(inputMaxBieres)
+        val liqueursRaw = safeDouble(inputMaxLiqueurs)
+        val alcoolFortRaw = safeDouble(inputMaxAlcoolFort)
 
-        val maxCig = safeInt(inputMaxCigarettes)
-        val maxJoints = safeInt(inputMaxJoints)
-        val maxAlcoolGlobal = safeInt(inputMaxAlcoolGlobal)
-        val maxBieres = safeInt(inputMaxBieres)
-        val maxLiqueurs = safeInt(inputMaxLiqueurs)
-        val maxAlcoolFort = safeInt(inputMaxAlcoolFort)
+        val cigDaily = normalizeToDaily(
+            cigRaw,
+            periodCigarettes.checkedRadioButtonId,
+            R.id.habitudes_cigarettes_jour,
+            R.id.habitudes_cigarettes_semaine,
+            R.id.habitudes_cigarettes_mois
+        )
 
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_CIGARETTE, maxCig)
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_JOINT, maxJoints)
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL, maxAlcoolGlobal)
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_BIERE, maxBieres)
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, maxLiqueurs)
-        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, maxAlcoolFort)
+        val jointsDaily = normalizeToDaily(
+            jointsRaw,
+            periodJoints.checkedRadioButtonId,
+            R.id.habitudes_joints_jour,
+            R.id.habitudes_joints_semaine,
+            R.id.habitudes_joints_mois
+        )
+
+        val alcoolGlobalDaily = normalizeToDaily(
+            alcoolGlobalRaw,
+            periodAlcoolGlobal.checkedRadioButtonId,
+            R.id.habitudes_alcool_global_jour,
+            R.id.habitudes_alcool_global_semaine,
+            R.id.habitudes_alcool_global_mois
+        )
+
+        val bieresDaily = normalizeToDaily(
+            bieresRaw,
+            periodBieres.checkedRadioButtonId,
+            R.id.habitudes_bieres_jour,
+            R.id.habitudes_bieres_semaine,
+            R.id.habitudes_bieres_mois
+        )
+
+        val liqueursDaily = normalizeToDaily(
+            liqueursRaw,
+            periodLiqueurs.checkedRadioButtonId,
+            R.id.habitudes_liqueurs_jour,
+            R.id.habitudes_liqueurs_semaine,
+            R.id.habitudes_liqueurs_mois
+        )
+
+        val alcoolFortDaily = normalizeToDaily(
+            alcoolFortRaw,
+            periodAlcoolFort.checkedRadioButtonId,
+            R.id.habitudes_alcool_fort_jour,
+            R.id.habitudes_alcool_fort_semaine,
+            R.id.habitudes_alcool_fort_mois
+        )
+
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_CIGARETTE, cigDaily)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_JOINT, jointsDaily)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_GLOBAL, alcoolGlobalDaily)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_BIERE, bieresDaily)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_LIQUEUR, liqueursDaily)
+        dbHelper.setMaxJournalier(DatabaseHelper.TYPE_ALCOOL_FORT, alcoolFortDaily)
 
         Toast.makeText(
             requireContext(),
@@ -495,10 +591,10 @@ private fun saveHabitudesOnly() {
     } catch (e: Exception) {
         Log.e(TAG, "Erreur sauvegarde habitudes: ${e.message}", e)
         Toast.makeText(
-                requireContext(),
-                trad["msg_err_generic"] ?: "Une erreur est survenue",
-                Toast.LENGTH_SHORT
-            ).show()
+            requireContext(),
+            trad["msg_err_generic"] ?: "Une erreur est survenue",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
 
@@ -573,6 +669,7 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
 
