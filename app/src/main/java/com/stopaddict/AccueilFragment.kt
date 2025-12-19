@@ -1107,52 +1107,17 @@ class AccueilFragment : Fragment() {
     return arrondi
 }
 
-    private fun calculerEconomiesReelles(): Double {
+ private fun calculerEconomiesReelles(): Double {
     var economies = 0.0
     try {
         categoriesActives.forEach { (type, active) ->
             if (active) {
-                val maxHabitude = dbHelper.getMaxJournalier(type)
-                val consommation = when (type) {
-                    DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
-                    DatabaseHelper.TYPE_JOINT -> jointsCount
-                    DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
-                    DatabaseHelper.TYPE_BIERE -> bieresCount
-                    DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
-                    DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
-                    else -> 0
-                }
-
-                val consoD = consommation.toDouble()
-
-                val msgHabitudes = when {
-                    consoD < maxHabitude ->
-                        trad["habitudes_moins"] ?: "Vous êtes en dessous de vos habitudes."
-                
-                    kotlin.math.abs(consoD - maxHabitude) < 0.000001 ->
-                        trad["habitudes_egal"] ?: "Vous êtes dans vos habitudes."
-                
-                    else ->
-                        trad["habitudes_plus"] ?: "Vous dépassez vos habitudes, attention!"
-                    }
-                }
-            }
-        }
-    } catch (e: Exception) {
-        Log.e(TAG, "Erreur calcul économies réelles: ${e.message}", e)
-    }
-    val arrondi = Math.round(economies * 100.0) / 100.0
-    Log.d(TAG, "calculerEconomiesReelles -> economies=$economies, arrondi=$arrondi")
-    return arrondi
-}
-
-    private fun comparerHabitudes(): String {
-    return try {
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val maxHabitude = dbHelper.getMaxJournalier(type)
+                val maxHabitude = dbHelper.getMaxJournalier(type) // Double (dans ton DBHelper)
                 if (maxHabitude > 0) {
-                    val consommation = when (type) {
+                    val couts = dbHelper.getCouts(type)
+                    val prixUnitaire = calculerPrixUnitaire(type, couts)
+
+                    val consommationInt = when (type) {
                         DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
                         DatabaseHelper.TYPE_JOINT -> jointsCount
                         DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
@@ -1162,11 +1127,50 @@ class AccueilFragment : Fragment() {
                         else -> 0
                     }
 
+                    val consoD = consommationInt.toDouble()
+
+                    // Economies "réelles" = différence vs habitudes (peut être négatif si tu dépasses)
+                    if (prixUnitaire > 0.0) {
+                        economies += (maxHabitude - consoD) * prixUnitaire
+                    }
+                }
+            }
+        }
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur calcul économies réelles: ${e.message}", e)
+    }
+
+    val arrondi = Math.round(economies * 100.0) / 100.0
+    Log.d(TAG, "calculerEconomiesReelles -> economies=$economies, arrondi=$arrondi")
+    return arrondi
+}
+
+    private fun comparerHabitudes(): String {
+    return try {
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val maxHabitude = dbHelper.getMaxJournalier(type) // Double
+                if (maxHabitude > 0) {
+
+                    val consommationInt = when (type) {
+                        DatabaseHelper.TYPE_CIGARETTE -> cigarettesCount
+                        DatabaseHelper.TYPE_JOINT -> jointsCount
+                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> alcoolGlobalCount
+                        DatabaseHelper.TYPE_BIERE -> bieresCount
+                        DatabaseHelper.TYPE_LIQUEUR -> liqueursCount
+                        DatabaseHelper.TYPE_ALCOOL_FORT -> alcoolFortCount
+                        else -> 0
+                    }
+
+                    val consoD = consommationInt.toDouble()
+
                     return when {
-                        consommation < maxHabitude ->
+                        consoD < maxHabitude ->
                             trad["habitudes_moins"] ?: "Vous consommez moins que d'habitude, bravo!"
-                        consommation == maxHabitude.toDouble() ->
+
+                        kotlin.math.abs(consoD - maxHabitude) < 0.000001 ->
                             trad["habitudes_egal"] ?: "Vous êtes dans vos habitudes."
+
                         else ->
                             trad["habitudes_plus"] ?: "Vous dépassez vos habitudes, attention!"
                     }
@@ -1179,6 +1183,7 @@ class AccueilFragment : Fragment() {
         trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
     }
 }
+
         private fun genererConseilDate(): String {
         return try {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
