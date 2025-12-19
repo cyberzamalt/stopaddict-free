@@ -1124,14 +1124,17 @@ class AccueilFragment : Fragment() {
                 }
 
                 val consoD = consommation.toDouble()
-                if (maxHabitude > consoD) {
-                    val diff = maxHabitude - consoD
-                    val couts = dbHelper.getCouts(type)
-                    val prixUnitaire = calculerPrixUnitaire(type, couts)
-                    if (prixUnitaire > 0.0 && diff > 0) {
-                        economies += prixUnitaire * diff
-                    }
 
+                val msgHabitudes = when {
+                    consoD < maxHabitude ->
+                        trad["habitudes_moins"] ?: "Vous êtes en dessous de vos habitudes."
+                
+                    kotlin.math.abs(consoD - maxHabitude) < 0.000001 ->
+                        trad["habitudes_egal"] ?: "Vous êtes dans vos habitudes."
+                
+                    else ->
+                        trad["habitudes_plus"] ?: "Vous dépassez vos habitudes, attention!"
+                    }
                 }
             }
         }
