@@ -140,9 +140,36 @@ class CalendrierFragment : Fragment() {
         legendeContainer.addView(legendeTitre)
         
         addLegendeItem(legendeContainer, Color.parseColor("#FFFFFF"), trad["legende_vert"] ?: "Aucune consommation")
-        addLegendeItem(legendeContainer, Color.parseColor("#E3F2FD"), trad["legende_orange"] ?: "Consommation modérée (1-5)")
-        addLegendeItem(legendeContainer, Color.parseColor("#FFF3E0"), trad["legende_orange"] ?: "Consommation modérée (6-15)")
+        addLegendeItem(legendeContainer, Color.parseColor("#E3F2FD"), trad["legende_bleu"] ?: "Faible consommation (1–5)")
+        addLegendeItem(legendeContainer, Color.parseColor("#FFF3E0"), trad["legende_orange"] ?: "Consommation modérée (6–15)")
         addLegendeItem(legendeContainer, Color.parseColor("#FFCDD2"), trad["legende_rouge"] ?: "Consommation élevée (16+)")
+
+        val legendeObjectifs = TextView(requireContext()).apply {
+                text = trad["legende_objectifs"] ?: "Objectifs :"
+                textSize = 14f
+                setTypeface(null, android.graphics.Typeface.BOLD)
+                setPadding(0, 15, 0, 5)
+            }
+            legendeContainer.addView(legendeObjectifs)
+            
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🐢 ${trad["legende_reduction"] ?: "Réduction"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🛑 ${trad["legende_arret"] ?: "Arrêt"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "✅ ${trad["legende_reussite"] ?: "Objectif atteint"}")
+
+        val legendeConso = TextView(requireContext()).apply {
+                text = trad["legende_conso"] ?: "Consommations :"
+                textSize = 14f
+                setTypeface(null, android.graphics.Typeface.BOLD)
+                setPadding(0, 15, 0, 5)
+            }
+            legendeContainer.addView(legendeConso)
+            
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🚬 ${trad["label_cigarettes"] ?: "Cigarettes"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🌿 ${trad["label_joints"] ?: "Joints"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🍺 ${trad["label_bieres"] ?: "Bières"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🍷 ${trad["label_liqueurs"] ?: "Liqueurs"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🥃 ${trad["label_alcool_fort"] ?: "Alcool fort"}")
+            addLegendeItem(legendeContainer, Color.TRANSPARENT, "🥃G ${trad["label_alcool_global"] ?: "Alcool global"}")
     
         container.addView(legendeContainer)
     }
@@ -295,17 +322,34 @@ class CalendrierFragment : Fragment() {
                     val isArret = datesArret.contains(dateStr)
                     val isReussite = datesReussite.contains(dateStr)
                 
-                    // Texte du jour avec petits indicateurs
-                    var label = day.toString()
-                    if (isReduction) label += " R"
-                    if (isArret) label += " A"
-                    if (isReussite) label += " ✓"
+                    // Ligne emojis objectifs
+                    val objectifsEmojis = StringBuilder()
+                    if (isReduction) objectifsEmojis.append(" 🐢")
+                    if (isArret) objectifsEmojis.append(" 🛑")
+                    if (isReussite) objectifsEmojis.append(" ✅")
+                    
+                    // Ligne emojis consommations
+                    val consoEmojis = StringBuilder()
+                    if (categoriesActives["cigarette"] == true && dbHelper.getConsommationParDate("cigarette", dateStr) > 0) consoEmojis.append(" 🚬")
+                    if (categoriesActives["joint"] == true && dbHelper.getConsommationParDate("joint", dateStr) > 0) consoEmojis.append(" 🌿")
+                    if (categoriesActives["alcool_global"] == true && dbHelper.getConsommationParDate("alcool_global", dateStr) > 0) consoEmojis.append(" 🥃G")
+                    if (categoriesActives["biere"] == true && dbHelper.getConsommationParDate("biere", dateStr) > 0) consoEmojis.append(" 🍺")
+                    if (categoriesActives["liqueur"] == true && dbHelper.getConsommationParDate("liqueur", dateStr) > 0) consoEmojis.append(" 🍷")
+                    if (categoriesActives["alcool_fort"] == true && dbHelper.getConsommationParDate("alcool_fort", dateStr) > 0) consoEmojis.append(" 🥃")
+                    
+                    // Texte final de la case (jour + emojis)
+                    val finalLabel = buildString {
+                        append(day)
+                        if (consoEmojis.isNotEmpty()) append("\n").append(consoEmojis.toString())
+                        if (objectifsEmojis.isNotEmpty()) append("\n").append(objectifsEmojis.toString())
+                    }                    
                 
                     val dayView = TextView(requireContext()).apply {
-                        text = label
-                        textSize = 16f
-                        setPadding(8, 20, 8, 20)
+                        text = finalLabel
+                        textSize = 14f
+                        setPadding(8, 12, 8, 12)
                         gravity = android.view.Gravity.CENTER
+                        setLines(3)
                 
                         // Couleurs SOBRES selon total
                         val bgColor = when {
@@ -373,7 +417,7 @@ class CalendrierFragment : Fragment() {
                     val currentCount = dbHelper.getConsommationParDate(type, dateStr)
                     
                     val typeLabel = TextView(requireContext()).apply {
-                        text = when (type) {
+                        val labelTexte = when (type) {
                             "cigarette" -> trad["label_cigarettes"] ?: "Cigarettes"
                             "joint" -> trad["label_joints"] ?: "Joints"
                             "alcool_global" -> trad["label_alcool_global"] ?: "Alcool global"
@@ -382,13 +426,44 @@ class CalendrierFragment : Fragment() {
                             "alcool_fort" -> trad["label_alcool_fort"] ?: "Alcool fort"
                             else -> type
                         }
-
+                    
+                        val emoji = when (type) {
+                            "cigarette" -> "🚬"
+                            "joint" -> "🌿"
+                            "alcool_global" -> "🥃G"
+                            "biere" -> "🍺"
+                            "liqueur" -> "🍷"
+                            "alcool_fort" -> "🥃"
+                            else -> "•"
+                        }
+                    
+                        text = "$emoji $labelTexte"
                         textSize = 14f
-                        setPadding(0, 10, 0, 5)
+                        setTypeface(null, android.graphics.Typeface.BOLD)
+                        setPadding(0, 14, 0, 6)
                     }
                     container.addView(typeLabel)
                     
                     val editText = EditText(requireContext()).apply {
+                            setText(currentCount.toString())
+                            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+                            hint = "0"
+                        
+                            // visuel + confort
+                            setPadding(24, 18, 24, 18)
+                            setBackgroundResource(android.R.drawable.edit_text)
+                            gravity = android.view.Gravity.CENTER
+                        
+                            layoutParams = LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                            ).apply {
+                                setMargins(0, 0, 0, 10)
+                            }
+                        }
+                        container.addView(editText)
+                        editFields[type] = editText
+
                         setText(currentCount.toString())
                         inputType = android.text.InputType.TYPE_CLASS_NUMBER
                         hint = "0"
