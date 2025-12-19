@@ -9,6 +9,10 @@
     <string name="tab_calendrier">Calendar</string>
     <string name="tab_habitudes">Habits</string>
     <string name="tab_reglages">Settings</string>
+
+    <string name="periode_jour">Jour</string>
+    <string name="periode_semaine">Semaine</string>
+    <string name="periode_mois">Mois</string>
     
     <!-- Avertissement majorité -->
     <string name="warning_title">Age Verification</string>
