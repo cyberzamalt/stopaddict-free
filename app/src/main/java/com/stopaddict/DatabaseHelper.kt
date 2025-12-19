@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_NAME = "StopAddict.db"
-        private const val DATABASE_VERSION = 3
+        private const val DATABASE_VERSION = 4
         private const val TAG = "DatabaseHelper"
 
         // Table consommations
@@ -99,7 +99,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 CREATE TABLE $TABLE_HABITUDES (
                     $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     $COL_TYPE TEXT NOT NULL UNIQUE,
-                    $COL_MAX_JOURNALIER INTEGER DEFAULT 0
+                    $COL_MAX_JOURNALIER REAL DEFAULT 0
                 )
             """)
 
@@ -372,37 +372,50 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     // ==================== HABITUDES ====================
 
-    fun setMaxJournalier(type: String, max: Int): Boolean {
-        return try {
-            val db = writableDatabase
-            val values = ContentValues().apply {
-                put(COL_MAX_JOURNALIER, max)
-            }
-            val result = db.update(TABLE_HABITUDES, values, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Max journalier mis à jour pour $type: $max")
-            result > 0
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur update max journalier: ${e.message}")
-            false
+    fun setMaxJournalier(type: String, max: Double): Boolean {
+    return try {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COL_MAX_JOURNALIER, max)
         }
+        val result = db.update(TABLE_HABITUDES, values, "$COL_TYPE = ?", arrayOf(type))
+        Log.d(TAG, "Max journalier mis à jour pour $type: $max")
+        result > 0
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur update max journalier: ${e.message}")
+        false
     }
+}
 
-    fun getMaxJournalier(type: String): Int {
-        return try {
-            val db = readableDatabase
-            val cursor = db.query(TABLE_HABITUDES, arrayOf(COL_MAX_JOURNALIER), "$COL_TYPE = ?", arrayOf(type), null, null, null)
-            
-            var max = 0
-            if (cursor.moveToFirst()) {
-                max = cursor.getInt(0)
-            }
-            cursor.close()
-            max
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture max journalier: ${e.message}")
-            0
+/** Compat anciens appels (ReglagesFragment, etc.) */
+fun setMaxJournalier(type: String, max: Int): Boolean {
+    return setMaxJournalier(type, max.toDouble())
+}
+
+    fun getMaxJournalier(type: String): Double {
+    return try {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_HABITUDES,
+            arrayOf(COL_MAX_JOURNALIER),
+            "$COL_TYPE = ?",
+            arrayOf(type),
+            null,
+            null,
+            null
+        )
+
+        var max = 0.0
+        if (cursor.moveToFirst()) {
+            max = cursor.getDouble(0)
         }
+        cursor.close()
+        max
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur lecture max journalier: ${e.message}")
+        0.0
     }
+}
 
     // ==================== DATES OBJECTIFS ====================
 
@@ -849,7 +862,7 @@ fun setDatesObjectifs(
                 val values = ContentValues()
                 if (obj.has(COL_MAX_JOURNALIER)) {
                     val maxStr = obj.optString(COL_MAX_JOURNALIER, "0")
-                    val max = maxStr.toIntOrNull() ?: 0
+                    val max = maxStr.replace(',', '.').toDoubleOrNull() ?: 0.0
                     values.put(COL_MAX_JOURNALIER, max)
                 }
 
