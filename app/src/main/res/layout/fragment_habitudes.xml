@@ -77,6 +77,27 @@
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
+            <RadioGroup
+            android:id="@+id/habitudes_period_cigarettes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+        
+            <RadioButton
+                android:id="@+id/habitudes_cigarettes_jour"
+                android:text="@string/periode_jour" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_cigarettes_semaine"
+                android:text="@string/periode_semaine" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_cigarettes_mois"
+                android:text="@string/periode_mois" />
+        </RadioGroup>
+
+
             <!-- Max Joints -->
             <EditText
                 android:id="@+id/habitudes_input_max_joints"
@@ -85,6 +106,27 @@
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
+
+                <RadioGroup
+                    android:id="@+id/habitudes_period_joints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="6dp">
+            
+                <RadioButton
+                    android:id="@+id/habitudes_joints_jour"
+                    android:text="@string/periode_jour" />
+            
+                <RadioButton
+                    android:id="@+id/habitudes_joints_semaine"
+                    android:text="@string/periode_semaine" />
+            
+                <RadioButton
+                    android:id="@+id/habitudes_joints_mois"
+                    android:text="@string/periode_mois" />
+            </RadioGroup>
+
 
             <!-- Max Alcool Global -->
             <EditText
@@ -95,6 +137,26 @@
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
+            <RadioGroup
+                android:id="@+id/habitudes_period_alcool_global"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_global_jour"
+                android:text="@string/periode_jour" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_global_semaine"
+                android:text="@string/periode_semaine" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_global_mois"
+                android:text="@string/periode_mois" />
+        </RadioGroup>
+
             <!-- Max Bières -->
             <EditText
                 android:id="@+id/habitudes_input_max_bieres"
@@ -103,6 +165,26 @@
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
+
+                <RadioGroup
+                    android:id="@+id/habitudes_period_bieres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="6dp">
+                
+                <RadioButton
+                    android:id="@+id/habitudes_bieres_jour"
+                    android:text="@string/periode_jour" />
+            
+                <RadioButton
+                    android:id="@+id/habitudes_bieres_semaine"
+                    android:text="@string/periode_semaine" />
+            
+                <RadioButton
+                    android:id="@+id/habitudes_bieres_mois"
+                    android:text="@string/periode_mois" />
+            </RadioGroup>
 
             <!-- Max Liqueurs -->
             <EditText
@@ -113,6 +195,27 @@
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
+            <RadioGroup
+                android:id="@+id/habitudes_period_liqueurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+        
+            <RadioButton
+                android:id="@+id/habitudes_liqueurs_jour"
+                android:text="@string/periode_jour" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_liqueurs_semaine"
+                android:text="@string/periode_semaine" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_liqueurs_mois"
+                android:text="@string/periode_mois" />
+        </RadioGroup>
+
+
             <!-- Max Alcool Fort -->
             <EditText
                 android:id="@+id/habitudes_input_max_alcool_fort"
@@ -121,6 +224,25 @@
                 android:inputType="number"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="12dp" />
+            <RadioGroup
+                android:id="@+id/habitudes_period_alcool_fort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_fort_jour"
+                android:text="@string/periode_jour" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_fort_semaine"
+                android:text="@string/periode_semaine" />
+        
+            <RadioButton
+                android:id="@+id/habitudes_alcool_fort_mois"
+                android:text="@string/periode_mois" />
+        </RadioGroup>
 
         </LinearLayout>
 
