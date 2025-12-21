@@ -416,73 +416,82 @@ class CalendrierFragment : Fragment() {
                 if (active) {
                     val currentCount = dbHelper.getConsommationParDate(type, dateStr)
                     
-                    val typeLabel = TextView(requireContext()).apply {
-                        val labelTexte = when (type) {
-                            "cigarette" -> trad["label_cigarettes"] ?: "Cigarettes"
-                            "joint" -> trad["label_joints"] ?: "Joints"
-                            "alcool_global" -> trad["label_alcool_global"] ?: "Alcool global"
-                            "biere" -> trad["label_bieres"] ?: "Bières"
-                            "liqueur" -> trad["label_liqueurs"] ?: "Liqueurs"
-                            "alcool_fort" -> trad["label_alcool_fort"] ?: "Alcool fort"
-                            else -> type
-                        }
-                    
-                        val emoji = when (type) {
-                            "cigarette" -> "🚬"
-                            "joint" -> "🌿"
-                            "alcool_global" -> "🥃G"
-                            "biere" -> "🍺"
-                            "liqueur" -> "🍷"
-                            "alcool_fort" -> "🥃"
-                            else -> "•"
-                        }
-                    
-                        text = "$emoji $labelTexte"
-                        textSize = 14f
-                        setTypeface(null, android.graphics.Typeface.BOLD)
-                        setPadding(0, 14, 0, 6)
-                    }
-                    container.addView(typeLabel)
-                    
-                    val editText = EditText(requireContext()).apply {
-                            setText(currentCount.toString())
-                            inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                            hint = "0"
-                        
-                            // visuel + confort
-                            setPadding(24, 18, 24, 18)
-                            setBackgroundResource(android.R.drawable.edit_text)
-                            gravity = android.view.Gravity.CENTER
-                        
-                            layoutParams = LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                            ).apply {
-                                setMargins(0, 0, 0, 10)
-                            }
-                        }
-                        container.addView(editText)
-                        editFields[type] = editText
+                    val labelTexte = when (type) {
+    "cigarette" -> trad["label_cigarettes"] ?: "Cigarettes"
+    "joint" -> trad["label_joints"] ?: "Joints"
+    "alcool_global" -> trad["label_alcool_global"] ?: "Alcool global"
+    "biere" -> trad["label_bieres"] ?: "Bières"
+    "liqueur" -> trad["label_liqueurs"] ?: "Liqueurs"
+    "alcool_fort" -> trad["label_alcool_fort"] ?: "Alcool fort"
+    else -> type
+}
 
-                        setText(currentCount.toString())
-                        inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                        hint = "0"
-                    }
-                    container.addView(editText)
-                    editFields[type] = editText
+val emoji = when (type) {
+    "cigarette" -> "🚬"
+    "joint" -> "🌿"
+    "alcool_global" -> "🥃G"
+    "biere" -> "🍺"
+    "liqueur" -> "🍷"
+    "alcool_fort" -> "🥃"
+    else -> "•"
+}
+
+val typeLabel = TextView(requireContext()).apply {
+    text = "$emoji $labelTexte"
+    textSize = 14f
+    setTypeface(null, android.graphics.Typeface.BOLD)
+    setPadding(0, 14, 0, 6)
+}
+container.addView(typeLabel)
+
+val editText = EditText(requireContext()).apply {
+    setText(currentCount.toString())
+    inputType = android.text.InputType.TYPE_CLASS_NUMBER
+    hint = "0"
+
+    // style proche screenshot
+    setPadding(24, 18, 24, 18)
+    setBackgroundResource(android.R.drawable.edit_text)
+    gravity = android.view.Gravity.CENTER
+    setSingleLine(true)
+
+    layoutParams = LinearLayout.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    ).apply {
+        setMargins(0, 0, 0, 12)
+    }
+}
+container.addView(editText)
+editFields[type] = editText
                 }
             }
             
             val scrollView = ScrollView(requireContext())
             scrollView.addView(container)
             
-            android.app.AlertDialog.Builder(requireContext())
-            .setView(scrollView)
-            .setPositiveButton(trad["btn_sauvegarder"] ?: "Enregistrer") { _, _ ->
-                saveConsommationsForDate(dateStr, editFields)
-            }
-            .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
-            .show()
+            val dialog = android.app.AlertDialog.Builder(requireContext())
+    .setView(scrollView)
+    .setPositiveButton(trad["btn_sauvegarder"] ?: "Enregistrer") { _, _ ->
+        saveConsommationsForDate(dateStr, editFields)
+    }
+    .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
+    .create()
+
+dialog.setOnShowListener {
+    val btnOk = dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
+    val btnCancel = dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)
+
+    // vert sauvegarder
+    btnOk.setBackgroundColor(Color.parseColor("#43A047"))
+    btnOk.setTextColor(Color.WHITE)
+
+    // gris annuler
+    btnCancel.setBackgroundColor(Color.parseColor("#E0E0E0"))
+    btnCancel.setTextColor(Color.parseColor("#212121"))
+}
+
+dialog.show()
 
                 
         } catch (e: Exception) {
