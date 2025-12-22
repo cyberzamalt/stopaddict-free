@@ -668,7 +668,4 @@ private fun saveDatesOnly() {
             Log.e(TAG, "Erreur onDestroyView: ${e.message}", e)
         }
     }
-}
-
-
-
+}
