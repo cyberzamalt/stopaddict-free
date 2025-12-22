@@ -69,19 +69,34 @@
             android:layout_marginBottom="16dp">
 
             <!-- Max Cigarettes -->
-            <EditText
-                android:id="@+id/habitudes_input_max_cigarettes"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="8dp" />
-
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="8dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🚬"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_cigarettes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
+            
             <RadioGroup
             android:id="@+id/habitudes_period_cigarettes"
             android:layout_width="wrap_content"
@@ -105,18 +120,33 @@ android:paddingBottom="10dp"
 
 
             <!-- Max Joints -->
-            <EditText
-                android:id="@+id/habitudes_input_max_joints"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="8dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🌿"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_joints"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
 
                 <RadioGroup
                     android:id="@+id/habitudes_period_joints"
@@ -141,18 +171,33 @@ android:paddingBottom="10dp"
 
 
             <!-- Max Alcool Global -->
-            <EditText
-                android:id="@+id/habitudes_input_max_alcool_global"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="8dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🥃"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_alcool_global"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/habitudes_period_alcool_global"
@@ -176,18 +221,33 @@ android:paddingBottom="10dp"
         </RadioGroup>
 
             <!-- Max Bières -->
-            <EditText
-                android:id="@+id/habitudes_input_max_bieres"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="8dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🍺"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_bieres"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
 
                 <RadioGroup
                     android:id="@+id/habitudes_period_bieres"
@@ -211,18 +271,33 @@ android:paddingBottom="10dp"
             </RadioGroup>
 
             <!-- Max Liqueurs -->
-            <EditText
-                android:id="@+id/habitudes_input_max_liqueurs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="8dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🍸"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_liqueurs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/habitudes_period_liqueurs"
@@ -247,18 +322,34 @@ android:paddingBottom="10dp"
 
 
             <!-- Max Alcool Fort -->
-            <EditText
-                android:id="@+id/habitudes_input_max_alcool_fort"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:inputType="number"
                 android:layout_height="48dp"
-android:background="@drawable/bg_input_white_blue"
-android:paddingLeft="14dp"
-android:paddingRight="14dp"
-android:paddingTop="10dp"
-android:paddingBottom="10dp"
-                android:imeOptions="actionNext"
-                android:layout_marginBottom="12dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_white_blue"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_marginBottom="12dp">
+            
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="🥃"
+                    android:textSize="18sp" />
+            
+                <EditText
+                    android:id="@+id/habitudes_input_max_alcool_fort"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
+                        
             <RadioGroup
                 android:id="@+id/habitudes_period_alcool_fort"
                 android:layout_width="wrap_content"
@@ -295,15 +386,24 @@ android:paddingBottom="10dp"
     <Button
         android:id="@+id/habitudes_btn_effacer_habitudes"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_weight="1"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:backgroundTint="#E53935"
+        android:elevation="2dp"/>
 
     <Button
         android:id="@+id/habitudes_btn_sauvegarder_habitudes"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:backgroundTint="#43A047"
+        android:elevation="2dp"/>
+
 </LinearLayout>
 
         <!-- Zone Volonté (construite dynamiquement dans le code) -->
