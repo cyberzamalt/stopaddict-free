@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@android:drawable/dialog_holo_light_frame">
+             android:background="@android:drawable/dialog_holo_light_frame">
 
             <TextView
                 android:id="@+id/habitudes_profil_status"
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="@drawable/bg_card_white_blue"
             android:padding="16dp"
             android:layout_marginBottom="16dp">
 
@@ -72,8 +72,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_cigarettes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
@@ -82,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
             android:layout_marginTop="6dp">
         
             <RadioButton
@@ -102,8 +108,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_joints"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
@@ -112,6 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginTop="6dp">
             
                 <RadioButton
@@ -132,8 +144,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_alcool_global"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
@@ -142,6 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="6dp">
         
             <RadioButton
@@ -161,8 +179,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_bieres"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
@@ -171,6 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginTop="6dp">
                 
                 <RadioButton
@@ -190,8 +214,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_liqueurs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="8dp" />
 
@@ -200,6 +229,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="6dp">
         
             <RadioButton
@@ -220,8 +250,13 @@
             <EditText
                 android:id="@+id/habitudes_input_max_alcool_fort"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
+                android:layout_height="48dp"
+android:background="@drawable/bg_input_white_blue"
+android:paddingLeft="14dp"
+android:paddingRight="14dp"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
                 android:imeOptions="actionNext"
                 android:layout_marginBottom="12dp" />
             <RadioGroup
@@ -229,6 +264,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="0dp"
                 android:layout_marginTop="6dp">
         
             <RadioButton
@@ -284,7 +320,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:background="@drawable/bg_card_white_blue"
             android:padding="16dp" />
 
         <!-- Boutons Dates (uniquement) -->
