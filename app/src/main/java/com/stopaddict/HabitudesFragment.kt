@@ -347,13 +347,13 @@ private fun setupListeners() {
             // Container catégorie
             val containerCategorie = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
-                setPadding(16, 16, 16, 16)
+                setPadding(dp(14), dp(12), dp(14), dp(12))
                 setBackgroundResource(R.drawable.bg_card_white_blue)
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                params.setMargins(0, 0, 0, 16)
+                params.setMargins(0, 0, 0, dp(12))
                 layoutParams = params
             }
             
@@ -372,7 +372,7 @@ private fun setupListeners() {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         dp(1)
                     ).apply {
-                        setMargins(0, 0, 0, dp(10))
+                        setMargins(0, 0, 0, dp(8))
                     }
                     setBackgroundColor(0x22000000) // gris très léger
                 }
@@ -425,14 +425,14 @@ private fun setupListeners() {
     private fun createDateButton(label: String, dateStr: String, type: String, dateType: String): LinearLayout {
         val container = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(0, dp(6), 0, dp(10))
+            setPadding(0, dp(4), 0, dp(8))
         }
         
         // Label
         val labelView = TextView(requireContext()).apply {
             text = label
             textSize = 14f
-            setPadding(0, 0, 0, 4)
+            setPadding(0, 0, 0, dp(4))
         }
         container.addView(labelView)
         
@@ -444,7 +444,7 @@ private fun setupListeners() {
                 dp(48)
             )
             setBackgroundResource(R.drawable.bg_button_date_white_blue)
-            setPadding(dp(14), dp(10), dp(14), dp(10))
+            setPadding(dp(14), dp(8), dp(14), dp(8))
             isAllCaps = false
             setOnClickListener {
                 showDatePicker(type, dateType, this)
@@ -695,6 +695,7 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
 
