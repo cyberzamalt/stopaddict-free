@@ -341,7 +341,7 @@ private fun setupListeners() {
             val containerCategorie = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(16, 16, 16, 16)
-                setBackgroundResource(android.R.drawable.dialog_holo_light_frame)
+                setBackgroundResource(R.drawable.bg_card_white_blue)
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -398,11 +398,15 @@ private fun setupListeners() {
             Log.e(TAG, "Erreur construction catégorie volonté $type: ${e.message}", e)
         }
     }
+
+    private fun dp(value: Int): Int {
+    return (value * resources.displayMetrics.density).toInt()
+}
     
     private fun createDateButton(label: String, dateStr: String, type: String, dateType: String): LinearLayout {
         val container = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(0, 8, 0, 8)
+            setPadding(0, dp(6), 0, dp(10))
         }
         
         // Label
@@ -418,8 +422,11 @@ private fun setupListeners() {
             text = if (dateStr.isEmpty()) trad["btn_selectionner_date"] ?: "Sélectionner une date" else dateStr
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                dp(48)
             )
+            setBackgroundResource(R.drawable.bg_button_date_white_blue)
+            setPadding(dp(14), dp(10), dp(14), dp(10))
+            isAllCaps = false
             setOnClickListener {
                 showDatePicker(type, dateType, this)
             }
@@ -668,4 +675,4 @@ private fun saveDatesOnly() {
             Log.e(TAG, "Erreur onDestroyView: ${e.message}", e)
         }
     }
-}
+}
