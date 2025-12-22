@@ -391,7 +391,7 @@
         android:layout_marginEnd="8dp"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
-        android:backgroundTint="#E53935"
+        android:background="@drawable/btn_red"
         android:elevation="2dp"/>
 
     <Button
@@ -401,7 +401,7 @@
         android:layout_weight="1"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
-        android:backgroundTint="#43A047"
+        android:background="@drawable/btn_green"
         android:elevation="2dp"/>
 
 </LinearLayout>
@@ -441,7 +441,7 @@
     android:layout_marginEnd="8dp"
     android:textColor="@android:color/white"
     android:textAllCaps="false"
-    android:backgroundTint="#E53935"
+    android:background="@drawable/btn_red"
     android:elevation="2dp"/>
 
 <Button
@@ -451,7 +451,7 @@
     android:layout_weight="1"
     android:textColor="@android:color/white"
     android:textAllCaps="false"
-    android:backgroundTint="#43A047"
+    android:background="@drawable/btn_green"
     android:elevation="2dp"/>
 
 </LinearLayout>
