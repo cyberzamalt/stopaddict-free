@@ -357,15 +357,27 @@ private fun setupListeners() {
                 layoutParams = params
             }
             
-            // Titre catégorie
-            val titreCategorie = TextView(requireContext()).apply {
-                text = getNomCategorie(type, trad)
-                textSize = 16f
-                setTypeface(null, android.graphics.Typeface.BOLD)
-                setPadding(0, 0, 0, 12)
-            }
-            containerCategorie.addView(titreCategorie)
-            
+                // Titre catégorie
+                val titreCategorie = TextView(requireContext()).apply {
+                    text = getNomCategorie(type, trad)
+                    textSize = 16f
+                    setTypeface(null, android.graphics.Typeface.BOLD)
+                    setPadding(0, 0, 0, dp(8))
+                }
+                containerCategorie.addView(titreCategorie)
+                
+                // Séparateur (ligne fine)
+                val separator = View(requireContext()).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        dp(1)
+                    ).apply {
+                        setMargins(0, 0, 0, dp(10))
+                    }
+                    setBackgroundColor(0x22000000) // gris très léger
+                }
+                containerCategorie.addView(separator)
+                            
             // Charger dates existantes
                 val dates = dbHelper.getDatesObjectifs(type)
                 
@@ -683,6 +695,7 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
 
