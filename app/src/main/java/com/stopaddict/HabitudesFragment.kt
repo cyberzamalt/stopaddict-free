@@ -314,14 +314,21 @@ private fun setupListeners() {
             
             val trad = HabitudesLangues.getTraductions(configLangue.getLangue())
             
-            // Description
-            val description = TextView(requireContext()).apply {
-                text = trad["desc_volonte"] ?: "Définissez 3 dates par catégorie : Réduction, Arrêt, Réussite"
-                textSize = 14f
-                setPadding(0, 0, 0, 20)
-            }
-            containerVolonte.addView(description)
-            
+            // Description (encart)
+                val description = TextView(requireContext()).apply {
+                    text = trad["desc_volonte"] ?: "Définissez 3 dates par catégorie : Réduction, Arrêt, Réussite"
+                    textSize = 14f
+                    setBackgroundResource(R.drawable.bg_info_white_blue)
+                    setPadding(dp(14), dp(12), dp(14), dp(12))
+                    val params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    params.setMargins(0, 0, 0, dp(16))
+                    layoutParams = params
+                }
+                containerVolonte.addView(description)
+
             // Pour chaque catégorie active, créer section dates
             categoriesActives.forEach { (type, active) ->
                 if (active) {
@@ -676,4 +683,5 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
