@@ -181,18 +181,30 @@ class ReglagesFragment : Fragment() {
 
     fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
-    fun roundedBg(colorInt: Int, radiusDp: Int): android.graphics.drawable.GradientDrawable {
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
         return android.graphics.drawable.GradientDrawable().apply {
             shape = android.graphics.drawable.GradientDrawable.RECTANGLE
             cornerRadius = dp(radiusDp).toFloat()
-            setColor(colorInt)
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
         }
     }
 
-    fun applyWhiteFieldStyle(view: View) {
-        // Fond blanc + coins arrondis + padding + marge verticale
-        view.background = roundedBg(Color.WHITE, 10)
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        // Fond blanc + coins arrondis + liseré bleu + padding + marge verticale
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
         view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
         val lp = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -202,23 +214,23 @@ class ReglagesFragment : Fragment() {
         view.layoutParams = lp
     }
 
-    // Prénom
-    addLabel(container, trad["label_prenom"] ?: "Prénom")
+    // Prénom (avec emoji dans le label)
+    addLabel(container, "✏️ " + (trad["label_prenom"] ?: "Prénom"))
     editPrenom = EditText(requireContext()).apply {
         hint = trad["hint_prenom"] ?: "Entrer votre prénom"
         inputType = InputType.TYPE_CLASS_TEXT
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
+        // évite les tints Material qui donnent parfois une sensation “bleutée”
+        backgroundTintList = null
     }
-    applyWhiteFieldStyle(editPrenom)
+    applyWhiteFieldStyleWithBlueStroke(editPrenom)
     container.addView(editPrenom)
 
-    // Langue
-    addLabel(container, trad["label_langue"] ?: "Langue")
+    // Langue (avec emoji dans le label)
+    addLabel(container, "🌐 " + (trad["label_langue"] ?: "Langue"))
     spinnerLangue = Spinner(requireContext()).apply {
-        // Evite le "fond bleu" par défaut (tint/thème)
         backgroundTintList = null
-        background = roundedBg(Color.WHITE, 10)
     }
     val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
     spinnerLangue.adapter = ArrayAdapter(
@@ -228,14 +240,13 @@ class ReglagesFragment : Fragment() {
     ).apply {
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     }
-    applyWhiteFieldStyle(spinnerLangue)
+    applyWhiteFieldStyleWithBlueStroke(spinnerLangue)
     container.addView(spinnerLangue)
 
-    // Devise
-    addLabel(container, trad["label_devise"] ?: "Devise")
+    // Devise (avec emoji dans le label)
+    addLabel(container, "💰 " + (trad["label_devise"] ?: "Devise"))
     spinnerDevise = Spinner(requireContext()).apply {
         backgroundTintList = null
-        background = roundedBg(Color.WHITE, 10)
     }
     val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
     spinnerDevise.adapter = ArrayAdapter(
@@ -245,19 +256,22 @@ class ReglagesFragment : Fragment() {
     ).apply {
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     }
-    applyWhiteFieldStyle(spinnerDevise)
+    applyWhiteFieldStyleWithBlueStroke(spinnerDevise)
     container.addView(spinnerDevise)
 
-    // Bouton sauvegarder personnalisation (style proche de RAZ : gris clair arrondi + texte bleu)
+    // Bouton sauvegarder profil : emoji + texte (pas d'icône Android noir/blanc)
     val btnSavePerso = Button(requireContext()).apply {
-        text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder"
+        text = "💾 " + (trad["btn_sauvegarder_profil"] ?: "Sauvegarder")
         isAllCaps = false
         textSize = 13f
         setTextColor(Color.parseColor("#1976D2"))
-        setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_save, 0, 0, 0)
-        compoundDrawablePadding = dp(8)
         setPadding(dp(14), dp(12), dp(14), dp(12))
-        background = roundedBg(Color.parseColor("#F2F2F2"), 10)
+
+        background = android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(10).toFloat()
+            setColor(Color.parseColor("#F2F2F2"))
+        }
 
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -847,6 +861,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 }
     
+    
     private fun addRAZSection(container: LinearLayout) {
 
     fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
@@ -859,13 +874,11 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         }
     }
 
-    fun styleRazButton(btn: Button, iconRes: Int) {
+    fun styleRazButton(btn: Button) {
         btn.background = roundedBg(Color.parseColor("#F2F2F2"), 10)
         btn.setTextColor(Color.parseColor("#1976D2"))
         btn.isAllCaps = false
         btn.textSize = 13f
-        btn.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
-        btn.compoundDrawablePadding = dp(8)
         btn.setPadding(dp(14), dp(12), dp(14), dp(12))
         btn.minHeight = dp(44)
     }
@@ -903,7 +916,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     val btnRAZJour = Button(requireContext()).apply {
-        text = trad["btn_raz_jour"] ?: "RAZ du jour"
+        text = "🗑️ " + (trad["btn_raz_jour"] ?: "RAZ du jour")
         layoutParams = LinearLayout.LayoutParams(
             0,
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -911,13 +924,13 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         ).apply {
             setMargins(0, 0, dp(8), 0)
         }
-        styleRazButton(this, android.R.drawable.ic_menu_delete)
+        styleRazButton(this)
         // ✅ On utilise la fonction déjà présente showRAZConfirmation("jour")
         setOnClickListener { showRAZConfirmation("jour") }
     }
 
     val btnRAZHistorique = Button(requireContext()).apply {
-        text = trad["btn_raz_historique"] ?: "RAZ historique"
+        text = "🧹 " + (trad["btn_raz_historique"] ?: "RAZ historique")
         layoutParams = LinearLayout.LayoutParams(
             0,
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -925,19 +938,19 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         ).apply {
             setMargins(0, 0, dp(8), 0)
         }
-        styleRazButton(this, android.R.drawable.ic_menu_delete)
+        styleRazButton(this)
         // ✅ Confirmation RAZ historique
         setOnClickListener { showRAZConfirmation("historique") }
     }
 
     val btnRAZUsine = Button(requireContext()).apply {
-        text = trad["btn_raz_usine"] ?: "RAZ d'usine"
+        text = "⚠️ " + (trad["btn_raz_usine"] ?: "RAZ d'usine")
         layoutParams = LinearLayout.LayoutParams(
             0,
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         )
-        styleRazButton(this, android.R.drawable.ic_dialog_alert)
+        styleRazButton(this)
         // ✅ Confirmation RAZ usine
         setOnClickListener { showRAZConfirmation("usine") }
     }
@@ -966,7 +979,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     }
 
     val btnExporter = Button(requireContext()).apply {
-        text = trad["btn_exporter"] ?: "Exporter"
+        text = "📤 " + (trad["btn_exporter"] ?: "Exporter")
         layoutParams = LinearLayout.LayoutParams(
             0,
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -974,19 +987,19 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
         ).apply {
             setMargins(0, 0, dp(8), 0)
         }
-        styleRazButton(this, android.R.drawable.ic_menu_upload)
+        styleRazButton(this)
         // ✅ Utilise la fonction exportData() déjà définie plus bas
         setOnClickListener { exportData() }
     }
 
     val btnImporter = Button(requireContext()).apply {
-        text = trad["btn_importer"] ?: "Importer"
+        text = "📥 " + (trad["btn_importer"] ?: "Importer")
         layoutParams = LinearLayout.LayoutParams(
             0,
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         )
-        styleRazButton(this, android.R.drawable.ic_menu_save)
+        styleRazButton(this)
         // ✅ Utilise importData() déjà définie plus bas
         setOnClickListener { importData() }
     }
@@ -1005,12 +1018,12 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 
     // Bouton "Exporter les logs" -> pleine largeur
     val btnExportLogs = Button(requireContext()).apply {
-        text = trad["btn_export_logs"] ?: "Exporter les logs"
+        text = "🧾 " + (trad["btn_export_logs"] ?: "Exporter les logs")
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        styleRazButton(this, android.R.drawable.ic_menu_edit)
+        styleRazButton(this)
 
         setOnClickListener {
             (activity as? MainActivity)?.exportAllLogsFromSettings()
