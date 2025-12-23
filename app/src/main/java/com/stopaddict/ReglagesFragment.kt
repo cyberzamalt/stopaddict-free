@@ -196,7 +196,6 @@ class ReglagesFragment : Fragment() {
     }
 
     fun applyWhiteFieldStyleWithBlueStroke(view: View) {
-        // Fond blanc + coins arrondis + liseré bleu + padding + marge verticale
         view.background = roundedStrokeBg(
             fillColorInt = Color.WHITE,
             strokeColorInt = Color.parseColor("#1976D2"),
@@ -214,52 +213,86 @@ class ReglagesFragment : Fragment() {
         view.layoutParams = lp
     }
 
-    // Prénom (avec emoji dans le label)
+    // Prénom
     addLabel(container, "✏️ " + (trad["label_prenom"] ?: "Prénom"))
     editPrenom = EditText(requireContext()).apply {
         hint = trad["hint_prenom"] ?: "Entrer votre prénom"
         inputType = InputType.TYPE_CLASS_TEXT
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
-        // évite les tints Material qui donnent parfois une sensation “bleutée”
         backgroundTintList = null
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
     }
     applyWhiteFieldStyleWithBlueStroke(editPrenom)
     container.addView(editPrenom)
 
-    // Langue (avec emoji dans le label)
+    // Langue
     addLabel(container, "🌐 " + (trad["label_langue"] ?: "Langue"))
-    spinnerLangue = Spinner(requireContext()).apply {
-        backgroundTintList = null
-    }
+    spinnerLangue = Spinner(requireContext()).apply { backgroundTintList = null }
+
     val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
-    spinnerLangue.adapter = ArrayAdapter(
+    val adapterLangues = object : ArrayAdapter<String>(
         requireContext(),
         android.R.layout.simple_spinner_item,
         langues
-    ).apply {
+    ) {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val v = super.getView(position, convertView, parent)
+            (v.findViewById(android.R.id.text1) as TextView).apply {
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
+            }
+            return v
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val v = super.getDropDownView(position, convertView, parent)
+            (v.findViewById(android.R.id.text1) as TextView).apply {
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
+            }
+            return v
+        }
+    }.apply {
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     }
+    spinnerLangue.adapter = adapterLangues
+
     applyWhiteFieldStyleWithBlueStroke(spinnerLangue)
     container.addView(spinnerLangue)
 
-    // Devise (avec emoji dans le label)
+    // Devise
     addLabel(container, "💰 " + (trad["label_devise"] ?: "Devise"))
-    spinnerDevise = Spinner(requireContext()).apply {
-        backgroundTintList = null
-    }
+    spinnerDevise = Spinner(requireContext()).apply { backgroundTintList = null }
+
     val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
-    spinnerDevise.adapter = ArrayAdapter(
+    val adapterDevises = object : ArrayAdapter<String>(
         requireContext(),
         android.R.layout.simple_spinner_item,
         devises
-    ).apply {
+    ) {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val v = super.getView(position, convertView, parent)
+            (v.findViewById(android.R.id.text1) as TextView).apply {
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
+            }
+            return v
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val v = super.getDropDownView(position, convertView, parent)
+            (v.findViewById(android.R.id.text1) as TextView).apply {
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
+            }
+            return v
+        }
+    }.apply {
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     }
+    spinnerDevise.adapter = adapterDevises
+
     applyWhiteFieldStyleWithBlueStroke(spinnerDevise)
     container.addView(spinnerDevise)
 
-    // Bouton sauvegarder profil : emoji + texte (pas d'icône Android noir/blanc)
+    // Bouton sauvegarder profil
     val btnSavePerso = Button(requireContext()).apply {
         text = "💾 " + (trad["btn_sauvegarder_profil"] ?: "Sauvegarder")
         isAllCaps = false
@@ -632,6 +665,7 @@ class ReglagesFragment : Fragment() {
         inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
         backgroundTintList = null
     }
     applyWhiteFieldStyleWithBlueStroke(editGrammeParJoint)
@@ -725,6 +759,7 @@ class ReglagesFragment : Fragment() {
         inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
         backgroundTintList = null
     }
     applyWhiteFieldStyleWithBlueStroke(editUniteCLGlobal)
@@ -799,6 +834,7 @@ class ReglagesFragment : Fragment() {
         inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
         backgroundTintList = null
     }
     applyWhiteFieldStyleWithBlueStroke(editUniteCLBiere)
@@ -871,6 +907,7 @@ class ReglagesFragment : Fragment() {
         inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
         backgroundTintList = null
     }
     applyWhiteFieldStyleWithBlueStroke(editUniteCLLiqueur)
@@ -944,6 +981,7 @@ class ReglagesFragment : Fragment() {
         setTextColor(Color.BLACK)
         setHintTextColor(Color.parseColor("#9E9E9E"))
         backgroundTintList = null
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
     }
     applyWhiteFieldStyleWithBlueStroke(editUniteCLAlcoolFort)
     alcoolFortCard.addView(editUniteCLAlcoolFort)
@@ -2057,6 +2095,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         // Action principale du clavier = Suivant (Next)
         imeOptions = EditorInfo.IME_ACTION_NEXT
         // Une seule ligne pour éviter les retours à la ligne
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
         setSingleLine(true)
         setPadding(20, 20, 20, 20)
     }
@@ -2064,14 +2103,15 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
     private fun createNumberEditText(): EditText {
     return EditText(requireContext()).apply {
         hint = "0"
-        // Clavier numérique entier
         inputType = InputType.TYPE_CLASS_NUMBER
-        // Action principale du clavier = Suivant (Next)
         imeOptions = EditorInfo.IME_ACTION_NEXT
         setSingleLine(true)
         setPadding(20, 20, 20, 20)
+        // 👇 taille du texte
+        setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
     }
 }
+    
     private fun addLinkButton(container: LinearLayout, text: String, onClick: () -> Unit) {
         val button = Button(requireContext()).apply {
             this.text = text
