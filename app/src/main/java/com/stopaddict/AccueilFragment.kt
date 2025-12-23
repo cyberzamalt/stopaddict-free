@@ -610,7 +610,7 @@ class AccueilFragment : Fragment() {
         txtProfilComplet.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
 
         profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+        txtProfilRestant.visibility = View.INVISIBLE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur mise à jour profil (progression): ${e.message}")
