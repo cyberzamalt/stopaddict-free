@@ -35,6 +35,11 @@ class HabitudesFragment : Fragment() {
     private lateinit var inputMaxAlcoolFort: EditText
     private lateinit var txtTitreHabitudes: TextView
 
+    private lateinit var blockAlcoolGlobal: LinearLayout
+    private lateinit var blockBieres: LinearLayout
+    private lateinit var blockLiqueurs: LinearLayout
+    private lateinit var blockAlcoolFort: LinearLayout
+
     // Périodes (Jour / Semaine / Mois) - 1 par catégorie
     private lateinit var periodCigarettes: RadioGroup
     private lateinit var periodJoints: RadioGroup
@@ -82,6 +87,7 @@ class HabitudesFragment : Fragment() {
             
             initializeViews(view)
             loadCategoriesActives()
+            applyAlcoholVisibility()
             applyTranslations()
             setupListeners()
             loadExistingData()
@@ -117,6 +123,11 @@ class HabitudesFragment : Fragment() {
             periodBieres = view.findViewById(R.id.habitudes_period_bieres)
             periodLiqueurs = view.findViewById(R.id.habitudes_period_liqueurs)
             periodAlcoolFort = view.findViewById(R.id.habitudes_period_alcool_fort)
+
+            blockAlcoolGlobal = view.findViewById(R.id.habitudes_block_alcool_global)
+            blockBieres = view.findViewById(R.id.habitudes_block_bieres)
+            blockLiqueurs = view.findViewById(R.id.habitudes_block_liqueurs)
+            blockAlcoolFort = view.findViewById(R.id.habitudes_block_alcool_fort)
 
             txtTitreHabitudes = view.findViewById(R.id.habitudes_txt_titre_habitudes)
             txtTitreVolonte = view.findViewById(R.id.habitudes_txt_titre_volonte)
@@ -180,6 +191,25 @@ class HabitudesFragment : Fragment() {
             Log.e(TAG, "Erreur application traductions: ${e.message}", e)
         }
     }
+
+private fun applyAlcoholVisibility() {
+    val alcoolGlobalOn = categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true
+    val bieresOn = categoriesActives[DatabaseHelper.TYPE_BIERE] == true
+    val liqueurOn = categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true
+    val fortOn = categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true
+
+    if (alcoolGlobalOn) {
+        blockAlcoolGlobal.visibility = View.VISIBLE
+        blockBieres.visibility = View.GONE
+        blockLiqueurs.visibility = View.GONE
+        blockAlcoolFort.visibility = View.GONE
+    } else {
+        blockAlcoolGlobal.visibility = View.GONE
+        blockBieres.visibility = if (bieresOn) View.VISIBLE else View.GONE
+        blockLiqueurs.visibility = if (liqueurOn) View.VISIBLE else View.GONE
+        blockAlcoolFort.visibility = if (fortOn) View.VISIBLE else View.GONE
+    }
+}
 
 private fun setupListeners() {
 
@@ -709,26 +739,28 @@ private fun saveDatesOnly() {
 }
 
     fun refreshData() {
-        try {
-            loadCategoriesActives()
-            loadExistingData()
-            buildVolonteSection()
-            Log.d(TAG, "Données rafraîchies")
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur refresh data: ${e.message}", e)
-        }
+    try {
+        loadCategoriesActives()
+        applyAlcoholVisibility()   // 👈 AJOUTE CETTE LIGNE
+        loadExistingData()
+        buildVolonteSection()
+        Log.d(TAG, "Données rafraîchies")
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur refresh data: ${e.message}", e)
     }
+}
 
     override fun onResume() {
-        super.onResume()
-        try {
-            loadCategoriesActives()
-            loadExistingData()
-            buildVolonteSection()
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur onResume: ${e.message}", e)
-        }
+    super.onResume()
+    try {
+        loadCategoriesActives()
+        applyAlcoholVisibility()   // 👈 AJOUTE CETTE LIGNE
+        loadExistingData()
+        buildVolonteSection()
+    } catch (e: Exception) {
+        Log.e(TAG, "Erreur onResume: ${e.message}", e)
     }
+}
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -742,9 +774,3 @@ private fun saveDatesOnly() {
         }
     }
 }
-
-
-
-
-
-
