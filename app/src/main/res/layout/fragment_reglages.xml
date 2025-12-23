@@ -12,7 +12,7 @@
 
         <!-- Bandeau profil (progression) -->
         <LinearLayout
-            android:id="@+id/habitudes_bandeau_profil"
+            android:id="@+id/reglages_bandeau_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,7 +21,7 @@
              android:background="@android:drawable/dialog_holo_light_frame">
 
             <TextView
-                android:id="@+id/habitudes_profil_status"
+                android:id="@+id/reglages_profil_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -30,7 +30,7 @@
                 android:paddingBottom="8dp" />
 
             <ProgressBar
-                android:id="@+id/habitudes_profil_progress"
+                android:id="@+id/reglages_profil_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -40,7 +40,7 @@
                 android:splitTrack="false"/>
 
             <TextView
-                android:id="@+id/habitudes_txt_profil_restant"
+                android:id="@+id/reglages_txt_profil_restant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
