@@ -177,38 +177,97 @@ class ReglagesFragment : Fragment() {
 }
     
     private fun addPersonnalisationSection(container: LinearLayout) {
-        addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
-        
-        // Prénom
-        addLabel(container, trad["label_prenom"] ?: "Prénom")
-        editPrenom = EditText(requireContext()).apply {
-            hint = trad["hint_prenom"] ?: "Entrer votre prénom"
-            inputType = InputType.TYPE_CLASS_TEXT
-            setPadding(20, 20, 20, 20)
+    addSectionTitle(container, trad["titre_profil"] ?: "Personnalisation")
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedBg(colorInt: Int, radiusDp: Int): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(colorInt)
         }
-        container.addView(editPrenom)
-        
-        // Langue
-        addLabel(container, trad["label_langue"] ?: "Langue")
-        spinnerLangue = Spinner(requireContext())
-        val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
-        spinnerLangue.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, langues)
-        container.addView(spinnerLangue)
-        
-        // Devise
-        addLabel(container, trad["label_devise"] ?: "Devise")
-        spinnerDevise = Spinner(requireContext())
-        val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
-        spinnerDevise.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, devises)
-        container.addView(spinnerDevise)
-        
-        // Bouton sauvegarder personnalisation
-        val btnSavePerso = Button(requireContext()).apply {
-            text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder"
-            setOnClickListener { savePersonnalisation() }
-        }
-        container.addView(btnSavePerso)
     }
+
+    fun applyWhiteFieldStyle(view: View) {
+        // Fond blanc + coins arrondis + padding + marge verticale
+        view.background = roundedBg(Color.WHITE, 10)
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(14))
+        }
+        view.layoutParams = lp
+    }
+
+    // Prénom
+    addLabel(container, trad["label_prenom"] ?: "Prénom")
+    editPrenom = EditText(requireContext()).apply {
+        hint = trad["hint_prenom"] ?: "Entrer votre prénom"
+        inputType = InputType.TYPE_CLASS_TEXT
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+    }
+    applyWhiteFieldStyle(editPrenom)
+    container.addView(editPrenom)
+
+    // Langue
+    addLabel(container, trad["label_langue"] ?: "Langue")
+    spinnerLangue = Spinner(requireContext()).apply {
+        // Evite le "fond bleu" par défaut (tint/thème)
+        backgroundTintList = null
+        background = roundedBg(Color.WHITE, 10)
+    }
+    val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
+    spinnerLangue.adapter = ArrayAdapter(
+        requireContext(),
+        android.R.layout.simple_spinner_item,
+        langues
+    ).apply {
+        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    }
+    applyWhiteFieldStyle(spinnerLangue)
+    container.addView(spinnerLangue)
+
+    // Devise
+    addLabel(container, trad["label_devise"] ?: "Devise")
+    spinnerDevise = Spinner(requireContext()).apply {
+        backgroundTintList = null
+        background = roundedBg(Color.WHITE, 10)
+    }
+    val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
+    spinnerDevise.adapter = ArrayAdapter(
+        requireContext(),
+        android.R.layout.simple_spinner_item,
+        devises
+    ).apply {
+        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    }
+    applyWhiteFieldStyle(spinnerDevise)
+    container.addView(spinnerDevise)
+
+    // Bouton sauvegarder personnalisation (style proche de RAZ : gris clair arrondi + texte bleu)
+    val btnSavePerso = Button(requireContext()).apply {
+        text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder"
+        isAllCaps = false
+        textSize = 13f
+        setTextColor(Color.parseColor("#1976D2"))
+        setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_save, 0, 0, 0)
+        compoundDrawablePadding = dp(8)
+        setPadding(dp(14), dp(12), dp(14), dp(12))
+        background = roundedBg(Color.parseColor("#F2F2F2"), 10)
+
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        setOnClickListener { savePersonnalisation() }
+    }
+    container.addView(btnSavePerso)
+}
 
     private fun addCoutsSection(container: LinearLayout) {
         addSectionTitle(container, trad["titre_categories"] ?: "Coûts")
