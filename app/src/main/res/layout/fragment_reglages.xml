@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textSize="12sp"
+                android:minLines="1"
                 android:paddingTop="6dp" />
 
         </LinearLayout>
