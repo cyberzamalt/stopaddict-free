@@ -2027,7 +2027,9 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         txtProfilComplet.compoundDrawablePadding = 8.dp
 
         profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+        txtProfilRestant.text = " "              // espace pour forcer 1 ligne
+        txtProfilRestant.visibility = View.VISIBLE
+        txtProfilRestant.setTextColor(Color.TRANSPARENT)  // invisible mais garde la hauteur
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
