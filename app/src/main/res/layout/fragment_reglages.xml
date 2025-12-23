@@ -10,47 +10,45 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-                <!-- Bandeau profil (progression) -->
+        <!-- Bandeau profil (progression) -->
         <LinearLayout
-            android:id="@+id/reglages_bandeau_profil"
+            android:id="@+id/habitudes_bandeau_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@android:drawable/dialog_holo_light_frame">
+             android:background="@android:drawable/dialog_holo_light_frame">
 
             <TextView
-                android:id="@+id/reglages_txt_profil_complet"
+                android:id="@+id/habitudes_profil_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profil complété à 0%"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:drawablePadding="8dp"
-                android:gravity="center_vertical"
                 android:paddingBottom="8dp" />
 
             <ProgressBar
-                android:id="@+id/reglages_profil_progress"
+                android:id="@+id/habitudes_profil_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:max="100"
-                android:progress="0" 
+                android:progress="0"
                 android:progressDrawable="@drawable/profil_progress_drawable"
                 android:splitTrack="false"/>
 
             <TextView
-                android:id="@+id/reglages_txt_profil_restant"
+                android:id="@+id/habitudes_txt_profil_restant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="0 champs restants"
                 android:textSize="12sp"
                 android:paddingTop="6dp" />
 
         </LinearLayout>
+        
         <!-- Container dynamique (celui que Kotlin vide/reconstruit) -->
         
 <LinearLayout
