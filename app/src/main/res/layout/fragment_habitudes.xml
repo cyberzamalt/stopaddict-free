@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
@@ -172,6 +171,11 @@
                     android:text="@string/periode_mois" />
             </RadioGroup>
 
+            <LinearLayout
+                android:id="@+id/habitudes_block_alcool_global"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <!-- Max Alcool Global -->
             <LinearLayout
@@ -222,7 +226,14 @@
                 android:id="@+id/habitudes_alcool_global_mois"
                 android:text="@string/periode_mois" />
         </RadioGroup>
+</LinearLayout>
 
+            <LinearLayout
+    android:id="@+id/habitudes_block_bieres"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+                
             <!-- Max Bières -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -272,7 +283,14 @@
                     android:id="@+id/habitudes_bieres_mois"
                     android:text="@string/periode_mois" />
             </RadioGroup>
+    </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/habitudes_block_liqueurs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                            
             <!-- Max Liqueurs -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -322,8 +340,13 @@
                 android:id="@+id/habitudes_liqueurs_mois"
                 android:text="@string/periode_mois" />
         </RadioGroup>
-
-
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/habitudes_block_alcool_fort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
             <!-- Max Alcool Fort -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -375,7 +398,8 @@
         </RadioGroup>
 
         </LinearLayout>
-
+</LinearLayout>
+        
         <!-- Boutons Habitudes (uniquement) -->
 <LinearLayout
     android:id="@+id/habitudes_buttons_habitudes_container"
