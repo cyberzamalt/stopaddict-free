@@ -284,334 +284,672 @@ class ReglagesFragment : Fragment() {
 }
 
     private fun addCoutsSection(container: LinearLayout) {
-        addSectionTitle(container, trad["titre_categories"] ?: "Coûts")
-        
-        // CIGARETTES
-        addCigarettesSection(container)
-        
-        // JOINTS
-        addJointsSection(container)
-        
-        // ALCOOL GLOBAL
-        addAlcoolGlobalSection(container)
-        
-        // BIÈRES
-        addBieresSection(container)
-        
-        // LIQUEURS
-        addLiqueursSection(container)
-        
-        // ALCOOL FORT
-        addAlcoolFortSection(container)
-        
-        // Bouton sauvegarder coûts
-        val btnSaveCouts = Button(requireContext()).apply {
-            text = trad["btn_sauvegarder_profil"] ?: "Sauvegarder les coûts"
-            setOnClickListener { saveCouts() }
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedBg(colorInt: Int, radiusDp: Int): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(colorInt)
         }
-        container.addView(btnSaveCouts)
     }
+
+    // Titre global "Catégories / Coûts" avec emoji
+    addSectionTitle(
+        container,
+        "📂 " + (trad["titre_categories"] ?: "Coûts")
+    )
+
+    // CIGARETTES
+    addCigarettesSection(container)
+
+    // JOINTS
+    addJointsSection(container)
+
+    // ALCOOL GLOBAL
+    addAlcoolGlobalSection(container)
+
+    // BIÈRES
+    addBieresSection(container)
+
+    // LIQUEURS
+    addLiqueursSection(container)
+
+    // ALCOOL FORT
+    addAlcoolFortSection(container)
+
+    // Bouton sauvegarder coûts (emoji + style cohérent avec le reste)
+    val btnSaveCouts = Button(requireContext()).apply {
+        text = "💾 " + (trad["btn_sauvegarder_profil"] ?: "Sauvegarder les coûts")
+        isAllCaps = false
+        textSize = 13f
+        setTextColor(Color.parseColor("#1976D2"))
+        setPadding(dp(14), dp(12), dp(14), dp(12))
+
+        background = roundedBg(Color.parseColor("#F2F2F2"), 10)
+
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, dp(12), 0, dp(20))
+        }
+
+        setOnClickListener { saveCouts() }
+    }
+
+    container.addView(btnSaveCouts)
+}
 
     private fun addCigarettesSection(container: LinearLayout) {
-        val cigaretteCard = createCard()
-        
-        // Switch cigarette
-        switchCigarette = CheckBox(requireContext()).apply {
-            text = trad["label_cigarettes"] ?: "Cigarettes"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["cigarette"] = isChecked
-                saveCategoriesActives()
-            }
-        }
-        cigaretteCard.addView(switchCigarette)
-        
-        // RadioGroup pour 3 modes
-        val radioGroup = RadioGroup(requireContext())
-        
-        // Mode 1: Paquet classique
-        radioCigarettesClassiques = RadioButton(requireContext()).apply {
-            text = "📦 ${trad["radio_classiques"] ?: "Cigarettes paquet classique"}"
-            isChecked = true
-        }
-        radioGroup.addView(radioCigarettesClassiques)
-        
-        // Champs paquet
-        val paquetContainer = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(30, 10, 0, 10)
-        }
-        addLabel(paquetContainer, (trad["label_prix_paquet"] ?: "Prix du paquet") + " (" + getDeviseSymbol() + ")")
-        editPrixPaquet = createMoneyEditText()
-        paquetContainer.addView(editPrixPaquet)
-        
-        addLabel(paquetContainer, trad["label_nb_cigarettes"] ?: "Nombre de cigarettes par paquet")
-        editNbCigarettes = createNumberEditText()
-        paquetContainer.addView(editNbCigarettes)
-        radioGroup.addView(paquetContainer)
-        
-        // Mode 2: À rouler
-        radioCigarettesRouler = RadioButton(requireContext()).apply {
-            text = "🌿 ${trad["radio_rouler"] ?: "Cigarettes à rouler"}"
-        }
-        radioGroup.addView(radioCigarettesRouler)
-        
-        val roulerContainer = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(30, 10, 0, 10)
-        }
-        addLabel(roulerContainer, (trad["label_prix_tabac"] ?: "Prix du tabac à rouler") + " (" + getDeviseSymbol() + ")")
-        editPrixTabac = createMoneyEditText()
-        roulerContainer.addView(editPrixTabac)
-        
-        addLabel(roulerContainer, (trad["label_prix_feuilles"] ?: "Prix des feuilles à rouler") + " (" + getDeviseSymbol() + ")")
-        editPrixFeuilles = createMoneyEditText()
-        roulerContainer.addView(editPrixFeuilles)
-        
-        addLabel(roulerContainer, trad["label_nb_feuilles"] ?: "Nombre de feuilles")
-        editNbFeuilles = createNumberEditText()
-        roulerContainer.addView(editNbFeuilles)
-        
-        addLabel(roulerContainer, (trad["label_prix_filtres"] ?: "Prix du sachet de filtres") + " (" + getDeviseSymbol() + ")")
-        editPrixFiltres = createMoneyEditText()
-        roulerContainer.addView(editPrixFiltres)
-        
-        addLabel(roulerContainer, trad["label_nb_filtres"] ?: "Nombre de filtres")
-        editNbFiltres = createNumberEditText()
-        roulerContainer.addView(editNbFiltres)
 
-        // Nouveau : nombre de cigarettes fabriquées avec ce paquet (rouler)
-        addLabel(
-            roulerContainer,
-            trad["label_nb_cigarettes"]
-                ?: "Nombre de cigarettes"
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
+        }
+    }
+
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
         )
-        editNbCigarettesRoulees = createNumberEditText()
-        roulerContainer.addView(editNbCigarettesRoulees)
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
 
-        radioGroup.addView(roulerContainer)
-        
-                // Mode 3: À tuber
-        radioCigarettesTubeuse = RadioButton(requireContext()).apply {
-            text = "🚬 ${trad["radio_tubeuse"] ?: "Cigarettes à tuber"}"
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
         }
-        radioGroup.addView(radioCigarettesTubeuse)
-        
-        val tuberContainer = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(30, 10, 0, 10)
+        view.layoutParams = lp
+    }
+
+    fun labelWithEmoji(text: String): String {
+        // Habillage uniquement : si tu veux changer les emojis ensuite, on change ici
+        return text
+    }
+
+    val cigaretteCard = createCard()
+
+    // Switch cigarette (emoji + texte, sans toucher aux traductions)
+    switchCigarette = CheckBox(requireContext()).apply {
+        text = "🚬 " + (trad["label_cigarettes"] ?: "Cigarettes")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["cigarette"] = isChecked
+            saveCategoriesActives()
         }
+    }
+    cigaretteCard.addView(switchCigarette)
 
-        // Prix du tabac à tuber
-        addLabel(tuberContainer, (trad["label_prix_tabac"] ?: "Prix du tabac pour tubeuse") + " (" + getDeviseSymbol() + ")")
-        editPrixTabacTubes = createMoneyEditText()
-        tuberContainer.addView(editPrixTabacTubes)
+    // RadioGroup pour 3 modes
+    val radioGroup = RadioGroup(requireContext())
 
-        // Prix des tubes
-        addLabel(tuberContainer, (trad["label_prix_tubes"] ?: "Prix des tubes") + " (" + getDeviseSymbol() + ")")
-        editPrixTubes = createMoneyEditText()
-        tuberContainer.addView(editPrixTubes)
-                // Nombre de tubes
-        addLabel(tuberContainer, trad["label_nb_tubes"] ?: "Nombre de tubes")
-        editNbTubes = createNumberEditText()
-        tuberContainer.addView(editNbTubes)
+    // Mode 1: Paquet classique
+    radioCigarettesClassiques = RadioButton(requireContext()).apply {
+        text = "📦 ${trad["radio_classiques"] ?: "Cigarettes paquet classique"}"
+        isChecked = true
+    }
+    radioGroup.addView(radioCigarettesClassiques)
 
-        // Nouveau : nombre de cigarettes fabriquées avec ce paquet (tuber)
-        addLabel(
+    // Champs paquet
+    val paquetContainer = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(30, 10, 0, 10)
+    }
+
+    addLabel(
+        paquetContainer,
+        "💶 " + ((trad["label_prix_paquet"] ?: "Prix du paquet") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixPaquet = createMoneyEditText()
+    editPrixPaquet.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixPaquet)
+    paquetContainer.addView(editPrixPaquet)
+
+    addLabel(paquetContainer, "🔢 " + (trad["label_nb_cigarettes"] ?: "Nombre de cigarettes par paquet"))
+    editNbCigarettes = createNumberEditText()
+    editNbCigarettes.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbCigarettes)
+    paquetContainer.addView(editNbCigarettes)
+
+    radioGroup.addView(paquetContainer)
+
+    // Mode 2: À rouler
+    radioCigarettesRouler = RadioButton(requireContext()).apply {
+        text = "🌿 ${trad["radio_rouler"] ?: "Cigarettes à rouler"}"
+    }
+    radioGroup.addView(radioCigarettesRouler)
+
+    val roulerContainer = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(30, 10, 0, 10)
+    }
+
+    addLabel(
+        roulerContainer,
+        "💶 " + ((trad["label_prix_tabac"] ?: "Prix du tabac à rouler") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixTabac = createMoneyEditText()
+    editPrixTabac.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixTabac)
+    roulerContainer.addView(editPrixTabac)
+
+    addLabel(
+        roulerContainer,
+        "🧻 " + ((trad["label_prix_feuilles"] ?: "Prix des feuilles à rouler") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixFeuilles = createMoneyEditText()
+    editPrixFeuilles.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixFeuilles)
+    roulerContainer.addView(editPrixFeuilles)
+
+    addLabel(roulerContainer, "📄 " + (trad["label_nb_feuilles"] ?: "Nombre de feuilles"))
+    editNbFeuilles = createNumberEditText()
+    editNbFeuilles.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbFeuilles)
+    roulerContainer.addView(editNbFeuilles)
+
+    addLabel(
+        roulerContainer,
+        "💶 " + ((trad["label_prix_filtres"] ?: "Prix du sachet de filtres") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixFiltres = createMoneyEditText()
+    editPrixFiltres.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixFiltres)
+    roulerContainer.addView(editPrixFiltres)
+
+    addLabel(roulerContainer, "🧩 " + (trad["label_nb_filtres"] ?: "Nombre de filtres"))
+    editNbFiltres = createNumberEditText()
+    editNbFiltres.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbFiltres)
+    roulerContainer.addView(editNbFiltres)
+
+    // Nouveau : nombre de cigarettes fabriquées avec ce paquet (rouler)
+    addLabel(
+        roulerContainer,
+        "🔢 " + (trad["label_nb_cigarettes"] ?: "Nombre de cigarettes")
+    )
+    editNbCigarettesRoulees = createNumberEditText()
+    editNbCigarettesRoulees.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbCigarettesRoulees)
+    roulerContainer.addView(editNbCigarettesRoulees)
+
+    radioGroup.addView(roulerContainer)
+
+    // Mode 3: À tuber
+    radioCigarettesTubeuse = RadioButton(requireContext()).apply {
+        text = "🚬 ${trad["radio_tubeuse"] ?: "Cigarettes à tuber"}"
+    }
+    radioGroup.addView(radioCigarettesTubeuse)
+
+    val tuberContainer = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(30, 10, 0, 10)
+    }
+
+    // Prix du tabac à tuber
+    addLabel(
         tuberContainer,
-        trad["label_nb_cigarettes"]
-            ?: "Nombre de cigarettes"
-            )
-        editNbCigarettesTubees = createNumberEditText()
-        tuberContainer.addView(editNbCigarettesTubees)
+        "💶 " + ((trad["label_prix_tabac"] ?: "Prix du tabac pour tubeuse") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixTabacTubes = createMoneyEditText()
+    editPrixTabacTubes.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixTabacTubes)
+    tuberContainer.addView(editPrixTabacTubes)
 
-        radioGroup.addView(tuberContainer)
-        // Assurer qu'un seul mode de cigarettes est sélectionné à la fois
+    // Prix des tubes
+    addLabel(
+        tuberContainer,
+        "💶 " + ((trad["label_prix_tubes"] ?: "Prix des tubes") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixTubes = createMoneyEditText()
+    editPrixTubes.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixTubes)
+    tuberContainer.addView(editPrixTubes)
 
-        radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
-    if (isChecked) {
-        radioCigarettesRouler.isChecked = false
-        radioCigarettesTubeuse.isChecked = false
+    // Nombre de tubes
+    addLabel(tuberContainer, "📦 " + (trad["label_nb_tubes"] ?: "Nombre de tubes"))
+    editNbTubes = createNumberEditText()
+    editNbTubes.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbTubes)
+    tuberContainer.addView(editNbTubes)
+
+    // Nouveau : nombre de cigarettes fabriquées avec ce paquet (tuber)
+    addLabel(
+        tuberContainer,
+        "🔢 " + (trad["label_nb_cigarettes"] ?: "Nombre de cigarettes")
+    )
+    editNbCigarettesTubees = createNumberEditText()
+    editNbCigarettesTubees.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbCigarettesTubees)
+    tuberContainer.addView(editNbCigarettesTubees)
+
+    radioGroup.addView(tuberContainer)
+
+    // Assurer qu'un seul mode de cigarettes est sélectionné à la fois
+    radioCigarettesClassiques.setOnCheckedChangeListener { _, isChecked ->
+        if (isChecked) {
+            radioCigarettesRouler.isChecked = false
+            radioCigarettesTubeuse.isChecked = false
+        }
     }
+
+    radioCigarettesRouler.setOnCheckedChangeListener { _, isChecked ->
+        if (isChecked) {
+            radioCigarettesClassiques.isChecked = false
+            radioCigarettesTubeuse.isChecked = false
+        }
+    }
+
+    radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
+        if (isChecked) {
+            radioCigarettesClassiques.isChecked = false
+            radioCigarettesRouler.isChecked = false
+        }
+    }
+
+    cigaretteCard.addView(radioGroup)
+    container.addView(cigaretteCard)
 }
-
-radioCigarettesRouler.setOnCheckedChangeListener { _, isChecked ->
-    if (isChecked) {
-        radioCigarettesClassiques.isChecked = false
-        radioCigarettesTubeuse.isChecked = false
-    }
-}
-
-radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
-    if (isChecked) {
-        radioCigarettesClassiques.isChecked = false
-        radioCigarettesRouler.isChecked = false
-    }
-}
-
-        cigaretteCard.addView(radioGroup)
-        container.addView(cigaretteCard)
-    }
 
     private fun addJointsSection(container: LinearLayout) {
-        val jointCard = createCard()
-        
-        switchJoint = CheckBox(requireContext()).apply {
-            text = trad["label_joints"] ?: "Joints (Cannabis)"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["joint"] = isChecked
-                saveCategoriesActives()
-            }
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
         }
-        jointCard.addView(switchJoint)
-        
-        addLabel(jointCard, (trad["label_prix_gramme"] ?: "Prix du gramme") + " (" + getDeviseSymbol() + ")")
-        editPrixGramme = createMoneyEditText()
-        jointCard.addView(editPrixGramme)
-        
-        addLabel(jointCard, trad["label_gramme_par_joint"] ?: "Grammes par joint")
-        editGrammeParJoint = EditText(requireContext()).apply {
-            hint = "0.0"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
-        jointCard.addView(editGrammeParJoint)
-        
-        addLabel(jointCard, (trad["label_prix_feuilles_longues"] ?: "Prix des feuilles longues") + " (" + getDeviseSymbol() + ")")
-        editPrixFeuillesJoint = createMoneyEditText()
-        jointCard.addView(editPrixFeuillesJoint)
-        
-        addLabel(jointCard, trad["label_nb_feuilles_longues"] ?: "Nombre de feuilles longues")
-        editNbFeuillesJoint = createNumberEditText()
-        jointCard.addView(editNbFeuillesJoint)
-        
-        container.addView(jointCard)
     }
+
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
+        }
+        view.layoutParams = lp
+    }
+
+    val jointCard = createCard()
+
+    switchJoint = CheckBox(requireContext()).apply {
+        text = "🌿 " + (trad["label_joints"] ?: "Joints (Cannabis)")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["joint"] = isChecked
+            saveCategoriesActives()
+        }
+    }
+    jointCard.addView(switchJoint)
+
+    addLabel(
+        jointCard,
+        "💶 " + ((trad["label_prix_gramme"] ?: "Prix du gramme") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixGramme = createMoneyEditText()
+    editPrixGramme.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixGramme)
+    jointCard.addView(editPrixGramme)
+
+    addLabel(jointCard, "⚖️ " + (trad["label_gramme_par_joint"] ?: "Grammes par joint"))
+    editGrammeParJoint = EditText(requireContext()).apply {
+        hint = "0.0"
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+        backgroundTintList = null
+    }
+    applyWhiteFieldStyleWithBlueStroke(editGrammeParJoint)
+    jointCard.addView(editGrammeParJoint)
+
+    addLabel(
+        jointCard,
+        "🧻 " + ((trad["label_prix_feuilles_longues"] ?: "Prix des feuilles longues") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixFeuillesJoint = createMoneyEditText()
+    editPrixFeuillesJoint.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixFeuillesJoint)
+    jointCard.addView(editPrixFeuillesJoint)
+
+    addLabel(jointCard, "📄 " + (trad["label_nb_feuilles_longues"] ?: "Nombre de feuilles longues"))
+    editNbFeuillesJoint = createNumberEditText()
+    editNbFeuillesJoint.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editNbFeuillesJoint)
+    jointCard.addView(editNbFeuillesJoint)
+
+    container.addView(jointCard)
+}
 
     private fun addAlcoolGlobalSection(container: LinearLayout) {
-        val alcoolCard = createCard()
-        
-        switchAlcoolGlobal = CheckBox(requireContext()).apply {
-            text = trad["label_alcool_global"] ?: "Alcool Global"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["alcool_global"] = isChecked
-                // Désactiver sous-catégories si global désactivé
-                if (!isChecked) {
-                    switchBiere.isChecked = false
-                    switchLiqueur.isChecked = false
-                    switchAlcoolFort.isChecked = false
-                }
-                saveCategoriesActives()
-            }
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
         }
-        alcoolCard.addView(switchAlcoolGlobal)
-        
-        addLabel(alcoolCard, (trad["label_prix_verre"] ?: "Prix du verre (alcool global)") + " (" + getDeviseSymbol() + ")")
-        editPrixVerreGlobal = createMoneyEditText()
-        alcoolCard.addView(editPrixVerreGlobal)
-        
-        addLabel(alcoolCard, trad["unite_cl_global"] ?: "Unité en cL")
-        editUniteCLGlobal = EditText(requireContext()).apply {
-            hint = "00"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
-        alcoolCard.addView(editUniteCLGlobal)
-        
-        container.addView(alcoolCard)
     }
+
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
+        }
+        view.layoutParams = lp
+    }
+
+    val alcoolCard = createCard()
+
+    switchAlcoolGlobal = CheckBox(requireContext()).apply {
+        text = "🍷 " + (trad["label_alcool_global"] ?: "Alcool Global")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["alcool_global"] = isChecked
+            // Désactiver sous-catégories si global désactivé
+            if (!isChecked) {
+                switchBiere.isChecked = false
+                switchLiqueur.isChecked = false
+                switchAlcoolFort.isChecked = false
+            }
+            saveCategoriesActives()
+        }
+    }
+    alcoolCard.addView(switchAlcoolGlobal)
+
+    addLabel(
+        alcoolCard,
+        "💶 " + ((trad["label_prix_verre"] ?: "Prix du verre (alcool global)") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixVerreGlobal = createMoneyEditText()
+    editPrixVerreGlobal.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixVerreGlobal)
+    alcoolCard.addView(editPrixVerreGlobal)
+
+    addLabel(alcoolCard, "🧪 " + (trad["unite_cl_global"] ?: "Unité en cL"))
+    editUniteCLGlobal = EditText(requireContext()).apply {
+        hint = "00"
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+        backgroundTintList = null
+    }
+    applyWhiteFieldStyleWithBlueStroke(editUniteCLGlobal)
+    alcoolCard.addView(editUniteCLGlobal)
+
+    container.addView(alcoolCard)
+}
 
     private fun addBieresSection(container: LinearLayout) {
-        val biereCard = createCard()
-        
-        switchBiere = CheckBox(requireContext()).apply {
-            text = trad["label_bieres"] ?: "Bières"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["biere"] = isChecked
-                saveCategoriesActives()
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable.RECTANGLE.let {
+            android.graphics.drawable.GradientDrawable().apply {
+                shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+                cornerRadius = dp(radiusDp).toFloat()
+                setColor(fillColorInt)
+                setStroke(dp(strokeWidthDp), strokeColorInt)
             }
         }
-        biereCard.addView(switchBiere)
-        
-        addLabel(biereCard, (trad["label_prix_verre"] ?: "Prix du verre de bière") + " (" + getDeviseSymbol() + ")")
-        editPrixVerreBiere = createMoneyEditText()
-        biereCard.addView(editPrixVerreBiere)
-        
-        addLabel(biereCard, trad["unite_cl_biere"] ?: "Unité en cL")
-        editUniteCLBiere = EditText(requireContext()).apply {
-            hint = "0"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
-        biereCard.addView(editUniteCLBiere)
-        
-        container.addView(biereCard)
     }
+
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
+        }
+        view.layoutParams = lp
+    }
+
+    val biereCard = createCard()
+
+    switchBiere = CheckBox(requireContext()).apply {
+        text = "🍺 " + (trad["label_bieres"] ?: "Bières")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["biere"] = isChecked
+            saveCategoriesActives()
+        }
+    }
+    biereCard.addView(switchBiere)
+
+    addLabel(
+        biereCard,
+        "💶 " + ((trad["label_prix_verre"] ?: "Prix du verre de bière") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixVerreBiere = createMoneyEditText()
+    editPrixVerreBiere.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixVerreBiere)
+    biereCard.addView(editPrixVerreBiere)
+
+    addLabel(biereCard, "🧪 " + (trad["unite_cl_biere"] ?: "Unité en cL"))
+    editUniteCLBiere = EditText(requireContext()).apply {
+        hint = "0"
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+        backgroundTintList = null
+    }
+    applyWhiteFieldStyleWithBlueStroke(editUniteCLBiere)
+    biereCard.addView(editUniteCLBiere)
+
+    container.addView(biereCard)
+}
 
     private fun addLiqueursSection(container: LinearLayout) {
-        val liqueurCard = createCard()
-        
-        switchLiqueur = CheckBox(requireContext()).apply {
-            text = trad["label_liqueurs"] ?: "Liqueurs"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["liqueur"] = isChecked
-                saveCategoriesActives()
-            }
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
         }
-        liqueurCard.addView(switchLiqueur)
-        
-        addLabel(liqueurCard, (trad["label_prix_verre"] ?: "Prix du verre de liqueur") + " (" + getDeviseSymbol() + ")")
-        editPrixVerreLiqueur = createMoneyEditText()
-        liqueurCard.addView(editPrixVerreLiqueur)
-        
-        addLabel(liqueurCard, trad["unite_cl_liqueur"] ?: "Unité en cL")
-        editUniteCLLiqueur = EditText(requireContext()).apply {
-            hint = "0"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
-        liqueurCard.addView(editUniteCLLiqueur)
-        
-        container.addView(liqueurCard)
     }
 
-    private fun addAlcoolFortSection(container: LinearLayout) {
-        val alcoolFortCard = createCard()
-        
-        switchAlcoolFort = CheckBox(requireContext()).apply {
-            text = trad["label_alcool_fort"] ?: "Alcool Fort"
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setOnCheckedChangeListener { _, isChecked ->
-                categoriesActives["alcool_fort"] = isChecked
-                saveCategoriesActives()
-            }
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
         }
-        alcoolFortCard.addView(switchAlcoolFort)
-        
-        addLabel(alcoolFortCard, (trad["label_prix_verre"] ?: "Prix du verre d'alcool fort") + " (" + getDeviseSymbol() + ")")
-        editPrixVerreAlcoolFort = createMoneyEditText()
-        alcoolFortCard.addView(editPrixVerreAlcoolFort)
-        
-        addLabel(alcoolFortCard, trad["unite_cl_alcool_fort"] ?: "Unité en cL")
-        editUniteCLAlcoolFort = EditText(requireContext()).apply {
-            hint = "0"
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(20, 20, 20, 20)
-        }
-        alcoolFortCard.addView(editUniteCLAlcoolFort)
-        
-        container.addView(alcoolFortCard)
+        view.layoutParams = lp
     }
+
+    val liqueurCard = createCard()
+
+    switchLiqueur = CheckBox(requireContext()).apply {
+        text = "🍸 " + (trad["label_liqueurs"] ?: "Liqueurs")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["liqueur"] = isChecked
+            saveCategoriesActives()
+        }
+    }
+    liqueurCard.addView(switchLiqueur)
+
+    addLabel(
+        liqueurCard,
+        "💶 " + ((trad["label_prix_verre"] ?: "Prix du verre de liqueur") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixVerreLiqueur = createMoneyEditText()
+    editPrixVerreLiqueur.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixVerreLiqueur)
+    liqueurCard.addView(editPrixVerreLiqueur)
+
+    addLabel(liqueurCard, "🧪 " + (trad["unite_cl_liqueur"] ?: "Unité en cL"))
+    editUniteCLLiqueur = EditText(requireContext()).apply {
+        hint = "0"
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+        backgroundTintList = null
+    }
+    applyWhiteFieldStyleWithBlueStroke(editUniteCLLiqueur)
+    liqueurCard.addView(editUniteCLLiqueur)
+
+    container.addView(liqueurCard)
+}
+
+    private fun addAlcoolFortSection(container: LinearLayout) {
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedStrokeBg(
+        fillColorInt: Int,
+        strokeColorInt: Int,
+        strokeWidthDp: Int,
+        radiusDp: Int
+    ): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(fillColorInt)
+            setStroke(dp(strokeWidthDp), strokeColorInt)
+        }
+    }
+
+    fun applyWhiteFieldStyleWithBlueStroke(view: View) {
+        view.background = roundedStrokeBg(
+            fillColorInt = Color.WHITE,
+            strokeColorInt = Color.parseColor("#1976D2"),
+            strokeWidthDp = 2,
+            radiusDp = 10
+        )
+        view.setPadding(dp(14), dp(14), dp(14), dp(14))
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(12))
+        }
+        view.layoutParams = lp
+    }
+
+    val alcoolFortCard = createCard()
+
+    switchAlcoolFort = CheckBox(requireContext()).apply {
+        text = "🥃 " + (trad["label_alcool_fort"] ?: "Alcool Fort")
+        textSize = 16f
+        setTypeface(null, android.graphics.Typeface.BOLD)
+        setOnCheckedChangeListener { _, isChecked ->
+            categoriesActives["alcool_fort"] = isChecked
+            saveCategoriesActives()
+        }
+    }
+    alcoolFortCard.addView(switchAlcoolFort)
+
+    addLabel(
+        alcoolFortCard,
+        "💶 " + ((trad["label_prix_verre"] ?: "Prix du verre d'alcool fort") + " (" + getDeviseSymbol() + ")")
+    )
+    editPrixVerreAlcoolFort = createMoneyEditText()
+    editPrixVerreAlcoolFort.backgroundTintList = null
+    applyWhiteFieldStyleWithBlueStroke(editPrixVerreAlcoolFort)
+    alcoolFortCard.addView(editPrixVerreAlcoolFort)
+
+    addLabel(alcoolFortCard, "🧪 " + (trad["unite_cl_alcool_fort"] ?: "Unité en cL"))
+    editUniteCLAlcoolFort = EditText(requireContext()).apply {
+        hint = "0"
+        inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        setTextColor(Color.BLACK)
+        setHintTextColor(Color.parseColor("#9E9E9E"))
+        backgroundTintList = null
+    }
+    applyWhiteFieldStyleWithBlueStroke(editUniteCLAlcoolFort)
+    alcoolFortCard.addView(editUniteCLAlcoolFort)
+
+    container.addView(alcoolFortCard)
+}
 
     private fun savePersonnalisation() {
         try {
