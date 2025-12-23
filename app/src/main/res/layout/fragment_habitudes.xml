@@ -96,7 +96,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
             
             <RadioGroup
@@ -147,7 +150,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
 
                 <RadioGroup
@@ -203,7 +209,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
 
             <RadioGroup
@@ -260,7 +269,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
 
                 <RadioGroup
@@ -317,7 +329,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
 
             <RadioGroup
@@ -373,7 +388,10 @@
                     android:background="@android:color/transparent"
                     android:inputType="number"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"/>
             </LinearLayout>
                         
             <RadioGroup
