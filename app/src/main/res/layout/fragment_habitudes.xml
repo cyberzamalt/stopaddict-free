@@ -392,6 +392,8 @@
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/btn_red"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
         android:elevation="2dp"/>
 
     <Button
@@ -402,6 +404,8 @@
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/btn_green"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
         android:elevation="2dp"/>
 
 </LinearLayout>
@@ -442,6 +446,8 @@
     android:textColor="@android:color/white"
     android:textAllCaps="false"
     android:background="@drawable/btn_red"
+    android:backgroundTint="@null"
+    app:backgroundTint="@null"
     android:elevation="2dp"/>
 
 <Button
@@ -452,6 +458,8 @@
     android:textColor="@android:color/white"
     android:textAllCaps="false"
     android:background="@drawable/btn_green"
+    android:backgroundTint="@null"
+    app:backgroundTint="@null"
     android:elevation="2dp"/>
 
 </LinearLayout>
