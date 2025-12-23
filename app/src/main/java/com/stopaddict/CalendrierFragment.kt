@@ -231,7 +231,7 @@ class CalendrierFragment : Fragment() {
         txtProfilStatus.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
 
         profilProgress.progress = percent
-        txtProfilRestant.visibility = View.GONE
+        txtProfilRestant.visibility = View.INVISIBLE
 
     } catch (e: Exception) {
         Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
