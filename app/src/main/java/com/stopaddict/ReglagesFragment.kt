@@ -22,6 +22,7 @@ import android.view.inputmethod.EditorInfo
 import java.text.SimpleDateFormat
 import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
+import android.graphics.Typeface
 import java.util.*
 
 class ReglagesFragment : Fragment() {
@@ -788,21 +789,58 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
 }
     
     private fun addRAZSection(container: LinearLayout) {
-    // ✅ On utilise la version existante de createCard() (sans paramètre)
-    val card = createCard()
+
+    fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    fun roundedBg(colorInt: Int, radiusDp: Int): android.graphics.drawable.GradientDrawable {
+        return android.graphics.drawable.GradientDrawable().apply {
+            shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+            cornerRadius = dp(radiusDp).toFloat()
+            setColor(colorInt)
+        }
+    }
+
+    fun styleRazButton(btn: Button, iconRes: Int) {
+        btn.background = roundedBg(Color.parseColor("#F2F2F2"), 10)
+        btn.setTextColor(Color.parseColor("#1976D2"))
+        btn.isAllCaps = false
+        btn.textSize = 13f
+        btn.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
+        btn.compoundDrawablePadding = dp(8)
+        btn.setPadding(dp(14), dp(12), dp(14), dp(12))
+        btn.minHeight = dp(44)
+    }
+
+    // Carte blanche arrondie (spécifique à cette section)
+    val card = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 0, 0, dp(16))
+        }
+        background = roundedBg(Color.WHITE, 14)
+        setPadding(dp(16), dp(16), dp(16), dp(16))
+    }
 
     val title = TextView(requireContext()).apply {
         text = trad["raz_sauvegarde"] ?: "RAZ & sauvegarde"
         textSize = 18f
-        setTextColor(Color.BLACK)
-        setPadding(0, 0, 0, 16)
+        setTextColor(Color.parseColor("#1976D2"))
+        setTypeface(null, Typeface.BOLD)
+        setPadding(0, 0, 0, dp(12))
     }
     card.addView(title)
 
-    // Ligne boutons RAZ (jour / historique / usine)
+    // Ligne boutons RAZ (jour / historique / usine) -> 3 colonnes
     val razLayout = LinearLayout(requireContext()).apply {
         orientation = LinearLayout.HORIZONTAL
         weightSum = 3f
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
     }
 
     val btnRAZJour = Button(requireContext()).apply {
@@ -812,8 +850,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         ).apply {
-            setMargins(0, 0, 8, 0)
+            setMargins(0, 0, dp(8), 0)
         }
+        styleRazButton(this, android.R.drawable.ic_menu_delete)
         // ✅ On utilise la fonction déjà présente showRAZConfirmation("jour")
         setOnClickListener { showRAZConfirmation("jour") }
     }
@@ -825,8 +864,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         ).apply {
-            setMargins(0, 0, 8, 0)
+            setMargins(0, 0, dp(8), 0)
         }
+        styleRazButton(this, android.R.drawable.ic_menu_delete)
         // ✅ Confirmation RAZ historique
         setOnClickListener { showRAZConfirmation("historique") }
     }
@@ -838,6 +878,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         )
+        styleRazButton(this, android.R.drawable.ic_dialog_alert)
         // ✅ Confirmation RAZ usine
         setOnClickListener { showRAZConfirmation("usine") }
     }
@@ -847,11 +888,22 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     razLayout.addView(btnRAZUsine)
     card.addView(razLayout)
 
-    // Ligne Export / Import JSON
+    // Espace entre lignes
+    card.addView(Space(requireContext()).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            dp(10)
+        )
+    })
+
+    // Ligne Export / Import JSON -> 2 colonnes
     val exportImportLayout = LinearLayout(requireContext()).apply {
         orientation = LinearLayout.HORIZONTAL
         weightSum = 2f
-        setPadding(0, 16, 0, 0)
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
     }
 
     val btnExporter = Button(requireContext()).apply {
@@ -861,8 +913,9 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         ).apply {
-            setMargins(0, 0, 8, 0)
+            setMargins(0, 0, dp(8), 0)
         }
+        styleRazButton(this, android.R.drawable.ic_menu_upload)
         // ✅ Utilise la fonction exportData() déjà définie plus bas
         setOnClickListener { exportData() }
     }
@@ -874,6 +927,7 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1f
         )
+        styleRazButton(this, android.R.drawable.ic_menu_save)
         // ✅ Utilise importData() déjà définie plus bas
         setOnClickListener { importData() }
     }
@@ -882,15 +936,22 @@ radioCigarettesTubeuse.setOnCheckedChangeListener { _, isChecked ->
     exportImportLayout.addView(btnImporter)
     card.addView(exportImportLayout)
 
-    // Bouton "Exporter les logs"
+    // Espace entre lignes
+    card.addView(Space(requireContext()).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            dp(10)
+        )
+    })
+
+    // Bouton "Exporter les logs" -> pleine largeur
     val btnExportLogs = Button(requireContext()).apply {
         text = trad["btn_export_logs"] ?: "Exporter les logs"
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            setMargins(0, 16, 0, 0)
-        }
+        )
+        styleRazButton(this, android.R.drawable.ic_menu_edit)
 
         setOnClickListener {
             (activity as? MainActivity)?.exportAllLogsFromSettings()
