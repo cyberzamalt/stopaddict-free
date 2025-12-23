@@ -230,9 +230,10 @@ private fun setupListeners() {
     btnEffacerDates.setOnClickListener {
         try {
             val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+            val placeholderUi = withCalendarIcon(placeholder)
             btnDatesMap.forEach { (_, datesButtons) ->
                 datesButtons.values.forEach { button ->
-                    button.text = placeholder
+                    button.text = placeholderUi
                 }
             }
 
@@ -357,14 +358,31 @@ private fun setupListeners() {
                 layoutParams = params
             }
             
-                // Titre catégorie
-                val titreCategorie = TextView(requireContext()).apply {
-                    text = getNomCategorie(type, trad)
-                    textSize = 16f
-                    setTypeface(null, android.graphics.Typeface.BOLD)
-                    setPadding(0, 0, 0, dp(8))
-                }
-                containerCategorie.addView(titreCategorie)
+                // Header catégorie (icône + titre)
+                    val headerCategorie = LinearLayout(requireContext()).apply {
+                        orientation = LinearLayout.HORIZONTAL
+                        gravity = android.view.Gravity.CENTER_VERTICAL
+                        setPadding(0, 0, 0, dp(10))
+                    }
+                    
+                    val emojiView = TextView(requireContext()).apply {
+                        text = getEmojiCategorie(type)              // 🚬 🌿 🍺 ...
+                        textSize = 18f
+                        setPadding(0, 0, dp(8), 0)
+                        setTextColor(0xFF000000.toInt())           // noir (évite le “violet/thème”)
+                    }
+                    
+                    val titreCategorie = TextView(requireContext()).apply {
+                        text = getNomCategorie(type, trad)          // texte traduit
+                        textSize = 16f
+                        setPadding(0, 0, 0, dp(2))
+                        setTypeface(null, android.graphics.Typeface.BOLD)
+                        setTextColor(0xFF000000.toInt())           // noir (évite le “violet/thème”)
+                    }
+                    
+                    headerCategorie.addView(emojiView)
+                    headerCategorie.addView(titreCategorie)
+                    containerCategorie.addView(headerCategorie)
                 
                 // Séparateur (ligne fine)
                 val separator = View(requireContext()).apply {
@@ -438,14 +456,18 @@ private fun setupListeners() {
         
         // Bouton date
         val btnDate = Button(requireContext()).apply {
-            text = if (dateStr.isEmpty()) trad["btn_selectionner_date"] ?: "Sélectionner une date" else dateStr
+            val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+            val baseText = if (dateStr.isEmpty()) placeholder else dateStr
+            text = withCalendarIcon(baseText)
+        
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 dp(48)
             )
             setBackgroundResource(R.drawable.bg_button_date_white_blue)
-            setPadding(dp(14), dp(8), dp(14), dp(8))
+            setPadding(dp(14), dp(10), dp(14), dp(10))
             isAllCaps = false
+        
             setOnClickListener {
                 showDatePicker(type, dateType, this)
             }
@@ -467,25 +489,27 @@ private fun setupListeners() {
             val calendar = Calendar.getInstance()
             
             // Si date existante, partir de là
-            val currentText = button.text.toString()
+            val currentTextRaw = button.text.toString()
+            val currentText = stripCalendarIcon(currentTextRaw)
             val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
-                if (currentText != placeholder) {
-                try {
-                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    val date = dateFormat.parse(currentText)
-                    if (date != null) {
-                        calendar.time = date
-                    }
-                } catch (e: Exception) {
-                    Log.w(TAG, "Date invalide dans bouton: $currentText")
+            
+            if (currentText.isNotEmpty() && currentText != placeholder) {
+            try {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = dateFormat.parse(currentText)
+                if (date != null) {
+                    calendar.time = date
                 }
+            } catch (e: Exception) {
+                Log.w(TAG, "Date invalide dans bouton: $currentTextRaw")
+            }
             }
             
             DatePickerDialog(
                 requireContext(),
                 { _, year, month, dayOfMonth ->
                     val dateStr = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
-                    button.text = dateStr
+                    button.text = withCalendarIcon(dateStr)
                     Log.d(TAG, "Date sélectionnée: $dateStr pour $type - $dateType")
                 },
                 calendar.get(Calendar.YEAR),
@@ -514,6 +538,28 @@ private fun setupListeners() {
             else -> type
         }
     }
+
+private fun withCalendarIcon(text: String): String {
+    // On n'altère pas les traductions : on ajoute juste un prefix visuel
+    return "📅 $text"
+}
+
+private fun stripCalendarIcon(text: String): String {
+    // Pour sauver/relire proprement en base + parsing date
+    return text.replace("📅", "").trim()
+}
+
+    private fun getEmojiCategorie(type: String): String {
+    return when (type) {
+        DatabaseHelper.TYPE_CIGARETTE -> "🚬"
+        DatabaseHelper.TYPE_JOINT -> "🌿"
+        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> "🥃"
+        DatabaseHelper.TYPE_BIERE -> "🍺"
+        DatabaseHelper.TYPE_LIQUEUR -> "🍸"
+        DatabaseHelper.TYPE_ALCOOL_FORT -> "🥃"
+        else -> "📌"
+    }
+}
 
 private fun safeDouble(input: EditText): Double {
     val v = input.text.toString().trim()
@@ -625,13 +671,14 @@ private fun saveHabitudesOnly() {
 }
 
 private fun saveDatesOnly() {
-    try {
-        val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
-
-        fun safeDate(btn: Button): String {
-            val t = btn.text.toString().trim()
-            return if (t.isNotEmpty() && t != placeholder) t else ""
-        }
+        try {
+            val placeholder = trad["btn_selectionner_date"] ?: "Sélectionner une date"
+    
+    fun safeDate(btn: Button): String {
+        val tRaw = btn.text.toString().trim()
+        val t = stripCalendarIcon(tRaw)
+        return if (t.isNotEmpty() && t != placeholder) t else ""
+    }
 
         btnDatesMap.forEach { (type, datesButtons) ->
             val dReduction = datesButtons["reduction"]?.let { safeDate(it) } ?: ""
@@ -695,6 +742,7 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
 
