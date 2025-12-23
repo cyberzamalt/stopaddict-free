@@ -89,6 +89,7 @@ class HabitudesFragment : Fragment() {
             loadCategoriesActives()
             applyAlcoholVisibility()
             applyTranslations()
+            updateHintsFromPeriods() 
             setupListeners()
             loadExistingData()
             buildVolonteSection()
@@ -165,6 +166,36 @@ class HabitudesFragment : Fragment() {
         }
     }
 
+    private fun updateHintsFromPeriods() {
+        fun baseHint(full: String): String {
+            // On enlève un éventuel suffixe "par ..." ou "— ..."
+            return full
+                .replace(Regex("\\s+par\\s+.+$"), "")
+                .replace(Regex("\\s+—\\s+.+$"), "")
+                .trim()
+        }
+    
+        fun periodLabel(group: RadioGroup): String {
+            val id = group.checkedRadioButtonId
+            if (id == -1) return "" // aucun choix => pas de suffixe
+            val rb = view?.findViewById<RadioButton>(id)
+            return rb?.text?.toString()?.trim().orEmpty()
+        }
+    
+        fun apply(edit: EditText, fullTranslatedHint: String, group: RadioGroup) {
+            val base = baseHint(fullTranslatedHint)
+            val p = periodLabel(group)
+            edit.hint = if (p.isNotEmpty()) "$base — $p" else base
+        }
+    
+        apply(inputMaxCigarettes, trad["hint_max_cigarettes"] ?: "Max cigarettes", periodCigarettes)
+        apply(inputMaxJoints, trad["hint_max_joints"] ?: "Max joints", periodJoints)
+        apply(inputMaxAlcoolGlobal, trad["hint_max_alcool_global"] ?: "Max alcool global", periodAlcoolGlobal)
+        apply(inputMaxBieres, trad["hint_max_bieres"] ?: "Max bières", periodBieres)
+        apply(inputMaxLiqueurs, trad["hint_max_liqueurs"] ?: "Max liqueurs", periodLiqueurs)
+        apply(inputMaxAlcoolFort, trad["hint_max_alcool_fort"] ?: "Max alcool fort", periodAlcoolFort)
+    }
+    
     private fun applyTranslations() {
         try {
             trad = emptyMap()
@@ -282,6 +313,13 @@ private fun setupListeners() {
             ).show()
         }
     }
+        // 🔁 Mise à jour dynamique des libellés selon la période choisie
+    periodCigarettes.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
+    periodJoints.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
+    periodAlcoolGlobal.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
+    periodBieres.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
+    periodLiqueurs.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
+    periodAlcoolFort.setOnCheckedChangeListener { _, _ -> updateHintsFromPeriods() }
 }
         
     private fun loadExistingData() {
@@ -306,6 +344,8 @@ private fun setupListeners() {
         if (bieresTxt.isNotEmpty()) inputMaxBieres.setText(bieresTxt)
         if (liqueursTxt.isNotEmpty()) inputMaxLiqueurs.setText(liqueursTxt)
         if (alcoolFortTxt.isNotEmpty()) inputMaxAlcoolFort.setText(alcoolFortTxt)
+
+        updateHintsFromPeriods()
 
         updateBandeau()
         Log.d(TAG, "Données existantes chargées")
@@ -774,3 +814,4 @@ private fun saveDatesOnly() {
         }
     }
 }
+
