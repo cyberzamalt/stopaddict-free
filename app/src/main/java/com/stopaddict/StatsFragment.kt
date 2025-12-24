@@ -571,7 +571,7 @@ private fun configureBarChart(chart: BarChart) {
             val maxYLim = activeTypes.maxOfOrNull { type ->
                 dbHelper.getMaxJournalier(type)
             } ?: 0
-            val yRange = maxOf(maxYData, maxYLim).toFloat().coerceAtLeast(1f)
+            val yRange = kotlin.math.max(maxYData.toFloat(), maxYLim.toFloat()).coerceAtLeast(1f)
             
             // Petite marge au-dessus de la valeur, stable quel que soit le zoom/échelle
             val baseOffsetConso = (yRange * 0.045f).coerceIn(0.60f, 2.20f)
@@ -1119,13 +1119,9 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             }
 
             if (allValues.isNotEmpty()) {
-        
-            // ✅ Compatible toutes versions Kotlin (évite maxOf { } qui casse la compile)
-            var maxAbs = 0f
-            for (v in allValues) {
-                val av = kotlin.math.abs(v)
-                if (av > maxAbs) maxAbs = av
-            }
+
+            // max(abs(..)) sans maxOf { } (évite les soucis de résolution sur certains builds)
+            val maxAbs = (allValues.map { kotlin.math.abs(it) }.maxOrNull() ?: 0f)
         
             val axisLeft = chartCouts.axisLeft
             axisLeft.axisMinimum = -maxAbs * 1.1f
