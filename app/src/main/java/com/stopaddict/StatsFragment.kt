@@ -574,8 +574,8 @@ private fun configureBarChart(chart: BarChart) {
             val yRange = kotlin.math.max(maxYData.toFloat(), maxYLim.toFloat()).coerceAtLeast(1f)
             
             // Petite marge au-dessus de la valeur, stable quel que soit le zoom/échelle
-            val baseOffsetConso = (yRange * 0.045f).coerceIn(0.60f, 2.20f)
-            val baseOffsetMax   = (yRange * 0.035f).coerceIn(0.55f, 2.00f)
+            val baseOffsetConso = (yRange * 0.020f).coerceIn(0.25f, 1.10f)
+            val baseOffsetMax   = (yRange * 0.016f).coerceIn(0.22f, 1.00f)
             
             activeTypes.forEachIndexed { i, type ->
                 val values = donnees[type] ?: emptyList()
