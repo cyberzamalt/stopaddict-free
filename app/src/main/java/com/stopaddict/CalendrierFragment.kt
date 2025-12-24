@@ -407,9 +407,9 @@ class CalendrierFragment : Fragment() {
 
 
                     // Objectifs (icônes uniquement, pas de texte)
-                    if (isReduction) lines.add("🐢Ral")
-                    if (isArret) lines.add("🛑Ar")
-                    if (isReussite) lines.add("✅Réu")
+                    if (isReduction) lines.add("🐢\u00A0Ral")
+                    if (isArret) lines.add("🛑\u00A0Ar")
+                    if (isReussite) lines.add("✅\u00A0Réu")
 
                     // Texte final : 1ère ligne = jour, puis lignes de contenu
                     val finalLabel = buildString {
