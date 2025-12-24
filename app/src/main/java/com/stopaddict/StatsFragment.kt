@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.json.JSONObject
 
@@ -311,6 +312,10 @@ class StatsFragment : Fragment() {
         chart.setPinchZoom(true)
         chart.setDrawGridBackground(false)
 
+        // Un peu d’air pour éviter que les emoji soient coupés en haut/bas
+        chart.setExtraOffsets(8f, 14f, 8f, 14f)
+        chart.axisLeft.spaceTop = 20f
+
         val xAxis = chart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setDrawGridLines(true)
@@ -537,6 +542,86 @@ private fun configureBarChart(chart: BarChart) {
             }
                         
             if (dataSets.isNotEmpty()) {
+                            // =====================
+            // REPÈRES EMOJI PERSISTANTS (X fixe / Y dynamique)
+            // =====================
+            
+            // 1) Liste des catégories actives dans un ordre stable (ordre de parcours actuel)
+            val activeTypes = categoriesActives.filter { it.value }.map { it.key }
+            
+            // 2) Nombre de points max (sert à connaître l’étendue X)
+            val maxCount = activeTypes
+                .map { type -> (donnees[type] ?: emptyList()).size }
+                .maxOrNull() ?: 0
+            
+            val lastX = if (maxCount > 0) (maxCount - 1).toFloat() else 0f
+            
+            // On crée des positions X fixes même si peu de points (x décimal autorisé)
+            val totalSlots = (activeTypes.size * 2).coerceAtLeast(1) // conso + max par type
+            
+            val emojiConsoEntries = mutableListOf<Entry>()
+            val emojiMaxEntries = mutableListOf<Entry>()
+            
+            activeTypes.forEachIndexed { i, type ->
+                val values = donnees[type] ?: emptyList()
+                if (values.isNotEmpty()) {
+            
+                    // X fixe : réparti sur la largeur du chart (décimal)
+                    val xConso = if (lastX <= 0f) 0f else ((i * 2f + 0.5f) / totalSlots) * lastX
+                    val xMax   = if (lastX <= 0f) 0f else ((i * 2f + 1.5f) / totalSlots) * lastX
+            
+                    // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
+                    val yConso = values.last().toFloat()
+            
+                    // Emoji de catégorie
+                    val emoji = getEmojiCategorie(type)
+            
+                    // Conso : emoji seul
+                    emojiConsoEntries.add(Entry(xConso, yConso).apply {
+                        data = emoji
+                    })
+            
+                    // Max : "MAX + emoji" (utilise ton libellé déjà localisé)
+                    val maxHabitude = dbHelper.getMaxJournalier(type)
+                    if (maxHabitude > 0) {
+                        val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats())
+                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat()).apply {
+                            data = "$libelleLimite $emoji"
+                        })
+                    }
+                }
+            }
+            
+            // Dataset emoji conso
+            if (emojiConsoEntries.isNotEmpty()) {
+                val dsEmojiConso = LineDataSet(emojiConsoEntries, "").apply {
+                    // On ne veut pas de ligne, juste du texte
+                    color = Color.TRANSPARENT
+                    lineWidth = 0f
+                    setDrawCircles(false)
+                    setDrawValues(true)
+                    valueFormatter = emojiValueFormatter
+                    valueTextSize = 12f
+                    // Important : éviter de polluer la légende
+                    form = Legend.LegendForm.NONE
+                }
+                dataSets.add(dsEmojiConso)
+            }
+            
+            // Dataset emoji max
+            if (emojiMaxEntries.isNotEmpty()) {
+                val dsEmojiMax = LineDataSet(emojiMaxEntries, "").apply {
+                    color = Color.TRANSPARENT
+                    lineWidth = 0f
+                    setDrawCircles(false)
+                    setDrawValues(true)
+                    valueFormatter = emojiValueFormatter
+                    valueTextSize = 11f
+                    form = Legend.LegendForm.NONE
+                }
+                dataSets.add(dsEmojiMax)
+            }
+
                 val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
                 chartConsommation.data = lineData
                 chartConsommation.xAxis.valueFormatter = getXAxisFormatter()
@@ -875,6 +960,26 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             else -> type
         }
     }
+
+    private fun getEmojiCategorie(type: String): String {
+    // IMPORTANT : utilise exactement les mêmes "type" que dans getLabelCategorie(...)
+    return when (type) {
+        "cigarettes" -> "🚬"
+        "joints" -> "🍀"
+        "bieres" -> "🍺"
+        "liqueurs" -> "🍷"
+        "alcool_fort" -> "🥃"
+        "alcool_global" -> "🍸"
+        else -> "•"
+    }
+}
+
+    private val emojiValueFormatter = object : ValueFormatter() {
+    override fun getPointLabel(entry: com.github.mikephil.charting.data.Entry?): String {
+        if (entry == null) return ""
+        return (entry.data as? String) ?: ""
+    }
+}
 
     private fun getColorCategorie(type: String): Int {
         return when (type) {
