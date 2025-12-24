@@ -261,6 +261,16 @@ class CalendrierFragment : Fragment() {
 
         // Objectifs : 1 ligne si au moins un objectif sur ce jour
         // (on ne compte pas 3 lignes séparées ici, sinon cases trop grandes)
+        var hasObj = false
+        categoriesActives.forEach { (type, active) ->
+            if (active) {
+                val d = dbHelper.getDatesObjectifs(type)
+                if (d["date_reduction"] == dateStr || d["date_arret"] == dateStr || d["date_reussite"] == dateStr) {
+                    hasObj = true
+                }
+            }
+        }
+        if (hasObj) score++
 
         return score
     }
@@ -389,7 +399,7 @@ class CalendrierFragment : Fragment() {
                     if (cBie > 0) lines.add("🍺 $cBie")
                     if (cLiq > 0) lines.add("🍷 $cLiq")
                     if (cFor > 0) lines.add("🥃 $cFor")
-                    if (cAlg > 0) lines.add("🥃G $cAlg")
+                    if (cAlg > 0) lines.add("🥃ᴳ\u00A0$cAlg")
 
                     val isReduction = datesReduction.contains(dateStr)
                     val isArret = datesArret.contains(dateStr)
@@ -397,9 +407,9 @@ class CalendrierFragment : Fragment() {
 
 
                     // Objectifs (icônes uniquement, pas de texte)
-                    if (isReduction) lines.add("🐢")
-                    if (isArret) lines.add("🛑")
-                    if (isReussite) lines.add("✅")
+                    if (isReduction) lines.add("🐢\u00A0Ral")
+                    if (isArret) lines.add("🛑\u00A0Ar")
+                    if (isReussite) lines.add("✅\u00A0Réu")
 
                     // Texte final : 1ère ligne = jour, puis lignes de contenu
                     val finalLabel = buildString {
