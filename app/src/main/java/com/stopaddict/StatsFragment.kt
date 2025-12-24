@@ -522,13 +522,14 @@ private fun configureBarChart(chart: BarChart) {
                             val r = Color.red(baseColor)
                             val g = Color.green(baseColor)
                             val b = Color.blue(baseColor)
-                            val limiteColor = Color.argb(150, r, g, b) // ~60% d’opacité
+                            val limiteColor = Color.argb(220, r, g, b) // plus visible
 
-                            // Lignes de limites : fines, pointillées, transparentes, avec points
+                            // Lignes de limites : ligne pleine, plus lisible
                             limiteDataSet.color = limiteColor
-                            limiteDataSet.lineWidth = 1.5f
-                            limiteDataSet.enableDashedLine(10f, 5f, 0f)
-
+                            limiteDataSet.lineWidth = 2.5f
+                            // IMPORTANT : plus de pointillés
+                            // limiteDataSet.enableDashedLine(...)
+                            
                             limiteDataSet.setDrawCircles(true)
                             limiteDataSet.circleRadius = 5f
                             limiteDataSet.setDrawCircleHole(true)
@@ -572,12 +573,13 @@ private fun configureBarChart(chart: BarChart) {
             
                     // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
                     val yConso = values.last().toFloat()
+                    val emojiYOffset = 1.2f
             
                     // Emoji de catégorie
                     val emoji = getEmojiCategorie(type)
             
                     // Conso : emoji seul
-                    emojiConsoEntries.add(Entry(xConso, yConso).apply {
+                    emojiConsoEntries.add(Entry(xConso, yConso + emojiYOffset).apply {
                         data = emoji
                     })
             
@@ -585,7 +587,7 @@ private fun configureBarChart(chart: BarChart) {
                     val maxHabitude = dbHelper.getMaxJournalier(type)
                     if (maxHabitude > 0) {
                         val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats())
-                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat()).apply {
+                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat() + emojiYOffset).apply {
                             data = "$libelleLimite $emoji"
                         })
                     }
@@ -601,7 +603,7 @@ private fun configureBarChart(chart: BarChart) {
                     setDrawCircles(false)
                     setDrawValues(true)
                     valueFormatter = emojiValueFormatter
-                    valueTextSize = 12f
+                    valueTextSize = 16f
                     // Important : éviter de polluer la légende
                     form = Legend.LegendForm.NONE
                 }
@@ -616,7 +618,7 @@ private fun configureBarChart(chart: BarChart) {
                     setDrawCircles(false)
                     setDrawValues(true)
                     valueFormatter = emojiValueFormatter
-                    valueTextSize = 11f
+                    valueTextSize = 14f
                     form = Legend.LegendForm.NONE
                 }
                 dataSets.add(dsEmojiMax)
