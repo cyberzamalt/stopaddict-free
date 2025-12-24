@@ -399,7 +399,7 @@ class CalendrierFragment : Fragment() {
                     if (cBie > 0) lines.add("🍺 $cBie")
                     if (cLiq > 0) lines.add("🍷 $cLiq")
                     if (cFor > 0) lines.add("🥃 $cFor")
-                    if (cAlg > 0) lines.add("🥃ᴳ$cAlg")
+                    if (cAlg > 0) lines.add("🥃G$cAlg")
 
                     val isReduction = datesReduction.contains(dateStr)
                     val isArret = datesArret.contains(dateStr)
@@ -425,7 +425,7 @@ class CalendrierFragment : Fragment() {
                         textSize = 14f
                         setPadding(8, 12, 8, 12)
                         gravity = android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL
-                        setLines(6)
+                        maxLines = 7
                 
                         // Couleurs SOBRES selon total
                         val bgColor = when {
