@@ -544,6 +544,7 @@ private fun configureBarChart(chart: BarChart) {
                         
             if (dataSets.isNotEmpty()) {
                             // =====================
+           // =====================
             // REPÈRES EMOJI PERSISTANTS (X fixe / Y dynamique)
             // =====================
             
@@ -563,6 +564,19 @@ private fun configureBarChart(chart: BarChart) {
             val emojiConsoEntries = mutableListOf<Entry>()
             val emojiMaxEntries = mutableListOf<Entry>()
             
+            // ✅ Offset "propre" : dépend de l’échelle du graphe (ni collé, ni trop loin, ni en dessous)
+            val maxYData = activeTypes.maxOfOrNull { type ->
+                (donnees[type] ?: emptyList()).maxOrNull() ?: 0
+            } ?: 0
+            val maxYLim = activeTypes.maxOfOrNull { type ->
+                dbHelper.getMaxJournalier(type)
+            } ?: 0
+            val yRange = maxOf(maxYData, maxYLim).toFloat().coerceAtLeast(1f)
+            
+            // Petite marge au-dessus de la valeur, stable quel que soit le zoom/échelle
+            val baseOffsetConso = (yRange * 0.045f).coerceIn(0.60f, 2.20f)
+            val baseOffsetMax   = (yRange * 0.035f).coerceIn(0.55f, 2.00f)
+            
             activeTypes.forEachIndexed { i, type ->
                 val values = donnees[type] ?: emptyList()
                 if (values.isNotEmpty()) {
@@ -573,26 +587,31 @@ private fun configureBarChart(chart: BarChart) {
             
                     // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
                     val yConso = values.last().toFloat()
-
-                    // Décalage optimisé pour rester AU-DESSUS de la ligne sans s’en éloigner
-                    val emojiYOffsetConso = 0.65f
-                    
-                    // On garde un décalage séparé pour les limites (car elles sont OK chez toi)
-                    val emojiYOffsetMax = 1.2f
+            
+                    // Micro-ajustement par type (baseline emoji) mais TRES léger
+                    val tweak = when (type) {
+                        DatabaseHelper.TYPE_CIGARETTE     -> 1.06f
+                        DatabaseHelper.TYPE_JOINT         -> 1.00f
+                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> 1.00f
+                        DatabaseHelper.TYPE_BIERE         -> 1.00f
+                        DatabaseHelper.TYPE_LIQUEUR       -> 1.00f
+                        DatabaseHelper.TYPE_ALCOOL_FORT   -> 1.00f
+                        else -> 1.02f
+                    }
             
                     // Emoji de catégorie
                     val emoji = getEmojiCategorie(type)
             
-                    // Conso : emoji seul
-                    emojiConsoEntries.add(Entry(xConso, yConso + emojiYOffsetConso).apply {
+                    // Conso : emoji seul (juste au-dessus)
+                    emojiConsoEntries.add(Entry(xConso, yConso + (baseOffsetConso * tweak)).apply {
                         data = emoji
                     })
             
-                    // Max : "MAX + emoji" (utilise ton libellé déjà localisé)
+                    // Max : "MAX + emoji" (utilise ton libellé déjà localisé) — juste au-dessus aussi
                     val maxHabitude = dbHelper.getMaxJournalier(type)
                     if (maxHabitude > 0) {
                         val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats())
-                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat() + emojiYOffsetMax).apply {
+                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat() + (baseOffsetMax * 1.02f)).apply {
                             data = "$libelleLimite $emoji"
                         })
                     }
@@ -628,20 +647,20 @@ private fun configureBarChart(chart: BarChart) {
                 }
                 dataSets.add(dsEmojiMax)
             }
-
-                val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
-                chartConsommation.data = lineData
-                chartConsommation.xAxis.valueFormatter = getXAxisFormatter()
-                chartConsommation.invalidate()
-                Log.d(TAG, "Graphique consommation mis à jour: ${dataSets.size} datasets")
+            
+            val lineData = LineData(dataSets as List<com.github.mikephil.charting.interfaces.datasets.ILineDataSet>)
+            chartConsommation.data = lineData
+            chartConsommation.xAxis.valueFormatter = getXAxisFormatter()
+            chartConsommation.invalidate()
+            Log.d(TAG, "Graphique consommation mis à jour: ${dataSets.size} datasets")
             } else {
                 chartConsommation.clear()
                 Log.w(TAG, "Aucune donnée pour graphique consommation")
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour graphique consommation: ${e.message}")
-        }
-    }
+            } catch (e: Exception) {
+                Log.e(TAG, "Erreur mise à jour graphique consommation: ${e.message}")
+            }
+            }
 
     /**
      * Dispatch horaire pour période JOUR
