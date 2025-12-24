@@ -962,14 +962,13 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
     }
 
     private fun getEmojiCategorie(type: String): String {
-    // IMPORTANT : utilise exactement les mêmes "type" que dans getLabelCategorie(...)
     return when (type) {
-        "cigarettes" -> "🚬"
-        "joints" -> "🍀"
-        "bieres" -> "🍺"
-        "liqueurs" -> "🍷"
-        "alcool_fort" -> "🥃"
-        "alcool_global" -> "🍸"
+        DatabaseHelper.TYPE_CIGARETTE -> "🚬"
+        DatabaseHelper.TYPE_JOINT -> "🌿"
+        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> "🥃G"
+        DatabaseHelper.TYPE_BIERE -> "🍺"
+        DatabaseHelper.TYPE_LIQUEUR -> "🍷"
+        DatabaseHelper.TYPE_ALCOOL_FORT -> "🥃"
         else -> "•"
     }
 }
