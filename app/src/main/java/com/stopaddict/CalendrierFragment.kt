@@ -248,32 +248,20 @@ class CalendrierFragment : Fragment() {
     }
 
     // "Score" de contenu d'une journée : sert uniquement à choisir une hauteur
-    private fun computeDayContentScore(dateStr: String): Int {
-        var score = 0
+// IMPORTANT : ici on ne touche PLUS aux objectifs (sinon ça ralentit)
+private fun computeDayContentScore(dateStr: String): Int {
+    var score = 0
 
-        // Consommations actives > 0 : 1 ligne par conso
-        if (categoriesActives["cigarette"] == true && dbHelper.getConsommationParDate("cigarette", dateStr) > 0) score++
-        if (categoriesActives["joint"] == true && dbHelper.getConsommationParDate("joint", dateStr) > 0) score++
-        if (categoriesActives["alcool_global"] == true && dbHelper.getConsommationParDate("alcool_global", dateStr) > 0) score++
-        if (categoriesActives["biere"] == true && dbHelper.getConsommationParDate("biere", dateStr) > 0) score++
-        if (categoriesActives["liqueur"] == true && dbHelper.getConsommationParDate("liqueur", dateStr) > 0) score++
-        if (categoriesActives["alcool_fort"] == true && dbHelper.getConsommationParDate("alcool_fort", dateStr) > 0) score++
+    // Consommations actives > 0 : 1 ligne par conso
+    if (categoriesActives["cigarette"] == true && dbHelper.getConsommationParDate("cigarette", dateStr) > 0) score++
+    if (categoriesActives["joint"] == true && dbHelper.getConsommationParDate("joint", dateStr) > 0) score++
+    if (categoriesActives["alcool_global"] == true && dbHelper.getConsommationParDate("alcool_global", dateStr) > 0) score++
+    if (categoriesActives["biere"] == true && dbHelper.getConsommationParDate("biere", dateStr) > 0) score++
+    if (categoriesActives["liqueur"] == true && dbHelper.getConsommationParDate("liqueur", dateStr) > 0) score++
+    if (categoriesActives["alcool_fort"] == true && dbHelper.getConsommationParDate("alcool_fort", dateStr) > 0) score++
 
-        // Objectifs : 1 ligne si au moins un objectif sur ce jour
-        // (on ne compte pas 3 lignes séparées ici, sinon cases trop grandes)
-        var hasObj = false
-        categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val d = dbHelper.getDatesObjectifs(type)
-                if (d["date_reduction"] == dateStr || d["date_arret"] == dateStr || d["date_reussite"] == dateStr) {
-                    hasObj = true
-                }
-            }
-        }
-        if (hasObj) score++
-
-        return score
-    }
+    return score
+}
 
     private fun weekHeightDp(weekMaxScore: Int): Int {
         return when {
@@ -363,7 +351,12 @@ class CalendrierFragment : Fragment() {
                 val cellIndex = (firstDayOfWeek + (d - 1))
                 val w = cellIndex / 7
 
-                val s = computeDayContentScore(ds)
+                var s = computeDayContentScore(ds)
+
+                // Objectifs = +1 ligne si au moins un objectif ce jour (sans refaire d'accès DB)
+                if (datesReduction.contains(ds) || datesArret.contains(ds) || datesReussite.contains(ds)) {
+                    s += 1
+                }
                 val prev = weekMaxScores[w] ?: 0
                 if (s > prev) weekMaxScores[w] = s
             }
@@ -394,12 +387,18 @@ class CalendrierFragment : Fragment() {
                     val cLiq = if (categoriesActives["liqueur"] == true) dbHelper.getConsommationParDate("liqueur", dateStr) else 0
                     val cFor = if (categoriesActives["alcool_fort"] == true) dbHelper.getConsommationParDate("alcool_fort", dateStr) else 0
 
-                    if (cCig > 0) lines.add("🚬 $cCig")
-                    if (cJoi > 0) lines.add("🌿 $cJoi")
-                    if (cBie > 0) lines.add("🍺 $cBie")
-                    if (cLiq > 0) lines.add("🍷 $cLiq")
-                    if (cFor > 0) lines.add("🥃 $cFor")
-                    if (cAlg > 0) lines.add("🥃G$cAlg")
+                    // Empêche les retours à la ligne au milieu (Word Joiner)
+                    val WJ = "\u2060"
+                    
+                    // ...
+                    if (cCig > 0) lines.add("🚬${WJ}$cCig")
+                    if (cJoi > 0) lines.add("🌿${WJ}$cJoi")
+                    if (cBie > 0) lines.add("🍺${WJ}$cBie")
+                    if (cLiq > 0) lines.add("🍷${WJ}$cLiq")
+                    if (cFor > 0) lines.add("🥃${WJ}$cFor")
+                    
+                    // IMPORTANT : alcool global → colle TOUT : 🥃 + G + nombre
+                    if (cAlg > 0) lines.add("🥃G\u00A0$cAlg")
 
                     val isReduction = datesReduction.contains(dateStr)
                     val isArret = datesArret.contains(dateStr)
@@ -407,9 +406,10 @@ class CalendrierFragment : Fragment() {
 
 
                     // Objectifs (icônes uniquement, pas de texte)
-                    if (isReduction) lines.add("🐢\u00A0Ral")
-                    if (isArret) lines.add("🛑\u00A0Ar")
-                    if (isReussite) lines.add("✅\u00A0Réu")
+                    val WJ = "\u2060"
+                    if (isReduction) lines.add("🐢${WJ}Ral")
+                    if (isArret) lines.add("🛑${WJ}Ar")
+                    if (isReussite) lines.add("✅${WJ}Réu")
 
                     // Texte final : 1ère ligne = jour, puis lignes de contenu
                     val finalLabel = buildString {
