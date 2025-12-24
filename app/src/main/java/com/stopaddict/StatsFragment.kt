@@ -1119,18 +1119,22 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             }
 
             if (allValues.isNotEmpty()) {
-                val maxAbs = allValues
-                    .map { kotlin.math.abs(it) }
-                    .maxOrNull() ?: 0f
-            
-                val axisLeft = chartCouts.axisLeft
-                axisLeft.axisMinimum = -maxAbs * 1.1f
-                axisLeft.axisMaximum =  maxAbs * 1.1f
-                chartCouts.axisRight.isEnabled = false
+        
+            // ✅ Compatible toutes versions Kotlin (évite maxOf { } qui casse la compile)
+            var maxAbs = 0f
+            for (v in allValues) {
+                val av = kotlin.math.abs(v)
+                if (av > maxAbs) maxAbs = av
             }
-            
-            chartCouts.invalidate()
-            Log.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
+        
+            val axisLeft = chartCouts.axisLeft
+            axisLeft.axisMinimum = -maxAbs * 1.1f
+            axisLeft.axisMaximum =  maxAbs * 1.1f
+            chartCouts.axisRight.isEnabled = false
+        }
+        
+        chartCouts.invalidate()
+        Log.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
 
         } else {
             chartCouts.clear()
