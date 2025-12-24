@@ -573,13 +573,18 @@ private fun configureBarChart(chart: BarChart) {
             
                     // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
                     val yConso = values.last().toFloat()
-                    val emojiYOffset = 1.2f
+
+                    // Décalage plus faible pour les icônes de conso (sinon elles flottent trop haut)
+                    val emojiYOffsetConso = 0.4f
+                    
+                    // On garde un décalage séparé pour les limites (car elles sont OK chez toi)
+                    val emojiYOffsetMax = 1.2f
             
                     // Emoji de catégorie
                     val emoji = getEmojiCategorie(type)
             
                     // Conso : emoji seul
-                    emojiConsoEntries.add(Entry(xConso, yConso + emojiYOffset).apply {
+                    emojiConsoEntries.add(Entry(xConso, yConso + emojiYOffsetConso).apply {
                         data = emoji
                     })
             
@@ -587,7 +592,7 @@ private fun configureBarChart(chart: BarChart) {
                     val maxHabitude = dbHelper.getMaxJournalier(type)
                     if (maxHabitude > 0) {
                         val libelleLimite = StatsLangues.getTexte("label_limite", getCodeLangueStats())
-                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat() + emojiYOffset).apply {
+                        emojiMaxEntries.add(Entry(xMax, maxHabitude.toFloat() + emojiYOffsetMax).apply {
                             data = "$libelleLimite $emoji"
                         })
                     }
