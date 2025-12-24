@@ -377,39 +377,37 @@ private fun computeDayContentScore(dateStr: String): Int {
                         }
                     }
                 
-                                        // --- Lignes affichées dans la case (1 ligne = 1 icône + nombre, seulement si > 0) ---
+                    // --- Lignes affichées dans la case (1 ligne = 1 icône + nombre, seulement si > 0) ---
                     val lines = mutableListOf<String>()
-
+                    
                     val cCig = if (categoriesActives["cigarette"] == true) dbHelper.getConsommationParDate("cigarette", dateStr) else 0
                     val cJoi = if (categoriesActives["joint"] == true) dbHelper.getConsommationParDate("joint", dateStr) else 0
                     val cAlg = if (categoriesActives["alcool_global"] == true) dbHelper.getConsommationParDate("alcool_global", dateStr) else 0
                     val cBie = if (categoriesActives["biere"] == true) dbHelper.getConsommationParDate("biere", dateStr) else 0
                     val cLiq = if (categoriesActives["liqueur"] == true) dbHelper.getConsommationParDate("liqueur", dateStr) else 0
                     val cFor = if (categoriesActives["alcool_fort"] == true) dbHelper.getConsommationParDate("alcool_fort", dateStr) else 0
-
+                    
                     // Empêche les retours à la ligne au milieu (Word Joiner)
                     val WJ = "\u2060"
                     
-                    // ...
+                    // Consommations
                     if (cCig > 0) lines.add("🚬${WJ}$cCig")
                     if (cJoi > 0) lines.add("🌿${WJ}$cJoi")
                     if (cBie > 0) lines.add("🍺${WJ}$cBie")
                     if (cLiq > 0) lines.add("🍷${WJ}$cLiq")
                     if (cFor > 0) lines.add("🥃${WJ}$cFor")
                     
-                    // IMPORTANT : alcool global → colle TOUT : 🥃 + G + nombre
-                    if (cAlg > 0) lines.add("🥃G\u00A0$cAlg")
-
+                    // IMPORTANT : alcool global → tout sur une seule ligne
+                    if (cAlg > 0) lines.add("🥃${WJ}G${WJ}$cAlg")
+                    
                     val isReduction = datesReduction.contains(dateStr)
                     val isArret = datesArret.contains(dateStr)
                     val isReussite = datesReussite.contains(dateStr)
-
-
-                    // Objectifs (icônes uniquement, pas de texte)
-                    val WJ = "\u2060"
-                    if (isReduction) lines.add("🐢${WJ}Ral")
-                    if (isArret) lines.add("🛑${WJ}Ar")
-                    if (isReussite) lines.add("✅${WJ}Réu")
+                    
+                    // Objectifs : ultra-court pour éviter toute coupe sur petits écrans
+                    if (isReduction) lines.add("🐢${WJ}R")
+                    if (isArret) lines.add("🛑${WJ}A")
+                    if (isReussite) lines.add("✅${WJ}✓")
 
                     // Texte final : 1ère ligne = jour, puis lignes de contenu
                     val finalLabel = buildString {
