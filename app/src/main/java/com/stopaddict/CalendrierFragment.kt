@@ -34,6 +34,11 @@ class CalendrierFragment : Fragment() {
     private val currentCalendar = Calendar.getInstance()
     private val categoriesActives = mutableMapOf<String, Boolean>()
 
+    // Hauteurs (dp) pour les cases du calendrier
+    private val CELL_MIN_HEIGHT_DP = 72
+    private val CELL_MID_HEIGHT_DP = 108
+    private val CELL_MAX_HEIGHT_DP = 140
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return try {
             val view = inflater.inflate(R.layout.fragment_calendrier, container, false)
@@ -238,6 +243,42 @@ class CalendrierFragment : Fragment() {
     }
 }
 
+    private fun dp(dp: Int): Int {
+        return (dp * resources.displayMetrics.density).toInt()
+    }
+
+    // "Score" de contenu d'une journée : sert uniquement à choisir une hauteur
+    private fun computeDayContentScore(dateStr: String): Int {
+        var score = 0
+
+        // Consommations actives > 0 : 1 ligne par conso
+        if (categoriesActives["cigarette"] == true && dbHelper.getConsommationParDate("cigarette", dateStr) > 0) score++
+        if (categoriesActives["joint"] == true && dbHelper.getConsommationParDate("joint", dateStr) > 0) score++
+        if (categoriesActives["alcool_global"] == true && dbHelper.getConsommationParDate("alcool_global", dateStr) > 0) score++
+        if (categoriesActives["biere"] == true && dbHelper.getConsommationParDate("biere", dateStr) > 0) score++
+        if (categoriesActives["liqueur"] == true && dbHelper.getConsommationParDate("liqueur", dateStr) > 0) score++
+        if (categoriesActives["alcool_fort"] == true && dbHelper.getConsommationParDate("alcool_fort", dateStr) > 0) score++
+
+        // Objectifs : 1 ligne si au moins un objectif sur ce jour
+        // (on ne compte pas 3 lignes séparées ici, sinon cases trop grandes)
+                // Objectifs : 1 ligne si au moins un objectif ce jour
+        // (on ne compte pas 3 lignes séparées ici)
+        val hasObj =
+            (dbHelper.getPreference("dummy", "") != null) && (
+                false
+            )
+
+        return score
+    }
+
+    private fun weekHeightDp(weekMaxScore: Int): Int {
+        return when {
+            weekMaxScore <= 0 -> CELL_MIN_HEIGHT_DP
+            weekMaxScore <= 2 -> CELL_MID_HEIGHT_DP
+            else -> CELL_MAX_HEIGHT_DP
+        }
+    }
+
     private fun updateCalendar() {
         try {
             val dateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
@@ -290,7 +331,12 @@ class CalendrierFragment : Fragment() {
             // Jours du mois
             val dateFormatJour = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-            
+
+                        // --- Pré-calcul hauteur par semaine (ligne) ---
+            // Index de cellule (en jours) depuis le début de la grille (sans compter l'entête)
+            // On inclut les cases vides du début pour rester aligné.
+            val weekMaxScores = mutableMapOf<Int, Int>()  // weekIndex -> maxScore
+
             // Pré-calcul des dates d'objectifs (réduction / arrêt / réussite) pour les catégories actives
             val datesReduction = mutableSetOf<String>()
             val datesArret = mutableSetOf<String>()
@@ -304,10 +350,27 @@ class CalendrierFragment : Fragment() {
                     dates["date_reussite"]?.takeIf { it.isNotEmpty() }?.let { datesReussite.add(it) }
                 }
             }
+
+                        // --- PASS 1 : calcul du max de contenu par semaine (avant de dessiner) ---
+            for (d in 1..daysInMonth) {
+                cal.set(Calendar.DAY_OF_MONTH, d)
+                val ds = dateFormatJour.format(cal.time)
+
+                val cellIndex = (firstDayOfWeek + (d - 1))
+                val w = cellIndex / 7
+
+                val s = computeDayContentScore(ds)
+                val prev = weekMaxScores[w] ?: 0
+                if (s > prev) weekMaxScores[w] = s
+            }
             
                 for (day in 1..daysInMonth) {
                     cal.set(Calendar.DAY_OF_MONTH, day)
                     val dateStr = dateFormatJour.format(cal.time)
+                    // weekIndex = 0 pour la première ligne de jours du mois (après les vides initiaux)
+                    val cellIndexFromMonthStart = (firstDayOfWeek + (day - 1))
+                    val weekIndex = cellIndexFromMonthStart / 7
+
                     
                     // Total consommations du jour
                     var totalDay = 0
@@ -317,39 +380,48 @@ class CalendrierFragment : Fragment() {
                         }
                     }
                 
-                    // Marqueurs d'objectifs pour ce jour
+                                        // --- Lignes affichées dans la case (1 ligne = 1 icône + nombre, seulement si > 0) ---
+                    val lines = mutableListOf<String>()
+
+                    val cCig = if (categoriesActives["cigarette"] == true) dbHelper.getConsommationParDate("cigarette", dateStr) else 0
+                    val cJoi = if (categoriesActives["joint"] == true) dbHelper.getConsommationParDate("joint", dateStr) else 0
+                    val cAlg = if (categoriesActives["alcool_global"] == true) dbHelper.getConsommationParDate("alcool_global", dateStr) else 0
+                    val cBie = if (categoriesActives["biere"] == true) dbHelper.getConsommationParDate("biere", dateStr) else 0
+                    val cLiq = if (categoriesActives["liqueur"] == true) dbHelper.getConsommationParDate("liqueur", dateStr) else 0
+                    val cFor = if (categoriesActives["alcool_fort"] == true) dbHelper.getConsommationParDate("alcool_fort", dateStr) else 0
+
+                    if (cCig > 0) lines.add("🚬 $cCig")
+                    if (cJoi > 0) lines.add("🌿 $cJoi")
+                    if (cBie > 0) lines.add("🍺 $cBie")
+                    if (cLiq > 0) lines.add("🍷 $cLiq")
+                    if (cFor > 0) lines.add("🥃 $cFor")
+                    if (cAlg > 0) lines.add("🥃G $cAlg")
+
                     val isReduction = datesReduction.contains(dateStr)
                     val isArret = datesArret.contains(dateStr)
                     val isReussite = datesReussite.contains(dateStr)
-                
-                    // Ligne emojis objectifs
-                    val objectifsEmojis = StringBuilder()
-                    if (isReduction) objectifsEmojis.append(" 🐢")
-                    if (isArret) objectifsEmojis.append(" 🛑")
-                    if (isReussite) objectifsEmojis.append(" ✅")
-                    
-                    // Ligne emojis consommations
-                    val consoEmojis = StringBuilder()
-                    if (categoriesActives["cigarette"] == true && dbHelper.getConsommationParDate("cigarette", dateStr) > 0) consoEmojis.append(" 🚬")
-                    if (categoriesActives["joint"] == true && dbHelper.getConsommationParDate("joint", dateStr) > 0) consoEmojis.append(" 🌿")
-                    if (categoriesActives["alcool_global"] == true && dbHelper.getConsommationParDate("alcool_global", dateStr) > 0) consoEmojis.append(" 🥃G")
-                    if (categoriesActives["biere"] == true && dbHelper.getConsommationParDate("biere", dateStr) > 0) consoEmojis.append(" 🍺")
-                    if (categoriesActives["liqueur"] == true && dbHelper.getConsommationParDate("liqueur", dateStr) > 0) consoEmojis.append(" 🍷")
-                    if (categoriesActives["alcool_fort"] == true && dbHelper.getConsommationParDate("alcool_fort", dateStr) > 0) consoEmojis.append(" 🥃")
-                    
-                    // Texte final de la case (jour + emojis)
+
+
+                    // Objectifs (icônes uniquement, pas de texte)
+                    if (isReduction) lines.add("🐢")
+                    if (isArret) lines.add("🛑")
+                    if (isReussite) lines.add("✅")
+
+                    // Texte final : 1ère ligne = jour, puis lignes de contenu
                     val finalLabel = buildString {
                         append(day)
-                        if (consoEmojis.isNotEmpty()) append("\n").append(consoEmojis.toString())
-                        if (objectifsEmojis.isNotEmpty()) append("\n").append(objectifsEmojis.toString())
+                        if (lines.isNotEmpty()) {
+                            append("\n")
+                            append(lines.joinToString("\n"))
+                        }
                     }                    
-                
+
                     val dayView = TextView(requireContext()).apply {
                         text = finalLabel
                         textSize = 14f
                         setPadding(8, 12, 8, 12)
-                        gravity = android.view.Gravity.CENTER
-                        setLines(3)
+                        gravity = android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL
+                        setLines(6)
                 
                         // Couleurs SOBRES selon total
                         val bgColor = when {
@@ -373,7 +445,8 @@ class CalendrierFragment : Fragment() {
                     }
                     val params = GridLayout.LayoutParams().apply {
                         width = 0
-                        height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        val hDp = weekHeightDp(weekMaxScores[weekIndex] ?: 0)
+                        height = dp(hDp)
                         columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
                     }
                     dayView.layoutParams = params
