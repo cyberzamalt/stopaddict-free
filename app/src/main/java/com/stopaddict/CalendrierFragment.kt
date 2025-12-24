@@ -261,12 +261,6 @@ class CalendrierFragment : Fragment() {
 
         // Objectifs : 1 ligne si au moins un objectif sur ce jour
         // (on ne compte pas 3 lignes séparées ici, sinon cases trop grandes)
-                // Objectifs : 1 ligne si au moins un objectif ce jour
-        // (on ne compte pas 3 lignes séparées ici)
-        val hasObj =
-            (dbHelper.getPreference("dummy", "") != null) && (
-                false
-            )
 
         return score
     }
