@@ -574,8 +574,8 @@ private fun configureBarChart(chart: BarChart) {
                     // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
                     val yConso = values.last().toFloat()
 
-                    // Décalage plus faible pour les icônes de conso (sinon elles flottent trop haut)
-                    val emojiYOffsetConso = 0.4f
+                    // Décalage optimisé pour rester AU-DESSUS de la ligne sans s’en éloigner
+                    val emojiYOffsetConso = 0.65f
                     
                     // On garde un décalage séparé pour les limites (car elles sont OK chez toi)
                     val emojiYOffsetMax = 1.2f
