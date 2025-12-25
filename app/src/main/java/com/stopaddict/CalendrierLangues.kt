@@ -19,7 +19,7 @@ object CalendrierLangues {
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
             else -> {
-                Log.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
