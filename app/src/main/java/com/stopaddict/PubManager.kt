@@ -82,7 +82,7 @@ class PubManager(private val context: Context) {
             
             StopAddictLogger.d(TAG, "Chargement bandeau pub lancé")
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur création bandeau pub: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur création bandeau pub", e)
         }
     }
 
