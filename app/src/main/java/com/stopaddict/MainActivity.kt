@@ -65,6 +65,9 @@ class MainActivity : AppCompatActivity() {
     // Cache : dernier jour pour lequel le bandeau a été calculé
     private var headerResumeLastDay: String? = null
 
+    // Cache : dernière config de catégories actives utilisée pour calculer le bandeau
+    private var headerResumeLastCategoriesJson: String? = null
+
     // Cache bandeau "Jour" (évite de recharger les traductions à chaque update)
     private var headerTradStatsCache: Map<String, String>? = null
     private var headerLabelJourCache: String? = null
@@ -461,11 +464,18 @@ updateHeaderResumeVisibility(viewPager.currentItem)
     if (position == 0 || position == 1 || position == 2 || position == 3 || position == 4) {
         headerResumeScroll.visibility = View.VISIBLE
 
-        // Micro-optimisation : on ne recalcule que si le JOUR a changé
-        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        if (headerResumeLastDay != today) {
-            updateHeaderResumeJour()
-        }
+        // Recalcul si le jour OU les catégories actives ont changé
+val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+val categoriesJson = dbHelper.getPreference(
+    "categories_actives",
+    """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}"""
+)
+
+if (headerResumeLastDay != today || headerResumeLastCategoriesJson != categoriesJson) {
+    updateHeaderResumeJour()
+}
+
     } else {
         headerResumeScroll.visibility = View.GONE
     }
@@ -493,6 +503,16 @@ updateHeaderResumeVisibility(viewPager.currentItem)
             headerResumeLastDay = today
             val consos = dbHelper.getConsommationsJour(today)
 
+            val categoriesJson = dbHelper.getPreference(
+                    "categories_actives",
+                    """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}"""
+                )
+                headerResumeLastCategoriesJson = categoriesJson
+                
+                val gson = com.google.gson.Gson()
+                val typeToken = object : com.google.gson.reflect.TypeToken<Map<String, Boolean>>() {}.type
+                val categoriesActives: Map<String, Boolean> = gson.fromJson(categoriesJson, typeToken)
+
             fun getCount(key: String): Int {
                 val value = consos[key]
                 return when (value) {
@@ -508,12 +528,20 @@ updateHeaderResumeVisibility(viewPager.currentItem)
             val cLiqueur = getCount("liqueur")
             val cAlcoolFort = getCount("alcool_fort")
 
-            headerResumeCigarette.text = "🚬 $cCigarette"
-            headerResumeJoint.text = "🌿 $cJoint"
-            headerResumeAlcoolGlobal.text = "🥃G $cAlcoolGlobal"
-            headerResumeBiere.text = "🍺 $cBiere"
-            headerResumeLiqueur.text = "🍷 $cLiqueur"
-            headerResumeAlcoolFort.text = "🥃 $cAlcoolFort"
+            fun setItem(tv: TextView, active: Boolean, label: String) {
+                tv.visibility = if (active) View.VISIBLE else View.GONE
+                if (active) tv.text = label
+            }
+            
+            setItem(headerResumeCigarette, categoriesActives["cigarette"] == true, "🚬 $cCigarette")
+            setItem(headerResumeJoint, categoriesActives["joint"] == true, "🌿 $cJoint")
+            
+            // “mini G” compact : ᴳ
+            setItem(headerResumeAlcoolGlobal, categoriesActives["alcool_global"] == true, "🥃ᴳ $cAlcoolGlobal")
+            
+            setItem(headerResumeBiere, categoriesActives["biere"] == true, "🍺 $cBiere")
+            setItem(headerResumeLiqueur, categoriesActives["liqueur"] == true, "🍷 $cLiqueur")
+            setItem(headerResumeAlcoolFort, categoriesActives["alcool_fort"] == true, "🥃 $cAlcoolFort")
 
             logger.d("updateHeaderResumeJour: jour=$today, ciga=$cCigarette, joint=$cJoint, alcoolGlobal=$cAlcoolGlobal, biere=$cBiere, liqueur=$cLiqueur, alcoolFort=$cAlcoolFort")
         } catch (e: Exception) {
