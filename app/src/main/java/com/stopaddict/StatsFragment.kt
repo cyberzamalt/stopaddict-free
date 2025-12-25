@@ -2,7 +2,6 @@ package com.stopaddict
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -175,7 +174,7 @@ class StatsFragment : Fragment() {
             updateGraphiques()
             updateProfilStatus()
 
-            Log.d(TAG, "StatsFragment initialisé avec succès")
+            StopAddictLogger.d(TAG, "StatsFragment initialisé avec succès")
         } catch (e: Exception) {
     StopAddictLogger.e(TAG, "Erreur chargement Stats", e)
 
@@ -295,7 +294,7 @@ class StatsFragment : Fragment() {
             configureLineChart(chartConsommation)
             configureBarChart(chartCouts)
 
-            Log.d(TAG, "Vues initialisées avec succès")
+            StopAddictLogger.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur initialisation vues", e)
             throw e
@@ -333,7 +332,7 @@ class StatsFragment : Fragment() {
         chart.legend.isEnabled = true
         chart.legend.textColor = Color.BLACK
 
-        Log.d(TAG, "LineChart configuré")
+        StopAddictLogger.d(TAG, "LineChart configuré")
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur configuration LineChart", e)
     }
@@ -366,7 +365,7 @@ private fun configureBarChart(chart: BarChart) {
         chart.legend.isEnabled = true
         chart.legend.textColor = Color.BLACK
 
-        Log.d(TAG, "BarChart configuré")
+        StopAddictLogger.d(TAG, "BarChart configuré")
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur configuration BarChart", e)
     }
@@ -390,7 +389,7 @@ private fun configureBarChart(chart: BarChart) {
                 categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] =
                     jsonObj.optBoolean("alcool_fort", false)
             }
-            Log.d(TAG, "Catégories actives chargées: $categoriesActives")
+            StopAddictLogger.d(TAG, "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur chargement catégories actives", e)
         }
@@ -422,7 +421,7 @@ private fun configureBarChart(chart: BarChart) {
                 updateGraphiques()
             }
 
-            Log.d(TAG, "Listeners configurés")
+            StopAddictLogger.d(TAG, "Listeners configurés")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur configuration listeners", e)
         }
@@ -450,7 +449,7 @@ private fun configureBarChart(chart: BarChart) {
             PERIODE_ANNEE -> btnAnnee.isSelected = true
         }
 
-        Log.d(TAG, "État boutons (selected) mis à jour: $periodeActive")
+        StopAddictLogger.d(TAG, "État boutons (selected) mis à jour: $periodeActive")
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur mise à jour état boutons: ${e.message}", e)
     }
@@ -461,7 +460,7 @@ private fun configureBarChart(chart: BarChart) {
             updateGraphiqueConsommation()
             updateGraphiqueCouts()
             updateResumeTable()
-            Log.d(TAG, "Graphiques + tableau mis à jour pour période: $periodeActive")
+            StopAddictLogger.d(TAG, "Graphiques + tableau mis à jour pour période: $periodeActive")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur mise à jour graphiques", e)
         }
@@ -652,10 +651,10 @@ private fun configureBarChart(chart: BarChart) {
             chartConsommation.data = lineData
             chartConsommation.xAxis.valueFormatter = getXAxisFormatter()
             chartConsommation.invalidate()
-            Log.d(TAG, "Graphique consommation mis à jour: ${dataSets.size} datasets")
+            StopAddictLogger.d(TAG, "Graphique consommation mis à jour: ${dataSets.size} datasets")
             } else {
                 chartConsommation.clear()
-                Log.w(TAG, "Aucune donnée pour graphique consommation")
+                StopAddictLogger.w(TAG, "Aucune donnée pour graphique consommation")
             }
             } catch (e: Exception) {
                 StopAddictLogger.e(TAG, "Erreur mise à jour graphique consommation", e)
@@ -686,7 +685,7 @@ private fun configureBarChart(chart: BarChart) {
                 }
             }
 
-            Log.d(TAG, "Consommations jour dispatch calculées")
+            StopAddictLogger.d(TAG, "Consommations jour dispatch calculées")
             result
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur dispatch consommations jour", e)
@@ -1130,11 +1129,11 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         }
         
         chartCouts.invalidate()
-        Log.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
+        StopAddictLogger.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
 
         } else {
             chartCouts.clear()
-            Log.w(TAG, "Aucune donnée pour graphique coûts")
+            StopAddictLogger.w(TAG, "Aucune donnée pour graphique coûts")
         }
 
     } catch (e: Exception) {
@@ -1161,7 +1160,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
                 }
             }
 
-            Log.d(TAG, "Coûts calculés: ${couts.sum()} ${getDeviseSymbol()} total")
+            StopAddictLogger.d(TAG, "Coûts calculés: ${couts.sum()} ${getDeviseSymbol()} total")
             couts
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur calcul coûts", e)
@@ -1207,7 +1206,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             }
         }
 
-        Log.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
+        StopAddictLogger.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
         economies
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur calcul économies", e)
@@ -1502,7 +1501,7 @@ private fun calculerEconomiesParCategorie(
             setMoneyCell(cellEconomiesMois, ecoMois)
             setMoneyCell(cellEconomiesAnnee, ecoAnnee)
 
-            Log.d(TAG, "Tableau résumé mis à jour")
+            StopAddictLogger.d(TAG, "Tableau résumé mis à jour")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur updateResumeTable", e)
         }
@@ -1588,7 +1587,7 @@ private fun calculerEconomiesParCategorie(
             loadCategoriesActives()
             updateGraphiques()
             updateProfilStatus()
-            Log.d(TAG, "Fragment resumed - données rechargées")
+            StopAddictLogger.d(TAG, "Fragment resumed - données rechargées")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur onResume", e)
         }
@@ -1597,7 +1596,7 @@ private fun calculerEconomiesParCategorie(
     override fun onPause() {
         super.onPause()
         try {
-            Log.d(TAG, "Fragment paused")
+            StopAddictLogger.d(TAG, "Fragment paused")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur onPause", e)
         }
@@ -1608,7 +1607,7 @@ private fun calculerEconomiesParCategorie(
         try {
             chartConsommation.clear()
             chartCouts.clear()
-            Log.d(TAG, "Fragment détruit - graphiques nettoyés")
+            StopAddictLogger.d(TAG, "Fragment détruit - graphiques nettoyés")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur onDestroyView", e)
         }
@@ -1617,7 +1616,7 @@ private fun calculerEconomiesParCategorie(
     override fun onDestroy() {
         super.onDestroy()
         try {
-            Log.d(TAG, "Fragment destroyed")
+            StopAddictLogger.d(TAG, "Fragment destroyed")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur onDestroy", e)
         }
@@ -1628,7 +1627,7 @@ private fun calculerEconomiesParCategorie(
             loadCategoriesActives()
             updateGraphiques()
             updateProfilStatus()
-            Log.d(TAG, "Données rafraîchies manuellement")
+            StopAddictLogger.d(TAG, "Données rafraîchies manuellement")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur refresh data", e)
         }
@@ -1640,9 +1639,9 @@ private fun calculerEconomiesParCategorie(
                 periodeActive = periode
                 updateButtonsState()
                 updateGraphiques()
-                Log.d(TAG, "Période changée: $periode")
+                StopAddictLogger.d(TAG, "Période changée: $periode")
             } else {
-                Log.w(TAG, "Période invalide: $periode")
+                StopAddictLogger.w(TAG, "Période invalide: $periode")
             }
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur changement période", e)
