@@ -83,8 +83,8 @@ object AccueilLangues {
         "date_rapproche" to "Votre objectif se rapproche!",
         
         // Messages économies
-        "economies_jour" to "Vous économisez %.2f€ aujourd'hui!",
-        "economies_reelles" to "Économies réelles: %.2f€ vs vos habitudes!",
+        "economies_jour" to "Vous économisez %.2f aujourd'hui!",
+        "economies_reelles" to "Économies réelles: %.2f vs vos habitudes!",
         "economies_accumulent" to "Ces économies s'accumulent jour après jour.",
 
         "btn_ok" to "Fermer",
@@ -219,8 +219,8 @@ object AccueilLangues {
         "date_rapproche" to "¡Tu objetivo se acerca!",
         
         // Messages économies
-        "economies_jour" to "¡Estás ahorrando %.2f€ hoy!",
-        "economies_reelles" to "Ahorros reales: %.2f€ vs tus hábitos!",
+        "economies_jour" to "¡Estás ahorrando %.2f hoy!",
+        "economies_reelles" to "Ahorros reales: %.2f vs tus hábitos!",
         "economies_accumulent" to "Estos ahorros se acumulan rápidamente.",
 
                 "btn_ok" to "Cerrar",
@@ -354,7 +354,7 @@ object AccueilLangues {
         "date_rapproche" to "Ihr Ziel nähert sich!",
         
         // Messages économies
-        "economies_jour" to "Sie sparen heute %.2f€!",
+        "economies_jour" to "Sie sparen heute %.2f!",
         "economies_reelles" to "Echte Ersparnisse: %.2f€ vs Ihre Gewohnheiten!",
         "economies_accumulent" to "Diese Ersparnisse häufen sich schnell an.",
 
@@ -422,7 +422,7 @@ object AccueilLangues {
         "date_rapproche" to "Il tuo obiettivo si avvicina!",
         
         // Messages économies
-        "economies_jour" to "Stai risparmiando %.2f€ oggi!",
+        "economies_jour" to "Stai risparmiando %.2f oggi!",
         "economies_reelles" to "Risparmi reali: %.2f€ vs le tue abitudini!",
         "economies_accumulent" to "Questi risparmi si accumulano rapidamente.",
 
@@ -490,7 +490,7 @@ object AccueilLangues {
         "date_rapproche" to "Ваша цель приближается!",
         
         // Messages économies
-        "economies_jour" to "Вы экономите %.2f₽ сегодня!",
+        "economies_jour" to "Вы экономите %.2f сегодня!",
         "economies_reelles" to "Реальная экономия: %.2f₽ vs ваши привычки!",
         "economies_accumulent" to "Эти сбережения быстро накапливаются.",
 
