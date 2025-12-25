@@ -434,10 +434,19 @@ private fun computeDayContentScore(dateStr: String): Int {
                         }
                         setBackgroundColor(bgColor)
                 
-                        // Bordure pour aujourd'hui
+                        // Bordure pour aujourd'hui (sans réduire la place du texte)
                         if (dateStr == today) {
-                            setBackgroundResource(android.R.drawable.editbox_background)
+                            val border = android.graphics.drawable.GradientDrawable().apply {
+                                shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+                                setColor(bgColor) // garde la couleur de fond du jour
+                                setStroke(dp(2), Color.parseColor("#1976D2")) // bordure bleue
+                                cornerRadius = dp(4).toFloat()
+                            }
+                            background = border
+                        
                             setTextColor(Color.parseColor("#1976D2"))
+                            // IMPORTANT : pas de gras pour aujourd'hui
+                            setTypeface(null, android.graphics.Typeface.NORMAL)
                         }
                 
                         setOnClickListener {
