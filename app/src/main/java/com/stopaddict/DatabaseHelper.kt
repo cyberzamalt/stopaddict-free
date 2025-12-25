@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONObject
@@ -166,7 +165,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 db.execSQL("INSERT INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
             }
 
-            Log.d(TAG, "Base de données créée avec succès")
+            StopAddictLogger.d(TAG, "Base de données créée avec succès")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur création base de données", e)
         }
@@ -180,7 +179,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             db.execSQL("DROP TABLE IF EXISTS $TABLE_COUTS")
             db.execSQL("DROP TABLE IF EXISTS $TABLE_PREFERENCES")
             onCreate(db)
-            Log.d(TAG, "Base de données mise à jour: v$oldVersion -> v$newVersion")
+            StopAddictLogger.d(TAG, "Base de données mise à jour: v$oldVersion -> v$newVersion")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur mise à jour base de données", e)
         }
@@ -205,7 +204,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             }
             
             val result = db.insert(TABLE_CONSOMMATIONS, null, values)
-            Log.d(TAG, "Consommation ajoutée: $type x$quantite à $dateHeure")
+            StopAddictLogger.d(TAG, "Consommation ajoutée: $type x$quantite à $dateHeure")
             result != -1L
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur ajout consommation", e)
@@ -261,7 +260,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             if (cursor.moveToFirst()) {
                 val id = cursor.getInt(0)
                 success = db.delete(TABLE_CONSOMMATIONS, "$COL_ID = ?", arrayOf(id.toString())) > 0
-                Log.d(TAG, "Consommation retirée: $type (ID: $id)")
+                StopAddictLogger.d(TAG, "Consommation retirée: $type (ID: $id)")
             }
             cursor.close()
             success
@@ -290,7 +289,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 result[type] = total
             }
             cursor.close()
-            Log.d(TAG, "Consommations du $date: $result")
+            StopAddictLogger.d(TAG, "Consommations du $date: $result")
             result
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur lecture consommations jour", e)
@@ -299,9 +298,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun getConsommationsSemaine(): Map<String, List<Int>> {
-    Log.d(TAG, "getConsommationsSemaine() appelé - période = 7 jours")
+    StopAddictLogger.d(TAG, "getConsommationsSemaine() appelé - période = 7 jours")
     val result = getConsommationsPeriode(7)
-    Log.d(
+    StopAddictLogger.d(
         TAG,
         "getConsommationsSemaine() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
     )
@@ -309,9 +308,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 }
 
     fun getConsommationsMois(): Map<String, List<Int>> {
-    Log.d(TAG, "getConsommationsMois() appelé - période = 30 jours")
+    StopAddictLogger.d(TAG, "getConsommationsMois() appelé - période = 30 jours")
     val result = getConsommationsPeriode(30)
-    Log.d(
+    StopAddictLogger.d(
         TAG,
         "getConsommationsMois() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
     )
@@ -319,9 +318,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 }
 
     fun getConsommationsAnnee(): Map<String, List<Int>> {
-    Log.d(TAG, "getConsommationsAnnee() appelé - période = 365 jours")
+    StopAddictLogger.d(TAG, "getConsommationsAnnee() appelé - période = 365 jours")
     val result = getConsommationsPeriode(365)
-    Log.d(
+    StopAddictLogger.d(
         TAG,
         "getConsommationsAnnee() terminé - types=${result.keys} nbJours=${result.values.firstOrNull()?.size ?: 0}"
     )
@@ -362,7 +361,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 cursor.close()
             }
             
-            Log.d(TAG, "Consommations période $jours jours récupérées")
+            StopAddictLogger.d(TAG, "Consommations période $jours jours récupérées")
             result
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur lecture consommations période", e)
@@ -379,7 +378,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put(COL_MAX_JOURNALIER, max)
         }
         val result = db.update(TABLE_HABITUDES, values, "$COL_TYPE = ?", arrayOf(type))
-        Log.d(TAG, "Max journalier mis à jour pour $type: $max")
+        StopAddictLogger.d(TAG, "Max journalier mis à jour pour $type: $max")
         result > 0
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur update max journalier", e)
@@ -451,7 +450,7 @@ fun setDatesObjectifs(
         }
 
         val result = db.update(TABLE_DATES, values, "$COL_TYPE = ?", arrayOf(type))
-        Log.d(
+        StopAddictLogger.d(
             TAG,
             "Dates objectifs mises à jour pour $type : " +
                     "reduction=$dateReduction, arret=$dateArret, reussite=$dateReussite ($result ligne(s))"
@@ -529,7 +528,7 @@ fun setDatesObjectifs(
         }
 
         val result = db.update(TABLE_COUTS, values, "$COL_TYPE = ?", arrayOf(type))
-        Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
+        StopAddictLogger.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
         result > 0
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur setCouts", e)
@@ -568,7 +567,7 @@ fun setDatesObjectifs(
                 put(key, value)
             }
             val result = db.update(TABLE_PREFERENCES, values, "$COL_ID = 1", null)
-            Log.d(TAG, "Préférence mise à jour: $key = $value")
+            StopAddictLogger.d(TAG, "Préférence mise à jour: $key = $value")
             result > 0
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur update préférence", e)
@@ -600,7 +599,7 @@ fun setDatesObjectifs(
             val db = writableDatabase
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             val result = db.delete(TABLE_CONSOMMATIONS, "$COL_DATE_HEURE LIKE ?", arrayOf("$today%"))
-            Log.d(TAG, "RAZ du jour effectuée: $result lignes supprimées")
+            StopAddictLogger.d(TAG, "RAZ du jour effectuée: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur RAZ jour", e)
@@ -612,7 +611,7 @@ fun setDatesObjectifs(
         return try {
             val db = writableDatabase
             db.delete(TABLE_CONSOMMATIONS, null, null)
-            Log.d(TAG, "RAZ historique effectuée")
+            StopAddictLogger.d(TAG, "RAZ historique effectuée")
             true
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur RAZ historique", e)
@@ -652,7 +651,7 @@ fun setDatesObjectifs(
                 db.execSQL("INSERT INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
             }
             
-            Log.d(TAG, "RAZ usine effectuée")
+            StopAddictLogger.d(TAG, "RAZ usine effectuée")
             true
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur RAZ usine", e)
@@ -676,7 +675,7 @@ fun setDatesObjectifs(
             }
             cursor.close()
             
-            Log.d(TAG, "Consommation $type du $date: $total")
+            StopAddictLogger.d(TAG, "Consommation $type du $date: $total")
             total
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur getConsommationParDate", e)
@@ -688,7 +687,7 @@ fun setDatesObjectifs(
         return try {
             val db = writableDatabase
             val result = db.delete(TABLE_CONSOMMATIONS, "$COL_TYPE = ? AND $COL_DATE_HEURE LIKE ?", arrayOf(type, "$date%"))
-            Log.d(TAG, "Suppression consommations du jour pour $type: $result lignes supprimées")
+            StopAddictLogger.d(TAG, "Suppression consommations du jour pour $type: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur supprimerConsommationsJour", e)
@@ -700,7 +699,7 @@ fun setDatesObjectifs(
         return try {
             val db = writableDatabase
             val result = db.delete(TABLE_CONSOMMATIONS, "$COL_TYPE = ?", arrayOf(type))
-            Log.d(TAG, "Suppression toutes consommations pour $type: $result lignes supprimées")
+            StopAddictLogger.d(TAG, "Suppression toutes consommations pour $type: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur supprimerToutesConsommations", e)
@@ -732,7 +731,7 @@ fun setDatesObjectifs(
             }
             cursor.close()
             
-            Log.d(TAG, "Récupération de ${liste.size} consommations pour $type")
+            StopAddictLogger.d(TAG, "Récupération de ${liste.size} consommations pour $type")
             liste
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur getToutesConsommations", e)
@@ -810,7 +809,7 @@ fun setDatesObjectifs(
             }
             prefCursor.close()
 
-            Log.d(TAG, "Export JSON réussi")
+            StopAddictLogger.d(TAG, "Export JSON réussi")
             export.toString(2)
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur export JSON", e)
@@ -964,7 +963,7 @@ fun setDatesObjectifs(
             }
         }
 
-        Log.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
+        StopAddictLogger.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
         true
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur import JSON", e)
@@ -982,7 +981,7 @@ fun setDatesObjectifs(
             val dateLimit = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
             
             val deleted = db.delete(TABLE_CONSOMMATIONS, "$COL_DATE_HEURE < ?", arrayOf(dateLimit))
-            Log.d(TAG, "Nettoyage données >5 ans: $deleted lignes supprimées")
+            StopAddictLogger.d(TAG, "Nettoyage données >5 ans: $deleted lignes supprimées")
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur nettoyage historique", e)
         }
