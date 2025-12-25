@@ -3,7 +3,7 @@ package com.stopaddict
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import android.util.Log
+// import android.util.Log  // supprimé: logs exportables via StopAddictLogger
 
 /**
  * FragmentAdapter.kt
@@ -26,31 +26,31 @@ class FragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activit
      * Création des fragments selon la position
      */
     override fun createFragment(position: Int): Fragment {
-        Log.d(TAG, "Création fragment position: $position")
+        StopAddictLogger.d(TAG, "Création fragment position: $position")
         
         return when (position) {
             0 -> {
-                Log.d(TAG, "→ AccueilFragment créé")
+                StopAddictLogger.d(TAG, "→ AccueilFragment créé")
                 AccueilFragment()
             }
             1 -> {
-                Log.d(TAG, "→ StatsFragment créé")
+                StopAddictLogger.d(TAG, "→ StatsFragment créé")
                 StatsFragment()
             }
             2 -> {
-                Log.d(TAG, "→ CalendrierFragment créé")
+                StopAddictLogger.d(TAG, "→ CalendrierFragment créé")
                 CalendrierFragment()
             }
             3 -> {
-                Log.d(TAG, "→ HabitudesFragment créé")
+                StopAddictLogger.d(TAG, "→ HabitudesFragment créé")
                 HabitudesFragment()
             }
             4 -> {
-                Log.d(TAG, "→ ReglagesFragment créé")
+                StopAddictLogger.d(TAG, "→ ReglagesFragment créé")
                 ReglagesFragment()
             }
             else -> {
-                Log.e(TAG, "❌ Position invalide: $position")
+                StopAddictLogger.e(TAG, "❌ Position invalide: $position")
                 throw IllegalArgumentException("Position invalide: $position")
             }
         }
