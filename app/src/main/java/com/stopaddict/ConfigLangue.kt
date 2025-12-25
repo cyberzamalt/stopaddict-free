@@ -3,7 +3,6 @@ package com.stopaddict
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.util.Log
 import java.util.*
 
 class ConfigLangue(private val context: Context) {
@@ -49,7 +48,7 @@ class ConfigLangue(private val context: Context) {
      */
     fun getLangue(): String {
         val langue = prefs.getString(KEY_LANGUE, "FR") ?: "FR"
-        Log.d(TAG, "Langue actuelle: $langue")
+        StopAddictLogger.d(TAG, "Langue actuelle: $langue")
         return langue
     }
 
@@ -58,14 +57,14 @@ class ConfigLangue(private val context: Context) {
      */
     fun setLangue(codeLangue: String) {
         if (!LANGUES_DISPONIBLES.containsKey(codeLangue)) {
-            Log.e(TAG, "Code langue invalide: $codeLangue")
+            StopAddictLogger.e(TAG, "Code langue invalide: $codeLangue")
             return
         }
 
         try {
             // Sauvegarder dans SharedPreferences
             prefs.edit().putString(KEY_LANGUE, codeLangue).apply()
-            Log.d(TAG, "Langue sauvegardée: $codeLangue")
+            StopAddictLogger.d(TAG, "Langue sauvegardée: $codeLangue")
 
             // Appliquer la locale immédiatement
             appliquerLocale(codeLangue)
@@ -73,7 +72,7 @@ class ConfigLangue(private val context: Context) {
             // Redémarrer l'application
             redemarrerApplication()
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur changement langue: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur changement langue", e)
         }
     }
 
@@ -96,9 +95,9 @@ class ConfigLangue(private val context: Context) {
             }
 
             context.resources.updateConfiguration(config, context.resources.displayMetrics)
-            Log.d(TAG, "Locale appliquée: $localeCode")
+            StopAddictLogger.d(TAG, "Locale appliquée: $localeCode")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur application locale: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur application locale", e)
         }
     }
 
@@ -116,9 +115,9 @@ class ConfigLangue(private val context: Context) {
                 context.finish()
             }
             
-            Log.d(TAG, "Application redémarrée pour changement de langue")
+            StopAddictLogger.d(TAG, "Application redémarrée pour changement de langue")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur redémarrage application: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur redémarrage application", e)
         }
     }
 
@@ -128,7 +127,7 @@ class ConfigLangue(private val context: Context) {
     fun initialiserLangue() {
         val langue = getLangue()
         appliquerLocale(langue)
-        Log.d(TAG, "Langue initialisée: $langue")
+        StopAddictLogger.d(TAG, "Langue initialisée: $langue")
     }
 
     /**
