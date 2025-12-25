@@ -2,7 +2,6 @@ package com.stopaddict
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,8 @@ class HabitudesFragment : Fragment() {
         private const val TAG = "HabitudesFragment"
     }
 
+    private val logger = AppLogger("HabitudesFragment")
+    
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
     private var trad: Map<String, String> = emptyMap()
@@ -814,5 +815,6 @@ private fun saveDatesOnly() {
         }
     }
 }
+
 
 
