@@ -20,6 +20,7 @@
         private lateinit var dbHelper: DatabaseHelper
         private lateinit var configLangue: ConfigLangue
         private lateinit var trad: Map<String, String>
+        private val logger = AppLogger("CalendrierFragment")
         
         private lateinit var txtProfilStatus: TextView
         private lateinit var profilProgress: ProgressBar
@@ -47,10 +48,10 @@
                 updateProfilStatus()
                 updateCalendar()
                 
-                Log.d(TAG, "CalendrierFragment créé")
+                 "CalendrierFragment créé")
                 view
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur onCreateView", e)
+                logger.e( "Erreur onCreateView", e)
                 Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                 null
             }
@@ -207,7 +208,7 @@
                 categoriesActives.clear()
                 categoriesActives.putAll(map)
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur load categories", e)
+                logger.e( "Erreur load categories", e)
             }
         }
     
@@ -234,7 +235,7 @@
             txtProfilRestant.visibility = View.INVISIBLE
     
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
+            logger.e( "Erreur updateProfilStatus (progression)", e)
         }
     }
     
@@ -454,7 +455,7 @@
                         gridCalendrier.addView(dayView)
                     }            
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur update calendar", e)
+                logger.e( "Erreur update calendar", e)
             }
         }
     
@@ -465,7 +466,7 @@
                 
                 // Si la date est invalide, on sort proprement
                 if (parsedDate == null) {
-                    Log.e(TAG, "showDayDialog: date invalide pour dateStr=$dateStr")
+                    logger.e( "showDayDialog: date invalide pour dateStr=$dateStr")
                     return
                 }
                 
@@ -569,7 +570,7 @@
     
                     
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur dialog jour", e)
+                logger.e( "Erreur dialog jour", e)
             }
         }
     
@@ -604,7 +605,7 @@
                 Toast.makeText(requireContext(), trad["sauvegarde_ok"] ?: "Enregistré", Toast.LENGTH_SHORT).show()
                 
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur save", e)
+                logger.e( "Erreur save", e)
                 Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
