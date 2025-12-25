@@ -1,7 +1,6 @@
 package com.stopaddict
 
 import android.content.Context
-import android.util.Log
 import android.widget.EditText
 
 /**
@@ -43,23 +42,23 @@ class ReglagesValidator(private val context: Context) {
         // Vérifier format décimal
         val prix = texte.toDoubleOrNull()
         if (prix == null) {
-            Log.w(TAG, "Format invalide pour $nomChamp: $texte")
+            StopAddictLogger.w(TAG, "Format invalide pour $nomChamp: $texte")
             return ValidationResult(false, "Le prix '$nomChamp' doit être un nombre valide (ex: 12.50)")
         }
 
         // Vérifier positif
         if (prix < 0) {
-            Log.w(TAG, "Prix négatif pour $nomChamp: $prix")
+            StopAddictLogger.w(TAG, "Prix négatif pour $nomChamp: $prix")
             return ValidationResult(false, "Le prix '$nomChamp' ne peut pas être négatif")
         }
 
         // Vérifier limite raisonnable (max 1000€)
         if (prix > 1000) {
-            Log.w(TAG, "Prix trop élevé pour $nomChamp: $prix")
+            StopAddictLogger.w(TAG, "Prix trop élevé pour $nomChamp: $prix")
             return ValidationResult(false, "Le prix '$nomChamp' semble trop élevé (max 1000)")
         }
 
-        Log.d(TAG, "Prix validé: $nomChamp = $prix")
+        StopAddictLogger.d(TAG, "Prix validé: $nomChamp = $prix")
         return ValidationResult(true)
     }
 
@@ -85,23 +84,23 @@ class ReglagesValidator(private val context: Context) {
         // Vérifier format entier
         val quantite = texte.toIntOrNull()
         if (quantite == null) {
-            Log.w(TAG, "Format invalide pour $nomChamp: $texte")
+            StopAddictLogger.w(TAG, "Format invalide pour $nomChamp: $texte")
             return ValidationResult(false, "La quantité '$nomChamp' doit être un nombre entier (ex: 20)")
         }
 
         // Vérifier positif et non nul
         if (quantite <= 0) {
-            Log.w(TAG, "Quantité nulle ou négative pour $nomChamp: $quantite")
+            StopAddictLogger.w(TAG, "Quantité nulle ou négative pour $nomChamp: $quantite")
             return ValidationResult(false, "La quantité '$nomChamp' doit être supérieure à 0")
         }
 
         // Vérifier limite raisonnable (max 1000 unités)
         if (quantite > 1000) {
-            Log.w(TAG, "Quantité trop élevée pour $nomChamp: $quantite")
+            StopAddictLogger.w(TAG, "Quantité trop élevée pour $nomChamp: $quantite")
             return ValidationResult(false, "La quantité '$nomChamp' semble trop élevée (max 1000)")
         }
 
-        Log.d(TAG, "Quantité validée: $nomChamp = $quantite")
+        StopAddictLogger.d(TAG, "Quantité validée: $nomChamp = $quantite")
         return ValidationResult(true)
     }
 
@@ -132,7 +131,7 @@ class ReglagesValidator(private val context: Context) {
             return ValidationResult(false, "Les centilitres '$nomChamp' semblent trop élevés (max 500cl = 5L)")
         }
 
-        Log.d(TAG, "Centilitres validés: $nomChamp = $cl")
+        StopAddictLogger.d(TAG, "Centilitres validés: $nomChamp = $cl")
         return ValidationResult(true)
     }
 
@@ -164,7 +163,7 @@ class ReglagesValidator(private val context: Context) {
             return ValidationResult(false, "Les grammes '$nomChamp' semblent trop élevés (max 10g)")
         }
 
-        Log.d(TAG, "Grammes validés: $nomChamp = $grammes")
+        StopAddictLogger.d(TAG, "Grammes validés: $nomChamp = $grammes")
         return ValidationResult(true)
     }
 
@@ -200,7 +199,7 @@ class ReglagesValidator(private val context: Context) {
             return ValidationResult(false, "Le max '$nomChamp' semble trop élevé (max $limiteMax)")
         }
 
-        Log.d(TAG, "Max journalier validé: $nomChamp = $max")
+        StopAddictLogger.d(TAG, "Max journalier validé: $nomChamp = $max")
         return ValidationResult(true)
     }
 
@@ -208,7 +207,7 @@ class ReglagesValidator(private val context: Context) {
      * Valide un formulaire cigarettes classiques (paquet)
      */
     fun validerCigarettesClassiques(editPrix: EditText, editNb: EditText): ValidationResult {
-        Log.d(TAG, "Validation cigarettes classiques")
+        StopAddictLogger.d(TAG, "Validation cigarettes classiques")
         
         val validPrix = validerPrix(editPrix, "Prix du paquet")
         if (!validPrix.isValid) return validPrix
@@ -230,7 +229,7 @@ class ReglagesValidator(private val context: Context) {
         editPrixFiltres: EditText,
         editNbFiltres: EditText
     ): ValidationResult {
-        Log.d(TAG, "Validation cigarettes roulées")
+        StopAddictLogger.d(TAG, "Validation cigarettes roulées")
 
         validerPrix(editPrixTabac, "Prix du tabac").let { if (!it.isValid) return it }
         validerQuantite(editNbCigarettes, "Nombre de cigarettes").let { if (!it.isValid) return it }
@@ -251,7 +250,7 @@ class ReglagesValidator(private val context: Context) {
         editPrixTubes: EditText,
         editNbTubes: EditText
     ): ValidationResult {
-        Log.d(TAG, "Validation cigarettes tubeuse")
+        StopAddictLogger.d(TAG, "Validation cigarettes tubeuse")
 
         validerPrix(editPrixTabac, "Prix du tabac").let { if (!it.isValid) return it }
         validerQuantite(editNbCigarettes, "Nombre de cigarettes").let { if (!it.isValid) return it }
@@ -265,7 +264,7 @@ class ReglagesValidator(private val context: Context) {
      * Valide un formulaire joints
      */
     fun validerJoints(editPrixGramme: EditText, editGrammeParJoint: EditText): ValidationResult {
-        Log.d(TAG, "Validation joints")
+        StopAddictLogger.d(TAG, "Validation joints")
 
         val validPrix = validerPrix(editPrixGramme, "Prix du gramme")
         if (!validPrix.isValid) return validPrix
@@ -280,7 +279,7 @@ class ReglagesValidator(private val context: Context) {
      * Valide un formulaire alcool (prix verre + centilitres)
      */
     fun validerAlcool(editPrixVerre: EditText, editCL: EditText, typeAlcool: String): ValidationResult {
-        Log.d(TAG, "Validation alcool: $typeAlcool")
+        StopAddictLogger.d(TAG, "Validation alcool: $typeAlcool")
 
         val validPrix = validerPrix(editPrixVerre, "Prix du verre $typeAlcool")
         if (!validPrix.isValid) return validPrix
