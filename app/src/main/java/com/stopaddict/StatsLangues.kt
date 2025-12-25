@@ -1,6 +1,5 @@
 package com.stopaddict
 
-import android.util.Log
 
 object StatsLangues {
 
@@ -22,7 +21,7 @@ object StatsLangues {
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
             else -> {
-                Log.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
@@ -1105,7 +1104,7 @@ object StatsLangues {
             val traductions = getTraductions(codeLangue)
             traductions[key] ?: key
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur récupération texte $key: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur récupération texte $key", e)
             key
         }
     }
@@ -1124,7 +1123,7 @@ object StatsLangues {
             }
             getTexte(key, codeLangue)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur récupération label axe X: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur récupération texte $StopAddictLogger.e(TAG, "Erreur récupération label axe X", e)key", e)
             index.toString()
         }
     }
