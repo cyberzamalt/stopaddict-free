@@ -1,7 +1,5 @@
 package com.stopaddict
 
-import android.util.Log
-
 object MainActivityLangues {
 
     private const val TAG = "MainActivityLangues"
