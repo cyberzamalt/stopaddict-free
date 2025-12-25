@@ -18,6 +18,7 @@ import java.util.*
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import org.json.JSONObject
 import com.google.android.gms.ads.MobileAds
 
 
@@ -473,6 +474,7 @@ val categoriesJson = dbHelper.getPreference(
 )
 
 if (headerResumeLastDay != today || headerResumeLastCategoriesJson != categoriesJson) {
+    headerResumeLastCategoriesJson = categoriesJson
     updateHeaderResumeJour()
 }
 
@@ -493,6 +495,31 @@ if (headerResumeLastDay != today || headerResumeLastCategoriesJson != categories
             ?: "Jour"
 }
 
+    private fun getCategoriesActivesFromPrefs(): Map<String, Boolean> {
+        return try {
+            val json = dbHelper.getPreference("categories_actives", "{}")
+            val obj = org.json.JSONObject(json)
+    
+            mapOf(
+                DatabaseHelper.TYPE_CIGARETTE to obj.optBoolean("cigarette", true),
+                DatabaseHelper.TYPE_JOINT to obj.optBoolean("joint", true),
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL to obj.optBoolean("alcool_global", true),
+                DatabaseHelper.TYPE_BIERE to obj.optBoolean("biere", false),
+                DatabaseHelper.TYPE_LIQUEUR to obj.optBoolean("liqueur", false),
+                DatabaseHelper.TYPE_ALCOOL_FORT to obj.optBoolean("alcool_fort", false)
+            )
+        } catch (_: Exception) {
+            mapOf(
+                DatabaseHelper.TYPE_CIGARETTE to true,
+                DatabaseHelper.TYPE_JOINT to true,
+                DatabaseHelper.TYPE_ALCOOL_GLOBAL to true,
+                DatabaseHelper.TYPE_BIERE to false,
+                DatabaseHelper.TYPE_LIQUEUR to false,
+                DatabaseHelper.TYPE_ALCOOL_FORT to false
+            )
+        }
+    }
+
     private fun updateHeaderResumeJour() {
         try {
             ensureHeaderResumeCache()
@@ -502,16 +529,6 @@ if (headerResumeLastDay != today || headerResumeLastCategoriesJson != categories
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             headerResumeLastDay = today
             val consos = dbHelper.getConsommationsJour(today)
-
-            val categoriesJson = dbHelper.getPreference(
-                    "categories_actives",
-                    """{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}"""
-                )
-                headerResumeLastCategoriesJson = categoriesJson
-                
-                val gson = com.google.gson.Gson()
-                val typeToken = object : com.google.gson.reflect.TypeToken<Map<String, Boolean>>() {}.type
-                val categoriesActives: Map<String, Boolean> = gson.fromJson(categoriesJson, typeToken)
 
             fun getCount(key: String): Int {
                 val value = consos[key]
@@ -528,20 +545,50 @@ if (headerResumeLastDay != today || headerResumeLastCategoriesJson != categories
             val cLiqueur = getCount("liqueur")
             val cAlcoolFort = getCount("alcool_fort")
 
-            fun setItem(tv: TextView, active: Boolean, label: String) {
-                tv.visibility = if (active) View.VISIBLE else View.GONE
-                if (active) tv.text = label
+            // --- Visibilité + texte selon catégories actives (SOURCE UNIQUE) ---
+            val actives = getCategoriesActivesFromPrefs()
+            
+            fun applyHeaderItem(tv: TextView, enabled: Boolean, text: String) {
+                tv.visibility = if (enabled) View.VISIBLE else View.GONE
+                if (enabled) tv.text = text
             }
             
-            setItem(headerResumeCigarette, categoriesActives["cigarette"] == true, "🚬 $cCigarette")
-            setItem(headerResumeJoint, categoriesActives["joint"] == true, "🌿 $cJoint")
+            applyHeaderItem(
+                headerResumeCigarette,
+                actives[DatabaseHelper.TYPE_CIGARETTE] == true,
+                "🚬 $cCigarette"
+            )
             
-            // “mini G” compact : ᴳ
-            setItem(headerResumeAlcoolGlobal, categoriesActives["alcool_global"] == true, "🥃ᴳ $cAlcoolGlobal")
+            applyHeaderItem(
+                headerResumeJoint,
+                actives[DatabaseHelper.TYPE_JOINT] == true,
+                "🌿 $cJoint"
+            )
             
-            setItem(headerResumeBiere, categoriesActives["biere"] == true, "🍺 $cBiere")
-            setItem(headerResumeLiqueur, categoriesActives["liqueur"] == true, "🍷 $cLiqueur")
-            setItem(headerResumeAlcoolFort, categoriesActives["alcool_fort"] == true, "🥃 $cAlcoolFort")
+            // mini G : ᴳ
+            applyHeaderItem(
+                headerResumeAlcoolGlobal,
+                actives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true,
+                "🥃ᴳ $cAlcoolGlobal"
+            )
+            
+            applyHeaderItem(
+                headerResumeBiere,
+                actives[DatabaseHelper.TYPE_BIERE] == true,
+                "🍺 $cBiere"
+            )
+            
+            applyHeaderItem(
+                headerResumeLiqueur,
+                actives[DatabaseHelper.TYPE_LIQUEUR] == true,
+                "🍷 $cLiqueur"
+            )
+            
+            applyHeaderItem(
+                headerResumeAlcoolFort,
+                actives[DatabaseHelper.TYPE_ALCOOL_FORT] == true,
+                "🥃 $cAlcoolFort"
+            )
 
             logger.d("updateHeaderResumeJour: jour=$today, ciga=$cCigarette, joint=$cJoint, alcoolGlobal=$cAlcoolGlobal, biere=$cBiere, liqueur=$cLiqueur, alcoolFort=$cAlcoolFort")
         } catch (e: Exception) {
