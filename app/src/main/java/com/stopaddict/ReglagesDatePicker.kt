@@ -46,7 +46,7 @@ class ReglagesDatePicker(private val context: Context) {
                         calendar.time = parsedDate
                     }
                 } catch (e: Exception) {
-                    StopAddictLogger.w(TAG, "Erreur parsing date actuelle: $dateActuelle", e)
+                    StopAddictLogger.e(TAG, "Erreur parsing date actuelle: $dateActuelle", e)
                     // Garder la date d'aujourd'hui par défaut
                 }
             }
