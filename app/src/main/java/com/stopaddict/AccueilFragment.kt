@@ -223,18 +223,10 @@ class AccueilFragment : Fragment() {
             val tradReglages = ReglagesLangues.getTraductions(configLangue.getLangue())
             btnPremiumAccueil.text = tradReglages["btn_premium"] ?: "Version sans publicité"
 
-            // Appliquer traductions aux CheckBox
-            checkCigarettes.text = trad["label_cigarettes"] ?: "Cigarettes"
-            checkJoints.text = trad["label_joints"] ?: "Joints"
-            checkAlcoolGlobal.text = trad["label_alcool_global"] ?: "Alcool global"
-            checkBieres.text = trad["label_bieres"] ?: "Bières"
-            checkLiqueurs.text = trad["label_liqueurs"] ?: "Liqueurs"
-            checkAlcoolFort.text = trad["label_alcool_fort"] ?: "Alcool fort"
-
             // Ajout des icônes (emoji) comme dans le header et Stats – sans impacter la traduction
             checkCigarettes.text   = "🚬 " + (trad["label_cigarettes"] ?: "Cigarettes")
             checkJoints.text       = "🌿 " + (trad["label_joints"] ?: "Joints")
-            checkAlcoolGlobal.text = "🥃G " + (trad["label_alcool_global"] ?: "Alcool global")
+            checkAlcoolGlobal.text = "🥃ᴳ " + (trad["label_alcool_global"] ?: "Alcool global")
             checkBieres.text       = "🍺 " + (trad["label_bieres"] ?: "Bières")
             checkLiqueurs.text     = "🍷 " + (trad["label_liqueurs"] ?: "Liqueurs")
             checkAlcoolFort.text   = "🥃 " + (trad["label_alcool_fort"] ?: "Alcool fort")
@@ -511,6 +503,7 @@ class AccueilFragment : Fragment() {
 
             updateUI()
             planifierMiseAJourConseilAntiSpam()
+            (activity as? MainActivity)?.refreshHeaderResumeJour()
             Log.d(TAG, "Catégorie $type basculée: $isActive")
             
         } catch (e: Exception) {
@@ -529,7 +522,16 @@ class AccueilFragment : Fragment() {
             txtAlcoolFort.text = alcoolFortCount.toString()
 
             // Calcul total jour
-            val totalJour = cigarettesCount + jointsCount + alcoolGlobalCount + bieresCount + liqueursCount + alcoolFortCount
+            // Calcul total jour (UNIQUEMENT catégories actives)
+            // Calcul total jour (UNIQUEMENT catégories actives)
+            val totalJour =
+                (if (categoriesActives[DatabaseHelper.TYPE_CIGARETTE] == true) cigarettesCount else 0) +
+                (if (categoriesActives[DatabaseHelper.TYPE_JOINT] == true) jointsCount else 0) +
+                (if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_GLOBAL] == true) alcoolGlobalCount else 0) +
+                (if (categoriesActives[DatabaseHelper.TYPE_BIERE] == true) bieresCount else 0) +
+                (if (categoriesActives[DatabaseHelper.TYPE_LIQUEUR] == true) liqueursCount else 0) +
+                (if (categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] == true) alcoolFortCount else 0)
+
             txtTotalJourLabel.text = trad["total_aujourdhui"] ?: "Total aujourd'hui:"
             txtTotalJour.text = totalJour.toString()
 
