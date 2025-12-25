@@ -94,9 +94,9 @@ class HabitudesFragment : Fragment() {
             loadExistingData()
             buildVolonteSection()
             
-            Log.d(TAG, "HabitudesFragment initialisé avec succès")
+            StopAddictLogger.d(TAG, "HabitudesFragment initialisé avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur initialisation: ${e.message}", e) 
             Toast.makeText(
                 requireContext(),
                 trad["msg_err_chargement_habitudes"] ?: "Erreur chargement Habitudes",
@@ -141,9 +141,9 @@ class HabitudesFragment : Fragment() {
             
             containerVolonte = view.findViewById(R.id.habitudes_container_volonte)
             
-            Log.d(TAG, "Vues initialisées avec succès")
+            StopAddictLogger.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation vues: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur initialisation vues: ${e.message}", e) 
             throw e
         }
     }
@@ -160,9 +160,9 @@ class HabitudesFragment : Fragment() {
                 categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = jsonObj.optBoolean("liqueur", false)
                 categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = jsonObj.optBoolean("alcool_fort", false)
             }
-            Log.d(TAG, "Catégories actives chargées: $categoriesActives")
+            StopAddictLogger.d(TAG, "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur chargement catégories actives: ${e.message}", e) 
         }
     }
 
@@ -217,9 +217,9 @@ class HabitudesFragment : Fragment() {
             btnEffacerDates.text = trad["btn_effacer"] ?: "Effacer"
             btnSauvegarderDates.text = trad["btn_sauvegarder"] ?: "Sauvegarder"
             
-            Log.d(TAG, "Traductions appliquées pour langue: $langue")
+            StopAddictLogger.d(TAG, "Traductions appliquées pour langue: $langue")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur application traductions: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur application traductions: ${e.message}", e) 
         }
     }
 
@@ -273,7 +273,7 @@ private fun setupListeners() {
             ).show()
 
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ habitudes: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur RAZ habitudes: ${e.message}", e) 
             Toast.makeText(
                 requireContext(),
                 trad["msg_err_reset"] ?: "Erreur lors de la réinitialisation",
@@ -305,7 +305,7 @@ private fun setupListeners() {
             ).show()
 
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ dates: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur RAZ dates: ${e.message}", e) 
             Toast.makeText(
                 requireContext(),
                 trad["msg_err_reset"] ?: "Erreur lors de la réinitialisation",
@@ -348,9 +348,9 @@ private fun setupListeners() {
         updateHintsFromPeriods()
 
         updateBandeau()
-        Log.d(TAG, "Données existantes chargées")
+        StopAddictLogger.d(TAG, "Données existantes chargées")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur chargement données: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur chargement données: ${e.message}", e) 
     }
 }
 
@@ -375,7 +375,7 @@ private fun setupListeners() {
         txtProfilRestant.visibility = View.VISIBLE
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur update bandeau (progression)", e)
+        StopAddictLogger.e(TAG, "Erreur update bandeau (progression)", e) 
     }
 }
     
@@ -407,9 +407,9 @@ private fun setupListeners() {
                 }
             }
             
-            Log.d(TAG, "Section Volonté construite")
+            StopAddictLogger.d(TAG, "Section Volonté construite")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur construction section Volonté: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur construction section Volonté: ${e.message}", e) 
         }
     }
     
@@ -502,7 +502,7 @@ private fun setupListeners() {
                 containerVolonte.addView(containerCategorie)
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur construction catégorie volonté $type: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur construction catégorie volonté $type: ${e.message}", e) 
         }
     }
 
@@ -571,7 +571,7 @@ private fun setupListeners() {
                     calendar.time = date
                 }
             } catch (e: Exception) {
-                Log.w(TAG, "Date invalide dans bouton: $currentTextRaw")
+                StopAddictLogger.w(TAG, "Date invalide dans bouton: $currentTextRaw") 
             }
             }
             
@@ -580,7 +580,7 @@ private fun setupListeners() {
                 { _, year, month, dayOfMonth ->
                     val dateStr = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
                     button.text = withCalendarIcon(dateStr)
-                    Log.d(TAG, "Date sélectionnée: $dateStr pour $type - $dateType")
+                    StopAddictLogger.d(TAG, "Date sélectionnée: $dateStr pour $type - $dateType")
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -588,7 +588,7 @@ private fun setupListeners() {
             ).show()
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur affichage DatePicker: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur affichage DatePicker: ${e.message}", e) 
             Toast.makeText(
                 requireContext(),
                 trad["msg_err_generic"] ?: "Une erreur est survenue",
@@ -731,7 +731,7 @@ private fun saveHabitudesOnly() {
         (activity as? MainActivity)?.refreshData()
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur sauvegarde habitudes: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur sauvegarde habitudes: ${e.message}", e) 
         Toast.makeText(
             requireContext(),
             trad["msg_err_generic"] ?: "Une erreur est survenue",
@@ -756,7 +756,7 @@ private fun saveDatesOnly() {
             val dReussite = datesButtons["reussite"]?.let { safeDate(it) } ?: ""
 
             dbHelper.setDatesObjectifs(type, dReduction, dArret, dReussite)
-            Log.d(TAG, "Dates sauvegardées pour $type : R=$dReduction A=$dArret S=$dReussite")
+            StopAddictLogger.d(TAG, "Dates sauvegardées pour $type : R=$dReduction A=$dArret S=$dReussite")
         }
 
         Toast.makeText(
@@ -769,7 +769,7 @@ private fun saveDatesOnly() {
         (activity as? MainActivity)?.refreshData()
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur sauvegarde dates: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur sauvegarde dates: ${e.message}", e) 
         Toast.makeText(
             requireContext(),
             trad["msg_err_generic"] ?: "Une erreur est survenue",
@@ -784,9 +784,9 @@ private fun saveDatesOnly() {
         applyAlcoholVisibility()   // 👈 AJOUTE CETTE LIGNE
         loadExistingData()
         buildVolonteSection()
-        Log.d(TAG, "Données rafraîchies")
+        StopAddictLogger.d(TAG, "Données rafraîchies")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur refresh data: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur refresh data: ${e.message}", e) 
     }
 }
 
@@ -798,7 +798,7 @@ private fun saveDatesOnly() {
         loadExistingData()
         buildVolonteSection()
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur onResume: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur onResume: ${e.message}", e) 
     }
 }
 
@@ -808,10 +808,11 @@ private fun saveDatesOnly() {
             if (::dbHelper.isInitialized) {
                 dbHelper.close()
             }
-            Log.d(TAG, "Fragment détruit")
+            StopAddictLogger.d(TAG, "Fragment détruit")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroyView: ${e.message}", e)
+            StopAddictLogger.e(TAG, "Erreur onDestroyView: ${e.message}", e) 
         }
     }
 }
+
 
