@@ -157,9 +157,9 @@ class AccueilFragment : Fragment() {
 
             updateConseil()
 
-            Log.d(TAG, "AccueilFragment initialisé avec succès")
+            logger.d( "AccueilFragment initialisé avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation AccueilFragment: ${e.message}")
+            logger.e( "Erreur initialisation AccueilFragment: ${e.message}")
             Toast.makeText(requireContext(), trad["erreur_chargement"] ?: "Erreur chargement", Toast.LENGTH_SHORT).show()
         }
 
@@ -231,9 +231,9 @@ class AccueilFragment : Fragment() {
             checkLiqueurs.text     = "🍷 " + (trad["label_liqueurs"] ?: "Liqueurs")
             checkAlcoolFort.text   = "🥃 " + (trad["label_alcool_fort"] ?: "Alcool fort")
 
-            Log.d(TAG, "Vues initialisées avec succès")
+            logger.d( "Vues initialisées avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation vues: ${e.message}")
+            logger.e( "Erreur initialisation vues: ${e.message}")
             throw e
         }
     }
@@ -250,9 +250,9 @@ class AccueilFragment : Fragment() {
                 categoriesActives[DatabaseHelper.TYPE_LIQUEUR] = jsonObj.optBoolean("liqueur", false)
                 categoriesActives[DatabaseHelper.TYPE_ALCOOL_FORT] = jsonObj.optBoolean("alcool_fort", false)
             }
-            Log.d(TAG, "Catégories actives chargées: $categoriesActives")
+            logger.d( "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}")
+            logger.e( "Erreur chargement catégories actives: ${e.message}")
         }
     }
 
@@ -265,9 +265,9 @@ class AccueilFragment : Fragment() {
             bieresCount = consommations[DatabaseHelper.TYPE_BIERE] ?: 0
             liqueursCount = consommations[DatabaseHelper.TYPE_LIQUEUR] ?: 0
             alcoolFortCount = consommations[DatabaseHelper.TYPE_ALCOOL_FORT] ?: 0
-            Log.d(TAG, "Consommations chargées: C=$cigarettesCount J=$jointsCount A=$alcoolGlobalCount B=$bieresCount L=$liqueursCount AF=$alcoolFortCount")
+            logger.d( "Consommations chargées: C=$cigarettesCount J=$jointsCount A=$alcoolGlobalCount B=$bieresCount L=$liqueursCount AF=$alcoolFortCount")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement consommations: ${e.message}")
+            logger.e( "Erreur chargement consommations: ${e.message}")
         }
     }
 
@@ -378,9 +378,9 @@ class AccueilFragment : Fragment() {
         // Bouton version sans pub (accueil)
         btnPremiumAccueil.setOnClickListener { ouvrirVersionPremium() }
 
-        Log.d(TAG, "Listeners configurés avec succès")
+        logger.d( "Listeners configurés avec succès")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur configuration listeners: ${e.message}")
+        logger.e( "Erreur configuration listeners: ${e.message}")
     }
 }
     
@@ -394,10 +394,10 @@ class AccueilFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage")))
         } catch (e2: Exception) {
             // Plus de popup : juste un log (ou toast si tu préfères)
-            Log.e(TAG, "Impossible d'ouvrir le store", e2)
+            logger.e( "Impossible d'ouvrir le store", e2)
         }
     } catch (e: Exception) {
-        Log.e(TAG, "Impossible d'ouvrir le store", e)
+        logger.e( "Impossible d'ouvrir le store", e)
     }
 }
 
@@ -417,13 +417,13 @@ class AccueilFragment : Fragment() {
                             updateUI()
             planifierMiseAJourConseilAntiSpam()
             
-                Log.d(TAG, "Consommation ajoutée: $type")
+                logger.d( "Consommation ajoutée: $type")
             } else {
-                Log.e(TAG, "Échec ajout consommation: $type")
+                logger.e( "Échec ajout consommation: $type")
                 Toast.makeText(requireContext(), trad["erreur_ajout"] ?: "Erreur ajout", Toast.LENGTH_SHORT).show()    
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur ajout consommation $type: ${e.message}")
+            logger.e( "Erreur ajout consommation $type: ${e.message}")
             Toast.makeText(requireContext(), trad["erreur_generale"] ?: "Erreur", Toast.LENGTH_SHORT).show()
         }
     }
@@ -442,7 +442,7 @@ class AccueilFragment : Fragment() {
             }
 
             if (currentCount <= 0) {
-                Log.w(TAG, trad["erreur_retrait"] ?: "Impossible de retirer")
+                logger.w( trad["erreur_retrait"] ?: "Impossible de retirer")
                 return
             }
 
@@ -459,13 +459,13 @@ class AccueilFragment : Fragment() {
                 }
                 updateUI()
                 planifierMiseAJourConseilAntiSpam()
-                Log.d(TAG, "Consommation retirée: $type")
+                logger.d( "Consommation retirée: $type")
 
             } else {
-                Log.e(TAG, "Échec retrait consommation: $type")
+                logger.e( "Échec retrait consommation: $type")
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur retrait consommation $type: ${e.message}")
+            logger.e( "Erreur retrait consommation $type: ${e.message}")
             Toast.makeText(requireContext(), trad["erreur_generale"] ?: "Erreur", Toast.LENGTH_SHORT).show()
         }
     }
@@ -504,10 +504,10 @@ class AccueilFragment : Fragment() {
             updateUI()
             planifierMiseAJourConseilAntiSpam()
             (activity as? MainActivity)?.refreshHeaderResumeJour()
-            Log.d(TAG, "Catégorie $type basculée: $isActive")
+            logger.d( "Catégorie $type basculée: $isActive")
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur toggle catégorie $type: ${e.message}")
+            logger.e( "Erreur toggle catégorie $type: ${e.message}")
         }
     }
 
@@ -549,9 +549,9 @@ class AccueilFragment : Fragment() {
             // Mise à jour profil complet/incomplet
             updateProfilStatus()
 
-            Log.d(TAG, "UI mise à jour - Total: $totalJour")
+            logger.d( "UI mise à jour - Total: $totalJour")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour UI: ${e.message}")
+            logger.e( "Erreur mise à jour UI: ${e.message}")
         }
     }
 
@@ -586,9 +586,9 @@ class AccueilFragment : Fragment() {
         applyStyle(btnPlusAlcoolFort,  fortEnabled)
         applyStyle(btnMoinsAlcoolFort, fortEnabled)
 
-        Log.d(TAG, "Visibilité boutons mise à jour")
+        logger.d( "Visibilité boutons mise à jour")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur mise à jour visibilité boutons: ${e.message}")
+        logger.e( "Erreur mise à jour visibilité boutons: ${e.message}")
     }
 }
         
@@ -615,7 +615,7 @@ class AccueilFragment : Fragment() {
         txtProfilRestant.visibility = View.INVISIBLE
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur mise à jour profil (progression): ${e.message}")
+        logger.e( "Erreur mise à jour profil (progression): ${e.message}")
     }
 }
     
@@ -748,9 +748,9 @@ class AccueilFragment : Fragment() {
             imgConseil.setImageResource(iconRes)
             imgConseil.visibility = View.VISIBLE
 
-            Log.d(TAG, "Conseil mis à jour: P=$hasPrenom C=$hasCouts H=$hasHabitudes D=$hasDates")
+            logger.d( "Conseil mis à jour: P=$hasPrenom C=$hasCouts H=$hasHabitudes D=$hasDates")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour conseil: ${e.message}")
+            logger.e( "Erreur mise à jour conseil: ${e.message}")
             txtConseil.text = trad["conseil_generique_6"] ?: "Restez motivé!"
         }
     }
@@ -1072,7 +1072,7 @@ class AccueilFragment : Fragment() {
                 else -> 0.0
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul prix unitaire $type: ${e.message}")
+            logger.e( "Erreur calcul prix unitaire $type: ${e.message}")
             0.0
         }
     }
@@ -1101,11 +1101,11 @@ class AccueilFragment : Fragment() {
             }
         }
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calcul économies jour: ${e.message}", e)
+        logger.e( "Erreur calcul économies jour: ${e.message}", e)
     }
     // On renvoie un Double arrondi à 2 décimales, sans passer par une String
     val arrondi = Math.round(economies * 100.0) / 100.0
-    Log.d(TAG, "calculerEconomiesJour -> economies=$economies, arrondi=$arrondi")
+    logger.d( "calculerEconomiesJour -> economies=$economies, arrondi=$arrondi")
     return arrondi
 }
 
@@ -1139,11 +1139,11 @@ class AccueilFragment : Fragment() {
             }
         }
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calcul économies réelles: ${e.message}", e)
+        logger.e( "Erreur calcul économies réelles: ${e.message}", e)
     }
 
     val arrondi = Math.round(economies * 100.0) / 100.0
-    Log.d(TAG, "calculerEconomiesReelles -> economies=$economies, arrondi=$arrondi")
+    logger.d( "calculerEconomiesReelles -> economies=$economies, arrondi=$arrondi")
     return arrondi
 }
 
@@ -1181,7 +1181,7 @@ class AccueilFragment : Fragment() {
         }
         trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur comparaison habitudes: ${e.message}")
+        logger.e( "Erreur comparaison habitudes: ${e.message}")
         trad["habitudes_suivre"] ?: "Suivez vos habitudes pour progresser."
     }
 }
@@ -1246,7 +1246,7 @@ class AccueilFragment : Fragment() {
             // Si aucune date exploitable trouvée
             trad["date_rapproche"] ?: "Votre objectif se rapproche !"
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur génération conseil date: ${e.message}")
+            logger.e( "Erreur génération conseil date: ${e.message}")
             trad["date_rapproche"] ?: "Votre objectif se rapproche !"
         }
     }
@@ -1259,18 +1259,18 @@ class AccueilFragment : Fragment() {
             loadCategoriesActives()
             updateUI()
             updateConseil()
-            Log.d(TAG, "Fragment resumed - données rechargées")
+            logger.d( "Fragment resumed - données rechargées")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onResume: ${e.message}")
+            logger.e( "Erreur onResume: ${e.message}")
         }
     }
 
     override fun onPause() {
         super.onPause()
         try {
-            Log.d(TAG, "Fragment paused")
+            logger.d( "Fragment paused")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onPause: ${e.message}")
+            logger.e( "Erreur onPause: ${e.message}")
         }
     }
 
@@ -1285,18 +1285,18 @@ class AccueilFragment : Fragment() {
         conseilAntispamRunnable?.let { conseilHandler.removeCallbacks(it) }
         conseilAntispamRunnable = null
 
-        Log.d(TAG, "Fragment détruit - rotation conseils et anti-spam arrêtés")
+        logger.d( "Fragment détruit - rotation conseils et anti-spam arrêtés")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur onDestroyView: ${e.message}")
+        logger.e( "Erreur onDestroyView: ${e.message}")
     }
  }
     override fun onDestroy() {
         super.onDestroy()
         try {
             // Cleanup final si nécessaire
-            Log.d(TAG, "Fragment destroyed")
+            logger.d( "Fragment destroyed")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroy: ${e.message}")
+            logger.e( "Erreur onDestroy: ${e.message}")
         }
     }
 
@@ -1310,9 +1310,9 @@ class AccueilFragment : Fragment() {
             loadCategoriesActives()
             updateUI()
             updateConseil()
-            Log.d(TAG, "Données rafraîchies manuellement")
+            logger.d( "Données rafraîchies manuellement")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur refresh data: ${e.message}")
+            logger.e( "Erreur refresh data: ${e.message}")
         }
     }
 
@@ -1323,9 +1323,9 @@ class AccueilFragment : Fragment() {
         fun forceUpdateConseil() {
         try {
             updateConseil()
-            Log.d(TAG, "Conseil mis à jour manuellement")
+            logger.d( "Conseil mis à jour manuellement")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur force update conseil: ${e.message}")
+            logger.e( "Erreur force update conseil: ${e.message}")
         }
     }
 }
