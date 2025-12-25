@@ -48,7 +48,7 @@
                 updateProfilStatus()
                 updateCalendar()
                 
-                 "CalendrierFragment créé")
+                logger.d("CalendrierFragment créé")
                 view
             } catch (e: Exception) {
                 logger.e( "Erreur onCreateView", e)
