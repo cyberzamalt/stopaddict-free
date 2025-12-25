@@ -1,7 +1,6 @@
 package com.stopaddict
 
 import android.content.Context
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,16 +38,16 @@ class ExportLimiter(private val context: Context) {
                     .putString(KEY_LAST_EXPORT_DATE, today)
                     .putInt(KEY_EXPORT_COUNT, 0)
                     .apply()
-                Log.d(TAG, "Nouveau jour détecté, compteur export réinitialisé")
+                StopAddictLogger.d(TAG, "Nouveau jour détecté, compteur export réinitialisé")
             }
             
             val exportCount = prefs.getInt(KEY_EXPORT_COUNT, 0)
             val canExport = exportCount < MAX_EXPORT_PER_DAY
             
-            Log.d(TAG, "Vérification export: $exportCount/$MAX_EXPORT_PER_DAY - Autorisé: $canExport")
+            StopAddictLogger.d(TAG, "Vérification export: $exportCount/$MAX_EXPORT_PER_DAY - Autorisé: $canExport")
             canExport
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur vérification export: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur vérification export", e)
             false
         }
     }
@@ -59,7 +58,7 @@ class ExportLimiter(private val context: Context) {
     fun recordExport(): Boolean {
         return try {
             if (!canExport()) {
-                Log.w(TAG, "Limite export atteinte pour aujourd'hui")
+                StopAddictLogger.w(TAG, "Limite export atteinte pour aujourd'hui")
                 return false
             }
             
@@ -71,10 +70,10 @@ class ExportLimiter(private val context: Context) {
                 .putInt(KEY_EXPORT_COUNT, currentCount + 1)
                 .apply()
             
-            Log.d(TAG, "Export enregistré: ${currentCount + 1}/$MAX_EXPORT_PER_DAY")
+            StopAddictLogger.d(TAG, "Export enregistré: ${currentCount + 1}/$MAX_EXPORT_PER_DAY")
             true
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur enregistrement export: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur enregistrement export: ${e.message}")
             false
         }
     }
@@ -93,16 +92,16 @@ class ExportLimiter(private val context: Context) {
                     .putString(KEY_LAST_IMPORT_DATE, today)
                     .putInt(KEY_IMPORT_COUNT, 0)
                     .apply()
-                Log.d(TAG, "Nouveau jour détecté, compteur import réinitialisé")
+                StopAddictLogger.d(TAG, "Nouveau jour détecté, compteur import réinitialisé")
             }
             
             val importCount = prefs.getInt(KEY_IMPORT_COUNT, 0)
             val canImport = importCount < MAX_IMPORT_PER_DAY
             
-            Log.d(TAG, "Vérification import: $importCount/$MAX_IMPORT_PER_DAY - Autorisé: $canImport")
+            StopAddictLogger.d(TAG, "Vérification import: $importCount/$MAX_IMPORT_PER_DAY - Autorisé: $canImport")
             canImport
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur vérification import: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur vérification import: ${e.message}")
             false
         }
     }
@@ -113,7 +112,7 @@ class ExportLimiter(private val context: Context) {
     fun recordImport(): Boolean {
         return try {
             if (!canImport()) {
-                Log.w(TAG, "Limite import atteinte pour aujourd'hui")
+                StopAddictLogger.w(TAG, "Limite import atteinte pour aujourd'hui")
                 return false
             }
             
@@ -125,10 +124,10 @@ class ExportLimiter(private val context: Context) {
                 .putInt(KEY_IMPORT_COUNT, currentCount + 1)
                 .apply()
             
-            Log.d(TAG, "Import enregistré: ${currentCount + 1}/$MAX_IMPORT_PER_DAY")
+            StopAddictLogger.d(TAG, "Import enregistré: ${currentCount + 1}/$MAX_IMPORT_PER_DAY")
             true
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur enregistrement import: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur enregistrement import: ${e.message}")
             false
         }
     }
