@@ -53,19 +53,19 @@ object CalendrierLangues {
         "jour_6" to "D",
         
         "legende_titre" to "Légende:",
-"legende_vert" to "Aucune consommation",
-"legende_bleu" to "Faible consommation (1–5)",
-"legende_orange" to "Consommation modérée (6–15)",
-"legende_rouge" to "Consommation élevée (16+)",
+        "legende_vert" to "Aucune consommation",
+        "legende_bleu" to "Faible consommation (1–5)",
+        "legende_orange" to "Consommation modérée (6–15)",
+        "legende_rouge" to "Consommation élevée (16+)",
+        
+        "legende_objectifs" to "Objectifs :",
+        "legende_reduction" to "Réduction",
+        "legende_arret" to "Arrêt",
+        "legende_reussite" to "Objectif atteint",
+        
+        "legende_conso" to "Consommations :",
 
-"legende_objectifs" to "Objectifs :",
-"legende_reduction" to "Réduction",
-"legende_arret" to "Arrêt",
-"legende_reussite" to "Objectif atteint",
-
-"legende_conso" to "Consommations :",
-
-"sauvegarde_ok" to "Enregistré",
+        "sauvegarde_ok" to "Enregistré",
         
         "dialog_titre" to "Consommations du",
         "btn_sauvegarder" to "Sauvegarder",
