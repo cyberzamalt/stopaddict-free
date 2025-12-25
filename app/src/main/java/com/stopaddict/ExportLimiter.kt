@@ -73,7 +73,7 @@ class ExportLimiter(private val context: Context) {
             StopAddictLogger.d(TAG, "Export enregistré: ${currentCount + 1}/$MAX_EXPORT_PER_DAY")
             true
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur enregistrement export: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur enregistrement export", e)
             false
         }
     }
@@ -101,7 +101,7 @@ class ExportLimiter(private val context: Context) {
             StopAddictLogger.d(TAG, "Vérification import: $importCount/$MAX_IMPORT_PER_DAY - Autorisé: $canImport")
             canImport
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur vérification import: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur vérification import", e)
             false
         }
     }
@@ -127,7 +127,7 @@ class ExportLimiter(private val context: Context) {
             StopAddictLogger.d(TAG, "Import enregistré: ${currentCount + 1}/$MAX_IMPORT_PER_DAY")
             true
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur enregistrement import: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur enregistrement import", e)
             false
         }
     }
