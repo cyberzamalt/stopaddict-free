@@ -1,7 +1,6 @@
 package com.stopaddict
 
 import android.content.Context
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.google.android.gms.ads.AdRequest
@@ -32,10 +31,10 @@ class PubManager(private val context: Context) {
         try {
             MobileAds.initialize(context) { initializationStatus ->
                 isInitialized = true
-                Log.d(TAG, "AdMob initialisé: ${initializationStatus.adapterStatusMap}")
+                StopAddictLogger.d(TAG, "AdMob initialisé: ${initializationStatus.adapterStatusMap}")
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation AdMob: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur initialisation AdMob", e)
         }
     }
 
@@ -44,7 +43,7 @@ class PubManager(private val context: Context) {
      */
     fun loadBanner(container: FrameLayout) {
         if (adView != null) {
-            Log.w(TAG, "Bandeau déjà chargé")
+            StopAddictLogger.w(TAG, "Bandeau déjà chargé")
             return
         }
 
@@ -57,19 +56,19 @@ class PubManager(private val context: Context) {
                 // Listener pour logs
                 adListener = object : com.google.android.gms.ads.AdListener() {
                     override fun onAdLoaded() {
-                        Log.d(TAG, "Bandeau pub chargé")
+                        StopAddictLogger.d(TAG, "Bandeau pub chargé")
                     }
                     
                     override fun onAdFailedToLoad(error: LoadAdError) {
-                        Log.e(TAG, "Erreur chargement pub: ${error.message}")
+                        StopAddictLogger.e(TAG, "Erreur chargement pub: ${error.message}")
                     }
                     
                     override fun onAdOpened() {
-                        Log.d(TAG, "Pub ouverte")
+                        StopAddictLogger.d(TAG, "Pub ouverte")
                     }
                     
                     override fun onAdClosed() {
-                        Log.d(TAG, "Pub fermée")
+                        StopAddictLogger.d(TAG, "Pub fermée")
                     }
                 }
             }
@@ -96,7 +95,7 @@ class PubManager(private val context: Context) {
             adView = null
             Log.d(TAG, "Bandeau pub détruit")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur destruction pub: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur destruction pub", e)
         }
     }
 
