@@ -2,7 +2,6 @@ package com.stopaddict
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,7 +35,7 @@ class ReglagesDatePicker(private val context: Context) {
         callback: DateCallback
     ) {
         try {
-            Log.d(TAG, "Affichage DatePicker - Catégorie: $categorie, Type: $typeDate")
+            StopAddictLogger.d(TAG, "Affichage DatePicker - Catégorie: $categorie, Type: $typeDate")
 
             // Parser la date actuelle si elle existe
             val calendar = Calendar.getInstance()
@@ -47,7 +46,7 @@ class ReglagesDatePicker(private val context: Context) {
                         calendar.time = parsedDate
                     }
                 } catch (e: Exception) {
-                    Log.w(TAG, "Erreur parsing date actuelle: $dateActuelle", e)
+                    StopAddictLogger.w(TAG, "Erreur parsing date actuelle: $dateActuelle", e)
                     // Garder la date d'aujourd'hui par défaut
                 }
             }
@@ -67,7 +66,7 @@ class ReglagesDatePicker(private val context: Context) {
 
                     // Valider la date selon le type
                     if (validerDate(typeDate, selectedCalendar)) {
-                        Log.d(TAG, "Date valide sélectionnée: $dateSelectionnee")
+                        StopAddictLogger.d(TAG, "Date valide sélectionnée: $dateSelectionnee")
                         callback.onDateSelected(categorie, typeDate, dateSelectionnee)
                     } else {
                         val errorMsg = when (typeDate) {
@@ -75,7 +74,7 @@ class ReglagesDatePicker(private val context: Context) {
                             "arret" -> "La date d'arrêt ne peut pas être dans le futur"
                             else -> "Date invalide"
                         }
-                        Log.w(TAG, errorMsg)
+                        StopAddictLogger.w(TAG, errorMsg)
                         callback.onDateError(errorMsg)
                     }
                 },
@@ -91,7 +90,7 @@ class ReglagesDatePicker(private val context: Context) {
             datePickerDialog.show()
 
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur affichage DatePicker", e)
+            StopAddictLogger.e(TAG, "Erreur affichage DatePicker", e)
             callback.onDateError("Erreur lors de l'affichage du calendrier: ${e.message}")
         }
     }
@@ -107,7 +106,7 @@ class ReglagesDatePicker(private val context: Context) {
             "reduction", "arret" -> {
                 // Pour réduction et arrêt: pas de date future
                 datePicker.maxDate = aujourdhui
-                Log.d(TAG, "Limite max = aujourd'hui pour type: $typeDate")
+                StopAddictLogger.d(TAG, "Limite max = aujourd'hui pour type: $typeDate")
             }
             "reussite" -> {
                 // Pour réussite: peut être dans le futur
@@ -115,7 +114,7 @@ class ReglagesDatePicker(private val context: Context) {
                 val futureMax = Calendar.getInstance()
                 futureMax.add(Calendar.YEAR, 10)
                 datePicker.maxDate = futureMax.timeInMillis
-                Log.d(TAG, "Limite max = +10 ans pour type: $typeDate")
+                StopAddictLogger.d(TAG, "Limite max = +10 ans pour type: $typeDate")
             }
         }
 
@@ -152,7 +151,7 @@ class ReglagesDatePicker(private val context: Context) {
                 true
             }
             else -> {
-                Log.w(TAG, "Type de date inconnu: $typeDate")
+                StopAddictLogger.w(TAG, "Type de date inconnu: $typeDate")
                 false
             }
         }
@@ -162,7 +161,7 @@ class ReglagesDatePicker(private val context: Context) {
      * Efface une date (retourne null)
      */
     fun effacerDate(categorie: String, typeDate: String, callback: DateCallback) {
-        Log.d(TAG, "Effacement date - Catégorie: $categorie, Type: $typeDate")
+        StopAddictLogger.d(TAG, "Effacement date - Catégorie: $categorie, Type: $typeDate")
         callback.onDateSelected(categorie, typeDate, "")
     }
 
@@ -178,7 +177,7 @@ class ReglagesDatePicker(private val context: Context) {
                 calendar
             } else null
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur parsing date: $dateString", e)
+            StopAddictLogger.e(TAG, "Erreur parsing date: $dateString", e)
             null
         }
     }
