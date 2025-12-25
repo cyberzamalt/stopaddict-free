@@ -420,10 +420,10 @@ private fun computeDayContentScore(dateStr: String): Int {
 
                     val dayView = TextView(requireContext()).apply {
                         text = finalLabel
-                        textSize = 14f
-                        setPadding(8, 12, 8, 12)
+                        textSize = 12f
+                        setPadding(6, 10, 6, 10)
                         gravity = android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL
-                        maxLines = 7
+                        maxLines = 12
                 
                         // Couleurs SOBRES selon total
                         val bgColor = when {
