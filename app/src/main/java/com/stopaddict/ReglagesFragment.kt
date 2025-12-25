@@ -40,6 +40,7 @@ class ReglagesFragment : Fragment() {
     private lateinit var configLangue: ConfigLangue
     private lateinit var exportLimiter: ExportLimiter
     private lateinit var trad: Map<String, String>
+    private val logger = AppLogger("ReglagesFragment")
     
     private lateinit var txtProfilComplet: TextView
     private lateinit var profilProgress: ProgressBar
@@ -113,10 +114,10 @@ class ReglagesFragment : Fragment() {
             initializeUI(view) 
             loadData()
             
-            Log.d(TAG, "ReglagesFragment créé")
+            logger.d( "ReglagesFragment créé")
             view
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onCreateView", e)
+            logger.e( "Erreur onCreateView", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             null
         }
@@ -1006,7 +1007,7 @@ class ReglagesFragment : Fragment() {
             activity?.recreate()
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur save perso", e)
+            logger.e( "Erreur save perso", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -1161,7 +1162,7 @@ class ReglagesFragment : Fragment() {
         updateProfilStatus()
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur save coûts", e)
+        logger.e( "Erreur save coûts", e)
         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
     }
 }
@@ -1170,9 +1171,9 @@ class ReglagesFragment : Fragment() {
         try {
             val json = com.google.gson.Gson().toJson(categoriesActives)
             dbHelper.setPreference("categories_actives", json)
-            Log.d(TAG, "Catégories actives sauvegardées: $json")
+            logger.d( "Catégories actives sauvegardées: $json")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur save catégories", e)
+            logger.e( "Erreur save catégories", e)
         }
     }
 
@@ -1230,10 +1231,10 @@ class ReglagesFragment : Fragment() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage")))
         } catch (e2: Exception) {
-            Log.e(TAG, "Impossible d'ouvrir le store", e2)
+            logger.e( "Impossible d'ouvrir le store", e2)
         }
     } catch (e: Exception) {
-        Log.e(TAG, "Impossible d'ouvrir le store", e)
+        logger.e( "Impossible d'ouvrir le store", e)
     }
 }
     
@@ -1556,7 +1557,7 @@ class ReglagesFragment : Fragment() {
             updateProfilStatus()
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ", e)
+            logger.e( "Erreur RAZ", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -1583,7 +1584,7 @@ class ReglagesFragment : Fragment() {
             exportLimiter.enregistrerExport()
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur export", e)
+            logger.e( "Erreur export", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -1663,7 +1664,7 @@ class ReglagesFragment : Fragment() {
             exportLimiter.enregistrerImport()
 
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur import", e)
+            logger.e( "Erreur import", e)
             Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -1688,7 +1689,7 @@ class ReglagesFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } catch (e: Exception) {
-                        Log.e(TAG, "Erreur écriture export", e)
+                        logger.e( "Erreur écriture export", e)
                         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -1711,7 +1712,7 @@ class ReglagesFragment : Fragment() {
                         loadData()
 
                     } catch (e: Exception) {
-                        Log.e(TAG, "Erreur lecture import", e)
+                        logger.e( "Erreur lecture import", e)
                         Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -1760,7 +1761,7 @@ categoriesActives["biere"] = jsonCat.optBoolean("biere", false)
 categoriesActives["liqueur"] = jsonCat.optBoolean("liqueur", false)
 categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur parse categories_actives à l'import: ${e.message}")
+            logger.e( "Erreur parse categories_actives à l'import: ${e.message}")
         }
 
         // 3) Restaurer les coûts par catégorie (ordre cohérent avec saveCouts()/loadCouts())
@@ -1890,7 +1891,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
             }
         }
 
-        Log.d(TAG, "Import JSON complet (profil + données) terminé")
+        logger.d( "Import JSON complet (profil + données) terminé")
 
         Toast.makeText(
             requireContext(),
@@ -1899,7 +1900,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         ).show()
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur lors de l'import JSON: ${e.message}", e)
+        logger.e( "Erreur lors de l'import JSON: ${e.message}", e)
         Toast.makeText(
             requireContext(),
             "Erreur lors de l'import: ${e.message}",
@@ -1952,7 +1953,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
             updateProfilStatus()
             
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur load data", e)
+            logger.e( "Erreur load data", e)
         }
     }
 
@@ -2032,7 +2033,7 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
         txtProfilRestant.setTextColor(Color.TRANSPARENT)  // invisible mais garde la hauteur
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
+        logger.e( "Erreur updateProfilStatus (progression)", e)
     }
 }
 
