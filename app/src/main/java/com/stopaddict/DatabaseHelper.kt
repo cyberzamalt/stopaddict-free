@@ -168,7 +168,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
             Log.d(TAG, "Base de données créée avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur création base de données: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur création base de données", e)
         }
     }
 
@@ -182,7 +182,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             onCreate(db)
             Log.d(TAG, "Base de données mise à jour: v$oldVersion -> v$newVersion")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour base de données: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur mise à jour base de données", e)
         }
     }
     
@@ -208,7 +208,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             Log.d(TAG, "Consommation ajoutée: $type x$quantite à $dateHeure")
             result != -1L
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur ajout consommation: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur ajout consommation", e)
             false
         }
     }
@@ -266,7 +266,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             cursor.close()
             success
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur retrait consommation: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur retrait consommation", e)
             false
         }
     }
@@ -293,7 +293,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             Log.d(TAG, "Consommations du $date: $result")
             result
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture consommations jour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur lecture consommations jour", e)
             emptyMap()
         }
     }
@@ -365,7 +365,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             Log.d(TAG, "Consommations période $jours jours récupérées")
             result
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture consommations période: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur lecture consommations période", e)
             emptyMap()
         }
     }
@@ -382,7 +382,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         Log.d(TAG, "Max journalier mis à jour pour $type: $max")
         result > 0
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur update max journalier: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur update max journalier", e)
         false
     }
 }
@@ -412,7 +412,7 @@ fun setMaxJournalier(type: String, max: Int): Boolean {
         cursor.close()
         max
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur lecture max journalier: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur lecture max journalier", e)
         0.0
     }
 }
@@ -458,7 +458,7 @@ fun setDatesObjectifs(
         )
         result > 0
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur setDatesObjectifs: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur setDatesObjectifs", e)
         false
     }
 }
@@ -483,7 +483,7 @@ fun setDatesObjectifs(
             cursor.close()
             result
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture dates objectifs: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur lecture dates objectifs", e)
             emptyMap()
         }
     }
@@ -532,7 +532,7 @@ fun setDatesObjectifs(
         Log.d(TAG, "Coûts mis à jour pour $type: $result ligne(s)")
         result > 0
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur setCouts: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur setCouts", e)
         false
     }
 }
@@ -554,7 +554,7 @@ fun setDatesObjectifs(
             cursor.close()
             result
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture coûts: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur lecture coûts", e)
             emptyMap()
         }
     }
@@ -571,7 +571,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Préférence mise à jour: $key = $value")
             result > 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur update préférence: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur update préférence", e)
             false
         }
     }
@@ -588,7 +588,7 @@ fun setDatesObjectifs(
             cursor.close()
             value
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur lecture préférence: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur lecture préférence", e)
             default
         }
     }
@@ -603,7 +603,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "RAZ du jour effectuée: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ jour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur RAZ jour", e)
             false
         }
     }
@@ -615,7 +615,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "RAZ historique effectuée")
             true
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ historique: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur RAZ historique", e)
             false
         }
     }
@@ -655,7 +655,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "RAZ usine effectuée")
             true
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur RAZ usine: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur RAZ usine", e)
             false
         }
     }
@@ -679,7 +679,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Consommation $type du $date: $total")
             total
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur getConsommationParDate: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur getConsommationParDate", e)
             0
         }
     }
@@ -691,7 +691,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Suppression consommations du jour pour $type: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur supprimerConsommationsJour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur supprimerConsommationsJour", e)
             false
         }
     }
@@ -703,7 +703,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Suppression toutes consommations pour $type: $result lignes supprimées")
             result >= 0
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur supprimerToutesConsommations: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur supprimerToutesConsommations", e)
             false
         }
     }
@@ -735,7 +735,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Récupération de ${liste.size} consommations pour $type")
             liste
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur getToutesConsommations: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur getToutesConsommations", e)
             emptyList()
         }
     }
@@ -813,7 +813,7 @@ fun setDatesObjectifs(
             Log.d(TAG, "Export JSON réussi")
             export.toString(2)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur export JSON: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur export JSON", e)
             ""
         }
     }
@@ -967,7 +967,7 @@ fun setDatesObjectifs(
         Log.d(TAG, "Import JSON réussi (consommations + habitudes + dates + coûts + préférences)")
         true
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur import JSON: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur import JSON", e)
         false
     }
 }
@@ -984,7 +984,7 @@ fun setDatesObjectifs(
             val deleted = db.delete(TABLE_CONSOMMATIONS, "$COL_DATE_HEURE < ?", arrayOf(dateLimit))
             Log.d(TAG, "Nettoyage données >5 ans: $deleted lignes supprimées")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur nettoyage historique: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur nettoyage historique", e)
         }
     }
 }
