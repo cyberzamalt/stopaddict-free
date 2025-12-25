@@ -34,7 +34,7 @@ class PubManager(private val context: Context) {
                 StopAddictLogger.d(TAG, "AdMob initialisé: ${initializationStatus.adapterStatusMap}")
             }
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, StopAddictLogger.e(TAG, initialisation AdMob", e)
+            StopAddictLogger.e(TAG, "Erreur initialisation AdMob", e)
         }
     }
 
@@ -60,7 +60,7 @@ class PubManager(private val context: Context) {
                     }
                     
                     override fun onAdFailedToLoad(error: LoadAdError) {
-                        StopAddictLogger.e(TAG, StopAddictLogger.e(TAG, chargement pub: ${error.message}")
+                        StopAddictLogger.e(TAG, "Erreur chargement pub: ${error.message}")
                     }
                     
                     override fun onAdOpened() {
@@ -95,7 +95,7 @@ class PubManager(private val context: Context) {
             adView = null
             StopAddictLogger.d(TAG, "Bandeau pub détruit")
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, StopAddictLogger.e(TAG, destruction pub", e)
+            StopAddictLogger.e(TAG, "Erreur destruction pub", e)
         }
     }
 
@@ -107,7 +107,7 @@ class PubManager(private val context: Context) {
             adView?.pause()
             StopAddictLogger.d(TAG, "Bandeau pub en pause")
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, StopAddictLogger.e(TAG, pause pub: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur pause pub", e)
         }
     }
 
@@ -119,7 +119,7 @@ class PubManager(private val context: Context) {
             adView?.resume()
             StopAddictLogger.d(TAG, "Bandeau pub repris")
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, StopAddictLogger.e(TAG, reprise pub: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur reprise pub", e)
         }
     }
 }
