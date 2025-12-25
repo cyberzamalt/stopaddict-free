@@ -1,7 +1,5 @@
 package com.stopaddict
 
-import android.util.Log
-
 object HabitudesLangues {
 
     private const val TAG = "HabitudesLangues"
@@ -22,7 +20,7 @@ object HabitudesLangues {
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
             else -> {
-                Log.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
@@ -478,5 +476,6 @@ object HabitudesLangues {
         "msg_err_generic" to "エラーが発生しました"
     )
 }
+
 
 
