@@ -177,7 +177,7 @@ class StatsFragment : Fragment() {
 
             Log.d(TAG, "StatsFragment initialisé avec succès")
         } catch (e: Exception) {
-    Log.e(TAG, "Erreur chargement Stats", e)
+    StopAddictLogger.e(TAG, "Erreur chargement Stats", e)
 
     // Texte localisé via StatsLangues
     val messageErreur = StatsLangues.getTexte("erreur_chargement", getCodeLangueStats())
@@ -297,7 +297,7 @@ class StatsFragment : Fragment() {
 
             Log.d(TAG, "Vues initialisées avec succès")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur initialisation vues: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur initialisation vues", e)
             throw e
         }
     }
@@ -335,7 +335,7 @@ class StatsFragment : Fragment() {
 
         Log.d(TAG, "LineChart configuré")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur configuration LineChart: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur configuration LineChart", e)
     }
 }
 
@@ -368,7 +368,7 @@ private fun configureBarChart(chart: BarChart) {
 
         Log.d(TAG, "BarChart configuré")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur configuration BarChart: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur configuration BarChart", e)
     }
 }
 
@@ -392,7 +392,7 @@ private fun configureBarChart(chart: BarChart) {
             }
             Log.d(TAG, "Catégories actives chargées: $categoriesActives")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur chargement catégories actives: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur chargement catégories actives", e)
         }
     }
 
@@ -424,7 +424,7 @@ private fun configureBarChart(chart: BarChart) {
 
             Log.d(TAG, "Listeners configurés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur configuration listeners: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur configuration listeners", e)
         }
     }
 
@@ -452,7 +452,7 @@ private fun configureBarChart(chart: BarChart) {
 
         Log.d(TAG, "État boutons (selected) mis à jour: $periodeActive")
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur mise à jour état boutons: ${e.message}", e)
+        StopAddictLogger.e(TAG, "Erreur mise à jour état boutons: ${e.message}", e)
     }
 }
 
@@ -463,7 +463,7 @@ private fun configureBarChart(chart: BarChart) {
             updateResumeTable()
             Log.d(TAG, "Graphiques + tableau mis à jour pour période: $periodeActive")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur mise à jour graphiques: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur mise à jour graphiques", e)
         }
     }
 
@@ -658,7 +658,7 @@ private fun configureBarChart(chart: BarChart) {
                 Log.w(TAG, "Aucune donnée pour graphique consommation")
             }
             } catch (e: Exception) {
-                Log.e(TAG, "Erreur mise à jour graphique consommation: ${e.message}")
+                StopAddictLogger.e(TAG, "Erreur mise à jour graphique consommation", e)
             }
             }
 
@@ -689,7 +689,7 @@ private fun configureBarChart(chart: BarChart) {
             Log.d(TAG, "Consommations jour dispatch calculées")
             result
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur dispatch consommations jour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur dispatch consommations jour", e)
             emptyMap()
         }
     }
@@ -786,7 +786,7 @@ private fun configureBarChart(chart: BarChart) {
                 else -> emptyMap()
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur getDonneesPourConsommation: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur getDonneesPourConsommation", e)
             emptyMap()
         }
     }
@@ -835,7 +835,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             else -> emptyMap()
         }
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur getDonneesPourCouts: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur getDonneesPourCouts", e)
         emptyMap()
     }
 }
@@ -846,7 +846,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         val calendar = Calendar.getInstance()
         calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calcul lastDayOfMonth: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur calcul lastDayOfMonth", e)
         31 // fallback raisonnable
     }
 
@@ -1138,7 +1138,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         }
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur mise à jour graphique coûts: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur mise à jour graphique coûts", e)
     }
 }
    
@@ -1164,7 +1164,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             Log.d(TAG, "Coûts calculés: ${couts.sum()} ${getDeviseSymbol()} total")
             couts
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul coûts: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur calcul coûts", e)
             emptyList()
         }
     }
@@ -1210,7 +1210,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         Log.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
         economies
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calcul économies: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur calcul économies", e)
         emptyList()
     }
 }
@@ -1236,7 +1236,7 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
         }
         result
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calculerCoutsParCategorie: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur calculerCoutsParCategorie", e)
         result
     }
 }
@@ -1270,7 +1270,7 @@ private fun calculerEconomiesParCategorie(
         }
         result
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur calculerEconomiesParCategorie: ${e.message}")
+        StopAddictLogger.e(TAG, "Erreur calculerEconomiesParCategorie", e)
         result
     }
 }
@@ -1384,7 +1384,7 @@ private fun calculerEconomiesParCategorie(
                 else -> 0.0
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur calcul prix unitaire $type: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur calcul prix unitaire $type", e)
             0.0
         }
     }
@@ -1504,7 +1504,7 @@ private fun calculerEconomiesParCategorie(
 
             Log.d(TAG, "Tableau résumé mis à jour")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur updateResumeTable: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur updateResumeTable", e)
         }
     }
 
@@ -1524,7 +1524,7 @@ private fun calculerEconomiesParCategorie(
             }
             total
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur calculerCoutsJour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur calculerCoutsJour", e)
             0.0
         }
     }
@@ -1549,7 +1549,7 @@ private fun calculerEconomiesParCategorie(
             }
             totalEco
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur calculerEconomiesJour: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur calculerEconomiesJour", e)
             0.0
         }
     }
@@ -1578,7 +1578,7 @@ private fun calculerEconomiesParCategorie(
         txtProfilRestant.visibility = View.INVISIBLE
 
     } catch (e: Exception) {
-        Log.e(TAG, "Erreur updateProfilStatus (progression)", e)
+        StopAddictLogger.e(TAG, "Erreur updateProfilStatus (progression)", e)
     }
 }
 
@@ -1590,7 +1590,7 @@ private fun calculerEconomiesParCategorie(
             updateProfilStatus()
             Log.d(TAG, "Fragment resumed - données rechargées")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onResume: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur onResume", e)
         }
     }
 
@@ -1599,7 +1599,7 @@ private fun calculerEconomiesParCategorie(
         try {
             Log.d(TAG, "Fragment paused")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onPause: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur onPause", e)
         }
     }
 
@@ -1610,7 +1610,7 @@ private fun calculerEconomiesParCategorie(
             chartCouts.clear()
             Log.d(TAG, "Fragment détruit - graphiques nettoyés")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroyView: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur onDestroyView", e)
         }
     }
 
@@ -1619,7 +1619,7 @@ private fun calculerEconomiesParCategorie(
         try {
             Log.d(TAG, "Fragment destroyed")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur onDestroy: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur onDestroy", e)
         }
     }
 
@@ -1630,7 +1630,7 @@ private fun calculerEconomiesParCategorie(
             updateProfilStatus()
             Log.d(TAG, "Données rafraîchies manuellement")
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur refresh data: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur refresh data", e)
         }
     }
 
@@ -1645,7 +1645,7 @@ private fun calculerEconomiesParCategorie(
                 Log.w(TAG, "Période invalide: $periode")
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur changement période: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur changement période", e)
         }
     }
         // Renvoie le code langue au format attendu par StatsLangues (FR, EN, ES, ...)
