@@ -438,7 +438,6 @@ private fun computeDayContentScore(dateStr: String): Int {
                         if (dateStr == today) {
                             setBackgroundResource(android.R.drawable.editbox_background)
                             setTextColor(Color.parseColor("#1976D2"))
-                            setTypeface(null, android.graphics.Typeface.BOLD)
                         }
                 
                         setOnClickListener {
