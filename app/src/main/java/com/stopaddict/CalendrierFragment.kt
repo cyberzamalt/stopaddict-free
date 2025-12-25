@@ -423,7 +423,7 @@ private fun computeDayContentScore(dateStr: String): Int {
                         textSize = 12f
                         setPadding(6, 10, 6, 10)
                         gravity = android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL
-                        maxLines = 12
+                        maxLines = 10
                 
                         // Couleurs SOBRES selon total
                         val bgColor = when {
