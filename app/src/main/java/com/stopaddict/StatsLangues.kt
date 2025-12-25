@@ -1123,7 +1123,7 @@ object StatsLangues {
             }
             getTexte(key, codeLangue)
         } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur récupération texte $StopAddictLogger.e(TAG, "Erreur récupération label axe X", e)key", e)
+            StopAddictLogger.e(TAG, "Erreur récupération label axe X", e)
             index.toString()
         }
     }
