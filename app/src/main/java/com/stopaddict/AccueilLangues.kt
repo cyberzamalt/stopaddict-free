@@ -22,7 +22,7 @@ object AccueilLangues {
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
             else -> {
-                Log.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
@@ -716,7 +716,7 @@ object AccueilLangues {
             val template = traductions[key] ?: key
             String.format(template, *args)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur formatage message $key: ${e.message}")
+            StopAddictLogger.e(TAG, "Erreur formatage message $key", e)
             key
         }
     }
