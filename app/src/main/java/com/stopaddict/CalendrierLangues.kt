@@ -1,7 +1,5 @@
 package com.stopaddict
 
-import android.util.Log
-
 object CalendrierLangues {
 
     private const val TAG = "CalendrierLangues"
