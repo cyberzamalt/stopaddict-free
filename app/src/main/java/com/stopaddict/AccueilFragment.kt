@@ -129,6 +129,7 @@ class AccueilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_accueil, container, false)
+        dbHelper = DatabaseHelper(requireContext())
 
         try {
             // Initialisation database et config
