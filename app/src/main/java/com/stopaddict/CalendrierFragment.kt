@@ -231,7 +231,7 @@
             txtProfilStatus.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
     
             profilProgress.progress = percent
-            txtProfilRestant.visibility = View.INVISIBLE
+            txtProfilRestant.visibility = View.GONE
     
         } catch (e: Exception) {
             logger.e( "Erreur updateProfilStatus (progression)", e)
