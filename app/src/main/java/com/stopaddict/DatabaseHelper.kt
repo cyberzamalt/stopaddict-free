@@ -339,26 +339,43 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 result[type] = MutableList(jours) { 0 }
             }
             
-            // Récupérer les données
-            for (i in 0 until jours) {
-                calendar.time = Date()
-                calendar.add(Calendar.DAY_OF_YEAR, -i)
-                val date = dateFormat.format(calendar.time)
-                
-                val cursor = db.query(
-                    TABLE_CONSOMMATIONS,
-                    arrayOf(COL_TYPE, "SUM($COL_QUANTITE) as total"),
-                    "$COL_DATE_HEURE LIKE ? AND $COL_ACTIF = 1",
-                    arrayOf("$date%"),
-                    COL_TYPE, null, null
-                )
-                
-                while (cursor.moveToNext()) {
-                    val type = cursor.getString(0)
-                    val total = cursor.getInt(1)
-                    result[type]?.set(jours - 1 - i, total)
+            // Récupérer les données (1 seule requête au lieu de 1 requête/jour)
+            calendar.time = Date()
+            val endDate = dateFormat.format(calendar.time)
+            
+            // startDate = aujourd'hui - (jours-1)
+            calendar.add(Calendar.DAY_OF_YEAR, -(jours - 1))
+            val startDate = dateFormat.format(calendar.time)
+            
+            val cursor = db.rawQuery(
+                """
+                    SELECT $COL_TYPE,
+                           substr($COL_DATE_HEURE, 1, 10) AS d,
+                           SUM($COL_QUANTITE) AS total
+                    FROM $TABLE_CONSOMMATIONS
+                    WHERE $COL_ACTIF = 1
+                      AND substr($COL_DATE_HEURE, 1, 10) BETWEEN ? AND ?
+                    GROUP BY $COL_TYPE, d
+                """.trimIndent(),
+                arrayOf(startDate, endDate)
+            )
+            
+            while (cursor.moveToNext()) {
+                val type = cursor.getString(0)
+                val d = cursor.getString(1) ?: continue
+                val total = cursor.getInt(2)
+            
+                // Calculer l'index dans la liste [0..jours-1]
+                // index 0 = startDate, index jours-1 = endDate
+                val dateObj = dateFormat.parse(d) ?: continue
+                val startObj = dateFormat.parse(startDate) ?: continue
+                val diffDays = ((dateObj.time - startObj.time) / (1000 * 60 * 60 * 24)).toInt()
+            
+                if (diffDays in 0 until jours) {
+                    result[type]?.set(diffDays, total)
                 }
-                cursor.close()
+            }
+            cursor.close()
             }
             
             StopAddictLogger.d(TAG, "Consommations période $jours jours récupérées")
