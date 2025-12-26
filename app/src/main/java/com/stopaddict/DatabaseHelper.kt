@@ -1003,4 +1003,60 @@ fun setDatesObjectifs(
             StopAddictLogger.e(TAG, "Erreur nettoyage historique", e)
         }
     }
+    // =======================
+    // PREFERENCES (COMPAT)
+    // =======================
+    
+    fun getPreference(key: String, defaultValue: String = ""): String {
+        val prefs = context.getSharedPreferences("stopaddict_prefs", Context.MODE_PRIVATE)
+        return prefs.getString(key, defaultValue) ?: defaultValue
+    }
+    
+    fun setPreference(key: String, value: String) {
+        val prefs = context.getSharedPreferences("stopaddict_prefs", Context.MODE_PRIVATE)
+        prefs.edit().putString(key, value).apply()
+    }
+    
+    // =======================
+    // COUTS & LIMITES
+    // =======================
+    
+    fun getCouts(type: String): Map<String, Double> {
+        val result = mutableMapOf<String, Double>()
+        val db = readableDatabase
+    
+        val cursor = db.query(
+            "couts",
+            null,
+            "type = ?",
+            arrayOf(type),
+            null,
+            null,
+            null
+        )
+    
+        if (cursor.moveToFirst()) {
+            do {
+                val key = cursor.getString(cursor.getColumnIndexOrThrow("cle"))
+                val value = cursor.getDouble(cursor.getColumnIndexOrThrow("valeur"))
+                result[key] = value
+            } while (cursor.moveToNext())
+        }
+    
+        cursor.close()
+        return result
+    }
+    
+    fun getMaxJournalier(type: String): Int {
+        val prefs = context.getSharedPreferences("stopaddict_prefs", Context.MODE_PRIVATE)
+        return prefs.getInt("max_journalier_$type", 0)
+    }
+    
+    fun getDatesObjectifs(): Map<String, String> {
+        val prefs = context.getSharedPreferences("stopaddict_prefs", Context.MODE_PRIVATE)
+        return prefs.all
+            .filterKeys { it.startsWith("objectif_date_") }
+            .mapValues { it.value.toString() }
+    }
+
 }
