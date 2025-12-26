@@ -376,7 +376,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 }
             }
             cursor.close()
-            }
             
             StopAddictLogger.d(TAG, "Consommations période $jours jours récupérées")
             result
