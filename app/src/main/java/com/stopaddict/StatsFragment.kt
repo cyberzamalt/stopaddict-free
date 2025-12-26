@@ -14,7 +14,7 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.LineDataSet            
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -65,6 +65,11 @@ class StatsFragment : Fragment() {
     private lateinit var btnSemaine: Button
     private lateinit var btnMois: Button
     private lateinit var btnAnnee: Button
+
+    // Cache pour éviter de recalculer plusieurs fois les mêmes données période (Semaine/Mois/Trimestre/Année)
+    private var cachePeriodeKey: String? = null
+    private var cachePeriodeData: Map<String, List<Int>>? = null
+
 
     // UI Elements - Zone titres graphiques
     private lateinit var txtTitreConso: TextView
@@ -304,7 +309,7 @@ class StatsFragment : Fragment() {
     private fun configureLineChart(chart: LineChart) {
     try {
         chart.description.isEnabled = false
-        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+        chart.setNoDataText(trad["aucune_donnee"] ?: "Aucune donnée à afficher")
         chart.setTouchEnabled(true)
         chart.isDragEnabled = true
         chart.setScaleEnabled(true)
@@ -341,7 +346,7 @@ class StatsFragment : Fragment() {
 private fun configureBarChart(chart: BarChart) {
     try {
         chart.description.isEnabled = false
-        chart.setNoDataText(trad["aucune_donnee"] ?: "No chart data available")
+        chart.setNoDataText(trad["aucune_donnee"] ?: "Aucune donnée à afficher")
         chart.setTouchEnabled(true)
         chart.isDragEnabled = true
         chart.setScaleEnabled(true)
@@ -393,6 +398,8 @@ private fun configureBarChart(chart: BarChart) {
         } catch (e: Exception) {
             StopAddictLogger.e(TAG, "Erreur chargement catégories actives", e)
         }
+        cachePeriodeKey = null
+        cachePeriodeData = null
     }
 
     private fun setupListeners() {
@@ -732,6 +739,54 @@ private fun configureBarChart(chart: BarChart) {
         return result
     }
 
+    private fun getDonneesPeriodeBrutesAvecCache(): Map<String, List<Int>> {
+            // La clé dépend de la période + des catégories actives (sinon le cache peut être faux)
+            val catsSig = categoriesActives
+                .filter { it.value }
+                .keys
+                .sorted()
+                .joinToString(",")
+        
+            val key = "$periodeActive|$catsSig"
+        
+            // Si cache valide, on renvoie direct
+            if (cachePeriodeKey == key && cachePeriodeData != null) {
+                return cachePeriodeData!!
+            }
+        
+            // Sinon, on calcule
+            val donnees = when (periodeActive) {
+                PERIODE_JOUR -> {
+                    // pas de cache “jour” (c’est léger), mais on filtre pareil
+                        val d = getConsommationsJourDispatch()
+                        d.filterKeys { type -> categoriesActives[type] == true }
+                    }
+        
+                PERIODE_SEMAINE -> {
+                    val d = dbHelper.getConsommationsSemaine()
+                    d.filterKeys { type -> categoriesActives[type] == true }
+                }
+        
+                PERIODE_MOIS -> {
+                    val d = dbHelper.getConsommationsMois()
+                    d.filterKeys { type -> categoriesActives[type] == true }
+                }
+        
+                PERIODE_ANNEE -> {
+                    val d = dbHelper.getConsommationsAnnee()
+                    d.filterKeys { type -> categoriesActives[type] == true }
+                }
+        
+                else -> emptyMap()
+            }
+        
+            // On stocke dans le cache
+            cachePeriodeKey = key
+            cachePeriodeData = donnees
+        
+            return donnees
+        }
+
     /**
      * Données spécifiques pour le graphique CONSOMMATION
      * - JOUR   : 4 tranches horaires (inchangé)
@@ -748,7 +803,7 @@ private fun configureBarChart(chart: BarChart) {
                 }
 
                 PERIODE_SEMAINE -> {
-                    val base = dbHelper.getConsommationsSemaine()
+                    val base = getDonneesPeriodeBrutesAvecCache()
                     val result = mutableMapOf<String, List<Int>>()
                     base.forEach { (type, values) ->
                         if (categoriesActives[type] == true) {
@@ -759,7 +814,7 @@ private fun configureBarChart(chart: BarChart) {
                 }
 
                 PERIODE_MOIS -> {
-                    val base = dbHelper.getConsommationsMois()
+                    val base = getDonneesPeriodeBrutesAvecCache()
                     val result = mutableMapOf<String, List<Int>>()
                     base.forEach { (type, values) ->
                         if (categoriesActives[type] == true) {
@@ -770,17 +825,17 @@ private fun configureBarChart(chart: BarChart) {
                     result
                 }
 
-                PERIODE_ANNEE -> {
-                    val base = dbHelper.getConsommationsAnnee()
-                    val result = mutableMapOf<String, List<Int>>()
-                    base.forEach { (type, values) ->
-                        if (categoriesActives[type] == true) {
-                            // 12 points -> 1 par mois (Jan..Déc)
-                            result[type] = aggregateToFixedBuckets(values, 12)
-                        }
+               PERIODE_ANNEE -> {
+                val base = getDonneesPeriodeBrutesAvecCache()
+                val result = mutableMapOf<String, List<Int>>()
+                base.forEach { (type, values) ->
+                    if (categoriesActives[type] == true) {
+                        // 12 points -> 1 par mois (Jan..Déc)
+                        result[type] = aggregateToFixedBuckets(values, 12)
                     }
-                    result
                 }
+                result
+            }    
 
                 else -> emptyMap()
             }
@@ -798,45 +853,7 @@ private fun configureBarChart(chart: BarChart) {
  * - ANNEE  : 12 points (mois)
  */
 private fun getDonneesPourCouts(): Map<String, List<Int>> {
-    return try {
-        when (periodeActive) {
-            PERIODE_JOUR -> {
-                val consosJour = dbHelper.getConsommationsJour()
-                val result = mutableMapOf<String, List<Int>>()
-                categoriesActives.forEach { (type, active) ->
-                    if (active) {
-                        val total = consosJour[type] ?: 0
-                        result[type] = listOf(total)
-                    }
-                }
-                result
-            }
-
-            PERIODE_SEMAINE -> {
-                dbHelper.getConsommationsSemaine()
-            }
-
-            PERIODE_MOIS -> {
-                val base = dbHelper.getConsommationsMois()
-                val result = mutableMapOf<String, List<Int>>()
-                base.forEach { (type, values) ->
-                    if (categoriesActives[type] == true) {
-                        result[type] = aggregateToWeeks(values)
-                    }
-                }
-                result
-            }
-
-            PERIODE_ANNEE -> {
-                dbHelper.getConsommationsAnnee()
-            }
-
-            else -> emptyMap()
-        }
-    } catch (e: Exception) {
-        StopAddictLogger.e(TAG, "Erreur getDonneesPourCouts", e)
-        emptyMap()
-    }
+    return getDonneesPeriodeBrutesAvecCache()
 }
 
     private fun getXAxisFormatter(): ValueFormatter {
@@ -1411,10 +1428,23 @@ private fun calculerEconomiesParCategorie(
     private fun updateResumeTable() {
         try {
             // --- Consommations brutes par période ---
+
+            val savedCacheKey = cachePeriodeKey
+            val savedCacheData = cachePeriodeData
             val consosJour = dbHelper.getConsommationsJour()
-            val consosSemaine = dbHelper.getConsommationsSemaine()
-            val consosMois = dbHelper.getConsommationsMois()
-            val consosAnnee = dbHelper.getConsommationsAnnee()
+            
+            val prevPeriode = periodeActive
+            
+            periodeActive = PERIODE_SEMAINE
+            val consosSemaine = getDonneesPeriodeBrutesAvecCache()
+            
+            periodeActive = PERIODE_MOIS
+            val consosMois = getDonneesPeriodeBrutesAvecCache()
+            
+            periodeActive = PERIODE_ANNEE
+            val consosAnnee = getDonneesPeriodeBrutesAvecCache()
+            
+            periodeActive = prevPeriode
 
             fun totalJour(type: String): Int =
                 (consosJour[type] ?: 0)
@@ -1500,6 +1530,9 @@ private fun calculerEconomiesParCategorie(
             setMoneyCell(cellEconomiesSemaine, ecoSemaine)
             setMoneyCell(cellEconomiesMois, ecoMois)
             setMoneyCell(cellEconomiesAnnee, ecoAnnee)
+
+            cachePeriodeKey = savedCacheKey
+            cachePeriodeData = savedCacheData
 
             StopAddictLogger.d(TAG, "Tableau résumé mis à jour")
         } catch (e: Exception) {
@@ -1647,23 +1680,19 @@ private fun calculerEconomiesParCategorie(
             StopAddictLogger.e(TAG, "Erreur changement période", e)
         }
     }
-        // Renvoie le code langue au format attendu par StatsLangues (FR, EN, ES, ...)
-        
-    private fun getCodeLangueStats(): String {
-        val langueSysteme = java.util.Locale.getDefault().language.lowercase()
+    
+    // Renvoie le code langue au format attendu par StatsLangues (FR, EN, ES, ...)
+private fun getCodeLangueStats(): String {
+    // Langue choisie dans l’app (même source que trad)
+    val lang = try {
+        configLangue.getLangue().trim().uppercase()   // ex: "FR", "EN", ...
+    } catch (e: Exception) {
+        "FR"
+    }
 
-        return when (langueSysteme) {
-            "fr" -> "FR"
-            "en" -> "EN"
-            "es" -> "ES"
-            "pt" -> "PT"
-            "de" -> "DE"
-            "it" -> "IT"
-            "ru" -> "RU"
-            "ar" -> "AR"
-            "hi" -> "HI"
-            "ja" -> "JA"
-            else -> "FR"   // fallback propre
+    return when (lang) {
+        "FR","EN","ES","PT","DE","IT","RU","AR","HI","JA" -> lang
+        else -> "FR"
         }
     }
 }
