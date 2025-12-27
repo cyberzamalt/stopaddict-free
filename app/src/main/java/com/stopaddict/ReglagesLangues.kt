@@ -5,27 +5,31 @@ object ReglagesLangues {
 
     private const val TAG = "ReglagesLangues"
 
-    /**
+     /**
      * Retourne toutes les traductions pour une langue donnée
      */
-    fun getTraductions(codeLangue: String): Map<String, String> {
-        return when (codeLangue) {
-            "FR" -> TRADUCTIONS_FR
-            "EN" -> TRADUCTIONS_EN
-            "ES" -> TRADUCTIONS_ES
-            "PT" -> TRADUCTIONS_PT
-            "DE" -> TRADUCTIONS_DE
-            "IT" -> TRADUCTIONS_IT
-            "RU" -> TRADUCTIONS_RU
-            "AR" -> TRADUCTIONS_AR
-            "HI" -> TRADUCTIONS_HI
-            "JA" -> TRADUCTIONS_JA
-            else -> {
-                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
-                TRADUCTIONS_FR
-            }
-        }
+    fun getTraductions(langue: String): Map<String, String> {
+    val base = TRADUCTIONS_FR
+
+    val specific = when (langue.uppercase()) {
+        "EN"  -> TRADUCTIONS_EN
+        "ES"  -> TRADUCTIONS_ES
+        "PT"  -> TRADUCTIONS_PT
+        "DE"  -> TRADUCTIONS_DE
+        "IT"  -> TRADUCTIONS_IT
+        "RU"  -> TRADUCTIONS_RU
+        "AR"  -> TRADUCTIONS_AR
+        "HI"  -> TRADUCTIONS_HI
+        "JA"  -> TRADUCTIONS_JA
+        "NL"  -> TRADUCTIONS_NL
+        "ZH"  -> TRADUCTIONS_ZH      // Chinois (simplifié)
+        "ZHT" -> TRADUCTIONS_ZHT     // Chinois (traditionnel)
+        else  -> TRADUCTIONS_FR
     }
+
+    // base + specific => si une clé manque dans la langue, on retombe sur le FR
+    return base + specific
+}
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
@@ -177,6 +181,90 @@ object ReglagesLangues {
         "msg_export_logs_impossible" to "Impossible d’exporter les logs",
         "msg_import_termine" to "Import terminé avec succès",
         "msg_import_erreur" to "Erreur lors de l'import: %s",
+
+        "msg_erreur_prefix" to "Erreur : %s",
+        "sauvegarde_ok" to "Sauvegardé",
+        "msg_profil_sauvegarde" to "Coûts sauvegardés",
+        "profil_complet" to "Profil: Complet ✓",
+        "profil_incomplet" to "Profil: Incomplet",
+        
+        "btn_sauvegarder_profil" to "Sauvegarder",
+        "btn_sauvegarder_couts" to "Sauvegarder les coûts",
+        "titre_categories" to "Catégories / Coûts",
+        
+        "label_cigarettes" to "Cigarettes",
+        "radio_classiques" to "Cigarettes paquet classique",
+        "radio_rouler" to "Cigarettes à rouler",
+        "radio_tubeuse" to "Cigarettes à tuber",
+        "label_prix_paquet" to "Prix du paquet",
+        "label_nb_cigarettes" to "Nombre de cigarettes",
+        "label_prix_tabac" to "Prix du tabac",
+        "label_prix_feuilles" to "Prix des feuilles",
+        "label_nb_feuilles" to "Nombre de feuilles",
+        "label_prix_filtres" to "Prix du sachet de filtres",
+        "label_nb_filtres" to "Nombre de filtres",
+        "label_prix_tubes" to "Prix des tubes",
+        "label_nb_tubes" to "Nombre de tubes",
+        
+        "label_joints" to "Joints (Cannabis)",
+        "label_prix_gramme" to "Prix du gramme",
+        "label_gramme_par_joint" to "Grammes par joint",
+        "label_prix_feuilles_longues" to "Prix des feuilles longues",
+        "label_nb_feuilles_longues" to "Nombre de feuilles longues",
+        
+        "label_alcool_global" to "Alcool Global",
+        "label_bieres" to "Bières",
+        "label_liqueurs" to "Liqueurs",
+        "label_alcool_fort" to "Alcool Fort",
+        "label_prix_verre" to "Prix du verre",
+        "unite_cl_global" to "Unité en cL",
+        "unite_cl_biere" to "Unité en cL",
+        "unite_cl_liqueur" to "Unité en cL",
+        "unite_cl_alcool_fort" to "Unité en cL",
+        
+        "titre_a_propos" to "À propos",
+        "voir_avertissement" to "Voir l'avertissement",
+        "btn_manuel" to "Manuel d'utilisation",
+        "btn_cgv" to "Conditions générales de vente (CGV)",
+        "btn_mentions_legales" to "Mentions légales",
+        "btn_premium" to "Version sans publicité",
+        "btn_maj" to "Dernières mises à jour",
+        "btn_contact" to "Contact support",
+        
+        "raz_sauvegarde" to "RAZ & sauvegarde",
+        "btn_raz_jour" to "RAZ du jour",
+        "btn_raz_historique" to "RAZ historique",
+        "btn_raz_usine" to "RAZ d'usine",
+        "btn_exporter" to "Exporter",
+        "btn_importer" to "Importer",
+        "btn_export_logs" to "Exporter les logs",
+        "msg_export_logs_impossible" to "Impossible d’exporter les logs",
+        "btn_ok" to "Fermer",
+        
+        "support_email_subject" to "StopAddict - Support",
+        "support_email_error" to "Impossible d'ouvrir l'application e-mail : %s",
+        
+        "confirm_raz_jour_titre" to "Effacer les consommations du jour ?",
+        "confirm_raz_historique_titre" to "Effacer TOUT l'historique ?",
+        "confirm_raz_usine_titre" to "TOUT réinitialiser (historique + réglages) ?",
+        "confirm_default" to "Confirmer ?",
+        "btn_confirmer" to "Confirmer",
+        "btn_annuler" to "Annuler",
+        "raz_jour_ok" to "RAZ jour effectué",
+        "raz_historique_ok" to "RAZ historique effectué",
+        "raz_usine_ok" to "RAZ usine effectué",
+        
+        "msg_open_store_impossible" to "Impossible d'ouvrir le store",
+        "maj_titre" to "Dernières mises à jour",
+        "maj_contenu" to "Déploiement V1",
+        
+        "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
+        "msg_import_limite" to "Limite atteinte. %d import(s) restant(s) aujourd'hui.",
+        "msg_export_reussi" to "Export réussi",
+        "msg_import_reussi" to "Import réussi",
+        "msg_import_termine_succes" to "Import terminé avec succès",
+        "msg_import_erreur" to "Erreur lors de l'import : %s",
+
 
         "label_prix_feuilles_longues" to "Prix des feuilles longues",
         "label_nb_feuilles_longues" to "Nombre de feuilles longues"
