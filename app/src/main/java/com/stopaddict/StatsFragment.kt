@@ -591,10 +591,6 @@ private fun configureBarChart(chart: BarChart) {
                     val xConso = if (lastX <= 0f) 0f else ((i * 2f + 0.5f) / totalSlots) * lastX
                     val xMax   = if (lastX <= 0f) 0f else ((i * 2f + 1.5f) / totalSlots) * lastX
             
-                    // Y dynamique : on prend la valeur "courante" (dernière valeur disponible)
-                    val yConso = values.last().toFloat()
-            
-                    // Micro-ajustement par type (baseline emoji) mais TRES léger
                     // Y dynamique : on ancre l'emoji sur la valeur de la courbe AU MÊME ENDROIT que son X
                     // (xConso est décimal, les points de courbe sont aux index entiers 0..n-1)
                     val idxConso = xConso.roundToInt().coerceIn(0, values.size - 1)
