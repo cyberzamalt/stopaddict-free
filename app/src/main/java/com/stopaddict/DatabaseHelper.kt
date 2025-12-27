@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -505,20 +504,37 @@ fun setDatesObjectifs(
 
     // ==================== COÛTS ====================
 
-    fun setCouts(
+    /** Compat anciens appels (Int) */
+fun setCouts(
     type: String,
     prixPaquet: Double,
-    nbCigarettes: Double,
+    nbCigarettes: Int,
     prixTabac: Double,
     prixFeuilles: Double,
-    nbFeuilles: Double,
+    nbFeuilles: Int,
     prixFiltres: Double,
-    nbFiltres: Double,
+    nbFiltres: Int,
     prixTubes: Double,
-    nbTubes: Double,
+    nbTubes: Int,
     prixTabacTubes: Double,
     prixVerre: Double
 ): Boolean {
+    return setCouts(
+        type = type,
+        prixPaquet = prixPaquet,
+        nbCigarettes = nbCigarettes.toDouble(),
+        prixTabac = prixTabac,
+        prixFeuilles = prixFeuilles,
+        nbFeuilles = nbFeuilles.toDouble(),
+        prixFiltres = prixFiltres,
+        nbFiltres = nbFiltres.toDouble(),
+        prixTubes = prixTubes,
+        nbTubes = nbTubes.toDouble(),
+        prixTabacTubes = prixTabacTubes,
+        prixVerre = prixVerre
+    )
+}
+ {
     return try {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -676,7 +692,6 @@ fun setDatesObjectifs(
     }
 
     // ==================== MÉTHODES ADDITIONNELLES ====================
-
     fun getConsommationParDate(type: String, date: String): Int {
         return try {
             val db = readableDatabase
@@ -1002,4 +1017,35 @@ fun setDatesObjectifs(
             StopAddictLogger.e(TAG, "Erreur nettoyage historique", e)
         }
     }
+
+    /**
+ * Retourne la date (yyyy-MM-dd) de la première consommation "active" et > 0,
+ * toutes catégories confondues.
+ * Si aucune conso n'existe, retourne null.
+ */
+fun getDatePremiereConsoActive(): String? {
+    return try {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            """
+                SELECT substr($COL_DATE_HEURE, 1, 10) AS d
+                FROM $TABLE_CONSOMMATIONS
+                WHERE $COL_ACTIF = 1
+                  AND $COL_QUANTITE > 0
+                ORDER BY $COL_DATE_HEURE ASC
+                LIMIT 1
+            """.trimIndent(),
+            null
+        )
+
+        val date = if (cursor.moveToFirst()) cursor.getString(0) else null
+        cursor.close()
+
+        StopAddictLogger.d(TAG, "getDatePremiereConsoActive() = $date")
+        date
+    } catch (e: Exception) {
+        StopAddictLogger.e(TAG, "Erreur getDatePremiereConsoActive", e)
+        null
+    }
+}
 }
