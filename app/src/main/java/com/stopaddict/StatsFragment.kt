@@ -595,15 +595,13 @@ private fun configureBarChart(chart: BarChart) {
                     val yConso = values.last().toFloat()
             
                     // Micro-ajustement par type (baseline emoji) mais TRES léger
-                    val tweak = when (type) {
-                        DatabaseHelper.TYPE_CIGARETTE     -> 1.06f
-                        DatabaseHelper.TYPE_JOINT         -> 1.00f
-                        DatabaseHelper.TYPE_ALCOOL_GLOBAL -> 1.00f
-                        DatabaseHelper.TYPE_BIERE         -> 1.00f
-                        DatabaseHelper.TYPE_LIQUEUR       -> 1.00f
-                        DatabaseHelper.TYPE_ALCOOL_FORT   -> 1.00f
-                        else -> 1.02f
-                    }
+                    // Y dynamique : on ancre l'emoji sur la valeur de la courbe AU MÊME ENDROIT que son X
+                    // (xConso est décimal, les points de courbe sont aux index entiers 0..n-1)
+                    val idxConso = xConso.roundToInt().coerceIn(0, values.size - 1)
+                    val yConso = values[idxConso].toFloat()
+                    
+                    // Pas de traitement spécial par type : distance emoji ↔ ligne identique pour tous
+                    val tweak = 1.00f
             
                     // Emoji de catégorie
                     val emoji = getEmojiCategorie(type)
