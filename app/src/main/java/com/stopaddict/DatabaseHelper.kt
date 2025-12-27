@@ -504,7 +504,7 @@ fun setDatesObjectifs(
 
     // ==================== COÛTS ====================
 
-    /** Compat anciens appels (Int) */
+/** Compat anciens appels (Int) */
 fun setCouts(
     type: String,
     prixPaquet: Double,
@@ -534,14 +534,29 @@ fun setCouts(
         prixVerre = prixVerre
     )
 }
- {
+
+/** Version principale (Double) */
+fun setCouts(
+    type: String,
+    prixPaquet: Double,
+    nbCigarettes: Double,
+    prixTabac: Double,
+    prixFeuilles: Double,
+    nbFeuilles: Double,
+    prixFiltres: Double,
+    nbFiltres: Double,
+    prixTubes: Double,
+    nbTubes: Double,
+    prixTabacTubes: Double,
+    prixVerre: Double
+): Boolean {
     return try {
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COL_PRIX_PAQUET, prixPaquet)
             put(COL_NB_CIGARETTES, nbCigarettes.toInt())
             put(COL_PRIX_TABAC, prixTabac)
-            put(COL_PRIX_TABAC_TUBE, prixTabacTubes)       // 🔹 nouveau
+            put(COL_PRIX_TABAC_TUBE, prixTabacTubes)
             put(COL_PRIX_FEUILLES, prixFeuilles)
             put(COL_NB_FEUILLES, nbFeuilles.toInt())
             put(COL_PRIX_FILTRES, prixFiltres)
@@ -550,11 +565,9 @@ fun setCouts(
             put(COL_NB_TUBES, nbTubes.toInt())
 
             if (type == TYPE_JOINT) {
-                // Pour les joints : dernier param = prix du gramme
                 put(COL_PRIX_GRAMME, prixVerre)
                 put(COL_PRIX_VERRE, 0.0)
             } else {
-                // Pour les autres types : dernier param = prix du verre
                 put(COL_PRIX_VERRE, prixVerre)
             }
         }
