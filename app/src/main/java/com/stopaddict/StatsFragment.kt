@@ -1192,44 +1192,76 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 
         val economies = MutableList(nbPoints) { 0.0 }
 
-        // 1) On repère le premier index où il existe au moins UNE consommation > 0
-        val firstIndexWithConso = (0 until nbPoints).firstOrNull { index ->
-            categoriesActives.any { (type, active) ->
-                if (!active) return@any false
-                val values = donnees[type] ?: emptyList()
-                index < values.size && values[index] > 0
-            }
-        } ?: nbPoints  // Si vraiment aucune conso sur la période, on neutralise tout
+        // Démarrage GLOBAL : première date où une conso active > 0 existe dans l’historique
+        val firstDateStr = dbHelper.getDatePremiereConsoActive()
+        if (firstDateStr.isNullOrBlank()) {
+            // App jamais "démarrée" => pas d’économies fantômes
+            return economies
+        }
 
-        // 2) Calcul des économies uniquement à partir de ce premier jour "réel"
+        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+        val firstDateObj = try { dateFormat.parse(firstDateStr) } catch (e: Exception) { null }
+        if (firstDateObj == null) return economies
+
+        // Fenêtre glissante : index 0 = startDate, index nbPoints-1 = today
+        fun computeWindowStartDate(days: Int): java.util.Date {
+            val c = Calendar.getInstance()
+            c.time = java.util.Date()
+            c.add(Calendar.DAY_OF_YEAR, -(days - 1))
+            return c.time
+        }
+
+        val windowStart = when (periodeActive) {
+            PERIODE_SEMAINE -> computeWindowStartDate(7)
+            PERIODE_MOIS -> computeWindowStartDate(30)
+            PERIODE_ANNEE -> computeWindowStartDate(365)
+            else -> computeWindowStartDate(nbPoints)
+        }
+
+        fun isBeforeGlobalStart(indexInWindow: Int): Boolean {
+            val c = Calendar.getInstance()
+            c.time = windowStart
+            c.add(Calendar.DAY_OF_YEAR, indexInWindow)
+            return c.time.before(firstDateObj)
+        }
+
+        // Calcul des économies : uniquement à partir de la date de démarrage GLOBAL
         categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val values = donnees[type] ?: emptyList()
-                if (values.isEmpty()) return@forEach
+            if (!active) return@forEach
 
-                val maxHabitude = dbHelper.getMaxJournalier(type)
-                if (maxHabitude <= 0) return@forEach
+            val values = donnees[type] ?: emptyList()
+            if (values.isEmpty()) return@forEach
 
-                val coutsType = dbHelper.getCouts(type)
-                val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+            val maxHabitude = dbHelper.getMaxJournalier(type)
+            if (maxHabitude <= 0) return@forEach
 
-                values.forEachIndexed { index, quantite ->
-                    // On ignore les jours AVANT la première vraie conso
-                    if (index >= firstIndexWithConso && quantite < maxHabitude) {
-                        val diff = maxHabitude - quantite
-                        economies[index] += prixUnitaire * diff
-                    }
+            val coutsType = dbHelper.getCouts(type)
+            val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+            if (prixUnitaire <= 0.0) return@forEach
+
+            values.forEachIndexed { index, quantite ->
+                // Avant démarrage global => donnée absente => pas d’économie
+                if (isBeforeGlobalStart(index)) return@forEachIndexed
+
+                // Après démarrage : 0 = 0 consommé => économie possible
+                if (quantite < maxHabitude) {
+                    val diff = (maxHabitude - quantite).toDouble()
+                    economies[index] += prixUnitaire * diff
                 }
             }
         }
 
-        StopAddictLogger.d(TAG, "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total")
+        StopAddictLogger.d(
+            TAG,
+            "Économies calculées: ${economies.sum()} ${getDeviseSymbol()} total"
+        )
         economies
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur calcul économies", e)
         emptyList()
     }
 }
+    
         private fun calculerCoutsParCategorie(
     donnees: Map<String, List<Int>>
 ): Map<String, Double> {
@@ -1262,28 +1294,105 @@ private fun calculerEconomiesParCategorie(
 ): Map<String, Double> {
     val result = mutableMapOf<String, Double>()
     return try {
+        val cal = Calendar.getInstance()
+
+        val nbPoints = donnees.values.firstOrNull()?.size ?: 0
+        if (nbPoints <= 0) return result
+
+        // Démarrage GLOBAL : première date où une conso active > 0 existe
+        val firstDateStr = dbHelper.getDatePremiereConsoActive()
+        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+
+        // Si jamais aucune conso dans la vie => pas d’économies (tu ne veux pas d’économie fantôme)
+        if (firstDateStr.isNullOrBlank()) return result
+        val firstDateObj = try { dateFormat.parse(firstDateStr) } catch (e: Exception) { null }
+        if (firstDateObj == null) return result
+
+        // Dates de fenêtre (SEMAINE/MOIS/ANNEE) : on reconstruit start/end comme DatabaseHelper
+        // end = aujourd’hui, start = aujourd’hui - (jours-1)
+        fun computeWindowStartDate(days: Int): java.util.Date {
+            val c = Calendar.getInstance()
+            c.time = java.util.Date()
+            c.add(Calendar.DAY_OF_YEAR, -(days - 1))
+            return c.time
+        }
+
+        // Pour JOUR : on considère "aujourd’hui" comme date de la fenêtre
+        val today = Calendar.getInstance().time
+
+        // Calcule si un index (dans values) est avant démarrage global
+        fun isBeforeGlobalStart(indexInWindow: Int, windowStart: java.util.Date): Boolean {
+            val c = Calendar.getInstance()
+            c.time = windowStart
+            c.add(Calendar.DAY_OF_YEAR, indexInWindow)
+            val dayDate = c.time
+            return dayDate.before(firstDateObj)
+        }
+
         categoriesActives.forEach { (type, active) ->
-            if (active) {
-                val values = donnees[type] ?: emptyList()
-                if (values.isNotEmpty()) {
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    if (maxHabitude > 0) {
-                        val coutsType = dbHelper.getCouts(type)
-                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
-                        if (prixUnitaire > 0.0) {
-                            var totalEco = 0.0
-                            values.forEach { quantite ->
-                                if (quantite < maxHabitude) {
-                                    val diff = maxHabitude - quantite
-                                    totalEco += prixUnitaire * diff
-                                }
-                            }
-                            result[type] = totalEco
-                        }
-                    }
+            if (!active) return@forEach
+
+            val values = donnees[type] ?: emptyList()
+            if (values.isEmpty()) return@forEach
+
+            val maxHabitude = dbHelper.getMaxJournalier(type)
+            if (maxHabitude <= 0) return@forEach
+
+            val coutsType = dbHelper.getCouts(type)
+            val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+            if (prixUnitaire <= 0.0) return@forEach
+
+            val totalEco: Double = if (periodeActive == PERIODE_JOUR) {
+                // JOUR : 4 tranches horaires, on compare TOTAL du jour à l’habitude.
+                // Mais on n'autorise l'économie que si "aujourd’hui" est après démarrage global.
+                if (today.before(firstDateObj)) {
+                    0.0
+                } else {
+                    val totalJour = values.sum().toDouble()
+                    val diff = maxHabitude - totalJour
+                    if (diff > 0) prixUnitaire * diff else 0.0
                 }
+            } else {
+                val nbJoursPeriode = when (periodeActive) {
+                    PERIODE_SEMAINE -> {
+                        val dow = cal.get(Calendar.DAY_OF_WEEK)
+                        val isoDow = if (dow == Calendar.SUNDAY) 7 else (dow - 1)
+                        isoDow
+                    }
+                    PERIODE_MOIS -> cal.get(Calendar.DAY_OF_MONTH)
+                    PERIODE_ANNEE -> cal.get(Calendar.DAY_OF_YEAR)
+                    else -> values.size
+                }.coerceIn(1, values.size)
+
+                val slice = values.takeLast(nbJoursPeriode)
+                val startIndexInWindow = (values.size - nbJoursPeriode).coerceAtLeast(0)
+
+                val windowStart = when (periodeActive) {
+                    PERIODE_SEMAINE -> computeWindowStartDate(7)
+                    PERIODE_MOIS -> computeWindowStartDate(30)
+                    PERIODE_ANNEE -> computeWindowStartDate(365)
+                    else -> computeWindowStartDate(values.size)
+                }
+
+                var eco = 0.0
+                slice.forEachIndexed { localIndex, quantite ->
+                    val globalIndex = startIndexInWindow + localIndex
+
+                    // Avant démarrage global => "absent" => pas d’économie
+                    if (isBeforeGlobalStart(globalIndex, windowStart)) return@forEachIndexed
+
+                    // Après démarrage : 0 = 0 consommé => économie possible
+                    val diff = maxHabitude - quantite.toDouble()
+                    if (diff > 0) eco += prixUnitaire * diff
+                }
+                eco
+            }
+
+            if (totalEco > 0.0) {
+                result[type] = totalEco
             }
         }
+
         result
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur calculerEconomiesParCategorie", e)
@@ -1445,6 +1554,8 @@ private fun calculerEconomiesParCategorie(
             val consosAnnee = getDonneesPeriodeBrutesAvecCache()
             
             periodeActive = prevPeriode
+            cachePeriodeKey = null
+            cachePeriodeData = null
 
             fun totalJour(type: String): Int =
                 (consosJour[type] ?: 0)
@@ -1562,30 +1673,42 @@ private fun calculerEconomiesParCategorie(
     }
 
     // Économies réelles du JOUR = (max_journalier - conso du jour) * prix_unitaire (si tu es en dessous)
-    private fun calculerEconomiesJour(consosJour: Map<String, Int>): Double {
-        return try {
-            var totalEco = 0.0
-            categoriesActives.forEach { (type, active) ->
-                if (active) {
-                    val nbUnites = consosJour[type] ?: 0
-                    val maxHabitude = dbHelper.getMaxJournalier(type)
-                    if (maxHabitude > 0 && nbUnites < maxHabitude) {
-                        val diff = maxHabitude - nbUnites
-                        val coutsType = dbHelper.getCouts(type)
-                        val prixUnitaire = calculerPrixUnitaire(type, coutsType)
-                        if (prixUnitaire > 0.0) {
-                            totalEco += prixUnitaire * diff
-                        }
-                    }
+// MAIS uniquement si l'app a déjà "démarré" (au moins une conso active > 0 dans l'historique)
+private fun calculerEconomiesJour(consosJour: Map<String, Int>): Double {
+    return try {
+        // Démarrage GLOBAL
+        val firstDateStr = dbHelper.getDatePremiereConsoActive()
+        if (firstDateStr.isNullOrBlank()) {
+            // App jamais démarrée => pas d'économies fantômes
+            return 0.0
+        }
+
+        var totalEco = 0.0
+
+        categoriesActives.forEach { (type, active) ->
+            if (!active) return@forEach
+
+            val nbUnites = consosJour[type] ?: 0
+            val maxHabitude = dbHelper.getMaxJournalier(type)
+            if (maxHabitude <= 0) return@forEach
+
+            // Après démarrage : 0 = 0 consommé => économie possible
+            if (nbUnites < maxHabitude) {
+                val diff = (maxHabitude - nbUnites).toDouble()
+                val coutsType = dbHelper.getCouts(type)
+                val prixUnitaire = calculerPrixUnitaire(type, coutsType)
+                if (prixUnitaire > 0.0) {
+                    totalEco += prixUnitaire * diff
                 }
             }
-            totalEco
-        } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur calculerEconomiesJour", e)
-            0.0
         }
-    }
 
+        totalEco
+    } catch (e: Exception) {
+        StopAddictLogger.e(TAG, "Erreur calculerEconomiesJour", e)
+        0.0
+    }
+}
     
     private fun updateProfilStatus() {
     try {
