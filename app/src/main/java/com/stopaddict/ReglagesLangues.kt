@@ -173,6 +173,11 @@ object ReglagesLangues {
         "unite_cl_liqueur"     to "Unité en cL",
         "unite_cl_alcool_fort" to "Unité en cL",
 
+        "btn_sauvegarder_couts" to "Sauvegarder les coûts",
+        "msg_export_logs_impossible" to "Impossible d’exporter les logs",
+        "msg_import_termine" to "Import terminé avec succès",
+        "msg_import_erreur" to "Erreur lors de l'import: %s",
+
         "label_prix_feuilles_longues" to "Prix des feuilles longues",
         "label_nb_feuilles_longues" to "Nombre de feuilles longues"
     )
@@ -322,6 +327,11 @@ object ReglagesLangues {
         "unite_cl_biere"       to "Unit (cl)",
         "unite_cl_liqueur"     to "Unit (cl)",
         "unite_cl_alcool_fort" to "Unit (cl)",
+
+        "btn_sauvegarder_couts" to "Save costs",
+        "msg_export_logs_impossible" to "Unable to export logs",
+        "msg_import_termine" to "Import completed successfully",
+        "msg_import_erreur" to "Import error: %s",
         
         "label_prix_feuilles_longues" to "Long papers price",
         "label_nb_feuilles_longues"   to "Number of long papers"
