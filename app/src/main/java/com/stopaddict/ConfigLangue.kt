@@ -12,7 +12,6 @@ class ConfigLangue(private val context: Context) {
         private const val KEY_LANGUE = "langue"
         private const val TAG = "ConfigLangue"
 
-        // Langues disponibles
         val LANGUES_DISPONIBLES = mapOf(
             "FR" to "Français",
             "EN" to "English",
@@ -20,13 +19,14 @@ class ConfigLangue(private val context: Context) {
             "PT" to "Português",
             "DE" to "Deutsch",
             "IT" to "Italiano",
-            "RU" to "Русский",
-            "AR" to "العربية",
-            "HI" to "हिन्दी",
-            "JA" to "日本語"
+            "RU" to "RU Русский",
+            "AR" to "AR العربية",
+            "HI" to "HI हिन्दी",
+            "JA" to "JA 日本語",
+            "ZHS" to "ZH 简体",
+            "ZHT" to "ZH 繁體"
         )
 
-        // Correspondance codes langue Android
         private val LOCALE_MAP = mapOf(
             "FR" to "fr",
             "EN" to "en",
@@ -37,7 +37,9 @@ class ConfigLangue(private val context: Context) {
             "RU" to "ru",
             "AR" to "ar",
             "HI" to "hi",
-            "JA" to "ja"
+            "JA" to "ja",
+            "ZHS" to "zh",
+            "ZHT" to "zh"
         )
     }
 
