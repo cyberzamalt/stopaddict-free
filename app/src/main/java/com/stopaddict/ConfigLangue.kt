@@ -40,8 +40,8 @@ class ConfigLangue(private val context: Context) {
             "AR" to "ar",
             "HI" to "hi",
             "JA" to "ja",
-            "ZHS" to "zh",
-            "ZHT" to "zh"
+            "ZHS" to "zh_CN",
+            "ZHT" to "zh_TW"
         )
     }
 
@@ -87,7 +87,13 @@ class ConfigLangue(private val context: Context) {
     fun appliquerLocale(codeLangue: String = getLangue()) {
         try {
             val localeCode = LOCALE_MAP[codeLangue] ?: "fr"
-            val locale = Locale(localeCode)
+
+            val locale = when (codeLangue) {
+                "ZHS" -> Locale("zh", "CN") // chinois simplifié
+                "ZHT" -> Locale("zh", "TW") // chinois traditionnel
+                else  -> Locale(localeCode) // cas standards
+            }
+            
             Locale.setDefault(locale)
 
             val config = Configuration(context.resources.configuration)
