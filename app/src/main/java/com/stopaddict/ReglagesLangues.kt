@@ -3403,6 +3403,263 @@ private val TRADUCTIONS_NL = mapOf(
             アプリの利用をもって本マニュアルへの同意とみなされます。
             """.trimIndent()
 
+            "NL" -> """
+                GEBRUIKSHANDLEIDING – STOPADDICT
+                
+                Welkom bij StopAddict. Deze applicatie is ontworpen om je te helpen je consumptie van sigaretten, joints en alcohol op een eenvoudige, visuele en informatieve manier te volgen. De app vervangt geen medisch advies en moedigt op geen enkele manier consumptie aan. Het is uitsluitend een geavanceerde teller, een schattings- en bewustwordingsinstrument.
+                
+                1. ALGEMENE PRESENTATIE
+                StopAddict werkt volledig offline, zonder registratie en zonder gegevensverzameling. Alle informatie die je invoert wordt lokaal op je apparaat opgeslagen. Je kunt de app dagelijks gebruiken om je consumptie, budget, gewoonten, vooruitgang en doelen te visualiseren.
+                
+                De applicatie bestaat uit verschillende tabbladen:
+                • Start: dagtellers en adaptieve adviezen.
+                • Kosten: nauwkeurige instelling van de prijs per consumptie.
+                • Gewoonten: invoer van je gebruikelijke dagelijkse limieten.
+                • Datums: vastleggen van je doelen (stoppen of verminderen).
+                • Agenda: dagelijks overzicht van alle consumpties.
+                • Statistieken: evolutie­grafieken en schattingen.
+                • Instellingen: taal, profiel, informatie, premium.
+                
+                2. WERKING VAN HET STARTTABBLAD
+                De startpagina toont de geactiveerde consumptiecategorieën. Voor elke categorie zijn er + en − knoppen om een eenheid toe te voegen of te verwijderen. De ingevoerde waarden worden automatisch opgeslagen voor de huidige dag.
+                
+                Je kunt categorieën activeren of deactiveren: sigaretten, joints, globale alcohol, bier, likeuren en sterke drank. Het deactiveren van een categorie verbergt de knoppen maar behoudt de geschiedenis.
+                
+                Het dagtotaal wordt bovenaan weergegeven en in realtime bijgewerkt.
+                
+                3. GEPERSONALISEERDE ADVIEZEN
+                De zone “Advies” toont automatisch berichten aangepast aan jouw situatie. De applicatie analyseert uitsluitend:
+                • de aanwezigheid van een voornaam,
+                • je kosten,
+                • je gewoonten,
+                • je doeldata,
+                • je consumptie van de dag.
+                
+                De adviezen worden regelmatig vernieuwd, met een anti-spam­beveiliging om te snelle wijzigingen te voorkomen.
+                
+                4. MODULE “KOSTEN”
+                In dit tabblad kun je de werkelijke kosten van je consumpties invoeren:
+                • Klassieke sigaretten: prijs per pak en aantal sigaretten.
+                • Rol­sigaretten: prijs van tabak, vloei, filters en aantal eenheden.
+                • Tubesigaretten: prijs van tabak, tubes en aantal sigaretten.
+                • Joints: prijs per gram, gram per joint, prijs van vloei.
+                • Alcohol: prijs per glas voor elk type alcohol.
+                
+                De eenheidsprijzen worden automatisch berekend en gebruikt in het tabblad Statistieken.
+                
+                5. MODULE “GEWOONTEN”
+                Je kunt aangeven hoeveel je normaal per dag consumeert per categorie. Hierdoor kan de app bepalen of je onder, gelijk aan of boven je gebruikelijke niveau zit.
+                
+                Deze waarden worden ook gebruikt om de “echte” besparingen te berekenen.
+                
+                6. MODULE “DATUMS”
+                Je kunt twee soorten doelen instellen:
+                • Stopdatum: volledig stoppen.
+                • Reductiedatum: geleidelijk verminderen.
+                
+                Indien een datum is ingesteld, berekent de app automatisch het aantal resterende dagen of eventuele overschrijding.
+                
+                7. AGENDA
+                De agenda toont je consumptiegeschiedenis per dag en helpt je je gedrag visueel te volgen. De gegevens blijven uitsluitend lokaal opgeslagen.
+                
+                8. STATISTIEKEN
+                De statistieken tonen:
+                • dagelijkse,
+                • wekelijkse,
+                • maandelijkse,
+                • jaarlijkse evolutie.
+                
+                De grafieken bevatten ook kosten, potentiële en werkelijke besparingen. De assen passen zich automatisch aan.
+                
+                9. EXPORT EN IMPORT
+                In de gratis versie:
+                • export niet beschikbaar,
+                • import niet beschikbaar.
+                
+                In de premiumversie zijn export en import beschikbaar via lokale JSON-bestanden.
+                
+                10. GRATIS VS PREMIUM
+                Gratis versie:
+                • advertenties,
+                • geen export/import.
+                
+                Premium versie:
+                • geen advertenties,
+                • onbeperkte export/import,
+                • ondersteuning van de onafhankelijke ontwikkelaar.
+                
+                11. TALEN
+                De app past zich aan de gekozen taal aan. Sommige lange teksten zijn mogelijk alleen in het Frans beschikbaar.
+                
+                12. PRIVACY
+                StopAddict verzamelt geen persoonlijke gegevens. Alles blijft lokaal op je apparaat.
+                
+                13. TECHNISCHE BEPERKINGEN
+                Gedrag kan variëren afhankelijk van het toestel. Bugs zijn mogelijk.
+                
+                14. AANBEVELINGEN
+                StopAddict vervangt geen gezondheidsprofessional. Raadpleeg bij behoefte een specialist.
+                
+                15. EIGENDOM
+                StopAddict is een onafhankelijke applicatie. Alle inhoud is auteursrechtelijk beschermd.
+                
+                16. UPDATES
+                Functies kunnen worden aangepast of verbeterd zonder garantie op permanente beschikbaarheid.
+                
+                17. AANVAARDING
+                Het gebruik van StopAddict impliceert volledige aanvaarding van deze handleiding.
+                """.trimIndent()
+
+                "ZH" -> """
+                使用手册 – STOPADDICT
+                
+                欢迎使用 StopAddict。本应用旨在帮助你以简单、直观且信息化的方式跟踪香烟、大麻和酒精的消费情况。该应用不构成医疗建议，也不鼓励任何形式的消费，仅作为高级计数、估算和意识提升工具。
+                
+                1. 总体介绍
+                StopAddict 完全离线运行，无需注册，也不收集任何数据。你输入的所有信息仅存储在你的设备上。
+                
+                应用包含以下页面：
+                • 首页：当日计数与动态建议
+                • 成本：消费价格设置
+                • 习惯：每日习惯阈值
+                • 日期：减少或停止目标
+                • 日历：每日消费汇总
+                • 统计：趋势图与估算
+                • 设置：语言、资料、信息
+                
+                2. 首页功能
+                首页显示已启用的消费类别。每个类别都有 + / − 按钮用于增加或减少单位，数据会自动保存。
+                
+                禁用类别不会删除历史数据，仅隐藏操作。
+                
+                3. 个性化建议
+                建议根据以下信息动态生成：
+                • 是否填写姓名
+                • 成本信息
+                • 习惯
+                • 目标日期
+                • 当日消费
+                
+                4. 成本模块
+                可设置每种消费的真实价格，用于统计和节省计算。
+                
+                5. 习惯模块
+                输入你的日常习惯，用于比较和真实节省计算。
+                
+                6. 日期模块
+                可设置减少或停止日期，应用会自动计算剩余天数。
+                
+                7. 日历
+                显示每日消费记录，仅存储在本地。
+                
+                8. 统计
+                提供日、周、月、年图表，以及成本和节省估算。
+                
+                9. 导出与导入
+                免费版不支持导出和导入。
+                高级版支持本地 JSON 文件。
+                
+                10. 免费版与高级版
+                免费版：含广告
+                高级版：无广告，支持导入导出
+                
+                11. 语言
+                应用支持多语言，部分长文本可能仅提供法语版本。
+                
+                12. 隐私
+                不收集、不上传任何个人数据。
+                
+                13. 技术限制
+                不同设备可能存在差异或异常。
+                
+                14. 使用建议
+                本应用不能替代医疗或专业建议。
+                
+                15. 所有权
+                所有内容受版权保护。
+                
+                16. 更新
+                功能可能随更新调整。
+                
+                17. 接受
+                使用 StopAddict 即表示你接受本手册内容。
+                """.trimIndent()
+
+                "ZHT" -> """
+                使用手冊 – STOPADDICT
+                
+                歡迎使用 StopAddict。本應用程式旨在幫助你以簡單、直觀且資訊化的方式追蹤香菸、大麻與酒精的使用情況。本應用不構成醫療建議，也不鼓勵任何消費行為。
+                
+                1. 總體介紹
+                StopAddict 完全離線運作，無需註冊，也不會收集任何資料。所有輸入的資訊僅儲存在你的裝置中。
+                
+                應用包含以下頁面：
+                • 首頁：每日計數與動態建議
+                • 成本：消費價格設定
+                • 習慣：每日習慣上限
+                • 日期：減量或停止目標
+                • 行事曆：每日消費摘要
+                • 統計：趨勢圖與估算
+                • 設定：語言、個人資訊
+                
+                2. 首頁功能
+                首頁顯示已啟用的消費類別。每個類別都有 + / − 按鈕，資料會自動儲存。
+                
+                停用類別不會刪除歷史資料。
+                
+                3. 個人化建議
+                建議會根據：
+                • 是否填寫姓名
+                • 成本
+                • 習慣
+                • 目標日期
+                • 當日消費
+                
+                4. 成本模組
+                可設定每種消費的實際價格，用於統計分析。
+                
+                5. 習慣模組
+                設定每日習慣，用於比較與節省計算。
+                
+                6. 日期模組
+                可設定減量或停止日期，系統會自動計算。
+                
+                7. 行事曆
+                顯示每日消費紀錄，資料僅存於本機。
+                
+                8. 統計
+                提供日、週、月、年圖表與成本分析。
+                
+                9. 匯出與匯入
+                免費版不支援。
+                進階版支援本機 JSON。
+                
+                10. 免費版與進階版
+                免費版：含廣告
+                進階版：無廣告、支援匯出匯入
+                
+                11. 語言
+                部分長文本可能僅提供法語版本。
+                
+                12. 隱私
+                不收集任何個人資料。
+                
+                13. 技術限制
+                不同裝置可能有差異。
+                
+                14. 使用建議
+                本應用不取代醫療或專業建議。
+                
+                15. 版權
+                所有內容受著作權保護。
+                
+                16. 更新
+                功能可能隨更新調整。
+                
+                17. 接受
+                使用 StopAddict 即表示你接受本手冊內容。
+                """.trimIndent()
+
             else -> getManuel("FR") // Fallback FR pour autres langues
         }
     }
@@ -4298,6 +4555,251 @@ private val TRADUCTIONS_NL = mapOf(
                 12) 同意
                 本アプリの使用をもって、本 CGV の受諾となります。
                 """.trimIndent()
+
+                "NL" -> """
+            ALGEMENE VERKOOPSVOORWAARDEN (AVV) – STOPADDICT
+            
+            Deze Algemene Verkoopvoorwaarden regelen het gebruik van de gratis versie en de premiumversie van de StopAddict-applicatie. Installatie, gebruik of aankoop van de premiumversie impliceert volledige en onvoorwaardelijke aanvaarding van onderstaande bepalingen.
+            
+            1. DOEL VAN DE APPLICATIE
+            StopAddict is een informatieve en speelse applicatie waarmee je je dagelijkse consumptie van sigaretten, joints en alcohol kunt volgen, evenals je uitgaven, gewoonten en doelstellingen.
+            De applicatie is in geen geval:
+            • een medisch hulpmiddel,
+            • een therapeutische dienst,
+            • een diagnostisch instrument,
+            • een vervanging voor professionele begeleiding.
+            
+            De applicatie moedigt geen consumptie, aankoop of gebruik van gereguleerde stoffen aan.
+            
+            2. GRATIS VERSIE
+            De gratis versie van StopAddict biedt toegang tot de belangrijkste functies:
+            • dagelijkse opvolging,
+            • gepersonaliseerde adviezen,
+            • kostenconfiguratie,
+            • gewoonten en doeldata,
+            • agenda,
+            • statistieken.
+            
+            De gratis versie bevat een advertentiebanner.
+            Import- en exportfuncties zijn niet beschikbaar in de gratis versie.
+            Elke poging om deze functies te gebruiken toont het bericht:
+            “Deze functie is alleen beschikbaar in de premiumversie.”
+            
+            3. PREMIUMVERSIE
+            De premiumversie van StopAddict biedt:
+            • volledige verwijdering van advertenties,
+            • volledige toegang tot import- en exportfuncties,
+            • ondersteuning van de onafhankelijke ontwikkelaar.
+            
+            De aankoop van de premiumversie is een eenmalige betaling via de Google Play Store en geen abonnement.
+            
+            4. AANKOOPVOORWAARDEN
+            De aankoop van de premiumversie gebeurt uitsluitend via de Google Play Store volgens de regels van Google.
+            De ontwikkelaar verzamelt geen persoonlijke aankoopgegevens.
+            
+            Het is de verantwoordelijkheid van de gebruiker:
+            • een geldig Google-account te gebruiken,
+            • meerderjarig te zijn volgens lokale wetgeving,
+            • de Play Store-voorwaarden in zijn/haar land te controleren.
+            
+            5. GEEN TERUGBETALING
+            Gezien:
+            • het bestaan van een gratis versie om de applicatie te testen,
+            • technische beperkingen van verschillende smartphones,
+            • verschillen tussen Android-versies,
+            • de immateriële aard van het digitale product,
+            
+            kan na aankoop van de premiumversie geen terugbetaling worden toegekend.
+            
+            Dit geldt ook in geval van:
+            • incompatibiliteit met het apparaat,
+            • bugs, fouten of weergaveproblemen,
+            • gegevensverlies,
+            • verandering van telefoon,
+            • verandering van Google-account,
+            • reset van het toestel.
+            
+            In sommige gevallen kan de Play Store een eerdere aankoop niet automatisch herkennen, waardoor een nieuwe aankoop vereist kan zijn volgens de regels van Google.
+            
+            6. VERANTWOORDELIJKHEID VAN DE GEBRUIKER
+            De gebruiker is volledig verantwoordelijk voor:
+            • het gebruik van de applicatie,
+            • de invoer, juistheid en het beheer van zijn/haar gegevens,
+            • de naleving van lokale wetten omtrent tabak, alcohol en cannabis,
+            • de beveiliging van het toestel en de opslag.
+            
+            De gebruiker erkent dat de opgeslagen gegevens:
+            • geen juridisch bewijs vormen,
+            • niet voor gerechtelijke doeleinden kunnen worden gebruikt,
+            • geen aansprakelijkheid van de ontwikkelaar kunnen inroepen.
+            
+            7. TECHNISCHE BEPERKINGEN EN STORINGEN
+            De applicatie kan variëren afhankelijk van apparaat, Android-versie of softwareomgeving. Er wordt geen perfecte of gegarandeerde werking beloofd.
+            
+            De ontwikkelaar kan niet aansprakelijk worden gesteld voor:
+            • softwarebugs,
+            • gegevensverlies,
+            • beschadigde exportbestanden (premiumversie),
+            • hardware- of softwarestoringen,
+            • volledige of gedeeltelijke incompatibiliteit,
+            • stopzetting van ontwikkeling of uitblijven van updates.
+            
+            8. PERSOONSGEGEVENS EN PRIVACY
+            StopAddict verzamelt geen gegevens.
+            Er worden geen persoonsgegevens naar een server verzonden.
+            Geen registratie is vereist.
+            Alle gegevens blijven lokaal op het apparaat.
+            
+            Geëxporteerde bestanden (premiumversie) vallen onder de volledige verantwoordelijkheid van de gebruiker.
+            
+            9. ONAFHANKELIJKHEID
+            De ontwikkelaar van StopAddict is een onafhankelijke particulier.
+            De applicatie heeft geen enkele band met:
+            • de tabaksindustrie,
+            • alcoholproducenten,
+            • cannabisgerelateerde bedrijven,
+            • de overheid,
+            • criminele organisaties.
+            
+            Alle inhoud is origineel en auteursrechtelijk beschermd.
+            
+            10. INTELLECTUEEL EIGENDOM
+            Alle inhoud van StopAddict is beschermd door het auteursrecht.
+            Elke ongeoorloofde reproductie of verspreiding is verboden.
+            
+            11. UPDATES
+            Updates kunnen worden aangeboden zonder verplichting tot permanente compatibiliteit of ondersteuning.
+            
+            12. AANVAARDING
+            Door installatie, gebruik of aankoop van de premiumversie erkent de gebruiker deze Algemene Verkoopvoorwaarden te hebben gelezen en aanvaard.
+            """.trimIndent()
+
+            "ZH" -> """
+            一般销售条款（CGV）– STOPADDICT
+            
+            本一般销售条款规范 StopAddict 应用免费版与高级版的使用。安装、使用或购买高级版即表示用户完全接受以下条款。
+            
+            1. 应用目的
+            StopAddict 是一款信息性与辅助性的应用，用于记录香烟、大麻及酒精的日常消费，以及相关支出、习惯和目标。
+            本应用不属于：
+            • 医疗工具，
+            • 治疗服务，
+            • 诊断设备，
+            • 专业陪伴的替代品。
+            
+            应用不鼓励任何形式的消费或购买。
+            
+            2. 免费版
+            免费版提供以下主要功能：
+            • 每日追踪，
+            • 个性化建议，
+            • 成本设置，
+            • 习惯与目标日期，
+            • 日历，
+            • 统计。
+            
+            免费版包含广告横幅。
+            不支持数据导入与导出。
+            
+            3. 高级版
+            高级版提供：
+            • 完全移除广告，
+            • 完整导入与导出功能，
+            • 支持独立开发者。
+            
+            高级版为一次性购买，不是订阅。
+            
+            4. 购买条件
+            购买仅通过 Google Play Store 进行。
+            开发者不收集任何购买相关的个人信息。
+            
+            5. 不退款政策
+            鉴于产品为数字内容，购买后不提供退款。
+            
+            6. 用户责任
+            用户对应用的使用及数据管理负全部责任。
+            
+            7. 技术限制
+            应用可能因设备或系统不同而存在差异。
+            
+            8. 数据与隐私
+            不收集、不传输任何个人数据，所有信息仅存储于本地。
+            
+            9. 独立性
+            应用与任何烟草、酒精、大麻产业或政府机构无关。
+            
+            10. 知识产权
+            所有内容均受版权保护。
+            
+            11. 更新
+            更新可能随时进行，开发者不保证持续支持。
+            
+            12. 接受条款
+            使用或购买 StopAddict 即表示你接受本条款。
+            """.trimIndent()
+
+            "ZHT" -> """
+            一般銷售條款（CGV）– STOPADDICT
+            
+            本一般銷售條款規範 StopAddict 應用免費版與進階版的使用。安裝、使用或購買進階版即表示使用者完全接受以下條款。
+            
+            1. 應用目的
+            StopAddict 為一款資訊性應用，用於追蹤香菸、大麻與酒精的每日使用情況，以及相關支出、習慣與目標。
+            本應用不屬於：
+            • 醫療工具，
+            • 治療服務，
+            • 診斷設備，
+            • 專業輔導的替代品。
+            
+            應用不鼓勵任何消費或購買行為。
+            
+            2. 免費版
+            免費版提供：
+            • 每日追蹤，
+            • 個人化建議，
+            • 成本設定，
+            • 習慣與目標日期，
+            • 行事曆，
+            • 統計。
+            
+            免費版包含廣告。
+            不支援資料匯入與匯出。
+            
+            3. 進階版
+            進階版提供：
+            • 完全移除廣告，
+            • 完整匯入與匯出功能，
+            • 支持獨立開發者。
+            
+            進階版為一次性購買，非訂閱制。
+            
+            4. 購買條件
+            僅能透過 Google Play Store 購買。
+            
+            5. 不退款政策
+            因數位產品特性，購買後不提供退款。
+            
+            6. 使用者責任
+            使用者需自行負責應用使用及資料管理。
+            
+            7. 技術限制
+            不同裝置與系統可能造成差異。
+            
+            8. 資料與隱私
+            不收集、不傳送任何個人資料，所有資料皆儲存在本機。
+            
+            9. 獨立性
+            本應用與任何菸酒或政府機構無關。
+            
+            10. 智慧財產權
+            所有內容皆受著作權保護。
+            
+            11. 更新
+            功能可能隨更新調整，無永久支援保證。
+            
+            12. 條款接受
+            使用或購買 StopAddict 即表示你已閱讀並接受本條款。
+            """.trimIndent()
 
             else -> getCGV("FR") // Fallback FR
         }
@@ -5201,6 +5703,243 @@ private val TRADUCTIONS_NL = mapOf(
                 アプリの利用を継続することで、あなたはこの国際的注意事項を読み、理解し、同意したものとみなされます。
 
                 """.trimIndent()
+
+                "NL" -> """
+            JURIDISCHE VERMELDINGEN & GEGEVENSBELEID – STOPADDICT
+            
+            1. UITGEVER VAN DE APPLICATIE
+            StopAddict is een applicatie ontwikkeld door:
+            Ontwikkeling: StopAddict – Onafhankelijke ontwikkelaar.
+            Er bestaat geen institutionele, commerciële of juridische band met de tabaksindustrie, alcoholindustrie, cannabisindustrie, een overheidsinstantie, een regering, een medische instelling, een industrie of een kartel.
+            
+            2. DOEL VAN DE APPLICATIE
+            StopAddict is een speels, informatief en persoonlijk hulpmiddel bedoeld om gebruikers te helpen hun dagelijkse consumptie van sigaretten, joints en alcohol te volgen.
+            De applicatie is geen:
+            • medisch hulpmiddel,
+            • diagnostisch instrument,
+            • therapeutische ondersteuning,
+            • gezondheidsdienst,
+            • aansporing tot consumptie,
+            • aanmoediging om gereguleerde stoffen te kopen of te gebruiken.
+            
+            Het gebruik is strikt persoonlijk en vrijwillig.
+            
+            3. MEERDERJARIGHEID & INTERNATIONALE WETGEVING
+            De applicatie is bedoeld voor meerderjarige personen volgens:
+            • de wetgeving van het land van verblijf,
+            • en de wetgeving van het land waar de gebruiker zich fysiek bevindt tijdens het gebruik.
+            
+            De regels omtrent meerderjarigheid kunnen verschillen (bijvoorbeeld alcohol → verschillend tussen Frankrijk en de Verenigde Staten).
+            De gebruiker dient zelf de toepasselijke wetgeving te controleren met betrekking tot:
+            • tabak,
+            • alcohol,
+            • cannabis en afgeleiden,
+            • het gebruik van persoonlijke volgtoepassingen.
+            
+            De uitgever kan niet aansprakelijk worden gesteld voor illegaal gebruik in een land of voor onwetendheid van lokale wetten.
+            
+            4. NEUTRALITEIT & GEEN AANMOEDIGING
+            StopAddict:
+            • promoot geen sigaretten, alcohol of joints,
+            • verheerlijkt geen consumptie,
+            • moedigt geen aankoop van stoffen aan,
+            • suggereert geen risicovol gedrag.
+            
+            Het uiteindelijke doel is vermindering, stoppen of volledige afwezigheid van consumptie.
+            
+            5. VERANTWOORDELIJKHEID VAN DE GEBRUIKER
+            De gebruiker is volledig verantwoordelijk voor:
+            • het gebruik van de applicatie,
+            • de opgeslagen gegevens,
+            • de ingevoerde instellingen,
+            • zijn of haar persoonlijk gedrag,
+            • de naleving van lokale wetgeving.
+            
+            De applicatie kan in geen geval dienen als juridisch bewijs.
+            Interne registraties kunnen niet worden gebruikt om de gebruiker of de ontwikkelaar te incrimineren.
+            
+            In geval van misbruik ligt de volledige verantwoordelijkheid bij de gebruiker.
+            
+            6. GEGEVENSBESCHERMING & PRIVACY
+            StopAddict verzamelt geen persoonlijke gegevens.
+            Er is geen account vereist.
+            Er worden geen gegevens naar externe servers verzonden.
+            Er vindt geen tracking, analyse, profilering of gerichte reclame plaats.
+            
+            Alle gegevens blijven uitsluitend opgeslagen op het apparaat van de gebruiker.
+            Eventueel geëxporteerde bestanden (premiumversie) vallen onder de volledige verantwoordelijkheid van de gebruiker.
+            
+            Het wordt aanbevolen om:
+            • de toegang tot het toestel te beveiligen,
+            • geëxporteerde bestanden te beschermen,
+            • blootstelling van gevoelige gegevens te vermijden,
+            • een veilige digitale omgeving te behouden.
+            
+            7. VEILIGHEID, PREVENTIE & WAARSCHUWING
+            De applicatie raadt aan het gebruik van digitale apparaten door kinderen en adolescenten te controleren.
+            Ze benadrukt het belang van:
+            • gezondheid,
+            • slaap,
+            • lichaamsbeweging,
+            • voeding,
+            • sociale en familiale ondersteuning.
+            
+            StopAddict vervangt deze goede praktijken niet.
+            
+            8. ADVERTENTIES & PREMIUMVERSIE
+            De gratis versie bevat een advertentiebanner ter ondersteuning van de ontwikkeling.
+            De premiumversie verwijdert alle advertenties en activeert import- en exportfuncties.
+            
+            De premiumversie is een eenmalige aankoop en valt onder de regels van de Google Play Store.
+            Installatie op een nieuw apparaat kan een nieuwe aankoop vereisen volgens het beleid van Google.
+            
+            Er kan geen terugbetaling worden verleend door de ontwikkelaar, zelfs niet in geval van:
+            • incompatibiliteit,
+            • hardware- of softwarestoringen,
+            • gegevensverlies,
+            • bugs of anomalieën,
+            • verandering van smartphone.
+            
+            9. GARANTIES & TECHNISCHE BEPERKINGEN
+            De applicatie wordt geleverd “zoals ze is”.
+            Er wordt geen garantie gegeven voor:
+            • perfecte werking,
+            • afwezigheid van bugs,
+            • volledige compatibiliteit,
+            • continuïteit van de dienst,
+            • regelmatige updates.
+            
+            De ontwikkelaar kan niet aansprakelijk worden gesteld voor:
+            • gegevensverlies,
+            • incompatibiliteit,
+            • systeemproblemen van het toestel,
+            • corruptie van een exportbestand,
+            • stopzetting van verdere ontwikkeling.
+            
+            10. INTELLECTUEEL EIGENDOM
+            De volledige applicatie (code, teksten, afbeeldingen, functies, structuur en design) is beschermd door het auteursrecht.
+            Elke ongeoorloofde reproductie, wijziging of verspreiding is verboden.
+            
+            11. ONAFHANKELIJKHEID & TRANSPARANTIE
+            StopAddict is ontworpen door een onafhankelijke ontwikkelaar zonder commerciële of institutionele invloed.
+            De applicatie heeft geen banden met:
+            • de staat,
+            • tabaksindustrieën,
+            • alcoholindustrieën,
+            • de cannabissector,
+            • criminele organisaties,
+            • medische instellingen of verenigingen.
+            
+            12. TECHNISCHE OORSPRONG & CREATIE
+            De applicatie werd ontwikkeld door persoonlijk werk, aangevuld met het gebruik van softwarehulpmiddelen, waaronder kunstmatige intelligentie ter ondersteuning van tekst- en codestructuur.
+            De ontwikkelaar blijft volledig verantwoordelijk voor het eindproduct.
+            
+            13. CONTACT & ONDERSTEUNING
+            Aangezien de applicatie door een onafhankelijke ontwikkelaar wordt gemaakt, is er geen continue ondersteuning gegarandeerd.
+            Er wordt geen professionele klantenservice aangeboden.
+            Feedback kan worden verzonden via de ontwikkelaarspagina op Google Play Store.
+            
+            14. AANVAARDING
+            Het gebruik van de applicatie impliceert volledige en onvoorwaardelijke aanvaarding van deze juridische vermeldingen en het gegevensbeleid.
+            
+            BELANGRIJKE WAARSCHUWING: Deze applicatie vormt geen medisch, psychologisch of professioneel advies. Alle informatie is algemeen en uitsluitend bedoeld voor persoonlijk en informatief gebruik.
+            
+            Door de applicatie te gebruiken, erkent de gebruiker dat hij of zij dit onder eigen verantwoordelijkheid doet. Het toepasselijk recht is uitsluitend het Franse recht. Elk geschil valt onder de bevoegdheid van de Franse rechtbanken.
+            """.trimIndent()
+
+            "ZH" -> """
+            法律声明与数据政策 – STOPADDICT
+            
+            1. 应用开发者
+            StopAddict 由独立开发者开发。
+            与烟草、酒精、大麻行业、政府机构、医疗机构或任何组织无任何商业或法律关系。
+            
+            2. 应用目的
+            StopAddict 是一款用于记录香烟、大麻和酒精日常使用情况的个人信息工具。
+            本应用不是：
+            • 医疗设备，
+            • 诊断工具，
+            • 治疗服务，
+            • 健康服务，
+            • 消费鼓励。
+            
+            使用完全出于个人自愿。
+            
+            3. 法定年龄与国际法规
+            本应用仅适用于符合所在地法律规定的成年人。
+            用户有责任遵守当地关于烟草、酒精和大麻的法律。
+            
+            4. 中立性
+            StopAddict 不推广、不鼓励任何形式的消费行为。
+            
+            5. 用户责任
+            用户对应用的使用及其数据承担全部责任。
+            应用数据不得作为法律证据。
+            
+            6. 数据保护与隐私
+            不收集、不传输任何个人数据。
+            所有数据仅存储在用户设备中。
+            
+            7. 广告与高级版
+            免费版包含广告。
+            高级版移除广告并启用导入导出功能。
+            
+            8. 技术限制
+            应用按“现状”提供，不保证无错误或持续更新。
+            
+            9. 知识产权
+            所有内容均受版权保护。
+            
+            10. 接受
+            使用 StopAddict 即表示你接受本法律声明。
+            """.trimIndent()
+
+            "ZHT" -> """
+            法律聲明與資料政策 – STOPADDICT
+            
+            1. 應用開發者
+            StopAddict 由獨立開發者開發。
+            與菸酒、大麻產業、政府或醫療機構無任何商業或法律關係。
+            
+            2. 應用目的
+            StopAddict 為個人資訊工具，用於追蹤香菸、大麻與酒精的每日使用情況。
+            本應用不是：
+            • 醫療設備，
+            • 診斷工具，
+            • 治療服務，
+            • 健康服務，
+            • 消費鼓勵。
+            
+            使用完全出於個人自願。
+            
+            3. 法定年齡與國際法規
+            本應用僅限符合所在地法律規定之成年人使用。
+            使用者須自行確認並遵守當地法律。
+            
+            4. 中立性
+            StopAddict 不鼓勵或推廣任何消費行為。
+            
+            5. 使用者責任
+            使用者須自行負責應用使用及資料管理。
+            資料不得作為法律證據。
+            
+            6. 資料保護與隱私
+            不收集、不傳送任何個人資料。
+            所有資料僅儲存在使用者裝置中。
+            
+            7. 廣告與進階版
+            免費版包含廣告。
+            進階版移除廣告並提供匯入匯出功能。
+            
+            8. 技術限制
+            應用以「現狀」提供，不保證無錯誤或持續更新。
+            
+            9. 智慧財產權
+            所有內容皆受著作權保護。
+            
+            10. 接受
+            使用 StopAddict 即表示你接受本法律聲明。
+            """.trimIndent()
 
             else -> getMentionsLegales("FR") // Fallback FR
         }
