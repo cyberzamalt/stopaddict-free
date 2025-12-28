@@ -16,12 +16,16 @@ object MainActivityLangues {
             "AR" -> TRADUCTIONS_AR
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
+            "NL" -> TRADUCTIONS_NL
+            "ZH" -> TRADUCTIONS_ZH
+            "ZHT" -> TRADUCTIONS_ZHT
             else -> {
                 StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
     }
+
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
@@ -217,7 +221,7 @@ object MainActivityLangues {
         "console_android" to "Android",
         "console_app_state" to "État Application",
         "console_age_accepted" to "Age accepté",
-        "console_warning_shown" to "Warning shown",
+        "console_warning_shown" to "Avertissement affiché",
         "console_error_prefs" to "Erreur lecture prefs",
         "console_logs_db" to "Logs Database",
         "console_consos_jour" to "Consommations jour",
@@ -1961,4 +1965,626 @@ object MainActivityLangues {
         "console_logs_selectable" to "選択可能なログ ✓",
         "console_btn_close" to "閉じる"
     )
+
+        // ==================== NEDERLANDS (NL) ====================
+private val TRADUCTIONS_NL = mapOf(
+    // Tabtitels
+    "tab_accueil" to "Start",
+    "tab_stats" to "Statistieken",
+    "tab_calendrier" to "Kalender",
+    "tab_habitudes" to "Gewoonten & Wilskracht",
+    "tab_reglages" to "Instellingen",
+
+    // Dialoog waarschuwing meerderjarigheid
+    "warning_title" to "⚠️ Waarschuwing – Alleen voor volwassenen",
+    "warning_message" to """
+        ⚠️ JURIDISCHE WAARSCHUWING
+        
+        Het gebruik van deze applicatie houdt in dat u onderstaande waarschuwing aandachtig hebt gelezen.
+        De gebruiker wordt uitgenodigd om alle volgende informatie door te nemen vóór elk gebruik.
+        
+        1. CONTROLE OP MEERDERJARIGHEID EN NALEVING VAN LOKALE WETGEVING
+        De gebruiker moet controleren dat hij/zij meerderjarig is volgens de wetgeving van het land van verblijf én van elk land waar hij/zij zich bevindt op het moment van gebruik.
+        Wettelijke leeftijden voor tabak, cannabis en alcohol verschillen per land.
+        Voorbeeld: iemand die in Frankrijk op 18 jaar meerderjarig is, kan volgens de Amerikaanse wetgeving voor alcoholconsumptie als minderjarig worden beschouwd.
+        
+        Het is uitsluitend de verantwoordelijkheid van de gebruiker om de wetten, verboden, verplichtingen en beperkingen te controleren die gelden in elk land of gebied met betrekking tot:
+        - het gebruik van de applicatie,
+        - het bezit of gebruik van sigaretten,
+        - het gebruik van cannabis volgens lokale regelgeving,
+        - alcoholconsumptie,
+        - elke andere gereguleerde praktijk.
+        
+        De applicatie mag in geen enkel land worden beschouwd als het aanmoedigen, vergemakkelijken, stimuleren of aanbevelen van het gebruik van gereguleerde middelen.
+        
+        2. GEEN AANMOEDIGING TOT CONSUMPTIE
+        Het gebruik van de applicatie betekent niet dat de gebruiker een roker is of alcohol/cannabis gebruikt.
+        De applicatie stimuleert niet, raadt niet aan, verheerlijkt niet en normaliseert niet het gebruik van sigaretten, joints of alcohol.
+        
+        De applicatie heeft uitsluitend als doel:
+        - helpen tellen, visualiseren en analyseren,
+        - de gebruiker bewust maken van consumptie, gewoonten en uitgaven,
+        - reductie of stoppen ondersteunen.
+        
+        Echte winst is een sigaret, joint of glas alcohol weigeren — of zelfs nooit beginnen.
+        Als u niet rookt en niet drinkt, blijf uw gezondheid beschermen: tabak, cannabis en alcohol zijn schadelijk voor de gezondheid en kunnen sociaal gedrag negatief beïnvloeden.
+        
+        3. VERANTWOORDELIJKHEID VAN DE GEBRUIKER
+        Het gebruik van de applicatie gebeurt volledig onder verantwoordelijkheid van de gebruiker, of van diens wettelijke vertegenwoordigers als de gebruiker minderjarig is.
+        De ontwikkelaar kan niet aansprakelijk worden gesteld in geval van:
+        - onjuist gebruik,
+        - misbruik of gebruik buiten het beoogde doel,
+        - foutieve interpretatie,
+        - niet-naleving van lokale wetgeving,
+        - beslissingen die worden genomen op basis van de getoonde gegevens.
+        
+        De applicatie kan in geen geval worden gebruikt om strafrechtelijke of civielrechtelijke aansprakelijkheid vast te stellen, noch als bewijs in een juridische context, hetzij voor de gebruiker, hetzij tegen de ontwikkelaar.
+        
+        4. BESCHERMING VAN MINDERJARIGEN EN OUDERLIJK TOEZICHT
+        Ook al verzamelt de applicatie geen persoonsgegevens, wordt eraan herinnerd dat het essentieel is om het digitale gebruik van minderjarigen te bewaken.
+        Ouders, voogden en wettelijke vertegenwoordigers dienen te letten op:
+        - gezondheid,
+        - mentaal welzijn,
+        - sociaal gedrag,
+        - gematigd gebruik van digitale hulpmiddelen.
+        
+        5. PERSOONSGEGEVENS EN PRIVACY
+        Er is geen registratie vereist.
+        Er worden geen persoonsgegevens verzameld, opgeslagen of verzonden.
+        Als de gebruiker een voornaam invoert, wordt deze uitsluitend gebruikt binnen de applicatie en in export-/importbestanden die op de eigen telefoon van de gebruiker worden opgeslagen.
+        
+        Het is de verantwoordelijkheid van de gebruiker om:
+        - de smartphone te beveiligen,
+        - beveiligingssoftware up-to-date te houden,
+        - goede praktijken voor gegevensbescherming toe te passen.
+        
+        6. ADVERTENTIES EN FINANCIERING
+        De gratis versie bevat een advertentiebanner om de ontwikkeling te financieren.
+        De premium versie maakt gebruik zonder advertenties mogelijk.
+        
+        Deze applicatie is het resultaat van persoonlijk werk van een onafhankelijke maker.
+        Advertenties dienen uitsluitend om ontwikkeling, onderhoud en verbetering van de applicatie te ondersteunen.
+        
+        7. NEUTRALITEIT, ONAFHANKELIJKHEID EN GEEN EXTERNE BANDEN
+        De ontwikkelaar is een onafhankelijke particulier.
+        De applicatie heeft geen banden met:
+        - de staat of overheidsdiensten,
+        - tabaksbedrijven,
+        - alcoholproducenten,
+        - de cannabisindustrie,
+        - enige criminele organisatie of kartel.
+        
+        De applicatie is niet bedoeld om een andere applicatie met een vergelijkbare naam te vervangen of te beconcurreren.
+        
+        8. INTELLECTUELE EIGENDOM
+        De naam, het ontwerp, de inhoud, de teksten en de functionaliteiten van de applicatie zijn beschermd door het auteursrecht.
+        Elke reproductie, kopie of herdistributie zonder toestemming is verboden.
+        
+        Ook zonder officiële (betaalde) registratie geldt auteursrecht automatisch volgens de wet.
+        
+        9. TECHNISCHE BEPERKINGEN, COMPATIBILITEIT EN RISICO’S
+        De applicatie kan bugs, fouten of gegevensverlies vertonen afhankelijk van:
+        - het telefoonmodel,
+        - de Android-versie,
+        - de staat van het systeem,
+        - beschikbare opslag,
+        - de softwareomgeving.
+        
+        De ontwikkelaar kan niet aansprakelijk worden gesteld in geval van:
+        - gegevensverlies,
+        - hardware- of softwarestoringen,
+        - beschadigde bestanden,
+        - gedeeltelijke of volledige incompatibiliteit.
+        
+        De gratis versie laat toe om de applicatie te testen vóór aankoop.
+        Terugbetaling is niet mogelijk.
+        
+        Een verandering van smartphone of Google-account kan ertoe leiden dat de applicatie opnieuw moet worden gekocht, afhankelijk van de regels van de Play Store.
+        
+        10. ONTWIKKELING EN ROL VAN AI
+        De applicatie is ontwikkeld via persoonlijk werk en met gebruik van AI-tools om bepaalde teksten en delen van de code te optimaliseren.
+        De maker blijft de uiteindelijke auteur en verantwoordelijke van het volledige project.
+    """.trimIndent(),
+
+    "warning_resources_link" to "📞 Hulpbronnen en nuttige telefoonnummers",
+    "warning_checkbox_age" to "☑️ Ik bevestig dat ik meerderjarig ben",
+    "warning_checkbox_noshow" to "Dit bericht niet meer tonen",
+    "warning_btn_quit" to "Afsluiten",
+    "warning_btn_accept" to "Ik accepteer en ga verder",
+
+    // Dialoog hulpbronnen
+    "resources_title" to "📞 Hulpbronnen en nuttige telefoonnummers",
+    "resources_content" to """
+        📞 NUTTIGE HULPBRONNEN – HULP, ONDERSTEUNING, INFORMATIE
+        
+        Deze module verzamelt verschillende hulp-, informatie- en ondersteuningsbronnen voor mensen die te maken hebben met tabak, alcohol, cannabis of andere moeilijkheden. De onderstaande nummers kunnen per land verschillen en sommige lijnen zijn alleen bereikbaar vanuit specifieke geografische zones. De gebruiker moet de lokale beschikbaarheid van nummers of diensten controleren.
+        
+        1. TABAK – STOPPEN, ADVIES, ONDERSTEUNING
+        • Frankrijk – Tabac Info Service: 39 89
+          Officiële hulplijn voor stoppen met roken. Gespecialiseerde adviseurs, persoonlijke opvolging, informatie over nicotinevervangers en stopmethoden.
+        • Canada – QuitNow: 1 877 455 2233
+        • België – Tabac Stop: 0800 111 00
+        • Zwitserland – Stop Tabac: 0848 000 181
+        • Internationale informatie: raadpleeg lokale hulplijnen of de volksgezondheidsdiensten van het land.
+        
+        2. ALCOHOL – HULP, PREVENTIE, ONDERSTEUNING
+        • Frankrijk – Alcool Info Service: 0 980 980 930
+          Anoniem en gratis. Advies, luisterend oor, ondersteuning, doorverwijzing. Beschikbaar 7 dagen per week.
+        • Canada – Anonieme Alcoholisten: 1 877 404 2242
+        • België – Drogues & Alcool-lijn: 078 15 15 15
+        • Zwitserland – Addiction Suisse: 021 321 29 11
+        
+        3. CANNABIS – INFORMATIE & BEGELEIDING
+        • Frankrijk – Drogues Info Service: 0 800 23 13 13
+          Officiële informatie over middelen, risico’s en beschikbare hulp.
+        • België – Infor-Drogues: 02 227 52 52
+        • Zwitserland – Ligne Drogue: 0848 133 133
+        
+        4. NOOD, PSYCHOLOGISCHE CRISIS & EMOTIONELE STEUN
+        Overmatig gebruik van tabak, alcohol of cannabis kan psychisch of sociaal lijden maskeren. In geval van nood zijn er verschillende nummers beschikbaar.
+        
+        • Frankrijk – Suicide Écoute: 01 45 39 40 00
+        • Frankrijk – Nationaal nummer suïcidepreventie: 3114
+        • Frankrijk – SOS Amitié: 09 72 39 40 50
+        • België – Télé-Accueil: 107
+        • Zwitserland – La Main Tendue: 143
+        • Canada – Suicide Prevention Service: 1 833 456 4566
+        
+        5. NOODNUMMERS
+        Noodnummers verschillen per land. Voorbeelden:
+        • Europese Unie – 112
+        • Frankrijk – Samu 15, Politie 17, Brandweer 18, Enkel noodnummer 112
+        • Verenigde Staten – 911
+        • Canada – 911
+        De gebruiker wordt uitgenodigd om de officiële noodnummers te controleren van het land waarin hij/zij zich bevindt.
+        
+        6. VERANTWOORD GEBRUIK EN AANVULLENDE INFORMATIE
+        De genoemde hulpbronnen hebben geen band met StopAddict. Ze worden enkel ter informatie verstrekt. De gebruiker blijft vrij om ze al dan niet te contacteren.
+        Het raadplegen van gezondheidsprofessionals wordt aanbevolen bij fysieke, psychologische, sociale of familiale moeilijkheden.
+        
+        7. BELANGRIJKE HERINNERING
+        De applicatie is niet bedoeld om een ziekte te diagnosticeren, te behandelen of te voorkomen.
+        Ze vervangt geen medisch advies.
+        Bij nood of onmiddellijk gevaar: neem contact op met de nooddiensten van het land waarin u zich bevindt.
+    """.trimIndent(),
+    "resources_btn_close" to "Sluiten",
+
+    // Console debug
+    "console_title" to "DEBUGCONSOLE STOPADDICT",
+    "console_version" to "Versie",
+    "console_version_free" to "Gratis",
+    "console_version_paid" to "Betaald",
+    "console_langue" to "Taal",
+    "console_date" to "Datum",
+    "console_build" to "Build",
+    "console_device" to "Toestel",
+    "console_android" to "Android",
+    "console_app_state" to "App-status",
+    "console_age_accepted" to "Leeftijd geaccepteerd",
+    "console_warning_shown" to "Waarschuwing weergegeven",
+    "console_error_prefs" to "Fout bij lezen prefs",
+    "console_logs_db" to "Database-logs",
+    "console_consos_jour" to "Dagelijkse consumpties",
+    "console_no_conso" to "Geen consumptie",
+    "console_error_db" to "Fout bij lezen DB",
+    "console_logs_selectable" to "Selecteerbare logs ✓",
+    "console_btn_close" to "Sluiten"
+)
+
+        // ==================== 中文 (ZH) ====================
+private val TRADUCTIONS_ZH = mapOf(
+    // Titres onglets
+    "tab_accueil" to "首页",
+    "tab_stats" to "统计",
+    "tab_calendrier" to "日历",
+    "tab_habitudes" to "习惯与意志",
+    "tab_reglages" to "设置",
+
+    // Dialog avertissement majorité
+    "warning_title" to "⚠️ 警告 - 仅限成年人",
+    "warning_message" to """
+⚠️ 法律警示
+
+使用本应用程序即表示您已认真阅读本警示内容。
+在任何使用之前，建议用户完整了解以下全部信息。
+
+1. 成年核验与遵守当地法律
+用户必须核实自己在以下两种法律体系下均为成年人：
+- 居住国法律；
+- 使用本应用时用户实际所在国/地区法律。
+
+关于烟草、大麻或酒精的法定年龄在不同国家/地区差异很大。
+示例：在法国年满 18 岁被视为成年人，但在美国关于酒精消费的法律下可能仍被视为未成年人。
+
+用户有唯一且排他的责任，在每个国家或地区核实与以下事项相关的法律、禁令、义务与限制：
+- 本应用的使用；
+- 香烟的持有或消费；
+- 大麻的使用（依据当地法规）；
+- 酒精的消费；
+- 任何其他受监管的实践或行为。
+
+本应用在任何国家/地区都不应被视为在鼓励、促成、煽动或推荐对受监管物质的消费。
+
+2. 不鼓励消费
+使用本应用并不推定用户必然是吸烟者、饮酒者或大麻使用者。
+本应用不会鼓励、推荐、美化、合理化或“正常化”香烟、joint（大麻卷烟）或酒精的消费。
+
+本应用的唯一目标是：
+- 帮助记录、可视化并分析；
+- 提升用户对自身消费、习惯与花费的认知；
+- 鼓励减少或停止。
+
+真正的成功，是拒绝一支香烟、一个 joint 或一杯酒，甚至是永远不要开始。
+如果您不吸烟也不饮酒，请继续保护您的健康：烟草、大麻与酒精对健康有害，并可能影响社会行为。
+
+3. 用户责任
+本应用的使用完全由用户自行负责；若用户为未成年人，则由其法定监护人承担责任。
+开发者不对以下情况承担责任：
+- 不当使用；
+- 规避用途或偏离预期用途；
+- 错误解读；
+- 不遵守当地法律；
+- 基于应用显示数据做出的决定。
+
+本应用在任何情况下都不得被用于追究刑事或民事责任，也不得作为司法环境中的证据，无论是用于用户自身，还是用于针对开发者。
+
+4. 未成年人保护与家长监护
+即使本应用不收集任何个人数据，也提醒用户：监护未成年人的数字使用行为至关重要。
+父母、监护人及法定负责人应关注：
+- 健康；
+- 心理福祉；
+- 社会行为；
+- 适度使用数字工具。
+
+5. 个人数据与保密
+无需注册。
+不收集、存储或传输任何个人数据。
+若用户输入姓名，该姓名仅用于本应用内部，且仅会出现在导出/导入文件中（这些文件仍存储在用户自己的手机中）。
+
+用户有责任：
+- 保护其智能手机；
+- 维护安全软件；
+- 采用良好的数据保护实践。
+
+6. 广告与收益
+免费版包含广告横幅，用于资助开发。
+高级版（premium）允许无广告使用。
+
+本应用是独立创作者的个人成果。
+广告仅用于支持本应用的开发、维护与改进。
+
+7. 中立性、独立性与无外部关联
+开发者为独立个人。
+本应用与以下主体没有任何联系：
+- 国家或行政机关；
+- 烟草企业；
+- 酒精生产商；
+- 大麻相关产业；
+- 任何犯罪组织或 cartel。
+
+本应用无意替代或与任何名称相近的应用竞争。
+
+8. 知识产权
+本应用的名称、设计、内容、文本及功能受著作权保护。
+未经授权的任何复制、拷贝或再分发均被禁止。
+
+即便未进行付费登记，著作权也会依法自动产生并适用。
+
+9. 技术限制、兼容性与风险
+本应用可能会出现 bug、错误或数据丢失，原因可能包括：
+- 手机型号；
+- Android 版本；
+- 系统状态；
+- 可用存储空间；
+- 软件环境。
+
+开发者不对以下情况承担责任：
+- 数据丢失；
+- 硬件或软件故障；
+- 文件损坏；
+- 部分或完全不兼容。
+
+免费版允许用户在购买前测试本应用。
+购买后不提供退款。
+
+更换手机或 Google 账号可能会导致需要重新购买，具体取决于 Play Store 的规则。
+
+10. 开发与人工智能的角色
+本应用通过个人工作开发，并借助人工智能工具优化部分文本与代码片段。
+创作者仍为整个项目的最终作者并承担最终责任。
+""".trimIndent(),
+
+    "warning_resources_link" to "📞 资源与求助号码",
+    "warning_checkbox_age" to "☑️ 我确认我已成年",
+    "warning_checkbox_noshow" to "不再显示此消息",
+    "warning_btn_quit" to "退出",
+    "warning_btn_accept" to "我接受并继续",
+
+    // Dialog ressources
+    "resources_title" to "📞 资源与求助号码",
+    "resources_content" to """
+📞 实用资源 – 求助、支持与信息
+
+本模块汇总若干与烟草、酒精、大麻或其他困难相关的帮助、信息或支持资源。以下号码可能因国家/地区不同而有所差异，且部分热线仅能从特定地理区域拨打。用户必须自行核实当地号码或服务的可用性。
+
+1. 烟草 – 戒烟、建议与支持
+• 法国 – Tabac Info Service：39 89
+  官方戒烟支持热线。专业顾问、个性化跟进、尼古丁替代品与戒烟方法信息。
+• 加拿大 – QuitNow：1 877 455 2233
+• 比利时 – Tabac Stop：0800 111 00
+• 瑞士 – Stop Tabac：0848 000 181
+• 国际信息：请参考当地戒烟热线或所在国公共卫生机构的相关服务。
+
+2. 酒精 – 帮助、预防与支持
+• 法国 – Alcool Info Service：0 980 980 930
+  匿名且免费。建议、倾听、支持与转介。每周 7 天开放。
+• 加拿大 – 匿名戒酒会（Alcoholics Anonymous）：1 877 404 2242
+• 比利时 – Drogues & Alcool 热线：078 15 15 15
+• 瑞士 – Addiction Suisse：021 321 29 11
+
+3. 大麻 – 信息与陪伴支持
+• 法国 – Drogues Info Service：0 800 23 13 13
+  关于物质、风险与可获得帮助的官方信息。
+• 比利时 – Infor-Drogues：02 227 52 52
+• 瑞士 – Ligne Drogue：0848 133 133
+
+4. 痛苦、心理紧急情况与情绪支持
+过度使用烟草、酒精或大麻有时可能掩盖心理或社会困境。如遇痛苦或危机，可联系以下号码：
+
+• 法国 – Suicide Écoute：01 45 39 40 00
+• 法国 – 国家自杀预防号码：3114
+• 法国 – SOS Amitié：09 72 39 40 50
+• 比利时 – Télé-Accueil：107
+• 瑞士 – La Main Tendue：143
+• 加拿大 – 自杀预防服务：1 833 456 4566
+
+5. 紧急号码
+紧急号码因国家/地区而异。示例：
+• 欧盟 – 112
+• 法国 – 急救 15，警察 17，消防 18，统一紧急 112
+• 美国 – 911
+• 加拿大 – 911
+建议用户核实其所在国家/地区的官方紧急号码。
+
+6. 负责任使用与补充信息
+上述资源与 StopAddict 无任何关联，仅供信息参考。用户可自行决定是否联系。
+如遇身体、心理、社会或家庭困难，建议寻求医疗或专业人士帮助。
+
+7. 重要提醒
+本应用无意诊断、治疗或预防任何疾病。
+本应用不能替代专业医疗意见。
+如遇紧急情况或即时危险，请联系您所在国家/地区的紧急救援服务。
+""".trimIndent(),
+
+    "resources_btn_close" to "关闭",
+
+    // Console debug
+    "console_title" to "STOPADDICT 调试控制台",
+    "console_version" to "版本",
+    "console_version_free" to "免费版",
+    "console_version_paid" to "付费版",
+    "console_langue" to "语言",
+    "console_date" to "日期",
+    "console_build" to "构建版本",
+    "console_device" to "设备",
+    "console_android" to "Android",
+    "console_app_state" to "应用状态",
+    "console_age_accepted" to "已确认成年",
+    "console_warning_shown" to "警示已显示",
+    "console_error_prefs" to "读取偏好设置出错",
+    "console_logs_db" to "数据库日志",
+    "console_consos_jour" to "当日消耗",
+    "console_no_conso" to "无消耗记录",
+    "console_error_db" to "读取数据库出错",
+    "console_logs_selectable" to "日志可选择 ✓",
+    "console_btn_close" to "关闭"
+)
+
+            private val TRADUCTIONS_ZHT = mapOf(
+    // Titres onglets
+    "tab_accueil" to "首頁",
+    "tab_stats" to "統計",
+    "tab_calendrier" to "日曆",
+    "tab_habitudes" to "習慣與意志",
+    "tab_reglages" to "設定",
+
+    // Dialog avertissement majorité
+    "warning_title" to "⚠️ 警告 - 僅限成年人",
+    "warning_message" to """
+⚠️ 法律警示
+
+使用本應用程式即表示您已仔細閱讀本警示內容。
+在任何使用之前，使用者被建議完整了解以下所有資訊。
+
+1. 成年核驗與遵守當地法規
+使用者必須核實自己在以下兩種法律體系下均為成年人：
+- 居住國法規；
+- 使用本應用時使用者實際所在國家/地區法規。
+
+關於菸草、大麻或酒精的法定年齡因國家/地區而異。
+例：在法國 18 歲視為成年人，但在美國關於酒精的法規下仍可能被視為未成年人。
+
+使用者對於每個國家或地區的法律、禁令、義務與限制，負有唯一且排他的核實責任，尤其包括：
+- 本應用的使用；
+- 香菸的持有或消費；
+- 大麻的使用（依當地法規）；
+- 酒精的消費；
+- 任何其他受規範的行為或實務。
+
+本應用在任何國家/地區都不得被視為在鼓勵、促成、煽動或推薦消費受管制物質。
+
+2. 不鼓勵消費
+使用本應用並不推定使用者為吸菸者、飲酒者或大麻使用者。
+本應用不會鼓勵、推薦、美化、合理化或「正常化」香菸、joint（大麻卷菸）或酒精的消費。
+
+本應用的唯一目的為：
+- 協助計數、視覺化與分析；
+- 使使用者意識到自身的消費、習慣與支出；
+- 鼓勵減量或戒除。
+
+真正的成功，是拒絕一支香菸、一個 joint 或一杯酒，甚至是永遠不要開始。
+若您不吸菸也不飲酒，請持續保護健康：菸草、大麻與酒精對健康有害，並可能影響社會行為。
+
+3. 使用者責任
+本應用的使用完全由使用者自行負責；若使用者為未成年人，則由其法定監護人負責。
+開發者不對下列情況承擔責任：
+- 不當使用；
+- 偏離預期用途；
+- 錯誤解讀；
+- 不遵守當地法規；
+- 依據應用顯示資料所作之決定。
+
+本應用在任何情況下不得作為追究刑事或民事責任之工具，也不得作為司法情境中的證據，無論是為使用者或針對開發者。
+
+4. 未成年人保護與家長監護
+即使本應用不收集任何個人資料，仍提醒：監督未成年人的數位使用行為至關重要。
+父母、監護人與法定負責人應關注：
+- 健康；
+- 心理福祉；
+- 社會行為；
+- 適度使用數位工具。
+
+5. 個人資料與保密
+無需註冊。
+不收集、儲存或傳輸任何個人資料。
+若使用者輸入姓名，該姓名僅用於本應用內部，並僅會出現在匯出/匯入檔案中（該檔案仍儲存在使用者自己的手機上）。
+
+使用者有責任：
+- 保護其智慧型手機；
+- 維持安全防護軟體；
+- 採取良好的資料保護實務。
+
+6. 廣告與收益
+免費版本包含廣告橫幅，用於資助開發。
+付費版本（premium）可無廣告使用。
+
+本應用為獨立創作者的個人成果。
+廣告僅用於支持本應用的開發、維護與改進。
+
+7. 中立性、獨立性與無外部關聯
+開發者為獨立個人。
+本應用與以下任何主體無任何關聯：
+- 國家或行政機關；
+- 菸草企業；
+- 酒精製造商；
+- 大麻相關產業；
+- 任何犯罪組織或 cartel。
+
+本應用無意取代或與任何名稱相近之應用競爭。
+
+8. 智慧財產權
+本應用的名稱、設計、內容、文字與功能受著作權保護。
+任何未經授權的複製、拷貝或再散布均被禁止。
+
+即使未進行付費登記，著作權亦依法律自動產生並適用。
+
+9. 技術限制、相容性與風險
+本應用可能出現 bug、錯誤或資料遺失，其原因可能包含：
+- 手機型號；
+- Android 版本；
+- 系統狀態；
+- 可用儲存空間；
+- 軟體環境。
+
+開發者不對下列情況負責：
+- 資料遺失；
+- 硬體或軟體故障；
+- 檔案損毀；
+- 部分或完全不相容。
+
+免費版本允許使用者在購買前測試本應用。
+購買後不提供退款。
+
+更換手機或 Google 帳號可能導致需要重新購買，依 Play Store 規則而定。
+
+10. 開發與人工智慧的角色
+本應用透過個人工作開發，並使用人工智慧工具優化部分文字與程式碼片段。
+創作者仍為整個專案之最終作者並承擔最終責任。
+""".trimIndent(),
+
+    "warning_resources_link" to "📞 資源與求助電話",
+    "warning_checkbox_age" to "☑️ 我確認我已成年",
+    "warning_checkbox_noshow" to "不再顯示此訊息",
+    "warning_btn_quit" to "退出",
+    "warning_btn_accept" to "我接受並繼續",
+
+    // Dialog ressources
+    "resources_title" to "📞 資源與求助電話",
+    "resources_content" to """
+📞 實用資源 – 求助、支持與資訊
+
+本模組彙整多項與菸草、酒精、大麻或其他困難相關的協助、資訊或支持資源。以下電話可能因國家/地區而異，且部分專線僅能於特定地理區域撥打。使用者必須自行確認當地電話或服務是否可用。
+
+1. 菸草 – 戒菸、建議與支持
+• 法國 – Tabac Info Service：39 89
+  官方戒菸支持專線。專業顧問、個人化追蹤、尼古丁替代品與戒菸方法資訊。
+• 加拿大 – QuitNow：1 877 455 2233
+• 比利時 – Tabac Stop：0800 111 00
+• 瑞士 – Stop Tabac：0848 000 181
+• 國際資訊：請參考所在地之戒菸專線或公共衛生機構服務。
+
+2. 酒精 – 協助、預防與支持
+• 法國 – Alcool Info Service：0 980 980 930
+  匿名且免費。建議、傾聽、支持與轉介。每週 7 天開放。
+• 加拿大 – 匿名戒酒會（Alcoholics Anonymous）：1 877 404 2242
+• 比利時 – Drogues & Alcool 專線：078 15 15 15
+• 瑞士 – Addiction Suisse：021 321 29 11
+
+3. 大麻 – 資訊與陪伴支持
+• 法國 – Drogues Info Service：0 800 23 13 13
+  關於物質、風險及可獲得協助之官方資訊。
+• 比利時 – Infor-Drogues：02 227 52 52
+• 瑞士 – Ligne Drogue：0848 133 133
+
+4. 痛苦、心理緊急情況與情緒支持
+過度使用菸草、酒精或大麻，有時可能掩蓋心理或社會困境。如遇痛苦或危機，可聯絡以下電話：
+
+• 法國 – Suicide Écoute：01 45 39 40 00
+• 法國 – 國家自殺預防電話：3114
+• 法國 – SOS Amitié：09 72 39 40 50
+• 比利時 – Télé-Accueil：107
+• 瑞士 – La Main Tendue：143
+• 加拿大 – 自殺預防服務：1 833 456 4566
+
+5. 緊急電話
+緊急電話因國家/地區而異。示例：
+• 歐盟 – 112
+• 法國 – 急救 15，警察 17，消防 18，統一緊急 112
+• 美國 – 911
+• 加拿大 – 911
+建議使用者查核其所在國家/地區之官方緊急電話。
+
+6. 負責任使用與補充資訊
+以上資源與 StopAddict 無任何關聯，僅供資訊參考。使用者可自行決定是否聯絡。
+如遇身體、心理、社會或家庭困難，建議尋求醫療或專業人士協助。
+
+7. 重要提醒
+本應用不以診斷、治療或預防任何疾病為目的。
+本應用不能取代專業醫療意見。
+如遇緊急情況或立即危險，請聯絡您所在地之緊急救援服務。
+""".trimIndent(),
+
+    "resources_btn_close" to "關閉",
+
+    // Console debug
+"console_title" to "STOPADDICT 除錯主控台",
+"console_version" to "版本",
+"console_version_free" to "免費版",
+"console_version_paid" to "付費版",
+"console_langue" to "語言",
+"console_date" to "日期",
+"console_build" to "建置版本",
+"console_device" to "裝置",
+"console_android" to "Android",
+"console_app_state" to "應用狀態",
+"console_age_accepted" to "已確認成年",
+"console_warning_shown" to "警示已顯示",
+"console_error_prefs" to "讀取偏好設定錯誤",
+"console_logs_db" to "資料庫日誌",
+"console_consos_jour" to "當日消耗",
+"console_no_conso" to "無消耗記錄",
+"console_error_db" to "讀取資料庫錯誤",
+"console_logs_selectable" to "日誌可選取 ✓",
+"console_btn_close" to "關閉"
+)
 }
