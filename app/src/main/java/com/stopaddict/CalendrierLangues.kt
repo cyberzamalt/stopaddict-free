@@ -74,6 +74,7 @@ object CalendrierLangues {
         "dialog_titre" to "Consommations du",
         "btn_sauvegarder" to "Sauvegarder",
         "btn_annuler" to "Annuler",
+        "msg_err_generic" to "Une erreur est survenue",
         "msg_sauvegarde_ok" to "Sauvegardé"
     )
 
@@ -125,7 +126,8 @@ private val TRADUCTIONS_EN = mapOf(
     "btn_sauvegarder" to "Save",
     "btn_annuler" to "Cancel",
     "msg_sauvegarde_ok" to "Saved",
-    "sauvegarde_ok" to "Saved"
+    "sauvegarde_ok" to "Saved",
+    "msg_err_generic" to "An error occurred"
 )
     
       // ==================== ESPAÑOL ====================
@@ -176,7 +178,8 @@ private val TRADUCTIONS_ES = mapOf(
     "sauvegarde_ok" to "Guardado",
 
     // Ancienne clé (si d'autres écrans l'utilisent encore)
-    "msg_sauvegarde_ok" to "Guardado"
+    "msg_sauvegarde_ok" to "Guardado",
+    "msg_err_generic" to "Se ha producido un error"
 )
 
      // ==================== PORTUGUÊS ====================
@@ -222,7 +225,8 @@ private val TRADUCTIONS_PT = mapOf(
     "dialog_titre" to "Consumo de",
     "btn_sauvegarder" to "Salvar",
     "btn_annuler" to "Cancelar",
-    "sauvegarde_ok" to "Salvo"
+    "sauvegarde_ok" to "Salvo",
+    "msg_err_generic" to "Ocorreu um erro"
 )
 
 // ==================== DEUTSCH ====================
@@ -271,7 +275,8 @@ private val TRADUCTIONS_DE = mapOf(
     "dialog_titre" to "Konsum am",
     "btn_sauvegarder" to "Speichern",
     "btn_annuler" to "Abbrechen",
-    "sauvegarde_ok" to "Gespeichert"
+    "sauvegarde_ok" to "Gespeichert",
+    "msg_err_generic" to "Ein Fehler ist aufgetreten"
 )
 
     // ==================== ITALIANO ====================
@@ -321,7 +326,8 @@ private val TRADUCTIONS_IT = mapOf(
     "btn_sauvegarder" to "Salva",
     "btn_annuler" to "Annulla",
     "msg_sauvegarde_ok" to "Salvato",
-    "sauvegarde_ok" to "Salvato"
+    "sauvegarde_ok" to "Salvato",
+    "msg_err_generic" to "Si è verificato un errore"
 )
 
     // ==================== РУССКИЙ ====================
@@ -377,7 +383,8 @@ private val TRADUCTIONS_RU = mapOf(
     "btn_annuler" to "Отмена",
 
     // Messages
-    "sauvegarde_ok" to "Сохранено"
+    "sauvegarde_ok" to "Сохранено",
+    "msg_err_generic" to "Произошла ошибка"
 )
 
      // ==================== العربية ====================
@@ -424,7 +431,8 @@ private val TRADUCTIONS_AR = mapOf(
     "btn_sauvegarder" to "حفظ",
     "btn_annuler" to "إلغاء",
     "msg_sauvegarde_ok" to "تم الحفظ",
-    "sauvegarde_ok" to "تم الحفظ"
+    "sauvegarde_ok" to "تم الحفظ",
+    "msg_err_generic" to "حدث خطأ"
 )
 
     // ==================== हिन्दी ====================
@@ -473,7 +481,8 @@ private val TRADUCTIONS_HI = mapOf(
 
     // compat: selon la clé appelée dans le fragment
     "sauvegarde_ok" to "सहेजा गया",
-    "msg_sauvegarde_ok" to "सहेजा गया"
+    "msg_sauvegarde_ok" to "सहेजा गया",
+    "msg_err_generic" to "एक त्रुटि हुई"
 )
 
     // ==================== 日本語 ====================
@@ -520,7 +529,8 @@ private val TRADUCTIONS_JA = mapOf(
     "btn_sauvegarder" to "保存",
     "btn_annuler" to "キャンセル",
     "msg_sauvegarde_ok" to "保存されました",
-    "sauvegarde_ok" to "保存されました"
+    "sauvegarde_ok" to "保存されました",
+    "msg_err_generic" to "エラーが発生しました"
 )
 
     private val TRADUCTIONS_NL = mapOf(
@@ -567,7 +577,8 @@ private val TRADUCTIONS_JA = mapOf(
     "dialog_titre" to "Consumpties van",
     "btn_sauvegarder" to "Opslaan",
     "btn_annuler" to "Annuleren",
-    "msg_sauvegarde_ok" to "Opgeslagen"
+    "msg_sauvegarde_ok" to "Opgeslagen",
+    "msg_err_generic" to "Er is een fout opgetreden"
 )
 
       private val TRADUCTIONS_ZHS = mapOf(
@@ -614,7 +625,8 @@ private val TRADUCTIONS_JA = mapOf(
     "dialog_titre" to "当日消费",
     "btn_sauvegarder" to "保存",
     "btn_annuler" to "取消",
-    "msg_sauvegarde_ok" to "已保存"
+    "msg_sauvegarde_ok" to "已保存",
+    "msg_err_generic" to "发生错误"
 )
 
       private val TRADUCTIONS_ZHT = mapOf(
@@ -661,6 +673,7 @@ private val TRADUCTIONS_JA = mapOf(
     "dialog_titre" to "當日消費",
     "btn_sauvegarder" to "儲存",
     "btn_annuler" to "取消",
-    "msg_sauvegarde_ok" to "已儲存"
+    "msg_sauvegarde_ok" to "已儲存",
+    "msg_err_generic" to "發生錯誤"
 )
 }
