@@ -1,18 +1,3 @@
-j'ai tout fait sauf 
-1) Dans ReglagesFragment, ajoute ces constantes (1 seul endroit)
-
-je n'ai pas compris où coller :
-        // Langues supportées (clôture de l’existant)
-        private val LANGUES_CODES = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
-
-        // Devises affichées dans le Spinner (format homogène)
-        private val DEVISES_AFFICHEES = arrayOf(
-            "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
-            "CHF (CHF)", "CAD (C$)", "AUD (A$)", "BRL (R$)", "INR (₹)", "RUB (₽)"
-        )
-
-Dans le companion object (tout en haut du fichier), ajoute ces lignes (idéalement après tes PREF_...) : NE VEUT RIEN DIRE POUR MOI CAR JE NE SUIS PAS CODEUR
-
 package com.stopaddict
 
 import android.app.Activity
