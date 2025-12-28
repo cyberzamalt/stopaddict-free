@@ -43,15 +43,6 @@ class ReglagesFragment : Fragment() {
     )
 
     // Devises affichées dans le Spinner (format homogène)
-    // (ajout : CNY, HKD)
-    private val DEVISES_AFFICHEES = arrayOf(
-        "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
-        "CHF (CHF)", "CAD (C$)", "AUD (A$)",
-        "BRL (R$)", "INR (₹)", "RUB (₽)",
-        "CNY (¥)", "HKD (HK$)"
-    )
-
-    // Devises affichées dans le Spinner (format homogène)
     private val DEVISES_AFFICHEES = arrayOf(
         "EUR (€)",
         "USD ($)",
