@@ -35,7 +35,7 @@ class ConfigLangue(private val context: Context) {
             "ZHT" to Locale.TRADITIONAL_CHINESE  // zh-TW
         )
 
-        // Pour couvrir le cas où MainActivity appelle ConfigLangue.initialiserLangue(...)
+        // Pour couvrir le cas où MainActivity appelle ConfigLangue.initialiserLangue
         fun initialiserLangue(context: Context) {
             ConfigLangue(context).initialiserLangue()
         }
