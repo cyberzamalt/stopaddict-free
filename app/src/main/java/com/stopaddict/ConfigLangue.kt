@@ -1,6 +1,8 @@
 package com.stopaddict
 
 import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
 import java.util.Locale
 
 class ConfigLangue(private val context: Context) {
@@ -9,44 +11,71 @@ class ConfigLangue(private val context: Context) {
         private const val PREFS_NAME = "stopaddict_prefs"
         private const val KEY_LANGUE = "langue"
 
-        // Langues supportées (codes cohérents avec ReglagesFragment)
-        private val LANGUES_DISPONIBLES = setOf(
+        // Langues disponibles (doit matcher ReglagesFragment + ReglagesLangues)
+        val LANGUES_DISPONIBLES = arrayOf(
             "FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA",
             "NL", "ZH", "ZHT"
         )
 
-        // Map code -> Locale
-        private val LOCALE_MAP: Map<String, Locale> = mapOf(
-            "FR" to Locale("fr", "FR"),
-            "EN" to Locale.ENGLISH,
-            "ES" to Locale("es", "ES"),
-            "PT" to Locale("pt", "PT"),
-            "DE" to Locale("de", "DE"),
-            "IT" to Locale("it", "IT"),
-            "RU" to Locale("ru", "RU"),
+        // Mapping code -> Locale
+        val LOCALE_MAP: Map<String, Locale> = mapOf(
+            "FR" to Locale("fr"),
+            "EN" to Locale("en"),
+            "ES" to Locale("es"),
+            "PT" to Locale("pt"),
+            "DE" to Locale("de"),
+            "IT" to Locale("it"),
+            "RU" to Locale("ru"),
             "AR" to Locale("ar"),
-            "HI" to Locale("hi", "IN"),
-            "JA" to Locale.JAPANESE,
-            "NL" to Locale("nl", "NL"),
-            // ZH = chinois simplifié, ZHT = chinois traditionnel
-            "ZH" to Locale.SIMPLIFIED_CHINESE,
-            "ZHT" to Locale.TRADITIONAL_CHINESE
+            "HI" to Locale("hi"),
+            "JA" to Locale("ja"),
+            "NL" to Locale("nl"),
+            // Chinois simplifié / traditionnel
+            "ZH" to Locale.SIMPLIFIED_CHINESE,   // zh-CN
+            "ZHT" to Locale.TRADITIONAL_CHINESE  // zh-TW
         )
+
+        // Pour couvrir le cas où MainActivity appelle ConfigLangue.initialiserLangue(...)
+        fun initialiserLangue(context: Context) {
+            ConfigLangue(context).initialiserLangue()
+        }
     }
 
     fun getLangue(): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val saved = prefs.getString(KEY_LANGUE, "FR") ?: "FR"
-        return if (LANGUES_DISPONIBLES.contains(saved)) saved else "FR"
+        return prefs.getString(KEY_LANGUE, "FR") ?: "FR"
     }
 
     fun setLangue(code: String) {
         val safe = if (LANGUES_DISPONIBLES.contains(code)) code else "FR"
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putString(KEY_LANGUE, safe).apply()
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .edit()
+            .putString(KEY_LANGUE, safe)
+            .apply()
+
+        appliquerLocale(safe)
     }
 
-    fun getLocale(): Locale {
-        return LOCALE_MAP[getLangue()] ?: Locale("fr", "FR")
+    // Pour couvrir le cas où MainActivity fait configLangue.initialiserLangue()
+    fun initialiserLangue() {
+        appliquerLocale(getLangue())
+    }
+
+    private fun appliquerLocale(code: String) {
+        val locale = LOCALE_MAP[code] ?: Locale("fr")
+        Locale.setDefault(locale)
+
+        val res = context.resources
+        val config = Configuration(res.configuration)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale)
+        } else {
+            @Suppress("DEPRECATION")
+            config.locale = locale
+        }
+
+        @Suppress("DEPRECATION")
+        res.updateConfiguration(config, res.displayMetrics)
     }
 }
