@@ -2179,6 +2179,7 @@ private val TRADUCTIONS_NL = mapOf(
     "support_email_error" to "Kan e-mailapp niet openen: %s",
     "msg_open_store_impossible" to "Kan de store niet openen"
 )
+    "NL" -> TRADUCTIONS_NL
 
     /**
      * Fonction helper pour récupérer une traduction spécifique
