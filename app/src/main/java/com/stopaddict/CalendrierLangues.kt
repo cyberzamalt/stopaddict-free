@@ -5,26 +5,26 @@ object CalendrierLangues {
     private const val TAG = "CalendrierLangues"
 
     fun getTraductions(codeLangue: String): Map<String, String> {
-        return when (codeLangue) {
-            "FR" -> TRADUCTIONS_FR
-            "EN" -> TRADUCTIONS_EN
-            "ES" -> TRADUCTIONS_ES
-            "PT" -> TRADUCTIONS_PT
-            "DE" -> TRADUCTIONS_DE
-            "IT" -> TRADUCTIONS_IT
-            "RU" -> TRADUCTIONS_RU
-            "AR" -> TRADUCTIONS_AR
-            "HI" -> TRADUCTIONS_HI
-            "JA" -> TRADUCTIONS_JA
-    
-            // AJOUTS
-            "NL" -> TRADUCTIONS_NL
-            "ZHS" -> TRADUCTIONS_ZHS
-            "ZHT" -> TRADUCTIONS_ZHT
-    
-            else -> {
-                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
-                TRADUCTIONS_FR
+    return when (codeLangue) {
+        "FR" -> TRADUCTIONS_FR
+        "EN" -> TRADUCTIONS_EN
+        "ES" -> TRADUCTIONS_ES
+        "PT" -> TRADUCTIONS_PT
+        "DE" -> TRADUCTIONS_DE
+        "IT" -> TRADUCTIONS_IT
+        "RU" -> TRADUCTIONS_RU
+        "AR" -> TRADUCTIONS_AR
+        "HI" -> TRADUCTIONS_HI
+        "JA" -> TRADUCTIONS_JA
+
+        // AJOUTS
+        "NL" -> TRADUCTIONS_NL
+        "ZHS" -> TRADUCTIONS_ZHS
+        "ZHT" -> TRADUCTIONS_ZHT
+
+        else -> {
+            StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+            TRADUCTIONS_FR
         }
     }
 }
@@ -541,13 +541,13 @@ private val TRADUCTIONS_JA = mapOf(
     "btn_mois_suivant" to "Volgende ▶",
     "btn_aujourdhui" to "Vandaag",
 
-    "jour_0" to "M",
-    "jour_1" to "D",
-    "jour_2" to "W",
-    "jour_3" to "D",
-    "jour_4" to "V",
-    "jour_5" to "Z",
-    "jour_6" to "Z",
+    "jour_0" to "Ma",
+    "jour_1" to "Di",
+    "jour_2" to "Wo",
+    "jour_3" to "Do",
+    "jour_4" to "Vr",
+    "jour_5" to "Za",
+    "jour_6" to "Zo",
 
     "legende_titre" to "Legenda:",
     "legende_vert" to "Geen consumptie",
@@ -611,7 +611,7 @@ private val TRADUCTIONS_JA = mapOf(
 
     "sauvegarde_ok" to "已保存",
 
-    "dialog_titre" to "消费记录",
+    "dialog_titre" to "当日消费",
     "btn_sauvegarder" to "保存",
     "btn_annuler" to "取消",
     "msg_sauvegarde_ok" to "已保存"
@@ -658,7 +658,7 @@ private val TRADUCTIONS_JA = mapOf(
 
     "sauvegarde_ok" to "已儲存",
 
-    "dialog_titre" to "消費紀錄",
+    "dialog_titre" to "當日消費",
     "btn_sauvegarder" to "儲存",
     "btn_annuler" to "取消",
     "msg_sauvegarde_ok" to "已儲存"
