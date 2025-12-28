@@ -68,7 +68,6 @@ class ReglagesFragment : Fragment() {
         "SGD (S$)"
     )
 }
-    }
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var configLangue: ConfigLangue
