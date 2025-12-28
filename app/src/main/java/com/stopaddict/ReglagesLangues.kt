@@ -1,6 +1,5 @@
 package com.stopaddict
 
-
 object ReglagesLangues {
 
     private const val TAG = "ReglagesLangues"
