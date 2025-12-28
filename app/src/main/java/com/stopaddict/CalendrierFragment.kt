@@ -48,10 +48,14 @@
                 updateCalendar()
                 
                 logger.d("CalendrierFragment créé")
-                view
-            } catch (e: Exception) {
-                logger.e( "Erreur onCreateView", e)
-                Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                                view
+                            } catch (e: Exception) {
+                                logger.e( "Erreur onCreateView", e)
+                                Toast.makeText(
+                    requireContext(),
+                    trad["msg_err_generic"] ?: "Erreur",
+                    Toast.LENGTH_SHORT
+                ).show()
                 null
             }
         }
@@ -603,10 +607,14 @@
                 }
                 
                 Toast.makeText(requireContext(), trad["sauvegarde_ok"] ?: "Enregistré", Toast.LENGTH_SHORT).show()
-                
-            } catch (e: Exception) {
-                logger.e( "Erreur save", e)
-                Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                        
+                    } catch (e: Exception) {
+                        logger.e( "Erreur save", e)
+                        Toast.makeText(
+            requireContext(),
+            trad["msg_err_generic"] ?: "Erreur",
+            Toast.LENGTH_SHORT
+        ).show()
             }
         }
     
