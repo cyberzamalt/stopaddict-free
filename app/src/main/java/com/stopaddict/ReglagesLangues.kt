@@ -32,11 +32,11 @@ object ReglagesLangues {
 }
 
     // ==================== FRANÇAIS ====================
-    private val TRADUCTIONS_FR = mapOf(
+    val TRADUCTIONS_FR: Map<String, String> = linkedMapOf(
         // Titres sections
         "titre" to "Réglages",
         "titre_profil" to "Profil",
-        "titre_categories" to "Catégories",
+        "titre_categories" to "Catégories / Coûts",
         "titre_couts_cigarettes" to "Coûts cigarettes",
         "titre_couts_joints" to "Coûts joints",
         "titre_couts_alcool" to "Coûts alcool",
@@ -48,151 +48,18 @@ object ReglagesLangues {
         "label_prenom" to "Prénom",
         "label_langue" to "Langue",
         "label_devise" to "Devise",
-        "btn_sauvegarder_profil" to "Sauvegarder profil",
+        "hint_prenom" to "Entrer votre prénom",
+        "btn_sauvegarder_profil" to "Sauvegarder",
 
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
-        "label_joints" to "Joints",
+        "label_joints" to "Joints (Cannabis)",
         "label_alcool_global" to "Alcool global",
         "label_bieres" to "Bières",
         "label_liqueurs" to "Liqueurs",
         "label_alcool_fort" to "Alcool fort",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Cigarettes classiques",
-        "radio_rouler" to "À rouler",
-        "radio_tubeuse" to "Tubeuse",
-        "label_prix_paquet" to "Prix du paquet",
-        "label_nb_cigarettes" to "Nombre de cigarettes",
-        "label_prix_tabac" to "Prix tabac",
-        "label_prix_feuilles" to "Prix feuilles",
-        "label_nb_feuilles" to "Nombre de feuilles",
-        "label_prix_filtres" to "Prix filtres",
-        "label_nb_filtres" to "Nombre de filtres",
-        "label_prix_tubes" to "Prix tubes",
-        "label_nb_tubes" to "Nombre de tubes",
-
-        // Labels formulaires joints
-        "label_prix_gramme" to "Prix du gramme",
-        "label_gramme_par_joint" to "Grammes par joint",
-
-        // Labels formulaires alcool
-        "label_prix_verre" to "Prix du verre",
-        "label_unite_cl" to "Unité (cL)",
-
-        // Labels habitudes
-        "label_max_journalier" to "Maximum journalier",
-
-        // Labels dates
-        "label_date_reduction" to "Date réduction",
-        "label_date_arret" to "Date arrêt",
-        "label_date_reussite" to "Date réussite",
-        "btn_choisir_date" to "Choisir date",
-
-        "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
-        "msg_import_limite" to "Limite atteinte. %d import(s) restant(s) aujourd'hui.",
-        
-        // Boutons RAZ
-        "btn_raz_jour" to "RAZ du jour",
-        "btn_raz_historique" to "RAZ historique",
-        "btn_raz_usine" to "RAZ d'usine",
-
-        // Boutons Export/Import
-        "btn_exporter" to "Exporter",
-        "btn_importer" to "Importer",
-        "btn_export_logs" to "Exporter les logs",
-
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "RAZ du jour",
-        "confirm_raz_jour_message" to "Supprimer toutes les consommations d'aujourd'hui ?",
-        "confirm_raz_historique_titre" to "RAZ de l'historique",
-        "confirm_raz_historique_message" to "Supprimer TOUT l'historique de consommation ? (Cette action est irréversible)",
-        "confirm_raz_usine_titre" to "RAZ d'usine",
-        "confirm_raz_usine_message" to "TOUT réinitialiser (profil, consommations, paramètres) ? (Cette action est irréversible)",
-        "confirm_import_titre" to "Importer sauvegarde",
-        "confirm_import_message" to "Toutes les données actuelles seront remplacées. Continuer ?",
-
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Profil sauvegardé",
-        "msg_date_enregistree" to "Date enregistrée",
-        "msg_raz_effectuee" to "RAZ effectuée",
-        "msg_export_reussi" to "Export réussi",
-        "msg_import_reussi" to "Import réussi",
-        "msg_erreur_sauvegarde" to "Erreur sauvegarde",
-        "msg_erreur_date" to "Erreur sauvegarde date",
-        "msg_erreur_raz" to "Erreur RAZ",
-        "msg_erreur_export" to "Erreur export",
-        "msg_erreur_import" to "Erreur import",
-        "msg_limite_export" to "Limite atteinte: %d export(s) restant(s) aujourd'hui (version gratuite)",
-        "msg_limite_import" to "Limite atteinte: %d import(s) restant(s) aujourd'hui (version gratuite)",
-        "msg_aucune_sauvegarde" to "Aucun fichier de sauvegarde trouvé",
-        "msg_donnees_invalides" to "Erreur import: données invalides",
-        "msg_champs_obligatoires" to "Veuillez renseigner au moins un coût",
-
-        // Bandeau profil
-        "profil_complet" to "Profil: Complet ✓",
-        "profil_incomplet" to "Profil: Incomplet",
-        "total_aujourdhui" to "Total aujourd'hui:",
-
-        // Économies potentielles
-        "titre_economies" to "Économies potentielles",
-        "economies_si_arret" to "Si vous arrêtiez complètement:",
-        "economies_jour" to "Jour",
-        "economies_semaine" to "Semaine",
-        "economies_mois" to "Mois",
-        "economies_annee" to "Année",
-
-        // Boutons dialog
-        "btn_confirmer" to "Confirmer",
-        "btn_annuler" to "Annuler",
-        "btn_ok" to "OK",
-
-        // À propos
-        "titre_a_propos" to "À propos",
-        "voir_avertissement" to "Voir l'avertissement",
-        "btn_manuel" to "Manuel d'utilisation",
-        "btn_cgv" to "Conditions générales de vente (CGV)",
-        "btn_mentions_legales" to "Mentions légales",
-        "btn_contact" to "Contact support",
-        "btn_maj" to "Dernières mises à jour",
-        "maj_titre" to "Dernières mises à jour",
-        "maj_contenu" to "Déploiement V1",
-        "btn_premium" to "Version sans publicité",
-        "premium_titre" to "Version sans publicité",
-        "premium_contenu" to "La version sans publicité sera bientôt disponible.\n\nElle supprimera les bandeaux pubs et les limitations.",
-        "hint_prenom" to "Entrer votre prénom",
-
-        // RAZ
-        "raz_sauvegarde" to "RAZ et Sauvegarde",
-        "raz_jour" to "RAZ jour",
-        "raz_historique" to "RAZ historique",
-        "raz_usine" to "RAZ réglages usine",
-        "raz_jour_ok" to "RAZ jour effectué",
-        "raz_historique_ok" to "RAZ historique effectué",
-        "raz_usine_ok" to "RAZ usine effectué",
-            
-        // Unités en cL pour les différents alcools
-        "unite_cl_global"      to "Unité en cL",
-        "unite_cl_biere"       to "Unité en cL",
-        "unite_cl_liqueur"     to "Unité en cL",
-        "unite_cl_alcool_fort" to "Unité en cL",
-
-        "btn_sauvegarder_couts" to "Sauvegarder les coûts",
-        "msg_export_logs_impossible" to "Impossible d’exporter les logs",
-        "msg_import_termine" to "Import terminé avec succès",
-        "msg_import_erreur" to "Erreur lors de l'import: %s",
-
-        "msg_erreur_prefix" to "Erreur : %s",
-        "sauvegarde_ok" to "Sauvegardé",
-        "msg_profil_sauvegarde" to "Coûts sauvegardés",
-        "profil_complet" to "Profil: Complet ✓",
-        "profil_incomplet" to "Profil: Incomplet",
-        
-        "btn_sauvegarder_profil" to "Sauvegarder",
-        "btn_sauvegarder_couts" to "Sauvegarder les coûts",
-        "titre_categories" to "Catégories / Coûts",
-        
-        "label_cigarettes" to "Cigarettes",
+        // Formulaires cigarettes
         "radio_classiques" to "Cigarettes paquet classique",
         "radio_rouler" to "Cigarettes à rouler",
         "radio_tubeuse" to "Cigarettes à tuber",
@@ -205,77 +72,141 @@ object ReglagesLangues {
         "label_nb_filtres" to "Nombre de filtres",
         "label_prix_tubes" to "Prix des tubes",
         "label_nb_tubes" to "Nombre de tubes",
-        
-        "label_joints" to "Joints (Cannabis)",
+
+        // Formulaires joints
         "label_prix_gramme" to "Prix du gramme",
         "label_gramme_par_joint" to "Grammes par joint",
         "label_prix_feuilles_longues" to "Prix des feuilles longues",
         "label_nb_feuilles_longues" to "Nombre de feuilles longues",
-        
-        "label_alcool_global" to "Alcool Global",
-        "label_bieres" to "Bières",
-        "label_liqueurs" to "Liqueurs",
-        "label_alcool_fort" to "Alcool Fort",
+
+        // Formulaires alcool
         "label_prix_verre" to "Prix du verre",
-        "unite_cl_global" to "Unité en cL",
-        "unite_cl_biere" to "Unité en cL",
-        "unite_cl_liqueur" to "Unité en cL",
-        "unite_cl_alcool_fort" to "Unité en cL",
-        
+        "label_unite_cl" to "Unité (cL)",
+
+        // Habitudes
+        "label_max_journalier" to "Objectif maximum par jour",
+
+        // Dates
+        "label_date_reduction" to "Date de réduction",
+        "label_date_arret" to "Date d'arrêt",
+        "label_date_reussite" to "Date de réussite",
+        "btn_choisir_date" to "Choisir une date",
+
+        // Messages limites / infos
+        "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
+        "msg_import_limite" to "Limite atteinte. %d import(s) restant(s) aujourd'hui.",
+        "msg_limite_export" to "Limite atteinte: %d export(s) restant(s) aujourd'hui (version gratuite)",
+        "msg_limite_import" to "Limite atteinte: %d import(s) restant(s) aujourd'hui (version gratuite)",
+
+        // Boutons RAZ
+        "btn_raz_jour" to "RAZ du jour",
+        "btn_raz_historique" to "RAZ historique",
+        "btn_raz_usine" to "RAZ d'usine",
+
+        // Export/Import
+        "btn_exporter" to "Exporter",
+        "btn_importer" to "Importer",
+        "btn_export_logs" to "Exporter les logs",
+
+        // Confirmations
+        "confirm_raz_jour_titre" to "RAZ du jour",
+        "confirm_raz_jour_message" to "Supprimer toutes les consommations d'aujourd'hui ?",
+        "confirm_raz_historique_titre" to "RAZ de l'historique",
+        "confirm_raz_historique_message" to "Supprimer TOUT l'historique de consommation ? (Cette action est irréversible)",
+        "confirm_raz_usine_titre" to "RAZ d'usine",
+        "confirm_raz_usine_message" to "TOUT réinitialiser (profil, consommations, paramètres) ? (Cette action est irréversible)",
+        "confirm_import_titre" to "Importer sauvegarde",
+        "confirm_import_message" to "Toutes les données actuelles seront remplacées. Continuer ?",
+        "confirm_default" to "Confirmer ?",
+
+        // Succès/erreurs
+        "msg_profil_sauvegarde" to "Profil sauvegardé",
+        "msg_couts_sauvegardes" to "Coûts sauvegardés",
+        "msg_date_enregistree" to "Date enregistrée",
+        "msg_raz_effectuee" to "RAZ effectuée",
+        "msg_export_reussi" to "Export réussi",
+        "msg_import_reussi" to "Import réussi",
+        "msg_import_termine" to "Import terminé avec succès",
+        "msg_import_termine_succes" to "Import terminé avec succès",
+        "msg_erreur_sauvegarde" to "Erreur sauvegarde",
+        "msg_erreur_date" to "Erreur sauvegarde date",
+        "msg_erreur_raz" to "Erreur RAZ",
+        "msg_erreur_export" to "Erreur export",
+        "msg_erreur_import" to "Erreur import",
+        "msg_import_erreur" to "Erreur lors de l'import : %s",
+        "msg_donnees_invalides" to "Erreur import: données invalides",
+        "msg_aucune_sauvegarde" to "Aucun fichier de sauvegarde trouvé",
+        "msg_champs_obligatoires" to "Veuillez renseigner au moins un coût",
+        "msg_erreur_prefix" to "Erreur : %s",
+
+        // Bandeau profil
+        "profil_complet" to "Profil: Complet ✓",
+        "profil_incomplet" to "Profil: Incomplet",
+        "total_aujourdhui" to "Total aujourd'hui:",
+
+        // Économies
+        "titre_economies" to "Économies potentielles",
+        "economies_si_arret" to "Si vous arrêtiez complètement:",
+        "economies_jour" to "Jour",
+        "economies_semaine" to "Semaine",
+        "economies_mois" to "Mois",
+        "economies_annee" to "Année",
+
+        // Dialog
+        "btn_confirmer" to "Confirmer",
+        "btn_annuler" to "Annuler",
+        "btn_ok" to "Fermer",
+
+        // À propos
         "titre_a_propos" to "À propos",
         "voir_avertissement" to "Voir l'avertissement",
         "btn_manuel" to "Manuel d'utilisation",
         "btn_cgv" to "Conditions générales de vente (CGV)",
         "btn_mentions_legales" to "Mentions légales",
-        "btn_premium" to "Version sans publicité",
-        "btn_maj" to "Dernières mises à jour",
         "btn_contact" to "Contact support",
-        
+        "btn_maj" to "Dernières mises à jour",
+        "maj_titre" to "Dernières mises à jour",
+        "maj_contenu" to "Déploiement V1",
+
+        // Premium
+        "btn_premium" to "Version sans publicité",
+        "premium_titre" to "Version sans publicité",
+        "premium_contenu" to "La version sans publicité sera bientôt disponible.\n\nElle supprimera les bandeaux pubs et les limitations.",
+
+        // RAZ libellés + confirmations OK
         "raz_sauvegarde" to "RAZ & sauvegarde",
-        "btn_raz_jour" to "RAZ du jour",
-        "btn_raz_historique" to "RAZ historique",
-        "btn_raz_usine" to "RAZ d'usine",
-        "btn_exporter" to "Exporter",
-        "btn_importer" to "Importer",
-        "btn_export_logs" to "Exporter les logs",
-        "msg_export_logs_impossible" to "Impossible d’exporter les logs",
-        "btn_ok" to "Fermer",
-        
-        "support_email_subject" to "StopAddict - Support",
-        "support_email_error" to "Impossible d'ouvrir l'application e-mail : %s",
-        
-        "confirm_raz_jour_titre" to "Effacer les consommations du jour ?",
-        "confirm_raz_historique_titre" to "Effacer TOUT l'historique ?",
-        "confirm_raz_usine_titre" to "TOUT réinitialiser (historique + réglages) ?",
-        "confirm_default" to "Confirmer ?",
-        "btn_confirmer" to "Confirmer",
-        "btn_annuler" to "Annuler",
+        "raz_jour" to "RAZ jour",
+        "raz_historique" to "RAZ historique",
+        "raz_usine" to "RAZ réglages usine",
         "raz_jour_ok" to "RAZ jour effectué",
         "raz_historique_ok" to "RAZ historique effectué",
         "raz_usine_ok" to "RAZ usine effectué",
-        
+
+        // Unités cL
+        "unite_cl_global" to "Unité en cL",
+        "unite_cl_biere" to "Unité en cL",
+        "unite_cl_liqueur" to "Unité en cL",
+        "unite_cl_alcool_fort" to "Unité en cL",
+
+        // Sauvegarde coûts + logs
+        "btn_sauvegarder_couts" to "Sauvegarder les coûts",
+        "msg_export_logs_impossible" to "Impossible d’exporter les logs",
+
+        // Support / store
+        "support_email_subject" to "StopAddict - Support",
+        "support_email_error" to "Impossible d'ouvrir l'application e-mail : %s",
         "msg_open_store_impossible" to "Impossible d'ouvrir le store",
-        "maj_titre" to "Dernières mises à jour",
-        "maj_contenu" to "Déploiement V1",
-        
-        "msg_export_limite" to "Pour accéder à l'exportation, passez à la version sans publicité pour en profiter :-)",
-        "msg_import_limite" to "Limite atteinte. %d import(s) restant(s) aujourd'hui.",
-        "msg_export_reussi" to "Export réussi",
-        "msg_import_reussi" to "Import réussi",
-        "msg_import_termine_succes" to "Import terminé avec succès",
-        "msg_import_erreur" to "Erreur lors de l'import : %s",
 
-
-        "label_prix_feuilles_longues" to "Prix des feuilles longues",
-        "label_nb_feuilles_longues" to "Nombre de feuilles longues"
+        // Divers
+        "sauvegarde_ok" to "Sauvegardé"
     )
 
     // ==================== ENGLISH ====================
-    private val TRADUCTIONS_EN = mapOf(
+    val TRADUCTIONS_EN: Map<String, String> = linkedMapOf(
         // Titres sections
         "titre" to "Settings",
         "titre_profil" to "Profile",
-        "titre_categories" to "Active categories",
+        "titre_categories" to "Categories / Costs",
         "titre_couts_cigarettes" to "Cigarettes costs",
         "titre_couts_joints" to "Joints costs",
         "titre_couts_alcool" to "Alcohol costs",
@@ -287,18 +218,19 @@ object ReglagesLangues {
         "label_prenom" to "First name",
         "label_langue" to "Language",
         "label_devise" to "Currency",
-        "btn_sauvegarder_profil" to "Save profile",
+        "hint_prenom" to "Enter your first name",
+        "btn_sauvegarder_profil" to "Save",
 
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
-        "label_joints" to "Joints",
+        "label_joints" to "Joints (Cannabis)",
         "label_alcool_global" to "Alcohol overall",
         "label_bieres" to "Beers",
         "label_liqueurs" to "Liquors",
         "label_alcool_fort" to "Spirits",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Regular cigarettes",
+        // Formulaires cigarettes
+        "radio_classiques" to "Regular cigarettes (pack)",
         "radio_rouler" to "Rolling tobacco",
         "radio_tubeuse" to "Tube machine",
         "label_prix_paquet" to "Pack price",
@@ -311,37 +243,42 @@ object ReglagesLangues {
         "label_prix_tubes" to "Tubes price",
         "label_nb_tubes" to "Number of tubes",
 
-        // Labels formulaires joints
+        // Formulaires joints
         "label_prix_gramme" to "Price per gram",
         "label_gramme_par_joint" to "Grams per joint",
+        "label_prix_feuilles_longues" to "Long papers price",
+        "label_nb_feuilles_longues" to "Number of long papers",
 
-        // Labels formulaires alcool
+        // Formulaires alcool
         "label_prix_verre" to "Drink price",
         "label_unite_cl" to "Unit (cL)",
 
-        // Labels habitudes
-        "label_max_journalier" to "Daily maximum",
+        // Habitudes
+        "label_max_journalier" to "Maximum daily goal",
 
-        // Labels dates
+        // Dates
         "label_date_reduction" to "Reduction date",
         "label_date_arret" to "Quit date",
         "label_date_reussite" to "Success date",
-        "btn_choisir_date" to "Choose date",
+        "btn_choisir_date" to "Choose a date",
 
-        "msg_export_limite" to "To access export, switch to the ad-free version to enjoy it :-)",
+        // Messages limites / infos
+        "msg_export_limite" to "To access export, upgrade to the ad-free version to enjoy it :-)",
         "msg_import_limite" to "Limit reached. %d import(s) remaining today.",
+        "msg_limite_export" to "Limit reached: %d export(s) remaining today (free version)",
+        "msg_limite_import" to "Limit reached: %d import(s) remaining today (free version)",
 
         // Boutons RAZ
         "btn_raz_jour" to "Reset today",
         "btn_raz_historique" to "Reset history",
         "btn_raz_usine" to "Factory reset",
 
-        // Boutons Export/Import
+        // Export/Import
         "btn_exporter" to "Export",
         "btn_importer" to "Import",
         "btn_export_logs" to "Export logs",
 
-        // Messages confirmations
+        // Confirmations
         "confirm_raz_jour_titre" to "Reset today",
         "confirm_raz_jour_message" to "Delete all today's consumption?",
         "confirm_raz_historique_titre" to "Reset history",
@@ -350,30 +287,34 @@ object ReglagesLangues {
         "confirm_raz_usine_message" to "Reset EVERYTHING (profile, consumption, settings)? (This action is irreversible)",
         "confirm_import_titre" to "Import backup",
         "confirm_import_message" to "All current data will be replaced. Continue?",
+        "confirm_default" to "Confirm?",
 
-        // Messages succès/erreur
+        // Succès/erreurs
         "msg_profil_sauvegarde" to "Profile saved",
+        "msg_couts_sauvegardes" to "Costs saved",
         "msg_date_enregistree" to "Date saved",
         "msg_raz_effectuee" to "Reset completed",
         "msg_export_reussi" to "Export successful",
         "msg_import_reussi" to "Import successful",
+        "msg_import_termine" to "Import completed successfully",
+        "msg_import_termine_succes" to "Import completed successfully",
         "msg_erreur_sauvegarde" to "Save error",
         "msg_erreur_date" to "Date save error",
         "msg_erreur_raz" to "Reset error",
         "msg_erreur_export" to "Export error",
         "msg_erreur_import" to "Import error",
-        "msg_limite_export" to "Limit reached: %d export(s) remaining today (free version)",
-        "msg_limite_import" to "Limit reached: %d import(s) remaining today (free version)",
-        "msg_aucune_sauvegarde" to "No backup file found",
+        "msg_import_erreur" to "Import error: %s",
         "msg_donnees_invalides" to "Import error: invalid data",
+        "msg_aucune_sauvegarde" to "No backup file found",
         "msg_champs_obligatoires" to "Please enter at least one cost",
+        "msg_erreur_prefix" to "Error: %s",
 
         // Bandeau profil
         "profil_complet" to "Profile: Complete ✓",
         "profil_incomplet" to "Profile: Incomplete",
         "total_aujourdhui" to "Total today:",
 
-        // Économies potentielles
+        // Économies
         "titre_economies" to "Potential savings",
         "economies_si_arret" to "If you quit completely:",
         "economies_jour" to "Day",
@@ -381,10 +322,10 @@ object ReglagesLangues {
         "economies_mois" to "Month",
         "economies_annee" to "Year",
 
-        // Boutons dialog
+        // Dialog
         "btn_confirmer" to "Confirm",
         "btn_annuler" to "Cancel",
-        "btn_ok" to "OK",
+        "btn_ok" to "Close",
 
         // About
         "titre_a_propos" to "About",
@@ -396,13 +337,14 @@ object ReglagesLangues {
         "btn_maj" to "Latest updates",
         "maj_titre" to "Latest updates",
         "maj_contenu" to "Deployment V1",
+
+        // Premium
         "btn_premium" to "Ad-free version",
         "premium_titre" to "Ad-free version",
         "premium_contenu" to "The ad-free version will be available soon.\n\nIt will remove banner ads and limits.",
-        "hint_prenom" to "Enter your first name",
 
-        // Reset
-        "raz_sauvegarde" to "Reset and Backup",
+        // Reset libellés + confirmations OK
+        "raz_sauvegarde" to "Reset & backup",
         "raz_jour" to "Reset day",
         "raz_historique" to "Reset history",
         "raz_usine" to "Factory reset",
@@ -410,1212 +352,1831 @@ object ReglagesLangues {
         "raz_historique_ok" to "History reset done",
         "raz_usine_ok" to "Factory reset done",
 
-        // Units in cl for alcohols
-        "unite_cl_global"      to "Unit (cl)",
-        "unite_cl_biere"       to "Unit (cl)",
-        "unite_cl_liqueur"     to "Unit (cl)",
-        "unite_cl_alcool_fort" to "Unit (cl)",
+        // Unités cL
+        "unite_cl_global" to "Unit (cL)",
+        "unite_cl_biere" to "Unit (cL)",
+        "unite_cl_liqueur" to "Unit (cL)",
+        "unite_cl_alcool_fort" to "Unit (cL)",
 
+        // Sauvegarde coûts + logs
         "btn_sauvegarder_couts" to "Save costs",
         "msg_export_logs_impossible" to "Unable to export logs",
-        "msg_import_termine" to "Import completed successfully",
-        "msg_import_erreur" to "Import error: %s",
-        
-        "label_prix_feuilles_longues" to "Long papers price",
-        "label_nb_feuilles_longues"   to "Number of long papers"
-    )
 
+        // Support / store
+        "support_email_subject" to "StopAddict - Support",
+        "support_email_error" to "Unable to open the email app: %s",
+        "msg_open_store_impossible" to "Unable to open the store",
+
+        // Divers
+        "sauvegarde_ok" to "Saved"
+    )
+    
     // ==================== ESPAÑOL ====================
-    private val TRADUCTIONS_ES = mapOf(
-        // Titres sections
-        "titre" to "Configuración",
-        "titre_profil" to "Perfil",
-        "titre_categories" to "Categorías activas",
-        "titre_couts_cigarettes" to "Costos cigarrillos",
-        "titre_couts_joints" to "Costos porros",
-        "titre_couts_alcool" to "Costos alcohol",
-        "titre_habitudes" to "Hábitos diarios",
-        "titre_dates_objectifs" to "Fechas objetivos",
-        "titre_raz_export" to "Restablecer y Exportar/Importar",
+private val TRADUCTIONS_ES = mapOf(
+    // Titres sections
+    "titre" to "Ajustes",
+    "titre_profil" to "Perfil",
+    "titre_categories" to "Categorías activas",
+    "titre_couts_cigarettes" to "Costes de cigarrillos",
+    "titre_couts_joints" to "Costes de porros",
+    "titre_couts_alcool" to "Costes de alcohol",
+    "titre_habitudes" to "Hábitos diarios",
+    "titre_dates_objectifs" to "Fechas objetivo",
+    "titre_raz_export" to "Reiniciar y Exportar/Importar",
 
-        // Labels profil
-        "label_prenom" to "Nombre",
-        "label_langue" to "Idioma",
-        "label_devise" to "Moneda",
-        "btn_sauvegarder_profil" to "Guardar perfil",
+    // Labels profil
+    "label_prenom" to "Nombre",
+    "label_langue" to "Idioma",
+    "label_devise" to "Moneda",
+    "btn_sauvegarder_profil" to "Guardar perfil",
 
-        // Labels catégories
-        "label_cigarettes" to "Cigarrillos",
-        "label_joints" to "Porros",
-        "label_alcool_global" to "Alcohol global",
-        "label_bieres" to "Cervezas",
-        "label_liqueurs" to "Licores",
-        "label_alcool_fort" to "Aguardiente",
+    // Labels catégories
+    "label_cigarettes" to "Cigarrillos",
+    "label_joints" to "Porros",
+    "label_alcool_global" to "Alcohol total",
+    "label_bieres" to "Cervezas",
+    "label_liqueurs" to "Licores",
+    "label_alcool_fort" to "Bebidas fuertes",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Cigarrillos clásicos",
-        "radio_rouler" to "Para liar",
-        "radio_tubeuse" to "Entubadora",
-        "label_prix_paquet" to "Precio del paquete",
-        "label_nb_cigarettes" to "Número de cigarrillos",
-        "label_prix_tabac" to "Precio tabaco",
-        "label_prix_feuilles" to "Precio papeles",
-        "label_nb_feuilles" to "Número de papeles",
-        "label_prix_filtres" to "Precio filtros",
-        "label_nb_filtres" to "Número de filtros",
-        "label_prix_tubes" to "Precio tubos",
-        "label_nb_tubes" to "Número de tubos",
+    // Labels formulaires cigarettes
+    "radio_classiques" to "Cigarrillos normales",
+    "radio_rouler" to "Tabaco de liar",
+    "radio_tubeuse" to "Máquina de tubos",
+    "label_prix_paquet" to "Precio del paquete",
+    "label_nb_cigarettes" to "Número de cigarrillos",
+    "label_prix_tabac" to "Precio del tabaco",
+    "label_prix_feuilles" to "Precio de los papeles",
+    "label_nb_feuilles" to "Número de papeles",
+    "label_prix_filtres" to "Precio de los filtros",
+    "label_nb_filtres" to "Número de filtros",
+    "label_prix_tubes" to "Precio de los tubos",
+    "label_nb_tubes" to "Número de tubos",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "Precio por gramo",
-        "label_gramme_par_joint" to "Gramos por porro",
+    // Labels formulaires joints
+    "label_prix_gramme" to "Precio por gramo",
+    "label_gramme_par_joint" to "Gramos por porro",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "Precio por copa",
-        "label_unite_cl" to "Unidad (cL)",
+    // Labels formulaires alcool
+    "label_prix_verre" to "Precio de la bebida",
+    "label_unite_cl" to "Unidad (cL)",
 
-        // Labels habitudes
-        "label_max_journalier" to "Máximo diario",
+    // Labels habitudes
+    "label_max_journalier" to "Máximo diario",
 
-        // Labels dates
-        "label_date_reduction" to "Fecha reducción",
-        "label_date_arret" to "Fecha abandono",
-        "label_date_reussite" to "Fecha éxito",
-        "btn_choisir_date" to "Elegir fecha",
+    // Labels dates
+    "label_date_reduction" to "Fecha de reducción",
+    "label_date_arret" to "Fecha de abandono",
+    "label_date_reussite" to "Fecha de éxito",
+    "btn_choisir_date" to "Elegir fecha",
 
-        "msg_export_limite" to "Para acceder a la exportación, pasa a la versión sin publicidad :-)",
-        "msg_import_limite" to "Límite alcanzado. Quedan %d importaciones hoy.",
-        
-        // Boutons RAZ
-        "btn_raz_jour" to "Restablecer hoy",
-        "btn_raz_historique" to "Restablecer historial",
-        "btn_raz_usine" to "Restablecimiento de fábrica",
+    "msg_export_limite" to "Para acceder a la exportación, cambia a la versión sin anuncios para disfrutarla :-)",
+    "msg_import_limite" to "Límite alcanzado. Quedan %d importación(es) hoy.",
 
-        // Boutons Export/Import
-        "btn_exporter" to "Exportar",
-        "btn_importer" to "Importar",
-        "btn_export_logs" to "Exportar registros",
+    // Boutons RAZ
+    "btn_raz_jour" to "Reiniciar hoy",
+    "btn_raz_historique" to "Reiniciar historial",
+    "btn_raz_usine" to "Restablecer de fábrica",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "Restablecer hoy",
-        "confirm_raz_jour_message" to "¿Eliminar todo el consumo de hoy?",
-        "confirm_raz_historique_titre" to "Restablecer historial",
-        "confirm_raz_historique_message" to "¿Eliminar TODO el historial de consumo? (Esta acción es irreversible)",
-        "confirm_raz_usine_titre" to "Restablecimiento de fábrica",
-        "confirm_raz_usine_message" to "¿Restablecer TODO (perfil, consumo, configuración)? (Esta acción es irreversible)",
-        "confirm_import_titre" to "Importar copia de seguridad",
-        "confirm_import_message" to "Todos los datos actuales serán reemplazados. ¿Continuar?",
+    // Boutons Export/Import
+    "btn_exporter" to "Exportar",
+    "btn_importer" to "Importar",
+    "btn_export_logs" to "Exportar registros",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Perfil guardado",
-        "msg_date_enregistree" to "Fecha guardada",
-        "msg_raz_effectuee" to "Restablecimiento completado",
-        "msg_export_reussi" to "Exportación exitosa",
-        "msg_import_reussi" to "Importación exitosa",
-        "msg_erreur_sauvegarde" to "Error al guardar",
-        "msg_erreur_date" to "Error al guardar fecha",
-        "msg_erreur_raz" to "Error de restablecimiento",
-        "msg_erreur_export" to "Error de exportación",
-        "msg_erreur_import" to "Error de importación",
-        "msg_limite_export" to "Límite alcanzado: %d exportación(es) restante(s) hoy (versión gratuita)",
-        "msg_limite_import" to "Límite alcanzado: %d importación(es) restante(s) hoy (versión gratuita)",
-        "msg_aucune_sauvegarde" to "No se encontró archivo de copia de seguridad",
-        "msg_donnees_invalides" to "Error de importación: datos inválidos",
-        "msg_champs_obligatoires" to "Por favor ingrese al menos un costo",
+    // Messages confirmations
+    "confirm_raz_jour_titre" to "Reiniciar hoy",
+    "confirm_raz_jour_message" to "¿Eliminar todos los consumos de hoy?",
+    "confirm_raz_historique_titre" to "Reiniciar historial",
+    "confirm_raz_historique_message" to "¿Eliminar TODO el historial de consumo? (Esta acción es irreversible)",
+    "confirm_raz_usine_titre" to "Restablecer de fábrica",
+    "confirm_raz_usine_message" to "¿Reiniciar TODO (perfil, consumos, ajustes)? (Esta acción es irreversible)",
+    "confirm_import_titre" to "Importar copia de seguridad",
+    "confirm_import_message" to "Todos los datos actuales serán reemplazados. ¿Continuar?",
 
-        // Bandeau profil
-        "profil_complet" to "Perfil: Completo ✓",
-        "profil_incomplet" to "Perfil: Incompleto",
-        "total_aujourdhui" to "Total hoy:",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "Perfil guardado",
+    "msg_date_enregistree" to "Fecha guardada",
+    "msg_raz_effectuee" to "Reinicio completado",
+    "msg_export_reussi" to "Exportación exitosa",
+    "msg_import_reussi" to "Importación exitosa",
+    "msg_erreur_sauvegarde" to "Error al guardar",
+    "msg_erreur_date" to "Error al guardar la fecha",
+    "msg_erreur_raz" to "Error al reiniciar",
+    "msg_erreur_export" to "Error de exportación",
+    "msg_erreur_import" to "Error de importación",
+    "msg_limite_export" to "Límite alcanzado: quedan %d exportación(es) hoy (versión gratuita)",
+    "msg_limite_import" to "Límite alcanzado: quedan %d importación(es) hoy (versión gratuita)",
+    "msg_aucune_sauvegarde" to "No se encontró ningún archivo de copia",
+    "msg_donnees_invalides" to "Error de importación: datos inválidos",
+    "msg_champs_obligatoires" to "Introduce al menos un coste",
 
-        // Économies potentielles
-        "titre_economies" to "Ahorros potenciales",
-        "economies_si_arret" to "Si dejaras completamente:",
-        "economies_jour" to "Día",
-        "economies_semaine" to "Semana",
-        "economies_mois" to "Mes",
-        "economies_annee" to "Año",
+    // Bandeau profil
+    "profil_complet" to "Perfil: Completo ✓",
+    "profil_incomplet" to "Perfil: Incompleto",
+    "total_aujourdhui" to "Total hoy:",
 
-        // Boutons dialog
-        "btn_confirmer" to "Confirmar",
-        "btn_annuler" to "Cancelar",
-        "btn_ok" to "OK",
+    // Économies potentielles
+    "titre_economies" to "Ahorros potenciales",
+    "economies_si_arret" to "Si dejaras por completo:",
+    "economies_jour" to "Día",
+    "economies_semaine" to "Semana",
+    "economies_mois" to "Mes",
+    "economies_annee" to "Año",
 
-        // Acerca de
-        "titre_a_propos" to "Acerca de",
-        "voir_avertissement" to "Ver advertencia",
-        "btn_manuel" to "Manual de usuario",
-        "btn_cgv" to "Términos y condiciones",
-        "btn_mentions_legales" to "Aviso legal",
-        "btn_contact" to "Contactar soporte",
-        "btn_maj" to "Últimas actualizaciones",
-        "maj_titre" to "Últimas actualizaciones",
-        "maj_contenu" to "Lanzamiento V1",
-        "btn_premium" to "Versión sin publicidad",
-        "premium_titre" to "Versión sin publicidad",
-        "premium_contenu" to "La versión sin publicidad estará disponible pronto.\n\nEliminará los anuncios y las limitaciones.",
-        "hint_prenom" to "Ingrese su nombre",
+    // Boutons dialog
+    "btn_confirmer" to "Confirmar",
+    "btn_annuler" to "Cancelar",
+    "btn_ok" to "OK",
 
-        // Restablecer
-        "raz_sauvegarde" to "Restablecer y Copia de seguridad",
-        "raz_jour" to "Restablecer día",
-        "raz_historique" to "Restablecer historial",
-        "raz_usine" to "Restablecimiento de fábrica",
-        "raz_jour_ok" to "Día restablecido",
-        "raz_historique_ok" to "Historial restablecido",
-        "raz_usine_ok" to "Restablecimiento de fábrica completado",
+    // About
+    "titre_a_propos" to "Acerca de",
+    "voir_avertissement" to "Ver advertencia",
+    "btn_manuel" to "Manual de usuario",
+    "btn_cgv" to "Términos y condiciones",
+    "btn_mentions_legales" to "Aviso legal",
+    "btn_contact" to "Contactar soporte",
+    "btn_maj" to "Últimas actualizaciones",
+    "maj_titre" to "Últimas actualizaciones",
+    "maj_contenu" to "Despliegue V1",
+    "btn_premium" to "Versión sin anuncios",
+    "premium_titre" to "Versión sin anuncios",
+    "premium_contenu" to "La versión sin anuncios estará disponible pronto.\n\nEliminará los banners y las limitaciones.",
+    "hint_prenom" to "Introduce tu nombre",
 
-        "unite_cl_global"      to "Unidad (cl)",
-        "unite_cl_biere"       to "Unidad (cl)",
-        "unite_cl_liqueur"     to "Unidad (cl)",
-        "unite_cl_alcool_fort" to "Unidad (cl)",
+    // Reset
+    "raz_sauvegarde" to "Reinicio y Copia",
+    "raz_jour" to "Reinicio del día",
+    "raz_historique" to "Reinicio del historial",
+    "raz_usine" to "Restablecer de fábrica",
+    "raz_jour_ok" to "Reinicio del día realizado",
+    "raz_historique_ok" to "Reinicio del historial realizado",
+    "raz_usine_ok" to "Restablecimiento de fábrica realizado",
 
-        "label_prix_feuilles_longues" to "Precio de papeles largos",
-        "label_nb_feuilles_longues"   to "Número de papeles largos"
-    )
+    // Units in cl for alcohols
+    "unite_cl_global"      to "Unidad (cL)",
+    "unite_cl_biere"       to "Unidad (cL)",
+    "unite_cl_liqueur"     to "Unidad (cL)",
+    "unite_cl_alcool_fort" to "Unidad (cL)",
 
-    // ==================== PORTUGUÊS ====================
-    private val TRADUCTIONS_PT = mapOf(
-        // Titres sections
-        "titre" to "Configurações",
-        "titre_profil" to "Perfil",
-        "titre_categories" to "Categorias ativas",
-        "titre_couts_cigarettes" to "Custos cigarros",
-        "titre_couts_joints" to "Custos baseados",
-        "titre_couts_alcool" to "Custos álcool",
-        "titre_habitudes" to "Hábitos diários",
-        "titre_dates_objectifs" to "Datas objetivos",
-        "titre_raz_export" to "Redefinir e Exportar/Importar",
+    "btn_sauvegarder_couts" to "Guardar costes",
+    "msg_export_logs_impossible" to "No se pudieron exportar los registros",
+    "msg_import_termine" to "Importación completada con éxito",
+    "msg_import_erreur" to "Error de importación: %s",
 
-        // Labels profil
-        "label_prenom" to "Nome",
-        "label_langue" to "Idioma",
-        "label_devise" to "Moeda",
-        "btn_sauvegarder_profil" to "Salvar perfil",
+    "label_max_journalier" to "Objetivo máximo diario",
+    "label_date_reduction" to "Fecha de reducción",
+    "label_date_arret" to "Fecha de abandono",
+    "label_date_reussite" to "Fecha de éxito",
+    "btn_choisir_date" to "Elegir una fecha",
+    "msg_export_limite" to "Para acceder a la exportación, actualiza a la versión sin anuncios para disfrutarla :-)",
 
-        // Labels catégories
-        "label_cigarettes" to "Cigarros",
-        "label_joints" to "Baseados",
-        "label_alcool_global" to "Álcool global",
-        "label_bieres" to "Cervejas",
-        "label_liqueurs" to "Licores",
-        "label_alcool_fort" to "Destilados",
+    "label_prix_feuilles_longues" to "Precio de papeles largos",
+    "label_nb_feuilles_longues"   to "Número de papeles largos"
+)
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Cigarros clássicos",
-        "radio_rouler" to "Para enrolar",
-        "radio_tubeuse" to "Entubadora",
-        "label_prix_paquet" to "Preço do maço",
-        "label_nb_cigarettes" to "Número de cigarros",
-        "label_prix_tabac" to "Preço tabaco",
-        "label_prix_feuilles" to "Preço papéis",
-        "label_nb_feuilles" to "Número de papéis",
-        "label_prix_filtres" to "Preço filtros",
-        "label_nb_filtres" to "Número de filtros",
-        "label_prix_tubes" to "Preço tubos",
-        "label_nb_tubes" to "Número de tubos",
+// ==================== PORTUGUÊS ====================
+private val TRADUCTIONS_PT = mapOf(
+    // Titres sections
+    "titre" to "Definições",
+    "titre_profil" to "Perfil",
+    "titre_categories" to "Categorias ativas",
+    "titre_couts_cigarettes" to "Custos de cigarros",
+    "titre_couts_joints" to "Custos de charros",
+    "titre_couts_alcool" to "Custos de álcool",
+    "titre_habitudes" to "Hábitos diários",
+    "titre_dates_objectifs" to "Datas objetivo",
+    "titre_raz_export" to "Repor e Exportar/Importar",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "Preço por grama",
-        "label_gramme_par_joint" to "Gramas por baseado",
+    // Labels profil
+    "label_prenom" to "Nome",
+    "label_langue" to "Idioma",
+    "label_devise" to "Moeda",
+    "btn_sauvegarder_profil" to "Guardar perfil",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "Preço por dose",
-        "label_unite_cl" to "Unidade (cL)",
+    // Labels catégories
+    "label_cigarettes" to "Cigarros",
+    "label_joints" to "Charros",
+    "label_alcool_global" to "Álcool total",
+    "label_bieres" to "Cervejas",
+    "label_liqueurs" to "Licores",
+    "label_alcool_fort" to "Bebidas espirituosas",
 
-        // Labels habitudes
-        "label_max_journalier" to "Máximo diário",
+    // Labels formulaires cigarettes
+    "radio_classiques" to "Cigarros normais",
+    "radio_rouler" to "Tabaco de enrolar",
+    "radio_tubeuse" to "Máquina de tubos",
+    "label_prix_paquet" to "Preço do maço",
+    "label_nb_cigarettes" to "Número de cigarros",
+    "label_prix_tabac" to "Preço do tabaco",
+    "label_prix_feuilles" to "Preço das mortalhas",
+    "label_nb_feuilles" to "Número de mortalhas",
+    "label_prix_filtres" to "Preço dos filtros",
+    "label_nb_filtres" to "Número de filtros",
+    "label_prix_tubes" to "Preço dos tubos",
+    "label_nb_tubes" to "Número de tubos",
 
-        // Labels dates
-        "label_date_reduction" to "Data redução",
-        "label_date_arret" to "Data parada",
-        "label_date_reussite" to "Data sucesso",
-        "btn_choisir_date" to "Escolher data",
+    // Labels formulaires joints
+    "label_prix_gramme" to "Preço por grama",
+    "label_gramme_par_joint" to "Gramas por charro",
 
-        "msg_export_limite" to "Para aceder à exportação, mude para a versão sem publicidade :-)",
-        "msg_import_limite" to "Limite atingido. Restam %d importações hoje.",
+    // Labels formulaires alcool
+    "label_prix_verre" to "Preço da bebida",
+    "label_unite_cl" to "Unidade (cL)",
 
-        // Boutons RAZ
-        "btn_raz_jour" to "Redefinir hoje",
-        "btn_raz_historique" to "Redefinir histórico",
-        "btn_raz_usine" to "Redefinição de fábrica",
+    // Labels habitudes
+    "label_max_journalier" to "Máximo diário",
 
-        // Boutons Export/Import
-        "btn_exporter" to "Exportar",
-        "btn_importer" to "Importar",
-        "btn_export_logs" to "Exportar registros",
+    // Labels dates
+    "label_date_reduction" to "Data de redução",
+    "label_date_arret" to "Data de parar",
+    "label_date_reussite" to "Data de sucesso",
+    "btn_choisir_date" to "Escolher data",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "Redefinir hoje",
-        "confirm_raz_jour_message" to "Excluir todo o consumo de hoje?",
-        "confirm_raz_historique_titre" to "Redefinir histórico",
-        "confirm_raz_historique_message" to "Excluir TODO o histórico de consumo? (Esta ação é irreversível)",
-        "confirm_raz_usine_titre" to "Redefinição de fábrica",
-        "confirm_raz_usine_message" to "Redefinir TUDO (perfil, consumo, configurações)? (Esta ação é irreversível)",
-        "confirm_import_titre" to "Importar backup",
-        "confirm_import_message" to "Todos os dados atuais serão substituídos. Continuar?",
+    "msg_export_limite" to "Para aceder à exportação, mude para a versão sem anúncios para usufruir :-)",
+    "msg_import_limite" to "Limite atingido. Restam %d importação(ões) hoje.",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Perfil salvo",
-        "msg_date_enregistree" to "Data salva",
-        "msg_raz_effectuee" to "Redefinição concluída",
-        "msg_export_reussi" to "Exportação bem-sucedida",
-        "msg_import_reussi" to "Importação bem-sucedida",
-        "msg_erreur_sauvegarde" to "Erro ao salvar",
-        "msg_erreur_date" to "Erro ao salvar data",
-        "msg_erreur_raz" to "Erro de redefinição",
-        "msg_erreur_export" to "Erro de exportação",
-        "msg_erreur_import" to "Erro de importação",
-        "msg_limite_export" to "Limite atingido: %d exportação(ões) restante(s) hoje (versão gratuita)",
-        "msg_limite_import" to "Limite atingido: %d importação(ões) restante(s) hoje (versão gratuita)",
-        "msg_aucune_sauvegarde" to "Nenhum arquivo de backup encontrado",
-        "msg_donnees_invalides" to "Erro de importação: dados inválidos",
-        "msg_champs_obligatoires" to "Por favor insira pelo menos um custo",
+    // Boutons RAZ
+    "btn_raz_jour" to "Repor hoje",
+    "btn_raz_historique" to "Repor histórico",
+    "btn_raz_usine" to "Reposição de fábrica",
 
-        // Bandeau profil
-        "profil_complet" to "Perfil: Completo ✓",
-        "profil_incomplet" to "Perfil: Incompleto",
-        "total_aujourdhui" to "Total hoje:",
+    // Boutons Export/Import
+    "btn_exporter" to "Exportar",
+    "btn_importer" to "Importar",
+    "btn_export_logs" to "Exportar registos",
 
-        // Économies potentielles
-        "titre_economies" to "Economias potenciais",
-        "economies_si_arret" to "Se você parasse completamente:",
-        "economies_jour" to "Dia",
-        "economies_semaine" to "Semana",
-        "economies_mois" to "Mês",
-        "economies_annee" to "Ano",
+    // Messages confirmations
+    "confirm_raz_jour_titre" to "Repor hoje",
+    "confirm_raz_jour_message" to "Eliminar todos os consumos de hoje?",
+    "confirm_raz_historique_titre" to "Repor histórico",
+    "confirm_raz_historique_message" to "Eliminar TODO o histórico de consumo? (Esta ação é irreversível)",
+    "confirm_raz_usine_titre" to "Reposição de fábrica",
+    "confirm_raz_usine_message" to "Repor TUDO (perfil, consumos, definições)? (Esta ação é irreversível)",
+    "confirm_import_titre" to "Importar cópia de segurança",
+    "confirm_import_message" to "Todos os dados atuais serão substituídos. Continuar?",
 
-        // Boutons dialog
-        "btn_confirmer" to "Confirmar",
-        "btn_annuler" to "Cancelar",
-        "btn_ok" to "OK",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "Perfil guardado",
+    "msg_date_enregistree" to "Data guardada",
+    "msg_raz_effectuee" to "Reposição concluída",
+    "msg_export_reussi" to "Exportação bem-sucedida",
+    "msg_import_reussi" to "Importação bem-sucedida",
+    "msg_erreur_sauvegarde" to "Erro ao guardar",
+    "msg_erreur_date" to "Erro ao guardar a data",
+    "msg_erreur_raz" to "Erro ao repor",
+    "msg_erreur_export" to "Erro de exportação",
+    "msg_erreur_import" to "Erro de importação",
+    "msg_limite_export" to "Limite atingido: restam %d exportação(ões) hoje (versão gratuita)",
+    "msg_limite_import" to "Limite atingido: restam %d importação(ões) hoje (versão gratuita)",
+    "msg_aucune_sauvegarde" to "Nenhum ficheiro de cópia encontrado",
+    "msg_donnees_invalides" to "Erro de importação: dados inválidos",
+    "msg_champs_obligatoires" to "Introduza pelo menos um custo",
 
-        // Sobre
-        "titre_a_propos" to "Sobre",
-        "voir_avertissement" to "Ver aviso",
-        "btn_manuel" to "Manual do usuário",
-        "btn_cgv" to "Termos e condições",
-        "btn_mentions_legales" to "Aviso legal",
-        "btn_contact" to "Contatar suporte",
-        "btn_maj" to "Últimas atualizações",
-        "maj_titre" to "Últimas atualizações",
-        "maj_contenu" to "Lançamento V1",
-        "btn_premium" to "Versão sem publicidade",
-        "premium_titre" to "Versão sem publicidade",
-        "premium_contenu" to "A versão sem publicidade estará disponível em breve.\n\nEla removerá os anúncios e as limitações.",
-        "hint_prenom" to "Digite seu nome",
+    // Bandeau profil
+    "profil_complet" to "Perfil: Completo ✓",
+    "profil_incomplet" to "Perfil: Incompleto",
+    "total_aujourdhui" to "Total hoje:",
 
-        // Redefinir
-        "raz_sauvegarde" to "Redefinir e Backup",
-        "raz_jour" to "Redefinir dia",
-        "raz_historique" to "Redefinir histórico",
-        "raz_usine" to "Redefinição de fábrica",
-        "raz_jour_ok" to "Dia redefinido",
-        "raz_historique_ok" to "Histórico redefinido",
-        "raz_usine_ok" to "Redefinição de fábrica concluída",
+    // Économies potentielles
+    "titre_economies" to "Poupanças potenciais",
+    "economies_si_arret" to "Se parasse completamente:",
+    "economies_jour" to "Dia",
+    "economies_semaine" to "Semana",
+    "economies_mois" to "Mês",
+    "economies_annee" to "Ano",
 
-        "unite_cl_global"      to "Unidade (cl)",
-        "unite_cl_biere"       to "Unidade (cl)",
-        "unite_cl_liqueur"     to "Unidade (cl)",
-        "unite_cl_alcool_fort" to "Unidade (cl)",
-        
-    "label_prix_feuilles_longues" to "Preço das folhas longas",
-    "label_nb_feuilles_longues" to "Número de folhas longas"
-    )
+    // Boutons dialog
+    "btn_confirmer" to "Confirmar",
+    "btn_annuler" to "Cancelar",
+    "btn_ok" to "OK",
+
+    // About
+    "titre_a_propos" to "Sobre",
+    "voir_avertissement" to "Ver aviso",
+    "btn_manuel" to "Manual do utilizador",
+    "btn_cgv" to "Termos e condições",
+    "btn_mentions_legales" to "Aviso legal",
+    "btn_contact" to "Contactar suporte",
+    "btn_maj" to "Últimas atualizações",
+    "maj_titre" to "Últimas atualizações",
+    "maj_contenu" to "Implementação V1",
+    "btn_premium" to "Versão sem anúncios",
+    "premium_titre" to "Versão sem anúncios",
+    "premium_contenu" to "A versão sem anúncios estará disponível em breve.\n\nIrá remover banners e limitações.",
+    "hint_prenom" to "Introduza o seu nome",
+
+    // Reset
+    "raz_sauvegarde" to "Reposição e Cópia",
+    "raz_jour" to "Reposição do dia",
+    "raz_historique" to "Reposição do histórico",
+    "raz_usine" to "Reposição de fábrica",
+    "raz_jour_ok" to "Reposição do dia concluída",
+    "raz_historique_ok" to "Reposição do histórico concluída",
+    "raz_usine_ok" to "Reposição de fábrica concluída",
+
+    // Units in cl for alcohols
+    "unite_cl_global"      to "Unidade (cL)",
+    "unite_cl_biere"       to "Unidade (cL)",
+    "unite_cl_liqueur"     to "Unidade (cL)",
+    "unite_cl_alcool_fort" to "Unidade (cL)",
+
+    "btn_sauvegarder_couts" to "Guardar custos",
+    "msg_export_logs_impossible" to "Não foi possível exportar os registos",
+    "msg_import_termine" to "Importação concluída com sucesso",
+    "msg_import_erreur" to "Erro de importação: %s",
+
+    "label_max_journalier" to "Objetivo máximo diário",
+    "label_date_reduction" to "Data de redução",
+    "label_date_arret" to "Data de parar",
+    "label_date_reussite" to "Data de sucesso",
+    "btn_choisir_date" to "Escolher uma data",
+    "msg_export_limite" to "Para aceder à exportação, atualize para a versão sem anúncios para usufruir :-)",
+
+    "label_prix_feuilles_longues" to "Preço de mortalhas longas",
+    "label_nb_feuilles_longues"   to "Número de mortalhas longas"
+)
+
 
     // ==================== DEUTSCH ====================
-    private val TRADUCTIONS_DE = mapOf(
-        // Titres sections
-        "titre" to "Einstellungen",
-        "titre_profil" to "Profil",
-        "titre_categories" to "Aktive Kategorien",
-        "titre_couts_cigarettes" to "Zigarettenkosten",
-        "titre_couts_joints" to "Joint-Kosten",
-        "titre_couts_alcool" to "Alkoholkosten",
-        "titre_habitudes" to "Tägliche Gewohnheiten",
-        "titre_dates_objectifs" to "Zieldaten",
-        "titre_raz_export" to "Zurücksetzen & Export/Import",
+private val TRADUCTIONS_DE = mapOf(
+    // Titres sections
+    "titre" to "Einstellungen",
+    "titre_profil" to "Profil",
+    "titre_categories" to "Aktive Kategorien",
+    "titre_couts_cigarettes" to "Zigarettenkosten",
+    "titre_couts_joints" to "Joint-Kosten",
+    "titre_couts_alcool" to "Alkoholkosten",
+    "titre_habitudes" to "Tägliche Gewohnheiten",
+    "titre_dates_objectifs" to "Zieldaten",
+    "titre_raz_export" to "Zurücksetzen & Export/Import",
 
-        // Labels profil
-        "label_prenom" to "Vorname",
-        "label_langue" to "Sprache",
-        "label_devise" to "Währung",
-        "btn_sauvegarder_profil" to "Profil speichern",
+    // Labels profil
+    "label_prenom" to "Vorname",
+    "label_langue" to "Sprache",
+    "label_devise" to "Währung",
+    "btn_sauvegarder_profil" to "Profil speichern",
+    "hint_prenom" to "Geben Sie Ihren Vornamen ein",
 
-        // Labels catégories
-        "label_cigarettes" to "Zigaretten",
-        "label_joints" to "Joints",
-        "label_alcool_global" to "Alkohol gesamt",
-        "label_bieres" to "Biere",
-        "label_liqueurs" to "Liköre",
-        "label_alcool_fort" to "Spirituosen",
+    // Labels catégories
+    "label_cigarettes" to "Zigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alkohol gesamt",
+    "label_bieres" to "Biere",
+    "label_liqueurs" to "Liköre",
+    "label_alcool_fort" to "Spirituosen",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Normale Zigaretten",
-        "radio_rouler" to "Selbstgedreht",
-        "radio_tubeuse" to "Stopfmaschine",
-        "label_prix_paquet" to "Packungspreis",
-        "label_nb_cigarettes" to "Anzahl Zigaretten",
-        "label_prix_tabac" to "Tabakpreis",
-        "label_prix_feuilles" to "Blättchenpreis",
-        "label_nb_feuilles" to "Anzahl Blättchen",
-        "label_prix_filtres" to "Filterpreis",
-        "label_nb_filtres" to "Anzahl Filter",
-        "label_prix_tubes" to "Hülsenpreis",
-        "label_nb_tubes" to "Anzahl Hülsen",
+    // Labels formulaires cigarettes
+    "radio_classiques" to "Normale Zigaretten",
+    "radio_rouler" to "Selbstgedreht",
+    "radio_tubeuse" to "Stopfmaschine",
+    "label_prix_paquet" to "Packungspreis",
+    "label_nb_cigarettes" to "Anzahl Zigaretten",
+    "label_prix_tabac" to "Tabakpreis",
+    "label_prix_feuilles" to "Blättchenpreis",
+    "label_nb_feuilles" to "Anzahl Blättchen",
+    "label_prix_filtres" to "Filterpreis",
+    "label_nb_filtres" to "Anzahl Filter",
+    "label_prix_tubes" to "Hülsenpreis",
+    "label_nb_tubes" to "Anzahl Hülsen",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "Preis pro Gramm",
-        "label_gramme_par_joint" to "Gramm pro Joint",
-
-        // Labels formulaires alcool
-        "label_prix_verre" to "Getränkpreis",
-        "label_unite_cl" to "Einheit (cL)",
-
-        // Labels habitudes
-        "label_max_journalier" to "Tägliches Maximum",
-
-        // Labels dates
-        "label_date_reduction" to "Reduzierungsdatum",
-        "label_date_arret" to "Aufhördatum",
-        "label_date_reussite" to "Erfolgsdatum",
-        "btn_choisir_date" to "Datum wählen",
-
-        "msg_export_limite" to "Um den Export zu nutzen, wechseln Sie zur werbefreien Version :-)",
-        "msg_import_limite" to "Limit erreicht. %d Importe verbleiben heute.",
-        
-        // Boutons RAZ
-        "btn_raz_jour" to "Heute zurücksetzen",
-        "btn_raz_historique" to "Verlauf zurücksetzen",
-        "btn_raz_usine" to "Werkseinstellungen",
-
-        // Boutons Export/Import
-        "btn_exporter" to "Exportieren",
-        "btn_importer" to "Importieren",
-        "btn_export_logs" to "Logs exportieren",
-
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "Heute zurücksetzen",
-        "confirm_raz_jour_message" to "Alle heutigen Konsumeinträge löschen?",
-        "confirm_raz_historique_titre" to "Verlauf zurücksetzen",
-        "confirm_raz_historique_message" to "ALLE Konsumhistorie löschen? (Diese Aktion ist irreversibel)",
-        "confirm_raz_usine_titre" to "Werkseinstellungen",
-        "confirm_raz_usine_message" to "ALLES zurücksetzen (Profil, Konsum, Einstellungen)? (Diese Aktion ist irreversibel)",
-        "confirm_import_titre" to "Backup importieren",
-        "confirm_import_message" to "Alle aktuellen Daten werden ersetzt. Fortfahren?",
-
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Profil gespeichert",
-        "msg_date_enregistree" to "Datum gespeichert",
-        "msg_raz_effectuee" to "Zurücksetzen abgeschlossen",
-        "msg_export_reussi" to "Export erfolgreich",
-        "msg_import_reussi" to "Import erfolgreich",
-        "msg_erreur_sauvegarde" to "Speicherfehler",
-        "msg_erreur_date" to "Datumsspeicherfehler",
-        "msg_erreur_raz" to "Zurücksetzungsfehler",
-        "msg_erreur_export" to "Exportfehler",
-        "msg_erreur_import" to "Importfehler",
-        "msg_limite_export" to "Limit erreicht: %d Export(e) heute übrig (kostenlose Version)",
-        "msg_limite_import" to "Limit erreicht: %d Import(e) heute übrig (kostenlose Version)",
-        "msg_aucune_sauvegarde" to "Keine Backup-Datei gefunden",
-        "msg_donnees_invalides" to "Importfehler: ungültige Daten",
-        "msg_champs_obligatoires" to "Bitte geben Sie mindestens einen Preis ein",
-
-        // Bandeau profil
-        "profil_complet" to "Profil: Vollständig ✓",
-        "profil_incomplet" to "Profil: Unvollständig",
-        "total_aujourdhui" to "Heute insgesamt:",
-
-        // Économies potentielles
-        "titre_economies" to "Mögliche Ersparnisse",
-        "economies_si_arret" to "Wenn Sie komplett aufhören würden:",
-        "economies_jour" to "Tag",
-        "economies_semaine" to "Woche",
-        "economies_mois" to "Monat",
-        "economies_annee" to "Jahr",
-
-        // Boutons dialog
-        "btn_confirmer" to "Bestätigen",
-        "btn_annuler" to "Abbrechen",
-        "btn_ok" to "OK",
-
-        // Über
-        "titre_a_propos" to "Über",
-        "voir_avertissement" to "Warnung anzeigen",
-        "btn_manuel" to "Benutzerhandbuch",
-        "btn_cgv" to "Allgemeine Geschäftsbedingungen",
-        "btn_mentions_legales" to "Impressum",
-        "btn_contact" to "Support kontaktieren",
-        "btn_maj" to "Letzte Aktualisierungen",
-        "maj_titre" to "Letzte Aktualisierungen",
-        "maj_contenu" to "Bereitstellung V1",
-        "btn_premium" to "Werbefreie Version",
-        "premium_titre" to "Werbefreie Version",
-        "premium_contenu" to "Die werbefreie Version ist bald verfügbar.\n\nSie entfernt Bannerwerbung und Einschränkungen.",
-        "hint_prenom" to "Geben Sie Ihren Vornamen ein",
-
-        // Zurücksetzen
-        "raz_sauvegarde" to "Zurücksetzen und Sicherung",
-        "raz_jour" to "Tag zurücksetzen",
-        "raz_historique" to "Verlauf zurücksetzen",
-        "raz_usine" to "Werkseinstellungen",
-        "raz_jour_ok" to "Tag zurückgesetzt",
-        "raz_historique_ok" to "Verlauf zurückgesetzt",
-        "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt",
-
-        "unite_cl_global"      to "Einheit (cl)",
-        "unite_cl_biere"       to "Einheit (cl)",
-        "unite_cl_liqueur"     to "Einheit (cl)",
-        "unite_cl_alcool_fort" to "Einheit (cl)",
-
+    // Labels formulaires joints
+    "label_prix_gramme" to "Preis pro Gramm",
+    "label_gramme_par_joint" to "Gramm pro Joint",
     "label_prix_feuilles_longues" to "Preis der langen Blättchen",
-    "label_nb_feuilles_longues" to "Anzahl der langen Blättchen"
-    )
+    "label_nb_feuilles_longues" to "Anzahl der langen Blättchen",
 
-    // ==================== ITALIANO ====================
-    private val TRADUCTIONS_IT = mapOf(
-        // Titres sections
-        "titre" to "Impostazioni",
-        "titre_profil" to "Profilo",
-        "titre_categories" to "Categorie attive",
-        "titre_couts_cigarettes" to "Costi sigarette",
-        "titre_couts_joints" to "Costi spinelli",
-        "titre_couts_alcool" to "Costi alcol",
-        "titre_habitudes" to "Abitudini quotidiane",
-        "titre_dates_objectifs" to "Date obiettivi",
-        "titre_raz_export" to "Ripristino ed Esporta/Importa",
+    // Labels formulaires alcool
+    "label_prix_verre" to "Getränkpreis",
+    "label_unite_cl" to "Einheit (cL)",
 
-        // Labels profil
-        "label_prenom" to "Nome",
-        "label_langue" to "Lingua",
-        "label_devise" to "Valuta",
-        "btn_sauvegarder_profil" to "Salva profilo",
+    // Labels habitudes
+    "label_max_journalier" to "Tägliches Maximum",
 
-        // Labels catégories
-        "label_cigarettes" to "Sigarette",
-        "label_joints" to "Spinelli",
-        "label_alcool_global" to "Alcol globale",
-        "label_bieres" to "Birre",
-        "label_liqueurs" to "Liquori",
-        "label_alcool_fort" to "Superalcolici",
+    // Labels dates
+    "label_date_reduction" to "Reduzierungsdatum",
+    "label_date_arret" to "Aufhördatum",
+    "label_date_reussite" to "Erfolgsdatum",
+    "btn_choisir_date" to "Datum wählen",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Sigarette classiche",
-        "radio_rouler" to "Da rollare",
-        "radio_tubeuse" to "Con tubo",
-        "label_prix_paquet" to "Prezzo pacchetto",
-        "label_nb_cigarettes" to "Numero di sigarette",
-        "label_prix_tabac" to "Prezzo tabacco",
-        "label_prix_feuilles" to "Prezzo cartine",
-        "label_nb_feuilles" to "Numero di cartine",
-        "label_prix_filtres" to "Prezzo filtri",
-        "label_nb_filtres" to "Numero di filtri",
-        "label_prix_tubes" to "Prezzo tubi",
-        "label_nb_tubes" to "Numero di tubi",
+    // Limites Export/Import
+    "msg_export_limite" to "Um den Export zu nutzen, wechseln Sie zur werbefreien Version :-)",
+    "msg_import_limite" to "Limit erreicht. %d Import(e) verbleiben heute.",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "Prezzo per grammo",
-        "label_gramme_par_joint" to "Grammi per spinello",
+    // Boutons RAZ
+    "btn_raz_jour" to "Heute zurücksetzen",
+    "btn_raz_historique" to "Verlauf zurücksetzen",
+    "btn_raz_usine" to "Werkseinstellungen",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "Prezzo bicchiere",
-        "label_unite_cl" to "Unità (cL)",
+    // Boutons Export/Import
+    "btn_exporter" to "Exportieren",
+    "btn_importer" to "Importieren",
+    "btn_export_logs" to "Logs exportieren",
 
-        // Labels habitudes
-        "label_max_journalier" to "Massimo giornaliero",
+    // Messages confirmations
+    "confirm_raz_jour_titre" to "Heute zurücksetzen",
+    "confirm_raz_jour_message" to "Alle heutigen Konsumeinträge löschen?",
+    "confirm_raz_historique_titre" to "Verlauf zurücksetzen",
+    "confirm_raz_historique_message" to "ALLE Konsumhistorie löschen? (Diese Aktion ist irreversibel)",
+    "confirm_raz_usine_titre" to "Werkseinstellungen",
+    "confirm_raz_usine_message" to "ALLES zurücksetzen (Profil, Konsum, Einstellungen)? (Diese Aktion ist irreversibel)",
+    "confirm_import_titre" to "Backup importieren",
+    "confirm_import_message" to "Alle aktuellen Daten werden ersetzt. Fortfahren?",
+    "confirm_default" to "Bestätigen?",
 
-        // Labels dates
-        "label_date_reduction" to "Data riduzione",
-        "label_date_arret" to "Data smettere",
-        "label_date_reussite" to "Data successo",
-        "btn_choisir_date" to "Scegli data",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "Profil gespeichert",
+    "msg_date_enregistree" to "Datum gespeichert",
+    "msg_raz_effectuee" to "Zurücksetzen abgeschlossen",
+    "msg_export_reussi" to "Export erfolgreich",
+    "msg_import_reussi" to "Import erfolgreich",
+    "msg_erreur_sauvegarde" to "Speicherfehler",
+    "msg_erreur_date" to "Datumsspeicherfehler",
+    "msg_erreur_raz" to "Zurücksetzungsfehler",
+    "msg_erreur_export" to "Exportfehler",
+    "msg_erreur_import" to "Importfehler",
+    "msg_limite_export" to "Limit erreicht: %d Export(e) heute übrig (kostenlose Version)",
+    "msg_limite_import" to "Limit erreicht: %d Import(e) heute übrig (kostenlose Version)",
+    "msg_aucune_sauvegarde" to "Keine Backup-Datei gefunden",
+    "msg_donnees_invalides" to "Importfehler: ungültige Daten",
+    "msg_champs_obligatoires" to "Bitte geben Sie mindestens einen Preis ein",
+    "msg_export_logs_impossible" to "Logs können nicht exportiert werden",
+    "msg_import_termine" to "Import erfolgreich abgeschlossen",
+    "msg_import_termine_succes" to "Import erfolgreich abgeschlossen",
+    "msg_import_erreur" to "Importfehler: %s",
+    "msg_erreur_prefix" to "Fehler: %s",
+    "sauvegarde_ok" to "Gespeichert",
+    "msg_open_store_impossible" to "Store kann nicht geöffnet werden",
 
-        "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
-        "msg_import_limite" to "Limite raggiunto. Rimangono %d importazioni oggi.",
+    // Bandeau profil
+    "profil_complet" to "Profil: Vollständig ✓",
+    "profil_incomplet" to "Profil: Unvollständig",
+    "total_aujourdhui" to "Heute insgesamt:",
 
-        // Boutons RAZ
-        "btn_raz_jour" to "Ripristina oggi",
-        "btn_raz_historique" to "Ripristina storico",
-        "btn_raz_usine" to "Ripristino di fabbrica",
+    // Économies potentielles
+    "titre_economies" to "Mögliche Ersparnisse",
+    "economies_si_arret" to "Wenn Sie komplett aufhören würden:",
+    "economies_jour" to "Tag",
+    "economies_semaine" to "Woche",
+    "economies_mois" to "Monat",
+    "economies_annee" to "Jahr",
 
-        // Boutons Export/Import
-        "btn_exporter" to "Esporta",
-        "btn_importer" to "Importa",
-        "btn_export_logs" to "Esporta log",
+    // Boutons dialog
+    "btn_confirmer" to "Bestätigen",
+    "btn_annuler" to "Abbrechen",
+    "btn_ok" to "OK",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "Ripristina oggi",
-        "confirm_raz_jour_message" to "Eliminare tutto il consumo di oggi?",
-        "confirm_raz_historique_titre" to "Ripristina storico",
-        "confirm_raz_historique_message" to "Eliminare TUTTO lo storico consumo? (Questa azione è irreversibile)",
-        "confirm_raz_usine_titre" to "Ripristino di fabbrica",
-        "confirm_raz_usine_message" to "Ripristinare TUTTO (profilo, consumo, impostazioni)? (Questa azione è irreversibile)",
-        "confirm_import_titre" to "Importa backup",
-        "confirm_import_message" to "Tutti i dati attuali saranno sostituiti. Continuare?",
+    // À propos
+    "titre_a_propos" to "Über",
+    "voir_avertissement" to "Warnung anzeigen",
+    "btn_manuel" to "Benutzerhandbuch",
+    "btn_cgvژه" to "Allgemeine Geschäftsbedingungen",
+    "btn_cgv" to "Allgemeine Geschäftsbedingungen",
+    "btn_mentions_legales" to "Impressum",
+    "btn_contact" to "Support kontaktieren",
+    "btn_maj" to "Letzte Aktualisierungen",
+    "maj_titre" to "Letzte Aktualisierungen",
+    "maj_contenu" to "Bereitstellung V1",
+    "btn_premium" to "Werbefreie Version",
+    "premium_titre" to "Werbefreie Version",
+    "premium_contenu" to "Die werbefreie Version ist bald verfügbar.\n\nSie entfernt Bannerwerbung und Einschränkungen.",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Profilo salvato",
-        "msg_date_enregistree" to "Data salvata",
-        "msg_raz_effectuee" to "Ripristino completato",
-        "msg_export_reussi" to "Esportazione riuscita",
-        "msg_import_reussi" to "Importazione riuscita",
-        "msg_erreur_sauvegarde" to "Errore salvataggio",
-        "msg_erreur_date" to "Errore salvataggio data",
-        "msg_erreur_raz" to "Errore ripristino",
-        "msg_erreur_export" to "Errore esportazione",
-        "msg_erreur_import" to "Errore importazione",
-        "msg_limite_export" to "Limite raggiunto: %d esportazione/i rimanente/i oggi (versione gratuita)",
-        "msg_limite_import" to "Limite raggiunto: %d importazione/i rimanente/i oggi (versione gratuita)",
-        "msg_aucune_sauvegarde" to "Nessun file di backup trovato",
-        "msg_donnees_invalides" to "Errore importazione: dati non validi",
-        "msg_champs_obligatoires" to "Per favore inserisci almeno un costo",
+    // Reset (libellés)
+    "raz_sauvegarde" to "Zurücksetzen und Sicherung",
+    "raz_jour" to "Tag zurücksetzen",
+    "raz_historique" to "Verlauf zurücksetzen",
+    "raz_usine" to "Werkseinstellungen",
+    "raz_jour_ok" to "Tag zurückgesetzt",
+    "raz_historique_ok" to "Verlauf zurückgesetzt",
+    "raz_usine_ok" to "Auf Werkseinstellungen zurückgesetzt",
 
-        // Bandeau profil
-        "profil_complet" to "Profilo: Completo ✓",
-        "profil_incomplet" to "Profilo: Incompleto",
-        "total_aujourdhui" to "Totale oggi:",
+    // Units in cl for alcohols
+    "unite_cl_global" to "Einheit (cl)",
+    "unite_cl_biere" to "Einheit (cl)",
+    "unite_cl_liqueur" to "Einheit (cl)",
+    "unite_cl_alcool_fort" to "Einheit (cl)",
 
-        // Économies potentielles
-        "titre_economies" to "Risparmi potenziali",
-        "economies_si_arret" to "Se smettessi completamente:",
-        "economies_jour" to "Giorno",
-        "economies_semaine" to "Settimana",
-        "economies_mois" to "Mese",
-        "economies_annee" to "Anno",
+    // Boutons divers
+    "btn_sauvegarder_couts" to "Kosten speichern",
 
-        // Boutons dialog
-        "btn_confirmer" to "Conferma",
-        "btn_annuler" to "Annulla",
-        "btn_ok" to "OK",
+    // Support email
+    "support_email_subject" to "StopAddict - Support",
+    "support_email_error" to "E-Mail-App kann nicht geöffnet werden: %s"
+)
 
-        // Informazioni
-        "titre_a_propos" to "Informazioni",
-        "voir_avertissement" to "Visualizza avviso",
-        "btn_manuel" to "Manuale utente",
-        "btn_cgv" to "Termini e condizioni",
-        "btn_mentions_legales" to "Note legali",
-        "btn_contact" to "Contatta supporto",
-        "btn_maj" to "Ultimi aggiornamenti",
-        "maj_titre" to "Ultimi aggiornamenti",
-        "maj_contenu" to "Rilascio V1",
-        "btn_premium" to "Versione senza pubblicità",
-        "premium_titre" to "Versione senza pubblicità",
-        "premium_contenu" to "La versione senza pubblicità sarà presto disponibile.\n\nRimuoverà i banner pubblicitari e i limiti.",
-        "hint_prenom" to "Inserisci il tuo nome",
 
-        // Ripristina
-        "raz_sauvegarde" to "Ripristina e Backup",
-        "raz_jour" to "Ripristina giorno",
-        "raz_historique" to "Ripristina cronologia",
-        "raz_usine" to "Ripristino di fabbrica",
-        "raz_jour_ok" to "Giorno ripristinato",
-        "raz_historique_ok" to "Cronologia ripristinata",
-        "raz_usine_ok" to "Ripristino di fabbrica completato",
+// ==================== ITALIANO ====================
+private val TRADUCTIONS_IT = mapOf(
+    // Titres sections
+    "titre" to "Impostazioni",
+    "titre_profil" to "Profilo",
+    "titre_categories" to "Categorie attive",
+    "titre_couts_cigarettes" to "Costi sigarette",
+    "titre_couts_joints" to "Costi spinelli",
+    "titre_couts_alcool" to "Costi alcol",
+    "titre_habitudes" to "Abitudini quotidiane",
+    "titre_dates_objectifs" to "Date obiettivi",
+    "titre_raz_export" to "Ripristino ed Esporta/Importa",
 
-        "unite_cl_global"      to "Unità (cl)",
-        "unite_cl_biere"       to "Unità (cl)",
-        "unite_cl_liqueur"     to "Unità (cl)",
-        "unite_cl_alcool_fort" to "Unità (cl)",
-        
+    // Labels profil
+    "label_prenom" to "Nome",
+    "label_langue" to "Lingua",
+    "label_devise" to "Valuta",
+    "btn_sauvegarder_profil" to "Salva profilo",
+    "hint_prenom" to "Inserisci il tuo nome",
+
+    // Labels catégories
+    "label_cigarettes" to "Sigarette",
+    "label_joints" to "Spinelli",
+    "label_alcool_global" to "Alcol totale",
+    "label_bieres" to "Birre",
+    "label_liqueurs" to "Liquori",
+    "label_alcool_fort" to "Superalcolici",
+
+    // Labels formulaires cigarettes
+    "radio_classiques" to "Sigarette classiche",
+    "radio_rouler" to "Da rollare",
+    "radio_tubeuse" to "Macchina per tubi",
+    "label_prix_paquet" to "Prezzo pacchetto",
+    "label_nb_cigarettes" to "Numero di sigarette",
+    "label_prix_tabac" to "Prezzo tabacco",
+    "label_prix_feuilles" to "Prezzo cartine",
+    "label_nb_feuilles" to "Numero di cartine",
+    "label_prix_filtres" to "Prezzo filtri",
+    "label_nb_filtres" to "Numero di filtri",
+    "label_prix_tubes" to "Prezzo tubi",
+    "label_nb_tubes" to "Numero di tubi",
+
+    // Labels formulaires joints
+    "label_prix_gramme" to "Prezzo per grammo",
+    "label_gramme_par_joint" to "Grammi per spinello",
     "label_prix_feuilles_longues" to "Prezzo delle cartine lunghe",
-    "label_nb_feuilles_longues" to "Numero di cartine lunghe"
-    )
+    "label_nb_feuilles_longues" to "Numero di cartine lunghe",
 
-    // ==================== РУССКИЙ ====================
-    private val TRADUCTIONS_RU = mapOf(
-        // Titres sections
-        "titre" to "Настройки",
-        "titre_profil" to "Профиль",
-        "titre_categories" to "Активные категории",
-        "titre_couts_cigarettes" to "Расходы на сигареты",
-        "titre_couts_joints" to "Расходы на косяки",
-        "titre_couts_alcool" to "Расходы на алкоголь",
-        "titre_habitudes" to "Ежедневные привычки",
-        "titre_dates_objectifs" to "Даты целей",
-        "titre_raz_export" to "Сброс и Экспорт/Импорт",
+    // Labels formulaires alcool
+    "label_prix_verre" to "Prezzo bicchiere",
+    "label_unite_cl" to "Unità (cL)",
 
-        // Labels profil
-        "label_prenom" to "Имя",
-        "label_langue" to "Язык",
-        "label_devise" to "Валюта",
-        "btn_sauvegarder_profil" to "Сохранить профиль",
+    // Labels habitudes
+    "label_max_journalier" to "Massimo giornaliero",
 
-        // Labels catégories
-        "label_cigarettes" to "Сигареты",
-        "label_joints" to "Косяки",
-        "label_alcool_global" to "Алкоголь общий",
-        "label_bieres" to "Пиво",
-        "label_liqueurs" to "Ликёры",
-        "label_alcool_fort" to "Крепкий алкоголь",
+    // Labels dates
+    "label_date_reduction" to "Data riduzione",
+    "label_date_arret" to "Data di stop",
+    "label_date_reussite" to "Data successo",
+    "btn_choisir_date" to "Scegli data",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "Обычные сигареты",
-        "radio_rouler" to "Самокрутки",
-        "radio_tubeuse" to "Гильзовочная машина",
-        "label_prix_paquet" to "Цена пачки",
-        "label_nb_cigarettes" to "Количество сигарет",
-        "label_prix_tabac" to "Цена табака",
-        "label_prix_feuilles" to "Цена бумаг",
-        "label_nb_feuilles" to "Количество бумаг",
-        "label_prix_filtres" to "Цена фильтров",
-        "label_nb_filtres" to "Количество фильтров",
-        "label_prix_tubes" to "Цена гильз",
-        "label_nb_tubes" to "Количество гильз",
+    // Limites Export/Import
+    "msg_export_limite" to "Per accedere all'esportazione, passa alla versione senza pubblicità per usufruirne :-)",
+    "msg_import_limite" to "Limite raggiunto. Rimangono %d importazioni oggi.",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "Цена за грамм",
-        "label_gramme_par_joint" to "Граммов на косяк",
+    // Boutons RAZ
+    "btn_raz_jour" to "Ripristina oggi",
+    "btn_raz_historique" to "Ripristina storico",
+    "btn_raz_usine" to "Ripristino di fabbrica",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "Цена напитка",
-        "label_unite_cl" to "Единица (cL)",
+    // Boutons Export/Import
+    "btn_exporter" to "Esporta",
+    "btn_importer" to "Importa",
+    "btn_export_logs" to "Esporta log",
 
-        // Labels habitudes
-        "label_max_journalier" to "Ежедневный максимум",
+    // Messages confirmations
+    "confirm_raz_jour_titre" to "Ripristina oggi",
+    "confirm_raz_jour_message" to "Eliminare tutto il consumo di oggi?",
+    "confirm_raz_historique_titre" to "Ripristina storico",
+    "confirm_raz_historique_message" to "Eliminare TUTTO lo storico consumo? (Questa azione è irreversibile)",
+    "confirm_raz_usine_titre" to "Ripristino di fabbrica",
+    "confirm_raz_usine_message" to "Ripristinare TUTTO (profilo, consumo, impostazioni)? (Questa azione è irreversibile)",
+    "confirm_import_titre" to "Importa backup",
+    "confirm_import_message" to "Tutti i dati attuali saranno sostituiti. Continuare?",
+    "confirm_default" to "Confermare?",
 
-        // Labels dates
-        "label_date_reduction" to "Дата сокращения",
-        "label_date_arret" to "Дата отказа",
-        "label_date_reussite" to "Дата успеха",
-        "btn_choisir_date" to "Выбрать дату",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "Profilo salvato",
+    "msg_date_enregistree" to "Data salvata",
+    "msg_raz_effectuee" to "Ripristino completato",
+    "msg_export_reussi" to "Esportazione riuscita",
+    "msg_import_reussi" to "Importazione riuscita",
+    "msg_erreur_sauvegarde" to "Errore salvataggio",
+    "msg_erreur_date" to "Errore salvataggio data",
+    "msg_erreur_raz" to "Errore ripristino",
+    "msg_erreur_export" to "Errore esportazione",
+    "msg_erreur_import" to "Errore importazione",
+    "msg_limite_export" to "Limite raggiunto: %d esportazione/i rimanente/i oggi (versione gratuita)",
+    "msg_limite_import" to "Limite raggiunto: %d importazione/i rimanente/i oggi (versione gratuita)",
+    "msg_aucune_sauvegarde" to "Nessun file di backup trovato",
+    "msg_donnees_invalides" to "Errore importazione: dati non validi",
+    "msg_champs_obligatoires" to "Per favore inserisci almeno un costo",
+    "msg_export_logs_impossible" to "Impossibile esportare i log",
+    "msg_import_termine" to "Import completato con successo",
+    "msg_import_termine_succes" to "Import completato con successo",
+    "msg_import_erreur" to "Errore importazione: %s",
+    "msg_erreur_prefix" to "Errore: %s",
+    "sauvegarde_ok" to "Salvato",
+    "msg_open_store_impossible" to "Impossibile aprire lo store",
 
-        "msg_export_limite" to "Чтобы пользоваться экспортом, перейдите на версию без рекламы :-)",
-        "msg_import_limite" to "Достигнут лимит. Осталось %d импорт(ов) на сегодня.",
+    // Bandeau profil
+    "profil_complet" to "Profilo: Completo ✓",
+    "profil_incomplet" to "Profilo: Incompleto",
+    "total_aujourdhui" to "Totale oggi:",
 
-        // Boutons RAZ
-        "btn_raz_jour" to "Сбросить сегодня",
-        "btn_raz_historique" to "Сбросить историю",
-        "btn_raz_usine" to "Заводской сброс",
+    // Économies potentielles
+    "titre_economies" to "Risparmi potenziali",
+    "economies_si_arret" to "Se smettessi completamente:",
+    "economies_jour" to "Giorno",
+    "economies_semaine" to "Settimana",
+    "economies_mois" to "Mese",
+    "economies_annee" to "Anno",
 
-        // Boutons Export/Import
-        "btn_exporter" to "Экспорт",
-        "btn_importer" to "Импорт",
-        "btn_export_logs" to "Экспорт журналов",
+    // Boutons dialog
+    "btn_confirmer" to "Conferma",
+    "btn_annuler" to "Annulla",
+    "btn_ok" to "OK",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "Сбросить сегодня",
-        "confirm_raz_jour_message" to "Удалить все сегодняшнее потребление?",
-        "confirm_raz_historique_titre" to "Сбросить историю",
-        "confirm_raz_historique_message" to "Удалить ВСЮ историю потребления? (Это действие необратимо)",
-        "confirm_raz_usine_titre" to "Заводской сброс",
-        "confirm_raz_usine_message" to "Сбросить ВСЁ (профиль, потребление, настройки)? (Это действие необратимо)",
-        "confirm_import_titre" to "Импорт резервной копии",
-        "confirm_import_message" to "Все текущие данные будут заменены. Продолжить?",
+    // About
+    "titre_a_propos" to "Informazioni",
+    "voir_avertissement" to "Visualizza avviso",
+    "btn_manuel" to "Manuale utente",
+    "btn_cgv" to "Termini e condizioni",
+    "btn_mentions_legales" to "Note legali",
+    "btn_contact" to "Contatta supporto",
+    "btn_maj" to "Ultimi aggiornamenti",
+    "maj_titre" to "Ultimi aggiornamenti",
+    "maj_contenu" to "Rilascio V1",
+    "btn_premium" to "Versione senza pubblicità",
+    "premium_titre" to "Versione senza pubblicità",
+    "premium_contenu" to "La versione senza pubblicità sarà presto disponibile.\n\nRimuoverà i banner pubblicitari e i limiti.",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "Профиль сохранен",
-        "msg_date_enregistree" to "Дата сохранена",
-        "msg_raz_effectuee" to "Сброс завершен",
-        "msg_export_reussi" to "Экспорт успешен",
-        "msg_import_reussi" to "Импорт успешен",
-        "msg_erreur_sauvegarde" to "Ошибка сохранения",
-        "msg_erreur_date" to "Ошибка сохранения даты",
-        "msg_erreur_raz" to "Ошибка сброса",
-        "msg_erreur_export" to "Ошибка экспорта",
-        "msg_erreur_import" to "Ошибка импорта",
-        "msg_limite_export" to "Достигнут лимит: %d экспорт(ов) осталось сегодня (бесплатная версия)",
-        "msg_limite_import" to "Достигнут лимит: %d импорт(ов) осталось сегодня (бесплатная версия)",
-        "msg_aucune_sauvegarde" to "Файл резервной копии не найден",
-        "msg_donnees_invalides" to "Ошибка импорта: недопустимые данные",
-        "msg_champs_obligatoires" to "Пожалуйста, введите хотя бы одну стоимость",
+    // Reset (libellés)
+    "raz_sauvegarde" to "Ripristino e Backup",
+    "raz_jour" to "Ripristino giorno",
+    "raz_historique" to "Ripristino cronologia",
+    "raz_usine" to "Ripristino di fabbrica",
+    "raz_jour_ok" to "Giorno ripristinato",
+    "raz_historique_ok" to "Cronologia ripristinata",
+    "raz_usine_ok" to "Ripristino di fabbrica completato",
 
-        // Bandeau profil
-        "profil_complet" to "Профиль: Полный ✓",
-        "profil_incomplet" to "Профиль: Неполный",
-        "total_aujourdhui" to "Всего сегодня:",
+    // Units in cl for alcohols
+    "unite_cl_global" to "Unità (cl)",
+    "unite_cl_biere" to "Unità (cl)",
+    "unite_cl_liqueur" to "Unità (cl)",
+    "unite_cl_alcool_fort" to "Unità (cl)",
 
-        // Économies potentielles
-        "titre_economies" to "Потенциальная экономия",
-        "economies_si_arret" to "Если вы полностью бросите:",
-        "economies_jour" to "День",
-        "economies_semaine" to "Неделя",
-        "economies_mois" to "Месяц",
-        "economies_annee" to "Год",
+    // Boutons divers
+    "btn_sauvegarder_couts" to "Salva costi",
 
-        // Boutons dialog
-        "btn_confirmer" to "Подтвердить",
-        "btn_annuler" to "Отмена",
-        "btn_ok" to "OK",
+    // Support email
+    "support_email_subject" to "StopAddict - Supporto",
+    "support_email_error" to "Impossibile aprire l'app e-mail: %s"
+)
 
-        // О программе
-        "titre_a_propos" to "О программе",
-        "voir_avertissement" to "Просмотр предупреждения",
-        "btn_manuel" to "Руководство пользователя",
-        "btn_cgv" to "Условия использования",
-        "btn_mentions_legales" to "Правовая информация",
-        "btn_contact" to "Связаться с поддержкой",
-        "btn_maj" to "Последние обновления",
-        "maj_titre" to "Последние обновления",
-        "maj_contenu" to "Релиз V1",
-        "btn_premium" to "Версия без рекламы",
-        "premium_titre" to "Версия без рекламы",
-        "premium_contenu" to "Версия без рекламы скоро будет доступна.\n\nОна уберёт баннерную рекламу и ограничения.",
-        "hint_prenom" to "Введите ваше имя",
 
-        // Сброс
-        "raz_sauvegarde" to "Сброс и резервное копирование",
-        "raz_jour" to "Сброс дня",
-        "raz_historique" to "Сброс истории",
-        "raz_usine" to "Сброс к заводским настройкам",
-        "raz_jour_ok" to "День сброшен",
-        "raz_historique_ok" to "История сброшена",
-        "raz_usine_ok" to "Выполнен сброс к заводским настройкам",
+// ==================== РУССКИЙ ====================
+private val TRADUCTIONS_RU = mapOf(
+    // Titres sections
+    "titre" to "Настройки",
+    "titre_profil" to "Профиль",
+    "titre_categories" to "Активные категории",
+    "titre_couts_cigarettes" to "Расходы на сигареты",
+    "titre_couts_joints" to "Расходы на косяки",
+    "titre_couts_alcool" to "Расходы на алкоголь",
+    "titre_habitudes" to "Ежедневные привычки",
+    "titre_dates_objectifs" to "Даты целей",
+    "titre_raz_export" to "Сброс и Экспорт/Импорт",
 
-        "unite_cl_global"      to "Единица (мл)",
-        "unite_cl_biere"       to "Единица (мл)",
-        "unite_cl_liqueur"     to "Единица (мл)",
-        "unite_cl_alcool_fort" to "Единица (мл)",
+    // Labels profil
+    "label_prenom" to "Имя",
+    "label_langue" to "Язык",
+    "label_devise" to "Валюта",
+    "btn_sauvegarder_profil" to "Сохранить профиль",
+    "hint_prenom" to "Введите ваше имя",
 
-    "label_prix_feuilles_longues" to "Цена длинных бумажек",
-    "label_nb_feuilles_longues" to "Количество длинных бумажек"
-    )
+    // Labels catégories
+    "label_cigarettes" to "Сигареты",
+    "label_joints" to "Косяки",
+    "label_alcool_global" to "Алкоголь общий",
+    "label_bieres" to "Пиво",
+    "label_liqueurs" to "Ликёры",
+    "label_alcool_fort" to "Крепкий алкоголь",
+
+    // Labels formulaires cigarettes
+    "radio_classiques" to "Обычные сигареты",
+    "radio_rouler" to "Самокрутки",
+    "radio_tubeuse" to "Гильзовочная машина",
+    "label_prix_paquet" to "Цена пачки",
+    "label_nb_cigarettes" to "Количество сигарет",
+    "label_prix_tabac" to "Цена табака",
+    "label_prix_feuilles" to "Цена бумаги",
+    "label_nb_feuilles" to "Количество бумаги",
+    "label_prix_filtres" to "Цена фильтров",
+    "label_nb_filtres" to "Количество фильтров",
+    "label_prix_tubes" to "Цена гильз",
+    "label_nb_tubes" to "Количество гильз",
+
+    // Labels formulaires joints
+    "label_prix_gramme" to "Цена за грамм",
+    "label_gramme_par_joint" to "Граммов на косяк",
+    "label_prix_feuilles_longues" to "Цена длинной бумаги",
+    "label_nb_feuilles_longues" to "Количество длинной бумаги",
+
+    // Labels formulaires alcool
+    "label_prix_verre" to "Цена напитка",
+    "label_unite_cl" to "Единица (cL)",
+
+    // Labels habitudes
+    "label_max_journalier" to "Ежедневный максимум",
+
+    // Labels dates
+    "label_date_reduction" to "Дата сокращения",
+    "label_date_arret" to "Дата отказа",
+    "label_date_reussite" to "Дата успеха",
+    "btn_choisir_date" to "Выбрать дату",
+
+    // Limites Export/Import
+    "msg_export_limite" to "Чтобы пользоваться экспортом, перейдите на версию без рекламы :-)",
+    "msg_import_limite" to "Достигнут лимит. Осталось %d импорт(ов) на сегодня.",
+
+    // Boutons RAZ
+    "btn_raz_jour" to "Сбросить сегодня",
+    "btn_raz_historique" to "Сбросить историю",
+    "btn_raz_usine" to "Заводской сброс",
+
+    // Boutons Export/Import
+    "btn_exporter" to "Экспорт",
+    "btn_importer" to "Импорт",
+    "btn_export_logs" to "Экспорт логов",
+
+    // Messages confirmations
+    "confirm_raz_jour_titre" to "Сбросить сегодня",
+    "confirm_raz_jour_message" to "Удалить всё сегодняшнее потребление?",
+    "confirm_raz_historique_titre" to "Сбросить историю",
+    "confirm_raz_historique_message" to "Удалить ВСЮ историю потребления? (Это действие необратимо)",
+    "confirm_raz_usine_titre" to "Заводской сброс",
+    "confirm_raz_usine_message" to "Сбросить ВСЁ (профиль, потребление, настройки)? (Это действие необратимо)",
+    "confirm_import_titre" to "Импорт резервной копии",
+    "confirm_import_message" to "Все текущие данные будут заменены. Продолжить?",
+    "confirm_default" to "Подтвердить?",
+
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "Профиль сохранён",
+    "msg_date_enregistree" to "Дата сохранена",
+    "msg_raz_effectuee" to "Сброс завершён",
+    "msg_export_reussi" to "Экспорт выполнен",
+    "msg_import_reussi" to "Импорт выполнен",
+    "msg_erreur_sauvegarde" to "Ошибка сохранения",
+    "msg_erreur_date" to "Ошибка сохранения даты",
+    "msg_erreur_raz" to "Ошибка сброса",
+    "msg_erreur_export" to "Ошибка экспорта",
+    "msg_erreur_import" to "Ошибка импорта",
+    "msg_limite_export" to "Достигнут лимит: осталось %d экспорт(ов) сегодня (бесплатная версия)",
+    "msg_limite_import" to "Достигнут лимит: осталось %d импорт(ов) сегодня (бесплатная версия)",
+    "msg_aucune_sauvegarde" to "Файл резервной копии не найден",
+    "msg_donnees_invalides" to "Ошибка импорта: недопустимые данные",
+    "msg_champs_obligatoires" to "Пожалуйста, введите хотя бы одну стоимость",
+    "msg_export_logs_impossible" to "Не удалось экспортировать логи",
+    "msg_import_termine" to "Импорт успешно завершён",
+    "msg_import_termine_succes" to "Импорт успешно завершён",
+    "msg_import_erreur" to "Ошибка импорта: %s",
+    "msg_erreur_prefix" to "Ошибка: %s",
+    "sauvegarde_ok" to "Сохранено",
+    "msg_open_store_impossible" to "Не удалось открыть магазин",
+
+    // Bandeau profil
+    "profil_complet" to "Профиль: Полный ✓",
+    "profil_incomplet" to "Профиль: Неполный",
+    "total_aujourdhui" to "Всего сегодня:",
+
+    // Économies potentielles
+    "titre_economies" to "Потенциальная экономия",
+    "economies_si_arret" to "Если вы полностью бросите:",
+    "economies_jour" to "День",
+    "economies_semaine" to "Неделя",
+    "economies_mois" to "Месяц",
+    "economies_annee" to "Год",
+
+    // Boutons dialog
+    "btn_confirmer" to "Подтвердить",
+    "btn_annuler" to "Отмена",
+    "btn_ok" to "OK",
+
+    // About
+    "titre_a_propos" to "О приложении",
+    "voir_avertissement" to "Просмотр предупреждения",
+    "btn_manuel" to "Руководство пользователя",
+    "btn_cgv" to "Условия использования",
+    "btn_mentions_legales" to "Правовая информация",
+    "btn_contact" to "Связаться с поддержкой",
+    "btn_maj" to "Последние обновления",
+    "maj_titre" to "Последние обновления",
+    "maj_contenu" to "Релиз V1",
+    "btn_premium" to "Версия без рекламы",
+    "premium_titre" to "Версия без рекламы",
+    "premium_contenu" to "Версия без рекламы скоро будет доступна.\n\nОна уберёт баннерную рекламу и ограничения.",
+
+    // Reset (libellés)
+    "raz_sauvegarde" to "Сброс и резервное копирование",
+    "raz_jour" to "Сброс дня",
+    "raz_historique" to "Сброс истории",
+    "raz_usine" to "Заводской сброс",
+    "raz_jour_ok" to "День сброшен",
+    "raz_historique_ok" to "История сброшена",
+    "raz_usine_ok" to "Выполнен заводской сброс",
+
+    // Units in cl for alcohols
+    "unite_cl_global" to "Единица (cl)",
+    "unite_cl_biere" to "Единица (cl)",
+    "unite_cl_liqueur" to "Единица (cl)",
+    "unite_cl_alcool_fort" to "Единица (cl)",
+
+    // Boutons divers
+    "btn_sauvegarder_couts" to "Сохранить цены",
+
+    // Support email
+    "support_email_subject" to "StopAddict - Поддержка",
+    "support_email_error" to "Не удалось открыть почтовое приложение: %s"
+)
 
     // ==================== العربية (ARABE) ====================
-    private val TRADUCTIONS_AR = mapOf(
-        // Titres sections
-        "titre" to "الإعدادات",
-        "titre_profil" to "الملف الشخصي",
-        "titre_categories" to "الفئات النشطة",
-        "titre_couts_cigarettes" to "تكاليف السجائر",
-        "titre_couts_joints" to "تكاليف المفاصل",
-        "titre_couts_alcool" to "تكاليف الكحول",
-        "titre_habitudes" to "العادات اليومية",
-        "titre_dates_objectifs" to "تواريخ الأهداف",
-        "titre_raz_export" to "إعادة التعيين والتصدير/الاستيراد",
+private val TRADUCTIONS_AR = mapOf(
+    // Titres sections
+    "titre" to "الإعدادات",
+    "titre_profil" to "الملف الشخصي",
+    "titre_categories" to "الفئات النشطة",
+    "titre_couts_cigarettes" to "تكاليف السجائر",
+    "titre_couts_joints" to "تكاليف الجوانت",
+    "titre_couts_alcool" to "تكاليف الكحول",
+    "titre_habitudes" to "العادات اليومية",
+    "titre_dates_objectifs" to "تواريخ الأهداف",
+    "titre_raz_export" to "إعادة التعيين والتصدير/الاستيراد",
 
-        // Labels profil
-        "label_prenom" to "الاسم الأول",
-        "label_langue" to "اللغة",
-        "label_devise" to "العملة",
-        "btn_sauvegarder_profil" to "حفظ الملف الشخصي",
+    // Labels profil
+    "label_prenom" to "الاسم الأول",
+    "label_langue" to "اللغة",
+    "label_devise" to "العملة",
+    "btn_sauvegarder_profil" to "حفظ الملف الشخصي",
+    "hint_prenom" to "أدخل اسمك الأول",
 
-        // Labels catégories
-        "label_cigarettes" to "السجائر",
-        "label_joints" to "المفاصل",
-        "label_alcool_global" to "الكحول العام",
-        "label_bieres" to "البيرة",
-        "label_liqueurs" to "المشروبات الكحولية",
-        "label_alcool_fort" to "الكحول القوي",
+    // Labels catégories
+    "label_cigarettes" to "السجائر",
+    "label_joints" to "جوانت",
+    "label_alcool_global" to "الكحول (إجمالي)",
+    "label_bieres" to "البيرة",
+    "label_liqueurs" to "المشروبات الكحولية (ليكيور)",
+    "label_alcool_fort" to "المشروبات الروحية",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "سجائر عادية",
-        "radio_rouler" to "للف",
-        "radio_tubeuse" to "آلة الأنابيب",
-        "label_prix_paquet" to "سعر الباقة",
-        "label_nb_cigarettes" to "عدد السجائر",
-        "label_prix_tabac" to "سعر التبغ",
-        "label_prix_feuilles" to "سعر الأوراق",
-        "label_nb_feuilles" to "عدد الأوراق",
-        "label_prix_filtres" to "سعر المرشحات",
-        "label_nb_filtres" to "عدد المرشحات",
-        "label_prix_tubes" to "سعر الأنابيب",
-        "label_nb_tubes" to "عدد الأنابيب",
+    // Labels formulaires cigarettes
+    "radio_classiques" to "سجائر عادية",
+    "radio_rouler" to "لفّ يدوي",
+    "radio_tubeuse" to "آلة تعبئة الأنابيب",
+    "label_prix_paquet" to "سعر العلبة",
+    "label_nb_cigarettes" to "عدد السجائر",
+    "label_prix_tabac" to "سعر التبغ",
+    "label_prix_feuilles" to "سعر أوراق اللف",
+    "label_nb_feuilles" to "عدد أوراق اللف",
+    "label_prix_filtres" to "سعر الفلاتر",
+    "label_nb_filtres" to "عدد الفلاتر",
+    "label_prix_tubes" to "سعر الأنابيب",
+    "label_nb_tubes" to "عدد الأنابيب",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "السعر لكل جرام",
-        "label_gramme_par_joint" to "جرامات لكل مفصل",
-
-        // Labels formulaires alcool
-        "label_prix_verre" to "سعر الكأس",
-        "label_unite_cl" to "(cL) الوحدة",
-
-        // Labels habitudes
-        "label_max_journalier" to "الحد الأقصى اليومي",
-
-        // Labels dates
-        "label_date_reduction" to "تاريخ التخفيض",
-        "label_date_arret" to "تاريخ الإقلاع",
-        "label_date_reussite" to "تاريخ النجاح",
-        "btn_choisir_date" to "اختر التاريخ",
-
-        "msg_export_limite" to "للاستفادة من التصدير، انتقل إلى النسخة بدون إعلانات :-)",
-        "msg_import_limite" to "تم بلوغ الحد. تبقّى %d عملية استيراد اليوم.",
-
-        // Boutons RAZ
-        "btn_raz_jour" to "إعادة تعيين اليوم",
-        "btn_raz_historique" to "إعادة تعيين السجل",
-        "btn_raz_usine" to "إعادة ضبط المصنع",
-
-        // Boutons Export/Import
-        "btn_exporter" to "تصدير",
-        "btn_importer" to "استيراد",
-        "btn_export_logs" to "تصدير السجلات",
-
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "إعادة تعيين اليوم",
-        "confirm_raz_jour_message" to "حذف كل استهلاك اليوم؟",
-        "confirm_raz_historique_titre" to "إعادة تعيين السجل",
-        "confirm_raz_historique_message" to "حذف كل سجل الاستهلاك؟ (هذا الإجراء لا رجعة فيه)",
-        "confirm_raz_usine_titre" to "إعادة ضبط المصنع",
-        "confirm_raz_usine_message" to "إعادة تعيين كل شيء (الملف، الاستهلاك، الإعدادات)؟ (هذا الإجراء لا رجعة فيه)",
-        "confirm_import_titre" to "استيراد النسخة الاحتياطية",
-        "confirm_import_message" to "سيتم استبدال جميع البيانات الحالية. هل تريد المتابعة؟",
-
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "تم حفظ الملف الشخصي",
-        "msg_date_enregistree" to "تم حفظ التاريخ",
-        "msg_raz_effectuee" to "تمت إعادة التعيين",
-        "msg_export_reussi" to "نجح التصدير",
-        "msg_import_reussi" to "نجح الاستيراد",
-        "msg_erreur_sauvegarde" to "خطأ في الحفظ",
-        "msg_erreur_date" to "خطأ في حفظ التاريخ",
-        "msg_erreur_raz" to "خطأ في إعادة التعيين",
-        "msg_erreur_export" to "خطأ في التصدير",
-        "msg_erreur_import" to "خطأ في الاستيراد",
-        "msg_limite_export" to "تم بلوغ الحد: %d تصدير متبقي اليوم (نسخة مجانية)",
-        "msg_limite_import" to "تم بلوغ الحد: %d استيراد متبقي اليوم (نسخة مجانية)",
-        "msg_aucune_sauvegarde" to "لم يتم العثور على ملف نسخ احتياطي",
-        "msg_donnees_invalides" to "خطأ في الاستيراد: بيانات غير صالحة",
-        "msg_champs_obligatoires" to "الرجاء إدخال تكلفة واحدة على الأقل",
-
-        // Bandeau profil
-        "profil_complet" to "✓ الملف: كامل",
-        "profil_incomplet" to "الملف: غير كامل",
-        "total_aujourdhui" to ":المجموع اليوم",
-
-        // Économies potentielles
-        "titre_economies" to "الوفورات المحتملة",
-        "economies_si_arret" to ":إذا توقفت تماماً",
-        "economies_jour" to "يوم",
-        "economies_semaine" to "أسبوع",
-        "economies_mois" to "شهر",
-        "economies_annee" to "سنة",
-
-        // Boutons dialog
-        "btn_confirmer" to "تأكيد",
-        "btn_annuler" to "إلغاء",
-        "btn_ok" to "موافق",
-
-        // حول
-        "titre_a_propos" to "حول",
-        "voir_avertissement" to "عرض التحذير",
-        "btn_manuel" to "دليل المستخدم",
-        "btn_cgv" to "الشروط والأحكام",
-        "btn_mentions_legales" to "الإشعار القانوني",
-        "btn_contact" to "الاتصال بالدعم",
-        "btn_maj" to "آخر التحديثات",
-        "maj_titre" to "آخر التحديثات",
-        "maj_contenu" to "نشر الإصدار V1",
-        "btn_premium" to "الإصدار بدون إعلانات",
-        "premium_titre" to "الإصدار بدون إعلانات",
-        "premium_contenu" to "الإصدار بدون إعلانات سيكون متاحًا قريبًا.\n\nسيزيل الإعلانات والقيود.",
-        "hint_prenom" to "أدخل اسمك الأول",
-
-        // إعادة تعيين
-        "raz_sauvegarde" to "إعادة التعيين والنسخ الاحتياطي",
-        "raz_jour" to "إعادة تعيين اليوم",
-        "raz_historique" to "إعادة تعيين السجل",
-        "raz_usine" to "إعادة التعيين إلى إعدادات المصنع",
-        "raz_jour_ok" to "تم إعادة تعيين اليوم",
-        "raz_historique_ok" to "تم إعادة تعيين السجل",
-        "raz_usine_ok" to "تمت إعادة التعيين إلى إعدادات المصنع",
-
-        "unite_cl_global"      to "الوحدة (سنتيلتر)",
-        "unite_cl_biere"       to "الوحدة (سنتيلتر)",
-        "unite_cl_liqueur"     to "الوحدة (سنتيلتر)",
-        "unite_cl_alcool_fort" to "الوحدة (سنتيلتر)",
-
+    // Joints
+    "label_prix_gramme" to "السعر لكل غرام",
+    "label_gramme_par_joint" to "غرام لكل جوانت",
     "label_prix_feuilles_longues" to "سعر أوراق اللف الطويلة",
-    "label_nb_feuilles_longues" to "عدد أوراق اللف الطويلة"
-    )
+    "label_nb_feuilles_longues" to "عدد أوراق اللف الطويلة",
 
-    // ==================== हिन्दी (HINDI) ====================
-    private val TRADUCTIONS_HI = mapOf(
-        // Titres sections
-        "titre" to "सेटिंग्स",
-        "titre_profil" to "प्रोफ़ाइल",
-        "titre_categories" to "सक्रिय श्रेणियां",
-        "titre_couts_cigarettes" to "सिगरेट की लागत",
-        "titre_couts_joints" to "जोड़ों की लागत",
-        "titre_couts_alcool" to "शराब की लागत",
-        "titre_habitudes" to "दैनिक आदतें",
-        "titre_dates_objectifs" to "लक्ष्य तिथियां",
-        "titre_raz_export" to "रीसेट और निर्यात/आयात",
+    // Alcool
+    "label_prix_verre" to "سعر المشروب",
+    "label_unite_cl" to "الوحدة (cL)",
 
-        // Labels profil
-        "label_prenom" to "नाम",
-        "label_langue" to "भाषा",
-        "label_devise" to "मुद्रा",
-        "btn_sauvegarder_profil" to "प्रोफ़ाइल सहेजें",
+    // Habitudes
+    "label_max_journalier" to "الحد الأقصى اليومي",
 
-        // Labels catégories
-        "label_cigarettes" to "सिगरेट",
-        "label_joints" to "जोड़",
-        "label_alcool_global" to "शराब कुल",
-        "label_bieres" to "बीयर",
-        "label_liqueurs" to "शराब",
-        "label_alcool_fort" to "मजबूत शराब",
+    // Dates
+    "label_date_reduction" to "تاريخ التقليل",
+    "label_date_arret" to "تاريخ التوقف",
+    "label_date_reussite" to "تاريخ النجاح",
+    "btn_choisir_date" to "اختر تاريخًا",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "नियमित सिगरेट",
-        "radio_rouler" to "लपेटने के लिए",
-        "radio_tubeuse" to "ट्यूब मशीन",
-        "label_prix_paquet" to "पैकेट की कीमत",
-        "label_nb_cigarettes" to "सिगरेट की संख्या",
-        "label_prix_tabac" to "तंबाकू की कीमत",
-        "label_prix_feuilles" to "कागजों की कीमत",
-        "label_nb_feuilles" to "कागजों की संख्या",
-        "label_prix_filtres" to "फिल्टर की कीमत",
-        "label_nb_filtres" to "फिल्टर की संख्या",
-        "label_prix_tubes" to "ट्यूब की कीमत",
-        "label_nb_tubes" to "ट्यूब की संख्या",
+    // Limitations free / premium
+    "msg_export_limite" to "لاستخدام التصدير، انتقل إلى النسخة بدون إعلانات للاستفادة منه :-)",
+    "msg_import_limite" to "تم بلوغ الحد. تبقّى %d عملية استيراد اليوم.",
+    "msg_limite_export" to "تم بلوغ الحد: تبقّى %d تصدير اليوم (النسخة المجانية)",
+    "msg_limite_import" to "تم بلوغ الحد: تبقّى %d استيراد اليوم (النسخة المجانية)",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "प्रति ग्राम कीमत",
-        "label_gramme_par_joint" to "प्रति जोड़ ग्राम",
+    // Boutons RAZ
+    "btn_raz_jour" to "إعادة تعيين اليوم",
+    "btn_raz_historique" to "إعادة تعيين السجل",
+    "btn_raz_usine" to "إعادة ضبط المصنع",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "पेय की कीमत",
-        "label_unite_cl" to "इकाई (cL)",
+    // Export/Import
+    "btn_exporter" to "تصدير",
+    "btn_importer" to "استيراد",
+    "btn_export_logs" to "تصدير السجلات",
+    "msg_export_logs_impossible" to "تعذر تصدير السجلات",
+    "msg_import_termine" to "اكتمل الاستيراد بنجاح",
+    "msg_import_erreur" to "خطأ أثناء الاستيراد: %s",
 
-        // Labels habitudes
-        "label_max_journalier" to "दैनिक अधिकतम",
+    // Confirmations
+    "confirm_raz_jour_titre" to "إعادة تعيين اليوم",
+    "confirm_raz_jour_message" to "حذف كل استهلاك اليوم؟",
+    "confirm_raz_historique_titre" to "إعادة تعيين السجل",
+    "confirm_raz_historique_message" to "حذف كل سجل الاستهلاك؟ (هذا الإجراء لا رجعة فيه)",
+    "confirm_raz_usine_titre" to "إعادة ضبط المصنع",
+    "confirm_raz_usine_message" to "إعادة تعيين كل شيء (الملف، الاستهلاك، الإعدادات)؟ (هذا الإجراء لا رجعة فيه)",
+    "confirm_import_titre" to "استيراد نسخة احتياطية",
+    "confirm_import_message" to "سيتم استبدال جميع البيانات الحالية. هل تريد المتابعة؟",
+    "confirm_default" to "تأكيد؟",
 
-        // Labels dates
-        "label_date_reduction" to "कमी की तिथि",
-        "label_date_arret" to "छोड़ने की तिथि",
-        "label_date_reussite" to "सफलता की तिथि",
-        "btn_choisir_date" to "तिथि चुनें",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "تم حفظ الملف الشخصي",
+    "msg_date_enregistree" to "تم حفظ التاريخ",
+    "msg_raz_effectuee" to "تمت إعادة التعيين",
+    "msg_export_reussi" to "نجح التصدير",
+    "msg_import_reussi" to "نجح الاستيراد",
+    "msg_erreur_sauvegarde" to "خطأ في الحفظ",
+    "msg_erreur_date" to "خطأ في حفظ التاريخ",
+    "msg_erreur_raz" to "خطأ في إعادة التعيين",
+    "msg_erreur_export" to "خطأ في التصدير",
+    "msg_erreur_import" to "خطأ في الاستيراد",
+    "msg_aucune_sauvegarde" to "لم يتم العثور على ملف نسخة احتياطية",
+    "msg_donnees_invalides" to "خطأ في الاستيراد: بيانات غير صالحة",
+    "msg_champs_obligatoires" to "الرجاء إدخال تكلفة واحدة على الأقل",
+    "msg_erreur_prefix" to "خطأ: %s",
+    "sauvegarde_ok" to "تم الحفظ",
 
-        "msg_export_limite" to "एक्सपोर्ट करने के लिए बिना विज्ञापन वाले वर्शन पर जाएँ :-)",
-        "msg_import_limite" to "सीमा पूरी हो गई। आज %d आयात शेष हैं।",
+    // Bandeau profil
+    "profil_complet" to "الملف الشخصي: مكتمل ✓",
+    "profil_incomplet" to "الملف الشخصي: غير مكتمل",
+    "total_aujourdhui" to "الإجمالي اليوم:",
 
-        // Boutons RAZ
-        "btn_raz_jour" to "आज रीसेट करें",
-        "btn_raz_historique" to "इतिहास रीसेट करें",
-        "btn_raz_usine" to "फ़ैक्टरी रीसेट",
+    // Économies potentielles
+    "titre_economies" to "الوفورات المحتملة",
+    "economies_si_arret" to "إذا توقفت تمامًا:",
+    "economies_jour" to "يوم",
+    "economies_semaine" to "أسبوع",
+    "economies_mois" to "شهر",
+    "economies_annee" to "سنة",
 
-        // Boutons Export/Import
-        "btn_exporter" to "निर्यात",
-        "btn_importer" to "आयात",
-        "btn_export_logs" to "लॉग निर्यात करें",
+    // Boutons dialog
+    "btn_confirmer" to "تأكيد",
+    "btn_annuler" to "إلغاء",
+    "btn_ok" to "موافق",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "आज रीसेट करें",
-        "confirm_raz_jour_message" to "आज की सभी खपत हटाएं?",
-        "confirm_raz_historique_titre" to "इतिहास रीसेट करें",
-        "confirm_raz_historique_message" to "सभी खपत इतिहास हटाएं? (यह क्रिया अपरिवर्तनीय है)",
-        "confirm_raz_usine_titre" to "फ़ैक्टरी रीसेट",
-        "confirm_raz_usine_message" to "सब कुछ रीसेट करें (प्रोफ़ाइल, खपत, सेटिंग्स)? (यह क्रिया अपरिवर्तनीय है)",
-        "confirm_import_titre" to "बैकअप आयात करें",
-        "confirm_import_message" to "सभी वर्तमान डेटा बदल दिया जाएगा। जारी रखें?",
+    // À propos
+    "titre_a_propos" to "حول",
+    "voir_avertissement" to "عرض التحذير",
+    "btn_manuel" to "دليل المستخدم",
+    "btn_cgv" to "الشروط والأحكام",
+    "btn_mentions_legales" to "إشعار قانوني",
+    "btn_contact" to "الاتصال بالدعم",
+    "btn_maj" to "آخر التحديثات",
+    "maj_titre" to "آخر التحديثات",
+    "maj_contenu" to "إطلاق V1",
+    "btn_premium" to "نسخة بدون إعلانات",
+    "premium_titre" to "نسخة بدون إعلانات",
+    "premium_contenu" to "ستتوفر النسخة بدون إعلانات قريبًا.\n\nستزيل الإعلانات والقيود.",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "प्रोफ़ाइल सहेजा गया",
-        "msg_date_enregistree" to "तिथि सहेजी गई",
-        "msg_raz_effectuee" to "रीसेट पूर्ण",
-        "msg_export_reussi" to "निर्यात सफल",
-        "msg_import_reussi" to "आयात सफल",
-        "msg_erreur_sauvegarde" to "सहेजने में त्रुटि",
-        "msg_erreur_date" to "तिथि सहेजने में त्रुटि",
-        "msg_erreur_raz" to "रीसेट त्रुटि",
-        "msg_erreur_export" to "निर्यात त्रुटि",
-        "msg_erreur_import" to "आयात त्रुटि",
-        "msg_limite_export" to "सीमा पहुंची: आज %d निर्यात शेष (मुफ़्त संस्करण)",
-        "msg_limite_import" to "सीमा पहुंची: आज %d आयात शेष (मुफ़्त संस्करण)",
-        "msg_aucune_sauvegarde" to "कोई बैकअप फ़ाइल नहीं मिली",
-        "msg_donnees_invalides" to "आयात त्रुटि: अमान्य डेटा",
-        "msg_champs_obligatoires" to "कृपया कम से कम एक लागत दर्ज करें",
+    // Support / store
+    "support_email_subject" to "StopAddict - الدعم",
+    "support_email_error" to "تعذر فتح تطبيق البريد الإلكتروني: %s",
+    "msg_open_store_impossible" to "تعذر فتح المتجر",
 
-        // Bandeau profil
-        "profil_complet" to "प्रोफ़ाइल: पूर्ण ✓",
-        "profil_incomplet" to "प्रोफ़ाइल: अपूर्ण",
-        "total_aujourdhui" to "आज कुल:",
+    // Reset labels (section)
+    "raz_sauvegarde" to "إعادة التعيين والنسخ الاحتياطي",
+    "raz_jour" to "إعادة تعيين اليوم",
+    "raz_historique" to "إعادة تعيين السجل",
+    "raz_usine" to "إعادة ضبط المصنع",
+    "raz_jour_ok" to "تمت إعادة تعيين اليوم",
+    "raz_historique_ok" to "تمت إعادة تعيين السجل",
+    "raz_usine_ok" to "تمت إعادة الضبط للمصنع",
 
-        // Économies potentielles
-        "titre_economies" to "संभावित बचत",
-        "economies_si_arret" to "यदि आप पूरी तरह से छोड़ दें:",
-        "economies_jour" to "दिन",
-        "economies_semaine" to "सप्ताह",
-        "economies_mois" to "महीना",
-        "economies_annee" to "वर्ष",
+    // Units cL
+    "unite_cl_global" to "الوحدة (cL)",
+    "unite_cl_biere" to "الوحدة (cL)",
+    "unite_cl_liqueur" to "الوحدة (cL)",
+    "unite_cl_alcool_fort" to "الوحدة (cL)",
 
-        // Boutons dialog
-        "btn_confirmer" to "पुष्टि करें",
-        "btn_annuler" to "रद्द करें",
-        "btn_ok" to "ठीक है",
+    // Bouton save costs
+    "btn_sauvegarder_couts" to "حفظ التكاليف"
+)
 
-        // के बारे में
-        "titre_a_propos" to "के बारे में",
-        "voir_avertissement" to "चेतावनी देखें",
-        "btn_manuel" to "उपयोगकर्ता मैनुअल",
-        "btn_cgv" to "नियम और शर्तें",
-        "btn_mentions_legales" to "कानूनी सूचना",
-        "btn_contact" to "सहायता से संपर्क करें",
-        "btn_maj" to "नवीनतम अपडेट",
-        "maj_titre" to "नवीनतम अपडेट",
-        "maj_contenu" to "परिनियोजन V1",
-        "btn_premium" to "विज्ञापन-मुक्त संस्करण",
-        "premium_titre" to "विज्ञापन-मुक्त संस्करण",
-        "premium_contenu" to "विज्ञापन-मुक्त संस्करण जल्दी ही उपलब्ध होगा।\n\nयह बैनर विज्ञापनों और सीमाओं को हटा देगा।",
-        "hint_prenom" to "अपना नाम दर्ज करें",
 
-        // रीसेट
-        "raz_sauvegarde" to "रीसेट और बैकअप",
-        "raz_jour" to "दिन रीसेट करें",
-        "raz_historique" to "इतिहास रीसेट करें",
-        "raz_usine" to "फ़ैक्टरी रीसेट",
-        "raz_jour_ok" to "दिन रीसेट हो गया",
-        "raz_historique_ok" to "इतिहास रीसेट हो गया",
-        "raz_usine_ok" to "फ़ैक्टरी रीसेट पूर्ण",
+// ==================== हिन्दी (HINDI) ====================
+private val TRADUCTIONS_HI = mapOf(
+    // Titres sections
+    "titre" to "सेटिंग्स",
+    "titre_profil" to "प्रोफ़ाइल",
+    "titre_categories" to "सक्रिय श्रेणियाँ",
+    "titre_couts_cigarettes" to "सिगरेट की लागत",
+    "titre_couts_joints" to "जॉइंट्स की लागत",
+    "titre_couts_alcool" to "शराब की लागत",
+    "titre_habitudes" to "दैनिक आदतें",
+    "titre_dates_objectifs" to "लक्ष्य तिथियाँ",
+    "titre_raz_export" to "रीसेट और एक्सपोर्ट/इम्पोर्ट",
 
-        "unite_cl_global"      to "इकाई (cl)",
-        "unite_cl_biere"       to "इकाई (cl)",
-        "unite_cl_liqueur"     to "इकाई (cl)",
-        "unite_cl_alcool_fort" to "इकाई (cl)",
+    // Labels profil
+    "label_prenom" to "नाम",
+    "label_langue" to "भाषा",
+    "label_devise" to "मुद्रा",
+    "btn_sauvegarder_profil" to "प्रोफ़ाइल सहेजें",
+    "hint_prenom" to "अपना नाम दर्ज करें",
 
+    // Labels catégories
+    "label_cigarettes" to "सिगरेट",
+    "label_joints" to "जॉइंट्स",
+    "label_alcool_global" to "शराब (कुल)",
+    "label_bieres" to "बीयर",
+    "label_liqueurs" to "लिकर (मीठी शराब)",
+    "label_alcool_fort" to "हार्ड लिकर",
+
+    // Labels formulaires cigarettes
+    "radio_classiques" to "सामान्य सिगरेट",
+    "radio_rouler" to "रोलिंग (हाथ से)",
+    "radio_tubeuse" to "ट्यूब मशीन",
+    "label_prix_paquet" to "पैकेट की कीमत",
+    "label_nb_cigarettes" to "सिगरेट की संख्या",
+    "label_prix_tabac" to "तंबाकू की कीमत",
+    "label_prix_feuilles" to "पेपर की कीमत",
+    "label_nb_feuilles" to "पेपर की संख्या",
+    "label_prix_filtres" to "फ़िल्टर की कीमत",
+    "label_nb_filtres" to "फ़िल्टर की संख्या",
+    "label_prix_tubes" to "ट्यूब की कीमत",
+    "label_nb_tubes" to "ट्यूब की संख्या",
+
+    // Joints
+    "label_prix_gramme" to "प्रति ग्राम कीमत",
+    "label_gramme_par_joint" to "प्रति जॉइंट ग्राम",
     "label_prix_feuilles_longues" to "लंबे रोलिंग पेपर की कीमत",
-    "label_nb_feuilles_longues" to "लंबे रोलिंग पेपर की संख्या"
-    )
+    "label_nb_feuilles_longues" to "लंबे रोलिंग पेपर की संख्या",
 
-    // ==================== 日本語 (JAPONAIS) ====================
-    private val TRADUCTIONS_JA = mapOf(
-        // Titres sections
-        "titre" to "設定",
-        "titre_profil" to "プロフィール",
-        "titre_categories" to "アクティブカテゴリ",
-        "titre_couts_cigarettes" to "タバコの費用",
-        "titre_couts_joints" to "ジョイントの費用",
-        "titre_couts_alcool" to "アルコールの費用",
-        "titre_habitudes" to "毎日の習慣",
-        "titre_dates_objectifs" to "目標日",
-        "titre_raz_export" to "リセットとエクスポート/インポート",
+    // Alcool
+    "label_prix_verre" to "ड्रिंक की कीमत",
+    "label_unite_cl" to "इकाई (cL)",
 
-        // Labels profil
-        "label_prenom" to "名前",
-        "label_langue" to "言語",
-        "label_devise" to "通貨",
-        "btn_sauvegarder_profil" to "プロフィールを保存",
+    // Habitudes
+    "label_max_journalier" to "दैनिक अधिकतम",
 
-        // Labels catégories
-        "label_cigarettes" to "タバコ",
-        "label_joints" to "ジョイント",
-        "label_alcool_global" to "アルコール全般",
-        "label_bieres" to "ビール",
-        "label_liqueurs" to "リキュール",
-        "label_alcool_fort" to "強いアルコール",
+    // Dates
+    "label_date_reduction" to "कमी की तिथि",
+    "label_date_arret" to "छोड़ने की तिथि",
+    "label_date_reussite" to "सफलता की तिथि",
+    "btn_choisir_date" to "तिथि चुनें",
 
-        // Labels formulaires cigarettes
-        "radio_classiques" to "通常のタバコ",
-        "radio_rouler" to "手巻き",
-        "radio_tubeuse" to "チューブマシン",
-        "label_prix_paquet" to "パック価格",
-        "label_nb_cigarettes" to "タバコの本数",
-        "label_prix_tabac" to "タバコ価格",
-        "label_prix_feuilles" to "紙の価格",
-        "label_nb_feuilles" to "紙の枚数",
-        "label_prix_filtres" to "フィルター価格",
-        "label_nb_filtres" to "フィルターの数",
-        "label_prix_tubes" to "チューブ価格",
-        "label_nb_tubes" to "チューブの数",
+    // Limitations free / premium
+    "msg_export_limite" to "एक्सपोर्ट के लिए, बिना-विज्ञापन संस्करण में अपग्रेड करें :-)",
+    "msg_import_limite" to "सीमा पूरी हो गई। आज %d इम्पोर्ट शेष हैं।",
+    "msg_limite_export" to "सीमा पहुँची: आज %d एक्सपोर्ट शेष (मुफ़्त संस्करण)",
+    "msg_limite_import" to "सीमा पहुँची: आज %d इम्पोर्ट शेष (मुफ़्त संस्करण)",
 
-        // Labels formulaires joints
-        "label_prix_gramme" to "グラム当たりの価格",
-        "label_gramme_par_joint" to "ジョイント当たりのグラム",
+    // Boutons RAZ
+    "btn_raz_jour" to "आज रीसेट करें",
+    "btn_raz_historique" to "इतिहास रीसेट करें",
+    "btn_raz_usine" to "फ़ैक्टरी रीसेट",
 
-        // Labels formulaires alcool
-        "label_prix_verre" to "ドリンク価格",
-        "label_unite_cl" to "単位（cL）",
+    // Export/Import
+    "btn_exporter" to "एक्सपोर्ट",
+    "btn_importer" to "इम्पोर्ट",
+    "btn_export_logs" to "लॉग्स एक्सपोर्ट करें",
+    "msg_export_logs_impossible" to "लॉग्स एक्सपोर्ट नहीं हो सके",
+    "msg_import_termine" to "इम्पोर्ट सफलतापूर्वक पूरा हुआ",
+    "msg_import_erreur" to "इम्पोर्ट त्रुटि: %s",
 
-        // Labels habitudes
-        "label_max_journalier" to "1日の最大",
+    // Confirmations
+    "confirm_raz_jour_titre" to "आज रीसेट करें",
+    "confirm_raz_jour_message" to "आज की सभी खपत हटाएँ?",
+    "confirm_raz_historique_titre" to "इतिहास रीसेट करें",
+    "confirm_raz_historique_message" to "पूरा खपत इतिहास हटाएँ? (यह क्रिया अपरिवर्तनीय है)",
+    "confirm_raz_usine_titre" to "फ़ैक्टरी रीसेट",
+    "confirm_raz_usine_message" to "सब कुछ रीसेट करें (प्रोफ़ाइल, खपत, सेटिंग्स)? (यह क्रिया अपरिवर्तनीय है)",
+    "confirm_import_titre" to "बैकअप इम्पोर्ट करें",
+    "confirm_import_message" to "सारा वर्तमान डेटा बदल दिया जाएगा। जारी रखें?",
+    "confirm_default" to "पुष्टि करें?",
 
-        // Labels dates
-        "label_date_reduction" to "削減日",
-        "label_date_arret" to "禁煙日",
-        "label_date_reussite" to "成功日",
-        "btn_choisir_date" to "日付を選択",
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "प्रोफ़ाइल सहेजी गई",
+    "msg_date_enregistree" to "तिथि सहेजी गई",
+    "msg_raz_effectuee" to "रीसेट पूरा हुआ",
+    "msg_export_reussi" to "एक्सपोर्ट सफल",
+    "msg_import_reussi" to "इम्पोर्ट सफल",
+    "msg_erreur_sauvegarde" to "सहेजने में त्रुटि",
+    "msg_erreur_date" to "तिथि सहेजने में त्रुटि",
+    "msg_erreur_raz" to "रीसेट त्रुटि",
+    "msg_erreur_export" to "एक्सपोर्ट त्रुटि",
+    "msg_erreur_import" to "इम्पोर्ट त्रुटि",
+    "msg_aucune_sauvegarde" to "कोई बैकअप फ़ाइल नहीं मिली",
+    "msg_donnees_invalides" to "इम्पोर्ट त्रुटि: अमान्य डेटा",
+    "msg_champs_obligatoires" to "कृपया कम से कम एक लागत दर्ज करें",
+    "msg_erreur_prefix" to "त्रुटि: %s",
+    "sauvegarde_ok" to "सहेजा गया",
 
-        "msg_export_limite" to "エクスポート機能を利用するには、広告なしバージョンにアップグレードしてください :-)",
-        "msg_import_limite" to "上限に達しました。本日はあと%d回インポートできます。",
+    // Bandeau profil
+    "profil_complet" to "प्रोफ़ाइल: पूर्ण ✓",
+    "profil_incomplet" to "प्रोफ़ाइल: अपूर्ण",
+    "total_aujourdhui" to "आज कुल:",
 
-        // Boutons RAZ
-        "btn_raz_jour" to "今日をリセット",
-        "btn_raz_historique" to "履歴をリセット",
-        "btn_raz_usine" to "工場出荷時リセット",
+    // Économies potentielles
+    "titre_economies" to "संभावित बचत",
+    "economies_si_arret" to "यदि आप पूरी तरह से छोड़ दें:",
+    "economies_jour" to "दिन",
+    "economies_semaine" to "सप्ताह",
+    "economies_mois" to "महीना",
+    "economies_annee" to "वर्ष",
 
-        // Boutons Export/Import
-        "btn_exporter" to "エクスポート",
-        "btn_importer" to "インポート",
-        "btn_export_logs" to "ログをエクスポート",
+    // Boutons dialog
+    "btn_confirmer" to "पुष्टि करें",
+    "btn_annuler" to "रद्द करें",
+    "btn_ok" to "ठीक है",
 
-        // Messages confirmations
-        "confirm_raz_jour_titre" to "今日をリセット",
-        "confirm_raz_jour_message" to "今日のすべての消費を削除しますか？",
-        "confirm_raz_historique_titre" to "履歴をリセット",
-        "confirm_raz_historique_message" to "すべての消費履歴を削除しますか？（この操作は元に戻せません）",
-        "confirm_raz_usine_titre" to "工場出荷時リセット",
-        "confirm_raz_usine_message" to "すべてをリセットしますか（プロフィール、消費、設定）？（この操作は元に戻せません）",
-        "confirm_import_titre" to "バックアップをインポート",
-        "confirm_import_message" to "すべての現在のデータが置き換えられます。続行しますか？",
+    // À propos
+    "titre_a_propos" to "परिचय",
+    "voir_avertissement" to "चेतावनी देखें",
+    "btn_manuel" to "यूज़र मैनुअल",
+    "btn_cgv" to "नियम और शर्तें",
+    "btn_mentions_legales" to "कानूनी सूचना",
+    "btn_contact" to "सपोर्ट से संपर्क करें",
+    "btn_maj" to "नवीनतम अपडेट",
+    "maj_titre" to "नवीनतम अपडेट",
+    "maj_contenu" to "डिप्लॉयमेंट V1",
+    "btn_premium" to "विज्ञापन-मुक्त संस्करण",
+    "premium_titre" to "विज्ञापन-मुक्त संस्करण",
+    "premium_contenu" to "विज्ञापन-मुक्त संस्करण जल्द ही उपलब्ध होगा।\n\nयह बैनर विज्ञापनों और सीमाओं को हटा देगा।",
 
-        // Messages succès/erreur
-        "msg_profil_sauvegarde" to "プロフィールが保存されました",
-        "msg_date_enregistree" to "日付が保存されました",
-        "msg_raz_effectuee" to "リセット完了",
-        "msg_export_reussi" to "エクスポート成功",
-        "msg_import_reussi" to "インポート成功",
-        "msg_erreur_sauvegarde" to "保存エラー",
-        "msg_erreur_date" to "日付保存エラー",
-        "msg_erreur_raz" to "リセットエラー",
-        "msg_erreur_export" to "エクスポートエラー",
-        "msg_erreur_import" to "インポートエラー",
-        "msg_limite_export" to "制限に達しました：本日残り%dエクスポート（無料版）",
-        "msg_limite_import" to "制限に達しました：本日残り%dインポート（無料版）",
-        "msg_aucune_sauvegarde" to "バックアップファイルが見つかりません",
-        "msg_donnees_invalides" to "インポートエラー：無効なデータ",
-        "msg_champs_obligatoires" to "少なくとも1つの費用を入力してください",
+    // Support / store
+    "support_email_subject" to "StopAddict - सपोर्ट",
+    "support_email_error" to "ईमेल ऐप नहीं खुल सका: %s",
+    "msg_open_store_impossible" to "स्टोर नहीं खुल सका",
 
-        // Bandeau profil
-        "profil_complet" to "プロフィール：完全 ✓",
-        "profil_incomplet" to "プロフィール：不完全",
-        "total_aujourdhui" to "今日の合計：",
+    // Reset labels (section)
+    "raz_sauvegarde" to "रीसेट और बैकअप",
+    "raz_jour" to "दिन रीसेट",
+    "raz_historique" to "इतिहास रीसेट",
+    "raz_usine" to "फ़ैक्टरी रीसेट",
+    "raz_jour_ok" to "दिन रीसेट हो गया",
+    "raz_historique_ok" to "इतिहास रीसेट हो गया",
+    "raz_usine_ok" to "फ़ैक्टरी रीसेट पूरा",
 
-        // Économies potentielles
-        "titre_economies" to "潜在的な節約",
-        "economies_si_arret" to "完全にやめた場合：",
-        "economies_jour" to "日",
-        "economies_semaine" to "週",
-        "economies_mois" to "月",
-        "economies_annee" to "年",
+    // Units cL
+    "unite_cl_global" to "इकाई (cL)",
+    "unite_cl_biere" to "इकाई (cL)",
+    "unite_cl_liqueur" to "इकाई (cL)",
+    "unite_cl_alcool_fort" to "इकाई (cL)",
 
-        // Boutons dialog
-        "btn_confirmer" to "確認",
-        "btn_annuler" to "キャンセル",
-        "btn_ok" to "OK",
+    // Bouton save costs
+    "btn_sauvegarder_couts" to "लागत सहेजें"
+)
 
-        // について
-        "titre_a_propos" to "について",
-        "voir_avertissement" to "警告を表示",
-        "btn_manuel" to "ユーザーマニュアル",
-        "btn_cgv" to "利用規約",
-        "btn_mentions_legales" to "法的通知",
-        "btn_contact" to "サポートに連絡",
-        "btn_maj" to "最新のアップデート",
-        "maj_titre" to "最新のアップデート",
-        "maj_contenu" to "リリース V1",
-        "btn_premium" to "広告なしバージョン",
-        "premium_titre" to "広告なしバージョン",
-        "premium_contenu" to "広告なしバージョンはまもなく利用可能になります。\n\nバナー広告と制限が解除されます。",
-        "hint_prenom" to "名前を入力してください",
 
-        // リセット
-        "raz_sauvegarde" to "リセットとバックアップ",
-        "raz_jour" to "今日をリセット",
-        "raz_historique" to "履歴をリセット",
-        "raz_usine" to "工場出荷時の設定にリセット",
-        "raz_jour_ok" to "今日をリセットしました",
-        "raz_historique_ok" to "履歴をリセットしました",
-        "raz_usine_ok" to "工場出荷時の設定にリセットしました",
+// ==================== 日本語 (JAPONAIS) ====================
+private val TRADUCTIONS_JA = mapOf(
+    // Titres sections
+    "titre" to "設定",
+    "titre_profil" to "プロフィール",
+    "titre_categories" to "有効なカテゴリ",
+    "titre_couts_cigarettes" to "タバコの費用",
+    "titre_couts_joints" to "ジョイントの費用",
+    "titre_couts_alcool" to "アルコールの費用",
+    "titre_habitudes" to "毎日の習慣",
+    "titre_dates_objectifs" to "目標日",
+    "titre_raz_export" to "リセットとエクスポート/インポート",
 
-        "unite_cl_global"      to "単位（cl）",
-        "unite_cl_biere"       to "単位（cl）",
-        "unite_cl_liqueur"     to "単位（cl）",
-        "unite_cl_alcool_fort" to "単位（cl）",
+    // Labels profil
+    "label_prenom" to "名前",
+    "label_langue" to "言語",
+    "label_devise" to "通貨",
+    "btn_sauvegarder_profil" to "プロフィールを保存",
+    "hint_prenom" to "名前を入力してください",
 
+    // Labels catégories
+    "label_cigarettes" to "タバコ",
+    "label_joints" to "ジョイント",
+    "label_alcool_global" to "アルコール（全体）",
+    "label_bieres" to "ビール",
+    "label_liqueurs" to "リキュール",
+    "label_alcool_fort" to "スピリッツ",
+
+    // Labels formulaires cigarettes
+    "radio_classiques" to "通常のタバコ",
+    "radio_rouler" to "手巻き",
+    "radio_tubeuse" to "チューブマシン",
+    "label_prix_paquet" to "パック価格",
+    "label_nb_cigarettes" to "本数",
+    "label_prix_tabac" to "たばこ葉の価格",
+    "label_prix_feuilles" to "ペーパーの価格",
+    "label_nb_feuilles" to "ペーパー枚数",
+    "label_prix_filtres" to "フィルター価格",
+    "label_nb_filtres" to "フィルター数",
+    "label_prix_tubes" to "チューブ価格",
+    "label_nb_tubes" to "チューブ数",
+
+    // Joints
+    "label_prix_gramme" to "グラム単価",
+    "label_gramme_par_joint" to "1本あたりのグラム",
     "label_prix_feuilles_longues" to "ロングペーパーの価格",
-    "label_nb_feuilles_longues" to "ロングペーパーの枚数"
-    )
+    "label_nb_feuilles_longues" to "ロングペーパーの枚数",
+
+    // Alcool
+    "label_prix_verre" to "ドリンク価格",
+    "label_unite_cl" to "単位（cL）",
+
+    // Habitudes
+    "label_max_journalier" to "1日の最大",
+
+    // Dates
+    "label_date_reduction" to "削減日",
+    "label_date_arret" to "中止日",
+    "label_date_reussite" to "成功日",
+    "btn_choisir_date" to "日付を選択",
+
+    // Limitations free / premium
+    "msg_export_limite" to "エクスポートを利用するには、広告なし版にアップグレードしてください :-)",
+    "msg_import_limite" to "上限に達しました。本日はあと%d回インポートできます。",
+    "msg_limite_export" to "制限に達しました：本日残り%d回エクスポート（無料版）",
+    "msg_limite_import" to "制限に達しました：本日残り%d回インポート（無料版）",
+
+    // Boutons RAZ
+    "btn_raz_jour" to "今日をリセット",
+    "btn_raz_historique" to "履歴をリセット",
+    "btn_raz_usine" to "工場出荷時リセット",
+
+    // Export/Import
+    "btn_exporter" to "エクスポート",
+    "btn_importer" to "インポート",
+    "btn_export_logs" to "ログをエクスポート",
+    "msg_export_logs_impossible" to "ログをエクスポートできません",
+    "msg_import_termine" to "インポートが正常に完了しました",
+    "msg_import_erreur" to "インポートエラー: %s",
+
+    // Confirmations
+    "confirm_raz_jour_titre" to "今日をリセット",
+    "confirm_raz_jour_message" to "今日の消費をすべて削除しますか？",
+    "confirm_raz_historique_titre" to "履歴をリセット",
+    "confirm_raz_historique_message" to "消費履歴をすべて削除しますか？（元に戻せません）",
+    "confirm_raz_usine_titre" to "工場出荷時リセット",
+    "confirm_raz_usine_message" to "すべてをリセットしますか（プロフィール、消費、設定）？（元に戻せません）",
+    "confirm_import_titre" to "バックアップをインポート",
+    "confirm_import_message" to "現在のデータはすべて置き換えられます。続行しますか？",
+    "confirm_default" to "確認しますか？",
+
+    // Messages succès/erreur
+    "msg_profil_sauvegarde" to "プロフィールを保存しました",
+    "msg_date_enregistree" to "日付を保存しました",
+    "msg_raz_effectuee" to "リセット完了",
+    "msg_export_reussi" to "エクスポート成功",
+    "msg_import_reussi" to "インポート成功",
+    "msg_erreur_sauvegarde" to "保存エラー",
+    "msg_erreur_date" to "日付保存エラー",
+    "msg_erreur_raz" to "リセットエラー",
+    "msg_erreur_export" to "エクスポートエラー",
+    "msg_erreur_import" to "インポートエラー",
+    "msg_aucune_sauvegarde" to "バックアップファイルが見つかりません",
+    "msg_donnees_invalides" to "インポートエラー：無効なデータ",
+    "msg_champs_obligatoires" to "少なくとも1つの費用を入力してください",
+    "msg_erreur_prefix" to "エラー：%s",
+    "sauvegarde_ok" to "保存しました",
+
+    // Bandeau profil
+    "profil_complet" to "プロフィール：完全 ✓",
+    "profil_incomplet" to "プロフィール：不完全",
+    "total_aujourdhui" to "今日の合計：",
+
+    // Économies potentielles
+    "titre_economies" to "潜在的な節約",
+    "economies_si_arret" to "完全にやめた場合：",
+    "economies_jour" to "日",
+    "economies_semaine" to "週",
+    "economies_mois" to "月",
+    "economies_annee" to "年",
+
+    // Boutons dialog
+    "btn_confirmer" to "確認",
+    "btn_annuler" to "キャンセル",
+    "btn_ok" to "OK",
+
+    // À propos
+    "titre_a_propos" to "情報",
+    "voir_avertissement" to "警告を表示",
+    "btn_manuel" to "ユーザーマニュアル",
+    "btn_cgv" to "利用規約",
+    "btn_mentions_legales" to "法的通知",
+    "btn_contact" to "サポートに連絡",
+    "btn_maj" to "最新のアップデート",
+    "maj_titre" to "最新のアップデート",
+    "maj_contenu" to "リリース V1",
+    "btn_premium" to "広告なし版",
+    "premium_titre" to "広告なし版",
+    "premium_contenu" to "広告なし版はまもなく利用可能になります。\n\nバナー広告と制限が解除されます。",
+
+    // Support / store
+    "support_email_subject" to "StopAddict - サポート",
+    "support_email_error" to "メールアプリを開けません：%s",
+    "msg_open_store_impossible" to "ストアを開けません",
+
+    // Reset labels (section)
+    "raz_sauvegarde" to "リセットとバックアップ",
+    "raz_jour" to "今日をリセット",
+    "raz_historique" to "履歴をリセット",
+    "raz_usine" to "工場出荷時設定にリセット",
+    "raz_jour_ok" to "今日をリセットしました",
+    "raz_historique_ok" to "履歴をリセットしました",
+    "raz_usine_ok" to "工場出荷時設定にリセットしました",
+
+    // Units cL
+    "unite_cl_global" to "単位（cL）",
+    "unite_cl_biere" to "単位（cL）",
+    "unite_cl_liqueur" to "単位（cL）",
+    "unite_cl_alcool_fort" to "単位（cL）",
+
+    // Bouton save costs
+    "btn_sauvegarder_couts" to "費用を保存"
+)
+// ==================== 中文（简体 / ZH-CN） ====================
+private val TRADUCTIONS_ZH_CN = mapOf(
+    // Section titles
+    "titre" to "设置",
+    "titre_profil" to "个人资料",
+    "titre_categories" to "启用的类别",
+    "titre_couts_cigarettes" to "香烟成本",
+    "titre_couts_joints" to "烟卷成本",
+    "titre_couts_alcool" to "酒精成本",
+    "titre_habitudes" to "每日习惯",
+    "titre_dates_objectifs" to "目标日期",
+    "titre_raz_export" to "重置与导出/导入",
+
+    // Profile labels
+    "label_prenom" to "名字",
+    "label_langue" to "语言",
+    "label_devise" to "货币",
+    "btn_sauvegarder_profil" to "保存资料",
+
+    // Categories labels
+    "label_cigarettes" to "香烟",
+    "label_joints" to "烟卷",
+    "label_alcool_global" to "酒精（总计）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    // Cigarettes form labels
+    "radio_classiques" to "普通香烟",
+    "radio_rouler" to "手卷烟",
+    "radio_tubeuse" to "卷管机",
+    "label_prix_paquet" to "每包价格",
+    "label_nb_cigarettes" to "香烟数量",
+    "label_prix_tabac" to "烟草价格",
+    "label_prix_feuilles" to "卷纸价格",
+    "label_nb_feuilles" to "卷纸数量",
+    "label_prix_filtres" to "滤嘴价格",
+    "label_nb_filtres" to "滤嘴数量",
+    "label_prix_tubes" to "烟管价格",
+    "label_nb_tubes" to "烟管数量",
+
+    // Joints form labels
+    "label_prix_gramme" to "每克价格",
+    "label_gramme_par_joint" to "每支用量（克）",
+    "label_prix_feuilles_longues" to "长卷纸价格",
+    "label_nb_feuilles_longues" to "长卷纸数量",
+
+    // Alcohol form labels
+    "label_prix_verre" to "每杯价格",
+    "label_unite_cl" to "单位 (cL)",
+
+    // Habits
+    "label_max_journalier" to "每日上限",
+
+    // Dates
+    "label_date_reduction" to "减少日期",
+    "label_date_arret" to "戒断日期",
+    "label_date_reussite" to "成功日期",
+    "btn_choisir_date" to "选择日期",
+
+    // Free/Premium limits
+    "msg_export_limite" to "要使用导出功能，请升级到无广告版本 :-)",
+    "msg_import_limite" to "已达到限制。今天还可导入 %d 次。",
+    "msg_limite_export" to "已达到限制：今天还可导出 %d 次（免费版）",
+    "msg_limite_import" to "已达到限制：今天还可导入 %d 次（免费版）",
+
+    // Reset buttons
+    "btn_raz_jour" to "重置今天",
+    "btn_raz_historique" to "重置历史",
+    "btn_raz_usine" to "恢复出厂设置",
+
+    // Export/Import buttons
+    "btn_exporter" to "导出",
+    "btn_importer" to "导入",
+    "btn_export_logs" to "导出日志",
+
+    // Confirmations
+    "confirm_raz_jour_titre" to "重置今天",
+    "confirm_raz_jour_message" to "删除今天所有记录？",
+    "confirm_raz_historique_titre" to "重置历史",
+    "confirm_raz_historique_message" to "删除所有历史记录？（此操作不可撤销）",
+    "confirm_raz_usine_titre" to "恢复出厂设置",
+    "confirm_raz_usine_message" to "重置所有内容（资料、记录、设置）？（此操作不可撤销）",
+    "confirm_import_titre" to "导入备份",
+    "confirm_import_message" to "当前所有数据将被替换。继续？",
+    "confirm_default" to "确认？",
+
+    // Success / Error messages
+    "msg_profil_sauvegarde" to "资料已保存",
+    "msg_date_enregistree" to "日期已保存",
+    "msg_raz_effectuee" to "重置完成",
+    "msg_export_reussi" to "导出成功",
+    "msg_import_reussi" to "导入成功",
+    "msg_erreur_sauvegarde" to "保存错误",
+    "msg_erreur_date" to "日期保存错误",
+    "msg_erreur_raz" to "重置错误",
+    "msg_erreur_export" to "导出错误",
+    "msg_erreur_import" to "导入错误",
+    "msg_aucune_sauvegarde" to "未找到备份文件",
+    "msg_donnees_invalides" to "导入错误：数据无效",
+    "msg_champs_obligatoires" to "请至少填写一项费用",
+    "msg_import_termine" to "导入已成功完成",
+    "msg_import_termine_succes" to "导入已成功完成",
+    "msg_import_erreur" to "导入错误：%s",
+    "msg_erreur_prefix" to "错误：%s",
+    "sauvegarde_ok" to "已保存",
+
+    // Banner / Profile header
+    "profil_complet" to "资料：完整 ✓",
+    "profil_incomplet" to "资料：不完整",
+    "total_aujourdhui" to "今日总计：",
+
+    // Savings
+    "titre_economies" to "潜在节省",
+    "economies_si_arret" to "如果你完全停止：",
+    "economies_jour" to "天",
+    "economies_semaine" to "周",
+    "economies_mois" to "月",
+    "economies_annee" to "年",
+
+    // Dialog buttons
+    "btn_confirmer" to "确认",
+    "btn_annuler" to "取消",
+    "btn_ok" to "OK",
+
+    // About
+    "titre_a_propos" to "关于",
+    "voir_avertissement" to "查看警告",
+    "btn_manuel" to "使用手册",
+    "btn_cgv" to "条款与条件",
+    "btn_mentions_legales" to "法律声明",
+    "btn_contact" to "联系支持",
+    "btn_maj" to "最新更新",
+    "maj_titre" to "最新更新",
+    "maj_contenu" to "发布 V1",
+    "btn_premium" to "无广告版本",
+    "premium_titre" to "无广告版本",
+    "premium_contenu" to "无广告版本即将推出。\n\n它将移除广告横幅与限制。",
+    "hint_prenom" to "请输入你的名字",
+
+    // Reset & backup labels
+    "raz_sauvegarde" to "重置与备份",
+    "raz_jour" to "重置当天",
+    "raz_historique" to "重置历史",
+    "raz_usine" to "恢复出厂设置",
+    "raz_jour_ok" to "当天已重置",
+    "raz_historique_ok" to "历史已重置",
+    "raz_usine_ok" to "已恢复出厂设置",
+
+    // Units
+    "unite_cl_global" to "单位 (cl)",
+    "unite_cl_biere" to "单位 (cl)",
+    "unite_cl_liqueur" to "单位 (cl)",
+    "unite_cl_alcool_fort" to "单位 (cl)",
+
+    // Extra keys seen in FR
+    "btn_sauvegarder_couts" to "保存费用",
+    "msg_export_logs_impossible" to "无法导出日志",
+    "support_email_subject" to "StopAddict - 支持",
+    "support_email_error" to "无法打开电子邮件应用：%s",
+    "msg_open_store_impossible" to "无法打开商店"
+)
+
+
+// ==================== 中文（繁體 / ZH-TW） ====================
+private val TRADUCTIONS_ZH_TW = mapOf(
+    // Section titles
+    "titre" to "設定",
+    "titre_profil" to "個人檔案",
+    "titre_categories" to "啟用的類別",
+    "titre_couts_cigarettes" to "香菸成本",
+    "titre_couts_joints" to "捲菸成本",
+    "titre_couts_alcool" to "酒精成本",
+    "titre_habitudes" to "每日習慣",
+    "titre_dates_objectifs" to "目標日期",
+    "titre_raz_export" to "重設與匯出/匯入",
+
+    // Profile labels
+    "label_prenom" to "名字",
+    "label_langue" to "語言",
+    "label_devise" to "貨幣",
+    "btn_sauvegarder_profil" to "儲存檔案",
+
+    // Categories labels
+    "label_cigarettes" to "香菸",
+    "label_joints" to "捲菸",
+    "label_alcool_global" to "酒精（總計）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    // Cigarettes form labels
+    "radio_classiques" to "一般香菸",
+    "radio_rouler" to "手捲菸",
+    "radio_tubeuse" to "填管機",
+    "label_prix_paquet" to "一包價格",
+    "label_nb_cigarettes" to "香菸數量",
+    "label_prix_tabac" to "菸草價格",
+    "label_prix_feuilles" to "捲紙價格",
+    "label_nb_feuilles" to "捲紙數量",
+    "label_prix_filtres" to "濾嘴價格",
+    "label_nb_filtres" to "濾嘴數量",
+    "label_prix_tubes" to "菸管價格",
+    "label_nb_tubes" to "菸管數量",
+
+    // Joints form labels
+    "label_prix_gramme" to "每克價格",
+    "label_gramme_par_joint" to "每支用量（克）",
+    "label_prix_feuilles_longues" to "長捲紙價格",
+    "label_nb_feuilles_longues" to "長捲紙數量",
+
+    // Alcohol form labels
+    "label_prix_verre" to "每杯價格",
+    "label_unite_cl" to "單位 (cL)",
+
+    // Habits
+    "label_max_journalier" to "每日上限",
+
+    // Dates
+    "label_date_reduction" to "減少日期",
+    "label_date_arret" to "戒斷日期",
+    "label_date_reussite" to "成功日期",
+    "btn_choisir_date" to "選擇日期",
+
+    // Free/Premium limits
+    "msg_export_limite" to "要使用匯出功能，請升級到無廣告版本 :-)",
+    "msg_import_limite" to "已達限制。今天還可匯入 %d 次。",
+    "msg_limite_export" to "已達限制：今天還可匯出 %d 次（免費版）",
+    "msg_limite_import" to "已達限制：今天還可匯入 %d 次（免費版）",
+
+    // Reset buttons
+    "btn_raz_jour" to "重設今天",
+    "btn_raz_historique" to "重設歷史",
+    "btn_raz_usine" to "恢復出廠設定",
+
+    // Export/Import buttons
+    "btn_exporter" to "匯出",
+    "btn_importer" to "匯入",
+    "btn_export_logs" to "匯出日誌",
+
+    // Confirmations
+    "confirm_raz_jour_titre" to "重設今天",
+    "confirm_raz_jour_message" to "刪除今天所有紀錄？",
+    "confirm_raz_historique_titre" to "重設歷史",
+    "confirm_raz_historique_message" to "刪除所有歷史紀錄？（此操作無法復原）",
+    "confirm_raz_usine_titre" to "恢復出廠設定",
+    "confirm_raz_usine_message" to "重設所有內容（檔案、紀錄、設定）？（此操作無法復原）",
+    "confirm_import_titre" to "匯入備份",
+    "confirm_import_message" to "目前所有資料將被取代。繼續？",
+    "confirm_default" to "確認？",
+
+    // Success / Error messages
+    "msg_profil_sauvegarde" to "檔案已儲存",
+    "msg_date_enregistree" to "日期已儲存",
+    "msg_raz_effectuee" to "重設完成",
+    "msg_export_reussi" to "匯出成功",
+    "msg_import_reussi" to "匯入成功",
+    "msg_erreur_sauvegarde" to "儲存錯誤",
+    "msg_erreur_date" to "日期儲存錯誤",
+    "msg_erreur_raz" to "重設錯誤",
+    "msg_erreur_export" to "匯出錯誤",
+    "msg_erreur_import" to "匯入錯誤",
+    "msg_aucune_sauvegarde" to "找不到備份檔案",
+    "msg_donnees_invalides" to "匯入錯誤：資料無效",
+    "msg_champs_obligatoires" to "請至少輸入一項費用",
+    "msg_import_termine" to "匯入已成功完成",
+    "msg_import_termine_succes" to "匯入已成功完成",
+    "msg_import_erreur" to "匯入錯誤：%s",
+    "msg_erreur_prefix" to "錯誤：%s",
+    "sauvegarde_ok" to "已儲存",
+
+    // Banner / Profile header
+    "profil_complet" to "檔案：完整 ✓",
+    "profil_incomplet" to "檔案：不完整",
+    "total_aujourdhui" to "今日總計：",
+
+    // Savings
+    "titre_economies" to "潛在節省",
+    "economies_si_arret" to "若你完全停止：",
+    "economies_jour" to "天",
+    "economies_semaine" to "週",
+    "economies_mois" to "月",
+    "economies_annee" to "年",
+
+    // Dialog buttons
+    "btn_confirmer" to "確認",
+    "btn_annuler" to "取消",
+    "btn_ok" to "OK",
+
+    // About
+    "titre_a_propos" to "關於",
+    "voir_avertissement" to "查看警告",
+    "btn_manuel" to "使用手冊",
+    "btn_cgv" to "條款與條件",
+    "btn_mentions_legales" to "法律聲明",
+    "btn_contact" to "聯絡支援",
+    "btn_maj" to "最新更新",
+    "maj_titre" to "最新更新",
+    "maj_contenu" to "發布 V1",
+    "btn_premium" to "無廣告版本",
+    "premium_titre" to "無廣告版本",
+    "premium_contenu" to "無廣告版本即將推出。\n\n將移除廣告與限制。",
+    "hint_prenom" to "請輸入你的名字",
+
+    // Reset & backup labels
+    "raz_sauvegarde" to "重設與備份",
+    "raz_jour" to "重設當天",
+    "raz_historique" to "重設歷史",
+    "raz_usine" to "恢復出廠設定",
+    "raz_jour_ok" to "當天已重設",
+    "raz_historique_ok" to "歷史已重設",
+    "raz_usine_ok" to "已恢復出廠設定",
+
+    // Units
+    "unite_cl_global" to "單位 (cl)",
+    "unite_cl_biere" to "單位 (cl)",
+    "unite_cl_liqueur" to "單位 (cl)",
+    "unite_cl_alcool_fort" to "單位 (cl)",
+
+    // Extra keys seen in FR
+    "btn_sauvegarder_couts" to "儲存費用",
+    "msg_export_logs_impossible" to "無法匯出日誌",
+    "support_email_subject" to "StopAddict - 支援",
+    "support_email_error" to "無法開啟電子郵件應用：%s",
+    "msg_open_store_impossible" to "無法開啟商店"
+)
+
+
+// ==================== Nederlands (NL) ====================
+private val TRADUCTIONS_NL = mapOf(
+    // Section titles
+    "titre" to "Instellingen",
+    "titre_profil" to "Profiel",
+    "titre_categories" to "Actieve categorieën",
+    "titre_couts_cigarettes" to "Kosten sigaretten",
+    "titre_couts_joints" to "Kosten joints",
+    "titre_couts_alcool" to "Kosten alcohol",
+    "titre_habitudes" to "Dagelijkse gewoonten",
+    "titre_dates_objectifs" to "Doeldatums",
+    "titre_raz_export" to "Reset & Export/Import",
+
+    // Profile labels
+    "label_prenom" to "Voornaam",
+    "label_langue" to "Taal",
+    "label_devise" to "Valuta",
+    "btn_sauvegarder_profil" to "Profiel opslaan",
+
+    // Categories labels
+    "label_cigarettes" to "Sigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alcohol totaal",
+    "label_bieres" to "Bier",
+    "label_liqueurs" to "Likeuren",
+    "label_alcool_fort" to "Sterke drank",
+
+    // Cigarettes form labels
+    "radio_classiques" to "Gewone sigaretten",
+    "radio_rouler" to "Shag (rollen)",
+    "radio_tubeuse" to "Stopmachine",
+    "label_prix_paquet" to "Prijs per pakje",
+    "label_nb_cigarettes" to "Aantal sigaretten",
+    "label_prix_tabac" to "Prijs tabak",
+    "label_prix_feuilles" to "Prijs vloei",
+    "label_nb_feuilles" to "Aantal vloei",
+    "label_prix_filtres" to "Prijs filters",
+    "label_nb_filtres" to "Aantal filters",
+    "label_prix_tubes" to "Prijs hulzen",
+    "label_nb_tubes" to "Aantal hulzen",
+
+    // Joints form labels
+    "label_prix_gramme" to "Prijs per gram",
+    "label_gramme_par_joint" to "Gram per joint",
+    "label_prix_feuilles_longues" to "Prijs lange vloei",
+    "label_nb_feuilles_longues" to "Aantal lange vloei",
+
+    // Alcohol form labels
+    "label_prix_verre" to "Prijs per drankje",
+    "label_unite_cl" to "Eenheid (cL)",
+
+    // Habits
+    "label_max_journalier" to "Dagelijks maximum",
+
+    // Dates
+    "label_date_reduction" to "Datum verminderen",
+    "label_date_arret" to "Stopdatum",
+    "label_date_reussite" to "Datum succes",
+    "btn_choisir_date" to "Datum kiezen",
+
+    // Free/Premium limits
+    "msg_export_limite" to "Voor export: stap over naar de advertentievrije versie :-)",
+    "msg_import_limite" to "Limiet bereikt. Vandaag nog %d import(s) over.",
+    "msg_limite_export" to "Limiet bereikt: vandaag nog %d export(s) over (gratis versie)",
+    "msg_limite_import" to "Limiet bereikt: vandaag nog %d import(s) over (gratis versie)",
+
+    // Reset buttons
+    "btn_raz_jour" to "Vandaag resetten",
+    "btn_raz_historique" to "Geschiedenis resetten",
+    "btn_raz_usine" to "Fabrieksreset",
+
+    // Export/Import buttons
+    "btn_exporter" to "Exporteren",
+    "btn_importer" to "Importeren",
+    "btn_export_logs" to "Logs exporteren",
+
+    // Confirmations
+    "confirm_raz_jour_titre" to "Vandaag resetten",
+    "confirm_raz_jour_message" to "Alle consumpties van vandaag verwijderen?",
+    "confirm_raz_historique_titre" to "Geschiedenis resetten",
+    "confirm_raz_historique_message" to "ALLE consumptiegeschiedenis verwijderen? (Deze actie is onomkeerbaar)",
+    "confirm_raz_usine_titre" to "Fabrieksreset",
+    "confirm_raz_usine_message" to "ALLES resetten (profiel, consumpties, instellingen)? (Deze actie is onomkeerbaar)",
+    "confirm_import_titre" to "Back-up importeren",
+    "confirm_import_message" to "Alle huidige gegevens worden vervangen. Doorgaan?",
+    "confirm_default" to "Bevestigen?",
+
+    // Success / Error messages
+    "msg_profil_sauvegarde" to "Profiel opgeslagen",
+    "msg_date_enregistree" to "Datum opgeslagen",
+    "msg_raz_effectuee" to "Reset voltooid",
+    "msg_export_reussi" to "Export geslaagd",
+    "msg_import_reussi" to "Import geslaagd",
+    "msg_erreur_sauvegarde" to "Opslaan mislukt",
+    "msg_erreur_date" to "Datum opslaan mislukt",
+    "msg_erreur_raz" to "Reset mislukt",
+    "msg_erreur_export" to "Export mislukt",
+    "msg_erreur_import" to "Import mislukt",
+    "msg_aucune_sauvegarde" to "Geen back-upbestand gevonden",
+    "msg_donnees_invalides" to "Importfout: ongeldige gegevens",
+    "msg_champs_obligatoires" to "Vul minimaal één kost in",
+    "msg_import_termine" to "Import succesvol voltooid",
+    "msg_import_termine_succes" to "Import succesvol voltooid",
+    "msg_import_erreur" to "Importfout: %s",
+    "msg_erreur_prefix" to "Fout: %s",
+    "sauvegarde_ok" to "Opgeslagen",
+
+    // Banner / Profile header
+    "profil_complet" to "Profiel: Compleet ✓",
+    "profil_incomplet" to "Profiel: Onvolledig",
+    "total_aujourdhui" to "Totaal vandaag:",
+
+    // Savings
+    "titre_economies" to "Mogelijke besparingen",
+    "economies_si_arret" to "Als je volledig zou stoppen:",
+    "economies_jour" to "Dag",
+    "economies_semaine" to "Week",
+    "economies_mois" to "Maand",
+    "economies_annee" to "Jaar",
+
+    // Dialog buttons
+    "btn_confirmer" to "Bevestigen",
+    "btn_annuler" to "Annuleren",
+    "btn_ok" to "OK",
+
+    // About
+    "titre_a_propos" to "Over",
+    "voir_avertissement" to "Waarschuwing bekijken",
+    "btn_manuel" to "Gebruikershandleiding",
+    "btn_cgv" to "Algemene voorwaarden",
+    "btn_mentions_legales" to "Juridische vermelding",
+    "btn_contact" to "Contact opnemen met support",
+    "btn_maj" to "Laatste updates",
+    "maj_titre" to "Laatste updates",
+    "maj_contenu" to "Uitrol V1",
+    "btn_premium" to "Advertentievrije versie",
+    "premium_titre" to "Advertentievrije versie",
+    "premium_contenu" to "De advertentievrije versie is binnenkort beschikbaar.\n\nDeze verwijdert banners en beperkingen.",
+    "hint_prenom" to "Voer je voornaam in",
+
+    // Reset & backup labels
+    "raz_sauvegarde" to "Reset en back-up",
+    "raz_jour" to "Dag resetten",
+    "raz_historique" to "Geschiedenis resetten",
+    "raz_usine" to "Fabrieksreset",
+    "raz_jour_ok" to "Dag gereset",
+    "raz_historique_ok" to "Geschiedenis gereset",
+    "raz_usine_ok" to "Fabrieksreset voltooid",
+
+    // Units
+    "unite_cl_global" to "Eenheid (cl)",
+    "unite_cl_biere" to "Eenheid (cl)",
+    "unite_cl_liqueur" to "Eenheid (cl)",
+    "unite_cl_alcool_fort" to "Eenheid (cl)",
+
+    // Extra keys seen in FR
+    "btn_sauvegarder_couts" to "Kosten opslaan",
+    "msg_export_logs_impossible" to "Kan logs niet exporteren",
+    "support_email_subject" to "StopAddict - Support",
+    "support_email_error" to "Kan e-mailapp niet openen: %s",
+    "msg_open_store_impossible" to "Kan de store niet openen"
+)
 
     /**
      * Fonction helper pour récupérer une traduction spécifique
