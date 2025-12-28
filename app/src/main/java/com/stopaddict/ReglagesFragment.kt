@@ -50,7 +50,7 @@ class ReglagesFragment : Fragment() {
         "BRL (R$)", "INR (₹)", "RUB (₽)",
         "CNY (¥)", "HKD (HK$)"
     )
-}
+
     // Devises affichées dans le Spinner (format homogène)
     private val DEVISES_AFFICHEES = arrayOf(
         "EUR (€)",
