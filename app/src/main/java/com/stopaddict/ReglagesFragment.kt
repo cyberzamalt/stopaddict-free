@@ -1,3 +1,18 @@
+j'ai tout fait sauf 
+1) Dans ReglagesFragment, ajoute ces constantes (1 seul endroit)
+
+je n'ai pas compris où coller :
+        // Langues supportées (clôture de l’existant)
+        private val LANGUES_CODES = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
+
+        // Devises affichées dans le Spinner (format homogène)
+        private val DEVISES_AFFICHEES = arrayOf(
+            "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
+            "CHF (CHF)", "CAD (C$)", "AUD (A$)", "BRL (R$)", "INR (₹)", "RUB (₽)"
+        )
+
+Dans le companion object (tout en haut du fichier), ajoute ces lignes (idéalement après tes PREF_...) : NE VEUT RIEN DIRE POUR MOI CAR JE NE SUIS PAS CODEUR
+
 package com.stopaddict
 
 import android.app.Activity
@@ -33,6 +48,25 @@ class ReglagesFragment : Fragment() {
         private const val PREF_MODE_CIGARETTE = "mode_cigarette"
         private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
         private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
+
+            companion object {
+        private const val TAG = "ReglagesFragment"
+        private const val REQUEST_CODE_EXPORT = 1001
+        private const val REQUEST_CODE_IMPORT = 1002
+        private const val PREF_MODE_CIGARETTE = "mode_cigarette"
+        private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
+        private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
+
+        // Langues supportées (clôture de l’existant)
+        private val LANGUES_CODES = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
+
+        // Devises affichées dans le Spinner (format homogène)
+        private val DEVISES_AFFICHEES = arrayOf(
+            "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
+            "CHF (CHF)", "CAD (C$)", "AUD (A$)", "BRL (R$)", "INR (₹)", "RUB (₽)"
+        )
+    }
+
     }
 
     private lateinit var dbHelper: DatabaseHelper
@@ -117,7 +151,11 @@ class ReglagesFragment : Fragment() {
             view
         } catch (e: Exception) {
             logger.e( "Erreur onCreateView", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                Toast.LENGTH_SHORT
+            ).show()
             null
         }
     }
@@ -230,11 +268,10 @@ class ReglagesFragment : Fragment() {
     addLabel(container, "🌐 " + (trad["label_langue"] ?: "Langue"))
     spinnerLangue = Spinner(requireContext()).apply { backgroundTintList = null }
 
-    val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
     val adapterLangues = object : ArrayAdapter<String>(
         requireContext(),
         android.R.layout.simple_spinner_item,
-        langues
+        LANGUES_CODES
     ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val v = super.getView(position, convertView, parent)
@@ -263,8 +300,8 @@ class ReglagesFragment : Fragment() {
     addLabel(container, "💰 " + (trad["label_devise"] ?: "Devise"))
     spinnerDevise = Spinner(requireContext()).apply { backgroundTintList = null }
 
-    val devises = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
-    val adapterDevises = object : ArrayAdapter<String>(
+        val devises = DEVISES_AFFICHEES
+        val adapterDevises = object : ArrayAdapter<String>(
         requireContext(),
         android.R.layout.simple_spinner_item,
         devises
@@ -354,7 +391,7 @@ class ReglagesFragment : Fragment() {
 
     // Bouton sauvegarder coûts (emoji + style cohérent avec le reste)
     val btnSaveCouts = Button(requireContext()).apply {
-        text = "💾 " + (trad["btn_sauvegarder_profil"] ?: "Sauvegarder les coûts")
+        text = "💾 " + (trad["btn_sauvegarder_couts"] ?: "Sauvegarder les coûts")
         isAllCaps = false
         textSize = 13f
         setTextColor(Color.parseColor("#1976D2"))
@@ -1007,7 +1044,11 @@ class ReglagesFragment : Fragment() {
             
         } catch (e: Exception) {
             logger.e( "Erreur save perso", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+            requireContext(),
+            String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+            Toast.LENGTH_SHORT
+        ).show()
         }
     }
 
@@ -1162,7 +1203,11 @@ class ReglagesFragment : Fragment() {
 
     } catch (e: Exception) {
         logger.e( "Erreur save coûts", e)
-        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
 
@@ -1230,10 +1275,10 @@ class ReglagesFragment : Fragment() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$premiumPackage")))
         } catch (e2: Exception) {
-            logger.e( "Impossible d'ouvrir le store", e2)
+            logger.e(trad["msg_open_store_impossible"] ?: "Impossible d'ouvrir le store", e2)
         }
     } catch (e: Exception) {
-        logger.e( "Impossible d'ouvrir le store", e)
+        logger.e(trad["msg_open_store_impossible"] ?: "Impossible d'ouvrir le store", e)
     }
 }
     
@@ -1405,7 +1450,7 @@ class ReglagesFragment : Fragment() {
             (activity as? MainActivity)?.exportAllLogsFromSettings()
                 ?: Toast.makeText(
                     requireContext(),
-                    "Impossible d’exporter les logs",
+                    (trad["msg_export_logs_impossible"] ?: "Impossible d’exporter les logs"),
                     Toast.LENGTH_SHORT
                 ).show()
         }
@@ -1488,11 +1533,15 @@ class ReglagesFragment : Fragment() {
         try {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:stopmauvaiseshabitudes@gmail.com")
-                putExtra(Intent.EXTRA_SUBJECT, "StopAddict - Support")
+                putExtra(Intent.EXTRA_SUBJECT, trad["support_email_subject"] ?: "StopAddict - Support")
             }
             startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+            requireContext(),
+            String.format(trad["support_email_error"] ?: "Impossible d'ouvrir l'application e-mail : %s", e.message ?: ""),
+            Toast.LENGTH_SHORT
+        ).show()
         }
     }
 
@@ -1501,7 +1550,7 @@ class ReglagesFragment : Fragment() {
             "jour" -> trad["confirm_raz_jour_titre"] ?: "Effacer les consommations du jour ?"
             "historique" -> trad["confirm_raz_historique_titre"] ?: "Effacer TOUT l'historique ?"
             "usine" -> trad["confirm_raz_usine_titre"] ?: "TOUT réinitialiser (historique + réglages) ?"
-            else -> "Confirmer ?"
+            else -> trad["confirm_default"] ?: "Confirmer ?"
         }
         
         AlertDialog.Builder(requireContext())
@@ -1557,7 +1606,11 @@ class ReglagesFragment : Fragment() {
             
         } catch (e: Exception) {
             logger.e( "Erreur RAZ", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
     
@@ -1584,7 +1637,11 @@ class ReglagesFragment : Fragment() {
             
         } catch (e: Exception) {
             logger.e( "Erreur export", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -1664,7 +1721,11 @@ class ReglagesFragment : Fragment() {
 
         } catch (e: Exception) {
             logger.e( "Erreur import", e)
-            Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -1689,7 +1750,11 @@ class ReglagesFragment : Fragment() {
                         ).show()
                     } catch (e: Exception) {
                         logger.e( "Erreur écriture export", e)
-                        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -1712,7 +1777,11 @@ class ReglagesFragment : Fragment() {
 
                     } catch (e: Exception) {
                         logger.e( "Erreur lecture import", e)
-                        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            String.format(trad["msg_erreur_prefix"] ?: "Erreur : %s", e.message ?: ""),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -1894,18 +1963,22 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
 
         Toast.makeText(
             requireContext(),
-            "Import terminé avec succès",
+            (trad["msg_import_termine_succes"] ?: "Import terminé avec succès"),
             Toast.LENGTH_LONG
         ).show()
 
-    } catch (e: Exception) {
-        logger.e( "Erreur lors de l'import JSON: ${e.message}", e)
-        Toast.makeText(
-            requireContext(),
-            "Erreur lors de l'import: ${e.message}",
-            Toast.LENGTH_LONG
-        ).show()
-    }
+            } catch (e: Exception) {
+            logger.e("Erreur processImportJSON", e)
+        
+            Toast.makeText(
+                requireContext(),
+                String.format(
+                    trad["msg_import_erreur"] ?: "Erreur lors de l'import : %s",
+                    (e.message ?: "")
+                ),
+                Toast.LENGTH_LONG
+            ).show()
+        }
 }
 
     private fun loadData() {
@@ -1914,12 +1987,10 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
             editPrenom.setText(dbHelper.getPreference("prenom", ""))
             
             val langue = configLangue.getLangue()
-            val langues = arrayOf("FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA")
-            spinnerLangue.setSelection(langues.indexOf(langue).coerceAtLeast(0))
+            spinnerLangue.setSelection(LANGUES_CODES.indexOf(langue).coerceAtLeast(0))
             
             val devise = dbHelper.getPreference("devise", "EUR")
-            val devisesAffichees = arrayOf("EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)", "CHF", "CAD", "AUD", "BRL", "INR", "RUB")
-            val idx = devisesAffichees.indexOfFirst { it.startsWith(devise) }
+            val idx = DEVISES_AFFICHEES.indexOfFirst { it.startsWith(devise) }
             spinnerDevise.setSelection(if (idx >= 0) idx else 0)
             
             // Charger catégories actives
@@ -2139,4 +2210,3 @@ private val Int.dp: Int
     get() = (this * resources.displayMetrics.density).roundToInt()
 
 }
-
