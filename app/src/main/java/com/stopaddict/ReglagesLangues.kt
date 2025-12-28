@@ -2016,6 +2016,7 @@ private val TRADUCTIONS_ZH_TW = mapOf(
 // Aliases utilisés par getTraductions()
 private val TRADUCTIONS_ZH = TRADUCTIONS_ZH_CN      // Chinois simplifié
 private val TRADUCTIONS_ZHT = TRADUCTIONS_ZH_TW     // Chinois traditionnel
+    
 
 // ==================== Nederlands (NL) ====================
 private val TRADUCTIONS_NL = mapOf(
@@ -2179,8 +2180,6 @@ private val TRADUCTIONS_NL = mapOf(
     "support_email_error" to "Kan e-mailapp niet openen: %s",
     "msg_open_store_impossible" to "Kan de store niet openen"
 )
-    "NL" -> TRADUCTIONS_NL
-
     /**
      * Fonction helper pour récupérer une traduction spécifique
      */
