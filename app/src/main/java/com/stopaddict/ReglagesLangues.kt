@@ -2013,6 +2013,9 @@ private val TRADUCTIONS_ZH_TW = mapOf(
     "msg_open_store_impossible" to "無法開啟商店"
 )
 
+// Aliases utilisés par getTraductions()
+private val TRADUCTIONS_ZH = TRADUCTIONS_ZH_CN      // Chinois simplifié
+private val TRADUCTIONS_ZHT = TRADUCTIONS_ZH_TW     // Chinois traditionnel
 
 // ==================== Nederlands (NL) ====================
 private val TRADUCTIONS_NL = mapOf(
