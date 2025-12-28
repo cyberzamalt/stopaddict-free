@@ -26,13 +26,7 @@ import java.util.*
 
 class ReglagesFragment : Fragment() {
 
-    companion object {
-        private const val TAG = "ReglagesFragment"
-        private const val REQUEST_CODE_EXPORT = 1001
-        private const val REQUEST_CODE_IMPORT = 1002
-        private const val PREF_MODE_CIGARETTE = "mode_cigarette"
-        private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
-        private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"companion object {
+   companion object {
     private const val TAG = "ReglagesFragment"
     private const val REQUEST_CODE_EXPORT = 1001
     private const val REQUEST_CODE_IMPORT = 1002
@@ -41,12 +35,22 @@ class ReglagesFragment : Fragment() {
     private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
     private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
 
-    // Langues supportées (inclut NL + ZH + ZHT)
+    // Langues supportées
+    // (ajout : NL, ZH = chinois simplifié, ZHT = chinois traditionnel)
     private val LANGUES_CODES = arrayOf(
         "FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA",
         "NL", "ZH", "ZHT"
     )
 
+    // Devises affichées dans le Spinner (format homogène)
+    // (ajout : CNY, HKD)
+    private val DEVISES_AFFICHEES = arrayOf(
+        "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
+        "CHF (CHF)", "CAD (C$)", "AUD (A$)",
+        "BRL (R$)", "INR (₹)", "RUB (₽)",
+        "CNY (¥)", "HKD (HK$)"
+    )
+}
     // Devises affichées dans le Spinner (format homogène)
     private val DEVISES_AFFICHEES = arrayOf(
         "EUR (€)",
