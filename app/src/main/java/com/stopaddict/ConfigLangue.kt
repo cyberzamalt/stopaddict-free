@@ -1,133 +1,52 @@
 package com.stopaddict
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
-import java.util.*
+import java.util.Locale
 
 class ConfigLangue(private val context: Context) {
 
     companion object {
-    private const val TAG = "ReglagesFragment"
-    private const val REQUEST_CODE_EXPORT = 1001
-    private const val REQUEST_CODE_IMPORT = 1002
-    private const val PREF_MODE_CIGARETTE = "mode_cigarette"
-    private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
-    private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
+        private const val PREFS_NAME = "stopaddict_prefs"
+        private const val KEY_LANGUE = "langue"
 
-    // Langues supportées
-    private val LANGUES_CODES = arrayOf(
-        "FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA",
-        "ZH_CN", "ZH_TW", "NL"
-    )
+        // Langues supportées (codes cohérents avec ReglagesFragment)
+        private val LANGUES_DISPONIBLES = setOf(
+            "FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA",
+            "NL", "ZH", "ZHT"
+        )
 
-    // Devises affichées
-    private val DEVISES_AFFICHEES = arrayOf(
-        "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
-        "CHF (CHF)", "CAD (C$)", "AUD (A$)",
-        "BRL (R$)", "INR (₹)", "RUB (₽)"
-    )
-}
+        // Map code -> Locale
+        private val LOCALE_MAP: Map<String, Locale> = mapOf(
+            "FR" to Locale("fr", "FR"),
+            "EN" to Locale.ENGLISH,
+            "ES" to Locale("es", "ES"),
+            "PT" to Locale("pt", "PT"),
+            "DE" to Locale("de", "DE"),
+            "IT" to Locale("it", "IT"),
+            "RU" to Locale("ru", "RU"),
+            "AR" to Locale("ar"),
+            "HI" to Locale("hi", "IN"),
+            "JA" to Locale.JAPANESE,
+            "NL" to Locale("nl", "NL"),
+            // ZH = chinois simplifié, ZHT = chinois traditionnel
+            "ZH" to Locale.SIMPLIFIED_CHINESE,
+            "ZHT" to Locale.TRADITIONAL_CHINESE
+        )
+    }
 
-    private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-    /**
-     * Récupère la langue actuelle
-     */
     fun getLangue(): String {
-        val langue = prefs.getString(KEY_LANGUE, "FR") ?: "FR"
-        StopAddictLogger.d(TAG, "Langue actuelle: $langue")
-        return langue
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val saved = prefs.getString(KEY_LANGUE, "FR") ?: "FR"
+        return if (LANGUES_DISPONIBLES.contains(saved)) saved else "FR"
     }
 
-    /**
-     * Définit une nouvelle langue et redémarre l'application
-     */
-    fun setLangue(codeLangue: String) {
-        if (!LANGUES_DISPONIBLES.containsKey(codeLangue)) {
-            StopAddictLogger.e(TAG, "Code langue invalide: $codeLangue")
-            return
-        }
-
-        try {
-            // Sauvegarder dans SharedPreferences
-            prefs.edit().putString(KEY_LANGUE, codeLangue).apply()
-            StopAddictLogger.d(TAG, "Langue sauvegardée: $codeLangue")
-
-            // Appliquer la locale immédiatement
-            appliquerLocale(codeLangue)
-
-            // Redémarrer l'application
-            redemarrerApplication()
-        } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur changement langue", e)
-        }
+    fun setLangue(code: String) {
+        val safe = if (LANGUES_DISPONIBLES.contains(code)) code else "FR"
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(KEY_LANGUE, safe).apply()
     }
 
-    /**
-     * Applique la locale au contexte
-     */
-     @Suppress("DEPRECATION")
-    fun appliquerLocale(codeLangue: String = getLangue()) {
-        try {
-            val localeCode = LOCALE_MAP[codeLangue] ?: "fr"
-
-            val locale = when (codeLangue) {
-                "ZHS" -> Locale("zh", "CN") // chinois simplifié
-                "ZHT" -> Locale("zh", "TW") // chinois traditionnel
-                else  -> Locale(localeCode) // cas standards
-            }
-            
-            Locale.setDefault(locale)
-
-            val config = Configuration(context.resources.configuration)
-            config.setLocale(locale)
-
-            // Support RTL pour arabe
-            if (codeLangue == "AR") {
-                config.setLayoutDirection(locale)
-            }
-
-            context.resources.updateConfiguration(config, context.resources.displayMetrics)
-            StopAddictLogger.d(TAG, "Locale appliquée: $localeCode")
-        } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur application locale", e)
-        }
-    }
-
-    /**
-     * Redémarre l'application pour appliquer la nouvelle langue
-     */
-    private fun redemarrerApplication() {
-        try {
-            val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-            intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-            
-            // Fermer l'activité actuelle
-            if (context is MainActivity) {
-                context.finish()
-            }
-            
-            StopAddictLogger.d(TAG, "Application redémarrée pour changement de langue")
-        } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur redémarrage application", e)
-        }
-    }
-
-    /**
-     * Initialise la langue au démarrage de l'application
-     */
-    fun initialiserLangue() {
-        val langue = getLangue()
-        appliquerLocale(langue)
-        StopAddictLogger.d(TAG, "Langue initialisée: $langue")
-    }
-
-    /**
-     * Vérifie si une langue est RTL (Right-to-Left)
-     */
-    fun isRTL(codeLangue: String = getLangue()): Boolean {
-        return codeLangue == "AR"
+    fun getLocale(): Locale {
+        return LOCALE_MAP[getLangue()] ?: Locale("fr", "FR")
     }
 }
