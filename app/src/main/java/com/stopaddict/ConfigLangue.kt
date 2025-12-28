@@ -8,42 +8,26 @@ import java.util.*
 class ConfigLangue(private val context: Context) {
 
     companion object {
-        private const val PREFS_NAME = "StopAddict"
-        private const val KEY_LANGUE = "langue"
-        private const val TAG = "ConfigLangue"
+    private const val TAG = "ReglagesFragment"
+    private const val REQUEST_CODE_EXPORT = 1001
+    private const val REQUEST_CODE_IMPORT = 1002
+    private const val PREF_MODE_CIGARETTE = "mode_cigarette"
+    private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
+    private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
 
-        val LANGUES_DISPONIBLES = mapOf(
-            "FR" to "Français",
-            "EN" to "English",
-            "ES" to "Español",
-            "PT" to "Português",
-            "DE" to "Deutsch",
-            "IT" to "Italiano",
-            "NL" to "NL Nederlands",
-            "RU" to "RU Русский",
-            "AR" to "AR العربية",
-            "HI" to "HI हिन्दी",
-            "JA" to "JA 日本語",
-            "ZHS" to "ZH 简体",
-            "ZHT" to "ZH 繁體"
-        )
+    // Langues supportées
+    private val LANGUES_CODES = arrayOf(
+        "FR", "EN", "ES", "PT", "DE", "IT", "RU", "AR", "HI", "JA",
+        "ZH_CN", "ZH_TW", "NL"
+    )
 
-        private val LOCALE_MAP = mapOf(
-            "FR" to "fr",
-            "EN" to "en",
-            "ES" to "es",
-            "PT" to "pt",
-            "DE" to "de",
-            "IT" to "it",
-            "NL" to "nl",
-            "RU" to "ru",
-            "AR" to "ar",
-            "HI" to "hi",
-            "JA" to "ja",
-            "ZHS" to "zh_CN",
-            "ZHT" to "zh_TW"
-        )
-    }
+    // Devises affichées
+    private val DEVISES_AFFICHEES = arrayOf(
+        "EUR (€)", "USD ($)", "GBP (£)", "JPY (¥)",
+        "CHF (CHF)", "CAD (C$)", "AUD (A$)",
+        "BRL (R$)", "INR (₹)", "RUB (₽)"
+    )
+}
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
