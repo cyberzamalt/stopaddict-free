@@ -16,12 +16,18 @@ object CalendrierLangues {
             "AR" -> TRADUCTIONS_AR
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
+    
+            // AJOUTS
+            "NL" -> TRADUCTIONS_NL
+            "ZHS" -> TRADUCTIONS_ZHS
+            "ZHT" -> TRADUCTIONS_ZHT
+    
             else -> {
                 StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
-            }
         }
     }
+}
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
@@ -515,5 +521,146 @@ private val TRADUCTIONS_JA = mapOf(
     "btn_annuler" to "キャンセル",
     "msg_sauvegarde_ok" to "保存されました",
     "sauvegarde_ok" to "保存されました"
+)
+
+    private val TRADUCTIONS_NL = mapOf(
+    "titre" to "Kalender",
+
+    "label_cigarettes" to "Sigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alcohol totaal",
+    "label_bieres" to "Bieren",
+    "label_liqueurs" to "Likeuren",
+    "label_alcool_fort" to "Sterke alcohol",
+
+    "profil_complet" to "Profiel: Volledig ✓",
+    "profil_incomplet" to "Profiel: Onvolledig",
+    "total_jour" to "Totaal per dag",
+
+    "btn_mois_precedent" to "◀ Vorige",
+    "btn_mois_suivant" to "Volgende ▶",
+    "btn_aujourdhui" to "Vandaag",
+
+    "jour_0" to "M",
+    "jour_1" to "D",
+    "jour_2" to "W",
+    "jour_3" to "D",
+    "jour_4" to "V",
+    "jour_5" to "Z",
+    "jour_6" to "Z",
+
+    "legende_titre" to "Legenda:",
+    "legende_vert" to "Geen consumptie",
+    "legende_bleu" to "Lage consumptie (1–5)",
+    "legende_orange" to "Matige consumptie (6–15)",
+    "legende_rouge" to "Hoge consumptie (16+)",
+
+    "legende_objectifs" to "Doelen:",
+    "legende_reduction" to "Vermindering",
+    "legende_arret" to "Stoppen",
+    "legende_reussite" to "Doel behaald",
+
+    "legende_conso" to "Consumpties:",
+
+    "sauvegarde_ok" to "Opgeslagen",
+
+    "dialog_titre" to "Consumpties van",
+    "btn_sauvegarder" to "Opslaan",
+    "btn_annuler" to "Annuleren",
+    "msg_sauvegarde_ok" to "Opgeslagen"
+)
+
+      private val TRADUCTIONS_ZHS = mapOf(
+    "titre" to "日历",
+
+    "label_cigarettes" to "香烟",
+    "label_joints" to "大麻卷烟",
+    "label_alcool_global" to "酒精总量",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈性酒",
+
+    "profil_complet" to "档案：完整 ✓",
+    "profil_incomplet" to "档案：未完整",
+    "total_jour" to "当日总计",
+
+    "btn_mois_precedent" to "◀ 上月",
+    "btn_mois_suivant" to "下月 ▶",
+    "btn_aujourdhui" to "今天",
+
+    "jour_0" to "一",
+    "jour_1" to "二",
+    "jour_2" to "三",
+    "jour_3" to "四",
+    "jour_4" to "五",
+    "jour_5" to "六",
+    "jour_6" to "日",
+
+    "legende_titre" to "图例：",
+    "legende_vert" to "无消费",
+    "legende_bleu" to "低消费（1–5）",
+    "legende_orange" to "中等消费（6–15）",
+    "legende_rouge" to "高消费（16+）",
+
+    "legende_objectifs" to "目标：",
+    "legende_reduction" to "减少",
+    "legende_arret" to "停止",
+    "legende_reussite" to "目标达成",
+
+    "legende_conso" to "消费：",
+
+    "sauvegarde_ok" to "已保存",
+
+    "dialog_titre" to "消费记录",
+    "btn_sauvegarder" to "保存",
+    "btn_annuler" to "取消",
+    "msg_sauvegarde_ok" to "已保存"
+)
+
+      private val TRADUCTIONS_ZHT = mapOf(
+    "titre" to "日曆",
+
+    "label_cigarettes" to "香菸",
+    "label_joints" to "大麻捲菸",
+    "label_alcool_global" to "酒精總量",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    "profil_complet" to "檔案：完整 ✓",
+    "profil_incomplet" to "檔案：未完整",
+    "total_jour" to "每日總計",
+
+    "btn_mois_precedent" to "◀ 上月",
+    "btn_mois_suivant" to "下月 ▶",
+    "btn_aujourdhui" to "今天",
+
+    "jour_0" to "一",
+    "jour_1" to "二",
+    "jour_2" to "三",
+    "jour_3" to "四",
+    "jour_4" to "五",
+    "jour_5" to "六",
+    "jour_6" to "日",
+
+    "legende_titre" to "圖例：",
+    "legende_vert" to "無消費",
+    "legende_bleu" to "低消費（1–5）",
+    "legende_orange" to "中等消費（6–15）",
+    "legende_rouge" to "高消費（16+）",
+
+    "legende_objectifs" to "目標：",
+    "legende_reduction" to "減少",
+    "legende_arret" to "停止",
+    "legende_reussite" to "目標達成",
+
+    "legende_conso" to "消費：",
+
+    "sauvegarde_ok" to "已儲存",
+
+    "dialog_titre" to "消費紀錄",
+    "btn_sauvegarder" to "儲存",
+    "btn_annuler" to "取消",
+    "msg_sauvegarde_ok" to "已儲存"
 )
 }
