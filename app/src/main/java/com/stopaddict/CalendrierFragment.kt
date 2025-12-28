@@ -477,13 +477,14 @@
                 }
                 
                 val title = TextView(requireContext()).apply {
-                    text = dateFormatted
+                    val prefix = trad["dialog_titre"] ?: "Consommations du"
+                    text = "$prefix $dateFormatted"
                     textSize = 18f
                     setTypeface(null, android.graphics.Typeface.BOLD)
                     setPadding(0, 0, 0, 20)
                 }
                 container.addView(title)
-                
+                                
                 val editFields = mutableMapOf<String, EditText>()
                 
                 categoriesActives.forEach { (type, active) ->
@@ -546,7 +547,7 @@
                 
                 val dialog = android.app.AlertDialog.Builder(requireContext())
         .setView(scrollView)
-        .setPositiveButton(trad["btn_sauvegarder"] ?: "Enregistrer") { _, _ ->
+        .setPositiveButton(trad["btn_sauvegarder"] ?: "Sauvegarder") { _, _ ->
             saveConsommationsForDate(dateStr, editFields)
         }
         .setNegativeButton(trad["btn_annuler"] ?: "Annuler", null)
