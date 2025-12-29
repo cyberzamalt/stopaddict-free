@@ -136,7 +136,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             """)
             
         // Table preferences
-            db.execSQL("""
+db.execSQL("""
     CREATE TABLE $TABLE_PREFERENCES (
         $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
         $COL_PRENOM TEXT DEFAULT '',
@@ -154,15 +154,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_NB_CIGARETTES_TUBEES_PREF TEXT DEFAULT '0'
     )
 """)
-            // Insertion préférences par défaut
-            db.execSQL("INSERT INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
+
+            // Créer la ligne unique id=1 (indispensable pour update WHERE id=1)
+            db.execSQL("INSERT OR IGNORE INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
 
             // Initialisation habitudes et dates pour chaque type
             val types = listOf(TYPE_CIGARETTE, TYPE_JOINT, TYPE_ALCOOL_GLOBAL, TYPE_BIERE, TYPE_LIQUEUR, TYPE_ALCOOL_FORT)
             types.forEach { type ->
-                db.execSQL("INSERT INTO $TABLE_HABITUDES ($COL_TYPE) VALUES ('$type')")
-                db.execSQL("INSERT INTO $TABLE_DATES ($COL_TYPE) VALUES ('$type')")
-                db.execSQL("INSERT INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_HABITUDES ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_DATES ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
             }
 
             StopAddictLogger.d(TAG, "Base de données créée avec succès")
@@ -172,18 +173,143 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        try {
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_CONSOMMATIONS")
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_HABITUDES")
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_DATES")
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_COUTS")
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_PREFERENCES")
-            onCreate(db)
-            StopAddictLogger.d(TAG, "Base de données mise à jour: v$oldVersion -> v$newVersion")
-        } catch (e: Exception) {
-            StopAddictLogger.e(TAG, "Erreur mise à jour base de données", e)
+    try {
+        StopAddictLogger.d(TAG, "onUpgrade() v$oldVersion -> v$newVersion (migration sans perte)")
+
+        // 1) S'assurer que les tables existent (si installation ancienne / bug)
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS $TABLE_CONSOMMATIONS (
+                $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COL_TYPE TEXT NOT NULL,
+                $COL_QUANTITE INTEGER NOT NULL DEFAULT 1,
+                $COL_DATE_HEURE TEXT NOT NULL,
+                $COL_ACTIF INTEGER NOT NULL DEFAULT 1
+            )
+        """)
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS $TABLE_HABITUDES (
+                $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COL_TYPE TEXT NOT NULL UNIQUE,
+                $COL_MAX_JOURNALIER REAL DEFAULT 0
+            )
+        """)
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS $TABLE_DATES (
+                $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COL_TYPE TEXT NOT NULL UNIQUE,
+                $COL_DATE_REDUCTION TEXT,
+                $COL_DATE_ARRET TEXT,
+                $COL_DATE_REUSSITE TEXT
+            )
+        """)
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS $TABLE_COUTS (
+                $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COL_TYPE TEXT NOT NULL UNIQUE,
+                $COL_PRIX_PAQUET REAL DEFAULT 0,
+                $COL_NB_CIGARETTES INTEGER DEFAULT 0,
+                $COL_PRIX_TABAC REAL DEFAULT 0,
+                $COL_PRIX_FEUILLES REAL DEFAULT 0,
+                $COL_PRIX_TABAC_TUBE REAL DEFAULT 0,
+                $COL_NB_FEUILLES INTEGER DEFAULT 0,
+                $COL_PRIX_FILTRES REAL DEFAULT 0,
+                $COL_NB_FILTRES INTEGER DEFAULT 0,
+                $COL_PRIX_TUBES REAL DEFAULT 0,
+                $COL_NB_TUBES INTEGER DEFAULT 0,
+                $COL_PRIX_GRAMME REAL DEFAULT 0,
+                $COL_GRAMME_PAR_JOINT REAL DEFAULT 0,
+                $COL_PRIX_VERRE REAL DEFAULT 0,
+                $COL_UNITE_CL INTEGER DEFAULT 0
+            )
+        """)
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS $TABLE_PREFERENCES (
+                $COL_ID INTEGER PRIMARY KEY CHECK ($COL_ID = 1),
+                $COL_PRENOM TEXT DEFAULT '',
+                $COL_LANGUE TEXT DEFAULT 'FR',
+                $COL_DEVISE TEXT DEFAULT 'EUR',
+                $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+                $COL_WELCOME_DISABLED TEXT DEFAULT '0',
+                $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
+                $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
+                $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '0',
+                $COL_UNITE_CL_BIERE TEXT DEFAULT '0',
+                $COL_UNITE_CL_LIQUEUR TEXT DEFAULT '0',
+                $COL_UNITE_CL_ALCOOL_FORT TEXT DEFAULT '0',
+                $COL_NB_CIGARETTES_ROULEES_PREF TEXT DEFAULT '0',
+                $COL_NB_CIGARETTES_TUBEES_PREF TEXT DEFAULT '0'
+            )
+        """)
+
+        // 2) Ajouter les colonnes manquantes (sans casser si elles existent déjà)
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_WELCOME_DISABLED, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_MODE_CIGARETTE, "TEXT", "'classique'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_GRAMME_PAR_JOINT_PREF, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_UNITE_CL_ALCOOL_GLOBAL, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_UNITE_CL_BIERE, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_UNITE_CL_LIQUEUR, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_UNITE_CL_ALCOOL_FORT, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_NB_CIGARETTES_ROULEES_PREF, "TEXT", "'0'")
+        addColumnIfMissing(db, TABLE_PREFERENCES, COL_NB_CIGARETTES_TUBEES_PREF, "TEXT", "'0'")
+
+        // (Optionnel) Colonnes couts si tu les as ajoutées en cours de route
+        addColumnIfMissing(db, TABLE_COUTS, COL_PRIX_TABAC_TUBE, "REAL", "0")
+        addColumnIfMissing(db, TABLE_COUTS, COL_PRIX_TUBES, "REAL", "0")
+        addColumnIfMissing(db, TABLE_COUTS, COL_NB_TUBES, "INTEGER", "0")
+        addColumnIfMissing(db, TABLE_COUTS, COL_PRIX_FILTRES, "REAL", "0")
+        addColumnIfMissing(db, TABLE_COUTS, COL_NB_FILTRES, "INTEGER", "0")
+
+        // 3) Garantir la ligne unique preferences id=1
+        db.execSQL("INSERT OR IGNORE INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
+
+        // 4) Garantir les lignes par type dans habitudes/dates/couts (sans doublons)
+        val types = listOf(TYPE_CIGARETTE, TYPE_JOINT, TYPE_ALCOOL_GLOBAL, TYPE_BIERE, TYPE_LIQUEUR, TYPE_ALCOOL_FORT)
+        types.forEach { type ->
+            db.execSQL("INSERT OR IGNORE INTO $TABLE_HABITUDES ($COL_TYPE) VALUES ('$type')")
+            db.execSQL("INSERT OR IGNORE INTO $TABLE_DATES ($COL_TYPE) VALUES ('$type')")
+            db.execSQL("INSERT OR IGNORE INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
+        }
+
+        StopAddictLogger.d(TAG, "Migration OK sans perte de données")
+    } catch (e: Exception) {
+        StopAddictLogger.e(TAG, "Erreur onUpgrade (migration)", e)
+    }
+}
+
+private fun addColumnIfMissing(
+    db: SQLiteDatabase,
+    table: String,
+    column: String,
+    type: String,
+    defaultSql: String
+) {
+    try {
+        if (!columnExists(db, table, column)) {
+            db.execSQL("ALTER TABLE $table ADD COLUMN $column $type DEFAULT $defaultSql")
+            StopAddictLogger.d(TAG, "Colonne ajoutée: $table.$column")
+        }
+    } catch (e: Exception) {
+        StopAddictLogger.e(TAG, "Erreur ajout colonne $table.$column", e)
+    }
+}
+
+private fun columnExists(db: SQLiteDatabase, table: String, column: String): Boolean {
+    val cursor = db.rawQuery("PRAGMA table_info($table)", null)
+    var exists = false
+    while (cursor.moveToNext()) {
+        val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+        if (name == column) {
+            exists = true
+            break
         }
     }
+    cursor.close()
+    return exists
+}
     
     // ==================== CONSOMMATIONS ====================
 
@@ -668,6 +794,7 @@ fun setCouts(
     fun razUsine(): Boolean {
         return try {
             val db = writableDatabase
+            db.execSQL("INSERT OR IGNORE INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
             db.delete(TABLE_CONSOMMATIONS, null, null)
             db.delete(TABLE_HABITUDES, null, null)
             db.delete(TABLE_DATES, null, null)
@@ -688,14 +815,15 @@ fun setCouts(
         $COL_UNITE_CL_ALCOOL_FORT = '0',
         $COL_NB_CIGARETTES_ROULEES_PREF = '0',
         $COL_NB_CIGARETTES_TUBEES_PREF = '0'
+    WHERE $COL_ID = 1
 """)
 
             // Réinitialiser les lignes par défaut
             val types = listOf(TYPE_CIGARETTE, TYPE_JOINT, TYPE_ALCOOL_GLOBAL, TYPE_BIERE, TYPE_LIQUEUR, TYPE_ALCOOL_FORT)
             types.forEach { type ->
-                db.execSQL("INSERT INTO $TABLE_HABITUDES ($COL_TYPE) VALUES ('$type')")
-                db.execSQL("INSERT INTO $TABLE_DATES ($COL_TYPE) VALUES ('$type')")
-                db.execSQL("INSERT INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_HABITUDES ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_DATES ($COL_TYPE) VALUES ('$type')")
+                db.execSQL("INSERT OR IGNORE INTO $TABLE_COUTS ($COL_TYPE) VALUES ('$type')")
             }
             
             StopAddictLogger.d(TAG, "RAZ usine effectuée")
