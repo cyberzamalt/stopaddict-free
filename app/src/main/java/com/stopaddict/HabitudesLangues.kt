@@ -19,12 +19,17 @@ object HabitudesLangues {
             "AR" -> TRADUCTIONS_AR
             "HI" -> TRADUCTIONS_HI
             "JA" -> TRADUCTIONS_JA
+        
+            // AJOUTS
+            "NL" -> TRADUCTIONS_NL
+            "ZHS" -> TRADUCTIONS_ZHS
+            "ZHT" -> TRADUCTIONS_ZHT
+        
             else -> {
                 StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
                 TRADUCTIONS_FR
             }
         }
-    }
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
@@ -628,6 +633,7 @@ private val TRADUCTIONS_ZHT = mapOf(
     "msg_err_generic" to "發生錯誤"
 )
 }
+
 
 
 
