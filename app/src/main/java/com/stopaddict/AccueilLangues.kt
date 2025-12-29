@@ -92,7 +92,7 @@ object AccueilLangues {
         "btn_ok" to "Fermer",
         
         // Messages erreurs
-        "erreur_chargement" to "Erreur chargement Accueil",
+        "erreur_chargement" to "Erreur de chargement",
         "erreur_ajout" to "Erreur ajout consommation",
         "erreur_retrait" to "Impossible de retirer, aucune consommation pour aujourd'hui",
         "erreur_generale" to "Erreur: %s"
@@ -160,7 +160,7 @@ object AccueilLangues {
                 "btn_ok" to "OK",
         
         // Messages erreurs
-        "erreur_chargement" to "Error loading Home",
+        "erreur_chargement" to "Loading error",
         "erreur_ajout" to "Error adding consumption",
         "erreur_retrait" to "Cannot remove, no consumption for today",
         "erreur_generale" to "Error: %s"
@@ -228,7 +228,7 @@ object AccueilLangues {
                 "btn_ok" to "Cerrar",
         
         // Messages erreurs
-        "erreur_chargement" to "Error al cargar Inicio",
+        "erreur_chargement" to "Error de carga",
         "erreur_ajout" to "Error al añadir consumo",
         "erreur_retrait" to "No se puede retirar, no hay consumo para hoy",
         "erreur_generale" to "Error: %s"
@@ -296,10 +296,11 @@ object AccueilLangues {
                 "btn_ok" to "Fechar",
         
         // Messages erreurs
-        "erreur_chargement" to "Erro ao carregar Início",
+        "erreur_chargement" to "Erro de carregamento",
         "erreur_ajout" to "Erro ao adicionar consumo",
         "erreur_retrait" to "Não é possível remover, nenhum consumo para hoje",
         "erreur_generale" to "Erro: %s"
+        
     )
     // ==================== DEUTSCH ====================
     private val TRADUCTIONS_DE = mapOf(
@@ -363,7 +364,7 @@ object AccueilLangues {
                 "btn_ok" to "Schließen",
         
         // Messages erreurs
-        "erreur_chargement" to "Fehler beim Laden der Startseite",
+        "erreur_chargement" to "Ladefehler",
         "erreur_ajout" to "Fehler beim Hinzufügen des Konsums",
         "erreur_retrait" to "Kann nicht abgezogen werden, kein Konsum für heute",
         "erreur_generale" to "Fehler: %s"
@@ -431,7 +432,7 @@ object AccueilLangues {
                 "btn_ok" to "Chiudi",
         
         // Messages erreurs
-        "erreur_chargement" to "Errore nel caricamento della Home",
+        "erreur_chargement" to "Errore di caricamento",
         "erreur_ajout" to "Errore nell'aggiunta del consumo",
         "erreur_retrait" to "Impossibile rimuovere, nessun consumo per oggi",
         "erreur_generale" to "Errore: %s"
@@ -499,11 +500,12 @@ object AccueilLangues {
                 "btn_ok" to "Закрыть",
         
         // Messages erreurs
-        "erreur_chargement" to "Ошибка загрузки Главной",
+        "erreur_chargement" to "Ошибка загрузки",
         "erreur_ajout" to "Ошибка при добавлении потребления",
         "erreur_retrait" to "Нельзя уменьшить: нет потребления за сегодня",
         "erreur_generale" to "Ошибка: %s"
     )
+    
     // ==================== العربية (ARABE) ====================
     private val TRADUCTIONS_AR = mapOf(
         // Labels catégories
@@ -566,7 +568,7 @@ object AccueilLangues {
                 "btn_ok" to "إغلاق",
         
         // Messages erreurs
-        "erreur_chargement" to "خطأ في تحميل الصفحة الرئيسية",
+        "erreur_chargement" to "خطأ في التحميل",
         "erreur_ajout" to "خطأ في إضافة الاستهلاك",
         "erreur_retrait" to "لا يمكن الإزالة، لا يوجد استهلاك لليوم",
         "erreur_generale" to "خطأ: %s"
@@ -634,7 +636,7 @@ object AccueilLangues {
                 "btn_ok" to "बंद करें",
         
         // Messages erreurs
-        "erreur_chargement" to "होम लोड करने में त्रुटि",
+        "erreur_chargement" to "लोड करने में त्रुटि",
         "erreur_ajout" to "खपत जोड़ने में त्रुटि",
         "erreur_retrait" to "घटाना संभव नहीं, आज के लिए कोई खपत नहीं है",
         "erreur_generale" to "त्रुटि: %s"
@@ -702,7 +704,7 @@ object AccueilLangues {
                 "btn_ok" to "閉じる",
         
         // Messages erreurs
-        "erreur_chargement" to "ホームの読み込みエラー",
+        "erreur_chargement" to "読み込みエラー",
         "erreur_ajout" to "消費追加エラー",
         "erreur_retrait" to "減らせません。本日の消費がありません。",
         "erreur_generale" to "エラー：%s"
@@ -770,7 +772,7 @@ private val TRADUCTIONS_NL = mapOf(
     "btn_ok" to "Sluiten",
 
     // Messages erreurs
-    "erreur_chargement" to "Fout bij laden van Startpagina",
+    "erreur_chargement" to "Laadfout",
     "erreur_ajout" to "Fout bij toevoegen van consumptie",
     "erreur_retrait" to "Kan niet verwijderen, geen consumptie vandaag",
     "erreur_generale" to "Fout: %s"
@@ -838,7 +840,7 @@ private val TRADUCTIONS_ZHS = mapOf(
     "btn_ok" to "关闭",
 
     // Messages erreurs
-    "erreur_chargement" to "首页加载错误",
+    "erreur_chargement" to "加载错误",
     "erreur_ajout" to "添加消费时出错",
     "erreur_retrait" to "无法移除，今天没有消费记录",
     "erreur_generale" to "错误：%s"
@@ -906,7 +908,7 @@ private val TRADUCTIONS_ZHT = mapOf(
     "btn_ok" to "關閉",
 
     // Messages erreurs
-    "erreur_chargement" to "首頁載入錯誤",
+    "erreur_chargement" to "載入錯誤",
     "erreur_ajout" to "新增消費時發生錯誤",
     "erreur_retrait" to "無法移除，今天沒有消費記錄",
     "erreur_generale" to "錯誤：%s"
