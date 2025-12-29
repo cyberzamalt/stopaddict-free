@@ -322,18 +322,26 @@ class ReglagesFragment : Fragment() {
     applyWhiteFieldStyleWithBlueStroke(spinnerDevise)
     container.addView(spinnerDevise)
 
-   // Encouragement à l'ouverture (popup Bienvenue)
-      addLabel(container, "💬 " + (trad["label_disable_welcome_opening"] ?: "Désactiver l’encouragement à l’ouverture"))
+      // Encouragement à l'ouverture (popup Bienvenue)
       
+      // ✅ Titre court
+      addSectionTitle(container, "💬 " + (trad["titre_encouragement"] ?: "Encouragement"))
+      
+      // ✅ Case + phrase sur la même ligne
       checkDisableWelcome = CheckBox(requireContext()).apply {
-          text = "" // IMPORTANT : pas de titre sur la case (comme demandé)
+          text = (trad["label_disable_welcome_opening"] ?: "Désactiver l'encouragement à l'ouverture")
+          textSize = 14f
+          setTextColor(Color.BLACK)
+      
           val saved = dbHelper.getPreference(PREF_WELCOME_DISABLED, "0")
           isChecked = (saved == "1")
       
-          setOnCheckedChangeListener { _, isChecked ->
-              dbHelper.setPreference(PREF_WELCOME_DISABLED, if (isChecked) "1" else "0")
+          setOnCheckedChangeListener { _, checked ->
+              dbHelper.setPreference(PREF_WELCOME_DISABLED, if (checked) "1" else "0")
           }
       }
+      
+      // Optionnel : garde ton style de cadre (si tu veux la même esthétique)
       applyWhiteFieldStyleWithBlueStroke(checkDisableWelcome)
       container.addView(checkDisableWelcome)
 
@@ -1044,6 +1052,8 @@ class ReglagesFragment : Fragment() {
             
             val devise = spinnerDevise.selectedItem.toString().split(" ")[0]
             dbHelper.setPreference("devise", devise)
+
+            dbHelper.setPreference(PREF_WELCOME_DISABLED, if (checkDisableWelcome.isChecked) "1" else "0")
             
             Toast.makeText(requireContext(), trad["sauvegarde_ok"] ?: "Sauvegardé", Toast.LENGTH_SHORT).show()
             
@@ -1590,20 +1600,30 @@ class ReglagesFragment : Fragment() {
                     Toast.makeText(requireContext(), trad["raz_historique_ok"] ?: "RAZ historique effectué", Toast.LENGTH_SHORT).show()
                 }
                 "usine" -> {
-                    categoriesActives.forEach { (typeCategorie, _) ->
-                        dbHelper.supprimerToutesConsommations(typeCategorie)
-                        dbHelper.setCouts(
-                        typeCategorie,
-                        0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                        0.0, 0.0, 0.0, 0.0, 0.0
-                    )
+                    val types = listOf(
+                      DatabaseHelper.TYPE_CIGARETTE,
+                      DatabaseHelper.TYPE_JOINT,
+                      DatabaseHelper.TYPE_ALCOOL_GLOBAL,
+                      DatabaseHelper.TYPE_BIERE,
+                      DatabaseHelper.TYPE_LIQUEUR,
+                      DatabaseHelper.TYPE_ALCOOL_FORT
+                  )
+                  
+                  types.forEach { typeCategorie ->
+                      dbHelper.supprimerToutesConsommations(typeCategorie)
+                      dbHelper.setCouts(
+                          typeCategorie,
+                          0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                          0.0, 0.0, 0.0, 0.0, 0.0
+                      )
+                      dbHelper.setMaxJournalier(typeCategorie, 0)
+                      dbHelper.setDatesObjectifs(typeCategorie, "", "", "")
+                  }
 
-                        dbHelper.setMaxJournalier(typeCategorie, 0)
-                        dbHelper.setDatesObjectifs(typeCategorie, "", "", "")
-                    }
                     dbHelper.setPreference("prenom", "")
                     dbHelper.setPreference("devise", "EUR")
                     configLangue.setLangue("FR")
+                    dbHelper.setPreference(PREF_WELCOME_DISABLED, "0")
                     
                     Toast.makeText(requireContext(), trad["raz_usine_ok"] ?: "RAZ usine effectué", Toast.LENGTH_SHORT).show()
                     activity?.recreate()
@@ -1665,6 +1685,7 @@ class ReglagesFragment : Fragment() {
         export.put(PREF_NB_CIGARETTES_ROULEES, dbHelper.getPreference(PREF_NB_CIGARETTES_ROULEES, "0"))
         export.put(PREF_NB_CIGARETTES_TUBEES, dbHelper.getPreference(PREF_NB_CIGARETTES_TUBEES, "0"))
         export.put("gramme_par_joint", dbHelper.getPreference("gramme_par_joint", "0"))
+        export.put(PREF_WELCOME_DISABLED, dbHelper.getPreference(PREF_WELCOME_DISABLED, "0"))
         export.put("unite_cl_alcool_global", dbHelper.getPreference("unite_cl_alcool_global", "0"))
         export.put("unite_cl_biere", dbHelper.getPreference("unite_cl_biere", "0"))
         export.put("unite_cl_liqueur", dbHelper.getPreference("unite_cl_liqueur", "0"))
@@ -1820,6 +1841,7 @@ class ReglagesFragment : Fragment() {
         dbHelper.setPreference(PREF_MODE_CIGARETTE, json.optString(PREF_MODE_CIGARETTE, "classique"))
         dbHelper.setPreference(PREF_NB_CIGARETTES_ROULEES, json.optString(PREF_NB_CIGARETTES_ROULEES, "0"))
         dbHelper.setPreference(PREF_NB_CIGARETTES_TUBEES, json.optString(PREF_NB_CIGARETTES_TUBEES, "0"))
+        dbHelper.setPreference(PREF_WELCOME_DISABLED, json.optString(PREF_WELCOME_DISABLED, "0"))
         
         dbHelper.setPreference("gramme_par_joint", json.optString("gramme_par_joint", "0"))
         dbHelper.setPreference("unite_cl_alcool_global", json.optString("unite_cl_alcool_global", "0"))
@@ -1831,14 +1853,14 @@ class ReglagesFragment : Fragment() {
         try {
             val jsonCat = JSONObject(categoriesActivesStr)
           categoriesActives["cigarette"] = jsonCat.optBoolean("cigarette", true)
-categoriesActives["joint"] = jsonCat.optBoolean("joint", true)
-categoriesActives["alcool_global"] = jsonCat.optBoolean("alcool_global", true)
-categoriesActives["biere"] = jsonCat.optBoolean("biere", false)
-categoriesActives["liqueur"] = jsonCat.optBoolean("liqueur", false)
-categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
-        } catch (e: Exception) {
-            logger.e( "Erreur parse categories_actives à l'import: ${e.message}")
-        }
+         categoriesActives["joint"] = jsonCat.optBoolean("joint", true)
+         categoriesActives["alcool_global"] = jsonCat.optBoolean("alcool_global", true)
+         categoriesActives["biere"] = jsonCat.optBoolean("biere", false)
+         categoriesActives["liqueur"] = jsonCat.optBoolean("liqueur", false)
+         categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
+                 } catch (e: Exception) {
+                     logger.e( "Erreur parse categories_actives à l'import: ${e.message}")
+                 }
 
         // 3) Restaurer les coûts par catégorie (ordre cohérent avec saveCouts()/loadCouts())
         val coutsObj = json.optJSONObject("couts")
@@ -2019,14 +2041,18 @@ categoriesActives["alcool_fort"] = jsonCat.optBoolean("alcool_fort", false)
             
             // Charger coûts
             loadCouts()
+            
+            // Charger état "Désactiver l'encouragement à l'ouverture"
+            val wd = dbHelper.getPreference(PREF_WELCOME_DISABLED, "0")
+            checkDisableWelcome.isChecked = (wd == "1")
 
             // ➕ AJOUT : re-sélectionner le mode de cigarettes mémorisé
         val modeCig = dbHelper.getPreference(PREF_MODE_CIGARETTE, "classique")
-    when (modeCig) {
-            "rouler" -> radioCigarettesRouler.isChecked = true
-            "tuber" -> radioCigarettesTubeuse.isChecked = true
-        else    -> radioCigarettesClassiques.isChecked = true
-    }
+          when (modeCig) {
+                  "rouler" -> radioCigarettesRouler.isChecked = true
+                  "tuber" -> radioCigarettesTubeuse.isChecked = true
+              else    -> radioCigarettesClassiques.isChecked = true
+          }
             
             updateProfilStatus()
             
