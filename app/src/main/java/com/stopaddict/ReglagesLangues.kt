@@ -49,6 +49,7 @@ object ReglagesLangues {
         "label_devise" to "Devise",
         "hint_prenom" to "Entrer votre prénom",
         "btn_sauvegarder_profil" to "Sauvegarder",
+        "label_disable_welcome_opening" to "Désactiver l’encouragement à l’ouverture",
 
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
@@ -219,6 +220,7 @@ object ReglagesLangues {
         "label_devise" to "Currency",
         "hint_prenom" to "Enter your first name",
         "btn_sauvegarder_profil" to "Save",
+        "label_disable_welcome_opening" to "Disable welcome encouragement at launch",
 
         // Labels catégories
         "label_cigarettes" to "Cigarettes",
@@ -388,6 +390,7 @@ private val TRADUCTIONS_ES = mapOf(
     "label_langue" to "Idioma",
     "label_devise" to "Moneda",
     "btn_sauvegarder_profil" to "Guardar perfil",
+    "label_disable_welcome_opening" to "Desactivar el mensaje de ánimo al iniciar",
 
     // Labels catégories
     "label_cigarettes" to "Cigarrillos",
@@ -550,6 +553,7 @@ private val TRADUCTIONS_PT = mapOf(
     "label_langue" to "Idioma",
     "label_devise" to "Moeda",
     "btn_sauvegarder_profil" to "Guardar perfil",
+    "label_disable_welcome_opening" to "Desativar a mensagem de incentivo ao abrir",
 
     // Labels catégories
     "label_cigarettes" to "Cigarros",
@@ -713,6 +717,7 @@ private val TRADUCTIONS_DE = mapOf(
     "label_langue" to "Sprache",
     "label_devise" to "Währung",
     "btn_sauvegarder_profil" to "Profil speichern",
+    "label_disable_welcome_opening" to "Ermutigung beim Start deaktivieren",
     "hint_prenom" to "Geben Sie Ihren Vornamen ein",
 
     // Labels catégories
@@ -880,6 +885,7 @@ private val TRADUCTIONS_IT = mapOf(
     "label_langue" to "Lingua",
     "label_devise" to "Valuta",
     "btn_sauvegarder_profil" to "Salva profilo",
+    "label_disable_welcome_opening" to "Disattivare l'incoraggiamento all'apertura",
     "hint_prenom" to "Inserisci il tuo nome",
 
     // Labels catégories
@@ -1046,6 +1052,7 @@ private val TRADUCTIONS_RU = mapOf(
     "label_langue" to "Язык",
     "label_devise" to "Валюта",
     "btn_sauvegarder_profil" to "Сохранить профиль",
+    "label_disable_welcome_opening" to "Отключить поощрение при запуске",
     "hint_prenom" to "Введите ваше имя",
 
     // Labels catégories
@@ -1211,6 +1218,7 @@ private val TRADUCTIONS_AR = mapOf(
     "label_langue" to "اللغة",
     "label_devise" to "العملة",
     "btn_sauvegarder_profil" to "حفظ الملف الشخصي",
+    "label_disable_welcome_opening" to "إيقاف رسالة التشجيع عند فتح التطبيق",
     "hint_prenom" to "أدخل اسمك الأول",
 
     // Labels catégories
@@ -1376,6 +1384,7 @@ private val TRADUCTIONS_HI = mapOf(
     "label_langue" to "भाषा",
     "label_devise" to "मुद्रा",
     "btn_sauvegarder_profil" to "प्रोफ़ाइल सहेजें",
+    "label_disable_welcome_opening" to "ऐप खोलने पर प्रोत्साहन संदेश बंद करें",
     "hint_prenom" to "अपना नाम दर्ज करें",
 
     // Labels catégories
@@ -1541,6 +1550,7 @@ private val TRADUCTIONS_JA = mapOf(
     "label_langue" to "言語",
     "label_devise" to "通貨",
     "btn_sauvegarder_profil" to "プロフィールを保存",
+    "label_disable_welcome_opening" to "起動時の励ましメッセージを無効にする",
     "hint_prenom" to "名前を入力してください",
 
     // Labels catégories
@@ -1704,6 +1714,7 @@ private val TRADUCTIONS_ZH_CN = mapOf(
     "label_langue" to "语言",
     "label_devise" to "货币",
     "btn_sauvegarder_profil" to "保存资料",
+    "label_disable_welcome_opening" to "关闭打开时的鼓励提示",
 
     // Categories labels
     "label_cigarettes" to "香烟",
@@ -1868,6 +1879,7 @@ private val TRADUCTIONS_ZH_TW = mapOf(
     "label_langue" to "語言",
     "label_devise" to "貨幣",
     "btn_sauvegarder_profil" to "儲存檔案",
+    "label_disable_welcome_opening" to "關閉開啟時的鼓勵提示",
 
     // Categories labels
     "label_cigarettes" to "香菸",
@@ -2036,6 +2048,7 @@ private val TRADUCTIONS_NL = mapOf(
     "label_langue" to "Taal",
     "label_devise" to "Valuta",
     "btn_sauvegarder_profil" to "Profiel opslaan",
+    "label_disable_welcome_opening" to "Aanmoediging bij het openen uitschakelen",
 
     // Categories labels
     "label_cigarettes" to "Sigaretten",
