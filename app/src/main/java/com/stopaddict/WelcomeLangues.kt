@@ -116,18 +116,77 @@ object WelcomeLangues {
     // Pour compilation immédiate : on peut temporairement fallback sur FR
     // Puis remplacer progressivement par de vraies traductions.
 
-    private val TRADUCTIONS_EN = TRADUCTIONS_FR
-    private val TRADUCTIONS_ES = TRADUCTIONS_FR
-    private val TRADUCTIONS_PT = TRADUCTIONS_FR
-    private val TRADUCTIONS_DE = TRADUCTIONS_FR
-    private val TRADUCTIONS_IT = TRADUCTIONS_FR
-    private val TRADUCTIONS_RU = TRADUCTIONS_FR
-    private val TRADUCTIONS_AR = TRADUCTIONS_FR
-    private val TRADUCTIONS_HI = TRADUCTIONS_FR
-    private val TRADUCTIONS_JA = TRADUCTIONS_FR
-    private val TRADUCTIONS_NL = TRADUCTIONS_FR
-    private val TRADUCTIONS_ZHS = TRADUCTIONS_FR
-    private val TRADUCTIONS_ZHT = TRADUCTIONS_FR
+    private val TRADUCTIONS_EN = mapOf(
+        "welcome_title" to "Welcome",
+        "welcome_checkbox_hide" to "Don't show the welcome message again",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_ES = mapOf(
+        "welcome_title" to "Bienvenido",
+        "welcome_checkbox_hide" to "No volver a mostrar el mensaje de bienvenida",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_PT = mapOf(
+        "welcome_title" to "Bem-vindo",
+        "welcome_checkbox_hide" to "Não mostrar novamente a mensagem de boas-vindas",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_DE = mapOf(
+        "welcome_title" to "Willkommen",
+        "welcome_checkbox_hide" to "Willkommensnachricht nicht mehr anzeigen",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_IT = mapOf(
+        "welcome_title" to "Benvenuto",
+        "welcome_checkbox_hide" to "Non mostrare più il messaggio di benvenuto",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_RU = mapOf(
+        "welcome_title" to "Добро пожаловать",
+        "welcome_checkbox_hide" to "Больше не показывать приветственное сообщение",
+        "welcome_ok" to "ОК"
+    )
+    
+    private val TRADUCTIONS_AR = mapOf(
+        "welcome_title" to "مرحبًا",
+        "welcome_checkbox_hide" to "عدم عرض رسالة الترحيب مرة أخرى",
+        "welcome_ok" to "حسنًا"
+    )
+    
+    private val TRADUCTIONS_HI = mapOf(
+        "welcome_title" to "स्वागत है",
+        "welcome_checkbox_hide" to "स्वागत संदेश फिर से न दिखाएँ",
+        "welcome_ok" to "ठीक है"
+    )
+    
+    private val TRADUCTIONS_JA = mapOf(
+        "welcome_title" to "ようこそ",
+        "welcome_checkbox_hide" to "起動時のメッセージを今後表示しない",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_NL = mapOf(
+        "welcome_title" to "Welkom",
+        "welcome_checkbox_hide" to "Welkomstbericht niet meer tonen",
+        "welcome_ok" to "OK"
+    )
+    
+    private val TRADUCTIONS_ZHS = mapOf(
+        "welcome_title" to "欢迎",
+        "welcome_checkbox_hide" to "不再显示欢迎信息",
+        "welcome_ok" to "确定"
+    )
+    
+    private val TRADUCTIONS_ZHT = mapOf(
+        "welcome_title" to "歡迎",
+        "welcome_checkbox_hide" to "不再顯示歡迎訊息",
+        "welcome_ok" to "確定"
+    )
 
     private val MESSAGES_EN = MESSAGES_FR
     private val MESSAGES_ES = MESSAGES_FR
