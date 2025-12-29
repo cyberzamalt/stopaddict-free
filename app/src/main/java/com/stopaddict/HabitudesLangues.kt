@@ -30,7 +30,7 @@ object HabitudesLangues {
                 TRADUCTIONS_FR
             }
         }
-
+    }
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
         "titre" to "Habitudes & Volonté",
@@ -633,6 +633,7 @@ private val TRADUCTIONS_ZHT = mapOf(
     "msg_err_generic" to "發生錯誤"
 )
 }
+
 
 
 
