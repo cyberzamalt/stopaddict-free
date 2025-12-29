@@ -8,30 +8,27 @@ object AccueilLangues {
      * Retourne toutes les traductions pour une langue donnée
      */
     fun getTraductions(codeLangue: String): Map<String, String> {
-        return when (codeLangue) {
-            "FR"  -> TRADUCTIONS_FR
-            "EN"  -> TRADUCTIONS_EN
-            "ES"  -> TRADUCTIONS_ES
-            "PT"  -> TRADUCTIONS_PT
-            "DE"  -> TRADUCTIONS_DE
-            "IT"  -> TRADUCTIONS_IT
-            "RU"  -> TRADUCTIONS_RU
-            "AR"  -> TRADUCTIONS_AR
-            "HI"  -> TRADUCTIONS_HI
-            "JA"  -> TRADUCTIONS_JA
-
-            // Ajouts
-            "NL"  -> TRADUCTIONS_NL
-            "ZHS" -> TRADUCTIONS_ZHS   // Chinois simplifié
-            "ZHT" -> TRADUCTIONS_ZHT   // Chinois traditionnel
-
-            else -> {
-                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
-                TRADUCTIONS_FR
-            }
+    return when (codeLangue) {
+        "FR" -> TRADUCTIONS_FR
+        "EN" -> TRADUCTIONS_EN
+        "ES" -> TRADUCTIONS_ES
+        "PT" -> TRADUCTIONS_PT
+        "DE" -> TRADUCTIONS_DE
+        "IT" -> TRADUCTIONS_IT
+        "RU" -> TRADUCTIONS_RU
+        "AR" -> TRADUCTIONS_AR
+        "HI" -> TRADUCTIONS_HI
+        "JA" -> TRADUCTIONS_JA
+        "NL" -> TRADUCTIONS_NL
+        "ZHS" -> TRADUCTIONS_ZHS
+        "ZHT" -> TRADUCTIONS_ZHT
+        else -> {
+            StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+            TRADUCTIONS_FR
         }
     }
 }
+
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
