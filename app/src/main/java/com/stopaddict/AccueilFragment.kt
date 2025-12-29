@@ -165,7 +165,7 @@ class AccueilFragment : Fragment() {
                 trad["erreur_chargement"] ?: "Erreur chargement",
                 Toast.LENGTH_SHORT
             ).show()
-
+        }
         return view
     }
 
