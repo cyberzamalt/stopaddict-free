@@ -290,6 +290,17 @@ class StatsFragment : Fragment() {
             cellDepensesMois = view.findViewById(R.id.stats_depenses_mois)
             cellDepensesAnnee = view.findViewById(R.id.stats_depenses_annee)
 
+            // Fix affichage € (évite que le bas soit coupé quand ça passe sur 2 lignes)
+            configureMoneyCellText(cellDepensesJour)
+            configureMoneyCellText(cellDepensesSemaine)
+            configureMoneyCellText(cellDepensesMois)
+            configureMoneyCellText(cellDepensesAnnee)
+            
+            configureMoneyCellText(cellEconomiesJour)
+            configureMoneyCellText(cellEconomiesSemaine)
+            configureMoneyCellText(cellEconomiesMois)
+            configureMoneyCellText(cellEconomiesAnnee)
+
             // Bandeau profil (progression)
             txtProfilComplet = view.findViewById(R.id.stats_txt_profil_complet)
             profilProgress = view.findViewById(R.id.stats_profil_progress)
@@ -1524,6 +1535,27 @@ private fun calculerEconomiesParCategorie(
             else -> code
         }
     }
+
+    private fun dpToPx(dp: Int): Int {
+    return (dp * resources.displayMetrics.density).roundToInt()
+}
+
+private fun configureMoneyCellText(tv: TextView) {
+    // Autoriser 2 lignes (montant + €)
+    tv.setSingleLine(false)
+    tv.maxLines = 2
+    tv.setLines(2)
+
+    // Évite le rognage haut/bas sur certaines polices / emojis
+    tv.setIncludeFontPadding(true)
+
+    // Un peu d’air vertical
+    val pad = dpToPx(2)
+    tv.setPadding(tv.paddingLeft, pad, tv.paddingRight, pad)
+
+    // Hauteur minimum pour ne jamais couper la 2e ligne
+    tv.minHeight = dpToPx(40)
+}
 
     /**
      * Remplit le tableau résumé en haut (Cigs/Joints/Alcool... x Jour/Semaine/Mois/Année)
