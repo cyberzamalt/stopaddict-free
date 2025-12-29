@@ -34,6 +34,7 @@ class ReglagesFragment : Fragment() {
     private const val PREF_MODE_CIGARETTE = "mode_cigarette"
     private const val PREF_NB_CIGARETTES_ROULEES = "nb_cigarettes_roulees"
     private const val PREF_NB_CIGARETTES_TUBEES = "nb_cigarettes_tubees"
+    private const val PREF_WELCOME_DISABLED = "welcome_disabled"
 
     // Langues supportées
     // (ajout : NL, ZH = chinois simplifié, ZHT = chinois traditionnel)
@@ -73,6 +74,7 @@ class ReglagesFragment : Fragment() {
     private lateinit var editPrenom: EditText
     private lateinit var spinnerLangue: Spinner
     private lateinit var spinnerDevise: Spinner
+    private lateinit var checkDisableWelcome: CheckBox
     
     // Catégories
     private lateinit var switchCigarette: CheckBox
@@ -319,6 +321,21 @@ class ReglagesFragment : Fragment() {
 
     applyWhiteFieldStyleWithBlueStroke(spinnerDevise)
     container.addView(spinnerDevise)
+
+   // Encouragement à l'ouverture (popup Bienvenue)
+      addLabel(container, "💬 " + (trad["label_disable_welcome_opening"] ?: "Désactiver l’encouragement à l’ouverture"))
+      
+      checkDisableWelcome = CheckBox(requireContext()).apply {
+          text = "" // IMPORTANT : pas de titre sur la case (comme demandé)
+          val saved = dbHelper.getPreference(PREF_WELCOME_DISABLED, "0")
+          isChecked = (saved == "1")
+      
+          setOnCheckedChangeListener { _, isChecked ->
+              dbHelper.setPreference(PREF_WELCOME_DISABLED, if (isChecked) "1" else "0")
+          }
+      }
+      applyWhiteFieldStyleWithBlueStroke(checkDisableWelcome)
+      container.addView(checkDisableWelcome)
 
     // Bouton sauvegarder profil
     val btnSavePerso = Button(requireContext()).apply {
