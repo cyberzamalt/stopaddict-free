@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     // Nouveau : date de dernière vérification + intervalle (30 jours)
     private const val PREF_LAST_AGE_CHECK = "last_age_check_timestamp"
     private const val AGE_CHECK_INTERVAL_DAYS = 30L
+    private const val PREF_WELCOME_DISABLED = "welcome_disabled"
 }
     
     private val logger = AppLogger("MainActivity")
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                 showAgeWarningDialog()
             } else {
                 initializeMainContent()
+                showWelcomeDialogIfNeeded()
             }
             
         } catch (e: Exception) {
@@ -314,6 +316,7 @@ private fun updateDateTime() {
                     // Si affiché depuis Réglages → NE PAS renvoyer à l'accueil
                     if (!fromSettings) {
                         initializeMainContent()
+                        showWelcomeDialogIfNeeded()
                     }
                 } else {
                     logger.d(
@@ -356,6 +359,66 @@ private fun showRessourcesUtiles() {
         logger.d("showRessourcesUtiles: dialog affiché avec succès")
     } catch (e: Exception) {
         logger.e("showRessourcesUtiles: erreur affichage ressources", e)
+    }
+}
+
+private fun showWelcomeDialogIfNeeded() {
+    try {
+        // Si l'utilisateur a désactivé l'encouragement → on ne montre rien
+        val disabled = dbHelper.getPreference(PREF_WELCOME_DISABLED, "0") == "1"
+        if (disabled) return
+
+        // Textes UI selon la langue
+        val wTrad = WelcomeLangues.getTraductions(configLangue.getLangue())
+        val title = wTrad["welcome_title"] ?: "Bienvenue"
+        val checkboxText = wTrad["welcome_checkbox_hide"] ?: "Ne plus afficher le message d’accueil"
+        val okText = wTrad["welcome_ok"] ?: "OK"
+
+        // 1 message aléatoire parmi 45
+        val messages = WelcomeLangues.getMessages(configLangue.getLangue())
+        val message = if (messages.isNotEmpty()) {
+            messages.random()
+        } else {
+            "★ Bienvenue !"
+        }
+
+        // UI
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(40, 35, 40, 15)
+        }
+
+        val tvMessage = TextView(this).apply {
+            text = message
+            textSize = 14f
+            setPadding(0, 10, 0, 25)
+        }
+        container.addView(tvMessage)
+
+        val checkbox = CheckBox(this).apply {
+            text = checkboxText
+            setPadding(0, 10, 0, 10)
+        }
+        container.addView(checkbox)
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(title)
+            .setView(container)
+            .setPositiveButton(okText) { d, _ ->
+                // Si coché → on désactive définitivement (jusqu'à réactivation dans Réglages)
+                if (checkbox.isChecked) {
+                    dbHelper.setPreference(PREF_WELCOME_DISABLED, "1")
+                }
+                d.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+
+        dialog.show()
+
+    } catch (e: Exception) {
+        // En cas de souci, on n'empêche pas l'app de fonctionner
+        logger.e("showWelcomeDialogIfNeeded: erreur", e)
     }
 }
 
