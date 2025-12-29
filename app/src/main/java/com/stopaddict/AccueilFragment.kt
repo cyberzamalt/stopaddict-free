@@ -160,8 +160,11 @@ class AccueilFragment : Fragment() {
             logger.d( "AccueilFragment initialisé avec succès")
         } catch (e: Exception) {
             logger.e( "Erreur initialisation AccueilFragment: ${e.message}")
-            Toast.makeText(requireContext(), "Erreur chargement", Toast.LENGTH_SHORT).show()
-        }
+            Toast.makeText(
+                requireContext(),
+                trad["erreur_chargement"] ?: "Erreur chargement",
+                Toast.LENGTH_SHORT
+            ).show()
 
         return view
     }
