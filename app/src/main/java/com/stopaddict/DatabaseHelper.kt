@@ -13,7 +13,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_NAME = "StopAddict.db"
-        private const val DATABASE_VERSION = 4
+        private const val DATABASE_VERSION = 5
         private const val TAG = "DatabaseHelper"
 
         // Table consommations
@@ -57,6 +57,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COL_LANGUE = "langue"
         private const val COL_DEVISE = "devise"
         private const val COL_CATEGORIES_ACTIVES = "categories_actives"
+        private const val COL_WELCOME_DISABLED = "welcome_disabled"
 
         // Préférences supplémentaires
         private const val COL_MODE_CIGARETTE = "mode_cigarette"
@@ -142,6 +143,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_LANGUE TEXT DEFAULT 'FR',
         $COL_DEVISE TEXT DEFAULT 'EUR',
         $COL_CATEGORIES_ACTIVES TEXT DEFAULT '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+        $COL_WELCOME_DISABLED TEXT DEFAULT '0',
         $COL_MODE_CIGARETTE TEXT DEFAULT 'classique',
         $COL_GRAMME_PAR_JOINT_PREF TEXT DEFAULT '0',
         $COL_UNITE_CL_ALCOOL_GLOBAL TEXT DEFAULT '0',
@@ -152,7 +154,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         $COL_NB_CIGARETTES_TUBEES_PREF TEXT DEFAULT '0'
     )
 """)
-
             // Insertion préférences par défaut
             db.execSQL("INSERT INTO $TABLE_PREFERENCES ($COL_ID) VALUES (1)")
 
@@ -678,6 +679,7 @@ fun setCouts(
         $COL_LANGUE = 'FR',
         $COL_DEVISE = 'EUR',
         $COL_CATEGORIES_ACTIVES = '{"cigarette":true,"joint":true,"alcool_global":true,"biere":false,"liqueur":false,"alcool_fort":false}',
+        $COL_WELCOME_DISABLED = '0',
         $COL_MODE_CIGARETTE = 'classique',
         $COL_GRAMME_PAR_JOINT_PREF = '0',
         $COL_UNITE_CL_ALCOOL_GLOBAL = '0',
