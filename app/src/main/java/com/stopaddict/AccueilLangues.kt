@@ -704,6 +704,210 @@ object AccueilLangues {
         "erreur_generale" to "エラー：%s"
     )
 
+    // ==================== NEDERLANDS ====================
+private val TRADUCTIONS_NL = mapOf(
+    // Labels catégories
+    "label_cigarettes" to "Sigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alcohol (globaal)",
+    "label_bieres" to "Bieren",
+    "label_liqueurs" to "Likeuren",
+    "label_alcool_fort" to "Sterke alcohol",
+
+    // Bandeau profil
+    "profil_complet" to "Profiel: Volledig ✓",
+    "profil_incomplet" to "Profiel: Onvolledig",
+    "total_aujourdhui" to "Totaal vandaag:",
+
+    // Conseils génériques
+    "conseil_generique_1" to "Elke niet-gerookte sigaret voegt 11 minuten toe aan je leven.",
+    "conseil_generique_2" to "Lichaamsbeweging helpt de drang te verminderen.",
+    "conseil_generique_3" to "Water drinken vermindert ontwenningsgevoelens.",
+    "conseil_generique_4" to "Omring jezelf met ondersteunende mensen.",
+    "conseil_generique_5" to "Elke stap telt in jouw traject.",
+    "conseil_generique_6" to "Motivatie is de sleutel tot succes.",
+
+    // Conseils cas 1
+    "conseil_cas1_1" to "Welkom! Stel je gewoonten in voor een gepersonaliseerde opvolging.",
+    "conseil_cas1_2" to "Elke stap telt in jouw traject.",
+    "conseil_cas1_3" to "Motivatie is de sleutel tot succes.",
+
+    // Conseils cas 3
+    "conseil_cas3_1" to "Je consumptie verminderen bespaart je geld.",
+    "conseil_cas3_2" to "Het bespaarde geld kan dienen voor je projecten.",
+    "conseil_cas3_3" to "Deze besparingen stapelen zich dag na dag op.",
+
+    // Conseils cas 4
+    "conseil_cas4_1" to "Je gewoonten volgen helpt je vooruitgang te boeken.",
+    "conseil_cas4_2" to "Stel realistische doelen.",
+
+    // Conseils cas 5
+    "conseil_cas5_1" to "Je doel komt dichterbij!",
+    "conseil_cas5_2" to "Blijf gefocust op je datum.",
+
+    // Comparaison habitudes
+    "habitudes_moins" to "Je gebruikt minder dan gewoonlijk, goed gedaan!",
+    "habitudes_egal" to "Je zit binnen je gebruikelijke gewoonten.",
+    "habitudes_plus" to "Je overschrijdt je gewoonten, let op!",
+    "habitudes_suivre" to "Volg je gewoonten om vooruitgang te boeken.",
+
+    // Messages dates
+    "date_jours_restants" to "Nog %d dagen tot je stopdatum!",
+    "date_aujourdhui" to "Vandaag is je stopdatum, houd vol!",
+    "date_depassee" to "Je stopdatum is voorbij, blijf doorgaan!",
+    "date_reduction" to "Reductiedatum: over %d dagen!",
+    "date_rapproche" to "Je doel komt dichterbij!",
+
+    // Messages économies
+    "economies_jour" to "Je bespaart vandaag %.2f!",
+    "economies_reelles" to "Werkelijke besparingen: %.2f t.o.v. je gewoonten!",
+    "economies_accumulent" to "Deze besparingen stapelen zich dag na dag op.",
+
+    "btn_ok" to "Sluiten",
+
+    // Messages erreurs
+    "erreur_chargement" to "Fout bij laden van Startpagina",
+    "erreur_ajout" to "Fout bij toevoegen van consumptie",
+    "erreur_retrait" to "Kan niet verwijderen, geen consumptie vandaag",
+    "erreur_generale" to "Fout: %s"
+)
+
+    // ==================== 中文（简体） ====================
+private val TRADUCTIONS_ZHS = mapOf(
+    // Labels catégories
+    "label_cigarettes" to "香烟",
+    "label_joints" to "大麻",
+    "label_alcool_global" to "酒精（总体）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈性酒",
+
+    // Bandeau profil
+    "profil_complet" to "档案：完整 ✓",
+    "profil_incomplet" to "档案：未完成",
+    "total_aujourdhui" to "今日总计：",
+
+    // Conseils génériques
+    "conseil_generique_1" to "每少抽一支烟，寿命可延长11分钟。",
+    "conseil_generique_2" to "运动有助于减少渴望。",
+    "conseil_generique_3" to "喝水可以减轻戒断不适。",
+    "conseil_generique_4" to "与支持你的人在一起。",
+    "conseil_generique_5" to "每一步都很重要。",
+    "conseil_generique_6" to "动力是成功的关键。",
+
+    // Conseils cas 1
+    "conseil_cas1_1" to "欢迎！请设置你的习惯以进行个性化跟踪。",
+    "conseil_cas1_2" to "每一步都很重要。",
+    "conseil_cas1_3" to "动力是成功的关键。",
+
+    // Conseils cas 3
+    "conseil_cas3_1" to "减少消费可以帮你省钱。",
+    "conseil_cas3_2" to "节省下来的钱可以用于你的计划。",
+    "conseil_cas3_3" to "这些节省会日积月累。",
+
+    // Conseils cas 4
+    "conseil_cas4_1" to "追踪你的习惯有助于进步。",
+    "conseil_cas4_2" to "设定现实的目标。",
+
+    // Conseils cas 5
+    "conseil_cas5_1" to "你的目标越来越近了！",
+    "conseil_cas5_2" to "专注于你的日期。",
+
+    // Comparaison habitudes
+    "habitudes_moins" to "你的消费比平时少，做得好！",
+    "habitudes_egal" to "你保持在平常水平。",
+    "habitudes_plus" to "你的消费超过平常，请注意！",
+    "habitudes_suivre" to "坚持追踪你的习惯以取得进展。",
+
+    // Messages dates
+    "date_jours_restants" to "距离你的戒断日期还有 %d 天！",
+    "date_aujourdhui" to "今天是你的戒断日期，加油！",
+    "date_depassee" to "你已超过戒断日期，请继续坚持！",
+    "date_reduction" to "减少日期：%d 天后！",
+    "date_rapproche" to "你的目标正在接近！",
+
+    // Messages économies
+    "economies_jour" to "你今天节省了 %.2f！",
+    "economies_reelles" to "实际节省：%.2f（相比你的习惯）！",
+    "economies_accumulent" to "这些节省会每天不断累积。",
+
+    "btn_ok" to "关闭",
+
+    // Messages erreurs
+    "erreur_chargement" to "首页加载错误",
+    "erreur_ajout" to "添加消费时出错",
+    "erreur_retrait" to "无法移除，今天没有消费记录",
+    "erreur_generale" to "错误：%s"
+)
+
+    // ==================== 中文（繁體） ====================
+private val TRADUCTIONS_ZHT = mapOf(
+    // Labels catégories
+    "label_cigarettes" to "香菸",
+    "label_joints" to "大麻",
+    "label_alcool_global" to "酒精（整體）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    // Bandeau profil
+    "profil_complet" to "檔案：完整 ✓",
+    "profil_incomplet" to "檔案：未完成",
+    "total_aujourdhui" to "今日總計：",
+
+    // Conseils génériques
+    "conseil_generique_1" to "每少抽一支菸，可延長壽命11分鐘。",
+    "conseil_generique_2" to "運動有助於減少渴望。",
+    "conseil_generique_3" to "喝水可以減輕戒斷不適。",
+    "conseil_generique_4" to "與支持你的人為伍。",
+    "conseil_generique_5" to "每一步都很重要。",
+    "conseil_generique_6" to "動力是成功的關鍵。",
+
+    // Conseils cas 1
+    "conseil_cas1_1" to "歡迎！請設定你的習慣以進行個人化追蹤。",
+    "conseil_cas1_2" to "每一步都很重要。",
+    "conseil_cas1_3" to "動力是成功的關鍵。",
+
+    // Conseils cas 3
+    "conseil_cas3_1" to "減少消費能幫助你省錢。",
+    "conseil_cas3_2" to "省下的錢可以用於你的計畫。",
+    "conseil_cas3_3" to "這些節省會日積月累。",
+
+    // Conseils cas 4
+    "conseil_cas4_1" to "追蹤你的習慣有助於進步。",
+    "conseil_cas4_2" to "設定實際的目標。",
+
+    // Conseils cas 5
+    "conseil_cas5_1" to "你的目標越來越近了！",
+    "conseil_cas5_2" to "專注於你的日期。",
+
+    // Comparaison habitudes
+    "habitudes_moins" to "你的消費比平時少，做得好！",
+    "habitudes_egal" to "你維持在平常水準。",
+    "habitudes_plus" to "你的消費超過平常，請注意！",
+    "habitudes_suivre" to "持續追蹤你的習慣以取得進展。",
+
+    // Messages dates
+    "date_jours_restants" to "距離你的戒斷日期還有 %d 天！",
+    "date_aujourdhui" to "今天是你的戒斷日期，加油！",
+    "date_depassee" to "你已超過戒斷日期，請繼續堅持！",
+    "date_reduction" to "減少日期：%d 天後！",
+    "date_rapproche" to "你的目標正在接近！",
+
+    // Messages économies
+    "economies_jour" to "你今天節省了 %.2f！",
+    "economies_reelles" to "實際節省：%.2f（相比你的習慣）！",
+    "economies_accumulent" to "這些節省會每天不斷累積。",
+
+    "btn_ok" to "關閉",
+
+    // Messages erreurs
+    "erreur_chargement" to "首頁載入錯誤",
+    "erreur_ajout" to "新增消費時發生錯誤",
+    "erreur_retrait" to "無法移除，今天沒有消費記錄",
+    "erreur_generale" to "錯誤：%s"
+)
+
     /**
      * Fonction helper pour formater les messages avec paramètres
      * Exemple: formatMessage("date_jours_restants", 5) -> "Plus que 5 jours..."
