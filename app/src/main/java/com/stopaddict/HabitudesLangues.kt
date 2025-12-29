@@ -475,7 +475,160 @@ object HabitudesLangues {
 
         "msg_err_generic" to "エラーが発生しました"
     )
+    // ==================== NEDERLANDS ====================
+private val TRADUCTIONS_NL = mapOf(
+    "titre" to "Gewoonten & Wilskracht",
+    "titre_habitudes" to "Gewoonten",
+    "titre_volonte" to "Wilskracht",
+
+    // Labels catégories
+    "label_cigarettes" to "Sigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alcohol (totaal)",
+    "label_bieres" to "Bieren",
+    "label_liqueurs" to "Likeuren",
+    "label_alcool_fort" to "Sterke drank",
+
+    // Bandeau profil
+    "profil_complet" to "Profiel: Volledig ✓",
+    "profil_incomplet" to "Profiel: Onvolledig",
+    "total_aujourdhui" to "Totaal vandaag",
+
+    // Hints section Habitudes
+    "hint_max_cigarettes" to "Max sigaretten per dag",
+    "hint_max_joints" to "Max joints per dag",
+    "hint_max_alcool_global" to "Max alcohol per dag",
+    "hint_max_bieres" to "Max bieren per dag",
+    "hint_max_liqueurs" to "Max likeuren per dag",
+    "hint_max_alcool_fort" to "Max sterke drank per dag",
+
+    // Section Volonté
+    "desc_volonte" to "Stel 3 datums per categorie in: Vermindering, Stop, Succes",
+
+    // Labels dates
+    "label_date_reduction" to "Datum van vermindering",
+    "label_date_arret" to "Stopdatum",
+    "label_date_reussite" to "Succesdatum",
+
+    // Boutons
+    "btn_sauvegarder" to "Opslaan",
+    "btn_selectionner_date" to "Selecteer een datum",
+    "btn_effacer" to "Wissen",
+
+    // Messages
+    "msg_err_chargement_habitudes" to "Fout bij het laden van Gewoonten",
+    "msg_reset_habitudes" to "Gewoonten gereset — Tik op Opslaan om toe te passen",
+    "msg_reset_dates" to "Datums gereset — Tik op Opslaan om toe te passen",
+    "msg_err_reset" to "Fout tijdens het resetten",
+    "msg_sauvegarde_habitudes_ok" to "Gewoonten opgeslagen",
+    "msg_sauvegarde_dates_ok" to "Datums opgeslagen",
+
+    "msg_err_generic" to "Er is een fout opgetreden"
+)
+
+// ==================== 中文（简体）====================
+private val TRADUCTIONS_ZHS = mapOf(
+    "titre" to "习惯与意志力",
+    "titre_habitudes" to "习惯",
+    "titre_volonte" to "意志力",
+
+    // Labels catégories
+    "label_cigarettes" to "香烟",
+    "label_joints" to "大麻烟卷",
+    "label_alcool_global" to "酒精（总计）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    // Bandeau profil
+    "profil_complet" to "档案：完整 ✓",
+    "profil_incomplet" to "档案：不完整",
+    "total_aujourdhui" to "今日总计",
+
+    // Hints section Habitudes
+    "hint_max_cigarettes" to "每日最多香烟数",
+    "hint_max_joints" to "每日最多大麻烟卷数",
+    "hint_max_alcool_global" to "每日最多酒精量",
+    "hint_max_bieres" to "每日最多啤酒数",
+    "hint_max_liqueurs" to "每日最多利口酒数",
+    "hint_max_alcool_fort" to "每日最多烈酒数",
+
+    // Section Volonté
+    "desc_volonte" to "每个类别设置3个日期：减少、停止、成功",
+
+    // Labels dates
+    "label_date_reduction" to "减少日期",
+    "label_date_arret" to "停止日期",
+    "label_date_reussite" to "成功日期",
+
+    // Boutons
+    "btn_sauvegarder" to "保存",
+    "btn_selectionner_date" to "选择日期",
+    "btn_effacer" to "清除",
+
+    // Messages
+    "msg_err_chargement_habitudes" to "加载习惯时出错",
+    "msg_reset_habitudes" to "习惯已重置 — 点击保存以应用",
+    "msg_reset_dates" to "日期已重置 — 点击保存以应用",
+    "msg_err_reset" to "重置时出错",
+    "msg_sauvegarde_habitudes_ok" to "习惯已保存",
+    "msg_sauvegarde_dates_ok" to "日期已保存",
+
+    "msg_err_generic" to "发生错误"
+)
+
+// ==================== 中文（繁體）====================
+private val TRADUCTIONS_ZHT = mapOf(
+    "titre" to "習慣與意志力",
+    "titre_habitudes" to "習慣",
+    "titre_volonte" to "意志力",
+
+    // Labels catégories
+    "label_cigarettes" to "香菸",
+    "label_joints" to "大麻菸捲",
+    "label_alcool_global" to "酒精（總計）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+
+    // Bandeau profil
+    "profil_complet" to "檔案：完整 ✓",
+    "profil_incomplet" to "檔案：不完整",
+    "total_aujourdhui" to "今日總計",
+
+    // Hints section Habitudes
+    "hint_max_cigarettes" to "每日最多香菸數",
+    "hint_max_joints" to "每日最多大麻菸捲數",
+    "hint_max_alcool_global" to "每日最多酒精量",
+    "hint_max_bieres" to "每日最多啤酒數",
+    "hint_max_liqueurs" to "每日最多利口酒數",
+    "hint_max_alcool_fort" to "每日最多烈酒數",
+
+    // Section Volonté
+    "desc_volonte" to "每個類別設定3個日期：減少、停止、成功",
+
+    // Labels dates
+    "label_date_reduction" to "減少日期",
+    "label_date_arret" to "停止日期",
+    "label_date_reussite" to "成功日期",
+
+    // Boutons
+    "btn_sauvegarder" to "儲存",
+    "btn_selectionner_date" to "選擇日期",
+    "btn_effacer" to "清除",
+
+    // Messages
+    "msg_err_chargement_habitudes" to "載入習慣時發生錯誤",
+    "msg_reset_habitudes" to "習慣已重置 — 點擊儲存以套用",
+    "msg_reset_dates" to "日期已重置 — 點擊儲存以套用",
+    "msg_err_reset" to "重置時發生錯誤",
+    "msg_sauvegarde_habitudes_ok" to "習慣已儲存",
+    "msg_sauvegarde_dates_ok" to "日期已儲存",
+
+    "msg_err_generic" to "發生錯誤"
+)
 }
+
 
 
 
