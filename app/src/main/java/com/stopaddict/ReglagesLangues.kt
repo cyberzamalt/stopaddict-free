@@ -42,6 +42,7 @@ object ReglagesLangues {
         "titre_habitudes" to "Habitudes quotidiennes",
         "titre_dates_objectifs" to "Dates objectifs",
         "titre_raz_export" to "RAZ & Export/Import",
+        "titre_encouragement" to "Encouragement",
 
         // Labels profil
         "label_prenom" to "Prénom",
@@ -213,6 +214,7 @@ object ReglagesLangues {
         "titre_habitudes" to "Daily habits",
         "titre_dates_objectifs" to "Goal dates",
         "titre_raz_export" to "Reset & Export/Import",
+        "titre_encouragement" to "Encouragement",
 
         // Labels profil
         "label_prenom" to "First name",
@@ -384,6 +386,7 @@ private val TRADUCTIONS_ES = mapOf(
     "titre_habitudes" to "Hábitos diarios",
     "titre_dates_objectifs" to "Fechas objetivo",
     "titre_raz_export" to "Reiniciar y Exportar/Importar",
+    "titre_encouragement" to "Motivación",
 
     // Labels profil
     "label_prenom" to "Nombre",
@@ -547,6 +550,7 @@ private val TRADUCTIONS_PT = mapOf(
     "titre_habitudes" to "Hábitos diários",
     "titre_dates_objectifs" to "Datas objetivo",
     "titre_raz_export" to "Repor e Exportar/Importar",
+    "titre_encouragement" to "Incentivo",
 
     // Labels profil
     "label_prenom" to "Nome",
@@ -711,6 +715,7 @@ private val TRADUCTIONS_DE = mapOf(
     "titre_habitudes" to "Tägliche Gewohnheiten",
     "titre_dates_objectifs" to "Zieldaten",
     "titre_raz_export" to "Zurücksetzen & Export/Import",
+    "titre_encouragement" to "Ermutigung",
 
     // Labels profil
     "label_prenom" to "Vorname",
@@ -879,6 +884,7 @@ private val TRADUCTIONS_IT = mapOf(
     "titre_habitudes" to "Abitudini quotidiane",
     "titre_dates_objectifs" to "Date obiettivi",
     "titre_raz_export" to "Ripristino ed Esporta/Importa",
+    "titre_encouragement" to "Incoraggiamento",
 
     // Labels profil
     "label_prenom" to "Nome",
@@ -1046,6 +1052,7 @@ private val TRADUCTIONS_RU = mapOf(
     "titre_habitudes" to "Ежедневные привычки",
     "titre_dates_objectifs" to "Даты целей",
     "titre_raz_export" to "Сброс и Экспорт/Импорт",
+    "titre_encouragement" to "Поощрение",
 
     // Labels profil
     "label_prenom" to "Имя",
@@ -1212,6 +1219,7 @@ private val TRADUCTIONS_AR = mapOf(
     "titre_habitudes" to "العادات اليومية",
     "titre_dates_objectifs" to "تواريخ الأهداف",
     "titre_raz_export" to "إعادة التعيين والتصدير/الاستيراد",
+    "titre_encouragement" to "التشجيع",
 
     // Labels profil
     "label_prenom" to "الاسم الأول",
@@ -1378,6 +1386,7 @@ private val TRADUCTIONS_HI = mapOf(
     "titre_habitudes" to "दैनिक आदतें",
     "titre_dates_objectifs" to "लक्ष्य तिथियाँ",
     "titre_raz_export" to "रीसेट और एक्सपोर्ट/इम्पोर्ट",
+    "titre_encouragement" to "प्रोत्साहन",
 
     // Labels profil
     "label_prenom" to "नाम",
@@ -1544,6 +1553,7 @@ private val TRADUCTIONS_JA = mapOf(
     "titre_habitudes" to "毎日の習慣",
     "titre_dates_objectifs" to "目標日",
     "titre_raz_export" to "リセットとエクスポート/インポート",
+    "titre_encouragement" to "励まし",
 
     // Labels profil
     "label_prenom" to "名前",
@@ -1708,6 +1718,7 @@ private val TRADUCTIONS_ZH_CN = mapOf(
     "titre_habitudes" to "每日习惯",
     "titre_dates_objectifs" to "目标日期",
     "titre_raz_export" to "重置与导出/导入",
+    "titre_encouragement" to "鼓励",
 
     // Profile labels
     "label_prenom" to "名字",
@@ -1873,6 +1884,7 @@ private val TRADUCTIONS_ZH_TW = mapOf(
     "titre_habitudes" to "每日習慣",
     "titre_dates_objectifs" to "目標日期",
     "titre_raz_export" to "重設與匯出/匯入",
+    "titre_encouragement" to "鼓勵",
 
     // Profile labels
     "label_prenom" to "名字",
