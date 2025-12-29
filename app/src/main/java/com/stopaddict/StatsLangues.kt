@@ -1,31 +1,36 @@
 package com.stopaddict
 
-
 object StatsLangues {
 
-    private const val TAG = "StatsLangues"
+   private const val TAG = "StatsLangues"
 
-    /**
-     * Retourne toutes les traductions pour une langue donnée
-     */
-    fun getTraductions(codeLangue: String): Map<String, String> {
-        return when (codeLangue) {
-            "FR" -> TRADUCTIONS_FR
-            "EN" -> TRADUCTIONS_EN
-            "ES" -> TRADUCTIONS_ES
-            "PT" -> TRADUCTIONS_PT
-            "DE" -> TRADUCTIONS_DE
-            "IT" -> TRADUCTIONS_IT
-            "RU" -> TRADUCTIONS_RU
-            "AR" -> TRADUCTIONS_AR
-            "HI" -> TRADUCTIONS_HI
-            "JA" -> TRADUCTIONS_JA
-            else -> {
-                StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
-                TRADUCTIONS_FR
-            }
+/**
+ * Retourne toutes les traductions pour une langue donnée
+ */
+fun getTraductions(codeLangue: String): Map<String, String> {
+    return when (codeLangue) {
+        "FR" -> TRADUCTIONS_FR
+        "EN" -> TRADUCTIONS_EN
+        "ES" -> TRADUCTIONS_ES
+        "PT" -> TRADUCTIONS_PT
+        "DE" -> TRADUCTIONS_DE
+        "IT" -> TRADUCTIONS_IT
+        "RU" -> TRADUCTIONS_RU
+        "AR" -> TRADUCTIONS_AR
+        "HI" -> TRADUCTIONS_HI
+        "JA" -> TRADUCTIONS_JA
+
+        // AJOUTS
+        "NL"  -> TRADUCTIONS_NL
+        "ZHS" -> TRADUCTIONS_ZHS
+        "ZHT" -> TRADUCTIONS_ZHT
+
+        else -> {
+            StopAddictLogger.w(TAG, "Langue inconnue: $codeLangue, fallback FR")
+            TRADUCTIONS_FR
         }
     }
+}
 
     // ==================== FRANÇAIS ====================
     private val TRADUCTIONS_FR = mapOf(
@@ -1095,6 +1100,329 @@ object StatsLangues {
         "erreur_chargement" to "統計の読み込みエラー",
         "aucune_donnee" to "データがありません"
     )
+
+    // ==================== NEDERLANDS (NL) ====================
+private val TRADUCTIONS_NL = mapOf(
+    // Titres sections
+    "titre_graphique_consommation" to "Consumptie",
+    "titre_graphique_couts" to "Kosten & Besparingen",
+
+    // Boutons période
+    "btn_jour" to "Dag",
+    "btn_semaine" to "Week",
+    "btn_mois" to "Maand",
+    "btn_annee" to "Jaar",
+
+    // Labels catégories
+    "label_cigarettes" to "Sigaretten",
+    "label_joints" to "Joints",
+    "label_alcool_global" to "Alcohol (totaal)",
+    "label_bieres" to "Bieren",
+    "label_liqueurs" to "Likeuren",
+    "label_alcool_fort" to "Sterke drank",
+    "label_limite" to "Limiet",
+    "label_couts" to "Kosten",
+    "label_economies" to "Besparingen",
+    "label_depenses" to "Uitgaven",
+
+    // Labels axes X (jour)
+    "axe_x_jour_0" to "00-07",
+    "axe_x_jour_1" to "07-14",
+    "axe_x_jour_2" to "14-21",
+    "axe_x_jour_3" to "21-00",
+
+    // Labels axes X (semaine)
+    "axe_x_semaine_0" to "Ma",
+    "axe_x_semaine_1" to "Di",
+    "axe_x_semaine_2" to "Wo",
+    "axe_x_semaine_3" to "Do",
+    "axe_x_semaine_4" to "Vr",
+    "axe_x_semaine_5" to "Za",
+    "axe_x_semaine_6" to "Zo",
+
+    // Labels axes X (mois)
+    "axe_x_mois_0" to "1",
+    "axe_x_mois_1" to "6",
+    "axe_x_mois_2" to "11",
+    "axe_x_mois_3" to "16",
+    "axe_x_mois_4" to "21",
+    "axe_x_mois_5" to "26",
+    "axe_x_mois_6" to "31",
+
+    // Labels axes X (année)
+    "axe_x_annee_0" to "jan",
+    "axe_x_annee_1" to "feb",
+    "axe_x_annee_2" to "mrt",
+    "axe_x_annee_3" to "apr",
+    "axe_x_annee_4" to "mei",
+    "axe_x_annee_5" to "jun",
+    "axe_x_annee_6" to "jul",
+    "axe_x_annee_7" to "aug",
+    "axe_x_annee_8" to "sep",
+    "axe_x_annee_9" to "okt",
+    "axe_x_annee_10" to "nov",
+    "axe_x_annee_11" to "dec",
+
+    // Alias axes jours (nouveau formatter StatsFragment)
+    "axe_jour_lun" to "Ma",
+    "axe_jour_mar" to "Di",
+    "axe_jour_mer" to "Wo",
+    "axe_jour_jeu" to "Do",
+    "axe_jour_ven" to "Vr",
+    "axe_jour_sam" to "Za",
+    "axe_jour_dim" to "Zo",
+
+    // Alias axes mois (nouveau formatter StatsFragment)
+    "axe_mois_jan" to "jan",
+    "axe_mois_fev" to "feb",
+    "axe_mois_mar" to "mrt",
+    "axe_mois_avr" to "apr",
+    "axe_mois_mai" to "mei",
+    "axe_mois_juin" to "jun",
+    "axe_mois_juil" to "jul",
+    "axe_mois_aou" to "aug",
+    "axe_mois_sep" to "sep",
+    "axe_mois_oct" to "okt",
+    "axe_mois_nov" to "nov",
+    "axe_mois_dec" to "dec",
+
+    // Zone calculs
+    "calculs_periode_jour" to "Dag",
+    "calculs_periode_semaine" to "Week",
+    "calculs_periode_mois" to "Maand",
+    "calculs_periode_annee" to "Jaar",
+    "calculs_unites" to "eenheden",
+    "calculs_depenses" to "uitgegeven",
+    "calculs_economies" to "bespaard",
+
+    // Bandeau profil
+    "profil_complet" to "Profiel: Voltooid ✓",
+    "profil_incomplet" to "Profiel: Onvolledig",
+    "total_aujourdhui" to "Totaal vandaag:",
+    "profil_complet_complet" to "Profiel: Voltooid ✓",
+    "profil_complet_incomplet" to "Profiel: Onvolledig",
+    "profil_total_jour" to "Totaal vandaag:",
+
+    // Messages
+    "erreur_chargement" to "Fout bij het laden van Stats",
+    "aucune_donnee" to "Geen gegevens beschikbaar"
+)
+
+
+// ==================== 中文（简体）(ZHS) ====================
+private val TRADUCTIONS_ZHS = mapOf(
+    // Titres sections
+    "titre_graphique_consommation" to "消耗",
+    "titre_graphique_couts" to "成本与节省",
+
+    // Boutons période
+    "btn_jour" to "日",
+    "btn_semaine" to "周",
+    "btn_mois" to "月",
+    "btn_annee" to "年",
+
+    // Labels catégories
+    "label_cigarettes" to "香烟",
+    "label_joints" to "卷烟",
+    "label_alcool_global" to "酒精（总计）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+    "label_limite" to "限额",
+    "label_couts" to "成本",
+    "label_economies" to "节省",
+    "label_depenses" to "支出",
+
+    // Labels axes X (jour)
+    "axe_x_jour_0" to "00-07",
+    "axe_x_jour_1" to "07-14",
+    "axe_x_jour_2" to "14-21",
+    "axe_x_jour_3" to "21-00",
+
+    // Labels axes X (semaine)
+    "axe_x_semaine_0" to "周一",
+    "axe_x_semaine_1" to "周二",
+    "axe_x_semaine_2" to "周三",
+    "axe_x_semaine_3" to "周四",
+    "axe_x_semaine_4" to "周五",
+    "axe_x_semaine_5" to "周六",
+    "axe_x_semaine_6" to "周日",
+
+    // Labels axes X (mois)
+    "axe_x_mois_0" to "1",
+    "axe_x_mois_1" to "6",
+    "axe_x_mois_2" to "11",
+    "axe_x_mois_3" to "16",
+    "axe_x_mois_4" to "21",
+    "axe_x_mois_5" to "26",
+    "axe_x_mois_6" to "31",
+
+    // Labels axes X (année)
+    "axe_x_annee_0" to "1月",
+    "axe_x_annee_1" to "2月",
+    "axe_x_annee_2" to "3月",
+    "axe_x_annee_3" to "4月",
+    "axe_x_annee_4" to "5月",
+    "axe_x_annee_5" to "6月",
+    "axe_x_annee_6" to "7月",
+    "axe_x_annee_7" to "8月",
+    "axe_x_annee_8" to "9月",
+    "axe_x_annee_9" to "10月",
+    "axe_x_annee_10" to "11月",
+    "axe_x_annee_11" to "12月",
+
+    // Alias axes jours (nouveau formatter StatsFragment)
+    "axe_jour_lun" to "周一",
+    "axe_jour_mar" to "周二",
+    "axe_jour_mer" to "周三",
+    "axe_jour_jeu" to "周四",
+    "axe_jour_ven" to "周五",
+    "axe_jour_sam" to "周六",
+    "axe_jour_dim" to "周日",
+
+    // Alias axes mois (nouveau formatter StatsFragment)
+    "axe_mois_jan" to "1月",
+    "axe_mois_fev" to "2月",
+    "axe_mois_mar" to "3月",
+    "axe_mois_avr" to "4月",
+    "axe_mois_mai" to "5月",
+    "axe_mois_juin" to "6月",
+    "axe_mois_juil" to "7月",
+    "axe_mois_aou" to "8月",
+    "axe_mois_sep" to "9月",
+    "axe_mois_oct" to "10月",
+    "axe_mois_nov" to "11月",
+    "axe_mois_dec" to "12月",
+
+    // Zone calculs
+    "calculs_periode_jour" to "日",
+    "calculs_periode_semaine" to "周",
+    "calculs_periode_mois" to "月",
+    "calculs_periode_annee" to "年",
+    "calculs_unites" to "单位",
+    "calculs_depenses" to "已花费",
+    "calculs_economies" to "已节省",
+
+    // Bandeau profil
+    "profil_complet" to "资料：已完成 ✓",
+    "profil_incomplet" to "资料：未完成",
+    "total_aujourdhui" to "今日总计：",
+    "profil_complet_complet" to "资料：已完成 ✓",
+    "profil_complet_incomplet" to "资料：未完成",
+    "profil_total_jour" to "今日总计：",
+
+    // Messages
+    "erreur_chargement" to "加载统计信息出错",
+    "aucune_donnee" to "暂无可用数据"
+)
+
+
+// ==================== 中文（繁體）(ZHT) ====================
+private val TRADUCTIONS_ZHT = mapOf(
+    // Titres sections
+    "titre_graphique_consommation" to "消耗",
+    "titre_graphique_couts" to "成本與節省",
+
+    // Boutons période
+    "btn_jour" to "日",
+    "btn_semaine" to "週",
+    "btn_mois" to "月",
+    "btn_annee" to "年",
+
+    // Labels catégories
+    "label_cigarettes" to "香菸",
+    "label_joints" to "卷菸",
+    "label_alcool_global" to "酒精（總計）",
+    "label_bieres" to "啤酒",
+    "label_liqueurs" to "利口酒",
+    "label_alcool_fort" to "烈酒",
+    "label_limite" to "上限",
+    "label_couts" to "成本",
+    "label_economies" to "節省",
+    "label_depenses" to "支出",
+
+    // Labels axes X (jour)
+    "axe_x_jour_0" to "00-07",
+    "axe_x_jour_1" to "07-14",
+    "axe_x_jour_2" to "14-21",
+    "axe_x_jour_3" to "21-00",
+
+    // Labels axes X (semaine)
+    "axe_x_semaine_0" to "週一",
+    "axe_x_semaine_1" to "週二",
+    "axe_x_semaine_2" to "週三",
+    "axe_x_semaine_3" to "週四",
+    "axe_x_semaine_4" to "週五",
+    "axe_x_semaine_5" to "週六",
+    "axe_x_semaine_6" to "週日",
+
+    // Labels axes X (mois)
+    "axe_x_mois_0" to "1",
+    "axe_x_mois_1" to "6",
+    "axe_x_mois_2" to "11",
+    "axe_x_mois_3" to "16",
+    "axe_x_mois_4" to "21",
+    "axe_x_mois_5" to "26",
+    "axe_x_mois_6" to "31",
+
+    // Labels axes X (année)
+    "axe_x_annee_0" to "1月",
+    "axe_x_annee_1" to "2月",
+    "axe_x_annee_2" to "3月",
+    "axe_x_annee_3" to "4月",
+    "axe_x_annee_4" to "5月",
+    "axe_x_annee_5" to "6月",
+    "axe_x_annee_6" to "7月",
+    "axe_x_annee_7" to "8月",
+    "axe_x_annee_8" to "9月",
+    "axe_x_annee_9" to "10月",
+    "axe_x_annee_10" to "11月",
+    "axe_x_annee_11" to "12月",
+
+    // Alias axes jours (nouveau formatter StatsFragment)
+    "axe_jour_lun" to "週一",
+    "axe_jour_mar" to "週二",
+    "axe_jour_mer" to "週三",
+    "axe_jour_jeu" to "週四",
+    "axe_jour_ven" to "週五",
+    "axe_jour_sam" to "週六",
+    "axe_jour_dim" to "週日",
+
+    // Alias axes mois (nouveau formatter StatsFragment)
+    "axe_mois_jan" to "1月",
+    "axe_mois_fev" to "2月",
+    "axe_mois_mar" to "3月",
+    "axe_mois_avr" to "4月",
+    "axe_mois_mai" to "5月",
+    "axe_mois_juin" to "6月",
+    "axe_mois_juil" to "7月",
+    "axe_mois_aou" to "8月",
+    "axe_mois_sep" to "9月",
+    "axe_mois_oct" to "10月",
+    "axe_mois_nov" to "11月",
+    "axe_mois_dec" to "12月",
+
+    // Zone calculs
+    "calculs_periode_jour" to "日",
+    "calculs_periode_semaine" to "週",
+    "calculs_periode_mois" to "月",
+    "calculs_periode_annee" to "年",
+    "calculs_unites" to "單位",
+    "calculs_depenses" to "已花費",
+    "calculs_economies" to "已節省",
+
+    // Bandeau profil
+    "profil_complet" to "個人資料：已完成 ✓",
+    "profil_incomplet" to "個人資料：未完成",
+    "total_aujourdhui" to "今日總計：",
+    "profil_complet_complet" to "個人資料：已完成 ✓",
+    "profil_complet_incomplet" to "個人資料：未完成",
+    "profil_total_jour" to "今日總計：",
+
+    // Messages
+    "erreur_chargement" to "載入統計資料時發生錯誤",
+    "aucune_donnee" to "沒有可用資料"
+)
 
     /**
      * Fonction helper pour récupérer une traduction spécifique
