@@ -1808,8 +1808,9 @@ private fun getCodeLangueStats(): String {
     }
 
     return when (lang) {
-        "FR","EN","ES","PT","DE","IT","RU","AR","HI","JA" -> lang
-        else -> "FR"
+            "FR","EN","ES","PT","DE","IT","RU","AR","HI","JA",
+            "NL","ZHS","ZHT" -> lang
+            else -> "FR"
         }
     }
 }
