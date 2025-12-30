@@ -402,7 +402,8 @@ private fun showWelcomeDialog() {
     }
 
     val message = TextView(this).apply {
-        text = wTrad["welcome_message"] ?: "Bienvenue"
+        val messages = WelcomeLangues.getMessages(configLangue.getLangue())
+        text = if (messages.isNotEmpty()) messages.random() else (wTrad["welcome_message"] ?: "Bienvenue")
         textSize = 14f
         setPadding(0, 10, 0, 25)
     }
