@@ -21,6 +21,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.json.JSONObject
 
 class StatsFragment : Fragment() {
@@ -1070,19 +1071,10 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
 
                 // On n’affiche la catégorie que si elle a au moins un montant
                 if (cout > 0.0 || eco > 0.0) {
-                    // Coût au-dessus de 0
-                    if (cout > 0.0) {
-                        coutsEntries.add(BarEntry(xIndex, cout.toFloat()))
-                    } else {
-                        coutsEntries.add(BarEntry(xIndex, 0f))
-                    }
-
-                    // Économie en dessous de 0
-                    if (eco > 0.0) {
-                        economiesEntries.add(BarEntry(xIndex, (-eco).toFloat()))
-                    } else {
-                        economiesEntries.add(BarEntry(xIndex, 0f))
-                    }
+                    // Toujours 1 entrée par dataset / catégorie (sinon groupBars se décale)
+                    coutsEntries.add(BarEntry(xIndex, cout.toFloat()))
+                    // Économie en dessous de 0 (barre vers le bas)
+                    economiesEntries.add(BarEntry(xIndex, (-eco).toFloat()))
 
                     labels.add(getLabelCategorie(type))
                     xIndex += 1f
@@ -1090,73 +1082,74 @@ private fun getDonneesPourCouts(): Map<String, List<Int>> {
             }
         }
 
-        val dataSets = mutableListOf<IBarDataSet>()
-
-        if (coutsEntries.isNotEmpty()) {
-            val coutsDataSet = BarDataSet(
-                coutsEntries,
-                trad["label_depenses"] ?: "Coûts"
-            )
-            coutsDataSet.color = COLOR_COUTS
-            coutsDataSet.valueTextSize = 9f
-            coutsDataSet.setDrawValues(true)
-            dataSets.add(coutsDataSet)
+        if (labels.isEmpty()) {
+            chartCouts.clear()
+            StopAddictLogger.w(TAG, "Aucune donnée pour graphique coûts")
+            return
         }
 
-        if (economiesEntries.isNotEmpty()) {
-            val ecoDataSet = BarDataSet(
-                economiesEntries,
-                trad["label_economies"] ?: "Économies"
-            )
-            ecoDataSet.color = COLOR_ECONOMIES
-            ecoDataSet.valueTextSize = 9f
-            ecoDataSet.setDrawValues(true)
-            dataSets.add(ecoDataSet)
+        val coutsDataSet = BarDataSet(
+            coutsEntries,
+            trad["label_depenses"] ?: "Coûts"
+        ).apply {
+            color = COLOR_COUTS
+            valueTextSize = 9f
+            setDrawValues(true)
         }
 
-        if (dataSets.isNotEmpty()) {
-            val barData = BarData(dataSets)
-            barData.barWidth = 0.45f
-            chartCouts.data = barData
+        val ecoDataSet = BarDataSet(
+            economiesEntries,
+            trad["label_economies"] ?: "Économies"
+        ).apply {
+            color = COLOR_ECONOMIES
+            valueTextSize = 9f
+            setDrawValues(true)
+        }
 
-            // Libellés de l’axe X = noms des catégories
-            chartCouts.xAxis.valueFormatter = object : ValueFormatter() {
-                override fun getFormattedValue(value: Float): String {
-                    val index = value.toInt()
-                    return if (index in labels.indices) labels[index] else ""
-                }
-            }
-            chartCouts.xAxis.granularity = 1f
+        val barData = BarData(listOf<IBarDataSet>(coutsDataSet, ecoDataSet))
 
-            // Axe Y symétrique pour afficher +coûts / -économies
-                        val allValues = mutableListOf<Float>()
+        // ==========================
+        // Affichage CÔTE À CÔTE (grouped bars)
+        // ==========================
+        val groupCount = labels.size
 
-            dataSets.forEach { dataSet ->
-                val count = dataSet.entryCount
-                for (i in 0 until count) {
-                    val e = dataSet.getEntryForIndex(i)
-                    allValues.add(e.y)
-                }
-            }
+        // Doit faire 1.0 au total : (barWidth * 2) + (barSpace * 2) + groupSpace = 1
+        val groupSpace = 0.24f
+        val barSpace = 0.02f
+        val barWidth = 0.36f
 
-            if (allValues.isNotEmpty()) {
+        barData.barWidth = barWidth
+        chartCouts.data = barData
 
-            // max(abs(..)) sans maxOf { } (évite les soucis de résolution sur certains builds)
-            val maxAbs = (allValues.map { kotlin.math.abs(it) }.maxOrNull() ?: 0f)
-        
+        // Axe X : labels centrés par groupe
+        chartCouts.xAxis.apply {
+            valueFormatter = IndexAxisValueFormatter(labels)
+            granularity = 1f
+            setCenterAxisLabels(true)
+            axisMinimum = 0f
+            axisMaximum = 0f + barData.getGroupWidth(groupSpace, barSpace) * groupCount
+        }
+
+        // Regroupement des barres (côte à côte)
+        chartCouts.groupBars(0f, groupSpace, barSpace)
+
+        // Axe Y symétrique pour afficher +coûts / -économies
+        val allValues = mutableListOf<Float>()
+        coutsEntries.forEach { allValues.add(it.y) }
+        economiesEntries.forEach { allValues.add(it.y) }
+
+        if (allValues.isNotEmpty()) {
+            val maxAbs = (allValues.map { kotlin.math.abs(it) }.maxOrNull() ?: 0f).coerceAtLeast(1f)
             val axisLeft = chartCouts.axisLeft
             axisLeft.axisMinimum = -maxAbs * 1.1f
             axisLeft.axisMaximum =  maxAbs * 1.1f
             chartCouts.axisRight.isEnabled = false
         }
-        
-        chartCouts.invalidate()
-        StopAddictLogger.d(TAG, "Graphique coûts (par catégorie) mis à jour: ${dataSets.size} datasets")
 
-        } else {
-            chartCouts.clear()
-            StopAddictLogger.w(TAG, "Aucune donnée pour graphique coûts")
-        }
+        chartCouts.setFitBars(true)
+        chartCouts.invalidate()
+
+        StopAddictLogger.d(TAG, "Graphique coûts (groupé côte à côte) mis à jour: 2 datasets, $groupCount groupes")
 
     } catch (e: Exception) {
         StopAddictLogger.e(TAG, "Erreur mise à jour graphique coûts", e)
