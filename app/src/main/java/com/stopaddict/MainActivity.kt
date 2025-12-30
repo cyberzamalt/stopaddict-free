@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
     private var consoleDialog: AlertDialog? = null
     private val isVersionGratuite = true
 
+    private var welcomeShownThisSession = false
+    private val PREF_WELCOME_DISABLED = "welcome_disabled" // même clé que dans ReglagesFragment
+
     // Cache : dernier jour pour lequel le bandeau a été calculé
     private var headerResumeLastDay: String? = null
 
@@ -364,62 +367,64 @@ private fun showRessourcesUtiles() {
 
 private fun showWelcomeDialogIfNeeded() {
     try {
-        // Si l'utilisateur a désactivé l'encouragement → on ne montre rien
+        // 1) Anti double-affichage dans la même session (même lancement de l’app)
+        if (welcomeShownThisSession) {
+            logger.d("Welcome: déjà affiché dans cette session -> skip")
+            return
+        }
+
+        // 2) Respect du réglage utilisateur (case "Désactiver l'encouragement")
+        // IMPORTANT : tu stockes ça via dbHelper.setPreference(...) dans ReglagesFragment
         val disabled = dbHelper.getPreference(PREF_WELCOME_DISABLED, "0") == "1"
-        if (disabled) return
-
-        // Textes UI selon la langue
-        val wTrad = WelcomeLangues.getTraductions(configLangue.getLangue())
-        val title = wTrad["welcome_title"] ?: "Bienvenue"
-        val checkboxText = wTrad["welcome_checkbox_hide"] ?: "Ne plus afficher le message d’accueil"
-        val okText = wTrad["welcome_ok"] ?: "OK"
-
-        // 1 message aléatoire parmi 45
-        val messages = WelcomeLangues.getMessages(configLangue.getLangue())
-        val message = if (messages.isNotEmpty()) {
-            messages.random()
-        } else {
-            "★ Bienvenue !"
+        if (disabled) {
+            logger.d("Welcome: désactivé via réglages -> skip")
+            return
         }
 
-        // UI
-        val container = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(40, 35, 40, 15)
-        }
+        // 3) Marquer comme affiché AVANT d’afficher (sécurité anti double trigger)
+        welcomeShownThisSession = true
 
-        val tvMessage = TextView(this).apply {
-            text = message
-            textSize = 14f
-            setPadding(0, 10, 0, 25)
-        }
-        container.addView(tvMessage)
-
-        val checkbox = CheckBox(this).apply {
-            text = checkboxText
-            setPadding(0, 10, 0, 10)
-        }
-        container.addView(checkbox)
-
-        val dialog = AlertDialog.Builder(this)
-            .setTitle(title)
-            .setView(container)
-            .setPositiveButton(okText) { d, _ ->
-                // Si coché → on désactive définitivement (jusqu'à réactivation dans Réglages)
-                if (checkbox.isChecked) {
-                    dbHelper.setPreference(PREF_WELCOME_DISABLED, "1")
-                }
-                d.dismiss()
-            }
-            .setCancelable(false)
-            .create()
-
-        dialog.show()
+        // 4) Afficher ton pop-up d’encouragement (garde TON implémentation actuelle)
+        // Exemple : showWelcomeDialog() / showEncouragementDialog() selon ton nom réel.
+        showWelcomeDialog()
 
     } catch (e: Exception) {
-        // En cas de souci, on n'empêche pas l'app de fonctionner
-        logger.e("showWelcomeDialogIfNeeded: erreur", e)
+        logger.e("Erreur showWelcomeDialogIfNeeded", e)
     }
+}
+
+private fun showWelcomeDialog() {
+    val wTrad = WelcomeLangues.getTraductions(configLangue.getLangue())
+
+    val container = LinearLayout(this).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(40, 35, 40, 15)
+    }
+
+    val message = TextView(this).apply {
+        text = wTrad["welcome_message"] ?: "Bienvenue"
+        textSize = 14f
+        setPadding(0, 10, 0, 25)
+    }
+    container.addView(message)
+
+    val checkbox = CheckBox(this).apply {
+        text = wTrad["welcome_checkbox_hide"]
+            ?: "Ne plus afficher le message d’accueil"
+    }
+    container.addView(checkbox)
+
+    AlertDialog.Builder(this)
+        .setTitle(wTrad["welcome_title"] ?: "Bienvenue")
+        .setView(container)
+        .setPositiveButton("OK") { d, _ ->
+            if (checkbox.isChecked) {
+                dbHelper.setPreference(PREF_WELCOME_DISABLED, "1")
+            }
+            d.dismiss()
+        }
+        .setCancelable(false)
+        .show()
 }
 
 private fun initializeMainContent() {
